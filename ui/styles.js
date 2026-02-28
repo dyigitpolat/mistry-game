@@ -1,6 +1,7 @@
 export const layoutStyles = {
   root: {
     minHeight: "100vh",
+    width: "100%",
     background: "#12101a",
     fontFamily: "'Courier New', monospace",
     color: "#e8e0d0",
@@ -132,6 +133,28 @@ export const sidebarStyles = {
     borderRadius: 2,
     flexShrink: 0,
     border: "1px solid rgba(255,255,255,0.15)",
+  },
+};
+
+export const minimapStyles = {
+  container: {
+    background: "#1a182a",
+    border: "2px solid #2a2840",
+    borderRadius: 8,
+    padding: 10,
+    minWidth: 140,
+    minHeight: 120,
+    alignSelf: "flex-start",
+  },
+  title: {
+    fontSize: 10,
+    color: "#88809a",
+    letterSpacing: 1,
+    marginBottom: 6,
+    textAlign: "center",
+  },
+  svg: {
+    display: "block",
   },
 };
 

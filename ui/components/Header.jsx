@@ -1,7 +1,11 @@
 import { DIRS } from "../constants/grid.js";
 import { headerStyles } from "../styles.js";
 
-export default function Header({ room, onRegenerate }) {
+export default function Header({ room, onRegenerate, currentRoomId, dungeon }) {
+  const roomIds = dungeon?.rooms ? Object.keys(dungeon.rooms) : [];
+  const roomIndex = currentRoomId ? roomIds.indexOf(currentRoomId) + 1 : 0;
+  const roomCount = roomIds.length;
+
   return (
     <div style={headerStyles.container}>
       <h1 style={headerStyles.title}>◈ ROOM GENERATOR</h1>
@@ -14,8 +18,13 @@ export default function Header({ room, onRegenerate }) {
         ↻ GENERATE
       </button>
       <span style={headerStyles.roomInfo}>
-        FLOOR: {room.floorType.toUpperCase()} &nbsp;|&nbsp; GATES:{" "}
-        {DIRS.filter((d) => room.gates[d]).join(" ")}
+        {roomCount > 0 && `${roomIndex} / ${roomCount} rooms`}
+        {room && (
+          <>
+            &nbsp;|&nbsp; FLOOR: {room.floorType.toUpperCase()} &nbsp;|&nbsp; GATES:{" "}
+            {DIRS.filter((d) => room.gates[d]).join(" ")}
+          </>
+        )}
       </span>
     </div>
   );

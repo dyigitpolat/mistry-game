@@ -26,8 +26,9 @@ The UI follows a **layered architecture**: dependencies point inward. Presentati
 │  DOMAIN                    │   │  INFRASTRUCTURE                  │
 │  room, geometry,           │   │  rendering/*, constants/*        │
 │  pathfinding,              │   │  — canvas drawing, config       │
-│  roomGeneration, random    │   │                                  │
-│  — pure logic, no React     │   │  (rendering reads domain types)  │
+│  roomGeneration,            │   │                                  │
+│  dungeonGeneration, random  │   │  (rendering reads domain types)  │
+│  — pure logic, no React     │   │                                  │
 └───────────────────────────┘   └─────────────────────────────────┘
 ```
 
@@ -43,7 +44,7 @@ The UI follows a **layered architecture**: dependencies point inward. Presentati
 | Path | Role | May import from |
 |------|------|------------------|
 | **`constants/`** | Grid dimensions, palette, item names/colors | — |
-| **`domain/`** | Room/object model, geometry, pathfinding, room generation, random helpers | `constants/` only |
+| **`domain/`** | Room/object model, geometry, pathfinding, room and dungeon generation, random helpers | `constants/` only |
 | **`rendering/`** | All canvas drawing; `drawScene` orchestrates the rest | `constants/`, `domain/` (geometry, room shape) |
 | **`hooks/`** | Game state, movement, canvas clicks, object actions | `constants/`, `domain/`, `rendering/` (e.g. `drawScene`) |
 | **`components/`** | Presentational React components | `constants/` (if needed), `styles.js`, other `components/` |
@@ -68,11 +69,11 @@ The UI follows a **layered architecture**: dependencies point inward. Presentati
 
 1. **`main.jsx`** renders `<App />` into `#root`.
 2. **`App`** calls:
-   - `useGameState()` → initial room, player position, path, selection, inventory, pending object, and `regenerate`
-   - `useMovement(...)` → effect that advances the path every `MOVE_DELAY` and, when the path is empty, applies the pending interaction (e.g. select object)
+   - `useGameState()` → dungeon (rooms, layout, startRoomId), currentRoomId, **setCurrentRoomId**, visitedRoomIds, addVisited, current **room** (derived), player position, setPlayerPos, setRoom, path, selection, inventory, pending object, and `regenerate`. Player position lives in the same state object as dungeon/currentRoomId/visitedRoomIds.
+   - `useMovement(...)` → effect that advances the path every `MOVE_DELAY`; when the next step is a gate with an exit, performs a room transition (setCurrentRoomId, setPlayerPos, addVisited); when the path is empty, applies the pending interaction (e.g. select object)
    - `useCanvasInteraction(...)` → returns `handleCanvasClick`
    - `useObjectActions(...)` → returns `toggleOpen`, `toggleLock`, `pickUpItem`, `pickUpFromSurface`
-3. **`useGameState`** uses `generateRoom()` from domain to create the initial room and on regenerate.
+3. **`useGameState`** uses **`generateDungeon()`** from **`domain/dungeonGeneration.js`** to create the initial dungeon and on regenerate. The current **room** is always `dungeon.rooms[currentRoomId]`.
 
 ### 3.2 User clicks the canvas
 
@@ -82,8 +83,8 @@ The UI follows a **layered architecture**: dependencies point inward. Presentati
    - Uses **domain** `getObjectTiles` to see if the click hit an interactable object.
    - Uses **domain** `buildWalkableGrid`, `findPath`, `findAdjacentWalkable` to decide:
      - **Click on object**: path to an adjacent tile and set `pendingObjId`, or if already adjacent, set `selectedObjId`.
-     - **Click on empty tile**: path to that tile and clear selection/pending.
-3. **`useMovement`** effect consumes the path: each tick it moves the player one step and, when the path is empty and there is a `pendingObjId`, sets `selectedObjId` and clears `pendingObjId`.
+     - **Click on empty tile**: path to that tile and clear selection/pending. Clicking a gate tile paths to it; **`useMovement`** will then perform a room transition when the player steps onto the gate.
+3. **`useMovement`** effect consumes the path: each tick, if the next step is a gate tile and the current room has an exit in that direction, it switches to the adjacent room and places the player just inside the gate (and adds both rooms to `visitedRoomIds`); otherwise it moves the player one step. When the path is empty and there is a `pendingObjId`, it sets `selectedObjId` and clears `pendingObjId`.
 
 ### 3.3 User interacts with the selected object (panel)
 
@@ -97,7 +98,7 @@ All of this uses **domain** only in the sense that room/object shape is defined 
 
 ### 3.4 Rendering the frame
 
-1. **`GameCanvas`** runs a `useEffect` that depends on `room`, `playerPos`, `selectedObjId`.
+1. **`GameCanvas`** runs a `useEffect` that depends on `room`, `playerPos`, `selectedObjId`. **`room`** is always the current room (`dungeon.rooms[currentRoomId]`).
 2. It gets the canvas 2D context and calls **`drawScene(ctx, room, playerPos, selectedObjId)`** from `rendering/drawScene.js`.
 3. **`drawScene`**:
    - Uses **domain** `getGateTiles` to know where to draw gates instead of walls.
@@ -109,12 +110,14 @@ So: **events → hooks (application) → domain (pathfinding, room data) and ren
 
 ## 4. Key data structures (domain)
 
-- **Room**: `{ width, height, gridW, gridH, floorType, gates: { N?, E?, S?, W? }, objects: Object[] }`.
+- **Dungeon**: `{ rooms: Record<roomId, Room>, layout: Record<roomId, { row, col }>, startRoomId: string }`. Created by **`domain/dungeonGeneration.js`** (`generateDungeon`).
+- **Room**: `{ id?, width, height, gridW, gridH, floorType, gates: { N?, E?, S?, W? }, exits: { N?, E?, S?, W? } (neighbor room ids), objects: Object[] }`. In a dungeon, `gates` are derived from `exits` (gate exists iff exit exists).
 - **Object**: `{ id, type, x, y, w?, h?, wall?, locked?, open?, items?: Item[] }`. Types include `container_box`, `container_safe`, `surface_table`, `decoration_flower`, `decoration_lamp`, `window`.
 - **Item**: `{ id, name, color }`.
 - **Position**: `{ x, y }` in grid coordinates.
+- **Application state**: One state object holds `dungeon`, `currentRoomId`, `visitedRoomIds`, and `playerPos`. `visitedRoomIds: Set<string>` tracks rooms the player has entered; current room is `dungeon.rooms[currentRoomId]`. **`useGameState`** exposes `setCurrentRoomId` and `setPlayerPos` (which update this state) for room transitions and movement.
 
-Room and object shapes are created in **`domain/room.js`** (`createRoom`, `createRoomObject`, `createItem`) and consumed by rendering and hooks as plain data.
+Room and object shapes are created in **`domain/room.js`** (`createRoom`, `createRoomObject`, `createItem`). Dungeons are built in **`domain/dungeonGeneration.js`**, which uses **`domain/roomGeneration.js`** to fill each room. Data is consumed by rendering and hooks as plain data.
 
 ---
 
@@ -126,11 +129,14 @@ Room and object shapes are created in **`domain/room.js`** (`createRoom`, `creat
 |------|------------------|
 | New room/object type or game rule | **`domain/room.js`** (DEFAULTS, factories). If it affects movement: **`domain/geometry.js`** (`blocksMovement`) and possibly **`domain/pathfinding.js`**. |
 | New procedural room layout or content | **`domain/roomGeneration.js`**. Use **`domain/random.js`**, **`domain/geometry.js`** (e.g. `getGateTiles`, `getObjectTiles`), **`domain/room.js`** (createRoom, createRoomObject, createItem). |
+| Dungeon structure (multiple rooms, layout, connections) | **`domain/dungeonGeneration.js`**. Calls **`domain/roomGeneration.js`** with `exits`/`skipResetUid` for each room. |
 | New pathfinding or grid behavior | **`domain/pathfinding.js`** and **`domain/geometry.js`**. Keep pure (no React, no canvas). |
 | New or changed canvas drawing | **`rendering/`**. New object type → add a `draw*` in **`drawObjects.js`** (or a new file if it’s a large family) and call it from **`drawScene.js`** in the correct order (depth by Y). Use **`constants/palette.js`** and **`constants/grid.js`** (TILE, PX). |
 | New constant or theme color | **`constants/grid.js`** or **`constants/palette.js`**. |
 | New UI state or side effect | **`hooks/`**. New state → consider **`useGameState.js`**. New effect (e.g. timer, subscription) → new hook or extend **`useMovement.js`**. |
 | New canvas interaction (e.g. drag, key) | **`hooks/useCanvasInteraction.js`** or a new hook; keep pathfinding and “click → path/selection” logic in one place. |
+| Room transition on gate step | **`hooks/useMovement.js`** (detect gate via **`domain/geometry.js`** `getGateDirectionAt`; switch room, set player via `getTileInsideGate`). **`useGameState.js`** holds dungeon, currentRoomId, visitedRoomIds, playerPos and exposes `setCurrentRoomId`, `setPlayerPos`, `addVisited`, and `setRoom`; **`App.jsx`** must destructure and pass `setCurrentRoomId` into `useMovement`. |
+| Minimap (visit-reveal, current room highlight) | **`components/Minimap.jsx`**. Receives `layout`, `visitedRoomIds`, `currentRoomId`, `rooms`; SVG from props only. Styles in **`styles.js`** (`minimapStyles`). |
 | New object action (e.g. drop item) | **`hooks/useObjectActions.js`**. |
 | New screen or layout section | **`App.jsx`** and/or new component in **`components/`**. Prefer small presentational components that receive props and callbacks. |
 | Shared styles | **`styles.js`**. Prefer named style objects over ad-hoc inline objects in components. |
@@ -154,11 +160,11 @@ Room and object shapes are created in **`domain/room.js`** (`createRoom`, `creat
 - [ ] No new dependency from domain → hooks/rendering/components, or from rendering → hooks/components.
 - [ ] New constants/themes go in **`constants/`**; new shared styles in **`styles.js`**.
 - [ ] Run **`npm run build`** from **`ui/`** and fix any errors.
-- [ ] Manually test: generate room, move, select object, open/lock, pick up items, regenerate.
+- [ ] Manually test: generate dungeon, move, select object, open/lock, pick up items, walk through gates (room transition), check minimap reveals only visited rooms, regenerate.
 
 ---
 
 ## 6. Entry points
 
-- **Development**: **`main.jsx`** is the Vite entry (referenced from **`index.html`**). It mounts **App** with `React.StrictMode`.
+- **Development**: **`main.jsx`** is the Vite entry (referenced from **`index.html`**). It sets **`#root`** to full viewport size, wraps **App** in an **ErrorBoundary** (so render errors show in-place), and mounts with **`React.StrictMode`**.
 - **External import**: Consumers can **`import App from './ui'`** (via **`index.jsx`**) or **`import App from './ui/ui.jsx'`** (legacy re-export). Both resolve to the same **App** component.

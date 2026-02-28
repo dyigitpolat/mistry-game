@@ -10,6 +10,7 @@ export function useObjectActions({ room, setRoom, setInventory }) {
 
   const toggleOpen = useCallback(
     (objId) => {
+      if (!room?.objects) return;
       const obj = room.objects.find(o => o.id === objId);
       if (obj?.locked) return;
       mutateObj(objId, o => ({ open: !o.open }));
@@ -19,6 +20,7 @@ export function useObjectActions({ room, setRoom, setInventory }) {
 
   const toggleLock = useCallback(
     (objId) => {
+      if (!room?.objects) return;
       const obj = room.objects.find(o => o.id === objId);
       if (obj?.open) return;
       mutateObj(objId, o => ({ locked: !o.locked }));
@@ -28,6 +30,7 @@ export function useObjectActions({ room, setRoom, setInventory }) {
 
   const pickUpItem = useCallback(
     (objId, itemId) => {
+      if (!room?.objects) return;
       const obj = room.objects.find(o => o.id === objId);
       if (!obj) return;
       const item = obj.items?.find(i => i.id === itemId);
@@ -40,6 +43,7 @@ export function useObjectActions({ room, setRoom, setInventory }) {
 
   const pickUpFromSurface = useCallback(
     (objId) => {
+      if (!room?.objects) return;
       const obj = room.objects.find(o => o.id === objId);
       if (!obj?.items?.length) return;
       setInventory(prev => [...prev, ...obj.items]);

@@ -29,11 +29,26 @@ export function createRoomObject(type, x, y, props = {}) {
 
 export function createRoom(config = {}) {
   const {
+    id = null,
     width = INTERIOR_W,
     height = INTERIOR_H,
     floorType = "wood",
     gates = { S: true },
+    exits = {},
     objects = [],
   } = config;
-  return { width, height, gridW: width + 2, gridH: height + 2, floorType, gates, objects };
+  const gatesResolved = Object.keys(exits).length
+    ? { N: !!exits.N, E: !!exits.E, S: !!exits.S, W: !!exits.W }
+    : gates;
+  return {
+    id,
+    width,
+    height,
+    gridW: width + 2,
+    gridH: height + 2,
+    floorType,
+    gates: gatesResolved,
+    exits: exits && typeof exits === "object" ? exits : {},
+    objects,
+  };
 }

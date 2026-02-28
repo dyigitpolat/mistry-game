@@ -16,6 +16,11 @@ export default function GameCanvas({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
+    if (!room || !playerPos) {
+      ctx.fillStyle = "#12101a";
+      ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+      return;
+    }
     drawScene(ctx, room, playerPos, selectedObjId);
   }, [room, playerPos, selectedObjId, canvasRef]);
 

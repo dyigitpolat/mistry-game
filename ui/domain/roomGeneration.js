@@ -4,13 +4,23 @@ import { getGateTiles, getObjectTiles } from "./geometry.js";
 import { createRoom, createRoomObject, createItem, resetUid } from "./room.js";
 import { pick, randInt } from "./random.js";
 
-export function generateRoom() {
-  resetUid();
-  const floorType = pick(["grass", "wood", "ceramic"]);
-  const numGates = randInt(1, 4);
-  const shuffled = [...DIRS].sort(() => Math.random() - 0.5);
-  const gates = {};
-  for (let i = 0; i < numGates; i++) gates[shuffled[i]] = true;
+export function generateRoom(config = {}) {
+  if (!config.skipResetUid) resetUid();
+  const floorType = config.floorType ?? pick(["grass", "wood", "ceramic"]);
+  let gates;
+  if (config.exits && typeof config.exits === "object") {
+    gates = {
+      N: !!config.exits.N,
+      E: !!config.exits.E,
+      S: !!config.exits.S,
+      W: !!config.exits.W,
+    };
+  } else {
+    const numGates = randInt(1, 4);
+    const shuffled = [...DIRS].sort(() => Math.random() - 0.5);
+    gates = {};
+    for (let i = 0; i < numGates; i++) gates[shuffled[i]] = true;
+  }
 
   const gw = GRID_W, gh = GRID_H;
   const occupied = Array.from({ length: gh }, () => Array(gw).fill(false));
@@ -125,5 +135,11 @@ export function generateRoom() {
     }
   }
 
-  return createRoom({ floorType, gates, objects });
+  return createRoom({
+    id: config.id ?? null,
+    floorType,
+    gates,
+    exits: config.exits ?? {},
+    objects,
+  });
 }

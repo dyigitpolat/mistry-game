@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { MOVE_DELAY } from "../constants/grid.js";
+import { getGateDirectionAt, getTileInsideGate, OPPOSITE_DIR } from "../domain/geometry.js";
 
 export function useMovement({
   path,
@@ -8,6 +9,11 @@ export function useMovement({
   pendingObjId,
   setPendingObjId,
   setSelectedObjId,
+  room,
+  currentRoomId,
+  dungeon,
+  setCurrentRoomId,
+  addVisited,
 }) {
   useEffect(() => {
     if (path.length === 0) {
@@ -17,10 +23,46 @@ export function useMovement({
       }
       return;
     }
+
+    const nextStep = path[0];
+    const hasDungeon = dungeon?.rooms && room?.exits;
+    const exitDir =
+      hasDungeon && room
+        ? getGateDirectionAt(nextStep.x, nextStep.y, room.gridW, room.gridH)
+        : null;
+    const nextRoomId = exitDir && room.exits[exitDir] ? room.exits[exitDir] : null;
+
+    if (nextRoomId) {
+      const nextRoom = dungeon.rooms[nextRoomId];
+      if (nextRoom) {
+        addVisited(currentRoomId);
+        addVisited(nextRoomId);
+        setCurrentRoomId(nextRoomId);
+        const enteredFrom = OPPOSITE_DIR[exitDir];
+        setPlayerPos(getTileInsideGate(enteredFrom, nextRoom.gridW, nextRoom.gridH));
+        setPath([]);
+        setPendingObjId(null);
+        setSelectedObjId(null);
+      }
+      return;
+    }
+
     const timer = setTimeout(() => {
-      setPlayerPos(path[0]);
-      setPath(p => p.slice(1));
+      setPlayerPos(nextStep);
+      setPath((p) => p.slice(1));
     }, MOVE_DELAY);
     return () => clearTimeout(timer);
-  }, [path, pendingObjId, setPath, setPlayerPos, setPendingObjId, setSelectedObjId]);
+  }, [
+    path,
+    pendingObjId,
+    room,
+    currentRoomId,
+    dungeon,
+    setPath,
+    setPlayerPos,
+    setPendingObjId,
+    setSelectedObjId,
+    setCurrentRoomId,
+    addVisited,
+  ]);
 }

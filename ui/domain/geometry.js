@@ -1,3 +1,5 @@
+export const OPPOSITE_DIR = { N: "S", S: "N", E: "W", W: "E" };
+
 export function getGateTiles(dir, gw, gh) {
   const cx = Math.floor(gw / 2), cy = Math.floor(gh / 2);
   switch (dir) {
@@ -6,6 +8,26 @@ export function getGateTiles(dir, gw, gh) {
     case "W": return [{ x: 0, y: cy - 1 }, { x: 0, y: cy }];
     case "E": return [{ x: gw - 1, y: cy - 1 }, { x: gw - 1, y: cy }];
     default: return [];
+  }
+}
+
+export function getGateDirectionAt(gx, gy, gw, gh) {
+  const cx = Math.floor(gw / 2), cy = Math.floor(gh / 2);
+  if (gy === 0 && gx >= cx - 1 && gx <= cx) return "N";
+  if (gy === gh - 1 && gx >= cx - 1 && gx <= cx) return "S";
+  if (gx === 0 && gy >= cy - 1 && gy <= cy) return "W";
+  if (gx === gw - 1 && gy >= cy - 1 && gy <= cy) return "E";
+  return null;
+}
+
+export function getTileInsideGate(dir, gw, gh) {
+  const cx = Math.floor(gw / 2), cy = Math.floor(gh / 2);
+  switch (dir) {
+    case "N": return { x: cx, y: 1 };
+    case "S": return { x: cx, y: gh - 2 };
+    case "W": return { x: 1, y: cy };
+    case "E": return { x: gw - 2, y: cy };
+    default: return { x: cx, y: cy };
   }
 }
 

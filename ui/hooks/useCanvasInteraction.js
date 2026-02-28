@@ -13,7 +13,7 @@ export function useCanvasInteraction({
 }) {
   return useCallback(
     (e) => {
-      if (!canvasRef.current) return;
+      if (!canvasRef.current || !room) return;
       const rect = canvasRef.current.getBoundingClientRect();
       const scaleX = CANVAS_W / rect.width;
       const scaleY = CANVAS_H / rect.height;

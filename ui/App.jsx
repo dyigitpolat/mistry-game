@@ -10,6 +10,7 @@ import GameCanvas from "./components/GameCanvas.jsx";
 import InteractionPanel from "./components/InteractionPanel.jsx";
 import InventorySidebar from "./components/InventorySidebar.jsx";
 import Legend from "./components/Legend.jsx";
+import Minimap from "./components/Minimap.jsx";
 
 function getPanelPos(selectedObj, canvasRef) {
   if (!selectedObj || !canvasRef?.current) return { left: 0, top: 0 };
@@ -25,6 +26,11 @@ function getPanelPos(selectedObj, canvasRef) {
 export default function App() {
   const canvasRef = useRef(null);
   const {
+    dungeon,
+    currentRoomId,
+    setCurrentRoomId,
+    visitedRoomIds,
+    addVisited,
     room,
     setRoom,
     playerPos,
@@ -47,6 +53,11 @@ export default function App() {
     pendingObjId,
     setPendingObjId,
     setSelectedObjId,
+    room,
+    currentRoomId,
+    dungeon,
+    setCurrentRoomId,
+    addVisited,
   });
 
   const handleCanvasClick = useCanvasInteraction({
@@ -64,12 +75,17 @@ export default function App() {
     setInventory,
   });
 
-  const selectedObj = room.objects.find((o) => o.id === selectedObjId) || null;
+  const selectedObj = room?.objects?.find((o) => o.id === selectedObjId) || null;
   const panelPos = getPanelPos(selectedObj, canvasRef);
 
   return (
     <div style={layoutStyles.root}>
-      <Header room={room} onRegenerate={regenerate} />
+      <Header
+        room={room}
+        onRegenerate={regenerate}
+        currentRoomId={currentRoomId}
+        dungeon={dungeon}
+      />
       <div style={layoutStyles.mainArea}>
         <GameCanvas
           canvasRef={canvasRef}
@@ -88,6 +104,12 @@ export default function App() {
             onClose={() => setSelectedObjId(null)}
           />
         </GameCanvas>
+        <Minimap
+          layout={dungeon?.layout ?? {}}
+          visitedRoomIds={visitedRoomIds}
+          currentRoomId={currentRoomId}
+          rooms={dungeon?.rooms ?? {}}
+        />
         <InventorySidebar inventory={inventory} />
       </div>
       <Legend />
