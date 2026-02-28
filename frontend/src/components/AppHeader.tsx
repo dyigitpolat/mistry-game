@@ -26,7 +26,7 @@ export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
                         <span className="material-symbols-outlined text-3xl">fingerprint</span>
                     </div>
                     <h2 className="text-white text-xl font-bold leading-tight tracking-[-0.015em]">
-                        Whodunit
+                        Mistry
                     </h2>
                 </Link>
                 <nav className="hidden md:flex items-center gap-9">

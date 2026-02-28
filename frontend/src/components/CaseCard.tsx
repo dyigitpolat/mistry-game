@@ -10,6 +10,7 @@ interface CaseCardProps {
     imageUrl?: string;
     solvedPercent?: number;
     author?: string;
+    phaseCount?: number;
     progressPercent?: number;
     isComplete?: boolean;
 }
@@ -29,6 +30,7 @@ export default function CaseCard({
     imageUrl,
     solvedPercent,
     author,
+    phaseCount,
     progressPercent,
     isComplete,
 }: CaseCardProps) {
@@ -77,6 +79,11 @@ export default function CaseCard({
 
                 {/* Content */}
                 <div className="p-4 flex flex-col gap-2">
+                    {author && (
+                        <div className="text-[10px] uppercase font-black tracking-widest text-primary/80 mb-[-4px]">
+                            {author}
+                        </div>
+                    )}
                     <h3 className="text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">
                         {title}
                     </h3>
@@ -88,9 +95,9 @@ export default function CaseCard({
                                 {solvedPercent}% Solved
                             </span>
                         )}
-                        {author && (
+                        {phaseCount !== undefined && (
                             <span className={`font-bold px-2 py-0.5 rounded ${diffClass}`}>
-                                {author}
+                                {phaseCount} Phases
                             </span>
                         )}
                     </div>

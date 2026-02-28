@@ -3,10 +3,12 @@
 import { useState, useEffect, useMemo } from "react";
 import AppHeader from "@/components/AppHeader";
 import CaseCard from "@/components/CaseCard";
-import { listScenarios, generateHeroBanner, type ScenarioSummary, BACKEND_URL } from "@/lib/api";
+import { listScenarios, generateHeroBanner, getGlobalLeaderboard, getFriendActivity, type ScenarioSummary, type GlobalLeaderboardEntry, type FriendActivity, BACKEND_URL } from "@/lib/api";
 
 export default function HomePage() {
   const [scenarios, setScenarios] = useState<ScenarioSummary[]>([]);
+  const [leaderboard, setLeaderboard] = useState<GlobalLeaderboardEntry[]>([]);
+  const [friends, setFriends] = useState<FriendActivity[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false); // Added error state
   const [generatingHero, setGeneratingHero] = useState(false);
@@ -15,8 +17,14 @@ export default function HomePage() {
   useEffect(() => {
     async function load() {
       try {
-        const data = await listScenarios();
+        const [data, lbData, friendsData] = await Promise.all([
+          listScenarios(),
+          getGlobalLeaderboard(),
+          getFriendActivity(),
+        ]);
         setScenarios(data);
+        setLeaderboard(lbData);
+        setFriends(friendsData);
       } catch (e) {
         console.error("Failed to load scenarios:", e);
         setError(true);
@@ -210,29 +218,23 @@ export default function HomePage() {
                     </div>
                   ))
                 ) : (
-                  <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-col gap-10">
-                    {groupedCases.map(([author, cases]) => (
-                      <div key={author} className="space-y-4">
-                        <h3 className="text-2xl font-semibold text-slate-200 border-b border-white/10 pb-2">
-                          {author}
-                        </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                          {cases.map((s) => (
-                            <CaseCard
-                              key={s.id}
-                              id={s.id}
-                              title={s.title}
-                              description={s.description}
-                              difficulty={s.difficulty}
-                              progressPercent={s.progress_percent}
-                              isComplete={s.is_complete}
-                              author={`${s.phase_count} phases`}
-                              imageUrl={`${BACKEND_URL}/scenes/${sanitizeId(s.id)}_hero.png`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 col-span-1 sm:col-span-2 lg:col-span-4">
+                    {[...availableCases]
+                      .sort((a, b) => (a.author || "Other Mysteries").localeCompare(b.author || "Other Mysteries"))
+                      .map((s) => (
+                        <CaseCard
+                          key={s.id}
+                          id={s.id}
+                          title={s.title}
+                          description={s.description}
+                          difficulty={s.difficulty}
+                          progressPercent={s.progress_percent}
+                          isComplete={s.is_complete}
+                          author={s.author || "Other Mysteries"}
+                          phaseCount={s.phase_count}
+                          imageUrl={`${BACKEND_URL}/scenes/${sanitizeId(s.id)}_hero.png`}
+                        />
+                      ))}
                   </div>
                 )}
               </div>
@@ -250,27 +252,29 @@ export default function HomePage() {
               Friend Activity
             </h3>
             <div className="flex flex-col gap-4">
-              {[
-                { name: "Dr. Watson", action: "Started", case: "Study in Scarlet", time: "2 mins ago", dot: "bg-green-500" },
-                { name: "Miss Marple", action: "Solved", case: "The ABC Murders", time: "1 hour ago", dot: "bg-yellow-500" },
-                { name: "Poirot_Fan", action: "Rated ★★★★★ for", case: "Orient Express", time: "5 hours ago", dot: "bg-slate-500" },
-              ].map((f) => (
-                <div key={f.name} className="flex items-start gap-3">
+              {friends.length > 0 ? friends.slice(0, 5).map((f, i) => (
+                <div key={`${f.user_name}-${i}`} className="flex items-start gap-3">
                   <div className="relative">
-                    <div className="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center">
-                      <span className="material-symbols-outlined text-text-secondary text-sm">person</span>
-                    </div>
-                    <div className={`absolute bottom-0 right-0 size-2.5 ${f.dot} border-2 border-background-dark rounded-full`} />
+                    {f.user_image ? (
+                      <img src={f.user_image} alt={f.user_name} className="size-8 rounded-full border border-border-dark object-cover" />
+                    ) : (
+                      <div className="size-8 rounded-full bg-surface-dark border border-border-dark flex items-center justify-center">
+                        <span className="material-symbols-outlined text-slate-400 text-sm">person</span>
+                      </div>
+                    )}
+                    <div className={`absolute bottom-0 right-0 size-2.5 ${f.action.toLowerCase().includes('solved') ? 'bg-yellow-500' : 'bg-green-500'} border-2 border-background-dark rounded-full`} />
                   </div>
                   <div className="text-sm">
-                    <p className="text-white font-medium">{f.name}</p>
+                    <p className="text-white font-medium">{f.user_name}</p>
                     <p className="text-slate-400 text-xs">
-                      {f.action} <span className="text-primary hover:underline cursor-pointer">{f.case}</span>
+                      {f.action} <span className="text-primary hover:underline cursor-pointer">{f.scenario_title}</span>
                     </p>
-                    <p className="text-slate-500 text-[10px] mt-1">{f.time}</p>
+                    <p className="text-slate-500 text-[10px] mt-1">{f.time_ago}</p>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div className="text-slate-500 text-sm text-center py-4">No recent friend activity</div>
+              )}
             </div>
           </div>
 
@@ -281,32 +285,30 @@ export default function HomePage() {
               Global Records
             </h3>
             <div className="bg-surface-dark rounded-xl p-3 border border-slate-800 flex flex-col gap-3">
-              {[
-                { rank: "1", name: "Sherlock_AI", cases: "200 Cases", color: "text-yellow-500" },
-                { rank: "2", name: "NoirDetect", cases: "189 Cases", color: "text-slate-400" },
-                { rank: "3", name: "Enola_H", cases: "154 Cases", color: "text-orange-700" },
-              ].map((r, i, arr) => (
+              {leaderboard.length > 0 ? leaderboard.slice(0, 5).map((r, i, arr) => (
                 <div
-                  key={r.name}
+                  key={`${r.user_name}-${i}`}
                   className={`flex items-center justify-between ${i < arr.length - 1 ? "border-b border-slate-700 pb-2" : ""
                     }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <span className={`${r.color} font-black text-lg`}>{r.rank}</span>
+                  <div className="flex items-center gap-3">
+                    <span className={`${i === 0 ? "text-yellow-500" : i === 1 ? "text-slate-300" : i === 2 ? "text-amber-600" : "text-slate-500"} font-black text-lg w-4 text-center`}>{i + 1}</span>
                     <div className="flex flex-col">
-                      <span className="text-white text-sm font-bold">{r.name}</span>
-                      <span className="text-[10px] text-slate-500">{r.cases} Solved</span>
+                      <span className="text-white text-sm font-bold truncate max-w-[120px]">{r.user_name}</span>
+                      <span className="text-[10px] text-slate-500">{r.cases_solved} Solved</span>
                     </div>
                   </div>
                   {i === 0 && (
                     <span className="material-symbols-outlined text-yellow-500 text-sm">workspace_premium</span>
                   )}
                 </div>
-              ))}
+              )) : (
+                <div className="text-slate-500 text-sm text-center py-4">No records found</div>
+              )}
             </div>
-            <button className="mt-4 w-full py-2 text-xs font-bold text-slate-400 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors">
+            <a href="/leaderboard" className="block mt-4 w-full py-2 text-xs font-bold text-center text-slate-400 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors">
               View Full Leaderboard
-            </button>
+            </a>
           </div>
         </aside>
       </div>
