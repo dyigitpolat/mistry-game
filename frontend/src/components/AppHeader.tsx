@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 interface AppHeaderProps {
-    activeTab?: "home" | "cases" | "social" | "leaderboard";
+    activeTab?: "home" | "cases" | "social" | "leaderboard" | "dossier";
 }
 
 export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
@@ -14,7 +14,8 @@ export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
         { label: "Home", href: "/", key: "home" },
         { label: "Case Studio", href: "/studio", key: "cases" },
         { label: "Social", href: "#", key: "social" },
-        { label: "Leaderboard", href: "#", key: "leaderboard" },
+        { label: "Leaderboard", href: "/leaderboard", key: "leaderboard" },
+        { label: "Dossier", href: "/profile", key: "dossier" },
     ];
 
     return (

@@ -24,6 +24,7 @@ class ScenarioSummary(BaseModel):
     """Lightweight view for the case gallery."""
     id: str
     title: str
+    author: str = ""
     description: str
     victim: str
     difficulty: str = "medium"
@@ -35,6 +36,7 @@ class ScenarioSummary(BaseModel):
     owner_name: Optional[str] = None
     visibility: str = "public"
     is_own: bool = False
+    global_clear_rate: float = 0.0
 
 
 async def _resolve_user_name(user_id: str) -> Optional[str]:
@@ -69,21 +71,39 @@ def _check_ownership(scenario, user_id: str, user_name: Optional[str]) -> bool:
         return True
     return False
 
-
-@router.get("/", response_model=List[ScenarioSummary])
-async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_user_optional)):
+  @router.get("/", response_model=List[ScenarioSummary])
+  async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_user_optional)):
     """
     List scenarios visible to the current user.
     Public scenarios are shown to everyone.
     Private scenarios are only shown to their owner.
+    Includes global clear rates and user progress if logged in.
     """
+    db = await get_database()
     summaries = []
 
+    # Fetch Global Clear Rates
+    global_stats = {}
+    if db is not None:
+        pipeline = [
+            {"$group": {
+                "_id": "$scenario_id",
+                "total_plays": {"$sum": 1},
+                "clears": {"$sum": {"$cond": [{"$and": [{"$eq": ["$is_complete", True]}, {"$eq": ["$outcome", "solved"]}]}, 1, 0]}}
+            }}
+        ]
+        cursor = db["game_sessions"].aggregate(pipeline)
+        async for doc in cursor:
+            sid = doc["_id"]
+            total = doc["total_plays"]
+            clears = doc["clears"]
+            global_stats[sid] = round((clears / total) * 100) if total > 0 else 0.0
+
+    # If the user is logged in, find all their active game sessions and resolve name
     user_sessions: Dict[str, Any] = {}
     user_name: Optional[str] = None
 
     if user:
-        db = await get_database()
         if db is not None:
             cursor = db["game_sessions"].find({"user_id": user["id"]}).sort("updated_at", -1)
             async for doc in cursor:
@@ -102,6 +122,7 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
         summary = ScenarioSummary(
             id=sid,
             title=scenario.title,
+            author=getattr(scenario, 'author', '') or '',
             description=scenario.description,
             victim=scenario.victim,
             difficulty=scenario.difficulty.value if scenario.difficulty else "medium",
@@ -110,6 +131,7 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
             owner_name=scenario.owner_name,
             visibility=scenario.visibility.value if scenario.visibility else "public",
             is_own=is_owner,
+            global_clear_rate=global_stats.get(sid, 0.0),
         )
 
         if sid in user_sessions:
@@ -130,7 +152,6 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
         summaries.append(summary)
 
     return summaries
-
 
 async def _set_visibility(scenario_id: str, user: Dict[str, Any], target: str):
     """Shared helper to change a scenario's visibility. Only the owner can do this."""

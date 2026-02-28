@@ -36,6 +36,7 @@ export async function POST(req: NextRequest, props: { params: Promise<{ path: st
             method: "POST",
             headers,
             ...(body !== undefined && { body: JSON.stringify(body) }),
+            cache: "no-store",
         });
 
         const data = await response.json();
@@ -69,6 +70,7 @@ export async function GET(req: NextRequest, props: { params: Promise<{ path: str
                 "Content-Type": "application/json",
                 "x-user-id": userId,
             },
+            cache: "no-store",
         });
 
         const data = await response.json();

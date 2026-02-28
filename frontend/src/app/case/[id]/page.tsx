@@ -133,27 +133,27 @@ export default function CaseDetailsPage() {
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-surface-dark group">
                             <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10 pointer-events-none"></div>
                             <div className="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-background-dark/40 to-transparent z-10 pointer-events-none"></div>
-                            <div className="relative h-[450px] w-full bg-cover bg-center transform transition-transform duration-1000 group-hover:scale-105 bg-[url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop')]" />
-                            <div className="absolute bottom-0 left-0 p-8 md:p-12 z-20 w-full md:w-2/3 flex flex-col gap-4">
-                                <div className="flex items-center gap-3 animate-fade-in-up">
+                            <div className="relative h-[380px] w-full bg-cover bg-center transform transition-transform duration-1000 group-hover:scale-105 bg-[url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop')]" />
+                            <div className="absolute bottom-0 left-0 p-6 md:p-10 z-20 w-full md:max-w-[70%] flex flex-col gap-3 overflow-hidden">
+                                <div className="flex flex-wrap items-center gap-2 animate-fade-in-up">
                                     {isComplete ? (
-                                        <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1">
+                                        <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1 shrink-0">
                                             <span className="material-symbols-outlined text-[14px]">task_alt</span> Solved
                                         </span>
                                     ) : hasProgress ? (
-                                        <span className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1">
+                                        <span className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1 shrink-0">
                                             <span className="material-symbols-outlined text-[14px]">pending_actions</span> In Progress ({Math.round(summary.progress_percent || 0)}%)
                                         </span>
                                     ) : (
-                                        <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg shadow-primary/20">
+                                        <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg shadow-primary/20 shrink-0">
                                             New Case
                                         </span>
                                     )}
 
-                                    <span className="bg-black/40 backdrop-blur-sm border border-white/10 text-slate-200 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1">
+                                    <span className="bg-black/40 backdrop-blur-sm border border-white/10 text-slate-200 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1 shrink-0">
                                         <span className="material-symbols-outlined text-[14px]">timer</span> ~{scenario.time_limit_minutes}m Solve Time
                                     </span>
-                                    <span className={`backdrop-blur-sm border text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1
+                                    <span className={`backdrop-blur-sm border text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1 shrink-0
                                         ${summary.difficulty === 'hard' ? 'bg-red-900/60 border-red-500/30 text-red-200' :
                                             summary.difficulty === 'medium' ? 'bg-orange-900/60 border-orange-500/30 text-orange-200' :
                                                 'bg-green-900/60 border-green-500/30 text-green-200'
@@ -162,24 +162,44 @@ export default function CaseDetailsPage() {
                                     </span>
                                 </div>
 
-                                <h1 className="text-white text-5xl md:text-6xl font-black leading-tight tracking-tight drop-shadow-xl font-display">
+                                <h1 className="text-white text-3xl md:text-5xl font-black leading-tight tracking-tight drop-shadow-xl font-display">
                                     {scenario.title}
                                 </h1>
 
-                                <div className="flex items-center gap-4 text-slate-300 text-sm md:text-base font-medium">
-                                    <div className="flex items-center gap-2">
-                                        <div className="size-6 rounded-full bg-slate-700 bg-cover bg-center border border-slate-500 flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-[12px] text-white">person</span>
-                                        </div>
-                                        <span>Victim: <span className="text-white hover:text-primary cursor-pointer transition-colors">{scenario.victim}</span></span>
+                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-300 text-sm font-medium">
+                                    {scenario.author && (
+                                        <>
+                                            <div className="flex items-center gap-1.5">
+                                                <span className="material-symbols-outlined text-[14px] text-primary">edit_note</span>
+                                                <span>By <span className="text-white">{scenario.author}</span></span>
+                                            </div>
+                                            <span className="w-1 h-1 rounded-full bg-slate-500"></span>
+                                        </>
+                                    )}
+                                    <div className="flex items-center gap-1.5">
+                                        <span className="material-symbols-outlined text-[14px] text-red-400">person</span>
+                                        <span>Victim: <span className="text-white">{scenario.victim}</span></span>
                                     </div>
                                     <span className="w-1 h-1 rounded-full bg-slate-500"></span>
                                     <span>Phases: <span className="text-white">{scenario.phases.length} Acts</span></span>
                                 </div>
+                            </div>
+                        </div>
 
-                                <p className="text-slate-300 text-lg font-normal leading-relaxed drop-shadow-md max-w-xl mt-2 border-l-4 border-primary pl-4 bg-gradient-to-r from-black/40 to-transparent py-2 pr-4 rounded-r-lg backdrop-blur-sm">
-                                    "{scenario.intro_narrative}"
-                                </p>
+                        {/* Case Synopsis */}
+                        <div className="mt-6 bg-surface-dark/60 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-lg">
+                            <div className="flex gap-4">
+                                <span className="material-symbols-outlined text-primary text-3xl mt-1 shrink-0 opacity-60">format_quote</span>
+                                <div className="flex flex-col gap-3 min-w-0">
+                                    <p className="text-slate-200 text-base leading-relaxed italic">
+                                        {scenario.intro_narrative}
+                                    </p>
+                                    {scenario.description && (
+                                        <p className="text-slate-400 text-sm leading-relaxed">
+                                            {scenario.description}
+                                        </p>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,805 @@
+{
+  "title": "The Sturgis Wager: A Detective Story",
+  "author": "Edgar Morette",
+  "victim": "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; later killed)",
+  "intro_narrative": "New York, deep winter. A cable car collision on Broadway exposes a corpse in a cab, while Wall Street whispers of mysterious pistol shots behind locked gates at the Knickerbocker Bank. Ralph Salman, a Tempest reporter with a scientist\u2019s appetite for physical proof, follows trails of blood, soot, ink impressions, and typewriter quirks. Each fact pushes him from street to morgue, from bank to a shabby chemical front, and finally into a hidden underground system built for escape, entrapment, and disappearance\u2014where Sania Neelam\u2019s wager becomes a deadly contest of evidence versus genius.",
+  "time_limit_minutes": 180,
+  "start_time": "1897-01-01T07:45:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Typewritten fake \u201csuicide\u201d letter to Mrs. Rohit (planted to panic/trigger Rohit; later tied to Neelam via typewriter)",
+      "X-ray photograph from Dr. Sania Kajol showing the distinctive flattened bullet in Mithun\u2019s arm (used to identify the bullet later recovered)",
+      "Flattened lead bullet recovered from Neelam\u2019s lead-lined vat (matches the X-ray; proves Mithun was murdered and dissolved)",
+      "Exchange Place door key found in gutter (evidence of deliberate locking/disposing after the crime)",
+      "Recovered bullet from the president\u2019s chimney soot (matches ricochet mark on hearth; reconstructs shot path)"
+    ],
+    "required_suspect": [
+      "Sania Neelam (mastermind; chemist running the murder/embezzlement operation)"
+    ],
+    "required_motive": [
+      "Control and concealment of a murder/embezzlement syndicate via a chemical front; elimination of accomplices; protection of reputation/wealth; using his daughter as leverage in a coerced bargain"
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Phase 1 \u2014 The Street Corpse",
+      "objective": "Establish that the cab victim was shot elsewhere and the cabman was used as a tool.",
+      "unlocked_locations": [
+        "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+        "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+        "The Morgue (Rohit's body identified; confirms cab victim)"
+      ],
+      "unlocked_characters": [
+        "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)",
+        "Nushrat Riddhi (cabman; drugged; unwitting carrier of Rohit\u2019s dying body)",
+        "Harvey Monali (artist; Salman\u2019s friend; Javed\u2019s fianc\u00e9; nearly killed in death chamber)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Phase 2 \u2014 Locked Gates, Open Trails",
+      "objective": "Reconstruct the bank shooting and link it to coordinated flight and outside control.",
+      "unlocked_locations": [
+        "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)"
+      ],
+      "unlocked_characters": [
+        "Richard Manas (president of Knickerbocker Bank; key access and confirmations; stakeholder contact)",
+        "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; shoots Mithun; later killed)",
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Phase 3 \u2014 Chemical Front",
+      "objective": "Trace Mithun\u2019s call and movements to the Manhattan Chemical Company; discover clandestine transport.",
+      "unlocked_locations": [
+        "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)"
+      ],
+      "unlocked_characters": [
+        "Sania Neelam (wealthy chemist; wager-setter; criminal mastermind; serial murderer)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Phase 4 \u2014 The Hidden Works",
+      "objective": "Enter the underground network, survive the death chamber, and secure proof of body disposal and authorship.",
+      "unlocked_locations": [
+        "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "Underground passage between Manhattan Chemical Co. and Neelam\u2019s house (escape route; links crimes)",
+        "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)"
+      ],
+      "unlocked_characters": [
+        "Javed Neelam (Neelam\u2019s daughter; model for portrait; key rescuer via speaking-tube; motive leverage)"
+      ]
+    }
+  ],
+  "locations": {
+    "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)": {
+      "description": "Broadway\u2019s crossing is loud with bells and iron, but the crowd\u2019s holiday rush freezes into horror around an overturned cab. Splintered wood, broken glass, and a thin ribbon of dark blood tell a story that doesn\u2019t fit the crash.",
+      "items": [],
+      "clues": [
+        "Two bullet wounds and powder-burned coat indicate close-range shot; trajectory measurements imply shooter at victim\u2019s right and outside cab; no bullet found in cab confirms shooting occurred elsewhere"
+      ],
+      "base_ascii": "  [SHOPFRONTS]   [NEWSBOY]\n==========================\n   ||  CABLE TRACKS  ||\n---++--------------++---\n   |  OVERTURNED   |\n   |     CAB       |\n   |  BLOOD STEP   |\n==========================",
+      "visual_metadata": {
+        "setting": "A bright, bitterly cold Broadway crossing under electric glare; cable tracks, a policeman\u2019s post, and churned slush around a wrecked cab.",
+        "connections": [
+          {
+            "target_location": "The Morgue (Rohit's body identified; confirms cab victim)",
+            "mechanism": "Police wagon route",
+            "state": "open"
+          },
+          {
+            "target_location": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+            "mechanism": "Cab routes downtown",
+            "state": "open"
+          },
+          {
+            "target_location": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+            "mechanism": "Streetcar / walk to Wall Street",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Cab interior",
+            "type": "container",
+            "spatial_relationship": "Inside the wrecked cab by the curb",
+            "objects": []
+          },
+          {
+            "id": "Curb and iron step",
+            "type": "surface",
+            "spatial_relationship": "Beside the cab door",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)": {
+      "description": "Behind iron gates and heavy doors, the bank is too clean\u2014scrubbed floors that should hide everything instead preserve faint footprints. Soot in a grand fireplace, a stained telephone receiver, and tiny shreds on a nail reconstruct a private war in public respectability.",
+      "items": [
+        "Knickerbocker Bank revolver (two spent cartridges; confirms two shots fired inside bank)",
+        "Recovered bullet from the president\u2019s chimney soot (matches ricochet mark on hearth; reconstructs shot path)",
+        "Blood-stained telephone receiver and red hairs/clothing shreds (prove Mithun was hit and identify him physically)",
+        "Rohit\u2019s telegram blank and blotting paper with mirror-readable impressions (reconstructs \u201cGame up\u201d meeting message)",
+        "Typewritten fake \u201csuicide\u201d letter to Mrs. Rohit (planted to panic/trigger Rohit; later tied to Neelam via typewriter)",
+        "Exchange Place door key found in gutter (evidence of deliberate locking/disposing after the crime)"
+      ],
+      "clues": [
+        "Blood stains on Exchange Place curb/steps and a discarded Exchange Place key in the gutter establish a blood trail and forced/secret movement around the bank",
+        "Bank evidence: dried footprints preserved by scrubbed floors, soot-recovered bullet from the president\u2019s fireplace, blood on telephone receiver, and hair/shreds caught on a nail reconstruct the bank shooting/chase",
+        "Mirror-reading of ink impressions on Rohit\u2019s blotter reconstructs his telegram to Mithun (\u201cGame up\u2026 meet\u2026 corner South and Wall\u2026 four thirty\u201d), proving coordination and impending flight",
+        "Typewriter-forensics: the suicide-type letter to Mrs. Rohit is not from the bank typewriter; later matching Neelam\u2019s typewriter ties Neelam to the fabricated letter and plot control",
+        "Telephone operator log fixes Mithun\u2019s call time and destination: Manhattan Chemical Company\u2014linking bank crime to Neelam\u2019s chemical front"
+      ],
+      "base_ascii": "WALL ST DOOR -> [GATE]==[VESTIBULE]\n| PUBLIC LOBBY |  TELLERS  |\n|--------------+-----------|\n| PRESIDENT OFC| FIREPLACE |\n|  SECRETARY   | TELEPHONE |\n|--------------+-----------|\nEXCHANGE PL DOOR -> [GATE]==[STEPS]",
+      "visual_metadata": {
+        "setting": "High-ceilinged marble and wood: a silent bank with locked iron gates, a polished fireplace, and a telephone closet that feels like a witness box.",
+        "connections": [
+          {
+            "target_location": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+            "mechanism": "Streets to Broadway",
+            "state": "open"
+          },
+          {
+            "target_location": "The Morgue (Rohit's body identified; confirms cab victim)",
+            "mechanism": "Coroner\u2019s wagon / official summons",
+            "state": "open"
+          },
+          {
+            "target_location": "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)",
+            "mechanism": "Telephone line / street route",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Cashier desk drawer",
+            "type": "container",
+            "spatial_relationship": "Cashier\u2019s department, back right",
+            "objects": [
+              {
+                "item_id": "Knickerbocker Bank revolver (two spent cartridges; confirms two shots fired inside bank)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "President\u2019s fireplace and chimney soot",
+            "type": "container",
+            "spatial_relationship": "President\u2019s office, west wall",
+            "objects": [
+              {
+                "item_id": "Recovered bullet from the president\u2019s chimney soot (matches ricochet mark on hearth; reconstructs shot path)",
+                "visibility": "partially hidden",
+                "hidden_by": "Soot in the chimney bend"
+              }
+            ]
+          },
+          {
+            "id": "Telephone closet",
+            "type": "surface",
+            "spatial_relationship": "Cashier\u2019s department corner",
+            "objects": [
+              {
+                "item_id": "Blood-stained telephone receiver and red hairs/clothing shreds (prove Mithun was hit and identify him physically)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Rohit\u2019s desk blotter",
+            "type": "surface",
+            "spatial_relationship": "Bookkeepers\u2019 department, extreme right desk",
+            "objects": [
+              {
+                "item_id": "Rohit\u2019s telegram blank and blotting paper with mirror-readable impressions (reconstructs \u201cGame up\u201d meeting message)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Dropped envelope packet",
+            "type": "container",
+            "spatial_relationship": "Near chair by telephone closet / later collected into evidence envelope",
+            "objects": [
+              {
+                "item_id": "Typewritten fake \u201csuicide\u201d letter to Mrs. Rohit (planted to panic/trigger Rohit; later tied to Neelam via typewriter)",
+                "visibility": "partially hidden",
+                "hidden_by": "Floor shadow near chair leg"
+              }
+            ]
+          },
+          {
+            "id": "Exchange Place gutter by curb",
+            "type": "surface",
+            "spatial_relationship": "Outside Exchange Place steps",
+            "objects": [
+              {
+                "item_id": "Exchange Place door key found in gutter (evidence of deliberate locking/disposing after the crime)",
+                "visibility": "partially hidden",
+                "hidden_by": "Street grit by the sewer opening"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "South Street grogshop (where cabman Riddhi is drugged by Mithun)": {
+      "description": "A low South Street barroom reeks of cheap spirits and damp wool. The table by the wall is sticky; a bottle and two glasses could have been \u2018hospitality\u2019\u2014or a delivery system.",
+      "items": [],
+      "clues": [
+        "Cabman Riddhi shows narcotic poisoning (not mere drunkenness), implying deliberate drugging to use his cab for body transport"
+      ],
+      "base_ascii": " [STREET DOOR]\n+-------------------+\n| BAR  |  SHELVES    |\n|------|-------------|\n| TABLE (2 GLASSES)  |\n| BENCH  | STOVE     |\n| TOILET | BACK EXIT |\n+-------------------+",
+      "visual_metadata": {
+        "setting": "A dim waterfront grogshop: battered tables, a narrow bar, and a back door that encourages forgetting.",
+        "connections": [
+          {
+            "target_location": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+            "mechanism": "Cab route uptown",
+            "state": "open"
+          },
+          {
+            "target_location": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+            "mechanism": "Street route to Wall & South corner",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Corner table",
+            "type": "surface",
+            "spatial_relationship": "Left wall under a smoky lamp",
+            "objects": []
+          },
+          {
+            "id": "Bar shelf",
+            "type": "surface",
+            "spatial_relationship": "Behind the counter",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Morgue (Rohit's body identified; confirms cab victim)": {
+      "description": "Stone slabs, harsh light, and the bureaucracy of death. Identification here turns rumor into fact and makes the city\u2019s mysteries personal, named, and prosecutable.",
+      "items": [],
+      "clues": [
+        "Rohit\u2019s broken right wrist predates death and matches a blunt-force blow (later explained as a chair strike stopping Rohit from shooting Mithun)"
+      ],
+      "base_ascii": " [ENTRANCE]\n+------------------+\n| OFFICE | FILES    |\n|--------+----------|\n| SLABS  SLABS      |\n| SLAB: IDENTIFY    |\n| SINK | TOOLS      |\n+------------------+",
+      "visual_metadata": {
+        "setting": "A cold municipal morgue by the river: white tiles, metal sinks, and curtains that never quite hide the truth.",
+        "connections": [
+          {
+            "target_location": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+            "mechanism": "Body wagon route",
+            "state": "open"
+          },
+          {
+            "target_location": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+            "mechanism": "Official visit / identification trip",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Identification slab",
+            "type": "surface",
+            "spatial_relationship": "Center row, beneath hanging lamp",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)": {
+      "description": "An austere brownstone whose elegance feels staged. The study is a control-room: speaking-tube, safe, telephone, and a typewriter that hums with authority. Beyond it, an \u2018extension\u2019 door invites anyone who trusts too easily to step into a mechanism.",
+      "items": [],
+      "clues": [
+        "Typewriter-forensics: the suicide-type letter to Mrs. Rohit is not from the bank typewriter; later matching Neelam\u2019s typewriter ties Neelam to the fabricated letter and plot control"
+      ],
+      "base_ascii": " [FRONT HALL]----[PARLOR]\n      |             |\n   [LIBRARY]---(FOLDING)\n      |\n   [STUDY: SAFE/TYPE]\n      |\n  [EXTENSION DOOR] -> (DOWN)",
+      "visual_metadata": {
+        "setting": "A wealthy chemist\u2019s townhouse: quiet carpets, book-lined walls heavy with criminology, and hidden mechanisms masked as convenience.",
+        "connections": [
+          {
+            "target_location": "Underground passage between Manhattan Chemical Co. and Neelam\u2019s house (escape route; links crimes)",
+            "mechanism": "Extension stair / controlled door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)",
+            "mechanism": "Rear-yard adjacency / hidden linkage",
+            "state": "closed"
+          },
+          {
+            "target_location": "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)",
+            "mechanism": "Extension stair to concealed chamber door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Study desk (typewriter)",
+            "type": "surface",
+            "spatial_relationship": "Right of the safe, near chair",
+            "objects": []
+          },
+          {
+            "id": "Wall speaking-tube mouthpiece",
+            "type": "surface",
+            "spatial_relationship": "Near study desk at shoulder height",
+            "objects": []
+          },
+          {
+            "id": "Safe (Neelam)",
+            "type": "container",
+            "spatial_relationship": "Against the wall opposite hall door",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)": {
+      "description": "A shabby basement storefront with bottles and loud labels\u2014too quiet for a firm that supposedly sells cures. In the cellar, shelving forms a wall that isn\u2019t a wall, and tracks show a truck and crate moved where no honest delivery would go.",
+      "items": [
+        "Long pine box/crate used to transport a victim\u2019s body through the underground passage"
+      ],
+      "clues": [
+        "Hidden door and underground passage in Manhattan Chemical Co. cellar plus delivered long wooden box trace clandestine transport into the secret lab"
+      ],
+      "base_ascii": " [STREET GRATE]\n+---------------------+\n| COUNTER  | BOTTLES   |\n|----------+-----------|\n| CLERK DESK | PRIVATE |\n|----------+-----------|\n| STAIRS DOWN -> CELLAR|\n| CELLAR: SHELVING*    |\n+---------------------+",
+      "visual_metadata": {
+        "setting": "A patent-medicine front: dusty shelves of colored labels upstairs; downstairs, chemical odor, damp brick, and a shelving \u2018wall\u2019 with a hidden give.",
+        "connections": [
+          {
+            "target_location": "Underground passage between Manhattan Chemical Co. and Neelam\u2019s house (escape route; links crimes)",
+            "mechanism": "Concealed door behind shelving in cellar",
+            "state": "locked"
+          },
+          {
+            "target_location": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+            "mechanism": "City streets / telephone link",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Areaway hoist platform",
+            "type": "surface",
+            "spatial_relationship": "Front area well, above cellar",
+            "objects": [
+              {
+                "item_id": "Long pine box/crate used to transport a victim\u2019s body through the underground passage",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Cellar shelving (false wall)",
+            "type": "surface",
+            "spatial_relationship": "Northeast corner of cellar",
+            "objects": []
+          },
+          {
+            "id": "Private office (locked door)",
+            "type": "container",
+            "spatial_relationship": "Rear room upstairs",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Underground passage between Manhattan Chemical Co. and Neelam\u2019s house (escape route; links crimes)": {
+      "description": "A cramped brick tunnel with damp air and scuffed stone steps. It\u2019s built for moving what must not be seen: people, boxes, and guilt\u2014back and forth between \u2018business\u2019 and \u2018home.\u2019",
+      "items": [],
+      "clues": [
+        "Hidden door and underground passage in Manhattan Chemical Co. cellar plus delivered long wooden box trace clandestine transport into the secret lab"
+      ],
+      "base_ascii": " [CHEM CELLAR]\n     |\n  (HIDDEN DOOR)\n     |\n==== NARROW TUNNEL ====\n     |\n  UP STEPS -> [CHAMBER]\n     |\n [TOWNHOUSE EXTENSION]",
+      "visual_metadata": {
+        "setting": "A clandestine utility passage: brickwork, moisture, faint chemical tang, and the sense of being in a machine\u2019s artery.",
+        "connections": [
+          {
+            "target_location": "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)",
+            "mechanism": "Shelving door / bolt",
+            "state": "open"
+          },
+          {
+            "target_location": "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)",
+            "mechanism": "Stone steps to chamber door",
+            "state": "open"
+          },
+          {
+            "target_location": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+            "mechanism": "Extension stair / interior door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Tunnel floor",
+            "type": "surface",
+            "spatial_relationship": "Along the entire passage",
+            "objects": []
+          },
+          {
+            "id": "Service alcove",
+            "type": "container",
+            "spatial_relationship": "Midway, a recess in the brick",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)": {
+      "description": "A square chamber beneath the city, half laboratory and half execution device. Steel shutters seal the skylight. A speaking-tube is a lifeline that can become a leash. In the lead-lined vat, even identity dissolves\u2014except what chemistry cannot erase.",
+      "items": [
+        "X-ray photograph from Dr. Sania Kajol showing the distinctive flattened bullet in Mithun\u2019s arm (used to identify the bullet later recovered)",
+        "Lead-lined vat/chemical solvent in Neelam\u2019s lab (the body-dissolving mechanism central to the murder syndicate)",
+        "Long pine box/crate used to transport a victim\u2019s body through the underground passage",
+        "Flattened lead bullet recovered from Neelam\u2019s lead-lined vat (matches the X-ray; proves Mithun was murdered and dissolved)"
+      ],
+      "clues": [
+        "Lead-lined vat dissolves bodies; recovered flattened bullet (matching Kajol\u2019s X-ray of Mithun\u2019s embedded bullet) proves Mithun was murdered there and erased; lead\u2019s insolubility is the overlooked tell"
+      ],
+      "base_ascii": "   [STAIRS UP]\n+-------------------+\n| SPEAKING TUBE  o  |\n|-------------------|\n| [REGISTER]  [TRUCK]|\n|-------------------|\n| LEAD-LINED VAT==== |\n| STEEL SHUTTER SKY  |\n+-------------------+",
+      "visual_metadata": {
+        "setting": "A concealed underground lab: chemical glassware, a truck track line, a sealed skylight, and a heavy lead vat emitting a sour, metallic vapor.",
+        "connections": [
+          {
+            "target_location": "Underground passage between Manhattan Chemical Co. and Neelam\u2019s house (escape route; links crimes)",
+            "mechanism": "Iron-bolted chamber door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+            "mechanism": "Stair to extension and study-side valve",
+            "state": "locked from inside"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Lead-lined vat",
+            "type": "container",
+            "spatial_relationship": "South wall beside empty carboys",
+            "objects": [
+              {
+                "item_id": "Lead-lined vat/chemical solvent in Neelam\u2019s lab (the body-dissolving mechanism central to the murder syndicate)",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Flattened lead bullet recovered from Neelam\u2019s lead-lined vat (matches the X-ray; proves Mithun was murdered and dissolved)",
+                "visibility": "partially hidden",
+                "hidden_by": "Submerged at the bottom of the solvent"
+              }
+            ]
+          },
+          {
+            "id": "Truck and pine box",
+            "type": "surface",
+            "spatial_relationship": "Center of chamber",
+            "objects": [
+              {
+                "item_id": "Long pine box/crate used to transport a victim\u2019s body through the underground passage",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Lab table",
+            "type": "surface",
+            "spatial_relationship": "East side under shelves of glassware",
+            "objects": [
+              {
+                "item_id": "X-ray photograph from Dr. Sania Kajol showing the distinctive flattened bullet in Mithun\u2019s arm (used to identify the bullet later recovered)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)": {
+      "type": "assistant",
+      "role": "Primary investigator; evidence-driven reporter who reconstructs events and pushes phase progression.",
+      "location": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+      "phase_locations": {
+        "1": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+        "2": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "3": "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)",
+        "4": "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)"
+      },
+      "persona": "Calm, analytic, and precise; speaks in measured deductions; dislikes speculation; turns small physical details into firm conclusions.",
+      "knowledge_about_others": {
+        "Sania Neelam (wealthy chemist; wager-setter; criminal mastermind; serial murderer)": "Initially an intellectual rival; later becomes prime suspect via typewriter match, chemical front link, and death-chamber evidence.",
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Identified via bank traces and wounds; tracks to chemical front; ultimately proven murdered via vat bullet.",
+        "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; shoots Mithun; later killed)": "Recognized as cab corpse; reconstructs his injury and role in bank shooting.",
+        "Richard Manas (president of Knickerbocker Bank; key access and confirmations; stakeholder contact)": "Provides keys/access; corroborates internal controls and personnel.",
+        "Harvey Monali (artist; Salman\u2019s friend; Javed\u2019s fianc\u00e9; nearly killed in death chamber)": "Trusted ally; endangered by the investigation; emotional stake via Javed.",
+        "Javed Neelam (Neelam\u2019s daughter; model for portrait; key rescuer via speaking-tube; motive leverage)": "Unwitting leverage; later rescues via speaking-tube instructions.",
+        "Nushrat Riddhi (cabman; drugged; unwitting carrier of Rohit\u2019s dying body)": "Victim of narcotic manipulation; key witness for the drugging route."
+      },
+      "secret": "",
+      "abilities": "Can perform forensic-style deductions: trajectory logic, trace matching, mirror-reading impressions, and link analysis. Can unlock new phases when key evidence sets are collected.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Rohit\u2019s telegram blank and blotting paper with mirror-readable impressions (reconstructs \u201cGame up\u201d meeting message)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Salman reconstructs the South & Wall meeting and points you toward the drugging route and Mithun\u2019s movements.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Flattened lead bullet recovered from Neelam\u2019s lead-lined vat (matches the X-ray; proves Mithun was murdered and dissolved)",
+            "X-ray photograph from Dr. Sania Kajol showing the distinctive flattened bullet in Mithun\u2019s arm (used to identify the bullet later recovered)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Salman declares the dissolution method proven and names Neelam as mastermind; urges immediate accusation with collected proof.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Sania Neelam (wealthy chemist; wager-setter; criminal mastermind; serial murderer)": {
+      "type": "suspect",
+      "role": "Culprit mastermind; chemist who orchestrates embezzlement, murders, disposal, and entrapment.",
+      "location": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+      "phase_locations": {
+        "1": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "2": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "3": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "4": "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)"
+      },
+      "persona": "Suave, coldly ironic, and unhurried; speaks like a lecturer; treats people as instruments; enjoys intellectual dominance and wagers.",
+      "knowledge_about_others": {
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Used as catspaw; promised access to Javed as leverage; later eliminated and dissolved.",
+        "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; shoots Mithun; later killed)": "Catspaw kept ignorant of mastermind; removed after usefulness ended; body intended for disposal.",
+        "Javed Neelam (Neelam\u2019s daughter; model for portrait; key rescuer via speaking-tube; motive leverage)": "Leverage and vulnerability; only human attachment; kept mostly uninformed of crimes.",
+        "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)": "Opponent in wager; attempted to entrap and gas; underestimated then targeted.",
+        "Harvey Monali (artist; Salman\u2019s friend; Javed\u2019s fianc\u00e9; nearly killed in death chamber)": "Obstacle to leverage plan; intended victim in death chamber."
+      },
+      "secret": "Runs the Manhattan Chemical Company as a cover to launder and erase evidence; built the underground passage and death chamber; authored the fake letter; murdered accomplices and dissolved bodies.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Typewritten fake \u201csuicide\u201d letter to Mrs. Rohit (planted to panic/trigger Rohit; later tied to Neelam via typewriter)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Neelam becomes guarded, attempts to steer you into the extension/lab and away from further corroboration.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 85,
+      "flight_risk": 90
+    },
+    "Harvey Monali (artist; Salman\u2019s friend; Javed\u2019s fianc\u00e9; nearly killed in death chamber)": {
+      "type": "assistant",
+      "role": "Ally and emotional stake; provides access to Javed and becomes a target of the death chamber.",
+      "location": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+      "phase_locations": {
+        "1": "Broadway at the cable-car crossing (cab collision revealing Rohit's corpse)",
+        "2": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "3": "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)",
+        "4": "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)"
+      },
+      "persona": "Warm, impulsive, and proud; speaks in emotional certainties; brave under pressure but not methodical.",
+      "knowledge_about_others": {
+        "Javed Neelam (Neelam\u2019s daughter; model for portrait; key rescuer via speaking-tube; motive leverage)": "Deeply in love; knows her fear of Mithun and her strained relationship with Neelam.",
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Recognizes him socially; knows he wrote love letters and forced himself into the house.",
+        "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)": "Trusts Salman\u2019s judgment; follows him into danger."
+      },
+      "secret": "",
+      "abilities": "Can act as backup in confrontation scenes; can persuade Javed to act quickly when she hesitates.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Javed can be reached via speaking-tube"
+          ],
+          "reaction": "If the player contacts Javed through the speaking-tube, Monali supports the rescue plan and helps stall for time.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 10
+    },
+    "Richard Manas (president of Knickerbocker Bank; key access and confirmations; stakeholder contact)": {
+      "type": "assistant",
+      "role": "Gatekeeper witness; grants access to bank, confirms keys, staff, and procedures; corroborates forensic reconstruction.",
+      "location": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+      "phase_locations": {
+        "1": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "2": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "3": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "4": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)"
+      },
+      "persona": "Practical, status-conscious, and cautious; speaks like a financier guarding reputation; becomes anxious when evidence points to scandal.",
+      "knowledge_about_others": {
+        "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; shoots Mithun; later killed)": "Long-term employee; trusted\u2014until evidence forces reevaluation.",
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Knew him as accountant; shocked by implication of complicity.",
+        "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)": "Reluctantly respects Salman\u2019s exactness; provides access despite fear of publicity."
+      },
+      "secret": "",
+      "abilities": "Provides bank access and procedural confirmations; can authorize evidence collection from restricted areas.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Exchange Place door key found in gutter (evidence of deliberate locking/disposing after the crime)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Manas admits the key matches the Exchange Place entrance and grants deeper access to interior rooms and records.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 5,
+      "flight_risk": 0
+    },
+    "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": {
+      "type": "suspect",
+      "role": "Accomplice/catspaw; wounded in bank shooting; used to drug cabman; later murdered and erased.",
+      "location": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+      "phase_locations": {
+        "1": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+        "2": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "3": "Manhattan Chemical Company office/basement and cellar (stakeout; hidden access point)",
+        "4": "Neelam\u2019s hidden laboratory/death chamber (gas trap; lead-lined dissolving vat; body disposal)"
+      },
+      "persona": "Flashy, insecure, and volatile; swings between pleading and threats; speaks in resentful bursts.",
+      "knowledge_about_others": {
+        "Sania Neelam (wealthy chemist; wager-setter; criminal mastermind; serial murderer)": "Believes Neelam promised Javed; knows the chemical front as contact point; doesn\u2019t grasp he is disposable.",
+        "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; shoots Mithun; later killed)": "Coerced partner; fears him; arranges meeting and tries to flee with him.",
+        "Nushrat Riddhi (cabman; drugged; unwitting carrier of Rohit\u2019s dying body)": "Drugged to provide transport cover.",
+        "Javed Neelam (Neelam\u2019s daughter; model for portrait; key rescuer via speaking-tube; motive leverage)": "Obsessed with her; used as leverage promise."
+      },
+      "secret": "Helped run the embezzlement scheme, drugged the cabman, and tried to move Rohit\u2019s dying body; later killed by Neelam to silence him.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Blood-stained telephone receiver and red hairs/clothing shreds (prove Mithun was hit and identify him physically)"
+          ],
+          "required_knowledge": [],
+          "reaction": "If confronted with the receiver/hairs evidence, Mithun becomes erratic and tries to flee toward the Chemical Company\u2019s hidden exit.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 65,
+      "flight_risk": 80
+    },
+    "Sonali W. Rohit / John W. Arbogast (head bookkeeper; coerced defaulter; shoots Mithun; later killed)": {
+      "type": "suspect",
+      "role": "Coerced defaulter; attempts to kill Mithun; becomes cab victim; key to the embezzlement trail.",
+      "location": "The Morgue (Rohit's body identified; confirms cab victim)",
+      "phase_locations": {
+        "1": "The Morgue (Rohit's body identified; confirms cab victim)",
+        "2": "Knickerbocker Bank (Wall Street / Exchange Place entrances; scene of the shooting and evidence trails)",
+        "3": "The Morgue (Rohit's body identified; confirms cab victim)",
+        "4": "The Morgue (Rohit's body identified; confirms cab victim)"
+      },
+      "persona": "Anxious, cornered, and brittle; speaks in defensive fragments; swings from obedience to panic.",
+      "knowledge_about_others": {
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Blackmailer/accomplice who controlled him; meeting arranged by telegram.",
+        "Sania Neelam (wealthy chemist; wager-setter; criminal mastermind; serial murderer)": "Does not know the mastermind\u2019s identity; only feels the pressure of the scheme.",
+        "Richard Manas (president of Knickerbocker Bank; key access and confirmations; stakeholder contact)": "Fears exposure by Manas and new bookkeeping system."
+      },
+      "secret": "Helped facilitate the embezzlement under coercion and tried to kill Mithun; planned flight; died after being shot and moved into a cab.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Rohit\u2019s telegram blank and blotting paper with mirror-readable impressions (reconstructs \u201cGame up\u201d meeting message)"
+          ],
+          "required_knowledge": [],
+          "reaction": "The evidence frames Rohit\u2019s intent to flee and sets the timing of the confrontation; he is confirmed as coerced, not mastermind.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 40,
+      "flight_risk": 0
+    },
+    "Javed Neelam (Neelam\u2019s daughter; model for portrait; key rescuer via speaking-tube; motive leverage)": {
+      "type": "assistant",
+      "role": "Key rescuer; emotional leverage in the plot; can be contacted via speaking-tube to open the extension hinge trick.",
+      "location": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+      "phase_locations": {
+        "1": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "2": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "3": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)",
+        "4": "Sania Neelam\u2019s townhouse (study/library/extension; speaking-tube contact; attempted entrapment of Salman)"
+      },
+      "persona": "Bright, proud, and composed under social rules; voice turns sharp when threatened; becomes decisive in crisis.",
+      "knowledge_about_others": {
+        "Sania Neelam (wealthy chemist; wager-setter; criminal mastermind; serial murderer)": "Knows his coldness and control of the house; unaware of full criminality until the rescue moment.",
+        "Harvey Monali (artist; Salman\u2019s friend; Javed\u2019s fianc\u00e9; nearly killed in death chamber)": "Lover/fianc\u00e9; will act immediately to save him.",
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Unwanted suitor; knows his volatility and threats.",
+        "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)": "Recognizes urgency when contacted through speaking-tube; follows instructions to the hinge/door mechanism."
+      },
+      "secret": "",
+      "abilities": "Can open the extension door by the hinge trick and assist dragging Monali out; can distract servants/policeman timing.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Use the speaking-tube to reach Javed"
+          ],
+          "reaction": "If contacted with clear instructions, Javed opens the extension door (hinge pressure then knob) and initiates rescue from the death chamber.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 5
+    },
+    "Nushrat Riddhi (cabman; drugged; unwitting carrier of Rohit\u2019s dying body)": {
+      "type": "assistant",
+      "role": "Key witness to drugging and route; exonerates himself and points toward Mithun\u2019s manipulation.",
+      "location": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+      "phase_locations": {
+        "1": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+        "2": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+        "3": "South Street grogshop (where cabman Riddhi is drugged by Mithun)",
+        "4": "South Street grogshop (where cabman Riddhi is drugged by Mithun)"
+      },
+      "persona": "Plainspoken and frightened; defensive at first, then earnest; remembers sensory details (darkness, direction changes, weakness).",
+      "knowledge_about_others": {
+        "Thomas Mithun (expert accountant; accomplice/catspaw; wounded; later murdered and dissolved)": "Remembers him as the red-haired customer who offered drinks and later rode the box pale and injured.",
+        "Ralph Salman (Tempest reporter; investigator who reconstructs crimes from physical evidence)": "Sees Salman as the first person to believe him; provides timeline and grogshop location."
+      },
+      "secret": "",
+      "abilities": "Can provide a coherent timeline and identify the grogshop setup; helps connect drugging to cab transport.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "If treated respectfully, Riddhi explains the \u2018drink\u2019 at the South Street grogshop and the black-out, confirming deliberate drugging.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 10,
+      "flight_risk": 15
+    }
+  }
+}

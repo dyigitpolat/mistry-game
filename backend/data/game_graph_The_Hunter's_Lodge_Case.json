@@ -1,0 +1,572 @@
+{
+  "title": "The Hunter's Lodge Case",
+  "author": "Agatha Christie",
+  "victim": "Andrew Poirot",
+  "intro_narrative": "Miss M Poirot hires Hercule Roger and his assistant Agatha to unravel a puzzle-will left by her late uncle at Crabtree Manor in Devonshire. The official will grants her use of the estate for a year\u2014then gives everything to charities\u2014daring her to find a later will or hidden fortune. A roll-top desk key bearing a grubby, oddly labeled envelope and rumors of secret repairs by Plymouth workmen point to concealment and misdirection. The chase runs from the manor\u2019s study to Plymouth and ends with a sudden realization on the Taunton platform.",
+  "time_limit_minutes": 180,
+  "start_time": "1925-03-26T11:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Dirty envelope attached to the key (actual later will written inside in sympathetic ink)",
+      "Sympathetic/disappearing ink (used to conceal the real will text)",
+      "Charred fragment of stiff paper with Sacre\u2019s partial signature (remnant proving the decoy will existed)"
+    ],
+    "required_suspect": [],
+    "required_motive": [
+      "Prove the existence and legal priority of a later will dated March 25 at 12:30 p.m., created to supersede the 11:00 a.m. will-form and defeat the charitable bequest."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Client\u2019s Challenge",
+      "objective": "Meet Miss M Poirot and establish the legal significance of the will\u2019s time-stamp; travel to Devonshire.",
+      "unlocked_locations": [
+        "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)"
+      ],
+      "unlocked_characters": [
+        "Hercule Roger (investigator)",
+        "Agatha (narrator/assistant to Roger)",
+        "Miss M Poirot (Andrew\u2019s niece; intended beneficiary; client)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Study and the Servants",
+      "objective": "Search the study, interrogate the Sacres, and identify the suspicious key-envelope and the rumored repairs.",
+      "unlocked_locations": [
+        "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "Old-fashioned fireplace in the study (brick cavity hiding place)"
+      ],
+      "unlocked_characters": [
+        "Mr. Sacre (servant/witness to the will-signings at 11 a.m.)",
+        "Mrs. Sacre (servant/witness; corroborates timing and repair workmen)",
+        "Andrew Poirot (deceased uncle; creator of the puzzle-will)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Plymouth Mechanism",
+      "objective": "Track down the Plymouth firm and learn the removable-brick mechanism; inspect the cavity and interpret the decoy evidence.",
+      "unlocked_locations": [
+        "Plymouth (firm/workmen who built the hidden cavity)"
+      ],
+      "unlocked_characters": [
+        "Jim (Plymouth workman who reveals how the fireplace hiding-place works)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Taunton Realization & Envelope Will",
+      "objective": "Realize the \u2018tradesmen\u2019 window for outside witnesses, then reveal the sympathetic-ink will inside the envelope and confirm its witnesses.",
+      "unlocked_locations": [
+        "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      ],
+      "unlocked_characters": [
+        "Jessie Christie (witness to the true later will on the envelope)",
+        "Pike Christie (Jessie\u2019s spouse; co-witness to the envelope will)"
+      ]
+    }
+  ],
+  "locations": {
+    "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)": {
+      "description": "A rambling old Devonshire farmhouse called Crabtree Manor, rich with quiet routines, locked-away habits, and the sense of a mind that arranged every object with intent. The house feels less like a home than a challenge set by a shrewd man who enjoyed being underestimated.",
+      "items": [
+        "The 11:00 a.m. printed will-form (leaves estate to charities after a year challenge)"
+      ],
+      "clues": [
+        "The official will is dated March 25 at 11:00 a.m., implying a later will (even 30 minutes later) would supersede it."
+      ],
+      "base_ascii": "+----------------------+\n|  YARD / DRIVEWAY     |\n|   [Barn]   [Gate]    |\n|                      |\n|  +----MANOR-----+    |\n|  | Hall  Stairs |    |\n|  |      Study-> |    |\n+----------------------+",
+      "visual_metadata": {
+        "setting": "Weathered stone, low beams, and the smell of old paper and dairy air; a property shaped by long habit and one man\u2019s stubborn logic.",
+        "connections": [
+          {
+            "target_location": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+            "mechanism": "Narrow hallway door with brass latch",
+            "state": "open"
+          },
+          {
+            "target_location": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)",
+            "mechanism": "Carriage drive to nearest station (off-map travel)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Front hall side table",
+            "type": "surface",
+            "spatial_relationship": "Just inside the front door beneath a hat-peg rail",
+            "objects": [
+              {
+                "item_id": "The 11:00 a.m. printed will-form (leaves estate to charities after a year challenge)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)": {
+      "description": "A small paneled study that doubles as living-room: neat docketed papers, an imposing roll-top desk, and a leather chair worn by long use. Everything is orderly\u2014except one glaringly grubby envelope tied to the desk key.",
+      "items": [
+        "Roll-top desk key (with the suspicious attached envelope)",
+        "Dirty envelope attached to the key (actual later will written inside in sympathetic ink)",
+        "Sympathetic/disappearing ink (used to conceal the real will text)"
+      ],
+      "clues": [
+        "A dirty, crudely labeled envelope tied to the roll-top desk key is stylistically unlike Andrew\u2019s usual orderly labeling\u2014suggesting it doesn\u2019t belong to his normal system and is meant to attract/repel attention.",
+        "Sacre reports two will-forms were obtained; the servants signed once around 11, then re-signed about an hour later after Andrew claimed a \u201cmistake\u201d and tore the first up."
+      ],
+      "base_ascii": "+------------------------+\n| Window seat   Settee    |\n| [chintz]      [chintz]  |\n|                        |\n| Roll-top Desk  Chair    |\n| [key+env]      [leather]|\n| Fireplace -> (east)     |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "Lamplit wood paneling, precise labels on keys and drawers, and the hush of a room that expects to be searched\u2014yet seems to be watching the searcher back.",
+        "connections": [
+          {
+            "target_location": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+            "mechanism": "Study door with simple keyhole",
+            "state": "closed"
+          },
+          {
+            "target_location": "Old-fashioned fireplace in the study (brick cavity hiding place)",
+            "mechanism": "Open hearth opening / brick surround",
+            "state": "open"
+          },
+          {
+            "target_location": "Plymouth (firm/workmen who built the hidden cavity)",
+            "mechanism": "Road journey to Plymouth (off-map travel)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Roll-top desk",
+            "type": "container",
+            "spatial_relationship": "Against the north wall, under a shelf of docketed packets",
+            "objects": [
+              {
+                "item_id": "Roll-top desk key (with the suspicious attached envelope)",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Dirty envelope attached to the key (actual later will written inside in sympathetic ink)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Desk drawer: writing set",
+            "type": "container",
+            "spatial_relationship": "Right-hand drawer of the roll-top desk",
+            "objects": [
+              {
+                "item_id": "Sympathetic/disappearing ink (used to conceal the real will text)",
+                "visibility": "partially hidden",
+                "hidden_by": "Folded blotter and pen tray"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Old-fashioned fireplace in the study (brick cavity hiding place)": {
+      "description": "An old-fashioned brick fireplace with a surround that looks seamless\u2014too seamless. The hearth is cold, but the masonry feels like it has been handled with recent cleverness, not mere age.",
+      "items": [
+        "Hidden fireplace brick mechanism/cavity (constructed hiding-place used for the decoy)",
+        "Second printed will-form (the one torn/burned; decoy hidden in fireplace)",
+        "Charred fragment of stiff paper with Sacre\u2019s partial signature (remnant proving the decoy will existed)"
+      ],
+      "clues": [
+        "Workmen from Plymouth did repairs while barring the servants from the study, implying a deliberate secret hiding-place was constructed.",
+        "The cavity contains only a charred fragment of stiff paper with part of Sacre\u2019s signature\u2014proof a will-form had been hidden there but was intentionally burned/removed (a planted decoy)."
+      ],
+      "base_ascii": "+--------------------+\n| Brick surround      |\n| [ ] [ ] [ ] [ ]    |\n|    (press here) ->  |\n| [2nd brick]         |\n| Hearth opening      |\n| Ash line / poker    |\n+--------------------+",
+      "visual_metadata": {
+        "setting": "Brickwork with invisible joins and a craftsman\u2019s trick: a secret cavity designed to reward the obvious searcher and punish the confident one.",
+        "connections": [
+          {
+            "target_location": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+            "mechanism": "Shared room boundary (east wall hearth)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Removable brick cavity",
+            "type": "container",
+            "spatial_relationship": "Behind the second brick from the end in the fireplace surround",
+            "objects": [
+              {
+                "item_id": "Second printed will-form (the one torn/burned; decoy hidden in fireplace)",
+                "visibility": "hidden",
+                "hidden_by": "Hidden fireplace brick mechanism/cavity (constructed hiding-place used for the decoy)"
+              },
+              {
+                "item_id": "Charred fragment of stiff paper with Sacre\u2019s partial signature (remnant proving the decoy will existed)",
+                "visibility": "hidden",
+                "hidden_by": "Hidden fireplace brick mechanism/cavity (constructed hiding-place used for the decoy)"
+              }
+            ]
+          },
+          {
+            "id": "Brick surround mechanism",
+            "type": "surface",
+            "spatial_relationship": "Second brick from the end (press point) on the surround",
+            "objects": [
+              {
+                "item_id": "Hidden fireplace brick mechanism/cavity (constructed hiding-place used for the decoy)",
+                "visibility": "partially hidden",
+                "hidden_by": "Seamless brick join and soot staining"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Plymouth (firm/workmen who built the hidden cavity)": {
+      "description": "A practical, soot-edged workshop district where secrets are not romantic\u2014just commissioned, measured, cut, and fitted. Here the \u2018how\u2019 of the hiding-place is ordinary labor, and therefore reliable truth.",
+      "items": [],
+      "clues": [
+        "Plymouth workmen disclose a specific mechanism: a removable fireplace brick reveals a concealed cavity."
+      ],
+      "base_ascii": "+----------------------+\n| PLYMOUTH WORKYARD     |\n|  Office  |  Store     |\n|  Ledger  |  Bricks    |\n|----------------------|\n| Bay: tools / mortar   |\n| Jim -> explains job   |\n+----------------------+",
+      "visual_metadata": {
+        "setting": "Clinking tools, chalky brick dust, and blunt speech; a place where workmanship proves what memory only hints.",
+        "connections": [
+          {
+            "target_location": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+            "mechanism": "Return journey by road (off-map travel)",
+            "state": "open"
+          },
+          {
+            "target_location": "Old-fashioned fireplace in the study (brick cavity hiding place)",
+            "mechanism": "Knowledge-based access (apply mechanism instructions)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Foreman\u2019s ledger counter",
+            "type": "surface",
+            "spatial_relationship": "Inside the small office by the yard gate",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)": {
+      "description": "A cold platform in the night, lit by harsh station lamps and the fading roar of the departing train. Here, frustration becomes clarity: the overlooked detail snaps into place and forces a return to the manor.",
+      "items": [],
+      "clues": [
+        "Roger\u2019s overlooked detail: Andrew went to the village to pay tradesmen\u2014creating an opportunity to have non-servant witnesses sign a different will.",
+        "Heating the inside of the desk-key envelope reveals sympathetic-ink text: a will leaving everything to Miss M Poirot, dated March 25 at 12:30 p.m., witnessed by Jessie and Pike Christie."
+      ],
+      "base_ascii": "+----------------------+\n| TAUNTON PLATFORM      |\n| Bench   Lamp   Sign   |\n|  [ ]     |    TAUNTON |\n|----------------------|\n| Track -> train gone   |\n| Roger: realization    |\n+----------------------+",
+      "visual_metadata": {
+        "setting": "Wind, cinders, and sudden insight\u2014an in-between place where the final logic clicks before the evidence is physically recovered.",
+        "connections": [
+          {
+            "target_location": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+            "mechanism": "Backtrack by train/car hire (off-map travel)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Station bench",
+            "type": "surface",
+            "spatial_relationship": "Under the main lamp near the timetable board",
+            "objects": []
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Hercule Roger (investigator)": {
+      "type": "assistant",
+      "role": "Investigator; interrogates witnesses, structures the search, and performs the final reveal by heat-developing the ink.",
+      "location": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+      "phase_locations": {
+        "1": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+        "2": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "3": "Plymouth (firm/workmen who built the hidden cavity)",
+        "4": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      },
+      "persona": "Fastidious, theatrical, and vain about his reasoning; speaks in crisp deductions and treats disorder as an accusation.",
+      "knowledge_about_others": {
+        "Miss M Poirot (Andrew\u2019s niece; intended beneficiary; client)": "Believes she is methodical and pragmatic; respects her for hiring expertise.",
+        "Mr. Sacre (servant/witness to the will-signings at 11 a.m.)": "Notices hesitation about the key-envelope writing; suspects concealment by fear or loyalty.",
+        "Andrew Poirot (deceased uncle; creator of the puzzle-will)": "Sees him as a shrewd puzzle-maker who anticipates the searcher's steps."
+      },
+      "secret": "",
+      "abilities": "Can combine clues into deductions; can 'develop' sympathetic ink by applying heat when the player has the envelope and an ignition source; can unlock phase progression when key evidence is collected.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Roll-top desk key (with the suspicious attached envelope)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Insists the dirty envelope is an intentional 'alien note' and pushes the investigation toward motive and misdirection rather than brute-force searching.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Dirty envelope attached to the key (actual later will written inside in sympathetic ink)"
+          ],
+          "required_knowledge": [
+            "Heating the inside of the desk-key envelope reveals sympathetic-ink text: a will leaving everything to Miss M Poirot, dated March 25 at 12:30 p.m., witnessed by Jessie and Pike Christie."
+          ],
+          "reaction": "Directs the player to open and heat the envelope interior to reveal the later will and complete the case.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Agatha (narrator/assistant to Roger)": {
+      "type": "assistant",
+      "role": "Narrator and field assistant; observes timing slips, records statements, and challenges Roger\u2019s assumptions.",
+      "location": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+      "phase_locations": {
+        "1": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+        "2": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "3": "Old-fashioned fireplace in the study (brick cavity hiding place)",
+        "4": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      },
+      "persona": "Plainspoken, quietly skeptical, and occasionally grumpy; notices human tells and practical gaps.",
+      "knowledge_about_others": {
+        "Hercule Roger (investigator)": "Knows his vanity can blind him to simple details.",
+        "Mr. Sacre (servant/witness to the will-signings at 11 a.m.)": "Senses he hesitated before claiming the envelope handwriting was Andrew\u2019s."
+      },
+      "secret": "",
+      "abilities": "Can summarize interrogations into actionable notes; can point out inconsistencies (hesitations, timing) to unlock optional dialogue branches.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Sacre reports two will-forms were obtained; the servants signed once around 11, then re-signed about an hour later after Andrew claimed a \u201cmistake\u201d and tore the first up."
+          ],
+          "reaction": "Prompts the player to re-question the Sacres about the second signing and what Andrew did immediately afterward.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Miss M Poirot (Andrew\u2019s niece; intended beneficiary; client)": {
+      "type": "assistant",
+      "role": "Client and intended beneficiary; provides the official will and context for Andrew\u2019s challenge.",
+      "location": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+      "phase_locations": {
+        "1": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+        "2": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "4": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      },
+      "persona": "Businesslike, controlled, and principled; treats the inheritance as a contest rather than entitlement.",
+      "knowledge_about_others": {
+        "Andrew Poirot (deceased uncle; creator of the puzzle-will)": "Understands his stubbornness and playfulness; expects misdirection.",
+        "Mr. Sacre (servant/witness to the will-signings at 11 a.m.)": "Believes they are loyal and want her to benefit."
+      },
+      "secret": "",
+      "abilities": "Can authorize access to rooms and documents; can formally accept the discovered will to trigger the endgame state.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Dirty envelope attached to the key (actual later will written inside in sympathetic ink)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Requests confirmation of date/time and witnesses to ensure the later will supersedes the 11 a.m. form.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Andrew Poirot (deceased uncle; creator of the puzzle-will)": {
+      "type": "assistant",
+      "role": "Deceased testator; appears through documents, design choices, and the logic of his misdirection.",
+      "location": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+      "phase_locations": {
+        "1": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+        "2": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "3": "Old-fashioned fireplace in the study (brick cavity hiding place)",
+        "4": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      },
+      "persona": "Present only as a \u2018voice\u2019 in design: methodical, competitive, and amused by predictable searches.",
+      "knowledge_about_others": {
+        "Miss M Poirot (Andrew\u2019s niece; intended beneficiary; client)": "Designed the puzzle to test her\u2014and to reward her for hiring an expert.",
+        "Jessie Christie (witness to the true later will on the envelope)": "Chose a local tradesperson couple as neutral witnesses outside the servants\u2019 orbit."
+      },
+      "secret": "",
+      "abilities": "N/A (non-interactive character node used for narrative anchoring and flashback-style exposition).",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Mr. Sacre (servant/witness to the will-signings at 11 a.m.)": {
+      "type": "suspect",
+      "role": "Servant witness; recounts the two will-forms and the two signings; potential red herring due to hesitation.",
+      "location": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+      "phase_locations": {
+        "2": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "3": "Old-fashioned fireplace in the study (brick cavity hiding place)"
+      },
+      "persona": "Wary, literal, and protective of the household; answers slowly when cornered on handwriting and access.",
+      "knowledge_about_others": {
+        "Mrs. Sacre (servant/witness; corroborates timing and repair workmen)": "Follows her steadier memory on times and domestic routines.",
+        "Andrew Poirot (deceased uncle; creator of the puzzle-will)": "Knows Andrew could be fussy, secretive, and fond of testing people."
+      },
+      "secret": "Feels ashamed of hesitating about the envelope label; fears being blamed for the missing will and thus becomes evasive, though he did not destroy the real will.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Dirty envelope attached to the key (actual later will written inside in sympathetic ink)"
+          ],
+          "required_knowledge": [
+            "A dirty, crudely labeled envelope tied to the roll-top desk key is stylistically unlike Andrew\u2019s usual orderly labeling\u2014suggesting it doesn\u2019t belong to his normal system and is meant to attract/repel attention."
+          ],
+          "reaction": "Deflects and insists the writing is Andrew\u2019s, then retreats to safer details about the will-form signing times.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 35,
+      "flight_risk": 5
+    },
+    "Mrs. Sacre (servant/witness; corroborates timing and repair workmen)": {
+      "type": "suspect",
+      "role": "Servant witness; provides strong time anchoring and recalls the barred-off workmen repairs.",
+      "location": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)",
+      "phase_locations": {
+        "2": "Mr. Andrew Poirot\u2019s study/living-room at Crabtree Manor (roll-top desk, key, and fireplace hiding-place)",
+        "3": "Crabtree Manor (Andrew Poirot\u2019s farmhouse estate in Devonshire)"
+      },
+      "persona": "Calm, practical, and confident about household timings; bluntly reminds others of what they forget.",
+      "knowledge_about_others": {
+        "Mr. Sacre (servant/witness to the will-signings at 11 a.m.)": "Knows he grows flustered under questioning.",
+        "Jim (Plymouth workman who reveals how the fireplace hiding-place works)": "Remembers only that the firm was from Plymouth and that the study was kept off-limits."
+      },
+      "secret": "Resents being treated as ignorant; downplays details of the repairs because she was excluded and dislikes admitting it.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Volunteers the key fact that workmen were in the study and the servants were barred, pointing the investigation to Plymouth.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 15,
+      "flight_risk": 0
+    },
+    "Jim (Plymouth workman who reveals how the fireplace hiding-place works)": {
+      "type": "assistant",
+      "role": "Workman witness; explains the exact removable-brick mechanism and the hidden cavity construction.",
+      "location": "Plymouth (firm/workmen who built the hidden cavity)",
+      "phase_locations": {
+        "3": "Plymouth (firm/workmen who built the hidden cavity)"
+      },
+      "persona": "Plain, intelligent, and unromantic; treats secrets as specifications and recalls workmanship details precisely.",
+      "knowledge_about_others": {
+        "Andrew Poirot (deceased uncle; creator of the puzzle-will)": "Remembers him as fussy and exacting about invisible joins and the press-point brick."
+      },
+      "secret": "",
+      "abilities": "Can provide the mechanical instruction needed to access the cavity (enables interaction with the fireplace mechanism).",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Describes the removable brick: press the second brick from the end to raise the cut brick and expose the cavity.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Jessie Christie (witness to the true later will on the envelope)": {
+      "type": "assistant",
+      "role": "Later-will witness; confirms signing at 12:30 p.m. and recognizes the unusual ink reveal method as Andrew\u2019s trick.",
+      "location": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)",
+      "phase_locations": {
+        "4": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      },
+      "persona": "Straightforward and slightly indignant at being treated as a mere footnote; insists on what she saw and signed.",
+      "knowledge_about_others": {
+        "Pike Christie (Jessie\u2019s spouse; co-witness to the envelope will)": "Signed alongside her; remembers the date/time being discussed.",
+        "Andrew Poirot (deceased uncle; creator of the puzzle-will)": "Came to pay tradesmen and presented the envelope interior for signatures."
+      },
+      "secret": "",
+      "abilities": "Can validate witness names and circumstances, strengthening the legal confidence of the later will.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Roger\u2019s overlooked detail: Andrew went to the village to pay tradesmen\u2014creating an opportunity to have non-servant witnesses sign a different will."
+          ],
+          "reaction": "Confirms Andrew appeared during tradesmen payments and asked for signatures beneath his own.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Pike Christie (Jessie\u2019s spouse; co-witness to the envelope will)": {
+      "type": "assistant",
+      "role": "Co-witness to the later will; corroborates Jessie\u2019s account and the timing relative to the 11 a.m. will.",
+      "location": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)",
+      "phase_locations": {
+        "4": "Train platform at Taunton (Roger\u2019s sudden realization leading to the solution)"
+      },
+      "persona": "Cautious, dutiful, and specific about formalities; reassures that names were written clearly as witnesses.",
+      "knowledge_about_others": {
+        "Jessie Christie (witness to the true later will on the envelope)": "They signed together; her memory is the sharper but his is steady.",
+        "Miss M Poirot (Andrew\u2019s niece; intended beneficiary; client)": "Knows only that Andrew spoke of leaving matters to his niece."
+      },
+      "secret": "",
+      "abilities": "Provides corroboration to reduce doubt; can confirm witness pairing (two witnesses) for will validity.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Heating the inside of the desk-key envelope reveals sympathetic-ink text: a will leaving everything to Miss M Poirot, dated March 25 at 12:30 p.m., witnessed by Jessie and Pike Christie."
+          ],
+          "reaction": "Affirms the 12:30 p.m. witnessing and that both Christies signed beneath Andrew\u2019s statement on the envelope interior.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  }
+}

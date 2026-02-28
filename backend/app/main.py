@@ -19,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 _project_root = Path(__file__).parent.parent.parent
 load_dotenv(_project_root / ".env")
 
-from app.routes import game, generate, scenarios, scenes, stats  # noqa: E402
+from app.routes import game, generate, scenarios, scenes, stats, profile  # noqa: E402
 from app.db.mongodb import connect_to_mongo, close_mongo_connection
 from app.db.redis_cache import connect_to_redis, close_redis_connection
 
@@ -38,7 +38,7 @@ async def lifespan(app: FastAPI):
         print("🎨 Google Nanobanana scene generation enabled")
 
     # Mount generated scenes as static files
-    scenes_dir = Path("/tmp/mistry-scenes")
+    scenes_dir = _project_root / "backend" / "data" / "scenes"
     scenes_dir.mkdir(parents=True, exist_ok=True)
     app.mount("/scenes", StaticFiles(directory=str(scenes_dir)), name="scenes")
 
@@ -84,6 +84,7 @@ app.include_router(scenarios.router, prefix="/scenarios", tags=["scenarios"])
 app.include_router(generate.router, prefix="/scenarios", tags=["generation"])
 app.include_router(scenes.router, prefix="/scenes", tags=["scenes"])
 app.include_router(stats.router, prefix="/stats", tags=["stats"])
+app.include_router(profile.router, prefix="/profile", tags=["profile"])
 
 
 # ── Health Check ──────────────────────────────────────────────────────

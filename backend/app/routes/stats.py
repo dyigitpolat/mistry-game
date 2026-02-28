@@ -10,6 +10,15 @@ from app.models.db_models import DBInteraction
 
 router = APIRouter()
 
+class GlobalLeaderboardEntry(BaseModel):
+    user_id: str
+    user_name: str
+    user_image: Optional[str] = None
+    cases_solved: int
+    total_time_mins: float
+    elo: int
+    rank_title: str
+
 class LeaderboardEntry(BaseModel):
     user_name: str
     user_image: Optional[str] = None
@@ -99,6 +108,184 @@ async def get_leaderboard(scenario_id: str):
             user_image=ud.get("image"),
             elapsed_minutes=doc.get("player_state", {}).get("elapsed_minutes", 0),
             solved_at=doc.get("updated_at")
+        ))
+
+    return entries
+
+@router.get("/leaderboard/global", response_model=List[GlobalLeaderboardEntry])
+async def get_global_leaderboard():
+    """Get the top detectives based on difficulty-weighted scores."""
+    db = await get_database()
+    if db is None:
+        return []
+
+    # Aggregate sessions joined with scenarios for difficulty
+    pipeline = [
+        {"$match": {"is_complete": True, "outcome": "solved"}},
+        {
+            "$lookup": {
+                "from": "scenarios",
+                "localField": "scenario_id",
+                "foreignField": "id",
+                "as": "scenario"
+            }
+        },
+        {"$unwind": "$scenario"},
+        {
+            "$project": {
+                "user_id": 1,
+                "player_state.elapsed_minutes": 1,
+                "score": {
+                    "$switch": {
+                        "branches": [
+                            {"case": {"$eq": ["$scenario.difficulty", "hard"]}, "then": 500},
+                            {"case": {"$eq": ["$scenario.difficulty", "medium"]}, "then": 250}
+                        ],
+                        "default": 100
+                    }
+                }
+            }
+        },
+        {
+            "$group": {
+                "_id": "$user_id",
+                "cases_solved": {"$sum": 1},
+                "total_time": {"$sum": "$player_state.elapsed_minutes"},
+                "total_points": {"$sum": "$score"}
+            }
+        },
+        {"$sort": {"total_points": -1, "total_time": 1}},
+        {"$limit": 50},
+        {
+            "$lookup": {
+                "from": "users",
+                "localField": "_id",
+                "foreignField": "_id",
+                "as": "user_details"
+            }
+        },
+        {"$unwind": "$user_details"}
+    ]
+
+    cursor = db["game_sessions"].aggregate(pipeline)
+    results = await cursor.to_list(length=50)
+
+    entries = []
+    for doc in results:
+        ud = doc.get("user_details", {})
+        cases = doc.get("cases_solved", 0)
+        points = doc.get("total_points", 0)
+        
+        # Rank Title Logic
+        title = "Junior Detective"
+        if cases >= 10: title = "Senior Inspector"
+        elif cases >= 5: title = "Detective Sergeant"
+        elif cases >= 1: title = "Constable"
+
+        entries.append(GlobalLeaderboardEntry(
+            user_id=doc["_id"],
+            user_name=ud.get("name", "Unknown Detective"),
+            user_image=ud.get("image"),
+            cases_solved=cases,
+            total_time_mins=doc.get("total_time", 0.0),
+            elo=1000 + points,
+            rank_title=title
+        ))
+
+    return entries
+
+@router.get("/leaderboard/friends", response_model=List[GlobalLeaderboardEntry])
+async def get_friends_leaderboard(user: Dict[str, Any] = Depends(get_current_user)):
+    """Get the leaderboard filtered to user's friends and themselves."""
+    db = await get_database()
+    if db is None:
+        return []
+
+    # Get friend IDs
+    friend_cursor = db["friendships"].find({
+        "user_id": user["id"],
+        "status": "accepted"
+    })
+    friendships = await friend_cursor.to_list(length=100)
+    friend_ids = [f["friend_id"] for f in friendships]
+    
+    # Fallback for demo if the user has no friends yet (matches profile.py)
+    if not friend_ids:
+        friend_ids = ["dummy_1", "dummy_2", "dummy_3", "dummy_4", "dummy_5", "dummy_6", "dummy_7", "dummy_8", "dummy_9", "dummy_10"]
+        
+    # Include self
+    relevant_ids = friend_ids + [user["id"]]
+
+    # Same pipeline but with $match on user_id
+    pipeline = [
+        {"$match": {"user_id": {"$in": relevant_ids}, "is_complete": True, "outcome": "solved"}},
+        {
+            "$lookup": {
+                "from": "scenarios",
+                "localField": "scenario_id",
+                "foreignField": "id",
+                "as": "scenario"
+            }
+        },
+        {"$unwind": "$scenario"},
+        {
+            "$project": {
+                "user_id": 1,
+                "player_state.elapsed_minutes": 1,
+                "score": {
+                    "$switch": {
+                        "branches": [
+                            {"case": {"$eq": ["$scenario.difficulty", "hard"]}, "then": 500},
+                            {"case": {"$eq": ["$scenario.difficulty", "medium"]}, "then": 250}
+                        ],
+                        "default": 100
+                    }
+                }
+            }
+        },
+        {
+            "$group": {
+                "_id": "$user_id",
+                "cases_solved": {"$sum": 1},
+                "total_time": {"$sum": "$player_state.elapsed_minutes"},
+                "total_points": {"$sum": "$score"}
+            }
+        },
+        {"$sort": {"total_points": -1, "total_time": 1}},
+        {
+            "$lookup": {
+                "from": "users",
+                "localField": "_id",
+                "foreignField": "_id",
+                "as": "user_details"
+            }
+        },
+        {"$unwind": "$user_details"}
+    ]
+
+    cursor = db["game_sessions"].aggregate(pipeline)
+    results = await cursor.to_list(length=100)
+
+    entries = []
+    for doc in results:
+        ud = doc.get("user_details", {})
+        cases = doc.get("cases_solved", 0)
+        points = doc.get("total_points", 0)
+        
+        # Rank Title Logic
+        title = "Junior Detective"
+        if cases >= 10: title = "Senior Inspector"
+        elif cases >= 5: title = "Detective Sergeant"
+        elif cases >= 1: title = "Constable"
+
+        entries.append(GlobalLeaderboardEntry(
+            user_id=doc["_id"],
+            user_name=ud.get("name", "Unknown Detective"),
+            user_image=ud.get("image"),
+            cases_solved=cases,
+            total_time_mins=doc.get("total_time", 0.0),
+            elo=1000 + points,
+            rank_title=title
         ))
 
     return entries
