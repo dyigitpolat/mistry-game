@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install uv
+RUN pip install --no-cache-dir uv
+
+# Copy agent module first (dependency)
+COPY agent/ /agent/
+
+# Copy backend
+COPY backend/ /app/
+
+# Install dependencies with uv
+RUN uv pip install --system -e /agent && \
+    uv pip install --system -e /app
+
+# Copy config
+COPY config.yaml /app/config.yaml
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

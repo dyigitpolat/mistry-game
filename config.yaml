@@ -1,0 +1,49 @@
+# ─── Mistry Game Configuration ─────────────────────────────────────
+# This file controls agent assignments, feature flags, and game params.
+# Secrets go in .env, not here.
+
+# ─── Agent Role → Model Assignments ───────────────────────────────
+agents:
+  gamemaker_oracle:
+    model: "mistralai:mistral-large-latest"
+    temperature: 0.3
+    max_tokens: 4096
+    description: "Evaluates world actions, phase progression, visual metadata mutations"
+
+  character_agent:
+    model: "mistralai:mistral-large-latest"
+    temperature: 0.7
+    max_tokens: 2048
+    description: "Per-NPC agent. Runs contradiction engine against player evidence."
+
+  epiphany_engine:
+    model: "mistralai:mistral-large-latest"
+    temperature: 0.4
+    max_tokens: 2048
+    description: "Evaluates red string board connections. Grants knowledge tokens."
+
+  scene_generator:
+    model: "gemini-3.1-flash-image-preview"
+    provider: "google"
+    temperature: 0.5
+    max_tokens: 1024
+    description: "Generates scene images from VisualMetadata using Google Nanobanana"
+
+# ─── Game Engine Parameters ──────────────────────────────────────
+game:
+  default_time_limit_minutes: 180
+  suspicion_increment: 5
+  max_suspicion: 100
+  max_flight_risk: 100
+  phase_check_interval: "after_each_action"
+
+# ─── Feature Flags ───────────────────────────────────────────────
+features:
+  scene_image_generation: true       # Google Nanobanana scene generation
+  langfuse_tracing: true             # Langfuse observability enabled
+  coop_mode: false                   # WIP
+  voice_input: false                 # TBD
+  discord_bot: false                 # TBD
+  case_studio: false                 # WIP
+  leaderboard: false                 # WIP
+  google_auth: false                 # Placeholder scaffolded
