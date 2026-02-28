@@ -123,7 +123,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                         const history = (charState as any).conversation_history || [];
                         for (const msg of history) {
                             if (msg.role === "user") {
-                                addLog(msg.content, { type: "player" });
+                                addLog(msg.content, { type: "narrator" });
                             } else if (msg.role === "assistant") {
                                 addLog(msg.content, { speaker: charName, type: "character" });
                             }
