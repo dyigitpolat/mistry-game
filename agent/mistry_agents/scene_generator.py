@@ -35,7 +35,7 @@ class SceneGenerator:
     def _build_prompt(self, visual_metadata: Dict[str, Any], location_name: str) -> str:
         """Build an image generation prompt from VisualMetadata."""
         setting = visual_metadata.get("setting", "")
-        surfaces = visual_metadata.get("surfaces_and_containers", [])
+        surfaces = visual_metadata.get("surfaces_and_containers", []) 
         connections = visual_metadata.get("connections", [])
 
         # Build structured prompt for atmospheric scene generation

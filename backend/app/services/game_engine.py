@@ -227,15 +227,19 @@ class GameEngine:
 
         try:
             # Build a prompt for the Oracle to evaluate the accusation
+            suspects_str = ", ".join(wc.required_suspect)
+            evidence_str = ", ".join(wc.required_evidence)
+            motive_str = ", ".join(wc.required_motive)
+            
             eval_message = (
                 f"The player is making their FINAL ACCUSATION:\n"
                 f"- Suspect: {accusation.suspect}\n"
-                f"- Weapon/Method: {accusation.weapon}\n"
+                f"- Weapon/Evidence: {accusation.weapon}\n"
                 f"- Motive: {accusation.motive}\n\n"
                 f"The ground truth is:\n"
-                f"- True Suspect: {wc.required_suspect}\n"
-                f"- True Weapon: {wc.required_weapon}\n"
-                f"- True Motive: {wc.required_motive}\n\n"
+                f"- True Suspect(s): {suspects_str}\n"
+                f"- True Evidence: {evidence_str}\n"
+                f"- True Motive(s): {motive_str}\n\n"
                 f"Evaluate whether each of the player's answers is correct or semantically equivalent "
                 f"to the ground truth. Respond with a JSON object:\n"
                 f'{{"suspect_correct": true/false, "weapon_correct": true/false, "motive_correct": true/false, '
@@ -258,17 +262,20 @@ class GameEngine:
                 narrative = parsed.get("narrative", "")
             except (json.JSONDecodeError, Exception):
                 # Fallback: do exact substring matching
-                suspect_ok = wc.required_suspect.lower() in accusation.suspect.lower()
-                weapon_ok = any(w in accusation.weapon.lower() for w in ["shock", "apoplexy", "fright", "sight"])
-                motive_ok = "betray" in accusation.motive.lower() or "india" in accusation.motive.lower()
+                suspect_ok = any(s.lower() in accusation.suspect.lower() for s in wc.required_suspect) or (accusation.suspect.lower() in suspects_str.lower())
+                weapon_ok = any(e.lower() in accusation.weapon.lower() for e in wc.required_evidence) or (accusation.weapon.lower() in evidence_str.lower())
+                motive_ok = any(m.lower() in accusation.motive.lower() for m in wc.required_motive) or (accusation.motive.lower() in motive_str.lower())
                 all_correct = suspect_ok and weapon_ok and motive_ok
                 narrative = response_text
 
         except Exception as e:
             # Direct string matching as ultimate fallback
-            suspect_ok = wc.required_suspect.lower() in accusation.suspect.lower()
-            weapon_ok = any(w in accusation.weapon.lower() for w in ["shock", "apoplexy", "fright", "sight"])
-            motive_ok = "betray" in accusation.motive.lower() or "india" in accusation.motive.lower()
+            suspects_str = ", ".join(wc.required_suspect)
+            evidence_str = ", ".join(wc.required_evidence)
+            motive_str = ", ".join(wc.required_motive)
+            suspect_ok = any(s.lower() in accusation.suspect.lower() for s in wc.required_suspect) or (accusation.suspect.lower() in suspects_str.lower())
+            weapon_ok = any(e.lower() in accusation.weapon.lower() for e in wc.required_evidence) or (accusation.weapon.lower() in evidence_str.lower())
+            motive_ok = any(m.lower() in accusation.motive.lower() for m in wc.required_motive) or (accusation.motive.lower() in motive_str.lower())
             all_correct = suspect_ok and weapon_ok and motive_ok
             narrative = (
                 "Case solved! You've uncovered the truth." if all_correct
@@ -282,9 +289,9 @@ class GameEngine:
         accusation_result = AccusationResult(
             correct=all_correct,
             narrative=narrative,
-            correct_suspect=wc.required_suspect if not all_correct else None,
-            correct_weapon=wc.required_weapon if not all_correct else None,
-            correct_motive=wc.required_motive if not all_correct else None,
+            correct_suspect=suspects_str if not all_correct else None,
+            correct_weapon=evidence_str if not all_correct else None,
+            correct_motive=motive_str if not all_correct else None,
         )
 
         return ActionResponse(
@@ -483,7 +490,8 @@ class GameEngine:
             return ActionResponse(
                 narrative=narrative_text,
                 state_updates=state_updates,
-                character_reaction=result.dialogue,
+                character_state_updates={char_name: char_state} if char_state else {},
+                phase_advanced=False,
                 new_clues=new_clues,
                 characters_in_room=self._get_characters_at_location(scenario, session.player_state),
             )
@@ -560,6 +568,7 @@ class GameEngine:
             return ActionResponse(
                 narrative=narrative_text,
                 state_updates=state_updates,
+                character_state_updates={char_name: char_state} if char_state else {},
                 character_reaction=result.dialogue,
                 new_clues=new_clues,
                 characters_in_room=self._get_characters_at_location(scenario, session.player_state),

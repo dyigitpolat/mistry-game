@@ -60,6 +60,7 @@ export interface AccusationResult {
 export interface ActionResponse {
   narrative: string;
   state_updates: PlayerState | null;
+  character_state_updates: Record<string, CharacterState> | null;
   phase_advanced: boolean;
   new_phase: number | null;
   phase_info: PhaseInfo | null;

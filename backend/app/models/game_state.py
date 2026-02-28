@@ -83,6 +83,7 @@ class ActionResponse(BaseModel):
     """Structured response returned to the frontend after processing an action."""
     narrative: str = Field(..., description="Story text to display to the player.")
     state_updates: Optional[PlayerState] = None
+    character_state_updates: Dict[str, CharacterState] = Field(default_factory=dict)
     phase_advanced: bool = False
     new_phase: Optional[int] = None
     phase_info: Optional[PhaseInfo] = None

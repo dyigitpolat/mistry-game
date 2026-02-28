@@ -6,9 +6,15 @@
     "time_limit_minutes": 180,
     "start_time": "11:45 PM",
     "win_conditions": {
-        "required_weapon": "The sight of Sherlock David (Shock/Apoplexy)",
-        "required_suspect": "Sherlock David",
-        "required_motive": "Morrison betrayed David during the Indian Mutiny to steal Simpson Bathsheba."
+        "required_evidence": [
+            "The sight of Sherlock David (Shock/Apoplexy)"
+        ],
+        "required_suspect": [
+            "Sherlock David"
+        ],
+        "required_motive": [
+            "Morrison betrayed David during the Indian Mutiny to steal Simpson Bathsheba."
+        ]
     },
     "phases": [
         {

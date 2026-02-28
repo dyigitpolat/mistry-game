@@ -100,6 +100,10 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                 const scenarioData = await getScenario(scenarioId);
                 setScenario(scenarioData);
 
+                // Fetch session logic: Try to start game, backend `startGame` uses `replace_one` with `upsert` and UUID. 
+                // Actually wait: The backend `start_game` generates a `uuid.uuid4()` EVERY time it is called.
+                // It does NOT resume sessions. We must use `getGameState` but we need `sessionId`.
+                // Let's check `api.ts` to see if there is a get active session or if `startGame` can be modified.
                 const gameSession = await startGame(scenarioId);
                 setSession(gameSession);
 
@@ -148,6 +152,20 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                 setSession((prev) =>
                     prev ? { ...prev, player_state: response.state_updates! } : prev
                 );
+            }
+
+            // Character state updates
+            if (response.character_state_updates) {
+                setSession((prev) => {
+                    if (!prev) return prev;
+                    return {
+                        ...prev,
+                        character_states: {
+                            ...prev.character_states,
+                            ...response.character_state_updates!
+                        }
+                    };
+                });
             }
 
             // New clues

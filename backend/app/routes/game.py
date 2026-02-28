@@ -51,6 +51,14 @@ async def start_game(scenario_id: str, user_auth: Dict[str, Any] = Depends(get_c
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
+    db = await get_database()
+    
+    # Check for an existing incomplete session
+    existing_session = await db.sessions.find_one({"user_id": user_id, "scenario_id": scenario_id, "is_complete": False})
+    if existing_session:
+        existing_session["id"] = existing_session.pop("_id")
+        return GameSession(**existing_session)
+
     session_id = str(uuid.uuid4())
 
     # Initialize character states from scenario
@@ -60,7 +68,7 @@ async def start_game(scenario_id: str, user_auth: Dict[str, Any] = Depends(get_c
             suspicion_meter=char.suspicion_meter,
         )
 
-    # Determine starting location from Phase 0
+    # Determine starting location from the first Phase object
     start_location = ""
     if scenario.phases:
         unlocked = scenario.phases[0].unlocked_locations
@@ -73,7 +81,7 @@ async def start_game(scenario_id: str, user_auth: Dict[str, Any] = Depends(get_c
         user_id=user_id,
         player_state=PlayerState(
             current_location=start_location,
-            current_phase=0,
+            current_phase=0,  # 0-based array index into scenario.phases[]
         ),
         character_states=char_states,
     )

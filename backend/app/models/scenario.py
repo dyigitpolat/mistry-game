@@ -104,9 +104,9 @@ class Phase(BaseModel):
 
 
 class WinConditions(BaseModel):
-    required_weapon: str
-    required_suspect: str
-    required_motive: str
+    required_evidence: List[str]
+    required_suspect: List[str]
+    required_motive: List[str]
 
 
 class ScenarioDifficulty(str, Enum):
