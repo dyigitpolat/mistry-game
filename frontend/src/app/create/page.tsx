@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useCallback, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import AppHeader from "@/components/AppHeader";
-import { generateScenario, type GenerateScenarioRequest } from "@/lib/api";
+import { generateScenario, getScenario, type GenerateScenarioRequest, type Scenario } from "@/lib/api";
 
 type CharacterInput = {
   type: "Suspect" | "Assistant";
@@ -49,11 +49,49 @@ const TIME_PERIODS = [
   "Custom",
 ];
 
+function mapScenarioToForm(scenario: Scenario) {
+  const chars: CharacterInput[] = Object.entries(scenario.characters).map(
+    ([name, c]) => ({
+      type: (c.type === "suspect" ? "Suspect" : "Assistant") as "Suspect" | "Assistant",
+      name,
+      role_archetype: c.role || "",
+      starting_location: c.location || "",
+      persona_and_secret: [c.persona, c.secret].filter(Boolean).join("\n\n"),
+    })
+  );
+
+  const phasesInput: PhaseInput[] = scenario.phases.map((p) => ({
+    objective: p.objective || "",
+    required_twists_or_discoveries: "",
+    logic_complexity: "Medium" as const,
+  }));
+
+  const locationNames = Object.keys(scenario.locations);
+
+  return {
+    caseTitle: scenario.title,
+    crimeSummary: scenario.description,
+    settingLocation: locationNames[0] || "",
+    settingDescription: scenario.intro_narrative?.slice(0, 200) || "",
+    characters: chars.length > 0 ? chars : [{ type: "Suspect" as const, name: "", role_archetype: "", starting_location: "", persona_and_secret: "" }],
+    culprit: scenario.win_conditions?.required_suspect?.[0] || "",
+    motive: scenario.win_conditions?.required_motive?.join("; ") || "",
+    criticalEvidence: scenario.win_conditions?.required_evidence?.length
+      ? scenario.win_conditions.required_evidence
+      : [""],
+    phases: phasesInput.length > 0 ? phasesInput : [{ objective: "", required_twists_or_discoveries: "", logic_complexity: "Low" as const }],
+  };
+}
+
 export default function CreateCasePage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const editId = searchParams.get("edit");
+
   const [step, setStep] = useState(0);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loadingDraft, setLoadingDraft] = useState(!!editId);
 
   // Foundation
   const [caseTitle, setCaseTitle] = useState("");
@@ -79,6 +117,36 @@ export default function CreateCasePage() {
   const [phases, setPhases] = useState<PhaseInput[]>([
     { objective: "", required_twists_or_discoveries: "", logic_complexity: "Low" },
   ]);
+
+  useEffect(() => {
+    if (!editId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const scenario = await getScenario(editId);
+        if (cancelled) return;
+        const mapped = mapScenarioToForm(scenario);
+        setCaseTitle(mapped.caseTitle);
+        setCrimeSummary(mapped.crimeSummary);
+        setSettingLocation(mapped.settingLocation);
+        setSettingDescription(mapped.settingDescription);
+        setCharacters(mapped.characters);
+        setCulprit(mapped.culprit);
+        setMotive(mapped.motive);
+        setCriticalEvidence(mapped.criticalEvidence);
+        setPhases(mapped.phases);
+        const phaseCount = mapped.phases.length;
+        if (phaseCount <= 2) setStoryLength("short");
+        else if (phaseCount <= 4) setStoryLength("med");
+        else setStoryLength("long");
+      } catch {
+        setError("Failed to load project draft.");
+      } finally {
+        if (!cancelled) setLoadingDraft(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [editId]);
 
   const addCharacter = useCallback(() => {
     setCharacters((prev) => [
@@ -178,17 +246,30 @@ export default function CreateCasePage() {
         <div className="relative px-8 md:px-16 pt-10 pb-8 bg-gradient-to-br from-primary/10 via-background-dark to-background-dark border-b border-slate-800">
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-3">
-              <span className="material-symbols-outlined text-primary text-3xl">auto_awesome</span>
+              <span className="material-symbols-outlined text-primary text-3xl">
+                {editId ? "edit_note" : "auto_awesome"}
+              </span>
               <h1 className="text-white text-3xl md:text-4xl font-black tracking-tight">
-                AI Weaver Case Generator
+                {editId ? "Edit Case Draft" : "AI Weaver Case Generator"}
               </h1>
             </div>
             <p className="text-slate-400 text-lg max-w-2xl">
-              Craft your own mystery case. Define the foundation, cast your characters, plant the evidence, 
-              and let the AI weave it into a fully playable investigation.
+              {editId
+                ? "Review and refine your case before regenerating it."
+                : "Craft your own mystery case. Define the foundation, cast your characters, plant the evidence, and let the AI weave it into a fully playable investigation."}
             </p>
           </div>
         </div>
+
+        {loadingDraft ? (
+          <div className="max-w-4xl mx-auto px-8 py-20 flex flex-col items-center justify-center gap-4">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 rounded-full border-4 border-primary/20" />
+              <div className="absolute inset-0 rounded-full border-4 border-t-primary animate-spin" />
+            </div>
+            <p className="text-slate-400 text-sm">Loading project draft...</p>
+          </div>
+        ) : (
 
         <div className="max-w-4xl mx-auto px-8 py-10">
           {/* Stepper */}
@@ -677,6 +758,8 @@ export default function CreateCasePage() {
             )}
           </div>
         </div>
+
+        )}
       </main>
 
       {/* Full-screen generating overlay */}

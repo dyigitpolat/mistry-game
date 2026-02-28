@@ -12,12 +12,13 @@ import uuid
 from pathlib import Path
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
 
 from app.db.mongodb import get_database
 from app.models.scenario import Scenario
 from app.services.game_engine import GameEngine
+from app.core.auth import get_current_user
 
 router = APIRouter()
 
@@ -61,14 +62,17 @@ class GenerateResponse(BaseModel):
 
 
 @router.post("/generate", response_model=GenerateResponse)
-async def generate_scenario(req: GenerateRequest):
+async def generate_scenario(
+    req: GenerateRequest,
+    user: dict = Depends(get_current_user),
+):
     """
     Run the procedural generation pipeline:
     1. Write input JSON to temp file
     2. Run procedural-gen CLI (story generation + game graph)
     3. Read the generated graph
     4. Validate against Scenario schema
-    5. Persist to MongoDB
+    5. Persist to MongoDB with ownership
     6. Register in the in-memory GameEngine
     """
     input_data = req.model_dump(exclude_none=True)
@@ -100,6 +104,26 @@ async def generate_scenario(req: GenerateRequest):
                 game_graph["description"] = req.crime_summary[:200]
             if "author" not in game_graph or not game_graph["author"]:
                 game_graph["author"] = "AI Weaver"
+
+            # Set ownership and default to private
+            game_graph["owner_id"] = user["id"]
+            game_graph["visibility"] = "private"
+
+            # Look up owner display name from NextAuth users collection
+            owner_name = None
+            db = await get_database()
+            if db is not None:
+                user_doc = await db["users"].find_one({"_id": user["id"]})
+                if not user_doc:
+                    from bson import ObjectId
+                    try:
+                        user_doc = await db["users"].find_one({"_id": ObjectId(user["id"])})
+                    except Exception:
+                        pass
+                if user_doc:
+                    owner_name = user_doc.get("name")
+            game_graph["owner_name"] = owner_name or "Unknown"
+
             scenario = Scenario.model_validate(game_graph)
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Generated graph failed validation: {e}")
@@ -109,7 +133,8 @@ async def generate_scenario(req: GenerateRequest):
         scenario_dict = json.loads(scenario.model_dump_json())
         scenario_dict["_id"] = scenario_id
 
-        db = await get_database()
+        if db is None:
+            db = await get_database()
         if db is not None:
             await db["scenarios"].replace_one(
                 {"_id": scenario_id},

@@ -85,6 +85,10 @@ export interface ScenarioSummary {
   progress_percent?: number;
   is_complete?: boolean;
   last_played_at?: string;
+  owner_id?: string;
+  owner_name?: string;
+  visibility?: "public" | "private";
+  is_own?: boolean;
 }
 
 export interface Phase {
@@ -100,7 +104,14 @@ export interface Character {
   role: string;
   location: string;
   persona: string;
+  secret?: string;
   suspicion_meter: number;
+}
+
+export interface WinConditions {
+  required_evidence: string[];
+  required_suspect: string[];
+  required_motive: string[];
 }
 
 export interface Location {
@@ -121,6 +132,10 @@ export interface Scenario {
   locations: Record<string, Location>;
   characters: Record<string, Character>;
   difficulty: string;
+  win_conditions: WinConditions;
+  owner_id?: string;
+  owner_name?: string;
+  visibility?: string;
 }
 
 export interface AccuseRequest {
@@ -332,5 +347,13 @@ export async function generateScenario(
     return apiFetch("/scenarios/generate", {
         method: "POST",
         body: JSON.stringify(payload),
+    });
+}
+
+export async function publishScenario(
+    scenarioId: string
+): Promise<{ status: string; scenario_id: string; visibility: string }> {
+    return apiFetch(`/scenarios/${scenarioId}/publish`, {
+        method: "POST",
     });
 }
