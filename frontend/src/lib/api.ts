@@ -86,6 +86,10 @@ export interface ScenarioSummary {
   progress_percent?: number;
   is_complete?: boolean;
   last_played_at?: string;
+  owner_id?: string;
+  owner_name?: string;
+  visibility?: "public" | "private";
+  is_own?: boolean;
   global_clear_rate?: number;
 }
 
@@ -102,7 +106,14 @@ export interface Character {
   role: string;
   location: string;
   persona: string;
+  secret?: string;
   suspicion_meter: number;
+}
+
+export interface WinConditions {
+  required_evidence: string[];
+  required_suspect: string[];
+  required_motive: string[];
 }
 
 export interface Location {
@@ -124,6 +135,10 @@ export interface Scenario {
   locations: Record<string, Location>;
   characters: Record<string, Character>;
   difficulty: string;
+  win_conditions: WinConditions;
+  owner_id?: string;
+  owner_name?: string;
+  visibility?: string;
 }
 
 export interface AccuseRequest {
@@ -352,6 +367,66 @@ export async function postInteraction(scenarioId: string, type: "like" | "commen
     });
 }
 
+// ── Scenario Generation ────────────────────────────────────────────
+
+export interface GenerateCharacterInput {
+    type: string;
+    name: string;
+    role_archetype: string;
+    starting_location: string;
+    persona_and_secret: string;
+}
+
+export interface GeneratePhaseInput {
+    objective: string;
+    required_twists_or_discoveries: string;
+    logic_complexity: string;
+}
+
+export interface GenerateScenarioRequest {
+    case_title: string;
+    time_period?: string;
+    setting_location?: string;
+    setting_description?: string;
+    genre: string;
+    crime_summary: string;
+    characters: GenerateCharacterInput[];
+    culprit: string;
+    motive: string;
+    critical_evidence: string[];
+    story_length: string;
+    story_phases: GeneratePhaseInput[];
+}
+
+export interface GenerateScenarioResponse {
+    scenario_id: string;
+    title: string;
+    status: string;
+}
+
+export async function generateScenario(
+    payload: GenerateScenarioRequest
+): Promise<GenerateScenarioResponse> {
+    return apiFetch("/scenarios/generate", {
+        method: "POST",
+        body: JSON.stringify(payload),
+    });
+}
+
+export async function publishScenario(
+    scenarioId: string
+): Promise<{ status: string; scenario_id: string; visibility: string }> {
+    return apiFetch(`/scenarios/${scenarioId}/publish`, {
+        method: "POST",
+    });
+}
+
+export async function unpublishScenario(
+    scenarioId: string
+): Promise<{ status: string; scenario_id: string; visibility: string }> {
+    return apiFetch(`/scenarios/${scenarioId}/unpublish`, {
+        method: "POST",
+    });
 export async function getUserProfileStats(): Promise<UserProfileStats> {
     return apiFetch("/profile/stats");
 }

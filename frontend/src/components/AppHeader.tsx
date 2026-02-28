@@ -12,7 +12,7 @@ export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
 
     const navItems = [
         { label: "Home", href: "/", key: "home" },
-        { label: "Case Studio", href: "#", key: "cases" },
+        { label: "Case Studio", href: "/studio", key: "cases" },
         { label: "Social", href: "#", key: "social" },
         { label: "Leaderboard", href: "/leaderboard", key: "leaderboard" },
         { label: "Dossier", href: "/profile", key: "dossier" },

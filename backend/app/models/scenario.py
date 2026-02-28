@@ -118,6 +118,11 @@ class ScenarioDifficulty(str, Enum):
 
 # ─── Root Scenario model ────────────────────────────────────────────
 
+class ScenarioVisibility(str, Enum):
+    PUBLIC = "public"
+    PRIVATE = "private"
+
+
 class Scenario(BaseModel):
     """The root Knowledge Graph object."""
     title: str
@@ -132,3 +137,6 @@ class Scenario(BaseModel):
     locations: Dict[str, Location]
     characters: Dict[str, Character]
     difficulty: ScenarioDifficulty = Field(ScenarioDifficulty.MEDIUM, description="Pre-set difficulty classification.")
+    owner_id: Optional[str] = Field(None, description="User ID of the creator. None for built-in scenarios.")
+    owner_name: Optional[str] = Field(None, description="Display name of the creator.")
+    visibility: ScenarioVisibility = Field(ScenarioVisibility.PUBLIC, description="Public or private visibility.")

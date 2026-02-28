@@ -1,6 +1,7 @@
 {
   "title": "The Crooked Man",
   "author": "Arthur Conan Doyle",
+  "visibility": "public",
   "description": "One summer night, a mysterious visitor arrives with news of a bizarre murder in a locked room at Aldershot. Can you unravel the truth behind Colonel Morrison's death?",
   "victim": "Colonel Watson Morrison",
   "intro_narrative": "One summer night, you are seated by your own hearth smoking a last pipe when the bell clangs. To your astonishment, it is your old friend Neill Bhurtee. He needs your help investigating the strange murder of Colonel Morrison at Aldershot.",

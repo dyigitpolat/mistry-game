@@ -19,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 _project_root = Path(__file__).parent.parent.parent
 load_dotenv(_project_root / ".env")
 
-from app.routes import game, scenarios, scenes, stats, profile  # noqa: E402
+from app.routes import game, generate, scenarios, scenes, stats, profile  # noqa: E402
 from app.db.mongodb import connect_to_mongo, close_mongo_connection
 from app.db.redis_cache import connect_to_redis, close_redis_connection
 
@@ -45,6 +45,13 @@ async def lifespan(app: FastAPI):
     # Connect to Databases
     await connect_to_mongo()
     await connect_to_redis()
+
+    # Load any user-generated scenarios from MongoDB into the GameEngine
+    from app.services.game_engine import GameEngine
+    engine = GameEngine._shared_instance
+    if engine:
+        await engine.load_scenarios_from_db()
+        print(f"🔮 Total scenarios loaded: {len(engine.scenarios)}")
 
     yield
     # ── Shutdown ──
@@ -74,6 +81,7 @@ app.add_middleware(
 # ── Routers ───────────────────────────────────────────────────────────
 app.include_router(game.router, prefix="/game", tags=["game"])
 app.include_router(scenarios.router, prefix="/scenarios", tags=["scenarios"])
+app.include_router(generate.router, prefix="/scenarios", tags=["generation"])
 app.include_router(scenes.router, prefix="/scenes", tags=["scenes"])
 app.include_router(stats.router, prefix="/stats", tags=["stats"])
 app.include_router(profile.router, prefix="/profile", tags=["profile"])
