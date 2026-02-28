@@ -73,8 +73,16 @@ class SceneGenerator:
         """
         Generate a scene image from visual metadata.
         """
-        safe_name = location_name.lower().replace(" ", "_").replace("'", "").replace("/", "_").replace("\\", "_")
-        expected_file_name = f"{scenario_id}_{safe_name}.png"
+        import re
+        safe_sid = re.sub(r'[^a-z0-9]', '_', scenario_id.lower())
+        
+        # Original logic explicitly removed apostrophes entirely, so we must replicate that
+        loc_no_apos = location_name.replace("'", "").replace("’", "")
+        safe_name = re.sub(r'[^a-z0-9]', '_', loc_no_apos.lower())
+        
+        # Combine and collapse multiple underscores
+        combined_name = f"{safe_sid}_{safe_name}"
+        expected_file_name = f"{re.sub(r'_+', '_', combined_name).strip('_')}.png"
         expected_file_path = self.output_dir / expected_file_name
         
         if expected_file_path.exists():
@@ -118,9 +126,7 @@ class SceneGenerator:
                         data_buffer = inline_data.data
                         file_extension = mimetypes.guess_extension(inline_data.mime_type) or ".png"
 
-                        safe_name = location_name.lower().replace(" ", "_").replace("'", "").replace("/", "_").replace("\\", "_")
-                        file_name = f"{scenario_id}_{safe_name}{file_extension}"
-                        file_path = self.output_dir / file_name
+                        file_path = self.output_dir / expected_file_name
 
                         with open(file_path, "wb") as f:
                             f.write(data_buffer)
@@ -226,4 +232,73 @@ class SceneGenerator:
 
         except Exception as e:
             print(f"⚠️ Scene edit failed for {location_name}: {e}")
+            return None
+
+    async def generate_hero_banner(self, title: str, description: str, victim: str, narrative: str, scenario_id: str) -> str | None:
+        """
+        Generate a high-level hero banner for the entire scenario and save it to disk.
+        """
+        import re
+        safe_sid = re.sub(r'[^a-z0-9]', '_', scenario_id.lower())
+        safe_sid = re.sub(r'_+', '_', safe_sid).strip('_')
+        expected_file_name = f"{safe_sid}_hero.png"
+        expected_file_path = self.output_dir / expected_file_name
+        
+        if expected_file_path.exists():
+            print(f"  [CACHE] Hero Banner already exists: {expected_file_path}")
+            return str(expected_file_path)
+
+        prompt = f"""
+You are an expert cinematic storyboard artist and digital painter for a premium mystery detective game.
+Your task is to create a SINGLE, wide, breathtaking 'Hero Banner' image that encapsulates the mood and premise of the following murder mystery scenario.
+
+SCENARIO TITLE: {title}
+DESCRIPTION: {description}
+VICTIM: {victim}
+CORE NARRATIVE: {narrative}
+
+REQUIREMENTS:
+1.  **Cinematic Composition**: The image should look like a title screen, movie poster, or high-end concept art.
+2.  **Mood & Tone**: Capture the specific atmosphere of the mystery (e.g., foggy Victorian London, a sterile high-tech lab, a gritty 1920s speakeasy) based on the description.
+3.  **No Text**: Do NOT include any words, titles, or text in the image.
+4.  **Key Elements**: Visually hint at the crime, the victim, or the central object of the mystery without giving away the solution.
+5.  **Quality**: Highly detailed, dramatic lighting, rich colors, ultra-realistic digital painting style.
+
+Create the hero banner now.
+"""
+        response = None
+        try:
+            if self.langfuse:
+                trace = self.langfuse.trace(
+                    name="generate_hero_banner",
+                    tags=["scene_generation", "hero_banner", scenario_id]
+                )
+                response = await self.client.models.generate_content_async(
+                    model=self.model,
+                    contents=prompt,
+                )
+                trace.update(output="Hero Banner Generated successfully")
+            else:
+                response = await self.client.models.generate_content_async(
+                    model=self.model,
+                    contents=prompt,
+                )
+
+            if response and response.candidates:
+                for part in response.candidates[0].content.parts:
+                    inline_data = getattr(part, "inline_data", None)
+                    if inline_data:
+                        data_buffer = inline_data.data
+                        with open(expected_file_path, "wb") as f:
+                            f.write(data_buffer)
+                        print(f"  [GENERATED] Hero Banner saved: {expected_file_path}")
+                        return str(expected_file_path)
+            
+            print(f"  [ERROR] No image data returned for Hero Banner: {scenario_id}")
+            return None
+
+        except Exception as e:
+            print(f"  [ERROR] generating hero banner: {e}")
+            if self.langfuse and 'trace' in locals():
+                trace.update(level="ERROR", status_message=str(e))
             return None

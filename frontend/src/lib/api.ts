@@ -182,6 +182,7 @@ export interface UserProfileStats {
   cases_solved: number;
   field_time_hours: number;
   avg_accuracy: number;
+  top_assistant?: string;
   case_history: UserCaseHistoryEntry[];
   badges: Badge[];
   skills: { [key: string]: number };
@@ -249,6 +250,12 @@ export async function startGame(
 
 export async function getGameState(sessionId: string): Promise<GameSession> {
   return apiFetch(`/game/${sessionId}/state`);
+}
+
+export async function generateHeroBanner(scenarioId: string): Promise<{ image_url: string; scenario: string }> {
+    return apiFetch(`/scenes/${scenarioId}/generate-hero`, {
+        method: 'POST',
+    });
 }
 
 export async function performAction(

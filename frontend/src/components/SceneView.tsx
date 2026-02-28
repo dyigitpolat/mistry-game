@@ -1,4 +1,5 @@
 "use client";
+import { BACKEND_URL } from "@/lib/api";
 
 interface SceneViewProps {
     locationName: string;
@@ -11,8 +12,8 @@ export default function SceneView({ locationName, sceneImageUrl }: SceneViewProp
             {/* Scene Image */}
             {sceneImageUrl ? (
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-70 group-hover:scale-105 transition-transform duration-700 ease-out"
-                    style={{ backgroundImage: `url(${sceneImageUrl})` }}
+                    className="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out"
+                    style={{ backgroundImage: `url(${sceneImageUrl.startsWith('http') ? sceneImageUrl : `${BACKEND_URL}${sceneImageUrl}`})` }}
                 />
             ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0d121c] via-[#192233] to-[#0d121c] flex items-center justify-center">

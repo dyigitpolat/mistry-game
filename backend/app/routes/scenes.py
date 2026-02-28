@@ -56,6 +56,37 @@ async def generate_scene(scenario_id: str, location_name: str):
     return {"image_url": f"/scenes/{filename}", "location": location_name}
 
 
+@router.post("/{scenario_id}/generate-hero")
+async def generate_hero(scenario_id: str):
+    """Generate a hero banner image for a specific scenario."""
+    if _scene_gen is None:
+        raise HTTPException(
+            status_code=503,
+            detail="Scene generation unavailable. Set GEMINI_API_KEY and install mistry-agents."
+        )
+
+    from app.services.game_engine import GameEngine
+    engine = GameEngine()
+    scenario = engine.load_scenario(scenario_id)
+    if scenario is None:
+        raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
+
+    path = await _scene_gen.generate_hero_banner(
+        title=scenario.title,
+        description=scenario.description,
+        victim=scenario.victim,
+        narrative=scenario.narrative,
+        scenario_id=scenario_id,
+    )
+
+    if path is None:
+        raise HTTPException(status_code=500, detail="Hero Banner generation failed.")
+
+    # Return relative URL for the static mount
+    filename = Path(path).name
+    return {"image_url": f"/scenes/{filename}", "scenario": scenario_id}
+
+
 @router.post("/{scenario_id}/generate-all")
 async def generate_all_scenes(scenario_id: str):
     """Generate scene images for all locations in a scenario."""

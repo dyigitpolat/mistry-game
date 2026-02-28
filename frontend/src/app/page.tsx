@@ -3,12 +3,14 @@
 import { useState, useEffect, useMemo } from "react";
 import AppHeader from "@/components/AppHeader";
 import CaseCard from "@/components/CaseCard";
-import { listScenarios, type ScenarioSummary } from "@/lib/api";
+import { listScenarios, generateHeroBanner, type ScenarioSummary, BACKEND_URL } from "@/lib/api";
 
 export default function HomePage() {
   const [scenarios, setScenarios] = useState<ScenarioSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false); // Added error state
+  const [generatingHero, setGeneratingHero] = useState(false);
+  const [heroBannerUrl, setHeroBannerUrl] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -27,6 +29,7 @@ export default function HomePage() {
             victim: "Colonel Watson Morrison",
             difficulty: "medium",
             phase_count: 4,
+            author: "Arthur Conan Doyle",
           },
         ]);
       } finally {
@@ -35,6 +38,9 @@ export default function HomePage() {
     }
     load();
   }, []);
+  const sanitizeId = (id: string) => {
+    return id.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+  };
 
   const activeCases = scenarios.filter(s => s.progress_percent && s.progress_percent > 0 && !s.is_complete);
   const availableCases = scenarios.filter(s => !activeCases.includes(s));
@@ -51,6 +57,28 @@ export default function HomePage() {
     return Object.entries(groups).sort((a, b) => a[0].localeCompare(b[0]));
   }, [availableCases]);
 
+  useEffect(() => {
+    if (featured && !heroBannerUrl) {
+      setHeroBannerUrl(`${BACKEND_URL}/scenes/${sanitizeId(featured.id)}_hero.png`);
+    }
+  }, [featured]);
+
+  const handleHeroImageError = async () => {
+    if (!featured || generatingHero) return;
+    try {
+      setGeneratingHero(true);
+      const res = await generateHeroBanner(featured.id);
+      // Append a timestamp to break browser cache if same URL returns
+      setHeroBannerUrl(`${BACKEND_URL}${res.image_url}?t=${Date.now()}`);
+    } catch (e) {
+      console.error("Failed to generate hero banner dynamically:", e);
+      // Set to empty to avoid infinite loops, rely on CSS fallback gradients
+      setHeroBannerUrl("");
+    } finally {
+      setGeneratingHero(false);
+    }
+  };
+
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden bg-background-dark text-slate-100 font-display">
       <AppHeader activeTab="home" />
@@ -62,8 +90,34 @@ export default function HomePage() {
           {featured && (
             <div className="w-full relative">
               <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10 pointer-events-none" />
-              <div className="relative min-h-[560px] flex flex-col justify-end p-8 md:p-16 bg-gradient-to-br from-[#0a0f1e] via-[#101622] to-[#192233]">
+              <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent z-10 pointer-events-none" />
+
+              {/* Background Image injected via style or an invisible img to trigger onError */}
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center opacity-80 bg-no-repeat transition-all duration-1000"
+                style={{ backgroundImage: heroBannerUrl ? `url('${heroBannerUrl}')` : undefined }}
+              />
+
+              {/* Hidden image just to detect 404s and trigger generation */}
+              {heroBannerUrl && (
+                <img
+                  src={heroBannerUrl}
+                  alt="Hero banner detector"
+                  onError={handleHeroImageError}
+                  className="hidden"
+                />
+              )}
+
+              {generatingHero && (
+                <div className="absolute inset-x-0 bottom-0 top-1/2 flex items-center justify-center z-20">
+                  <div className="bg-black/50 backdrop-blur-sm border border-white/10 px-6 py-3 rounded-full flex gap-3 shadow-2xl animate-pulse">
+                    <span className="material-symbols-outlined text-primary animate-spin">generating_tokens</span>
+                    <span className="text-white font-medium text-sm tracking-wide">Synthesizing Scene...</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="relative min-h-[560px] flex flex-col justify-end p-8 md:p-16 bg-gradient-to-br from-[#0a0f1e]/40 via-[#101622]/40 to-[#192233]/40">
                 <div className="relative z-20 max-w-2xl flex flex-col gap-4 animate-fade-in-up">
                   <div className="flex items-center gap-3 mb-2">
                     {featured.progress_percent && featured.progress_percent > 0 ? (
@@ -125,7 +179,7 @@ export default function HomePage() {
                       isComplete={s.is_complete}
                       author={`${s.phase_count} phases`}
                       solvedPercent={s.global_clear_rate}
-                      imageUrl={`/scenes/${s.id}_hero.png`}
+                      imageUrl={`${BACKEND_URL}/scenes/${sanitizeId(s.id)}_hero.png`}
                     />
                   ))}
                 </div>
@@ -173,7 +227,7 @@ export default function HomePage() {
                               progressPercent={s.progress_percent}
                               isComplete={s.is_complete}
                               author={`${s.phase_count} phases`}
-                              imageUrl={`/scenes/${s.id}_hero.png`}
+                              imageUrl={`${BACKEND_URL}/scenes/${sanitizeId(s.id)}_hero.png`}
                             />
                           ))}
                         </div>

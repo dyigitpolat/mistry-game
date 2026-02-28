@@ -17,7 +17,10 @@ except ImportError:
 
 async def generate_hero_banner(scene_gen, scenario, sid) -> str | None:
     """Generate a high-level hero banner for the entire scenario."""
-    expected_file_name = f"{sid}_hero.png"
+    import re
+    safe_sid = re.sub(r'[^a-z0-9]', '_', sid.lower())
+    safe_sid = re.sub(r'_+', '_', safe_sid).strip('_')
+    expected_file_name = f"{safe_sid}_hero.png"
     expected_file_path = scene_gen.output_dir / expected_file_name
     if expected_file_path.exists():
         print(f"  [CACHE] Hero Banner already exists: {expected_file_path}")

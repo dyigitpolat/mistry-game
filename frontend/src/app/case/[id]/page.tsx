@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import AppHeader from "@/components/AppHeader";
-import { listScenarios, getScenario, getScenarioStats, getLeaderboard, getComments, postInteraction, type ScenarioSummary, type Scenario, type ScenarioStats as IScenarioStats, type LeaderboardEntry, type Comment } from "@/lib/api";
+import { listScenarios, getScenario, getScenarioStats, getLeaderboard, getComments, postInteraction, type ScenarioSummary, type Scenario, type ScenarioStats as IScenarioStats, type LeaderboardEntry, type Comment, BACKEND_URL } from "@/lib/api";
 import Link from "next/link";
 import { formatDistanceToNow } from 'date-fns';
 
@@ -101,112 +101,127 @@ export default function CaseDetailsPage() {
         );
     }
 
-    if (!summary || !scenario) {
+    if (!summary && !scenario) {
         return (
             <div className="flex flex-col min-h-screen bg-background-dark text-white font-display">
                 <AppHeader activeTab="cases" />
                 <div className="flex-1 flex flex-col items-center justify-center gap-4">
-                    <span className="material-symbols-outlined text-6xl text-slate-600">search_off</span>
-                    <h1 className="text-2xl font-bold">Case Not Found</h1>
-                    <Link href="/" className="text-primary hover:underline">Return to Gallery</Link>
+                    <span className="material-symbols-outlined text-6xl text-slate-700">search_off</span>
+                    <h2 className="text-2xl font-bold text-slate-300">Case File Not Found</h2>
+                    <p className="text-slate-500">This investigation has been sealed or removed.</p>
+                    <Link href="/" className="mt-4 px-6 py-2 bg-primary hover:bg-primary/90 text-white rounded font-bold transition-colors">
+                        Return to Archives
+                    </Link>
                 </div>
             </div>
         );
     }
 
-    const hasProgress = summary.progress_percent !== undefined && summary.progress_percent > 0;
-    const isComplete = summary.is_complete;
+    const title = scenario?.title || summary?.title || "Case Details";
+    const description = scenario?.description || summary?.description || "";
+    const difficulty = scenario?.difficulty || summary?.difficulty || "Medium";
+
+    const sanitizeId = (strId: string) => {
+        return strId.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+    };
+
+    const hasProgress = summary?.progress_percent !== undefined && summary.progress_percent > 0;
+    const isComplete = summary?.is_complete;
 
     return (
-        <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col">
+        <div className="flex flex-col min-h-screen bg-background-dark text-white font-display">
             <AppHeader activeTab="cases" />
 
-            <div className="flex flex-1 overflow-hidden relative">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-background-dark/90 z-10"></div>
-                    <div className="w-full h-full bg-cover bg-center opacity-30 blur-sm bg-[url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop')]" />
-                </div>
+            <main className="flex-1 overflow-y-auto custom-scrollbar relative z-20 flex flex-col items-center w-full">
+                <div className="w-full max-w-7xl mx-auto pt-8 px-6 lg:px-8 pb-8">
+                    {/* Hero Banner */}
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-surface-dark group">
+                        <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-background-dark/40 to-transparent z-10 pointer-events-none"></div>
 
-                <main className="flex-1 overflow-y-auto custom-scrollbar relative z-20 flex flex-col items-center w-full">
-                    <div className="w-full max-w-7xl mx-auto pt-8 px-6 lg:px-8 pb-8">
-                        {/* Hero Banner */}
-                        <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-surface-dark group">
-                            <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10 pointer-events-none"></div>
-                            <div className="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-background-dark/40 to-transparent z-10 pointer-events-none"></div>
-                            <div className="relative h-[380px] w-full bg-cover bg-center transform transition-transform duration-1000 group-hover:scale-105 bg-[url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop')]" />
-                            <div className="absolute bottom-0 left-0 p-6 md:p-10 z-20 w-full md:max-w-[70%] flex flex-col gap-3 overflow-hidden">
-                                <div className="flex flex-wrap items-center gap-2 animate-fade-in-up">
-                                    {isComplete ? (
-                                        <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1 shrink-0">
-                                            <span className="material-symbols-outlined text-[14px]">task_alt</span> Solved
-                                        </span>
-                                    ) : hasProgress ? (
-                                        <span className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1 shrink-0">
-                                            <span className="material-symbols-outlined text-[14px]">pending_actions</span> In Progress ({Math.round(summary.progress_percent || 0)}%)
-                                        </span>
-                                    ) : (
-                                        <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg shadow-primary/20 shrink-0">
-                                            New Case
-                                        </span>
-                                    )}
+                        <div
+                            className="relative h-[380px] w-full bg-cover bg-center transform transition-transform duration-1000 group-hover:scale-105 opacity-80"
+                            style={{ backgroundImage: `url('${BACKEND_URL}/scenes/${sanitizeId(id)}_hero.png')` }}
+                        />
 
-                                    <span className="bg-black/40 backdrop-blur-sm border border-white/10 text-slate-200 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1 shrink-0">
-                                        <span className="material-symbols-outlined text-[14px]">timer</span> ~{scenario.time_limit_minutes}m Solve Time
+                        <div className="absolute bottom-0 left-0 p-6 md:p-10 z-20 w-full md:max-w-[70%] flex flex-col gap-3 overflow-hidden">
+                            <div className="flex flex-wrap items-center gap-2 animate-fade-in-up">
+                                {isComplete ? (
+                                    <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1 shrink-0">
+                                        <span className="material-symbols-outlined text-[14px]">task_alt</span> Solved
                                     </span>
-                                    <span className={`backdrop-blur-sm border text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1 shrink-0
-                                        ${summary.difficulty === 'hard' ? 'bg-red-900/60 border-red-500/30 text-red-200' :
-                                            summary.difficulty === 'medium' ? 'bg-orange-900/60 border-orange-500/30 text-orange-200' :
-                                                'bg-green-900/60 border-green-500/30 text-green-200'
-                                        }`}>
-                                        <span className="material-symbols-outlined text-[14px]">skull</span> {summary.difficulty}
+                                ) : hasProgress ? (
+                                    <span className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg flex items-center gap-1 shrink-0">
+                                        <span className="material-symbols-outlined text-[14px]">pending_actions</span> In Progress ({Math.round(summary?.progress_percent || 0)}%)
                                     </span>
-                                </div>
+                                ) : (
+                                    <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-lg shadow-primary/20 shrink-0">
+                                        New Case
+                                    </span>
+                                )}
 
-                                <h1 className="text-white text-3xl md:text-5xl font-black leading-tight tracking-tight drop-shadow-xl font-display">
-                                    {scenario.title}
-                                </h1>
-
-                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-300 text-sm font-medium">
-                                    {scenario.author && (
-                                        <>
-                                            <div className="flex items-center gap-1.5">
-                                                <span className="material-symbols-outlined text-[14px] text-primary">edit_note</span>
-                                                <span>By <span className="text-white">{scenario.author}</span></span>
-                                            </div>
-                                            <span className="w-1 h-1 rounded-full bg-slate-500"></span>
-                                        </>
-                                    )}
-                                    <div className="flex items-center gap-1.5">
-                                        <span className="material-symbols-outlined text-[14px] text-red-400">person</span>
-                                        <span>Victim: <span className="text-white">{scenario.victim}</span></span>
-                                    </div>
-                                    <span className="w-1 h-1 rounded-full bg-slate-500"></span>
-                                    <span>Phases: <span className="text-white">{scenario.phases.length} Acts</span></span>
-                                </div>
+                                <span className="bg-black/40 backdrop-blur-sm border border-white/10 text-slate-200 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1 shrink-0">
+                                    <span className="material-symbols-outlined text-[14px]">timer</span> ~{scenario?.time_limit_minutes || 60}m Solve Time
+                                </span>
+                                <span className={`backdrop-blur-sm border text-xs font-bold px-3 py-1 rounded uppercase tracking-wider flex items-center gap-1 shrink-0
+                                                        ${summary?.difficulty === 'hard' ? 'bg-red-900/60 border-red-500/30 text-red-200' :
+                                        summary?.difficulty === 'medium' ? 'bg-orange-900/60 border-orange-500/30 text-orange-200' :
+                                            'bg-green-900/60 border-green-500/30 text-green-200'
+                                    }`}>
+                                    <span className="material-symbols-outlined text-[14px]">skull</span> {summary?.difficulty || difficulty}
+                                </span>
                             </div>
-                        </div>
 
-                        {/* Case Synopsis */}
-                        <div className="mt-6 bg-surface-dark/60 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-lg">
-                            <div className="flex gap-4">
-                                <span className="material-symbols-outlined text-primary text-3xl mt-1 shrink-0 opacity-60">format_quote</span>
-                                <div className="flex flex-col gap-3 min-w-0">
-                                    <p className="text-slate-200 text-base leading-relaxed italic">
-                                        {scenario.intro_narrative}
-                                    </p>
-                                    {scenario.description && (
-                                        <p className="text-slate-400 text-sm leading-relaxed">
-                                            {scenario.description}
-                                        </p>
-                                    )}
-                                </div>
+                            <h1 className="text-white text-3xl md:text-5xl font-black leading-tight tracking-tight drop-shadow-xl font-display">
+                                {title}
+                            </h1>
+
+                            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-300 text-sm font-medium">
+                                {scenario?.author && (
+                                    <>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="material-symbols-outlined text-[14px] text-primary">edit_note</span>
+                                            <span>By <span className="text-white">{scenario.author}</span></span>
+                                        </div>
+                                        <span className="w-1 h-1 rounded-full bg-slate-500"></span>
+                                    </>
+                                )}
+                                {scenario?.victim && (
+                                    <>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="material-symbols-outlined text-[14px] text-red-400">person</span>
+                                            <span>Victim: <span className="text-white">{scenario.victim}</span></span>
+                                        </div>
+                                        <span className="w-1 h-1 rounded-full bg-slate-500"></span>
+                                    </>
+                                )}
+                                <span>Phases: <span className="text-white">{scenario?.phases?.length || 0} Acts</span></span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="w-full max-w-7xl mx-auto px-6 lg:px-8 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
-                        <div className="lg:col-span-8 flex flex-col gap-8">
+                    {/* Case Synopsis */}
 
+                    <div className="mt-6 bg-surface-dark/60 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-lg">
+                        <div className="flex gap-4">
+                            <span className="material-symbols-outlined text-primary text-3xl mt-1 shrink-0 opacity-60">format_quote</span>
+                            <div className="flex flex-col gap-3 min-w-0">
+                                {scenario?.intro_narrative && (
+                                    <p className="text-slate-200 text-base leading-relaxed italic">
+                                        {scenario.intro_narrative}
+                                    </p>
+                                )}
+                                {description && (
+                                    <p className="text-slate-400 text-sm leading-relaxed">
+                                        {description}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="w-full max-w-7xl mx-auto pt-12 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <div className="lg:col-span-8 flex flex-col gap-8">
                             {/* Action Bar */}
                             <div className="bg-surface-dark border border-slate-700 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg relative overflow-hidden">
                                 <div className="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
@@ -385,10 +400,9 @@ export default function CaseDetailsPage() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
     );
 }
