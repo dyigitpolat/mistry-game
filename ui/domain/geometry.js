@@ -39,6 +39,10 @@ export function getObjectTiles(obj) {
   return tiles;
 }
 
-export function blocksMovement(type) {
+export function blocksMovement(type, obj) {
+  if (type === "world_object") {
+    return obj && (obj.category === "container" || obj.category === "surface");
+  }
+  if (type === "world_person") return true;
   return ["container_box", "container_safe", "surface_table"].includes(type);
 }

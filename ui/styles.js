@@ -120,45 +120,6 @@ export const canvasStyles = {
   },
 };
 
-export const sidebarStyles = {
-  container: {
-    width: 200,
-    background: "#1a182a",
-    border: "2px solid #2a2840",
-    borderRadius: 4,
-    padding: 12,
-    minHeight: 300,
-  },
-  title: {
-    margin: "0 0 10px",
-    fontSize: 13,
-    letterSpacing: 2,
-    color: "#ffe088",
-    borderBottom: "1px solid #2a2840",
-    paddingBottom: 6,
-  },
-  empty: {
-    fontSize: 11,
-    color: "#44405a",
-    fontStyle: "italic",
-  },
-  itemRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: 8,
-    padding: "5px 8px",
-    background: "#222040",
-    borderRadius: 3,
-  },
-  itemColor: {
-    width: 20,
-    height: 20,
-    borderRadius: 2,
-    flexShrink: 0,
-    border: "1px solid rgba(255,255,255,0.15)",
-  },
-};
-
 export const minimapStyles = {
   container: {
     background: "#1a182a",

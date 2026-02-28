@@ -1,21 +1,27 @@
 import PanelBtn from "./PanelBtn.jsx";
-import { panelStyles, buttonStyles } from "../styles.js";
+import { panelStyles } from "../styles.js";
 
 export default function InteractionPanel({
   selectedObject,
   panelPos,
-  onOpen,
-  onLock,
-  onPickUpItem,
-  onPickUpFromSurface,
+  onToggleOpen,
   onClose,
 }) {
   if (!selectedObject) return null;
 
-  const isContainer = selectedObject.type?.startsWith("container");
-  const isSurface = selectedObject.type === "surface_table";
+  const isContainer =
+    selectedObject.type?.startsWith("container") ||
+    (selectedObject.type === "world_object" && selectedObject.category === "container");
+  const isSurface =
+    selectedObject.type === "surface_table" ||
+    (selectedObject.type === "world_object" && selectedObject.category === "surface");
 
   if (!isContainer && !isSurface) return null;
+
+  const title =
+    selectedObject.name ||
+    selectedObject.type?.replace("_", " ").toUpperCase() ||
+    "OBJECT";
 
   return (
     <div
@@ -26,7 +32,7 @@ export default function InteractionPanel({
       }}
     >
       <div style={panelStyles.title}>
-        {selectedObject.type.replace("_", " ").toUpperCase()}
+        {title}
       </div>
       {isContainer && (
         <div
@@ -41,12 +47,7 @@ export default function InteractionPanel({
           <PanelBtn
             label={selectedObject.open ? "Close" : "Open"}
             disabled={selectedObject.locked}
-            onClick={() => onOpen(selectedObject.id)}
-          />
-          <PanelBtn
-            label={selectedObject.locked ? "Unlock" : "Lock"}
-            disabled={selectedObject.open}
-            onClick={() => onLock(selectedObject.id)}
+            onClick={() => onToggleOpen(selectedObject.id)}
           />
         </div>
       )}
@@ -61,32 +62,30 @@ export default function InteractionPanel({
                 textAlign: "center",
               }}
             >
-              {isContainer ? "CONTENTS" : "ON SURFACE"} — click to pick up
+              {isContainer ? "CONTENTS" : "ON SURFACE"} — hover item in room for notes
             </div>
             <div
               style={{
-                display: "flex",
+                display: "grid",
+                gridTemplateColumns: "1fr",
                 gap: 4,
-                flexWrap: "wrap",
-                justifyContent: "center",
+                maxHeight: 120,
+                overflowY: "auto",
               }}
             >
               {selectedObject.items.map((item) => (
                 <div
                   key={item.id}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onPickUpItem(selectedObject.id, item.id);
-                  }}
-                  title={item.name}
                   style={{
-                    ...buttonStyles.itemSlot,
-                    background: item.color,
+                    fontSize: 10,
+                    color: "#ddd6ee",
+                    background: "#262239",
+                    border: "1px solid #4f4868",
+                    borderRadius: 4,
+                    padding: "4px 6px",
                   }}
-                  onMouseEnter={(e) => (e.target.style.transform = "scale(1.2)")}
-                  onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
                 >
-                  {item.name[0]}
+                  {item.name}
                 </div>
               ))}
             </div>
@@ -106,14 +105,6 @@ export default function InteractionPanel({
             Empty
           </div>
         )}
-      {isSurface && selectedObject.items?.length > 0 && (
-        <div style={{ textAlign: "center", marginTop: 4 }}>
-          <PanelBtn
-            label="Pick Up All"
-            onClick={() => onPickUpFromSurface(selectedObject.id)}
-          />
-        </div>
-      )}
       {isSurface && selectedObject.items?.length === 0 && (
         <div style={{ fontSize: 9, color: "#555", textAlign: "center" }}>
           Nothing here

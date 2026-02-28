@@ -9,7 +9,7 @@ export function buildWalkableGrid(room) {
   for (const dir of DIRS)
     if (room.gates[dir]) getGateTiles(dir, gw, gh).forEach(t => (grid[t.y][t.x] = true));
   room.objects.forEach(obj => {
-    if (!blocksMovement(obj.type)) return;
+    if (!blocksMovement(obj.type, obj)) return;
     getObjectTiles(obj).forEach(t => (grid[t.y][t.x] = false));
   });
   return grid;

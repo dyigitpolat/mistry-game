@@ -131,27 +131,78 @@ export function drawItemIcon(ctx, x, y, size, item) {
   ctx.fillRect(x + 1, y + size - 3, size - 2, 2);
 }
 
-export function drawItemsOnSurface(ctx, obj) {
+/**
+ * Draw a world-item SVG image at the given position (for items in containers/surfaces).
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {number} x
+ * @param {number} y
+ * @param {number} size
+ * @param {HTMLImageElement} img
+ */
+export function drawWorldItemIcon(ctx, x, y, size, img) {
+  if (!img?.complete || !img.naturalWidth) return;
+  ctx.drawImage(img, x + 1, y + 1, size - 2, size - 2);
+}
+
+function drawItemDropShadow(ctx, x, y, size) {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.28)";
+  ctx.fillRect(x + 2, y + size - 2, size - 2, 3);
+}
+
+export function getSurfaceItemBounds(obj, index) {
+  const baseX = obj.x * TILE;
+  const baseY = obj.y * TILE;
+  const itemSize = Math.floor(TILE * 0.62);
+  const cols = Math.max((obj.w ?? 1) * 2, 1);
+  const col = index % cols;
+  const row = Math.floor(index / cols);
+  const x = baseX + col * (itemSize - 2) + 2;
+  const y = baseY + PX + 1 + row * (itemSize - 6);
+  return { x, y, w: itemSize - 2, h: itemSize - 2 };
+}
+
+export function getContainerItemBounds(obj, index) {
+  const baseX = obj.x * TILE;
+  const baseY = obj.y * TILE;
+  const innerX = baseX + ((obj.w ?? 1) === 2 ? PX * 2 : PX);
+  const innerY = baseY + PX * 2;
+  const sz = Math.floor(TILE * 0.46);
+  const col = index % 2;
+  const row = Math.floor(index / 2);
+  const x = innerX + col * (sz + 3);
+  const y = innerY + row * (sz + 3);
+  return { x, y, w: sz, h: sz };
+}
+
+/**
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {object} obj
+ * @param {(key: string) => HTMLImageElement | null} [getWorldImage]
+ */
+export function drawItemsOnSurface(ctx, obj, getWorldImage) {
   if (!obj.items?.length) return;
-  const baseX = obj.x * TILE, baseY = obj.y * TILE;
-  const itemSize = Math.floor(TILE * 0.5);
   obj.items.forEach((item, i) => {
-    const col = i % (obj.w * 2);
-    const ix = baseX + col * itemSize + 2;
-    const iy = baseY + PX + 2;
-    drawItemIcon(ctx, ix, iy, itemSize - 4, item);
+    const box = getSurfaceItemBounds(obj, i);
+    drawItemDropShadow(ctx, box.x, box.y, box.w);
+    const img = item.worldItemSvgKey && getWorldImage ? getWorldImage(item.worldItemSvgKey) : null;
+    if (img) drawWorldItemIcon(ctx, box.x, box.y, box.w, img);
+    else drawItemIcon(ctx, box.x, box.y, box.w, item);
   });
 }
 
-export function drawItemsInContainer(ctx, obj) {
+/**
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {object} obj
+ * @param {(key: string) => HTMLImageElement | null} [getWorldImage]
+ */
+export function drawItemsInContainer(ctx, obj, getWorldImage) {
   if (!obj.items?.length || !obj.open) return;
-  const baseX = obj.x * TILE, baseY = obj.y * TILE;
-  const innerX = baseX + (obj.w === 2 ? PX * 3 : PX * 2);
-  const innerY = baseY + PX * 2;
-  const sz = Math.floor(TILE * 0.35);
   obj.items.forEach((item, i) => {
-    const col = i % 2, row = Math.floor(i / 2);
-    drawItemIcon(ctx, innerX + col * (sz + 2), innerY + row * (sz + 2), sz, item);
+    const box = getContainerItemBounds(obj, i);
+    drawItemDropShadow(ctx, box.x, box.y, box.w);
+    const img = item.worldItemSvgKey && getWorldImage ? getWorldImage(item.worldItemSvgKey) : null;
+    if (img) drawWorldItemIcon(ctx, box.x, box.y, box.w, img);
+    else drawItemIcon(ctx, box.x, box.y, box.w, item);
   });
 }
 

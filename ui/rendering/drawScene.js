@@ -20,10 +20,11 @@ import {
  * @param {import("../domain/room.js").Room} room
  * @param {{ x: number, y: number }} playerPos
  * @param {string | null} selectedObjId
- * @param {{ getImage?: (type: string, state: { locked?: boolean, open?: boolean }) => HTMLImageElement | null }} [options] - When getImage is provided and returns a loaded image, use it instead of procedural drawing for that object.
+ * @param {{ getImage?: (type: string, state: { locked?: boolean, open?: boolean }) => HTMLImageElement | null, getWorldImage?: (key: string) => HTMLImageElement | null }} [options] - getImage for type-based assets; getWorldImage for world API SVG keys.
  */
 export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
   const getImage = options.getImage ?? null;
+  const getWorldImage = options.getWorldImage ?? null;
   const { gridW: gw, gridH: gh } = room;
   ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
 
@@ -60,22 +61,31 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
   drawables.forEach(({ obj }) => {
     if (obj.type === "__player__") {
       drawPlayer(ctx, obj.x, obj.y);
+    } else if (obj.worldSvgKey && getWorldImage) {
+      const img = getWorldImage(obj.worldSvgKey);
+      if (img) {
+        drawSvgImage(ctx, obj, img);
+        if (obj.type === "world_object" && (obj.category === "container" || obj.category === "surface")) {
+          if (obj.category === "container") drawItemsInContainer(ctx, obj, getWorldImage);
+          else drawItemsOnSurface(ctx, obj, getWorldImage);
+        }
+      }
     } else {
       const state = { locked: obj.locked, open: obj.open };
       const img = getImage?.(obj.type, state);
       if (img) {
         drawSvgImage(ctx, obj, img);
-        if (obj.type === "container_box" || obj.type === "container_safe") drawItemsInContainer(ctx, obj);
-        if (obj.type === "surface_table") drawItemsOnSurface(ctx, obj);
+        if (obj.type === "container_box" || obj.type === "container_safe") drawItemsInContainer(ctx, obj, getWorldImage);
+        if (obj.type === "surface_table") drawItemsOnSurface(ctx, obj, getWorldImage);
       } else if (obj.type === "container_box") {
         drawBox(ctx, obj);
-        drawItemsInContainer(ctx, obj);
+        drawItemsInContainer(ctx, obj, getWorldImage);
       } else if (obj.type === "container_safe") {
         drawSafe(ctx, obj);
-        drawItemsInContainer(ctx, obj);
+        drawItemsInContainer(ctx, obj, getWorldImage);
       } else if (obj.type === "surface_table") {
         drawTable(ctx, obj);
-        drawItemsOnSurface(ctx, obj);
+        drawItemsOnSurface(ctx, obj, getWorldImage);
       } else if (obj.type === "decoration_flower") {
         drawFlowerPot(ctx, obj);
       } else if (obj.type === "decoration_lamp") {
