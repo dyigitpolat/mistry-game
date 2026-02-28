@@ -139,7 +139,13 @@ export function drawItemIcon(ctx, x, y, size, item) {
 export function drawWorldItemIcon(ctx, x, y, size, img) {
   if (!img?.complete || !img.naturalWidth) return;
   const { sx, sy, sw, sh } = getOpaqueSourceBounds(img);
-  ctx.drawImage(img, sx, sy, sw, sh, x + 1, y + 1, size - 2, size - 2);
+  const inner = size - 2;
+  const scale = Math.min(inner / sw, inner / sh);
+  const dw = Math.max(1, Math.round(sw * scale));
+  const dh = Math.max(1, Math.round(sh * scale));
+  const dx = x + 1 + Math.floor((inner - dw) / 2);
+  const dy = y + 1 + Math.floor((inner - dh) / 2);
+  ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
 }
 
 function drawItemDropShadow(ctx, x, y, size) {
@@ -157,9 +163,8 @@ export function getSurfaceItemBounds(obj, index) {
   const row = Math.floor(index / 2);
   const spacing = 4;
   const totalW = sz * 2 + spacing;
-  const totalH = sz * 2 + spacing;
   const startX = baseX + Math.floor((boxW - totalW) / 2);
-  const startY = baseY + Math.floor((boxH - totalH) / 2);
+  const startY = baseY + Math.floor(boxH * 0.05);
   return { x: startX + col * (sz + spacing), y: startY + row * (sz + spacing), w: sz, h: sz };
 }
 
@@ -253,7 +258,7 @@ function opaqueRatioInRect(data, width, x, y, w, h) {
   return opaque / total;
 }
 
-function getMaskAwareItemSlots(obj, count, parentImg, { preferLower = false } = {}) {
+function getMaskAwareItemSlots(obj, count, parentImg, { preferLower = false, preferUpper = false } = {}) {
   const slot = Math.floor(TILE * 0.92);
   if (!parentImg?.complete || !parentImg.naturalWidth) {
     return Array.from(
@@ -272,10 +277,10 @@ function getMaskAwareItemSlots(obj, count, parentImg, { preferLower = false } = 
       const ratio = opaqueRatioInRect(data, metrics.drawW, x, y, slot, slot);
       if (ratio >= 0.42) {
         const centerDist = Math.abs(x + slot / 2 - metrics.drawW / 2);
-        const yCenterDist = Math.abs(y + slot / 2 - metrics.drawH / 2);
-        const centerScore = -(centerDist + yCenterDist * 0.6);
+        const hCenterScore = -centerDist;
         const lowerBonus = preferLower ? y * 0.4 : 0;
-        candidates.push({ x, y, ratio, score: centerScore + lowerBonus });
+        const upperBonus = preferUpper ? (metrics.drawH - y) * 0.8 : 0;
+        candidates.push({ x, y, ratio, score: hCenterScore + lowerBonus + upperBonus });
       }
     }
   }
@@ -309,7 +314,7 @@ export function getContainerItemDisplayBounds(obj, count, getWorldImage) {
 
 export function getSurfaceItemDisplayBounds(obj, count, getWorldImage) {
   const surfaceImg = obj.worldSvgKey && getWorldImage ? getWorldImage(obj.worldSvgKey) : null;
-  return getMaskAwareItemSlots(obj, count, surfaceImg, { preferLower: false });
+  return getMaskAwareItemSlots(obj, count, surfaceImg, { preferUpper: true });
 }
 
 export function pointHitsImageOpaquePixel(img, bounds, px, py) {
@@ -370,9 +375,100 @@ export function drawSelectionHighlight(ctx, obj) {
   ctx.setLineDash([]);
 }
 
-export function drawObjectDropShadow(ctx, obj) {
+const _blurShadowCache = new WeakMap();
+const SHADOW_BLUR = 5;
+const SHADOW_PAD = SHADOW_BLUR * 2;
+
+function getBlurredShadowCanvas(img, drawW, drawH) {
+  const cached = _blurShadowCache.get(img);
+  if (cached && cached.w === drawW && cached.h === drawH) return cached;
+  const { sx, sy, sw, sh } = getOpaqueSourceBounds(img);
+  const padW = drawW + SHADOW_PAD * 2;
+  const padH = drawH + SHADOW_PAD * 2;
+  const canvas = document.createElement("canvas");
+  canvas.width = padW;
+  canvas.height = padH;
+  const sCtx = canvas.getContext("2d");
+  sCtx.drawImage(img, sx, sy, sw, sh, SHADOW_PAD, SHADOW_PAD, drawW, drawH);
+  sCtx.globalCompositeOperation = "source-in";
+  sCtx.fillStyle = "#000";
+  sCtx.fillRect(0, 0, padW, padH);
+  const blurred = document.createElement("canvas");
+  blurred.width = padW;
+  blurred.height = padH;
+  const bCtx = blurred.getContext("2d");
+  bCtx.filter = `blur(${SHADOW_BLUR}px)`;
+  bCtx.drawImage(canvas, 0, 0);
+  bCtx.filter = "none";
+  const result = { w: drawW, h: drawH, canvas: blurred, pad: SHADOW_PAD };
+  _blurShadowCache.set(img, result);
+  return result;
+}
+
+const _edgeAOCache = new WeakMap();
+
+function getEdgeAOCanvas(img, drawW, drawH) {
+  const cached = _edgeAOCache.get(img);
+  if (cached && cached.w === drawW && cached.h === drawH) return cached.canvas;
+
+  const { sx, sy, sw, sh } = getOpaqueSourceBounds(img);
+
+  const silCanvas = document.createElement("canvas");
+  silCanvas.width = drawW;
+  silCanvas.height = drawH;
+  const silCtx = silCanvas.getContext("2d");
+  silCtx.drawImage(img, sx, sy, sw, sh, 0, 0, drawW, drawH);
+  const origData = silCtx.getImageData(0, 0, drawW, drawH).data;
+
+  const { canvas: blurCanvas, pad } = getBlurredShadowCanvas(img, drawW, drawH);
+  const bCtx = blurCanvas.getContext("2d");
+  const blurData = bCtx.getImageData(pad, pad, drawW, drawH).data;
+
+  const out = document.createElement("canvas");
+  out.width = drawW;
+  out.height = drawH;
+  const oCtx = out.getContext("2d");
+  const imgData = oCtx.createImageData(drawW, drawH);
+  const d = imgData.data;
+
+  for (let y = 0; y < drawH; y++) {
+    const bottomT = Math.max(0, (y - drawH * 0.55) / (drawH * 0.45));
+    for (let x = 0; x < drawW; x++) {
+      const i = (y * drawW + x) * 4;
+      const origA = origData[i + 3];
+      if (origA < 10) continue;
+      const blurA = blurData[i + 3];
+      const edgeStrength = Math.max(0, origA - blurA);
+      const ao = Math.min(255, Math.round(edgeStrength * bottomT * 7.0));
+      d[i] = 0;
+      d[i + 1] = 0;
+      d[i + 2] = 0;
+      d[i + 3] = ao;
+    }
+  }
+  oCtx.putImageData(imgData, 0, 0);
+  _edgeAOCache.set(img, { w: drawW, h: drawH, canvas: out });
+  return out;
+}
+
+export function drawObjectDropShadow(ctx, obj, img) {
   const w = Math.max(obj.w ?? 1, 1) * TILE;
   const h = Math.max(obj.h ?? 1, 1) * TILE;
+
+  if (img?.complete && img.naturalWidth) {
+    const { drawX, drawY, drawW, drawH } = getDrawMetricsForImageInObjectBox(obj, img);
+    const { canvas: shadow, pad } = getBlurredShadowCanvas(img, drawW, drawH);
+    const shiftY = 5;
+    ctx.save();
+    ctx.globalAlpha = 0.38;
+    ctx.drawImage(
+      shadow, 0, 0, shadow.width, shadow.height,
+      drawX - pad, drawY - pad + shiftY, shadow.width, shadow.height,
+    );
+    ctx.restore();
+    return;
+  }
+
   const cx = obj.x * TILE + w / 2;
   const cy = obj.y * TILE + h - 2;
   const rx = w * 0.4;
@@ -383,6 +479,16 @@ export function drawObjectDropShadow(ctx, obj) {
   ctx.beginPath();
   ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
   ctx.fill();
+  ctx.restore();
+}
+
+export function drawObjectAO(ctx, obj, img) {
+  if (!img?.complete || !img.naturalWidth) return;
+  const { drawX, drawY, drawW, drawH } = getDrawMetricsForImageInObjectBox(obj, img);
+  const aoCanvas = getEdgeAOCanvas(img, drawW, drawH);
+  ctx.save();
+  ctx.globalAlpha = 0.55;
+  ctx.drawImage(aoCanvas, 0, 0, drawW, drawH, drawX, drawY, drawW, drawH);
   ctx.restore();
 }
 

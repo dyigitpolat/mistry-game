@@ -1,6 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 
-from src_py.infrastructure.hf_renderer import HfRenderer, _split_horizontal, _validate_png_base64
+from src_py.infrastructure.fal_renderer import FalRenderer, _split_horizontal, _validate_png_base64
 
 
 class _FakeImage:
@@ -27,7 +27,7 @@ def test_validate_png_base64_accepts_real_png_header() -> None:
     _validate_png_base64(one_px_png)
 
 
-def test_hf_renderer_init_is_safe_in_worker_thread() -> None:
+def test_fal_renderer_init_is_safe_in_worker_thread() -> None:
     with ThreadPoolExecutor(max_workers=1) as executor:
-        renderer = executor.submit(HfRenderer).result()
-    assert isinstance(renderer, HfRenderer)
+        renderer = executor.submit(FalRenderer).result()
+    assert isinstance(renderer, FalRenderer)

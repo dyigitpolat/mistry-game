@@ -15,6 +15,7 @@ import {
   drawSelectionHighlight,
   drawObjectLabel,
   drawObjectDropShadow,
+  drawObjectAO,
 } from "./drawObjects.js";
 
 /**
@@ -67,38 +68,39 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
   drawables.forEach(({ obj }) => {
     if (obj.type === "__player__") {
       drawPlayer(ctx, obj.x, obj.y);
-    } else if (obj.worldSvgKey && getWorldImage) {
-      const img = getWorldImage(obj.worldSvgKey);
-      if (img) {
-        drawObjectDropShadow(ctx, obj);
-        drawSvgImage(ctx, obj, img);
-        if (obj.type === "world_object" && (obj.category === "container" || obj.category === "surface")) {
-          if (obj.category === "container") drawItemsInContainer(ctx, obj, getWorldImage);
-          else drawItemsOnSurface(ctx, obj, getWorldImage);
-        }
-      }
-    } else {
+      return;
+    }
+    let spriteImg = null;
+    if (obj.worldSvgKey && getWorldImage) {
+      spriteImg = getWorldImage(obj.worldSvgKey);
+    }
+    if (!spriteImg) {
       const state = { locked: obj.locked, open: obj.open };
-      const img = getImage?.(obj.type, state);
-      if (img) {
-        drawObjectDropShadow(ctx, obj);
-        drawSvgImage(ctx, obj, img);
-        if (obj.type === "container_box" || obj.type === "container_safe") drawItemsInContainer(ctx, obj, getWorldImage);
-        if (obj.type === "surface_table") drawItemsOnSurface(ctx, obj, getWorldImage);
-      } else if (obj.type === "container_box") {
-        drawBox(ctx, obj);
-        drawItemsInContainer(ctx, obj, getWorldImage);
-      } else if (obj.type === "container_safe") {
-        drawSafe(ctx, obj);
-        drawItemsInContainer(ctx, obj, getWorldImage);
-      } else if (obj.type === "surface_table") {
-        drawTable(ctx, obj);
-        drawItemsOnSurface(ctx, obj, getWorldImage);
-      } else if (obj.type === "decoration_flower") {
-        drawFlowerPot(ctx, obj);
-      } else if (obj.type === "decoration_lamp") {
-        drawLamp(ctx, obj);
+      spriteImg = getImage?.(obj.type, state) ?? null;
+    }
+    drawObjectDropShadow(ctx, obj, spriteImg);
+    if (spriteImg) {
+      drawSvgImage(ctx, obj, spriteImg);
+      drawObjectAO(ctx, obj, spriteImg);
+      if (obj.type === "world_object" && (obj.category === "container" || obj.category === "surface")) {
+        if (obj.category === "container") drawItemsInContainer(ctx, obj, getWorldImage);
+        else drawItemsOnSurface(ctx, obj, getWorldImage);
       }
+      if (obj.type === "container_box" || obj.type === "container_safe") drawItemsInContainer(ctx, obj, getWorldImage);
+      if (obj.type === "surface_table") drawItemsOnSurface(ctx, obj, getWorldImage);
+    } else if (obj.type === "container_box") {
+      drawBox(ctx, obj);
+      drawItemsInContainer(ctx, obj, getWorldImage);
+    } else if (obj.type === "container_safe") {
+      drawSafe(ctx, obj);
+      drawItemsInContainer(ctx, obj, getWorldImage);
+    } else if (obj.type === "surface_table") {
+      drawTable(ctx, obj);
+      drawItemsOnSurface(ctx, obj, getWorldImage);
+    } else if (obj.type === "decoration_flower") {
+      drawFlowerPot(ctx, obj);
+    } else if (obj.type === "decoration_lamp") {
+      drawLamp(ctx, obj);
     }
     if (obj.id === selectedObjId) drawSelectionHighlight(ctx, obj);
   });

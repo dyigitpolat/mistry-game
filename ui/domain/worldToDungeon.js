@@ -45,7 +45,7 @@ function buildExitNames(exits, locations) {
  * @returns {{ rooms: Record<string, import("./room.js").Room>, layout: Record<string, { row: number, col: number }>, startRoomId: string }}
  */
 export function worldViewToDungeon(view) {
-  const { world, layout, placement, moods } = view;
+  const { world, layout, placement, moods, decorations } = view;
   const locIds = Object.keys(world.locations).sort();
   const startRoomId = locIds[0] ?? null;
   const rooms = {};
@@ -113,6 +113,26 @@ export function worldViewToDungeon(view) {
         locked: false,
         open: false,
         items: [],
+      });
+    }
+
+    const roomDecorations = decorations?.[locId] ?? [];
+    for (const decor of roomDecorations) {
+      roomObjects.push({
+        id: decor.id,
+        name: decor.name ?? "",
+        description: decor.description ?? "",
+        type: "world_object",
+        worldSvgKey: `decor:${locId}:${decor.id}`,
+        x: decor.x ?? 1,
+        y: decor.y ?? 1,
+        w: decor.w ?? 2,
+        h: decor.h ?? 2,
+        locked: false,
+        open: false,
+        items: [],
+        category: "decoration",
+        notes: "",
       });
     }
 

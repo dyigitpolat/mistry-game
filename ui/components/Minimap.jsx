@@ -1,26 +1,18 @@
 import { useMemo } from "react";
 import { minimapStyles } from "../styles.js";
 
-const CELL_SIZE = 32;
-const PAD = 14;
-const NODE_R = 6;
+const CELL_W = 100;
+const CELL_H = 40;
+const PAD = 18;
+const RECT_W = 88;
+const RECT_H = 28;
 const VISITED_FILL = "#2a2840";
 const VISITED_STROKE = "#44405a";
 const CURRENT_FILL = "#3a3860";
 const CURRENT_STROKE = "#ffe088";
 const LINE_STROKE = "#44405a";
-const LABEL_FILL = "#9e98b0";
+const LABEL_FILL = "#c8c2d6";
 const LABEL_FILL_CURRENT = "#ffe088";
-
-function abbreviate(name, maxLen = 10) {
-  if (!name) return "";
-  if (name.length <= maxLen) return name;
-  const words = name.split(/\s+/);
-  if (words.length >= 2) {
-    return words.map(w => w.charAt(0).toUpperCase()).join("");
-  }
-  return name.slice(0, maxLen - 1) + ".";
-}
 
 export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, rooms = {} }) {
   const { nodes, edges, bounds } = useMemo(() => {
@@ -68,22 +60,21 @@ export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, ro
     };
   }, [layout, visitedRoomIds, currentRoomId, rooms]);
 
-  const { width, height, scale, offsetX, offsetY } = useMemo(() => {
-    if (nodes.length === 0) return { width: 140, height: 100, scale: CELL_SIZE, offsetX: PAD, offsetY: PAD };
+  const { width, height, offsetX, offsetY } = useMemo(() => {
+    if (nodes.length === 0) return { width: 160, height: 100, offsetX: PAD, offsetY: PAD };
     const { minRow, maxRow, minCol, maxCol } = bounds;
-    const w = (maxCol - minCol + 1) * CELL_SIZE + PAD * 2;
-    const h = (maxRow - minRow + 1) * CELL_SIZE + PAD * 2;
+    const w = (maxCol - minCol + 1) * CELL_W + PAD * 2;
+    const h = (maxRow - minRow + 1) * CELL_H + PAD * 2;
     return {
-      width: Math.max(140, w),
+      width: Math.max(160, w),
       height: Math.max(100, h),
-      scale: CELL_SIZE,
-      offsetX: PAD - minCol * CELL_SIZE,
-      offsetY: PAD - minRow * CELL_SIZE,
+      offsetX: PAD - minCol * CELL_W,
+      offsetY: PAD - minRow * CELL_H,
     };
   }, [nodes.length, bounds]);
 
-  const toX = (col) => col * scale + offsetX + scale / 2;
-  const toY = (row) => row * scale + offsetY + scale / 2;
+  const toX = (col) => col * CELL_W + offsetX + CELL_W / 2;
+  const toY = (row) => row * CELL_H + offsetY + CELL_H / 2;
 
   return (
     <div style={minimapStyles.container}>
@@ -103,31 +94,35 @@ export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, ro
             y2={toY(to.row)}
             stroke={locked ? "#7a4040" : LINE_STROKE}
             strokeWidth={1.5}
-            strokeDasharray={locked ? "3 2" : undefined}
+            strokeDasharray={locked ? "4 3" : undefined}
           />
         ))}
         {nodes.map(({ id, row, col, name }) => {
           const isCurrent = id === currentRoomId;
           return (
             <g key={id}>
-              <circle
-                cx={toX(col)}
-                cy={toY(row)}
-                r={NODE_R}
+              <rect
+                x={toX(col) - RECT_W / 2}
+                y={toY(row) - RECT_H / 2}
+                width={RECT_W}
+                height={RECT_H}
+                rx={4}
+                ry={4}
                 fill={isCurrent ? CURRENT_FILL : VISITED_FILL}
                 stroke={isCurrent ? CURRENT_STROKE : VISITED_STROKE}
-                strokeWidth={isCurrent ? 2.5 : 1}
+                strokeWidth={isCurrent ? 2 : 1}
               />
               <text
                 x={toX(col)}
-                y={toY(row) + NODE_R + 9}
+                y={toY(row) + 1}
                 textAnchor="middle"
+                dominantBaseline="central"
                 fill={isCurrent ? LABEL_FILL_CURRENT : LABEL_FILL}
-                fontSize={7}
+                fontSize={8}
                 fontFamily="'Courier New', monospace"
                 fontWeight={isCurrent ? "bold" : "normal"}
               >
-                {abbreviate(name)}
+                {name}
               </text>
             </g>
           );

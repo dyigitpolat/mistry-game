@@ -31,6 +31,7 @@ export default function InteractionPanel({
         ...panelStyles.floating,
         left: panelPos.left,
         top: panelPos.top,
+        transform: panelPos.anchor === "below" ? "translateX(-50%)" : "translate(-50%, -100%)",
       }}
     >
       <div style={panelStyles.title}>

@@ -11,13 +11,17 @@ import Legend from "./components/Legend.jsx";
 import Minimap from "./components/Minimap.jsx";
 
 function getPanelPos(selectedObj, canvasRef) {
-  if (!selectedObj || !canvasRef?.current) return { left: 0, top: 0 };
+  if (!selectedObj || !canvasRef?.current) return { left: 0, top: 0, anchor: "above" };
   const rect = canvasRef.current.getBoundingClientRect();
   const sx = rect.width / CANVAS_W;
   const sy = rect.height / CANVAS_H;
+  const objTopPx = selectedObj.y * TILE;
+  const objBottomPx = (selectedObj.y + Math.max(selectedObj.h ?? 1, 1)) * TILE;
+  const inUpperHalf = objTopPx < CANVAS_H / 2;
   return {
     left: (selectedObj.x + Math.max(selectedObj.w ?? 1, 1) / 2) * TILE * sx,
-    top: selectedObj.y * TILE * sy - 8,
+    top: inUpperHalf ? objBottomPx * sy + 8 : objTopPx * sy - 8,
+    anchor: inUpperHalf ? "below" : "above",
   };
 }
 

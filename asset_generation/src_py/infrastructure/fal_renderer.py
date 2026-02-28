@@ -7,6 +7,8 @@ import os
 from collections import OrderedDict
 from typing import Any
 
+import httpx
+
 from src_py.application.ports import RendererPort
 from src_py.domain.rendering import (
     ArtifactType,
@@ -22,20 +24,37 @@ PIXEL_ART_PROMPT_PREFIX = (
     "white background, centered subject, no text, no watermark."
 )
 
+FAL_ENDPOINT = "https://fal.run/fal-ai/nano-banana-2"
 
-class HfRenderer(RendererPort):
+
+class FalRenderer(RendererPort):
     def __init__(self) -> None:
         self._prompt_cache: OrderedDict[str, bytes] = OrderedDict()
         self._cache_lock: asyncio.Lock | None = None
-        self._cache_max = max(0, int(os.getenv("ASSET_HF_PROMPT_CACHE_SIZE", "256")))
-        self._clients: dict[str, Any] = {}
+        self._cache_max = max(0, int(os.getenv("ASSET_FAL_PROMPT_CACHE_SIZE", "256")))
+        self._client: httpx.AsyncClient | None = None
+
+    def _get_client(self) -> httpx.AsyncClient:
+        if self._client is None or self._client.is_closed:
+            token = os.getenv("FAL_API_KEY") or os.getenv("FAL_KEY")
+            if not token:
+                raise RuntimeError("FAL_API_KEY is not set in .env")
+            timeout = float(os.getenv("ASSET_FAL_TIMEOUT_SECONDS", "120"))
+            self._client = httpx.AsyncClient(
+                headers={
+                    "Authorization": f"Key {token}",
+                    "Content-Type": "application/json",
+                },
+                timeout=httpx.Timeout(timeout, connect=30.0),
+            )
+        return self._client
 
     async def render(self, request: RenderRequest, profile: RenderProfile) -> RenderArtifact:
         if request.target_format is not RenderTargetFormat.PNG:
             raise RuntimeError(
-                f"Unsupported target_format={request.target_format.value}. Current renderer supports only PNG."
+                f"Unsupported target_format={request.target_format.value}. Only PNG is supported."
             )
-        image = await self._generate_pil_image(_build_single_prompt(request), profile)
+        image = await self._generate_pil_image(_build_single_prompt(request))
         generated_size = image.size
         generated_b64 = _png_to_base64(image)
         image = await self._remove_background(image)
@@ -43,9 +62,9 @@ class HfRenderer(RendererPort):
         processed_size = image.size
         payload_b64 = _png_to_base64(image)
         _validate_png_base64(payload_b64)
-        metadata = {
-            "provider": profile.provider,
-            "model": profile.model,
+        metadata: dict[str, Any] = {
+            "provider": "fal-ai",
+            "model": "nano-banana-2",
             "style_profile": profile.style_profile,
             "state": request.state,
             "target_format": request.target_format.value,
@@ -74,13 +93,12 @@ class HfRenderer(RendererPort):
     ) -> dict[str, RenderArtifact]:
         if request.target_format is not RenderTargetFormat.PNG:
             raise RuntimeError(
-                f"Unsupported target_format={request.target_format.value}. Current renderer supports only PNG."
+                f"Unsupported target_format={request.target_format.value}. Only PNG is supported."
             )
         states = list(request.states.keys())
         if len(states) == 0:
             raise RuntimeError("Variant request has no states")
 
-        # Generate only alive humans; derive dead as alpha silhouette.
         if (
             request.subject_type.value == "world_person"
             and "alive" in request.states
@@ -93,7 +111,7 @@ class HfRenderer(RendererPort):
                 f"{alive_desc}. "
                 "single version only."
             )
-            alive_img = await self._generate_pil_image(alive_prompt, profile)
+            alive_img = await self._generate_pil_image(alive_prompt)
             alive_img = await self._remove_background(alive_img)
             alive_img = await self._trim_to_visible_bounds(alive_img)
             dead_img = await self._dead_silhouette_from_alive(alive_img)
@@ -101,20 +119,20 @@ class HfRenderer(RendererPort):
             dead_b64 = _png_to_base64(dead_img)
             _validate_png_base64(alive_b64)
             _validate_png_base64(dead_b64)
+            meta_base: dict[str, Any] = {
+                "provider": "fal-ai",
+                "model": "nano-banana-2",
+                "style_profile": profile.style_profile,
+                "target_format": request.target_format.value,
+                **request.metadata,
+            }
             return {
                 request.build_key("alive"): RenderArtifact(
                     key=request.build_key("alive"),
                     artifact_type=ArtifactType.RASTER,
                     mime_type="image/png",
                     content=alive_b64,
-                    metadata={
-                        "provider": profile.provider,
-                        "model": profile.model,
-                        "style_profile": profile.style_profile,
-                        "state": "alive",
-                        "target_format": request.target_format.value,
-                        **request.metadata,
-                    },
+                    metadata={**meta_base, "state": "alive"},
                     version=profile.version,
                 ),
                 request.build_key("dead"): RenderArtifact(
@@ -122,26 +140,18 @@ class HfRenderer(RendererPort):
                     artifact_type=ArtifactType.RASTER,
                     mime_type="image/png",
                     content=dead_b64,
-                    metadata={
-                        "provider": profile.provider,
-                        "model": profile.model,
-                        "style_profile": profile.style_profile,
-                        "state": "dead",
-                        "derived_from": "alive_alpha_silhouette",
-                        "target_format": request.target_format.value,
-                        **request.metadata,
-                    },
+                    metadata={**meta_base, "state": "dead", "derived_from": "alive_alpha_silhouette"},
                     version=profile.version,
                 ),
             }
 
         strip_prompt = _build_variant_strip_prompt(request)
-        strip_image = await self._generate_pil_image(strip_prompt, profile)
+        strip_image = await self._generate_pil_image(strip_prompt)
         crops = _split_horizontal(strip_image, len(states))
         if len(crops) != len(states):
             raise RuntimeError("State strip crop failed: crop count does not match state count")
 
-        async def process_one(state: str, crop):
+        async def process_one(state: str, crop: Any) -> tuple[str, RenderArtifact]:
             generated_crop_b64 = _png_to_base64(crop)
             fg = await self._remove_background(crop)
             fg = await self._trim_to_visible_bounds(fg)
@@ -149,8 +159,8 @@ class HfRenderer(RendererPort):
             _validate_png_base64(payload_b64)
             key = request.build_key(state)
             metadata: dict[str, Any] = {
-                "provider": profile.provider,
-                "model": profile.model,
+                "provider": "fal-ai",
+                "model": "nano-banana-2",
                 "style_profile": profile.style_profile,
                 "state": state,
                 "target_format": request.target_format.value,
@@ -173,103 +183,103 @@ class HfRenderer(RendererPort):
                 version=profile.version,
             )
 
-        pairs = await asyncio.gather(*(process_one(state, crop) for state, crop in zip(states, crops)))
-        artifacts: dict[str, RenderArtifact] = {key: artifact for key, artifact in pairs}
-        return artifacts
+        pairs = await asyncio.gather(*(process_one(s, c) for s, c in zip(states, crops)))
+        return {key: artifact for key, artifact in pairs}
 
-    def _get_client(self, profile: RenderProfile):
-        token = os.getenv("HF_TOKEN")
-        if not token:
-            raise RuntimeError("HF_TOKEN is not set")
-        client_key = f"{profile.provider}|{token}"
-        if client_key not in self._clients:
-            try:
-                from huggingface_hub import InferenceClient
-            except Exception as exc:
-                raise RuntimeError("huggingface_hub is not available") from exc
-            timeout_seconds = float(os.getenv("ASSET_HF_TIMEOUT_SECONDS", "180"))
-            self._clients[client_key] = InferenceClient(
-                provider=profile.provider, api_key=token, timeout=timeout_seconds,
-            )
-        return self._clients[client_key]
+    # ── Image generation via fal.ai HTTP API ──────────────────────────
 
-    async def _generate_pil_image(self, prompt: str, profile: RenderProfile):
-        fallback_chain = _build_fallback_chain(profile)
-        for chain_idx, (prov, mdl) in enumerate(fallback_chain):
-            result = await self._try_generate(prompt, profile, prov, mdl, chain_idx, len(fallback_chain))
-            if result is not None:
-                return result
-        raise RuntimeError(
-            f"All providers exhausted ({', '.join(p for p, _ in fallback_chain)}). "
-            "Image generation failed for every fallback."
-        )
-
-    async def _try_generate(
-        self, prompt: str, profile: RenderProfile, provider: str, model: str,
-        chain_idx: int, chain_len: int,
-    ):
-        fb_profile = profile.model_copy(update={"provider": provider, "model": model})
-        cache_key = f"{provider}|{model}|{prompt}"
+    async def _generate_pil_image(self, prompt: str) -> Any:
+        cache_key = f"fal|nano-banana-2|{prompt}"
         cached = await self._prompt_cache_get(cache_key)
         if cached is not None:
             return _image_from_png_bytes(cached)
 
-        client = self._get_client(fb_profile)
+        client = self._get_client()
+        resolution = os.getenv("ASSET_FAL_RESOLUTION", "0.5K")
+        safety = os.getenv("ASSET_FAL_SAFETY_TOLERANCE", "6")
+
+        payload = {
+            "prompt": prompt,
+            "num_images": 1,
+            "output_format": "png",
+            "resolution": resolution,
+            "aspect_ratio": "1:1",
+            "safety_tolerance": safety,
+            "limit_generations": True,
+        }
+
+        max_attempts = max(1, int(os.getenv("ASSET_FAL_MAX_RETRIES", "3")))
+        base_delay = max(0.5, float(os.getenv("ASSET_FAL_RETRY_BASE_DELAY", "2")))
         current_prompt = prompt
-        is_last_provider = chain_idx == chain_len - 1
 
-        max_attempts = max(1, int(os.getenv("ASSET_HF_MAX_RETRIES", "4")))
-        base_delay_seconds = max(0.5, float(os.getenv("ASSET_HF_RETRY_BASE_DELAY_SECONDS", "3")))
-
-        tag = f"[hf_renderer:{provider}/{model}]"
         last_error: Exception | None = None
         for attempt in range(1, max_attempts + 1):
             try:
-                def _run(p=current_prompt, c=client, m=model) -> Any:
-                    return c.text_to_image(p, model=m)
+                print(f"[fal_renderer] generate:start attempt={attempt}/{max_attempts}")
+                req_payload = {**payload, "prompt": current_prompt}
+                resp = await client.post(FAL_ENDPOINT, json=req_payload)
 
-                print(f"{tag} text_to_image:start attempt={attempt}/{max_attempts}")
-                image = await asyncio.to_thread(_run)
-                if image is None:
-                    raise RuntimeError("InferenceClient returned no image")
-                print(f"{tag} text_to_image:done attempt={attempt}/{max_attempts}")
+                if resp.status_code == 422:
+                    body = resp.text.lower()
+                    if "content_policy" in body or "content checker" in body:
+                        sanitized = _sanitize_prompt(current_prompt)
+                        if sanitized != current_prompt:
+                            print("[fal_renderer] content policy hit, retrying with sanitized prompt")
+                            current_prompt = sanitized
+                            continue
+                        print("[fal_renderer] content policy persists, returning placeholder")
+                        return _generate_placeholder_image()
+
+                resp.raise_for_status()
+                data = resp.json()
+                images = data.get("images", [])
+                if not images:
+                    raise RuntimeError("No images in fal.ai response")
+
+                image_url = images[0].get("url")
+                if not image_url:
+                    raise RuntimeError("No URL in fal.ai image response")
+
+                img_resp = await client.get(image_url)
+                img_resp.raise_for_status()
+
+                from PIL import Image as PILImage
+                image = PILImage.open(io.BytesIO(img_resp.content)).convert("RGBA")
+                print(f"[fal_renderer] generate:done attempt={attempt}/{max_attempts} size={image.size}")
                 await self._prompt_cache_set(cache_key, _image_to_png_bytes(image))
                 return image
-            except Exception as exc:
+
+            except httpx.HTTPStatusError as exc:
                 last_error = exc
-                print(f"{tag} text_to_image:error attempt={attempt}/{max_attempts} error={exc}")
-                if _is_content_policy_error(exc):
-                    sanitized = _sanitize_prompt(current_prompt)
-                    if sanitized != current_prompt:
-                        print(f"{tag} content policy violation, retrying with sanitized prompt")
-                        current_prompt = sanitized
-                        continue
-                    print(f"{tag} content policy violation persists, generating placeholder")
-                    return _generate_placeholder_image()
-                if _is_transient_timeout_error(exc) and attempt < max_attempts:
-                    delay = base_delay_seconds * (2 ** (attempt - 1))
-                    print(f"{tag} retrying in {delay:.1f}s")
+                status = exc.response.status_code
+                print(f"[fal_renderer] generate:error attempt={attempt}/{max_attempts} status={status} error={exc}")
+                if status in {408, 429, 500, 502, 503, 504} and attempt < max_attempts:
+                    delay = base_delay * (2 ** (attempt - 1))
+                    print(f"[fal_renderer] retrying in {delay:.1f}s")
                     await asyncio.sleep(delay)
                     continue
-                if _is_transient_timeout_error(exc) and not is_last_provider:
-                    print(f"{tag} exhausted retries, falling back to next provider")
-                    return None
-                if _is_transient_timeout_error(exc):
-                    raise RuntimeError(
-                        f"Image generation timed out on all providers after retries. "
-                        f"Last provider: {provider}/{model}."
-                    ) from exc
-                if not is_last_provider:
-                    print(f"{tag} non-transient error, falling back to next provider")
-                    return None
-                raise RuntimeError(f"HuggingFace image generation failed: {type(exc).__name__}: {exc}") from exc
+                raise RuntimeError(f"fal.ai image generation failed (HTTP {status}): {exc}") from exc
 
-        if not is_last_provider:
-            print(f"{tag} all attempts failed, trying next provider")
-            return None
-        raise RuntimeError(f"HuggingFace image generation failed: {last_error}")
+            except (httpx.TimeoutException, httpx.ConnectError) as exc:
+                last_error = exc
+                print(f"[fal_renderer] generate:timeout attempt={attempt}/{max_attempts} error={exc}")
+                if attempt < max_attempts:
+                    delay = base_delay * (2 ** (attempt - 1))
+                    print(f"[fal_renderer] retrying in {delay:.1f}s")
+                    await asyncio.sleep(delay)
+                    continue
+                raise RuntimeError(f"fal.ai image generation timed out after {max_attempts} attempts") from exc
 
-    async def _remove_background(self, image):
+            except Exception as exc:
+                last_error = exc
+                print(f"[fal_renderer] generate:error attempt={attempt}/{max_attempts} error={exc}")
+                raise RuntimeError(f"fal.ai image generation failed: {type(exc).__name__}: {exc}") from exc
+
+        raise RuntimeError(f"fal.ai image generation failed after {max_attempts} attempts: {last_error}")
+
+    # ── Post-processing (shared with old renderer) ────────────────────
+
+    async def _remove_background(self, image: Any) -> Any:
         def _run() -> Any:
             try:
                 from PIL import Image
@@ -280,7 +290,6 @@ class HfRenderer(RendererPort):
                     "Ensure `pillow`, `rembg`, and `onnxruntime` are installed in asset_generation/.venv. "
                     f"Original import error: {type(exc).__name__}: {exc}"
                 ) from exc
-
             buffer = io.BytesIO()
             image.save(buffer, format="PNG")
             fg_bytes = remove(buffer.getvalue())
@@ -289,25 +298,51 @@ class HfRenderer(RendererPort):
 
         return await asyncio.to_thread(_run)
 
-    async def _dead_silhouette_from_alive(self, image):
+    async def _dead_silhouette_from_alive(self, image: Any) -> Any:
         def _run() -> Any:
             try:
                 from PIL import Image
             except Exception as exc:
                 raise RuntimeError("Pillow is not available for dead-silhouette generation") from exc
-
             rgba = image.convert("RGBA")
             alpha = rgba.getchannel("A")
-            silhouette = Image.new("RGBA", rgba.size, (20, 20, 24, 0))
-            silhouette.putalpha(alpha)
-            # Subtle floor shadow for readability.
-            shadow = Image.new("RGBA", rgba.size, (0, 0, 0, 0))
-            shadow_alpha = alpha.point(lambda a: min(110, int(a * 0.55)))
-            shadow.putalpha(shadow_alpha)
-            out = Image.alpha_composite(shadow, silhouette)
+            scaled_alpha = alpha.point(lambda a: (a * a) // 255)
+            out = Image.new("RGBA", rgba.size, (0, 0, 0, 0))
+            out.putalpha(scaled_alpha)
             return out
 
         return await asyncio.to_thread(_run)
+
+    async def _trim_to_visible_bounds(self, image: Any) -> Any:
+        def _run() -> Any:
+            try:
+                from PIL import Image
+            except Exception as exc:
+                raise RuntimeError("Pillow is not available for alpha trimming") from exc
+            rgba = image.convert("RGBA")
+            alpha = rgba.getchannel("A")
+            bbox = alpha.getbbox()
+            if not bbox:
+                return rgba
+            pad = max(0, int(os.getenv("ASSET_ALPHA_CROP_PADDING_PX", "2")))
+            left, top, right, bottom = bbox
+            left = max(0, left - pad)
+            top = max(0, top - pad)
+            right = min(rgba.width, right + pad)
+            bottom = min(rgba.height, bottom + pad)
+            cropped = rgba.crop((left, top, right, bottom))
+            min_side = max(1, int(os.getenv("ASSET_MIN_TRIMMED_SIDE_PX", "16")))
+            if cropped.width < min_side or cropped.height < min_side:
+                canvas = Image.new("RGBA", (max(cropped.width, min_side), max(cropped.height, min_side)), (0, 0, 0, 0))
+                off_x = (canvas.width - cropped.width) // 2
+                off_y = (canvas.height - cropped.height) // 2
+                canvas.paste(cropped, (off_x, off_y))
+                return canvas
+            return cropped
+
+        return await asyncio.to_thread(_run)
+
+    # ── Prompt-level LRU cache ────────────────────────────────────────
 
     async def _prompt_cache_get(self, key: str) -> bytes | None:
         if self._cache_max <= 0:
@@ -331,43 +366,12 @@ class HfRenderer(RendererPort):
                 self._prompt_cache.popitem(last=False)
 
     def _get_cache_lock(self) -> asyncio.Lock:
-        # Lazily create the lock while an event loop is running.
-        # This avoids RuntimeError when the renderer is instantiated in a worker thread.
         if self._cache_lock is None:
             self._cache_lock = asyncio.Lock()
         return self._cache_lock
 
-    async def _trim_to_visible_bounds(self, image):
-        def _run() -> Any:
-            try:
-                from PIL import Image
-            except Exception as exc:
-                raise RuntimeError("Pillow is not available for alpha trimming") from exc
 
-            rgba = image.convert("RGBA")
-            alpha = rgba.getchannel("A")
-            bbox = alpha.getbbox()
-            if not bbox:
-                return rgba
-            pad = max(0, int(os.getenv("ASSET_ALPHA_CROP_PADDING_PX", "2")))
-            left, top, right, bottom = bbox
-            left = max(0, left - pad)
-            top = max(0, top - pad)
-            right = min(rgba.width, right + pad)
-            bottom = min(rgba.height, bottom + pad)
-            cropped = rgba.crop((left, top, right, bottom))
-
-            min_side = max(1, int(os.getenv("ASSET_MIN_TRIMMED_SIDE_PX", "16")))
-            if cropped.width < min_side or cropped.height < min_side:
-                canvas = Image.new("RGBA", (max(cropped.width, min_side), max(cropped.height, min_side)), (0, 0, 0, 0))
-                off_x = (canvas.width - cropped.width) // 2
-                off_y = (canvas.height - cropped.height) // 2
-                canvas.paste(cropped, (off_x, off_y))
-                return canvas
-            return cropped
-
-        return await asyncio.to_thread(_run)
-
+# ── Prompt builders ───────────────────────────────────────────────────
 
 def _build_single_prompt(request: RenderRequest) -> str:
     person_hint = ""
@@ -403,7 +407,9 @@ def _build_variant_strip_prompt(request: RenderVariantRequest) -> str:
     )
 
 
-def _split_horizontal(image, parts: int):
+# ── Utilities ─────────────────────────────────────────────────────────
+
+def _split_horizontal(image: Any, parts: int) -> list[Any]:
     if parts <= 0:
         return []
     width, height = image.size
@@ -418,7 +424,7 @@ def _split_horizontal(image, parts: int):
     return out
 
 
-def _png_to_base64(image) -> str:
+def _png_to_base64(image: Any) -> str:
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
     return base64.b64encode(buffer.getvalue()).decode("utf-8")
@@ -435,86 +441,6 @@ def _validate_png_base64(payload_b64: str) -> None:
 
 def _debug_images_enabled() -> bool:
     return os.getenv("ASSET_INCLUDE_DEBUG_IMAGES", "").lower() in {"1", "true", "yes", "on"}
-
-
-_FALLBACK_PROVIDERS: list[tuple[str, str]] = [
-    ("fal-ai", "Qwen/Qwen-Image"),
-    ("hf-inference", "black-forest-labs/FLUX.1-schnell"),
-    ("nscale", "black-forest-labs/FLUX.1-schnell"),
-    ("replicate", "black-forest-labs/FLUX.1-schnell"),
-]
-
-
-def _build_fallback_chain(profile: RenderProfile) -> list[tuple[str, str]]:
-    env_chain = os.getenv("ASSET_PROVIDER_CHAIN")
-    if env_chain:
-        entries: list[tuple[str, str]] = []
-        for part in env_chain.split(","):
-            part = part.strip()
-            if "/" in part:
-                prov, mdl = part.split("/", 1)
-                entries.append((prov.strip(), mdl.strip()))
-            else:
-                entries.append((part, profile.model))
-        return entries if entries else [(profile.provider, profile.model)]
-
-    primary = (profile.provider, profile.model)
-    chain = [primary]
-    for fb in _FALLBACK_PROVIDERS:
-        if fb != primary:
-            chain.append(fb)
-    return chain
-
-
-def _is_transient_timeout_error(exc: Exception) -> bool:
-    status_code = getattr(getattr(exc, "response", None), "status_code", None)
-    if status_code in {408, 429, 500, 502, 503, 504}:
-        return True
-    msg = str(exc).lower()
-    timeout_markers = (
-        "gateway time-out",
-        "gateway timeout",
-        "readtimeout",
-        "timed out",
-        "temporarily unavailable",
-    )
-    return any(marker in msg for marker in timeout_markers)
-
-
-def _is_content_policy_error(exc: Exception) -> bool:
-    status_code = getattr(getattr(exc, "response", None), "status_code", None)
-    if status_code == 422:
-        msg = str(exc).lower()
-        return "content_policy" in msg or "content checker" in msg
-    return False
-
-
-def _sanitize_prompt(prompt: str) -> str:
-    """Strip the original description from the prompt, keeping only the pixel-art prefix and structure."""
-    if PIXEL_ART_PROMPT_PREFIX in prompt:
-        return (
-            f"{PIXEL_ART_PROMPT_PREFIX} "
-            "Small decorative household object, simple and harmless. "
-            "single version only."
-        )
-    return (
-        f"{PIXEL_ART_PROMPT_PREFIX} "
-        "Simple pixel art object, neutral colors. "
-        "single version only."
-    )
-
-
-def _generate_placeholder_image():
-    """Return a minimal placeholder PIL Image when generation is impossible."""
-    try:
-        from PIL import Image, ImageDraw
-    except Exception as exc:
-        raise RuntimeError("Pillow is not available for placeholder generation") from exc
-    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(img)
-    draw.rounded_rectangle([8, 8, 56, 56], radius=6, fill=(60, 55, 80, 180), outline=(90, 82, 117, 220), width=2)
-    draw.text((22, 24), "?", fill=(200, 190, 220, 220))
-    return img
 
 
 def _debug_payload(
@@ -535,13 +461,38 @@ def _debug_payload(
     }
 
 
-def _image_to_png_bytes(image) -> bytes:
+def _image_to_png_bytes(image: Any) -> bytes:
     buf = io.BytesIO()
     image.save(buf, format="PNG")
     return buf.getvalue()
 
 
-def _image_from_png_bytes(raw: bytes):
+def _image_from_png_bytes(raw: bytes) -> Any:
     from PIL import Image
-
     return Image.open(io.BytesIO(raw)).convert("RGBA")
+
+
+def _sanitize_prompt(prompt: str) -> str:
+    if PIXEL_ART_PROMPT_PREFIX in prompt:
+        return (
+            f"{PIXEL_ART_PROMPT_PREFIX} "
+            "Large decorative household object, simple and harmless. "
+            "single version only."
+        )
+    return (
+        f"{PIXEL_ART_PROMPT_PREFIX} "
+        "Simple pixel art object, neutral colors. "
+        "single version only."
+    )
+
+
+def _generate_placeholder_image() -> Any:
+    try:
+        from PIL import Image, ImageDraw
+    except Exception as exc:
+        raise RuntimeError("Pillow is not available for placeholder generation") from exc
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    draw.rounded_rectangle([8, 8, 56, 56], radius=6, fill=(60, 55, 80, 180), outline=(90, 82, 117, 220), width=2)
+    draw.text((22, 24), "?", fill=(200, 190, 220, 220))
+    return img

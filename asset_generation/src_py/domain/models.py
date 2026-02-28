@@ -10,6 +10,7 @@ class ObjectCategory(str, Enum):
     SURFACE = "surface"
     CONTAINER = "container"
     ITEM = "item"
+    DECORATION = "decoration"
 
 
 class ContainerState(str, Enum):
@@ -75,6 +76,11 @@ class GameObject(BaseModel):
         elif self.category is ObjectCategory.CONTAINER:
             if self.state is None:
                 raise ValueError("containers must define state")
+        elif self.category is ObjectCategory.DECORATION:
+            if self.state is not None:
+                raise ValueError("decorations cannot define state")
+            if self.contains:
+                raise ValueError("decorations cannot contain nested objects")
         return self
 
 

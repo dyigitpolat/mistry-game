@@ -27,6 +27,8 @@ def visual_state_for_object(category: ObjectCategory, state: ContainerState | No
 def object_view_box(category: ObjectCategory) -> ViewBox:
     if category in (ObjectCategory.SURFACE, ObjectCategory.CONTAINER):
         return ViewBox(w=120, h=120)
+    if category is ObjectCategory.DECORATION:
+        return ViewBox(w=60, h=60)
     return ViewBox(w=40, h=40)
 
 

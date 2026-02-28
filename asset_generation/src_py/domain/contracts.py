@@ -50,6 +50,18 @@ class RenderBatchResponse(BaseModel):
     diagnostics: Diagnostics
 
 
+class DecorationItem(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: str
+    name: str
+    description: str
+    x: int = 0
+    y: int = 0
+    w: int = 1
+    h: int = 1
+
+
 class WorldResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -59,6 +71,7 @@ class WorldResponse(BaseModel):
     placement: Placement
     artifacts: dict[str, RenderArtifact]
     moods: dict[str, RoomMood] = Field(default_factory=dict)
+    decorations: dict[str, list[DecorationItem]] = Field(default_factory=dict)
     cache_manifest: CacheManifest
     diagnostics: Diagnostics
 

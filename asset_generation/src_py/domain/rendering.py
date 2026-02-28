@@ -31,12 +31,17 @@ class ViewBox(BaseModel):
     h: int = Field(gt=0)
 
 
+def _env(key: str, default: str) -> str:
+    import os
+    return os.getenv(key, default)
+
+
 class RenderProfile(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     style_profile: str = "clean-minimal"
-    provider: str = "fal-ai"
-    model: str = "Qwen/Qwen-Image"
+    provider: str = Field(default_factory=lambda: _env("ASSET_PROVIDER", "fal-ai"))
+    model: str = Field(default_factory=lambda: _env("ASSET_MODEL", "fal-ai/nano-banana-2"))
     temperature: float = 0.2
     version: str = "v1"
 
@@ -87,6 +92,23 @@ class RenderVariantRequest(BaseModel):
 
     def build_key(self, state: str) -> str:
         return self.key_template.format(state=state)
+
+    def fingerprint(self, profile: "RenderProfile") -> str:
+        basis = "|".join(
+            [
+                self.subject_type.value,
+                self.subject_id,
+                str(sorted(self.states.items())),
+                self.target_format.value,
+                str(self.view_box.model_dump() if self.view_box else None),
+                str(sorted(self.constraints.items())),
+                profile.provider,
+                profile.model,
+                profile.style_profile,
+                profile.version,
+            ]
+        )
+        return hashlib.sha256(basis.encode("utf-8")).hexdigest()
 
 
 class RenderArtifact(BaseModel):
