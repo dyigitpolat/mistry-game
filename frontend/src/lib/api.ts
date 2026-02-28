@@ -86,6 +86,7 @@ export interface ScenarioSummary {
   progress_percent?: number;
   is_complete?: boolean;
   last_played_at?: string;
+  global_clear_rate?: number;
 }
 
 export interface Phase {
@@ -153,6 +154,59 @@ export interface Comment {
   created_at: string;
 }
 
+export interface UserCaseHistoryEntry {
+  scenario_id: string;
+  scenario_title: string;
+  outcome: string;
+  rank: string;
+  elapsed_minutes: number;
+  clues_found: number;
+  total_clues: number;
+  solved_at: string;
+}
+
+export interface Badge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  unlocked: boolean;
+  unlocked_at?: string;
+}
+
+export interface UserProfileStats {
+  name: string;
+  id: string;
+  title: string;
+  elo: number;
+  cases_solved: number;
+  field_time_hours: number;
+  avg_accuracy: number;
+  case_history: UserCaseHistoryEntry[];
+  badges: Badge[];
+  skills: { [key: string]: number };
+}
+
+export interface FriendActivity {
+  user_name: string;
+  user_image?: string;
+  action: string;
+  scenario_title: string;
+  time_ago: string;
+  timestamp: string;
+}
+
+export interface GlobalLeaderboardEntry {
+  user_id: string;
+  user_name: string;
+  user_image?: string;
+  cases_solved: number;
+  total_time_mins: number;
+  elo: number;
+  rank_title: string;
+}
+
+// ── API Functions ────────────────────────────────────────────────
 // ── API Functions ────────────────────────────────────────────────
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
@@ -289,4 +343,20 @@ export async function postInteraction(scenarioId: string, type: "like" | "commen
         method: "POST",
         body: JSON.stringify({ type, content })
     });
+}
+
+export async function getUserProfileStats(): Promise<UserProfileStats> {
+    return apiFetch("/profile/stats");
+}
+
+export async function getFriendActivity(): Promise<FriendActivity[]> {
+    return apiFetch("/profile/friends/activity");
+}
+
+export async function getGlobalLeaderboard(): Promise<GlobalLeaderboardEntry[]> {
+    return apiFetch("/stats/leaderboard/global");
+}
+
+export async function getFriendsLeaderboard(): Promise<GlobalLeaderboardEntry[]> {
+    return apiFetch("/stats/leaderboard/friends");
 }

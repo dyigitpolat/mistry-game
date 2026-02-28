@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import AppHeader from "@/components/AppHeader";
 import CaseCard from "@/components/CaseCard";
 import { listScenarios, type ScenarioSummary } from "@/lib/api";
@@ -8,14 +8,17 @@ import { listScenarios, type ScenarioSummary } from "@/lib/api";
 export default function HomePage() {
   const [scenarios, setScenarios] = useState<ScenarioSummary[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false); // Added error state
 
   useEffect(() => {
     async function load() {
       try {
         const data = await listScenarios();
         setScenarios(data);
-      } catch {
-        // Fallback: show demo data
+      } catch (e) {
+        console.error("Failed to load scenarios:", e);
+        setError(true);
+        // Fallback: show demo data if API fails and we don't want to show an error page
         setScenarios([
           {
             id: "the_crooked_man",
@@ -36,6 +39,17 @@ export default function HomePage() {
   const activeCases = scenarios.filter(s => s.progress_percent && s.progress_percent > 0 && !s.is_complete);
   const availableCases = scenarios.filter(s => !activeCases.includes(s));
   const featured = scenarios[0];
+
+  const groupedCases = useMemo(() => {
+    const groups: Record<string, typeof availableCases> = {};
+    for (const c of availableCases) {
+      const author = c.author || "Other Mysteries";
+      if (!groups[author]) groups[author] = [];
+      groups[author].push(c);
+    }
+    // Sort authors alphabetically
+    return Object.entries(groups).sort((a, b) => a[0].localeCompare(b[0]));
+  }, [availableCases]);
 
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden bg-background-dark text-slate-100 font-display">
@@ -110,6 +124,8 @@ export default function HomePage() {
                       progressPercent={s.progress_percent}
                       isComplete={s.is_complete}
                       author={`${s.phase_count} phases`}
+                      solvedPercent={s.global_clear_rate}
+                      imageUrl={`/scenes/${s.id}_hero.png`}
                     />
                   ))}
                 </div>
@@ -140,18 +156,30 @@ export default function HomePage() {
                     </div>
                   ))
                 ) : (
-                  availableCases.map((s) => (
-                    <CaseCard
-                      key={s.id}
-                      id={s.id}
-                      title={s.title}
-                      description={s.description}
-                      difficulty={s.difficulty}
-                      progressPercent={s.progress_percent}
-                      isComplete={s.is_complete}
-                      author={`${s.phase_count} phases`}
-                    />
-                  ))
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-col gap-10">
+                    {groupedCases.map(([author, cases]) => (
+                      <div key={author} className="space-y-4">
+                        <h3 className="text-2xl font-semibold text-slate-200 border-b border-white/10 pb-2">
+                          {author}
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                          {cases.map((s) => (
+                            <CaseCard
+                              key={s.id}
+                              id={s.id}
+                              title={s.title}
+                              description={s.description}
+                              difficulty={s.difficulty}
+                              progressPercent={s.progress_percent}
+                              isComplete={s.is_complete}
+                              author={`${s.phase_count} phases`}
+                              imageUrl={`/scenes/${s.id}_hero.png`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
             </div>

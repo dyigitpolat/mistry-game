@@ -24,3 +24,10 @@ class DBInteraction(BaseModel):
     type: str # "like" or "comment"
     content: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class DBFriendship(BaseModel):
+    id: str = Field(alias="_id")
+    user_id: str
+    friend_id: str
+    status: str = "accepted" # "pending", "accepted"
+    created_at: datetime = Field(default_factory=datetime.utcnow)

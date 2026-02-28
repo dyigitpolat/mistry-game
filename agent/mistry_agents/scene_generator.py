@@ -24,7 +24,9 @@ class SceneGenerator:
     to generate atmospheric scene images for game locations.
     """
 
-    def __init__(self, output_dir: str = "/tmp/mistry-scenes"):
+    def __init__(self, output_dir: str = None):
+        if output_dir is None:
+            output_dir = str(Path(__file__).parent.parent.parent / "backend" / "data" / "scenes")
         self.client = genai.Client(
             api_key=os.environ.get("GEMINI_API_KEY"),
         )
@@ -71,6 +73,13 @@ class SceneGenerator:
         """
         Generate a scene image from visual metadata.
         """
+        safe_name = location_name.lower().replace(" ", "_").replace("'", "").replace("/", "_").replace("\\", "_")
+        expected_file_name = f"{scenario_id}_{safe_name}.png"
+        expected_file_path = self.output_dir / expected_file_name
+        
+        if expected_file_path.exists():
+            return str(expected_file_path)
+            
         prompt = self._build_prompt(visual_metadata, location_name)
 
         try:
@@ -109,7 +118,7 @@ class SceneGenerator:
                         data_buffer = inline_data.data
                         file_extension = mimetypes.guess_extension(inline_data.mime_type) or ".png"
 
-                        safe_name = location_name.lower().replace(" ", "_").replace("'", "")
+                        safe_name = location_name.lower().replace(" ", "_").replace("'", "").replace("/", "_").replace("\\", "_")
                         file_name = f"{scenario_id}_{safe_name}{file_extension}"
                         file_path = self.output_dir / file_name
 

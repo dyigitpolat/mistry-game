@@ -30,25 +30,43 @@ class ScenarioSummary(BaseModel):
     progress_percent: float = 0.0
     is_complete: bool = False
     last_played_at: Optional[datetime] = None
+    global_clear_rate: float = 0.0
 
 
 @router.get("/", response_model=List[ScenarioSummary])
 async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_user_optional)):
     """List all available scenarios for the case gallery, factoring in progress if logged in."""
+    db = await get_database()
     summaries = []
     
-    # If the user is logged in, find all their active game sessions
+    # 1. Fetch Global Clear Rates
+    # We aggregate solves per scenario
+    global_stats = {}
+    if db is not None:
+        pipeline = [
+            {"$group": {
+                "_id": "$scenario_id",
+                "total_plays": {"$sum": 1},
+                "clears": {"$sum": {"$cond": [{"$and": [{"$eq": ["$is_complete", True]}, {"$eq": ["$outcome", "solved"]}]}, 1, 0]}}
+            }}
+        ]
+        cursor = db["game_sessions"].aggregate(pipeline)
+        async for doc in cursor:
+            sid = doc["_id"]
+            total = doc["total_plays"]
+            clears = doc["clears"]
+            global_stats[sid] = round((clears / total) * 100) if total > 0 else 0.0
+
+    # 2. If the user is logged in, find all their active game sessions
     user_sessions = {}
-    if user:
-        db = await get_database()
-        if db is not None:
-            # Query the latest session per scenario
-            cursor = db["sessions"].find({"user_id": user["id"]}).sort("updated_at", -1)
-            async for doc in cursor:
-                sid = doc.get("scenario_id")
-                # Store the most recent session we see for each scenario
-                if sid not in user_sessions:
-                    user_sessions[sid] = doc
+    if user and db is not None:
+        # Query the latest session per scenario
+        cursor = db["game_sessions"].find({"user_id": user["id"]}).sort("updated_at", -1)
+        async for doc in cursor:
+            sid = doc.get("scenario_id")
+            # Store the most recent session we see for each scenario
+            if sid not in user_sessions:
+                user_sessions[sid] = doc
 
     for sid, scenario in _engine.scenarios.items():
         summary = ScenarioSummary(
@@ -59,6 +77,7 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
             victim=scenario.victim,
             difficulty=getattr(scenario, 'difficulty', 'medium') or 'medium',
             phase_count=len(scenario.phases),
+            global_clear_rate=global_stats.get(sid, 0.0)
         )
 
         # Attach progress if a session exists
