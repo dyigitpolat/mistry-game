@@ -207,4 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # Node (ui app)
-node_modules/
+*/node_modules/
