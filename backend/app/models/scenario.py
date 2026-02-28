@@ -121,6 +121,7 @@ class ScenarioDifficulty(str, Enum):
 class Scenario(BaseModel):
     """The root Knowledge Graph object."""
     title: str
+    author: str = Field("", description="Author of the scenario.")
     description: str = Field("", description="Short non-spoiler description.")
     victim: str
     intro_narrative: str
