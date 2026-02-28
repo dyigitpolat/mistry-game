@@ -357,3 +357,11 @@ export async function publishScenario(
         method: "POST",
     });
 }
+
+export async function unpublishScenario(
+    scenarioId: string
+): Promise<{ status: string; scenario_id: string; visibility: string }> {
+    return apiFetch(`/scenarios/${scenarioId}/unpublish`, {
+        method: "POST",
+    });
+}

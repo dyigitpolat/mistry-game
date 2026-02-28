@@ -132,43 +132,55 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
     return summaries
 
 
-@router.post("/{scenario_id}/publish")
-async def publish_scenario(
-    scenario_id: str,
-    user: Dict[str, Any] = Depends(get_current_user),
-):
-    """
-    Publish a private scenario (make it public).
-    Only the owner can publish their own scenario.
-    """
+async def _set_visibility(scenario_id: str, user: Dict[str, Any], target: str):
+    """Shared helper to change a scenario's visibility. Only the owner can do this."""
+    from app.models.scenario import ScenarioVisibility
+
     scenario = _engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
     user_name = await _resolve_user_name(user["id"])
     if not _check_ownership(scenario, user["id"], user_name):
-        raise HTTPException(status_code=403, detail="You can only publish your own scenarios.")
+        raise HTTPException(status_code=403, detail="Only the owner can change visibility.")
 
-    if scenario.visibility.value == "public":
-        raise HTTPException(status_code=400, detail="Scenario is already public.")
+    if scenario.visibility.value == target:
+        raise HTTPException(status_code=400, detail=f"Scenario is already {target}.")
 
-    from app.models.scenario import ScenarioVisibility
-    scenario.visibility = ScenarioVisibility.PUBLIC
+    scenario.visibility = ScenarioVisibility(target)
 
     db = await get_database()
     if db is not None:
         await db["scenarios"].update_one(
             {"_id": scenario_id},
-            {"$set": {"visibility": "public"}},
+            {"$set": {"visibility": target}},
         )
 
     persist_path = Path(__file__).parent.parent.parent / "data" / f"{scenario_id}.json"
     if persist_path.exists():
         data = json.loads(persist_path.read_text(encoding="utf-8"))
-        data["visibility"] = "public"
+        data["visibility"] = target
         persist_path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    return {"status": "published", "scenario_id": scenario_id, "visibility": "public"}
+    return {"status": target, "scenario_id": scenario_id, "visibility": target}
+
+
+@router.post("/{scenario_id}/publish")
+async def publish_scenario(
+    scenario_id: str,
+    user: Dict[str, Any] = Depends(get_current_user),
+):
+    """Make a private scenario public. Only the owner can do this."""
+    return await _set_visibility(scenario_id, user, "public")
+
+
+@router.post("/{scenario_id}/unpublish")
+async def unpublish_scenario(
+    scenario_id: str,
+    user: Dict[str, Any] = Depends(get_current_user),
+):
+    """Make a public scenario private again. Only the owner can do this."""
+    return await _set_visibility(scenario_id, user, "private")
 
 
 @router.get("/{scenario_id}")

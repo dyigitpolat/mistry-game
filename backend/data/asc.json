@@ -1,6 +1,8 @@
 {
   "title": "asc",
   "author": "AI Weaver",
+  "owner_name": "Unknown",
+  "visibility": "private",
   "description": "sasc",
   "victim": "Mr. Harlan Sykes",
   "intro_narrative": "In soot-stained x, Inspector Evelyn Harrow and Constable Thomas Wren are drawn into a death at sdv—a cramped lodging house where the signs of burglary feel theatrically arranged. Ink, wax, and a physician’s needle form a trail through taverns, printworks, and church vestries toward a single set of initials: asc.",
@@ -670,7 +672,5 @@
   },
   "difficulty": "medium",
   "owner_id": "69a305adabb72dc52f9ac539",
-  "owner_name": "Unknown",
-  "visibility": "public",
   "_id": "asc"
 }

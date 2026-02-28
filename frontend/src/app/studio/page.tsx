@@ -7,6 +7,7 @@ import AppHeader from "@/components/AppHeader";
 import {
   listScenarios,
   publishScenario,
+  unpublishScenario,
   type ScenarioSummary,
 } from "@/lib/api";
 
@@ -77,7 +78,7 @@ export default function StudioDashboardPage() {
     loadScenarios();
   }, [loadScenarios]);
 
-  const myProjects = allScenarios.filter((s) => s.is_own && s.visibility === "private");
+  const myProjects = allScenarios.filter((s) => s.is_own);
 
   const filteredProjects = sidebarSearch
     ? myProjects.filter((s) =>
@@ -85,12 +86,19 @@ export default function StudioDashboardPage() {
       )
     : myProjects;
 
-  const handlePublish = async (scenarioId: string) => {
+  const handleToggleVisibility = async (
+    scenarioId: string,
+    currentVisibility: string
+  ) => {
     try {
-      await publishScenario(scenarioId);
+      if (currentVisibility === "private") {
+        await publishScenario(scenarioId);
+      } else {
+        await unpublishScenario(scenarioId);
+      }
       await loadScenarios();
     } catch (err) {
-      console.error("Failed to publish:", err);
+      console.error("Failed to change visibility:", err);
     }
   };
 
@@ -234,7 +242,8 @@ export default function StudioDashboardPage() {
               </h2>
               {filteredProjects.length > 0 && (
                 <span className="text-slate-500 text-sm">
-                  {filteredProjects.length} project{filteredProjects.length !== 1 ? "s" : ""}
+                  {filteredProjects.length} project
+                  {filteredProjects.length !== 1 ? "s" : ""}
                 </span>
               )}
             </div>
@@ -289,7 +298,7 @@ export default function StudioDashboardPage() {
                   <StudioProjectCard
                     key={project.id}
                     project={project}
-                    onPublish={handlePublish}
+                    onToggleVisibility={handleToggleVisibility}
                   />
                 ))}
               </div>
@@ -303,16 +312,16 @@ export default function StudioDashboardPage() {
 
 function StudioProjectCard({
   project,
-  onPublish,
+  onToggleVisibility,
 }: {
   project: ProjectCard;
-  onPublish: (id: string) => void;
+  onToggleVisibility: (id: string, currentVisibility: string) => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [publishing, setPublishing] = useState(false);
+  const [toggling, setToggling] = useState(false);
   const visibility = (project.visibility || "public") as Visibility;
   const visCfg = VISIBILITY_CONFIG[visibility];
-  const canEdit = visibility === "private";
+  const isPrivate = visibility === "private";
 
   const completionColor =
     project.completion >= 100
@@ -328,12 +337,12 @@ function StudioProjectCard({
     private: "bg-purple-500/10 text-purple-400",
   };
 
-  const handlePublishClick = async () => {
-    setPublishing(true);
+  const handleToggle = async () => {
+    setToggling(true);
     try {
-      await onPublish(project.id);
+      await onToggleVisibility(project.id, visibility);
     } finally {
-      setPublishing(false);
+      setToggling(false);
       setMenuOpen(false);
     }
   };
@@ -355,7 +364,7 @@ function StudioProjectCard({
           className={`size-10 rounded-lg flex items-center justify-center shrink-0 ${iconColors[visibility]}`}
         >
           <span className="material-symbols-outlined text-xl">
-            {visibility === "private" ? "lock" : "description"}
+            {isPrivate ? "lock" : "public"}
           </span>
         </div>
         <div className="min-w-0">
@@ -386,7 +395,7 @@ function StudioProjectCard({
 
       {/* Actions */}
       <div className="flex items-center gap-2 mt-auto">
-        {canEdit ? (
+        {isPrivate ? (
           <Link
             href={`/create?edit=${project.id}`}
             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold bg-surface-dark text-slate-300 border border-slate-700 hover:border-slate-500 hover:text-white transition-all"
@@ -428,16 +437,27 @@ function StudioProjectCard({
                   </span>
                   View Case
                 </Link>
-                {visibility === "private" && (
+                {isPrivate ? (
                   <button
-                    onClick={handlePublishClick}
-                    disabled={publishing}
+                    onClick={handleToggle}
+                    disabled={toggling}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-green-400 hover:bg-green-500/10 transition-colors disabled:opacity-50"
                   >
                     <span className="material-symbols-outlined text-[16px]">
                       public
                     </span>
-                    {publishing ? "Publishing..." : "Make Public"}
+                    {toggling ? "Updating..." : "Make Public"}
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleToggle}
+                    disabled={toggling}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-purple-400 hover:bg-purple-500/10 transition-colors disabled:opacity-50"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">
+                      lock
+                    </span>
+                    {toggling ? "Updating..." : "Make Private"}
                   </button>
                 )}
                 <button className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors">
