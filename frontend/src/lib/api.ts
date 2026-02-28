@@ -78,6 +78,7 @@ export interface ActionResponse {
 export interface ScenarioSummary {
   id: string;
   title: string;
+  author: string;
   description: string;
   victim: string;
   difficulty: string;
@@ -112,6 +113,7 @@ export interface Location {
 
 export interface Scenario {
   title: string;
+  author: string;
   description: string;
   victim: string;
   intro_narrative: string;

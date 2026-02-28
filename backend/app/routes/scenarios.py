@@ -22,6 +22,7 @@ class ScenarioSummary(BaseModel):
     """Lightweight view for the case gallery."""
     id: str
     title: str
+    author: str = ""
     description: str
     victim: str
     difficulty: str = "medium"
@@ -42,7 +43,7 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
         db = await get_database()
         if db is not None:
             # Query the latest session per scenario
-            cursor = db["game_sessions"].find({"user_id": user["id"]}).sort("updated_at", -1)
+            cursor = db["sessions"].find({"user_id": user["id"]}).sort("updated_at", -1)
             async for doc in cursor:
                 sid = doc.get("scenario_id")
                 # Store the most recent session we see for each scenario
@@ -53,9 +54,10 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
         summary = ScenarioSummary(
             id=sid,
             title=scenario.title,
+            author=getattr(scenario, 'author', '') or '',
             description=scenario.description,
             victim=scenario.victim,
-            difficulty="medium",  # Default, read from scenario later if added
+            difficulty=getattr(scenario, 'difficulty', 'medium') or 'medium',
             phase_count=len(scenario.phases),
         )
 
