@@ -71,8 +71,8 @@ def _check_ownership(scenario, user_id: str, user_name: Optional[str]) -> bool:
         return True
     return False
 
-  @router.get("/", response_model=List[ScenarioSummary])
-  async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_user_optional)):
+@router.get("/", response_model=List[ScenarioSummary])
+async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_user_optional)):
     """
     List scenarios visible to the current user.
     Public scenarios are shown to everyone.

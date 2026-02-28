@@ -7,7 +7,7 @@ name = "procedural-gen"
 version = "0.1.0"
 description = "Procedural generation of whodunnit mystery stories from user inputs"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.10"
 dependencies = [
     "datasets",
     "huggingface-hub",

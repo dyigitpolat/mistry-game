@@ -427,6 +427,8 @@ export async function unpublishScenario(
     return apiFetch(`/scenarios/${scenarioId}/unpublish`, {
         method: "POST",
     });
+}
+
 export async function getUserProfileStats(): Promise<UserProfileStats> {
     return apiFetch("/profile/stats");
 }
