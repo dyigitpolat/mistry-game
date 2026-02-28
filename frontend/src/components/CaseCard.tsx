@@ -10,6 +10,8 @@ interface CaseCardProps {
     imageUrl?: string;
     solvedPercent?: number;
     author?: string;
+    progressPercent?: number;
+    isComplete?: boolean;
 }
 
 const difficultyColors: Record<string, string> = {
@@ -27,11 +29,13 @@ export default function CaseCard({
     imageUrl,
     solvedPercent,
     author,
+    progressPercent,
+    isComplete,
 }: CaseCardProps) {
     const diffClass = difficultyColors[difficulty.toLowerCase()] || difficultyColors.medium;
 
     return (
-        <Link href={`/game/${id}`} className="block">
+        <Link href={`/case/${id}`} className="block">
             <div className="group relative flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-800">
                 {/* Image */}
                 <div className="aspect-video bg-cover bg-center relative bg-border-dark">
@@ -49,7 +53,27 @@ export default function CaseCard({
                     <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded capitalize">
                         {difficulty}
                     </div>
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
+
+                    {isComplete ? (
+                        <div className="absolute top-2 left-2 bg-primary/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg uppercase tracking-wider flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[12px]">task_alt</span> Solved
+                        </div>
+                    ) : progressPercent !== undefined && progressPercent > 0 ? (
+                        <div className="absolute top-2 left-2 bg-yellow-500/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg uppercase tracking-wider">
+                            In Progress
+                        </div>
+                    ) : null}
+
+                    {progressPercent !== undefined && (
+                        <div className="absolute bottom-0 left-0 w-full h-1 bg-black/40">
+                            <div
+                                className={`h-full ${isComplete ? 'bg-primary' : 'bg-yellow-500'} transition-all`}
+                                style={{ width: `${Math.max(5, progressPercent)}%` }}
+                            />
+                        </div>
+                    )}
+
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors pointer-events-none" />
                 </div>
 
                 {/* Content */}

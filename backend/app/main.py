@@ -19,8 +19,9 @@ from fastapi.staticfiles import StaticFiles
 _project_root = Path(__file__).parent.parent.parent
 load_dotenv(_project_root / ".env")
 
-from app.routes import game, scenarios, scenes  # noqa: E402
-
+from app.routes import game, scenarios, scenes, stats  # noqa: E402
+from app.db.mongodb import connect_to_mongo, close_mongo_connection
+from app.db.redis_cache import connect_to_redis, close_redis_connection
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -41,9 +42,15 @@ async def lifespan(app: FastAPI):
     scenes_dir.mkdir(parents=True, exist_ok=True)
     app.mount("/scenes", StaticFiles(directory=str(scenes_dir)), name="scenes")
 
+    # Connect to Databases
+    await connect_to_mongo()
+    await connect_to_redis()
+
     yield
     # ── Shutdown ──
     print("🔮 Mistry Backend shutting down…")
+    await close_mongo_connection()
+    await close_redis_connection()
 
 
 app = FastAPI(
@@ -65,9 +72,10 @@ app.add_middleware(
 )
 
 # ── Routers ───────────────────────────────────────────────────────────
-app.include_router(game.router, prefix="/game", tags=["Game"])
-app.include_router(scenarios.router, prefix="/scenarios", tags=["Scenarios"])
-app.include_router(scenes.router, prefix="/scenes", tags=["Scene Generation"])
+app.include_router(game.router, prefix="/game", tags=["game"])
+app.include_router(scenarios.router, prefix="/scenarios", tags=["scenarios"])
+app.include_router(scenes.router, prefix="/scenes", tags=["scenes"])
+app.include_router(stats.router, prefix="/stats", tags=["stats"])
 
 
 # ── Health Check ──────────────────────────────────────────────────────

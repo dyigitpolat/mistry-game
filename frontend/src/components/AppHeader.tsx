@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 interface AppHeaderProps {
     activeTab?: "home" | "cases" | "social" | "leaderboard";
 }
 
 export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
+    const { data: session } = useSession();
+
     const navItems = [
         { label: "Home", href: "/", key: "home" },
         { label: "Case Studio", href: "#", key: "cases" },
@@ -31,8 +34,8 @@ export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
                             key={item.key}
                             href={item.href}
                             className={`text-sm font-medium leading-normal hover:text-primary transition-colors ${activeTab === item.key
-                                    ? "text-white"
-                                    : "text-slate-400"
+                                ? "text-white"
+                                : "text-slate-400"
                                 }`}
                         >
                             {item.label}
@@ -56,9 +59,39 @@ export default function AppHeader({ activeTab = "home" }: AppHeaderProps) {
                     <button className="text-slate-400 hover:text-white transition-colors">
                         <span className="material-symbols-outlined">notifications</span>
                     </button>
-                    <div className="size-9 rounded-full bg-surface-dark border-2 border-border-dark flex items-center justify-center ring-2 ring-transparent hover:ring-primary cursor-pointer transition-all">
-                        <span className="material-symbols-outlined text-slate-400 text-lg">person</span>
-                    </div>
+
+                    {session ? (
+                        <div className="flex items-center gap-3">
+                            <span className="text-sm font-medium text-slate-300 hidden sm:block">
+                                {session.user?.name || "Detective"}
+                            </span>
+                            {session.user?.image ? (
+                                <img
+                                    src={session.user.image}
+                                    alt="Profile"
+                                    className="size-9 rounded-full border-2 border-border-dark cursor-pointer ring-2 ring-transparent hover:ring-primary transition-all"
+                                    title={session.user?.email || "Profile"}
+                                />
+                            ) : (
+                                <div
+                                    className="size-9 rounded-full bg-surface-dark border-2 border-border-dark flex items-center justify-center ring-2 ring-transparent hover:ring-primary cursor-pointer transition-all"
+                                    title={session.user?.email || "Profile"}
+                                >
+                                    <span className="material-symbols-outlined text-slate-400 text-lg">person</span>
+                                </div>
+                            )}
+                            <button
+                                onClick={() => signOut({ callbackUrl: "/login" })}
+                                className="ml-2 px-3 py-1.5 text-xs font-bold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-colors border border-slate-700 hover:border-slate-600"
+                            >
+                                Sign Out
+                            </button>
+                        </div>
+                    ) : (
+                        <Link href="/login" className="text-sm font-bold text-primary hover:text-primary/80 transition-colors">
+                            Sign In
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

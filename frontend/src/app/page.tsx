@@ -33,6 +33,8 @@ export default function HomePage() {
     load();
   }, []);
 
+  const activeCases = scenarios.filter(s => s.progress_percent && s.progress_percent > 0 && !s.is_complete);
+  const availableCases = scenarios.filter(s => !activeCases.includes(s));
   const featured = scenarios[0];
 
   return (
@@ -50,9 +52,15 @@ export default function HomePage() {
               <div className="relative min-h-[560px] flex flex-col justify-end p-8 md:p-16 bg-gradient-to-br from-[#0a0f1e] via-[#101622] to-[#192233]">
                 <div className="relative z-20 max-w-2xl flex flex-col gap-4 animate-fade-in-up">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">
-                      New Release
-                    </span>
+                    {featured.progress_percent && featured.progress_percent > 0 ? (
+                      <span className="bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">
+                        In Progress ({Math.round(featured.progress_percent)}%)
+                      </span>
+                    ) : (
+                      <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">
+                        New Release
+                      </span>
+                    )}
                     <span className="text-white/80 text-sm font-medium flex items-center gap-1">
                       <span className="material-symbols-outlined text-[16px] text-yellow-400">star</span>
                       4.9 Rating
@@ -66,19 +74,14 @@ export default function HomePage() {
                   </p>
                   <div className="flex flex-wrap gap-4 mt-6">
                     <a
-                      href={`/game/${featured.id}`}
+                      href={`/case/${featured.id}`}
                       className="flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary/90 text-white text-base font-bold transition-all shadow-lg shadow-primary/25 group"
                     >
-                      <span className="material-symbols-outlined mr-2 group-hover:animate-pulse">visibility</span>
-                      Start Investigation
+                      <span className="material-symbols-outlined mr-2 group-hover:animate-pulse">
+                        {featured.progress_percent && featured.progress_percent > 0 ? "resume" : "visibility"}
+                      </span>
+                      {featured.progress_percent && featured.progress_percent > 0 && !featured.is_complete ? "Continue Investigation" : "Start Investigation"}
                     </a>
-                    <button className="flex items-center justify-center rounded-lg h-12 px-6 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-base font-bold transition-all border border-white/20">
-                      <span className="material-symbols-outlined mr-2">play_arrow</span>
-                      View Trailer
-                    </button>
-                    <button className="flex items-center justify-center rounded-lg h-12 w-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all border border-white/20">
-                      <span className="material-symbols-outlined">add</span>
-                    </button>
                   </div>
                 </div>
               </div>
@@ -86,15 +89,40 @@ export default function HomePage() {
           )}
 
           <div className="px-8 pb-12 -mt-10 relative z-20">
+
+            {/* In Progress */}
+            {activeCases.length > 0 && (
+              <div className="mb-12 border-b border-white/5 pb-12">
+                <div className="flex justify-between items-end mb-4 px-2">
+                  <h2 className="text-white text-2xl font-bold tracking-tight flex items-center gap-2">
+                    <span className="material-symbols-outlined text-yellow-500">pending_actions</span>
+                    Active Investigations
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {activeCases.map((s) => (
+                    <CaseCard
+                      key={s.id}
+                      id={s.id}
+                      title={s.title}
+                      description={s.description}
+                      difficulty={s.difficulty}
+                      progressPercent={s.progress_percent}
+                      isComplete={s.is_complete}
+                      author={`${s.phase_count} phases`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Available Cases */}
             <div className="mb-12">
               <div className="flex justify-between items-end mb-4 px-2">
-                <h2 className="text-white text-2xl font-bold tracking-tight">
-                  Sherlock Holmes Classics
+                <h2 className="text-white text-2xl font-bold tracking-tight flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary">local_library</span>
+                  Case Studio Gallery
                 </h2>
-                <a className="text-primary text-sm font-bold hover:underline" href="#">
-                  View All
-                </a>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {loading ? (
@@ -112,14 +140,15 @@ export default function HomePage() {
                     </div>
                   ))
                 ) : (
-                  scenarios.map((s) => (
+                  availableCases.map((s) => (
                     <CaseCard
                       key={s.id}
                       id={s.id}
                       title={s.title}
                       description={s.description}
                       difficulty={s.difficulty}
-                      solvedPercent={42}
+                      progressPercent={s.progress_percent}
+                      isComplete={s.is_complete}
                       author={`${s.phase_count} phases`}
                     />
                   ))
@@ -127,86 +156,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Agatha Christie Collection (static showcase) */}
-            <div className="mb-12">
-              <div className="flex justify-between items-end mb-4 px-2">
-                <h2 className="text-white text-2xl font-bold tracking-tight">
-                  Agatha Christie Collection
-                </h2>
-                <a className="text-primary text-sm font-bold hover:underline" href="#">
-                  View All
-                </a>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { title: "Murder on the Orient Express", desc: "A lavish trip through Europe quickly unfolds into a race against time.", diff: "Medium", solved: 91 },
-                  { title: "Death on the Nile", desc: "The tranquillity of a cruise along the Nile is shattered by murder.", diff: "Easy", solved: 85 },
-                  { title: "The Murder at the Vicarage", desc: "Miss Marple's first case involves the murder of a colonel.", diff: "Medium", solved: 79 },
-                  { title: "And Then There Were None", desc: "Ten strangers are lured to an island mansion.", diff: "Hard", solved: 70 },
-                ].map((c) => (
-                  <CaseCard
-                    key={c.title}
-                    id="#"
-                    title={c.title}
-                    description={c.desc}
-                    difficulty={c.diff}
-                    solvedPercent={c.solved}
-                    author="A. Christie"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Trending Community Cases */}
-            <div className="mb-12">
-              <div className="flex justify-between items-end mb-4 px-2">
-                <h2 className="text-white text-2xl font-bold tracking-tight">
-                  Trending Community Cases
-                </h2>
-                <div className="flex gap-2">
-                  <button className="size-8 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 text-white">
-                    <span className="material-symbols-outlined text-sm">chevron_left</span>
-                  </button>
-                  <button className="size-8 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 text-white">
-                    <span className="material-symbols-outlined text-sm">chevron_right</span>
-                  </button>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { title: "Silicon Valley Shadows", desc: "Corporate espionage gone wrong.", diff: "Medium", by: "@tech_noir" },
-                  { title: "The Attic Whisperer", desc: "A ghost story or a murder plot?", diff: "Easy", by: "@ghost_hunter" },
-                  { title: "Neon Rain", desc: "Cyberpunk noir mystery.", diff: "Hard", by: "@cyber_sleuth" },
-                  { title: "Deep Blue Demise", desc: "Lost at sea, but not alone.", diff: "Medium", by: "@nautical_pi" },
-                ].map((c) => (
-                  <div
-                    key={c.title}
-                    className="bg-surface-dark p-4 rounded-xl border border-slate-800 flex gap-4 hover:bg-slate-800/80 transition-colors cursor-pointer group"
-                  >
-                    <div className="w-24 h-24 shrink-0 rounded-lg bg-border-dark flex items-center justify-center">
-                      <span className="material-symbols-outlined text-2xl text-primary/40">visibility</span>
-                    </div>
-                    <div className="flex flex-col justify-between py-1 w-full min-w-0">
-                      <div>
-                        <h4 className="text-white font-bold text-base truncate group-hover:text-primary">
-                          {c.title}
-                        </h4>
-                        <p className="text-slate-400 text-xs mt-1 truncate">{c.desc}</p>
-                      </div>
-                      <div className="flex items-center justify-between text-xs mt-2">
-                        <span className={`font-bold px-2 py-0.5 rounded ${c.diff === "Easy" ? "text-green-400 bg-green-500/10" :
-                          c.diff === "Hard" ? "text-red-400 bg-red-500/10" :
-                            "text-primary bg-primary/10"
-                          }`}>
-                          {c.diff}
-                        </span>
-                        <span className="text-slate-400">{c.by}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </main>
 

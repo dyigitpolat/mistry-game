@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "Whodunit — AI Detective Game",
@@ -26,7 +27,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased font-display">{children}</body>
+      <body className="antialiased font-display">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

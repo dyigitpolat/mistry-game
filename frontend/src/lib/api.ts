@@ -2,7 +2,8 @@
  * API client for the Mistry backend.
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = "/api/proxy";
+export const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
 export interface PlayerState {
   inventory: string[];
@@ -80,6 +81,9 @@ export interface ScenarioSummary {
   victim: string;
   difficulty: string;
   phase_count: number;
+  progress_percent?: number;
+  is_complete?: boolean;
+  last_played_at?: string;
 }
 
 export interface Phase {
@@ -124,13 +128,44 @@ export interface AccuseRequest {
   motive: string;
 }
 
+export interface ScenarioStats {
+  total_plays: number;
+  clear_rate: number;
+  total_likes: number;
+  user_has_liked: boolean;
+}
+
+export interface LeaderboardEntry {
+  user_name: string;
+  user_image?: string;
+  elapsed_minutes: number;
+  solved_at: string;
+}
+
+export interface Comment {
+  id: string;
+  user_name: string;
+  user_image?: string;
+  content: string;
+  created_at: string;
+}
+
 // ── API Functions ────────────────────────────────────────────────
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
+  const headers: Record<string, string> = {};
+  if (options?.body) {
+    headers["Content-Type"] = "application/json";
+  }
+
   const res = await fetch(`${API_BASE}${path}`, {
-    headers: { "Content-Type": "application/json" },
     ...options,
+    headers: {
+      ...headers,
+      ...options?.headers,
+    },
   });
+  
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: res.statusText }));
     throw new Error(err.detail || res.statusText);
@@ -232,4 +267,23 @@ export async function generateAllScenes(
   scenarioId: string
 ): Promise<{ scenes: Record<string, string | null> }> {
   return apiFetch(`/scenes/${scenarioId}/generate-all`, { method: "POST" });
+}
+
+export async function getScenarioStats(scenarioId: string): Promise<ScenarioStats> {
+    return apiFetch(`/stats/${scenarioId}`);
+}
+
+export async function getLeaderboard(scenarioId: string): Promise<LeaderboardEntry[]> {
+    return apiFetch(`/stats/${scenarioId}/leaderboard`);
+}
+
+export async function getComments(scenarioId: string): Promise<Comment[]> {
+    return apiFetch(`/stats/${scenarioId}/comments`);
+}
+
+export async function postInteraction(scenarioId: string, type: "like" | "comment", content?: string): Promise<{ status: string }> {
+    return apiFetch(`/stats/${scenarioId}/interact`, {
+        method: "POST",
+        body: JSON.stringify({ type, content })
+    });
 }

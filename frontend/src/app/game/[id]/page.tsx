@@ -17,6 +17,7 @@ import {
     connectClues,
     accuseCase,
     getScenario,
+    BACKEND_URL,
     type GameSession,
     type Scenario,
     type ActionResponse,
@@ -384,11 +385,11 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         let mounted = true;
         if (scenarioId && currentLocation) {
             setSceneImageUrl(undefined); // clear old image
-            fetch(`http://localhost:8000/scenes/${scenarioId}/generate?location_name=${encodeURIComponent(currentLocation)}`, { method: "POST" })
+            fetch(`${BACKEND_URL}/scenes/${scenarioId}/generate?location_name=${encodeURIComponent(currentLocation)}`, { method: "POST" })
                 .then(res => res.json())
                 .then(data => {
                     if (mounted && data.image_url) {
-                        setSceneImageUrl(`http://localhost:8000${data.image_url}`);
+                        setSceneImageUrl(`${BACKEND_URL}${data.image_url}`);
                     }
                 })
                 .catch(err => console.error("Failed to fetch scene image", err));
