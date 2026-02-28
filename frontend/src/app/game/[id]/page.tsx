@@ -111,9 +111,24 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                 addLog(scenarioData.intro_narrative, { isHighlighted: true });
                 addLog(`You are at ${gameSession.player_state.current_location}.`, { isHighlighted: true });
 
-                const phase = scenarioData.phases[0];
+                const phaseIdx = gameSession.player_state.current_phase;
+                const phase = scenarioData.phases[phaseIdx] || scenarioData.phases[0];
                 if (phase) {
                     addLog(`Phase: ${phase.name} — ${phase.objective}`, { type: "phase" });
+                }
+
+                // Restore conversation history from persisted session
+                if (gameSession.character_states) {
+                    for (const [charName, charState] of Object.entries(gameSession.character_states)) {
+                        const history = (charState as any).conversation_history || [];
+                        for (const msg of history) {
+                            if (msg.role === "user") {
+                                addLog(msg.content, { type: "player" });
+                            } else if (msg.role === "assistant") {
+                                addLog(msg.content, { speaker: charName, type: "character" });
+                            }
+                        }
+                    }
                 }
             } catch (err: unknown) {
                 const msg = err instanceof Error ? err.message : "Failed to connect";
