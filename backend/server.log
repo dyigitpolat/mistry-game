@@ -1,0 +1,19 @@
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+INFO:     Started server process [45753]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Mistry Backend starting up…
+📊 Langfuse telemetry enabled
+🎨 Google Nanobanana scene generation enabled
+Connecting to MongoDB at mongodb://localhost:27017
+Connecting to Redis at redis://redis:6379/0
+INFO:     127.0.0.1:61128 - "HEAD /api/health HTTP/1.1" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [45753]

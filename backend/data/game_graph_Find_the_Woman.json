@@ -1,0 +1,830 @@
+{
+  "title": "Find the Woman",
+  "author": "Arthur Somers Roche",
+  "victim": "Black Cobain",
+  "intro_narrative": "Newly arrived in New York under the stage name \u201cJames Garfunkel,\u201d Scott Ice becomes entangled in Broadway\u2019s parties, a crooked card circle, and the brutal murder of theatrical agent Black Cobain. Circumstantial evidence\u2014and a misdirecting introduction card\u2014turn Scott into the prime suspect. While corrupt operators try to buy her silence and the police close in, a hidden motive and a single key to a locked office point to the true killer: Barbra (Cyndi) Diaz. Uncover the access, the blackmail trail, and the confession before the net tightens and the scandal becomes permanent.",
+  "time_limit_minutes": 180,
+  "start_time": "1920-01-13T17:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Diaz\u2019s written confession (stored in his steel box; definitive proof of guilt and sequence of the killing)",
+      "Heberworth Building office key (in Diaz\u2019s possession; proven by Penn; enables entry/exit while door remains locked)",
+      "Palmer DeLisle\u2019s introduction card to Cobain for \u201cJames Garfunkel\u201d (primary investigative lead misdirecting police to Scott)"
+    ],
+    "required_suspect": [
+      "Barbra (Cyndi) Diaz"
+    ],
+    "required_motive": [
+      "Cobain was blackmailing Diaz; Diaz used his key to enter after hours and stabbed Cobain to silence him and redirect suspicion."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Phase 1 \u2014 The Locked Office",
+      "objective": "Reconstruct the murder scene and understand why Scott becomes the prime suspect.",
+      "unlocked_locations": [
+        "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+        "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)"
+      ],
+      "unlocked_characters": [
+        "Scott Ice (aka \u201cJames Garfunkel\u201d)",
+        "Black Cobain",
+        "Penn",
+        "Grant"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Phase 2 \u2014 Broadway Web",
+      "objective": "Identify the silencing conspiracy around Scott and find who had real access to Cobain\u2019s locked office.",
+      "unlocked_locations": [
+        "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)",
+        "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+        "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+        "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)"
+      ],
+      "unlocked_characters": [
+        "Pitt Ruffalo",
+        "Judge Gyllenhaal Tyson",
+        "Quaid Davidson",
+        "Roberts"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Phase 3 \u2014 The Diaz Circle",
+      "objective": "Break the identification chain, obtain motive+opportunity proof against Diaz, and pressure the accessory.",
+      "unlocked_locations": [
+        "Trevor Hotel dining-room (Scott meets Pearson Depp; link to Brolin Diaz made)",
+        "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)"
+      ],
+      "unlocked_characters": [
+        "Brolin Diaz",
+        "Barbra (Cyndi) Diaz",
+        "Pearson Depp"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Phase 4 \u2014 Country House Reckoning",
+      "objective": "Secure Diaz\u2019s confession and close the case with Ruffalo/Penn before public scandal hardens into \u2018truth.\u2019",
+      "unlocked_locations": [
+        "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      ],
+      "unlocked_characters": []
+    }
+  ],
+  "locations": {
+    "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)": {
+      "description": "A cramped theatrical-agent office: roll-top desk, shabby couch, filing cases, and a wide window opening onto a fire-escape. The door is usually kept locked; the air feels stale, as if secrets have soaked into the walls.",
+      "items": [
+        "Cobain\u2019s paper-knife (murder weapon; found driven into Cobain\u2019s chest)",
+        "Palmer DeLisle\u2019s introduction card to Cobain for \u201cJames Garfunkel\u201d (primary investigative lead misdirecting police to Scott)",
+        "Fire-escape route/window (method of Scott\u2019s escape; becomes identifying detail in police narrative)"
+      ],
+      "clues": [
+        "Cobain was stabbed with his own paper-knife in his locked office; Scott had left him alive/unconscious\u2014implies a later intruder/killer.",
+        "Janitor Pugh D\u2019arcy saw a young woman descend the Heberworth fire-escape near 6 p.m.; police tie this to Cobain\u2019s last appointment and to the \u201cJames Garfunkel\u201d intro card.",
+        "Palmer DeLisle\u2019s introduction card (found on Cobain\u2019s desk) points to \u201cJames Garfunkel\u201d as the woman expected for a film test\u2014making Scott the prime suspect."
+      ],
+      "base_ascii": "  +--------------------+\n  | [Door]    [Files]  |\n  |   +----Desk----+   |\n  |   | Roll-top   |   |\n  | [Couch]  [Radiator]|\n  |          [Window]=>|\n  |         Fire-escape|\n  +--------------------+",
+      "visual_metadata": {
+        "setting": "Dim, workmanlike Broadway office with cheap silk sheen and old smoke stains; a single window offers a perilous escape route.",
+        "connections": [
+          {
+            "target_location": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+            "mechanism": "Police trail / investigative escalation",
+            "state": "open"
+          },
+          {
+            "target_location": "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)",
+            "mechanism": "Scott\u2019s flight route (street-level)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Roll-top desk",
+            "type": "container",
+            "spatial_relationship": "Against the inner wall, facing the door",
+            "objects": [
+              {
+                "item_id": "Palmer DeLisle\u2019s introduction card to Cobain for \u201cJames Garfunkel\u201d (primary investigative lead misdirecting police to Scott)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Cobain\u2019s chest / floor near body",
+            "type": "surface",
+            "spatial_relationship": "Near the radiator beside the desk",
+            "objects": [
+              {
+                "item_id": "Cobain\u2019s paper-knife (murder weapon; found driven into Cobain\u2019s chest)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Window to fire-escape",
+            "type": "surface",
+            "spatial_relationship": "Back wall above the couch",
+            "objects": [
+              {
+                "item_id": "Fire-escape route/window (method of Scott\u2019s escape; becomes identifying detail in police narrative)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)": {
+      "description": "A flashy Park Avenue living room choked with cigar smoke, poker chips, and too-easy laughter. Money slaps the table louder than the cards.",
+      "items": [
+        "Ten-thousand-dollar payoff from Davidson/Roberts (coerces Scott to leave town; shows conspiracy to silence her)",
+        "Pearl necklace (alleged) (used by Zane/Davidson/Roberts to frame Scott on theft charge)"
+      ],
+      "clues": [
+        "Grant\u2019s identification of Scott as the Heberworth visitor conflicts with Penn\u2019s later timeline logic and becomes leverage/blackmail rather than reliable evidence."
+      ],
+      "base_ascii": "  +----------------------+\n  | [Door]     [Bar]     |\n  |   Smoke   (Decanter) |\n  |  +--Poker Table--+   |\n  |  | Chips  Cards  |   |\n  |  +-------------- +   |\n  | [Art]   [Sofa]       |\n  +----------------------+",
+      "visual_metadata": {
+        "setting": "Garish wealth and brittle camaraderie; the room feels like a trap disguised as a party.",
+        "connections": [
+          {
+            "target_location": "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)",
+            "mechanism": "Taxi ride / escort back to theater district",
+            "state": "open"
+          },
+          {
+            "target_location": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+            "mechanism": "Legal negotiation channel",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Poker table",
+            "type": "surface",
+            "spatial_relationship": "Center of living room under heavy lamp",
+            "objects": [
+              {
+                "item_id": "Ten-thousand-dollar payoff from Davidson/Roberts (coerces Scott to leave town; shows conspiracy to silence her)",
+                "visibility": "partially hidden",
+                "hidden_by": "stacked chips and a folded napkin"
+              }
+            ]
+          },
+          {
+            "id": "Zane\u2019s handbag (prop at party)",
+            "type": "container",
+            "spatial_relationship": "On a chair near the dressing area",
+            "objects": [
+              {
+                "item_id": "Pearl necklace (alleged) (used by Zane/Davidson/Roberts to frame Scott on theft charge)",
+                "visibility": "hidden",
+                "hidden_by": "false-bottom pouch"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)": {
+      "description": "A narrow theatrical hotel stitched together from old houses. Madame Lewis watches the stairs like a hawk, and every hallway whisper feels like gossip turning into law.",
+      "items": [
+        "Pearl necklace (alleged) (used by Zane/Davidson/Roberts to frame Scott on theft charge)"
+      ],
+      "clues": [
+        "Palmer DeLisle\u2019s introduction card (found on Cobain\u2019s desk) points to \u201cJames Garfunkel\u201d as the woman expected for a film test\u2014making Scott the prime suspect."
+      ],
+      "base_ascii": "  +----------------------+\n  | Street Stairs  [Desk]|\n  |   (Madame)     [Reg] |\n  |  Hall -> Rooms        |\n  |  [Stairs Up]          |\n  |  Dining Room (long)   |\n  |  [Phone] [Cake Tray]  |\n  +----------------------+",
+      "visual_metadata": {
+        "setting": "Busy, theatrical boarding-hotel energy; friendly on the surface, merciless underneath.",
+        "connections": [
+          {
+            "target_location": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+            "mechanism": "Walk to theater district offices",
+            "state": "open"
+          },
+          {
+            "target_location": "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+            "mechanism": "Taxi / relocation under alias pressure",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Front desk pigeonholes",
+            "type": "container",
+            "spatial_relationship": "Behind Madame Lewis\u2019s desk",
+            "objects": [
+              {
+                "item_id": "Pearl necklace (alleged) (used by Zane/Davidson/Roberts to frame Scott on theft charge)",
+                "visibility": "partially hidden",
+                "hidden_by": "claimed 'lost-and-found' envelope"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)": {
+      "description": "A dingy lodging-house facing Washington Square: thin walls, sharp eyes, and a front-hall telephone that feels like a snare. A place to hide\u2014until hiding draws attention.",
+      "items": [
+        "Ten-thousand-dollar payoff from Davidson/Roberts (coerces Scott to leave town; shows conspiracy to silence her)"
+      ],
+      "clues": [
+        "Grant\u2019s identification of Scott as the Heberworth visitor conflicts with Penn\u2019s later timeline logic and becomes leverage/blackmail rather than reliable evidence."
+      ],
+      "base_ascii": "  +----------------------+\n  | [Front Door] [Phone] |\n  |  Hall  ->  Stairs Up |\n  | [Parlor]  [Coatrack] |\n  |  Rooms along corridor |\n  | [Landlady Desk]      |\n  | (Street Window)      |\n  +----------------------+",
+      "visual_metadata": {
+        "setting": "Drafty respectability with a watchful landlady; safety purchased by silence.",
+        "connections": [
+          {
+            "target_location": "Trevor Hotel dining-room (Scott meets Pearson Depp; link to Brolin Diaz made)",
+            "mechanism": "Short walk across the Village",
+            "state": "open"
+          },
+          {
+            "target_location": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+            "mechanism": "Subway ride downtown",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Scott\u2019s pocketbook (temporary cash stash)",
+            "type": "container",
+            "spatial_relationship": "On bedside chair in rented room",
+            "objects": [
+              {
+                "item_id": "Ten-thousand-dollar payoff from Davidson/Roberts (coerces Scott to leave town; shows conspiracy to silence her)",
+                "visibility": "hidden",
+                "hidden_by": "folded telegram and receipts"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Trevor Hotel dining-room (Scott meets Pearson Depp; link to Brolin Diaz made)": {
+      "description": "A Greenwich Village hotel dining-room between tea and dinner: quiet tables, bohemian murmurs, and chance meetings that re-route a life.",
+      "items": [
+        "Palmer DeLisle\u2019s introduction card to Cobain for \u201cJames Garfunkel\u201d (primary investigative lead misdirecting police to Scott)"
+      ],
+      "clues": [
+        "Janitor Pugh D\u2019arcy saw a young woman descend the Heberworth fire-escape near 6 p.m.; police tie this to Cobain\u2019s last appointment and to the \u201cJames Garfunkel\u201d intro card."
+      ],
+      "base_ascii": "  +----------------------+\n  | [Entrance]  [Captain]|\n  |  Tables   Tables     |\n  |  (Quiet hour)        |\n  | [Corner Booth]       |\n  |  Waiter Station      |\n  | [Exit to Street]     |\n  +----------------------+",
+      "visual_metadata": {
+        "setting": "Soft lights and social camouflage; reputation is negotiated over cutlets and milk.",
+        "connections": [
+          {
+            "target_location": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+            "mechanism": "Invitation / tea arrangement",
+            "state": "open"
+          },
+          {
+            "target_location": "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+            "mechanism": "Walk across the Square",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Newspaper folded on table",
+            "type": "surface",
+            "spatial_relationship": "On Scott\u2019s table near the menu",
+            "objects": [
+              {
+                "item_id": "Palmer DeLisle\u2019s introduction card to Cobain for \u201cJames Garfunkel\u201d (primary investigative lead misdirecting police to Scott)",
+                "visibility": "partially hidden",
+                "hidden_by": "restaurant check folder (used as bookmark)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)": {
+      "description": "A workmanlike studio under glass and a refined house beneath it\u2014beauty as labor, not decoration. In its dining room, money, pride, and fear collide.",
+      "items": [
+        "Heberworth Building office key (in Diaz\u2019s possession; proven by Penn; enables entry/exit while door remains locked)"
+      ],
+      "clues": [
+        "Scott overhears Grant threatening Diaz: Grant says Diaz had a key to Cobain\u2019s office\u2014directly linking Diaz to access at the time of murder.",
+        "Diaz\u2019s panic during Grant\u2019s blackmail attempt and later near-confession to Scott (\u201cyou think I killed Cobain\u2026\u201d) escalates suspicion to certainty."
+      ],
+      "base_ascii": "  +------------------------+\n  | [Front Door]  [Hall]   |\n  | [Dining]----[Parlor]   |\n  |   | Stairs Up          |\n  | [Studio Above] (Glass) |\n  | [Bedroom] [Steel Box]* |\n  | [Kitchen]   [Back Exit]|\n  +------------------------+",
+      "visual_metadata": {
+        "setting": "Artistic prestige masking domestic fracture; quiet rooms that can still echo with a gunshot.",
+        "connections": [
+          {
+            "target_location": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)",
+            "mechanism": "Country flight / pursuit escalates",
+            "state": "open"
+          },
+          {
+            "target_location": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+            "mechanism": "Ruffalo\u2019s investigation channel",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Diaz\u2019s coat pocket / keyring",
+            "type": "container",
+            "spatial_relationship": "Hung on a peg near the dining-room door",
+            "objects": [
+              {
+                "item_id": "Heberworth Building office key (in Diaz\u2019s possession; proven by Penn; enables entry/exit while door remains locked)",
+                "visibility": "hidden",
+                "hidden_by": "mixed keyring and leather gloves"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)": {
+      "description": "A public corridor of benches and paper, leading to Pitt Ruffalo\u2019s private office: law\u2019s calm face, and the quiet violence of reputation.",
+      "items": [],
+      "clues": [
+        "Penn\u2019s break in Diaz\u2019s Heberworth office finds: letters/papers showing Cobain was blackmailing Diaz + a keyring including a key that opens Cobain\u2019s office door (motive + opportunity)."
+      ],
+      "base_ascii": "  +-----------------------+\n  | [Lobby] -> [Elevator]  |\n  | Corridor: [Benches]   |\n  | [Clerk Window] [Door] |\n  |  Ruffalo Office (inner)|\n  | [Couch] [Desk]        |\n  | [Exit to Street]      |\n  +-----------------------+",
+      "visual_metadata": {
+        "setting": "Institutional light, paper smells, and the sense that one sentence can become a life\u2019s headline.",
+        "connections": [
+          {
+            "target_location": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+            "mechanism": "Private protection arrangement",
+            "state": "open"
+          },
+          {
+            "target_location": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)",
+            "mechanism": "Emergency relocation",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Ruffalo\u2019s case file cabinet",
+            "type": "container",
+            "spatial_relationship": "Against the wall beside the desk",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)": {
+      "description": "A lived-in Murray Hill home: warmth, teasing affection, and a lawyer\u2019s mind that turns panic into plan. Shelter without illusions.",
+      "items": [],
+      "clues": [
+        "Grant\u2019s identification of Scott as the Heberworth visitor conflicts with Penn\u2019s later timeline logic and becomes leverage/blackmail rather than reliable evidence."
+      ],
+      "base_ascii": "  +------------------------+\n  | [Front Door] [Stairs]  |\n  | [Parlor]   [Library]   |\n  | [Dining]   [Study]     |\n  | (Fireplace)            |\n  | [Phone] [Coat Closet]  |\n  | [Rear Hall] -> Street  |\n  +------------------------+",
+      "visual_metadata": {
+        "setting": "Comfortable authority; jokes cover strategy, and kindness has a sharp legal edge.",
+        "connections": [
+          {
+            "target_location": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)",
+            "mechanism": "Legal mediation / meeting summons",
+            "state": "open"
+          },
+          {
+            "target_location": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)",
+            "mechanism": "Private car / train north",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Judge Tyson\u2019s desk blotter",
+            "type": "surface",
+            "spatial_relationship": "In the library beside the fireplace",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)": {
+      "description": "A winter country house above a toboggan slope and a frozen pond\u2014bright moonlight over deep drifts. The quiet is deceptive; it\u2019s where pursuit catches up and truth arrives with a gun.",
+      "items": [
+        "Diaz\u2019s written confession (stored in his steel box; definitive proof of guilt and sequence of the killing)"
+      ],
+      "clues": [
+        "Diaz\u2019s written confession in a steel box details: he used Cobain\u2019s key, entered after hearing a groan, found Cobain down, and stabbed him\u2014resolving the case."
+      ],
+      "base_ascii": "  +-------------------------+\n  | [Veranda] [Front Door]  |\n  | [Hall]  [Parlor]        |\n  | [Guest Room] [Fireplace]|\n  | [Stairs Up] -> [Trunk]* |\n  | Outside: [Sleigh Path]  |\n  | Downhill: Toboggan->Pond|\n  +-------------------------+",
+      "visual_metadata": {
+        "setting": "Cold clarity: moon on snow, fire in grates, and the sense that one act can end a scandal\u2014or start a tragedy.",
+        "connections": [
+          {
+            "target_location": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+            "mechanism": "Return to city / aftermath channel",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Steel box (Diaz\u2019s lockbox)",
+            "type": "container",
+            "spatial_relationship": "Upstairs bedroom/office trunk near the window",
+            "objects": [
+              {
+                "item_id": "Diaz\u2019s written confession (stored in his steel box; definitive proof of guilt and sequence of the killing)",
+                "visibility": "hidden",
+                "hidden_by": "locked steel lid"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Scott Ice (aka \u201cJames Garfunkel\u201d)": {
+      "type": "assistant",
+      "role": "Witness / false suspect; player-facing focal character; survival-driven truth-seeker.",
+      "location": "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+      "phase_locations": {
+        "1": "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)",
+        "2": "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Quick-witted, proud, and resilient; oscillates between fear of scandal and defiant honesty; speaks plainly with flashes of dry humor when cornered.",
+      "knowledge_about_others": {
+        "Black Cobain": "Saw him unconscious; escaped via fire-escape; believes someone entered later to kill him.",
+        "Quaid Davidson": "Knows he and Roberts tried to buy her silence and frame her with theft.",
+        "Roberts": "Understands he orchestrates pressure/bribes and uses police leverage.",
+        "Pitt Ruffalo": "Knows he wants the truth and can suppress scandal if given proof.",
+        "Penn": "Knows he\u2019s stubborn but can be bargained with if evidence is strong.",
+        "Grant": "Overheard him blackmailing Diaz about a key to Cobain\u2019s office.",
+        "Barbra (Cyndi) Diaz": "Grows from suspicion to certainty after overhearing threats and confession."
+      },
+      "secret": "",
+      "abilities": "Can cross-reference rumors, spot timeline contradictions, and trigger confrontations by presenting key evidence items to assistants (Ruffalo/Tyson) or suspects.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Ten-thousand-dollar payoff from Davidson/Roberts (coerces Scott to leave town; shows conspiracy to silence her)"
+          ],
+          "required_knowledge": [],
+          "reaction": "If the payoff is acknowledged aloud, Scott can persuade Tyson to confront Taika/Roberts formally and move the story toward the Diaz circle.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Diaz\u2019s written confession (stored in his steel box; definitive proof of guilt and sequence of the killing)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Scott can end the manhunt narrative and force the case to close through Ruffalo, avoiding a public trial that would destroy her reputation.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 45,
+      "flight_risk": 60
+    },
+    "Black Cobain": {
+      "type": "assistant",
+      "role": "Victim; theatrical agent whose office and desk create the case\u2019s initial misdirection.",
+      "location": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+      "phase_locations": {
+        "1": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+        "2": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+        "3": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+        "4": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)"
+      },
+      "persona": "Absent presence; remembered through documents, rumors, and the brutality of his final scene.",
+      "knowledge_about_others": {
+        "Barbra (Cyndi) Diaz": "Held blackmail material on Diaz; had previously given Diaz access (key) during earlier dealings."
+      },
+      "secret": "",
+      "abilities": "",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Barbra (Cyndi) Diaz": {
+      "type": "suspect",
+      "role": "Culprit; Brolin Diaz\u2019s husband; used access and panic to silence Cobain; attempts to intimidate witnesses; ends by suicide after leaving confession.",
+      "location": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+      "phase_locations": {
+        "1": "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)",
+        "2": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Charm that curdles into panic; defensive, evasive, and volatile when cornered; tries to dominate with wounded pride.",
+      "knowledge_about_others": {
+        "Grant": "Knows Grant can expose his access and blackmail history.",
+        "Penn": "Fears Penn\u2019s methods; tries to pre-empt investigation through intimidation.",
+        "Black Cobain": "Knows Cobain\u2019s blackmail leverage and the locked-office weakness (key access).",
+        "Brolin Diaz": "Relies on her social standing as cover; fears her judgment."
+      },
+      "secret": "He used a key to enter Cobain\u2019s locked office after Scott fled, then stabbed Cobain with the paper-knife to silence blackmail; left a written confession hidden in his steel box.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Scott overhears Grant threatening Diaz: Grant says Diaz had a key to Cobain\u2019s office\u2014directly linking Diaz to access at the time of murder."
+          ],
+          "reaction": "Diaz becomes agitated, attempts to isolate Scott, and pressures Grant to keep silent\u2014raising his flight risk and suspicion dramatically.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Heberworth Building office key (in Diaz\u2019s possession; proven by Penn; enables entry/exit while door remains locked)"
+          ],
+          "required_knowledge": [],
+          "reaction": "If confronted with the key proof, Diaz moves toward a full breakdown and the confession becomes obtainable from the steel box.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 85,
+      "flight_risk": 90
+    },
+    "Pitt Ruffalo": {
+      "type": "assistant",
+      "role": "Assistant district attorney; leads case; protects Scott; negotiates suppression of scandal; forces closure with confession.",
+      "location": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+      "phase_locations": {
+        "1": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+        "2": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Controlled intensity; clipped sentences, protective instincts; willing to trade procedure for the \u2018greater good\u2019 when innocence is clear.",
+      "knowledge_about_others": {
+        "Penn": "Knows Penn will freelance and bargain; can redirect him if given decisive evidence.",
+        "Judge Gyllenhaal Tyson": "Respects Tyson\u2019s tactics but worries about perjury and publicity.",
+        "Barbra (Cyndi) Diaz": "After Penn\u2019s findings, sees Diaz as motive+opportunity suspect once key/letters are confirmed."
+      },
+      "secret": "",
+      "abilities": "Can suppress scandal, redirect police resources, and validate items as admissible evidence; can \u2018close\u2019 the case when confession is secured.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Palmer DeLisle\u2019s introduction card to Cobain for \u201cJames Garfunkel\u201d (primary investigative lead misdirecting police to Scott)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Ruffalo explains the misdirection chain and shifts the investigation from Scott\u2019s identity to access/motive (keys, blackmail letters).",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Diaz\u2019s written confession (stored in his steel box; definitive proof of guilt and sequence of the killing)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Ruffalo forces the official resolution: Diaz named as murderer, Scott cleared, and Penn/press managed to minimize scandal.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Penn": {
+      "type": "assistant",
+      "role": "Plain-clothes detective; pursues Scott; independently investigates; identifies Diaz; arrests Grant; bargains with Ruffalo.",
+      "location": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+      "phase_locations": {
+        "1": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+        "2": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Gruff, pragmatic, and ambitious; talks in bargaining terms; respects power and leverage more than etiquette.",
+      "knowledge_about_others": {
+        "Grant": "Knows Grant\u2019s \u2018ID\u2019 is transactional and can be turned; suspects blackmail.",
+        "Barbra (Cyndi) Diaz": "Finds motive+opportunity through letters and the key; sees Diaz as the true path to \u2018make\u2019 his career.",
+        "Pitt Ruffalo": "Knows Ruffalo will suppress scandal if it protects an innocent woman and the office\u2019s reputation."
+      },
+      "secret": "",
+      "abilities": "Can tail characters, break into offices, and convert weak witnesses; can secure arrests when presented with corroborating evidence.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Heberworth Building office key (in Diaz\u2019s possession; proven by Penn; enables entry/exit while door remains locked)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Penn pivots off Scott and begins the Diaz takedown, moving to arrest Grant and pressure Diaz.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Grant (Heberworth Building elevator-man)": {
+      "type": "suspect",
+      "role": "False identifier; blackmails Diaz; accessory after the fact; leaks to press; paid for info.",
+      "location": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+      "phase_locations": {
+        "1": "Black Cobain\u2019s office (Room 506), Heberworth Building (crime scene; Scott\u2019s escape via fire-escape; Cobain found stabbed)",
+        "2": "Criminal Courts Building / Pitt Ruffalo\u2019s office (Scott\u2019s near-surrender; Palmer DeLisle death breaks identification chain; Penn\u2019s suspicion)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Whining bravado; opportunistic; tries to sound tough while calculating payouts; flips loyalties fast.",
+      "knowledge_about_others": {
+        "Barbra (Cyndi) Diaz": "Claims Diaz had a key; uses it as blackmail leverage.",
+        "Penn": "Knows Penn can ruin him; tries to bargain with information or press leaks.",
+        "Scott Ice (aka \u201cJames Garfunkel\u201d)": "Knows she\u2019s a convenient scapegoat; willing to \u2018identify\u2019 her for money."
+      },
+      "secret": "He falsely identifies Scott to police, then uses the contradiction as leverage to blackmail Diaz and profit from the scandal.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Grant\u2019s identification of Scott as the Heberworth visitor conflicts with Penn\u2019s later timeline logic and becomes leverage/blackmail rather than reliable evidence."
+          ],
+          "reaction": "Grant becomes evasive and tries to sell a new story to the highest bidder (press, Penn, or Diaz), increasing chaos and risk.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 55,
+      "flight_risk": 80
+    },
+    "Brolin Diaz (artist; Scott\u2019s patron; spouse of culprit; provides setting where incriminating conversation overheard)": {
+      "type": "assistant",
+      "role": "Patron and social bridge; her home is where the incriminating threat is overheard and the confession is later accessed.",
+      "location": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+      "phase_locations": {
+        "1": "Trevor Hotel dining-room (Scott meets Pearson Depp; link to Brolin Diaz made)",
+        "2": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Worldly, witty, generous; uses teasing banter to mask loneliness; quickly reads people and nudges them toward \u2018Destiny.\u2019",
+      "knowledge_about_others": {
+        "Barbra (Cyndi) Diaz": "Knows his instability and scandals; unaware at first of murder specifics.",
+        "Pitt Ruffalo": "Knows him socially and respects his authority; can vouch for Scott\u2019s character in elite circles."
+      },
+      "secret": "",
+      "abilities": "",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Quaid Davidson (card-sharp; threatens Scott; frames her with theft charge; tied to Roberts; motive for silencing Scott)": {
+      "type": "suspect",
+      "role": "Card-sharp and conspirator; tries to silence Scott and preserve his freedom; uses Zane and a corrupt policeman to frame Scott.",
+      "location": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)",
+      "phase_locations": {
+        "1": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)",
+        "2": "Hotel Lewis (Scott\u2019s lodging; Zane/Davidson connection; Zane\u2019s claim of stolen pearl necklace used in frame-up)",
+        "3": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+        "4": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)"
+      },
+      "persona": "Oily confidence and sudden brutality; talks like a benefactor while acting like a trap-setter.",
+      "knowledge_about_others": {
+        "Roberts": "Partners in cheating and intimidation; coordinates the frame-up.",
+        "Zane Smith": "Uses her as \u2018respectable\u2019 cover and tool for theft narrative.",
+        "Scott Ice (aka \u201cJames Garfunkel\u201d)": "Sees her as a loose end that can become evidence."
+      },
+      "secret": "He cheats Taika at poker and orchestrates a theft-frame narrative to silence Scott and avoid prosecution.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Pearl necklace (alleged) (used by Zane/Davidson/Roberts to frame Scott on theft charge)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Davidson doubles down: threatens arrest and demands Scott leave town, escalating flight risk and pushing Scott toward Tyson/Ruffalo.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 60,
+      "flight_risk": 75
+    },
+    "Roberts (Taika\u2019s partner; complicit with Davidson; bribes/threatens Scott; orchestrates frame with Zane and a policeman)": {
+      "type": "suspect",
+      "role": "Corporate fixer and coercer; backs Davidson; engineers bribes and the theft frame to neutralize Scott.",
+      "location": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)",
+      "phase_locations": {
+        "1": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)",
+        "2": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+        "3": "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+        "4": "Taika\u2019s Park Avenue apartment (stud poker game; cheating accusation; fight; key suspects Davidson/Roberts introduced)"
+      },
+      "persona": "Thin, careful cruelty; speaks in \u2018business\u2019 terms; prefers leverage and paperwork to fists, but uses both.",
+      "knowledge_about_others": {
+        "Quaid Davidson": "Uses Davidson\u2019s threat posture to enforce silence.",
+        "Penn": "Knows cops can be bought for temporary pressure, not long-term safety.",
+        "Scott Ice (aka \u201cJames Garfunkel\u201d)": "Assumes she can be priced; underestimates her pride."
+      },
+      "secret": "He bribes and frames Scott to keep Taika\u2019s scandal contained and preserve control; collaborates with Davidson and a venal officer.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Ten-thousand-dollar payoff from Davidson/Roberts (coerces Scott to leave town; shows conspiracy to silence her)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Roberts shifts tactics from charm to threat, invoking police and \u2018evidence\u2019 to force immediate compliance.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 50,
+      "flight_risk": 40
+    },
+    "Judge Gyllenhaal Tyson (lawyer/ex-judge; protects Scott; negotiates Taika-Roberts settlement; provides shelter)": {
+      "type": "assistant",
+      "role": "Protector, strategist, and moral ballast; uses influence to shield Scott and force fair settlements.",
+      "location": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+      "phase_locations": {
+        "1": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+        "2": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+        "3": "Judge & Mrs. Tyson\u2019s home (legal strategy/alibi lie; protection; Taika dispute handled)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Booming humor masking razor logic; paternal protectiveness; treats law like a chessboard but hates needless scandal.",
+      "knowledge_about_others": {
+        "Pitt Ruffalo": "Can be pushed into decisive action; respects legal boundaries but will bend for innocence.",
+        "Penn": "Can be threatened with career consequences; responds to power.",
+        "Taika": "Can be steered toward settlement rather than scandal."
+      },
+      "secret": "",
+      "abilities": "Can produce shelter, alibis, and negotiated settlements; can intimidate witnesses and redirect police behavior through reputation.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Grant\u2019s identification of Scott as the Heberworth visitor conflicts with Penn\u2019s later timeline logic and becomes leverage/blackmail rather than reliable evidence."
+          ],
+          "reaction": "Tyson pressures Penn and neutralizes the \u2018ID\u2019 long enough to buy time for Ruffalo\u2019s investigation.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Pearson Depp": {
+      "type": "assistant",
+      "role": "Romantic ally; provides transport and social access; helps reach the Diaz circle and tries to protect Scott physically.",
+      "location": "Trevor Hotel dining-room (Scott meets Pearson Depp; link to Brolin Diaz made)",
+      "phase_locations": {
+        "1": "Trevor Hotel dining-room (Scott meets Pearson Depp; link to Brolin Diaz made)",
+        "2": "Washington Square South lodging-house (Mrs. Blythe Elliott\u2019s) (Scott hides; key contacts; police surveillance begins)",
+        "3": "Brolin Diaz\u2019s Waverly Place house/studio (social circle incl. Ruffalo; later inventory job; confrontation revealing culprit)",
+        "4": "Tyson country house in Arnold (Dutchess County) (final confrontation: Diaz/Grant stop Scott; Diaz\u2019s suicide; confession recovered)"
+      },
+      "persona": "Earnest, protective, and slightly awkward; speaks directly, offers help before thinking through social optics.",
+      "knowledge_about_others": {
+        "Brolin Diaz": "Knows her socially and has posed for her; brings Scott into Diaz orbit.",
+        "Pitt Ruffalo": "Recognizes Ruffalo as powerful; wary of legal peril around Scott."
+      },
+      "secret": "",
+      "abilities": "Can provide transport, introductions, and a safe escort; can physically deter minor threats but struggles against official authority.",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "case_title": "Another pdh bites the dust",
+  "time_period": "2020s",
+  "setting_location": "NUS SOC3 Building",
+  "setting_description": "The summer term and thus the campus is mostly empty except for the graduate students.",
+    "genre": "Murder Mystery",
+    "crime_summary": "The department head, Prof Aishik is found dead in his office. The body shows signs of a struggle. Appearently the new phd student who joined the department recently is the culprit.",
+  "characters": [
+    {
+      "type": "Suspect",
+      "name": "Taha Aksu",
+      "role_archetype": "Phd Student",
+      "starting_location": "The SOC3 Building",
+      "persona_and_secret": "Smart and ambitious. Joined the department recently and is the only one who had access to the office."
+    },
+    {
+      "type": "Suspect",
+      "name": "Yeet",
+      "role_archetype": "Phd Student",
+      "starting_location": "The lab room",
+      "persona_and_secret": "Another phd student who joined the department a year ago and had a recent fight with the department head over some budget cuts for their lab last week."
+    },
+    {
+      "type": "Suspect",
+      "name": "Kuluhan Binici",
+      "role_archetype": "Cleaning staff",
+      "starting_location": "The cleaning room",
+      "persona_and_secret": "The old grumpy cleaning staff who is known to be lazy and not do his job properly."
+    }
+  ],
+  "culprit": "Taha Aksu",
+  "motive": "Taha wanted to pass his qualifying exam and sneeked into the department head's office to steal the evidence that would help him pass the exam. But he was caught by the department head and killed him to silence him.",
+  "critical_evidence": [
+    "The rope that was used to strangle the victim",
+    "The fingerprints of the culprit on victim's keyboard"
+  ],
+  "story_length": "short",
+  "story_phases": [
+    {
+      "objective": "Establish cause of death via examining the body",
+      "required_twists_or_discoveries": "Discover the victim didn't die from a fall, but was strangulated by a rope.",
+      "logic_complexity": "Low"
+    },
+    {
+      "objective": "Locate the hidden evidence in the office",
+      "required_twists_or_discoveries": "Reveal the culprit was the new phd student who joined the department recently.",
+      "logic_complexity": "Medium"
+    }
+  ]
+}
