@@ -288,3 +288,49 @@ export async function postInteraction(scenarioId: string, type: "like" | "commen
         body: JSON.stringify({ type, content })
     });
 }
+
+// ── Scenario Generation ────────────────────────────────────────────
+
+export interface GenerateCharacterInput {
+    type: string;
+    name: string;
+    role_archetype: string;
+    starting_location: string;
+    persona_and_secret: string;
+}
+
+export interface GeneratePhaseInput {
+    objective: string;
+    required_twists_or_discoveries: string;
+    logic_complexity: string;
+}
+
+export interface GenerateScenarioRequest {
+    case_title: string;
+    time_period?: string;
+    setting_location?: string;
+    setting_description?: string;
+    genre: string;
+    crime_summary: string;
+    characters: GenerateCharacterInput[];
+    culprit: string;
+    motive: string;
+    critical_evidence: string[];
+    story_length: string;
+    story_phases: GeneratePhaseInput[];
+}
+
+export interface GenerateScenarioResponse {
+    scenario_id: string;
+    title: string;
+    status: string;
+}
+
+export async function generateScenario(
+    payload: GenerateScenarioRequest
+): Promise<GenerateScenarioResponse> {
+    return apiFetch("/scenarios/generate", {
+        method: "POST",
+        body: JSON.stringify(payload),
+    });
+}

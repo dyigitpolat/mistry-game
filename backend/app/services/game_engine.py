@@ -64,6 +64,8 @@ class GameEngine:
     - Maintain conversation history per character
     """
 
+    _shared_instance: Optional["GameEngine"] = None
+
     def __init__(self):
         self.scenarios: Dict[str, Scenario] = {}
         self._load_builtin_scenarios()
@@ -75,6 +77,7 @@ class GameEngine:
         self._scene_generator: Optional[SceneGenerator] = None
 
         self._init_agents()
+        GameEngine._shared_instance = self
 
     def _init_agents(self):
         """Initialize all agent instances from config.yaml."""
@@ -117,6 +120,26 @@ class GameEngine:
     def load_scenario(self, scenario_id: str) -> Optional[Scenario]:
         """Get a scenario by ID."""
         return self.scenarios.get(scenario_id)
+
+    async def load_scenarios_from_db(self):
+        """Load all scenarios stored in MongoDB into memory."""
+        from app.db.mongodb import get_database
+        db = await get_database()
+        if db is None:
+            return
+        try:
+            cursor = db["scenarios"].find({})
+            async for doc in cursor:
+                sid = doc.get("_id") or doc.get("title", "").lower().replace(" ", "_")
+                doc.pop("_id", None)
+                try:
+                    scenario = Scenario.model_validate(doc)
+                    if sid not in self.scenarios:
+                        self.scenarios[sid] = scenario
+                except Exception as e:
+                    print(f"⚠️ Failed to load DB scenario {sid}: {e}")
+        except Exception as e:
+            print(f"⚠️ Failed to load scenarios from MongoDB: {e}")
 
     def _scenario_to_dict(self, scenario: Scenario) -> dict:
         """Convert Pydantic Scenario to dict for agent consumption."""
