@@ -14,6 +14,7 @@ export function useMovement({
   dungeon,
   setCurrentRoomId,
   addVisited,
+  onLockedGate,
 }) {
   useEffect(() => {
     if (path.length === 0) {
@@ -33,6 +34,13 @@ export function useMovement({
     const nextRoomId = exitDir && room.exits[exitDir] ? room.exits[exitDir] : null;
 
     if (nextRoomId) {
+      const connState = room.connectionStates?.[exitDir];
+      if (connState === "locked") {
+        setPath([]);
+        setPendingObjId(null);
+        onLockedGate?.(room.exitNames?.[exitDir] ?? nextRoomId);
+        return;
+      }
       const nextRoom = dungeon.rooms[nextRoomId];
       if (nextRoom) {
         addVisited(currentRoomId);
@@ -64,5 +72,6 @@ export function useMovement({
     setSelectedObjId,
     setCurrentRoomId,
     addVisited,
+    onLockedGate,
   ]);
 }

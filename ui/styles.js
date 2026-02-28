@@ -41,6 +41,30 @@ export const initScreenStyles = {
     maxWidth: 480,
     textAlign: "center",
   },
+  debug: {
+    fontSize: 12,
+    color: "#9ea8c7",
+    maxWidth: 680,
+    textAlign: "center",
+    wordBreak: "break-word",
+  },
+  previewGrid: {
+    marginTop: 8,
+    display: "grid",
+    gridTemplateColumns: "repeat(6, 36px)",
+    gap: 6,
+    justifyContent: "center",
+    maxWidth: 260,
+  },
+  previewImg: {
+    width: 36,
+    height: 36,
+    objectFit: "contain",
+    imageRendering: "pixelated",
+    border: "1px solid #3a4466",
+    borderRadius: 3,
+    background: "#1a1f31",
+  },
 };
 
 export const headerStyles = {

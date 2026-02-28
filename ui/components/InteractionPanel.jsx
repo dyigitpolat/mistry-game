@@ -5,6 +5,7 @@ export default function InteractionPanel({
   selectedObject,
   panelPos,
   onToggleOpen,
+  getWorldImage,
   onClose,
 }) {
   if (!selectedObject) return null;
@@ -15,8 +16,9 @@ export default function InteractionPanel({
   const isSurface =
     selectedObject.type === "surface_table" ||
     (selectedObject.type === "world_object" && selectedObject.category === "surface");
+  const isPerson = selectedObject.type === "world_person";
 
-  if (!isContainer && !isSurface) return null;
+  if (!isContainer && !isSurface && !isPerson) return null;
 
   const title =
     selectedObject.name ||
@@ -34,6 +36,34 @@ export default function InteractionPanel({
       <div style={panelStyles.title}>
         {title}
       </div>
+
+      {isPerson && (
+        <div>
+          {selectedObject.state && (
+            <div style={{
+              fontSize: 9,
+              color: selectedObject.state === "dead" ? "#e06050" : "#8bc48b",
+              textAlign: "center",
+              marginBottom: 4,
+              letterSpacing: 1,
+              textTransform: "uppercase",
+            }}>
+              {selectedObject.state}
+            </div>
+          )}
+          {selectedObject.description && (
+            <div style={{ fontSize: 10, color: "#d5d0e3", lineHeight: 1.4, marginBottom: 4 }}>
+              {selectedObject.description}
+            </div>
+          )}
+          {selectedObject.notes && (
+            <div style={{ fontSize: 10, color: "#a8a1ba", lineHeight: 1.35, fontStyle: "italic", borderTop: "1px solid #333", paddingTop: 5 }}>
+              {selectedObject.notes}
+            </div>
+          )}
+        </div>
+      )}
+
       {isContainer && (
         <div
           style={{
@@ -73,21 +103,52 @@ export default function InteractionPanel({
                 overflowY: "auto",
               }}
             >
-              {selectedObject.items.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    fontSize: 10,
-                    color: "#ddd6ee",
-                    background: "#262239",
-                    border: "1px solid #4f4868",
-                    borderRadius: 4,
-                    padding: "4px 6px",
-                  }}
-                >
-                  {item.name}
-                </div>
-              ))}
+              {selectedObject.items.map((item) => {
+                const thumb = item.worldItemSvgKey ? getWorldImage?.(item.worldItemSvgKey) : null;
+                const hasThumb = !!(thumb && thumb.complete && thumb.naturalWidth > 0 && thumb.src);
+                return (
+                  <div
+                    key={item.id}
+                    style={{
+                      fontSize: 10,
+                      color: "#ddd6ee",
+                      background: "#262239",
+                      border: "1px solid #4f4868",
+                      borderRadius: 4,
+                      padding: "4px 6px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                    }}
+                  >
+                    {hasThumb ? (
+                      <img
+                        src={thumb.src}
+                        alt={item.name}
+                        style={{
+                          width: 20,
+                          height: 20,
+                          objectFit: "contain",
+                          borderRadius: 3,
+                          background: "#171326",
+                          border: "1px solid #5b5375",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: 20,
+                          height: 20,
+                          borderRadius: 3,
+                          background: item.color ?? "#8a7355",
+                          border: "1px solid rgba(255,255,255,0.25)",
+                        }}
+                      />
+                    )}
+                    <span>{item.name}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

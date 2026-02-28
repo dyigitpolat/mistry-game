@@ -1,7 +1,49 @@
 const BASE =
   typeof import.meta !== "undefined" && import.meta.env?.VITE_ASSET_API_URL
     ? import.meta.env.VITE_ASSET_API_URL.replace(/\/$/, "")
-    : "";
+    : typeof import.meta !== "undefined" && import.meta.env?.DEV
+      ? "http://127.0.0.1:3001"
+      : "";
+const API_TIMEOUT_MS =
+  typeof import.meta !== "undefined" && import.meta.env?.VITE_ASSET_API_TIMEOUT_MS
+    ? Number(import.meta.env.VITE_ASSET_API_TIMEOUT_MS)
+    : 45000;
+const INITIALIZE_WORLD_TIMEOUT_MS =
+  typeof import.meta !== "undefined" && import.meta.env?.VITE_INITIALIZE_WORLD_TIMEOUT_MS
+    ? Number(import.meta.env.VITE_INITIALIZE_WORLD_TIMEOUT_MS)
+    : 10 * 60 * 1000;
+const DEBUG_LOGS =
+  typeof import.meta !== "undefined" && import.meta.env?.DEV;
+
+function log(...args) {
+  if (!DEBUG_LOGS) return;
+  // eslint-disable-next-line no-console
+  console.log("[assetApi]", ...args);
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = API_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const startedAt = performance.now();
+  log("request:start", options?.method ?? "GET", url, { timeoutMs });
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    log("request:end", options?.method ?? "GET", url, {
+      ok: response.ok,
+      status: response.status,
+      ms: Math.round(performance.now() - startedAt),
+    });
+    return response;
+  } catch (err) {
+    log("request:error", options?.method ?? "GET", url, err?.message ?? String(err));
+    if (err?.name === "AbortError") {
+      throw new Error(`Request timed out after ${timeoutMs}ms: ${url}`);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 function cacheKey(type, locked, open) {
   return `${type}:${!!locked}:${!!open}`;
@@ -32,17 +74,27 @@ function typeDescription(type, state) {
   }
 }
 
-/**
- * In-memory cache: cacheKey -> { svg, image }.
- * image is set when the Image has loaded (so we can draw synchronously).
- */
-const svgCache = new Map();
+const artifactCache = new Map();
 const imageCache = new Map();
 
-export async function fetchSvg(type, state = {}) {
+function artifactToDataUrl(artifact) {
+  if (!artifact || typeof artifact !== "object") return null;
+  const mime = typeof artifact.mime_type === "string" ? artifact.mime_type : "image/png";
+  const content = typeof artifact.content === "string" ? artifact.content.trim() : "";
+  if (!content) return null;
+  if (content.startsWith("data:")) return content;
+  if (mime === "image/png") return `data:image/png;base64,${content}`;
+  if (mime === "image/svg+xml") {
+    const blob = new Blob([content], { type: "image/svg+xml" });
+    return URL.createObjectURL(blob);
+  }
+  return `data:${mime};base64,${content}`;
+}
+
+export async function fetchArtifact(type, state = {}) {
   const { locked = false, open = false } = state;
   const key = cacheKey(type, locked, open);
-  if (svgCache.has(key)) return svgCache.get(key);
+  if (artifactCache.has(key)) return artifactCache.get(key);
   if (!BASE) return null;
 
   const request = {
@@ -51,11 +103,11 @@ export async function fetchSvg(type, state = {}) {
     subject_id: type,
     state: visualState(locked, open),
     description: typeDescription(type, state),
-    target_format: "svg",
+    target_format: "png",
     view_box: { w: type.startsWith("container_") || type.startsWith("surface_") ? 80 : 40, h: 40 },
     metadata: { source: "ui_preload" },
   };
-  const res = await fetch(`${BASE}/v1/renders/batch`, {
+  const res = await fetchWithTimeout(`${BASE}/v1/renders/batch`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ requests: [request] }),
@@ -66,12 +118,12 @@ export async function fetchSvg(type, state = {}) {
   }
   const json = await res.json();
   const artifact = json?.artifacts?.[key];
-  const svg = artifact?.content;
-  if (typeof svg === "string" && svg.trim()) {
-    svgCache.set(key, svg);
-    return svg;
+  const content = artifact?.content;
+  if (typeof content === "string" && content.trim()) {
+    artifactCache.set(key, artifact);
+    return artifact;
   }
-  throw new Error("Asset API returned empty or invalid SVG");
+  throw new Error("Asset API returned empty or invalid artifact");
 }
 
 /**
@@ -109,12 +161,12 @@ export async function fetchPreload() {
       subject_id: type,
       state: visualState(state.locked, state.open),
       description: typeDescription(type, state),
-      target_format: "svg",
+      target_format: "png",
       view_box: { w: type.startsWith("container_") || type.startsWith("surface_") ? 80 : 40, h: 40 },
       metadata: { source: "ui_preload_batch" },
     };
   });
-  const res = await fetch(`${BASE}/v1/renders/batch`, {
+  const res = await fetchWithTimeout(`${BASE}/v1/renders/batch`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ requests }),
@@ -128,34 +180,39 @@ export async function fetchPreload() {
   if (!artifacts || typeof artifacts !== "object") throw new Error("Asset API preload returned invalid response");
   const map = {};
   for (const [key, artifact] of Object.entries(artifacts)) {
-    const svg = artifact?.content;
-    if (typeof svg === "string" && svg.trim()) svgCache.set(key, svg);
-    if (typeof svg === "string" && svg.trim()) map[key] = svg;
+    const content = artifact?.content;
+    if (typeof content === "string" && content.trim()) {
+      artifactCache.set(key, artifact);
+      map[key] = artifact;
+    }
   }
   return map;
 }
 
 /**
  * Create Images from a preload map in parallel; store in imageCache. Resolves when all loaded, rejects on first error.
- * @param {Record<string, string>} map - cacheKey -> SVG string
+ * @param {Record<string, { mime_type: string, content: string }>} map - cacheKey -> artifact
  * @returns {Promise<void>}
  */
 export function preloadAllImagesFromMap(map) {
-  const entries = Object.entries(map).filter(([, svg]) => typeof svg === "string" && svg.trim());
+  const entries = Object.entries(map).filter(([, artifact]) => artifactToDataUrl(artifact));
   if (entries.length === 0) return Promise.resolve();
   return Promise.all(
-    entries.map(([key, svg]) => {
+    entries.map(([key, artifact]) => {
       return new Promise((resolve, reject) => {
-        const blob = new Blob([svg], { type: "image/svg+xml" });
-        const url = URL.createObjectURL(blob);
+        const url = artifactToDataUrl(artifact);
+        if (!url) {
+          reject(new Error("Failed to resolve artifact URL"));
+          return;
+        }
         const img = new Image();
         img.onload = () => {
-          URL.revokeObjectURL(url);
+          if (url.startsWith("blob:")) URL.revokeObjectURL(url);
           imageCache.set(key, img);
           resolve();
         };
         img.onerror = () => {
-          URL.revokeObjectURL(url);
+          if (url.startsWith("blob:")) URL.revokeObjectURL(url);
           reject(new Error("Failed to load image"));
         };
         img.src = url;
@@ -166,11 +223,15 @@ export function preloadAllImagesFromMap(map) {
 
 export async function initializeWorld(world, seed = 0) {
   if (!BASE) throw new Error("VITE_ASSET_API_URL is not set");
-  const res = await fetch(`${BASE}/v1/worlds/initialize`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ world, seed, target_format: "svg" }),
-  });
+  const res = await fetchWithTimeout(
+    `${BASE}/v1/worlds/initialize`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ world, seed, target_format: "png" }),
+    },
+    INITIALIZE_WORLD_TIMEOUT_MS
+  );
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`World API ${res.status}: ${text || res.statusText}`);
@@ -184,10 +245,10 @@ export async function updateWorld(world, layout, placement, previousWorldHash = 
     world,
     layout,
     placement,
-    target_format: "svg",
+    target_format: "png",
   };
   if (previousWorldHash) payload.previous_world_hash = previousWorldHash;
-  const res = await fetch(`${BASE}/v1/worlds/update`, {
+  const res = await fetchWithTimeout(`${BASE}/v1/worlds/update`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -199,26 +260,42 @@ export async function updateWorld(world, layout, placement, previousWorldHash = 
   return res.json();
 }
 
-export function preloadWorldSvgImages(artifacts) {
+export async function fetchDebugPreviews() {
+  if (!BASE) return null;
+  const res = await fetchWithTimeout(`${BASE}/v1/debug/previews`, {}, 10000);
+  if (!res.ok) return null;
+  return res.json();
+}
+
+export function preloadWorldSvgImages(artifacts, onImageLoaded) {
   const map = new Map();
   const entries = Object.entries(artifacts)
-    .map(([key, artifact]) => [key, artifact?.content])
-    .filter(([, svg]) => typeof svg === "string" && svg.trim());
+    .map(([key, artifact]) => [key, artifact])
+    .filter(([, artifact]) => !!artifactToDataUrl(artifact));
   if (entries.length === 0) return Promise.resolve(map);
-  return Promise.all(
-    entries.map(([key, svg]) => {
-      return new Promise((resolve, reject) => {
-        const blob = new Blob([svg], { type: "image/svg+xml" });
-        const url = URL.createObjectURL(blob);
+  let loaded = 0;
+  const total = entries.length;
+  return Promise.allSettled(
+    entries.map(([key, artifact]) => {
+      return new Promise((resolve) => {
+        const url = artifactToDataUrl(artifact);
+        if (!url) {
+          resolve();
+          return;
+        }
         const img = new Image();
         img.onload = () => {
-          URL.revokeObjectURL(url);
+          if (url.startsWith("blob:")) URL.revokeObjectURL(url);
           map.set(key, img);
+          loaded += 1;
+          onImageLoaded?.({ key, image: img, loaded, total });
           resolve();
         };
         img.onerror = () => {
-          URL.revokeObjectURL(url);
-          reject(new Error(`Failed to load world image: ${key}`));
+          if (url.startsWith("blob:")) URL.revokeObjectURL(url);
+          loaded += 1;
+          onImageLoaded?.({ key, image: null, loaded, total, error: true });
+          resolve();
         };
         img.src = url;
       });
@@ -240,20 +317,23 @@ export function ensureImageFor(type, state, onLoad) {
     onLoad?.();
     return Promise.resolve();
   }
-  return fetchSvg(type, state).then((svg) => {
-    if (!svg) return;
+  return fetchArtifact(type, state).then((artifact) => {
+    if (!artifact) return;
     return new Promise((resolve, reject) => {
-      const blob = new Blob([svg], { type: "image/svg+xml" });
-      const url = URL.createObjectURL(blob);
+      const url = artifactToDataUrl(artifact);
+      if (!url) {
+        reject(new Error("Invalid artifact data"));
+        return;
+      }
       const img = new Image();
       img.onload = () => {
-        URL.revokeObjectURL(url);
+        if (url.startsWith("blob:")) URL.revokeObjectURL(url);
         imageCache.set(key, img);
         onLoad?.();
         resolve();
       };
       img.onerror = () => {
-        URL.revokeObjectURL(url);
+        if (url.startsWith("blob:")) URL.revokeObjectURL(url);
         reject(new Error("Failed to load image"));
       };
       img.src = url;

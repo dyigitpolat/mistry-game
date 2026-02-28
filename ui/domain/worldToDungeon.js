@@ -16,12 +16,36 @@ function visualStateForObject(category, state) {
   return "closed";
 }
 
+const FLOOR_KEYWORDS = {
+  ceramic: ["kitchen", "bathroom", "tile", "ceramic", "hearth"],
+  grass: ["garden", "courtyard", "yard", "outside", "forest", "clearing"],
+  stone: ["hallway", "corridor", "cellar", "dungeon", "basement", "crypt", "cave", "passage"],
+};
+
+function inferFloorType(description) {
+  const lower = (description || "").toLowerCase();
+  for (const [type, keywords] of Object.entries(FLOOR_KEYWORDS)) {
+    if (keywords.some((kw) => lower.includes(kw))) return type;
+  }
+  return "wood";
+}
+
+function buildExitNames(exits, locations) {
+  const names = {};
+  for (const [dir, locId] of Object.entries(exits)) {
+    if (locId && locations[locId]) {
+      names[dir] = locations[locId].name ?? locId;
+    }
+  }
+  return names;
+}
+
 /**
  * @param {{ world: { locations: Record<string, { name: string, objects: unknown[], people: unknown[] }> }, layout: { grid: object, locations: Record<string, { row: number, col: number, gridW: number, gridH: number, gates: object, exits: object }> }, placement: { rooms: Record<string, { objects: Array<{ id: string, x: number, y: number, w: number, h: number }>, people: Array<{ id: string, x: number, y: number }> }> } }} view
  * @returns {{ rooms: Record<string, import("./room.js").Room>, layout: Record<string, { row: number, col: number }>, startRoomId: string }}
  */
 export function worldViewToDungeon(view) {
-  const { world, layout, placement } = view;
+  const { world, layout, placement, moods } = view;
   const locIds = Object.keys(world.locations).sort();
   const startRoomId = locIds[0] ?? null;
   const rooms = {};
@@ -54,6 +78,7 @@ export function worldViewToDungeon(view) {
       roomObjects.push({
         id: obj.id,
         name: obj.name ?? obj.id,
+        description: obj.description ?? "",
         type: "world_object",
         worldSvgKey,
         x: placedObj.x,
@@ -76,13 +101,15 @@ export function worldViewToDungeon(view) {
       roomObjects.push({
         id: person.id,
         name: person.name ?? person.id,
+        description: person.description ?? "",
         notes: person.notes ?? "",
+        state: state,
         type: "world_person",
         worldSvgKey,
         x: placedPerson.x,
         y: placedPerson.y,
-        w: 1,
-        h: 1,
+        w: 2,
+        h: 2,
         locked: false,
         open: false,
         items: [],
@@ -91,13 +118,18 @@ export function worldViewToDungeon(view) {
 
     rooms[locId] = {
       id: locId,
+      name: loc.name ?? locId,
+      description: loc.description ?? "",
       width: layoutLoc.gridW - 2,
       height: layoutLoc.gridH - 2,
       gridW: layoutLoc.gridW,
       gridH: layoutLoc.gridH,
-      floorType: "wood",
+      floorType: inferFloorType(loc.description ?? ""),
+      mood: moods?.[locId] ?? null,
       gates: layoutLoc.gates ?? { N: false, E: false, S: false, W: false },
       exits: layoutLoc.exits ?? {},
+      connectionStates: layoutLoc.connectionStates ?? {},
+      exitNames: buildExitNames(layoutLoc.exits ?? {}, world.locations),
       objects: roomObjects,
     };
   }

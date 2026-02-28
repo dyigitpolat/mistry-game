@@ -21,6 +21,16 @@ export function drawFloorTile(ctx, gx, gy, type) {
     ctx.fillRect(x, y + PX * 3, TILE, 1);
     ctx.fillRect(x, y + PX * 7, TILE, 1);
     if (r > 0.6) ctx.fillRect(x + PX * 4, y, 1, TILE);
+  } else if (type === "stone") {
+    ctx.fillStyle = r < 0.4 ? "#6b6b78" : r < 0.7 ? "#5e5e6c" : "#747482";
+    ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#52525e";
+    ctx.fillRect(x, y, TILE, 1);
+    ctx.fillRect(x, y, 1, TILE);
+    if (r > 0.5) {
+      ctx.fillStyle = "#585868";
+      ctx.fillRect(x + PX * 3, y + PX * 2, PX * 2, PX);
+    }
   } else {
     ctx.fillStyle = r < 0.5 ? PAL.ceramicA : PAL.ceramicB;
     ctx.fillRect(x, y, TILE, TILE);

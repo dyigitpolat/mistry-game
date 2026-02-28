@@ -20,8 +20,8 @@ class PlaceablePerson(BaseModel):
 
 
 def object_size(category: ObjectCategory) -> tuple[int, int]:
-    if category in (ObjectCategory.SURFACE, ObjectCategory.CONTAINER):
-        return (2, 1)
+    if category in (ObjectCategory.CONTAINER, ObjectCategory.SURFACE):
+        return (3, 3)
     return (1, 1)
 
 
@@ -90,15 +90,15 @@ def place_in_room(
     for person in people:
         done = False
         for _ in range(80):
-            x = rand_int(rng, 1, gw - 2)
-            y = rand_int(rng, 1, gh - 2)
-            if can_place(x, y, 1, 1):
+            x = rand_int(rng, 1, gw - 3)
+            y = rand_int(rng, 1, gh - 3)
+            if can_place(x, y, 2, 2):
                 placed_people.append(PlacementPerson(id=person.id, x=x, y=y))
-                occupy(x, y, 1, 1)
+                occupy(x, y, 2, 2)
                 done = True
                 break
         if not done:
             placed_people.append(PlacementPerson(id=person.id, x=1, y=2))
-            occupy(1, 2, 1, 1)
+            occupy(1, 2, 2, 2)
 
     return PlacementRoom(objects=placed_objects, people=placed_people)

@@ -5,6 +5,7 @@ import os
 
 from src_py.application.ports import CachePort, RendererPort
 from src_py.domain.rendering import CacheRecord, RenderArtifact, RenderProfile, RenderRequest, RenderVariantRequest
+from src_py.infrastructure.debug_feed import add_preview_artifact
 
 
 class ArtifactService:
@@ -42,7 +43,9 @@ class ArtifactService:
 
         async def render_one(request: RenderRequest, fingerprint: str) -> tuple[str, RenderArtifact]:
             async with semaphore:
+                print(f"[artifact_service] render_one:start key={request.key}")
                 artifact = await self._renderer.render(request, profile)
+                print(f"[artifact_service] render_one:done key={request.key}")
             await self._cache.set(
                 CacheRecord(
                     key=request.key,
@@ -50,6 +53,7 @@ class ArtifactService:
                     artifact=artifact,
                 )
             )
+            add_preview_artifact(key=request.key, mime_type=artifact.mime_type, content=artifact.content)
             return request.key, artifact
 
         jobs = [
@@ -74,7 +78,14 @@ class ArtifactService:
 
         async def render_group(request: RenderVariantRequest) -> dict[str, RenderArtifact]:
             async with semaphore:
-                return await self._renderer.render_variants(request, profile)
+                print(
+                    f"[artifact_service] render_group:start subject={request.subject_id} states={list(request.states.keys())}"
+                )
+                result = await self._renderer.render_variants(request, profile)
+                print(f"[artifact_service] render_group:done subject={request.subject_id}")
+                for key, artifact in result.items():
+                    add_preview_artifact(key=key, mime_type=artifact.mime_type, content=artifact.content)
+                return result
 
         jobs = [asyncio.create_task(render_group(request)) for request in requests]
         results = await asyncio.gather(*jobs)

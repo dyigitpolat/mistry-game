@@ -1,4 +1,4 @@
-import { DIRS, CANVAS_W, CANVAS_H } from "../constants/grid.js";
+import { TILE, DIRS, CANVAS_W, CANVAS_H } from "../constants/grid.js";
 import { getGateTiles } from "../domain/geometry.js";
 import { drawFloorTile } from "./drawFloor.js";
 import { drawWallTile, drawWindow, drawGate } from "./drawWalls.js";
@@ -13,14 +13,16 @@ import {
   drawItemsOnSurface,
   drawItemsInContainer,
   drawSelectionHighlight,
+  drawObjectLabel,
+  drawObjectDropShadow,
 } from "./drawObjects.js";
 
 /**
  * @param {CanvasRenderingContext2D} ctx
- * @param {import("../domain/room.js").Room} room
+ * @param {object} room
  * @param {{ x: number, y: number }} playerPos
  * @param {string | null} selectedObjId
- * @param {{ getImage?: (type: string, state: { locked?: boolean, open?: boolean }) => HTMLImageElement | null, getWorldImage?: (key: string) => HTMLImageElement | null }} [options] - getImage for type-based assets; getWorldImage for world API SVG keys.
+ * @param {{ getImage?: Function, getWorldImage?: Function }} [options]
  */
 export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
   const getImage = options.getImage ?? null;
@@ -28,13 +30,13 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
   const { gridW: gw, gridH: gh } = room;
   ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
 
+  for (let y = 1; y < gh - 1; y++)
+    for (let x = 1; x < gw - 1; x++) drawFloorTile(ctx, x, y, room.floorType);
+
   const gateTileSet = new Set();
   DIRS.forEach(d => {
     if (room.gates[d]) getGateTiles(d, gw, gh).forEach(t => gateTileSet.add(`${t.x},${t.y}`));
   });
-
-  for (let y = 1; y < gh - 1; y++)
-    for (let x = 1; x < gw - 1; x++) drawFloorTile(ctx, x, y, room.floorType);
 
   for (let x = 0; x < gw; x++) {
     if (!gateTileSet.has(`${x},0`)) drawWallTile(ctx, x, 0);
@@ -50,7 +52,11 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
 
   room.objects.filter(o => o.type === "window").forEach(o => drawWindow(ctx, o));
 
-  DIRS.forEach(d => { if (room.gates[d]) drawGate(ctx, d, gw, gh); });
+  DIRS.forEach(d => {
+    if (room.gates[d]) {
+      drawGate(ctx, d, gw, gh, room.connectionStates?.[d], room.exitNames?.[d]);
+    }
+  });
 
   const drawables = room.objects
     .filter(o => o.type !== "window")
@@ -64,6 +70,7 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
     } else if (obj.worldSvgKey && getWorldImage) {
       const img = getWorldImage(obj.worldSvgKey);
       if (img) {
+        drawObjectDropShadow(ctx, obj);
         drawSvgImage(ctx, obj, img);
         if (obj.type === "world_object" && (obj.category === "container" || obj.category === "surface")) {
           if (obj.category === "container") drawItemsInContainer(ctx, obj, getWorldImage);
@@ -74,6 +81,7 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
       const state = { locked: obj.locked, open: obj.open };
       const img = getImage?.(obj.type, state);
       if (img) {
+        drawObjectDropShadow(ctx, obj);
         drawSvgImage(ctx, obj, img);
         if (obj.type === "container_box" || obj.type === "container_safe") drawItemsInContainer(ctx, obj, getWorldImage);
         if (obj.type === "surface_table") drawItemsOnSurface(ctx, obj, getWorldImage);
@@ -93,5 +101,12 @@ export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
       }
     }
     if (obj.id === selectedObjId) drawSelectionHighlight(ctx, obj);
+  });
+
+  // Draw labels after all sprites so they appear on top
+  drawables.forEach(({ obj }) => {
+    if (obj.type === "__player__") return;
+    if (obj.type?.startsWith("decoration")) return;
+    drawObjectLabel(ctx, obj);
   });
 }

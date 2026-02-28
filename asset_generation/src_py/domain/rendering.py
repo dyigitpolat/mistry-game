@@ -35,8 +35,8 @@ class RenderProfile(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     style_profile: str = "clean-minimal"
-    provider: str = "mistral"
-    model: str = "mistral-large-latest"
+    provider: str = "fal-ai"
+    model: str = "Qwen/Qwen-Image"
     temperature: float = 0.2
     version: str = "v1"
 
@@ -49,7 +49,7 @@ class RenderRequest(BaseModel):
     subject_id: str
     description: str = Field(min_length=1)
     state: str = "default"
-    target_format: RenderTargetFormat = RenderTargetFormat.SVG
+    target_format: RenderTargetFormat = RenderTargetFormat.PNG
     view_box: ViewBox | None = None
     constraints: dict[str, Any] = Field(default_factory=dict)
     metadata: dict[str, Any] = Field(default_factory=dict)
@@ -80,7 +80,7 @@ class RenderVariantRequest(BaseModel):
     subject_id: str
     key_template: str
     states: dict[str, str]
-    target_format: RenderTargetFormat = RenderTargetFormat.SVG
+    target_format: RenderTargetFormat = RenderTargetFormat.PNG
     view_box: ViewBox | None = None
     constraints: dict[str, Any] = Field(default_factory=dict)
     metadata: dict[str, Any] = Field(default_factory=dict)

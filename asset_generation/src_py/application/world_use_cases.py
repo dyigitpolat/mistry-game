@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+
 from src_py.application.artifact_service import ArtifactService
 from src_py.domain.contracts import InitializeWorldRequest, UpdateWorldRequest, WorldResponse, world_hash
 from src_py.domain.layout import compute_world_layout
@@ -28,6 +30,8 @@ from src_py.domain.rendering import (
     RenderVariantRequest,
     SubjectType,
 )
+from src_py.infrastructure.debug_feed import finish_preview_run, start_preview_run
+from src_py.infrastructure.mood_inference import infer_room_moods
 
 
 def _collect_render_requests(
@@ -149,37 +153,67 @@ class WorldService:
             gate_map={loc_id: loc.gates for loc_id, loc in layout.locations.items()},
         )
         render_requests, variant_requests = _collect_render_requests(request.world, request.target_format)
-        artifacts, _, _ = await self._artifacts.render_many(render_requests, request.profile)
-        variant_artifacts, _ = await self._artifacts.render_variant_groups(variant_requests, request.profile)
-        artifacts.update(variant_artifacts)
-        keys = sorted(artifacts.keys())
-        return WorldResponse(
-            world=request.world,
-            world_hash=world_hash(request.world),
-            layout=layout,
-            placement=placement,
-            artifacts=artifacts,
-            cache_manifest=CacheManifest(hits=0, misses=len(artifacts), keys=keys),
-            diagnostics=Diagnostics(provider=_provider_name(artifacts), warnings=[]),
-        )
+        expected = len(render_requests) + sum(len(v.states) for v in variant_requests)
+        descriptions = {
+            loc_id: loc.description for loc_id, loc in request.world.locations.items()
+        }
+        start_preview_run(expected_total=expected)
+        try:
+            (artifacts, _, _), (variant_artifacts, _), moods = await asyncio.gather(
+                self._artifacts.render_many(render_requests, request.profile),
+                self._artifacts.render_variant_groups(variant_requests, request.profile),
+                infer_room_moods(descriptions),
+            )
+            artifacts.update(variant_artifacts)
+            keys = sorted(artifacts.keys())
+            response = WorldResponse(
+                world=request.world,
+                world_hash=world_hash(request.world),
+                layout=layout,
+                placement=placement,
+                artifacts=artifacts,
+                moods=moods,
+                cache_manifest=CacheManifest(hits=0, misses=len(artifacts), keys=keys),
+                diagnostics=Diagnostics(provider=_provider_name(artifacts), warnings=[]),
+            )
+            finish_preview_run(success=True)
+            return response
+        except Exception as exc:
+            finish_preview_run(success=False, error=str(exc))
+            raise
 
     async def update_world(self, request: UpdateWorldRequest) -> WorldResponse:
         if request.previous_world_hash and request.previous_world_hash != world_hash(request.world):
             raise ValueError("previous_world_hash does not match current world")
         render_requests, variant_requests = _collect_render_requests(request.world, request.target_format)
-        artifacts, _, _ = await self._artifacts.render_many(render_requests, request.profile)
-        variant_artifacts, _ = await self._artifacts.render_variant_groups(variant_requests, request.profile)
-        artifacts.update(variant_artifacts)
-        keys = sorted(artifacts.keys())
-        return WorldResponse(
-            world=request.world,
-            world_hash=world_hash(request.world),
-            layout=request.layout,
-            placement=request.placement,
-            artifacts=artifacts,
-            cache_manifest=CacheManifest(hits=0, misses=len(artifacts), keys=keys),
-            diagnostics=Diagnostics(provider=_provider_name(artifacts), warnings=[]),
-        )
+        expected = len(render_requests) + sum(len(v.states) for v in variant_requests)
+        descriptions = {
+            loc_id: loc.description for loc_id, loc in request.world.locations.items()
+        }
+        start_preview_run(expected_total=expected)
+        try:
+            (artifacts, _, _), (variant_artifacts, _), moods = await asyncio.gather(
+                self._artifacts.render_many(render_requests, request.profile),
+                self._artifacts.render_variant_groups(variant_requests, request.profile),
+                infer_room_moods(descriptions),
+            )
+            artifacts.update(variant_artifacts)
+            keys = sorted(artifacts.keys())
+            response = WorldResponse(
+                world=request.world,
+                world_hash=world_hash(request.world),
+                layout=request.layout,
+                placement=request.placement,
+                artifacts=artifacts,
+                moods=moods,
+                cache_manifest=CacheManifest(hits=0, misses=len(artifacts), keys=keys),
+                diagnostics=Diagnostics(provider=_provider_name(artifacts), warnings=[]),
+            )
+            finish_preview_run(success=True)
+            return response
+        except Exception as exc:
+            finish_preview_run(success=False, error=str(exc))
+            raise
 
     async def render_batch(
         self,

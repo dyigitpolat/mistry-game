@@ -1,14 +1,26 @@
 import { useMemo } from "react";
 import { minimapStyles } from "../styles.js";
 
-const CELL_SIZE = 24;
-const PAD = 12;
+const CELL_SIZE = 32;
+const PAD = 14;
 const NODE_R = 6;
 const VISITED_FILL = "#2a2840";
 const VISITED_STROKE = "#44405a";
 const CURRENT_FILL = "#3a3860";
 const CURRENT_STROKE = "#ffe088";
 const LINE_STROKE = "#44405a";
+const LABEL_FILL = "#9e98b0";
+const LABEL_FILL_CURRENT = "#ffe088";
+
+function abbreviate(name, maxLen = 10) {
+  if (!name) return "";
+  if (name.length <= maxLen) return name;
+  const words = name.split(/\s+/);
+  if (words.length >= 2) {
+    return words.map(w => w.charAt(0).toUpperCase()).join("");
+  }
+  return name.slice(0, maxLen - 1) + ".";
+}
 
 export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, rooms = {} }) {
   const { nodes, edges, bounds } = useMemo(() => {
@@ -19,7 +31,8 @@ export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, ro
     }
     const nodes = visited.map((id) => {
       const pos = layout[id];
-      return pos ? { id, row: pos.row, col: pos.col } : null;
+      const room = rooms[id];
+      return pos ? { id, row: pos.row, col: pos.col, name: room?.name ?? id } : null;
     }).filter(Boolean);
 
     const minRow = Math.min(...nodes.map((n) => n.row));
@@ -40,7 +53,10 @@ export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, ro
           edgeSet.add(key);
           const a = layout[id];
           const b = layout[otherId];
-          if (a && b) edges.push({ from: a, to: b });
+          if (a && b) {
+            const isLocked = r.connectionStates?.[dir] === "locked";
+            edges.push({ from: a, to: b, locked: isLocked });
+          }
         }
       });
     });
@@ -53,12 +69,12 @@ export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, ro
   }, [layout, visitedRoomIds, currentRoomId, rooms]);
 
   const { width, height, scale, offsetX, offsetY } = useMemo(() => {
-    if (nodes.length === 0) return { width: 120, height: 100, scale: CELL_SIZE, offsetX: PAD, offsetY: PAD };
+    if (nodes.length === 0) return { width: 140, height: 100, scale: CELL_SIZE, offsetX: PAD, offsetY: PAD };
     const { minRow, maxRow, minCol, maxCol } = bounds;
     const w = (maxCol - minCol + 1) * CELL_SIZE + PAD * 2;
     const h = (maxRow - minRow + 1) * CELL_SIZE + PAD * 2;
     return {
-      width: Math.max(120, w),
+      width: Math.max(140, w),
       height: Math.max(100, h),
       scale: CELL_SIZE,
       offsetX: PAD - minCol * CELL_SIZE,
@@ -78,29 +94,42 @@ export default function Minimap({ layout = {}, visitedRoomIds, currentRoomId, ro
         style={minimapStyles.svg}
         viewBox={`0 0 ${width} ${height}`}
       >
-        {edges.map(({ from, to }, i) => (
+        {edges.map(({ from, to, locked }, i) => (
           <line
             key={`e-${i}`}
             x1={toX(from.col)}
             y1={toY(from.row)}
             x2={toX(to.col)}
             y2={toY(to.row)}
-            stroke={LINE_STROKE}
+            stroke={locked ? "#7a4040" : LINE_STROKE}
             strokeWidth={1.5}
+            strokeDasharray={locked ? "3 2" : undefined}
           />
         ))}
-        {nodes.map(({ id, row, col }) => {
+        {nodes.map(({ id, row, col, name }) => {
           const isCurrent = id === currentRoomId;
           return (
-            <circle
-              key={id}
-              cx={toX(col)}
-              cy={toY(row)}
-              r={NODE_R}
-              fill={isCurrent ? CURRENT_FILL : VISITED_FILL}
-              stroke={isCurrent ? CURRENT_STROKE : VISITED_STROKE}
-              strokeWidth={isCurrent ? 2.5 : 1}
-            />
+            <g key={id}>
+              <circle
+                cx={toX(col)}
+                cy={toY(row)}
+                r={NODE_R}
+                fill={isCurrent ? CURRENT_FILL : VISITED_FILL}
+                stroke={isCurrent ? CURRENT_STROKE : VISITED_STROKE}
+                strokeWidth={isCurrent ? 2.5 : 1}
+              />
+              <text
+                x={toX(col)}
+                y={toY(row) + NODE_R + 9}
+                textAnchor="middle"
+                fill={isCurrent ? LABEL_FILL_CURRENT : LABEL_FILL}
+                fontSize={7}
+                fontFamily="'Courier New', monospace"
+                fontWeight={isCurrent ? "bold" : "normal"}
+              >
+                {abbreviate(name)}
+              </text>
+            </g>
           );
         })}
       </svg>

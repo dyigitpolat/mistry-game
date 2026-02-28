@@ -26,12 +26,12 @@ def visual_state_for_object(category: ObjectCategory, state: ContainerState | No
 
 def object_view_box(category: ObjectCategory) -> ViewBox:
     if category in (ObjectCategory.SURFACE, ObjectCategory.CONTAINER):
-        return ViewBox(w=80, h=40)
+        return ViewBox(w=120, h=120)
     return ViewBox(w=40, h=40)
 
 
 def person_view_box() -> ViewBox:
-    return ViewBox(w=40, h=40)
+    return ViewBox(w=80, h=80)
 
 
 def object_render_description(

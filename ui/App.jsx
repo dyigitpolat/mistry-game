@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { TILE, CANVAS_W, CANVAS_H } from "./constants/grid.js";
 import { useGameState } from "./hooks/useGameState.js";
 import { useMovement } from "./hooks/useMovement.js";
@@ -21,8 +21,19 @@ function getPanelPos(selectedObj, canvasRef) {
   };
 }
 
+function nextContainerWorldKey(worldKey, locked, open) {
+  if (!worldKey || typeof worldKey !== "string") return worldKey;
+  const parts = worldKey.split(":");
+  if (parts.length < 4) return worldKey;
+  const state = open ? "open" : locked ? "closed_locked" : "closed_unlocked";
+  return `${parts.slice(0, 3).join(":")}:${state}`;
+}
+
 export default function App() {
   const canvasRef = useRef(null);
+  const [lockedMsg, setLockedMsg] = useState(null);
+  const lockedTimerRef = useRef(null);
+
   const {
     dungeon,
     currentRoomId,
@@ -44,7 +55,16 @@ export default function App() {
     getWorldImage,
     worldLoadPending,
     worldLoadError,
+    worldLoadStage,
+    worldLoadProgress,
+    worldLoadPreviewSrcs,
   } = useGameState();
+
+  const handleLockedGate = useCallback((exitName) => {
+    setLockedMsg(`Door to ${exitName} is locked`);
+    if (lockedTimerRef.current) clearTimeout(lockedTimerRef.current);
+    lockedTimerRef.current = setTimeout(() => setLockedMsg(null), 2000);
+  }, []);
 
   useMovement({
     path,
@@ -58,6 +78,7 @@ export default function App() {
     dungeon,
     setCurrentRoomId,
     addVisited,
+    onLockedGate: handleLockedGate,
   });
 
   const handleCanvasClick = useCanvasInteraction({
@@ -78,7 +99,12 @@ export default function App() {
         objects: prev.objects.map((obj) => {
           if (obj.id !== objId) return obj;
           if (obj.category !== "container" || obj.locked) return obj;
-          return { ...obj, open: !obj.open };
+          const nextOpen = !obj.open;
+          return {
+            ...obj,
+            open: nextOpen,
+            worldSvgKey: nextContainerWorldKey(obj.worldSvgKey, obj.locked, nextOpen),
+          };
         }),
       }));
     },
@@ -104,9 +130,25 @@ export default function App() {
             <>
               <span style={initScreenStyles.message}>Failed to load world</span>
               <span style={initScreenStyles.error}>{worldLoadError}</span>
+              <span style={initScreenStyles.debug}>stage: {worldLoadStage}</span>
             </>
           ) : (
-            <span style={initScreenStyles.message}>Loading world view…</span>
+            <>
+              <span style={initScreenStyles.message}>Loading world view…</span>
+              <span style={initScreenStyles.debug}>stage: {worldLoadStage}</span>
+              {worldLoadProgress.total > 0 && (
+                <span style={initScreenStyles.debug}>
+                  images: {worldLoadProgress.loaded}/{worldLoadProgress.total}
+                </span>
+              )}
+              {worldLoadPreviewSrcs.length > 0 && (
+                <div style={initScreenStyles.previewGrid}>
+                  {worldLoadPreviewSrcs.map((src, idx) => (
+                    <img key={`${src}-${idx}`} src={src} alt="loading preview" style={initScreenStyles.previewImg} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       ) : (
@@ -124,8 +166,29 @@ export default function App() {
                 selectedObject={selectedObj}
                 panelPos={panelPos}
                 onToggleOpen={toggleOpenReadonly}
+                getWorldImage={getWorldImage}
                 onClose={() => setSelectedObjId(null)}
               />
+              {lockedMsg && (
+                <div style={{
+                  position: "absolute",
+                  bottom: 16,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  background: "rgba(160, 50, 50, 0.9)",
+                  color: "#ffe0d0",
+                  padding: "6px 16px",
+                  borderRadius: 6,
+                  fontSize: 12,
+                  fontFamily: "'Courier New', monospace",
+                  letterSpacing: 1,
+                  pointerEvents: "none",
+                  zIndex: 20,
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.4)",
+                }}>
+                  {lockedMsg}
+                </div>
+              )}
             </GameCanvas>
             <Minimap
               layout={dungeon?.layout ?? {}}

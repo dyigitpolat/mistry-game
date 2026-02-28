@@ -9,11 +9,8 @@ import { PAL } from "../constants/palette.js";
  */
 export function drawSvgImage(ctx, obj, img) {
   if (!img?.complete || !img.naturalWidth) return;
-  const w = Math.max(obj.w ?? 1, 1) * TILE;
-  const h = Math.max(obj.h ?? 1, 1) * TILE;
-  const x = obj.x * TILE;
-  const y = obj.y * TILE;
-  ctx.drawImage(img, x, y, w, h);
+  const { sx, sy, sw, sh, drawX, drawY, drawW, drawH } = getDrawMetricsForImageInObjectBox(obj, img);
+  ctx.drawImage(img, sx, sy, sw, sh, drawX, drawY, drawW, drawH);
 }
 
 export function drawBox(ctx, obj) {
@@ -141,7 +138,8 @@ export function drawItemIcon(ctx, x, y, size, item) {
  */
 export function drawWorldItemIcon(ctx, x, y, size, img) {
   if (!img?.complete || !img.naturalWidth) return;
-  ctx.drawImage(img, x + 1, y + 1, size - 2, size - 2);
+  const { sx, sy, sw, sh } = getOpaqueSourceBounds(img);
+  ctx.drawImage(img, sx, sy, sw, sh, x + 1, y + 1, size - 2, size - 2);
 }
 
 function drawItemDropShadow(ctx, x, y, size) {
@@ -150,28 +148,182 @@ function drawItemDropShadow(ctx, x, y, size) {
 }
 
 export function getSurfaceItemBounds(obj, index) {
+  const boxW = Math.max(obj.w ?? 1, 1) * TILE;
+  const boxH = Math.max(obj.h ?? 1, 1) * TILE;
   const baseX = obj.x * TILE;
   const baseY = obj.y * TILE;
-  const itemSize = Math.floor(TILE * 0.62);
-  const cols = Math.max((obj.w ?? 1) * 2, 1);
-  const col = index % cols;
-  const row = Math.floor(index / cols);
-  const x = baseX + col * (itemSize - 2) + 2;
-  const y = baseY + PX + 1 + row * (itemSize - 6);
-  return { x, y, w: itemSize - 2, h: itemSize - 2 };
+  const sz = Math.floor(TILE * 0.92);
+  const col = index % 2;
+  const row = Math.floor(index / 2);
+  const spacing = 4;
+  const totalW = sz * 2 + spacing;
+  const totalH = sz * 2 + spacing;
+  const startX = baseX + Math.floor((boxW - totalW) / 2);
+  const startY = baseY + Math.floor((boxH - totalH) / 2);
+  return { x: startX + col * (sz + spacing), y: startY + row * (sz + spacing), w: sz, h: sz };
 }
 
 export function getContainerItemBounds(obj, index) {
+  const boxW = Math.max(obj.w ?? 1, 1) * TILE;
+  const boxH = Math.max(obj.h ?? 1, 1) * TILE;
   const baseX = obj.x * TILE;
   const baseY = obj.y * TILE;
-  const innerX = baseX + ((obj.w ?? 1) === 2 ? PX * 2 : PX);
-  const innerY = baseY + PX * 2;
-  const sz = Math.floor(TILE * 0.46);
+  const sz = Math.floor(TILE * 0.92);
   const col = index % 2;
   const row = Math.floor(index / 2);
-  const x = innerX + col * (sz + 3);
-  const y = innerY + row * (sz + 3);
+  const spacing = 4;
+  const totalW = sz * 2 + spacing;
+  const totalH = sz * 2 + spacing;
+  const startX = baseX + Math.floor((boxW - totalW) / 2);
+  const startY = baseY + Math.floor((boxH - totalH) / 2);
+  const x = startX + col * (sz + spacing);
+  const y = startY + row * (sz + spacing);
   return { x, y, w: sz, h: sz };
+}
+
+const _alphaMaskCache = new WeakMap();
+const _opaqueBoundsCache = new WeakMap();
+
+function getAlphaMaskCanvas(img, drawW, drawH) {
+  const cached = _alphaMaskCache.get(img);
+  if (cached && cached.w === drawW && cached.h === drawH) return cached.canvas;
+  const canvas = document.createElement("canvas");
+  canvas.width = drawW;
+  canvas.height = drawH;
+  const ctx = canvas.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, drawW, drawH);
+  ctx.drawImage(img, 0, 0, drawW, drawH);
+  _alphaMaskCache.set(img, { w: drawW, h: drawH, canvas });
+  return canvas;
+}
+
+function getOpaqueSourceBounds(img, alphaThreshold = 8) {
+  const cached = _opaqueBoundsCache.get(img);
+  if (cached) return cached;
+  const canvas = getAlphaMaskCanvas(img, img.naturalWidth, img.naturalHeight);
+  const ctx = canvas.getContext("2d");
+  const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  let minX = canvas.width;
+  let minY = canvas.height;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < canvas.height; y++) {
+    for (let x = 0; x < canvas.width; x++) {
+      const a = data[(y * canvas.width + x) * 4 + 3];
+      if (a > alphaThreshold) {
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  const out =
+    maxX >= minX && maxY >= minY
+      ? { sx: minX, sy: minY, sw: maxX - minX + 1, sh: maxY - minY + 1 }
+      : { sx: 0, sy: 0, sw: img.naturalWidth, sh: img.naturalHeight };
+  _opaqueBoundsCache.set(img, out);
+  return out;
+}
+
+function getDrawMetricsForImageInObjectBox(obj, img) {
+  const boxW = Math.max(obj.w ?? 1, 1) * TILE;
+  const boxH = Math.max(obj.h ?? 1, 1) * TILE;
+  const boxX = obj.x * TILE;
+  const boxY = obj.y * TILE;
+  const { sx, sy, sw, sh } = getOpaqueSourceBounds(img);
+  const scale = Math.min(boxW / sw, boxH / sh);
+  const drawW = Math.max(1, Math.round(sw * scale));
+  const drawH = Math.max(1, Math.round(sh * scale));
+  const drawX = boxX + Math.floor((boxW - drawW) / 2);
+  const drawY = boxY + Math.floor((boxH - drawH) / 2);
+  return { sx, sy, sw, sh, drawX, drawY, drawW, drawH };
+}
+
+function opaqueRatioInRect(data, width, x, y, w, h) {
+  let opaque = 0;
+  const total = Math.max(w * h, 1);
+  for (let iy = y; iy < y + h; iy++) {
+    for (let ix = x; ix < x + w; ix++) {
+      const a = data[(iy * width + ix) * 4 + 3];
+      if (a > 40) opaque++;
+    }
+  }
+  return opaque / total;
+}
+
+function getMaskAwareItemSlots(obj, count, parentImg, { preferLower = false } = {}) {
+  const slot = Math.floor(TILE * 0.92);
+  if (!parentImg?.complete || !parentImg.naturalWidth) {
+    return Array.from(
+      { length: count },
+      (_, i) => (obj.category === "surface" ? getSurfaceItemBounds(obj, i) : getContainerItemBounds(obj, i))
+    );
+  }
+  const metrics = getDrawMetricsForImageInObjectBox(obj, parentImg);
+  const maskCanvas = getAlphaMaskCanvas(parentImg, metrics.drawW, metrics.drawH);
+  const maskCtx = maskCanvas.getContext("2d");
+  const data = maskCtx.getImageData(0, 0, metrics.drawW, metrics.drawH).data;
+  const step = Math.max(2, Math.floor(slot / 3));
+  const candidates = [];
+  for (let y = 0; y <= metrics.drawH - slot; y += step) {
+    for (let x = 0; x <= metrics.drawW - slot; x += step) {
+      const ratio = opaqueRatioInRect(data, metrics.drawW, x, y, slot, slot);
+      if (ratio >= 0.42) {
+        const centerDist = Math.abs(x + slot / 2 - metrics.drawW / 2);
+        const yCenterDist = Math.abs(y + slot / 2 - metrics.drawH / 2);
+        const centerScore = -(centerDist + yCenterDist * 0.6);
+        const lowerBonus = preferLower ? y * 0.4 : 0;
+        candidates.push({ x, y, ratio, score: centerScore + lowerBonus });
+      }
+    }
+  }
+  candidates.sort((a, b) => b.score - a.score);
+  const picked = [];
+  for (const cand of candidates) {
+    const overlaps = picked.some(
+      (p) =>
+        Math.abs(p.x - cand.x) < slot * 0.8 &&
+        Math.abs(p.y - cand.y) < slot * 0.8
+    );
+    if (!overlaps) picked.push(cand);
+    if (picked.length >= count) break;
+  }
+  if (picked.length === 0) {
+    return Array.from(
+      { length: count },
+      (_, i) => (obj.category === "surface" ? getSurfaceItemBounds(obj, i) : getContainerItemBounds(obj, i))
+    );
+  }
+  return Array.from({ length: count }, (_, i) => {
+    const p = picked[i % picked.length];
+    return { x: metrics.drawX + p.x, y: metrics.drawY + p.y, w: slot, h: slot };
+  });
+}
+
+export function getContainerItemDisplayBounds(obj, count, getWorldImage) {
+  const containerImg = obj.worldSvgKey && getWorldImage ? getWorldImage(obj.worldSvgKey) : null;
+  return getMaskAwareItemSlots(obj, count, containerImg, { preferLower: true });
+}
+
+export function getSurfaceItemDisplayBounds(obj, count, getWorldImage) {
+  const surfaceImg = obj.worldSvgKey && getWorldImage ? getWorldImage(obj.worldSvgKey) : null;
+  return getMaskAwareItemSlots(obj, count, surfaceImg, { preferLower: false });
+}
+
+export function pointHitsImageOpaquePixel(img, bounds, px, py) {
+  if (!img?.complete || !img.naturalWidth) return false;
+  if (px < bounds.x || py < bounds.y || px > bounds.x + bounds.w || py > bounds.y + bounds.h) return false;
+  const { sx, sy, sw, sh } = getOpaqueSourceBounds(img);
+  const relX = Math.floor(sx + ((px - bounds.x) / Math.max(bounds.w, 1)) * sw);
+  const relY = Math.floor(sy + ((py - bounds.y) / Math.max(bounds.h, 1)) * sh);
+  const canvas = getAlphaMaskCanvas(img, img.naturalWidth, img.naturalHeight);
+  const ctx = canvas.getContext("2d");
+  const clampedX = Math.min(Math.max(relX, 0), canvas.width - 1);
+  const clampedY = Math.min(Math.max(relY, 0), canvas.height - 1);
+  const pixel = ctx.getImageData(clampedX, clampedY, 1, 1).data;
+  return pixel[3] > 30;
 }
 
 /**
@@ -181,8 +333,9 @@ export function getContainerItemBounds(obj, index) {
  */
 export function drawItemsOnSurface(ctx, obj, getWorldImage) {
   if (!obj.items?.length) return;
+  const slots = getSurfaceItemDisplayBounds(obj, obj.items.length, getWorldImage);
   obj.items.forEach((item, i) => {
-    const box = getSurfaceItemBounds(obj, i);
+    const box = slots[i] ?? getSurfaceItemBounds(obj, i);
     drawItemDropShadow(ctx, box.x, box.y, box.w);
     const img = item.worldItemSvgKey && getWorldImage ? getWorldImage(item.worldItemSvgKey) : null;
     if (img) drawWorldItemIcon(ctx, box.x, box.y, box.w, img);
@@ -197,8 +350,9 @@ export function drawItemsOnSurface(ctx, obj, getWorldImage) {
  */
 export function drawItemsInContainer(ctx, obj, getWorldImage) {
   if (!obj.items?.length || !obj.open) return;
+  const slots = getContainerItemDisplayBounds(obj, obj.items.length, getWorldImage);
   obj.items.forEach((item, i) => {
-    const box = getContainerItemBounds(obj, i);
+    const box = slots[i] ?? getContainerItemBounds(obj, i);
     drawItemDropShadow(ctx, box.x, box.y, box.w);
     const img = item.worldItemSvgKey && getWorldImage ? getWorldImage(item.worldItemSvgKey) : null;
     if (img) drawWorldItemIcon(ctx, box.x, box.y, box.w, img);
@@ -214,4 +368,38 @@ export function drawSelectionHighlight(ctx, obj) {
   ctx.setLineDash([4, 3]);
   ctx.strokeRect(x, y, w, h);
   ctx.setLineDash([]);
+}
+
+export function drawObjectDropShadow(ctx, obj) {
+  const w = Math.max(obj.w ?? 1, 1) * TILE;
+  const h = Math.max(obj.h ?? 1, 1) * TILE;
+  const cx = obj.x * TILE + w / 2;
+  const cy = obj.y * TILE + h - 2;
+  const rx = w * 0.4;
+  const ry = Math.max(3, h * 0.08);
+  ctx.save();
+  ctx.globalAlpha = 0.25;
+  ctx.fillStyle = "#000";
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+export function drawObjectLabel(ctx, obj) {
+  const name = obj.name;
+  if (!name) return;
+  const w = Math.max(obj.w ?? 1, 1) * TILE;
+  const cx = obj.x * TILE + w / 2;
+  const bottomY = obj.y * TILE + Math.max(obj.h ?? 1, 1) * TILE;
+  ctx.save();
+  ctx.font = "bold 9px 'Courier New', monospace";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  const textWidth = ctx.measureText(name).width;
+  ctx.fillStyle = "rgba(12, 10, 20, 0.65)";
+  ctx.fillRect(cx - textWidth / 2 - 3, bottomY + 1, textWidth + 6, 12);
+  ctx.fillStyle = "#e8e0d0";
+  ctx.fillText(name, cx, bottomY + 2);
+  ctx.restore();
 }
