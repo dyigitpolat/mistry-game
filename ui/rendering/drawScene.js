@@ -9,12 +9,21 @@ import {
   drawTable,
   drawFlowerPot,
   drawLamp,
+  drawSvgImage,
   drawItemsOnSurface,
   drawItemsInContainer,
   drawSelectionHighlight,
 } from "./drawObjects.js";
 
-export function drawScene(ctx, room, playerPos, selectedObjId) {
+/**
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {import("../domain/room.js").Room} room
+ * @param {{ x: number, y: number }} playerPos
+ * @param {string | null} selectedObjId
+ * @param {{ getImage?: (type: string, state: { locked?: boolean, open?: boolean }) => HTMLImageElement | null }} [options] - When getImage is provided and returns a loaded image, use it instead of procedural drawing for that object.
+ */
+export function drawScene(ctx, room, playerPos, selectedObjId, options = {}) {
+  const getImage = options.getImage ?? null;
   const { gridW: gw, gridH: gh } = room;
   ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
 
@@ -51,19 +60,27 @@ export function drawScene(ctx, room, playerPos, selectedObjId) {
   drawables.forEach(({ obj }) => {
     if (obj.type === "__player__") {
       drawPlayer(ctx, obj.x, obj.y);
-    } else if (obj.type === "container_box") {
-      drawBox(ctx, obj);
-      drawItemsInContainer(ctx, obj);
-    } else if (obj.type === "container_safe") {
-      drawSafe(ctx, obj);
-      drawItemsInContainer(ctx, obj);
-    } else if (obj.type === "surface_table") {
-      drawTable(ctx, obj);
-      drawItemsOnSurface(ctx, obj);
-    } else if (obj.type === "decoration_flower") {
-      drawFlowerPot(ctx, obj);
-    } else if (obj.type === "decoration_lamp") {
-      drawLamp(ctx, obj);
+    } else {
+      const state = { locked: obj.locked, open: obj.open };
+      const img = getImage?.(obj.type, state);
+      if (img) {
+        drawSvgImage(ctx, obj, img);
+        if (obj.type === "container_box" || obj.type === "container_safe") drawItemsInContainer(ctx, obj);
+        if (obj.type === "surface_table") drawItemsOnSurface(ctx, obj);
+      } else if (obj.type === "container_box") {
+        drawBox(ctx, obj);
+        drawItemsInContainer(ctx, obj);
+      } else if (obj.type === "container_safe") {
+        drawSafe(ctx, obj);
+        drawItemsInContainer(ctx, obj);
+      } else if (obj.type === "surface_table") {
+        drawTable(ctx, obj);
+        drawItemsOnSurface(ctx, obj);
+      } else if (obj.type === "decoration_flower") {
+        drawFlowerPot(ctx, obj);
+      } else if (obj.type === "decoration_lamp") {
+        drawLamp(ctx, obj);
+      }
     }
     if (obj.id === selectedObjId) drawSelectionHighlight(ctx, obj);
   });

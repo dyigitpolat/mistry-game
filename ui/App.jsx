@@ -4,7 +4,8 @@ import { useGameState } from "./hooks/useGameState.js";
 import { useMovement } from "./hooks/useMovement.js";
 import { useCanvasInteraction } from "./hooks/useCanvasInteraction.js";
 import { useObjectActions } from "./hooks/useObjectActions.js";
-import { layoutStyles } from "./styles.js";
+import { useGeneratedAssets } from "./hooks/useGeneratedAssets.js";
+import { layoutStyles, initScreenStyles } from "./styles.js";
 import Header from "./components/Header.jsx";
 import GameCanvas from "./components/GameCanvas.jsx";
 import InteractionPanel from "./components/InteractionPanel.jsx";
@@ -75,8 +76,11 @@ export default function App() {
     setInventory,
   });
 
+  const { getImage, isInitializing, error } = useGeneratedAssets();
   const selectedObj = room?.objects?.find((o) => o.id === selectedObjId) || null;
   const panelPos = getPanelPos(selectedObj, canvasRef);
+
+  const showInitScreen = isInitializing || error;
 
   return (
     <div style={layoutStyles.root}>
@@ -86,33 +90,49 @@ export default function App() {
         currentRoomId={currentRoomId}
         dungeon={dungeon}
       />
-      <div style={layoutStyles.mainArea}>
-        <GameCanvas
-          canvasRef={canvasRef}
-          room={room}
-          playerPos={playerPos}
-          selectedObjId={selectedObjId}
-          onCanvasClick={handleCanvasClick}
-        >
-          <InteractionPanel
-            selectedObject={selectedObj}
-            panelPos={panelPos}
-            onOpen={toggleOpen}
-            onLock={toggleLock}
-            onPickUpItem={pickUpItem}
-            onPickUpFromSurface={pickUpFromSurface}
-            onClose={() => setSelectedObjId(null)}
-          />
-        </GameCanvas>
-        <Minimap
-          layout={dungeon?.layout ?? {}}
-          visitedRoomIds={visitedRoomIds}
-          currentRoomId={currentRoomId}
-          rooms={dungeon?.rooms ?? {}}
-        />
-        <InventorySidebar inventory={inventory} />
-      </div>
-      <Legend />
+      {showInitScreen ? (
+        <div style={initScreenStyles.container}>
+          {error ? (
+            <>
+              <span style={initScreenStyles.message}>Failed to load assets</span>
+              <span style={initScreenStyles.error}>{error}</span>
+            </>
+          ) : (
+            <span style={initScreenStyles.message}>Generating assets…</span>
+          )}
+        </div>
+      ) : (
+        <>
+          <div style={layoutStyles.mainArea}>
+            <GameCanvas
+              canvasRef={canvasRef}
+              room={room}
+              playerPos={playerPos}
+              selectedObjId={selectedObjId}
+              onCanvasClick={handleCanvasClick}
+              getImage={getImage}
+            >
+              <InteractionPanel
+                selectedObject={selectedObj}
+                panelPos={panelPos}
+                onOpen={toggleOpen}
+                onLock={toggleLock}
+                onPickUpItem={pickUpItem}
+                onPickUpFromSurface={pickUpFromSurface}
+                onClose={() => setSelectedObjId(null)}
+              />
+            </GameCanvas>
+            <Minimap
+              layout={dungeon?.layout ?? {}}
+              visitedRoomIds={visitedRoomIds}
+              currentRoomId={currentRoomId}
+              rooms={dungeon?.rooms ?? {}}
+            />
+            <InventorySidebar inventory={inventory} />
+          </div>
+          <Legend />
+        </>
+      )}
     </div>
   );
 }

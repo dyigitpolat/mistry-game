@@ -17,8 +17,8 @@ The UI follows a **layered architecture**: dependencies point inward. Presentati
                                  ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  APPLICATION (hooks)                                             │
-│  useGameState, useMovement, useCanvasInteraction, useObjectActions
-│  — state, side effects, event handlers                           │
+│  useGameState, useMovement, useCanvasInteraction, useObjectActions,
+│  useGeneratedAssets  — state, side effects, event handlers      │
 └───────────────┬─────────────────────────────┬───────────────────┘
                 │                             │
                 ▼                             ▼
@@ -46,7 +46,8 @@ The UI follows a **layered architecture**: dependencies point inward. Presentati
 | **`constants/`** | Grid dimensions, palette, item names/colors | — |
 | **`domain/`** | Room/object model, geometry, pathfinding, room and dungeon generation, random helpers | `constants/` only |
 | **`rendering/`** | All canvas drawing; `drawScene` orchestrates the rest | `constants/`, `domain/` (geometry, room shape) |
-| **`hooks/`** | Game state, movement, canvas clicks, object actions | `constants/`, `domain/`, `rendering/` (e.g. `drawScene`) |
+| **`hooks/`** | Game state, movement, canvas clicks, object actions, generated assets | `constants/`, `domain/`, `rendering/` (e.g. `drawScene`), `services/` |
+| **`services/`** | Asset API client (fetch SVG by type+state, cache) | — |
 | **`components/`** | Presentational React components | `constants/` (if needed), `styles.js`, other `components/` |
 | **`App.jsx`** | Root component; composes hooks and layout | `constants/`, `hooks/`, `components/`, `styles.js` |
 | **`styles.js`** | Shared inline style objects | — |
@@ -98,13 +99,15 @@ All of this uses **domain** only in the sense that room/object shape is defined 
 
 ### 3.4 Rendering the frame
 
-1. **`GameCanvas`** runs a `useEffect` that depends on `room`, `playerPos`, `selectedObjId`. **`room`** is always the current room (`dungeon.rooms[currentRoomId]`).
-2. It gets the canvas 2D context and calls **`drawScene(ctx, room, playerPos, selectedObjId)`** from `rendering/drawScene.js`.
-3. **`drawScene`**:
+1. **`GameCanvas`** runs a `useEffect` that depends on `room`, `playerPos`, `selectedObjId`, and `getImage`. **`room`** is always the current room (`dungeon.rooms[currentRoomId]`).
+2. **`App`** calls **`useGeneratedAssets()`**, which (when `VITE_USE_GENERATED_ASSETS` is true) fetches all SVG variants once at startup from the asset_generation API, caches them, and returns **`getImage(type, state)`**. That is passed to **`GameCanvas`** and into **`drawScene`**. Object state changes (e.g. open/locked) use the cache without re-fetching.
+3. **`GameCanvas`** gets the canvas 2D context and calls **`drawScene(ctx, room, playerPos, selectedObjId, { getImage })`** from `rendering/drawScene.js`.
+4. **`drawScene`**:
    - Uses **domain** `getGateTiles` to know where to draw gates instead of walls.
-   - Calls **rendering** helpers in order: floor, walls, windows, gates, then objects and player (sorted by Y for depth), and selection highlight.
+   - For each object: if **`getImage`** is provided and returns a loaded image for that type+state, draws it via **`drawSvgImage`** (and items on/inside if applicable); otherwise uses the procedural **`drawBox`**, **`drawSafe`**, **`drawTable`**, etc.
+   - Then floor, walls, windows, gates, objects and player (sorted by Y for depth), and selection highlight.
 
-So: **events → hooks (application) → domain (pathfinding, room data) and rendering (drawScene)**. Domain and rendering do not call each other except that rendering imports domain geometry for gate tiles and room structure.
+So: **events → hooks (application) → domain (pathfinding, room data) and rendering (drawScene)**. Domain and rendering do not call each other except that rendering imports domain geometry for gate tiles and room structure. When the **asset generation service** is used, the UI gets SVGs from its API (see repo root **ARCHITECTURE.md**), caches them by type+state in **`services/assetApi.js`**, and rendering uses them when available instead of procedural drawing.
 
 ---
 
@@ -139,6 +142,7 @@ Room and object shapes are created in **`domain/room.js`** (`createRoom`, `creat
 | Minimap (visit-reveal, current room highlight) | **`components/Minimap.jsx`**. Receives `layout`, `visitedRoomIds`, `currentRoomId`, `rooms`; SVG from props only. Styles in **`styles.js`** (`minimapStyles`). |
 | New object action (e.g. drop item) | **`hooks/useObjectActions.js`**. |
 | New screen or layout section | **`App.jsx`** and/or new component in **`components/`**. Prefer small presentational components that receive props and callbacks. |
+| Asset generation integration | **`services/assetApi.js`** (`fetchPreload`, `preloadAllImagesFromMap`, cache), **`hooks/useGeneratedAssets.js`** (one GET /svg/preload, then build all Images in parallel, expose `getImage`). Lockables: 3 states (open, closed_locked, closed_unlocked); single-state types: one SVG. **`rendering/drawScene.js`** uses `getImage` when provided and falls back to procedural drawing. Set `VITE_ASSET_API_URL` and `VITE_USE_GENERATED_ASSETS=true` to enable. |
 | Shared styles | **`styles.js`**. Prefer named style objects over ad-hoc inline objects in components. |
 
 ### 5.2 Conventions

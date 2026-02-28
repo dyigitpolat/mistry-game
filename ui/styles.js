@@ -20,6 +20,29 @@ export const layoutStyles = {
   },
 };
 
+export const initScreenStyles = {
+  container: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 16,
+    padding: 24,
+  },
+  message: {
+    fontSize: 16,
+    letterSpacing: 1,
+    color: "#e8e0d0",
+  },
+  error: {
+    fontSize: 14,
+    color: "#e06050",
+    maxWidth: 480,
+    textAlign: "center",
+  },
+};
+
 export const headerStyles = {
   container: {
     display: "flex",

@@ -1,6 +1,21 @@
 import { TILE, PX } from "../constants/grid.js";
 import { PAL } from "../constants/palette.js";
 
+/**
+ * Draw a pre-rendered image (e.g. generated SVG) at the object's grid position and size.
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {{ x: number, y: number, w?: number, h?: number }} obj - Room object
+ * @param {HTMLImageElement} img - Loaded image (e.g. from blob URL of SVG)
+ */
+export function drawSvgImage(ctx, obj, img) {
+  if (!img?.complete || !img.naturalWidth) return;
+  const w = Math.max(obj.w ?? 1, 1) * TILE;
+  const h = Math.max(obj.h ?? 1, 1) * TILE;
+  const x = obj.x * TILE;
+  const y = obj.y * TILE;
+  ctx.drawImage(img, x, y, w, h);
+}
+
 export function drawBox(ctx, obj) {
   const x = obj.x * TILE, y = obj.y * TILE;
   const w = 2 * TILE, h = TILE;

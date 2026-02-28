@@ -9,6 +9,7 @@ export default function GameCanvas({
   playerPos,
   selectedObjId,
   onCanvasClick,
+  getImage,
   children,
 }) {
   useEffect(() => {
@@ -21,8 +22,8 @@ export default function GameCanvas({
       ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
       return;
     }
-    drawScene(ctx, room, playerPos, selectedObjId);
-  }, [room, playerPos, selectedObjId, canvasRef]);
+    drawScene(ctx, room, playerPos, selectedObjId, { getImage: getImage ?? undefined });
+  }, [room, playerPos, selectedObjId, canvasRef, getImage]);
 
   return (
     <div style={panelStyles.container}>
