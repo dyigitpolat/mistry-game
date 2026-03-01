@@ -133,7 +133,7 @@ export default function StudioDashboardPage() {
 
           <nav className="flex-1 overflow-y-auto p-3">
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">
-              Whodunit Engine
+              Mistery
             </p>
             <div className="space-y-0.5">
               {SIDEBAR_NAV.map((item) => (
