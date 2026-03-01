@@ -105,11 +105,15 @@ async def main():
         # 1. Generate Hero Banner
         await generate_hero_banner(scene_gen, scenario, sid)
         
-        # 2. Generate Scene Images
+        # 2. Generate Scene Images - access locations via game_world
         locations_dict = {}
-        for name, loc in scenario.locations.items():
+        for name, loc in scenario.game_world.locations.items():
             locations_dict[name] = {
-                "visual_metadata": loc.visual_metadata.model_dump() if loc.visual_metadata else {}
+                "visual_metadata": {
+                    "setting": loc.setting,
+                    "objects": [obj.model_dump() for obj in loc.objects],
+                    "connections": [conn.model_dump() for conn in loc.connections],
+                }
             }
             
         print(f"  -> Generating {len(locations_dict)} location scenes...")

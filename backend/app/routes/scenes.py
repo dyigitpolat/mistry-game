@@ -36,11 +36,18 @@ async def generate_scene(scenario_id: str, location_name: str):
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
-    if location_name not in scenario.locations:
+    # Access locations via game_world
+    locations = scenario.game_world.locations
+    if location_name not in locations:
         raise HTTPException(status_code=404, detail=f"Location '{location_name}' not found.")
 
-    location = scenario.locations[location_name]
-    visual_metadata = location.visual_metadata.model_dump() if location.visual_metadata else {}
+    location = locations[location_name]
+    # Build visual metadata from new schema format
+    visual_metadata = {
+        "setting": location.setting,
+        "objects": [obj.model_dump() for obj in location.objects],
+        "connections": [conn.model_dump() for conn in location.connections],
+    }
 
     path = await _scene_gen.generate_scene_image(
         visual_metadata=visual_metadata,
@@ -102,10 +109,15 @@ async def generate_all_scenes(scenario_id: str):
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
+    # Access locations via game_world
     locations_dict = {}
-    for name, loc in scenario.locations.items():
+    for name, loc in scenario.game_world.locations.items():
         locations_dict[name] = {
-            "visual_metadata": loc.visual_metadata.model_dump() if loc.visual_metadata else {}
+            "visual_metadata": {
+                "setting": loc.setting,
+                "objects": [obj.model_dump() for obj in loc.objects],
+                "connections": [conn.model_dump() for conn in loc.connections],
+            }
         }
 
     results = await _scene_gen.generate_all_scenes(

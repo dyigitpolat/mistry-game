@@ -90,8 +90,8 @@ async def get_profile_stats(user: Dict[str, Any] = Depends(get_current_user)):
             continue
 
         clues_found = len(s.get("player_state", {}).get("clues", []))
-        # Determine total clues available in scenario recursively if needed, but for now we look at scenario.locations
-        total_clues = sum(len(loc.clue_ids) if hasattr(loc, 'clue_ids') else len(loc.clues) for loc in scenario.locations.values())
+        # Determine total clues available in scenario via game_world.locations
+        total_clues = sum(len(loc.clues) for loc in scenario.game_world.locations.values())
         
         accuracy = (clues_found / total_clues * 100) if total_clues > 0 else 100
         if s.get("outcome") == "solved":

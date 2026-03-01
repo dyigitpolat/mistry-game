@@ -1,7 +1,7 @@
 """
 Scene Image Generator — Uses Google Nanobanana (Gemini) for dynamic scene generation.
 
-Generates scene images from VisualMetadata descriptions using the
+Generates scene images from location data (setting, objects, connections) using the
 gemini-3.1-flash-image-preview model.
 """
 
@@ -18,7 +18,7 @@ from google.genai import types
 
 class SceneGenerator:
     """
-    Generates scene images from VisualMetadata using Google Nanobanana.
+    Generates scene images from location data using Google Nanobanana.
 
     Uses the gemini-3.1-flash-image-preview model with image output modality
     to generate atmospheric scene images for game locations.
@@ -35,9 +35,17 @@ class SceneGenerator:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def _build_prompt(self, visual_metadata: Dict[str, Any], location_name: str) -> str:
-        """Build an image generation prompt from VisualMetadata."""
+        """Build an image generation prompt from location data.
+
+        Supports both old visual_metadata format and new schema format:
+        - New schema: setting, objects (with category: surface/container/item), connections (with location_id)
+        - Old format: setting, surfaces_and_containers, connections (with target_location)
+        """
         setting = visual_metadata.get("setting", "")
-        surfaces = visual_metadata.get("surfaces_and_containers", []) 
+
+        # Handle both old and new schema formats
+        objects = visual_metadata.get("objects", [])
+        surfaces = visual_metadata.get("surfaces_and_containers", [])
         connections = visual_metadata.get("connections", [])
 
         # Build structured prompt for atmospheric scene generation
@@ -47,12 +55,27 @@ class SceneGenerator:
             f"Setting: {setting}",
         ]
 
-        if surfaces:
+        # Handle new schema format (objects with categories)
+        if objects:
+            surface_names = [
+                obj.get("name", obj.get("id", ""))
+                for obj in objects
+                if obj.get("category") in ("surface", "container")
+            ]
+            if surface_names:
+                prompt_parts.append(f"Key elements in the scene: {', '.join(surface_names)}")
+        # Handle old schema format (surfaces_and_containers)
+        elif surfaces:
             surface_names = [s.get("id", "") for s in surfaces]
             prompt_parts.append(f"Key elements in the scene: {', '.join(surface_names)}")
 
         if connections:
-            exits = [f"{c.get('mechanism', '')} leading to {c.get('target_location', '')}" for c in connections]
+            exits = []
+            for c in connections:
+                # New schema uses location_id, old uses target_location
+                target = c.get("location_id") or c.get("target_location", "")
+                mechanism = c.get("mechanism", "path")
+                exits.append(f"{mechanism} leading to {target}")
             prompt_parts.append(f"Exits/connections: {', '.join(exits)}")
 
         prompt_parts.extend([

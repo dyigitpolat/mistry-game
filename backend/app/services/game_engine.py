@@ -142,8 +142,16 @@ class GameEngine:
             print(f"⚠️ Failed to load scenarios from MongoDB: {e}")
 
     def _scenario_to_dict(self, scenario: Scenario) -> dict:
-        """Convert Pydantic Scenario to dict for agent consumption."""
-        return json.loads(scenario.model_dump_json())
+        """Convert Pydantic Scenario to dict for agent consumption.
+
+        Note: We flatten game_world.locations to just 'locations' for backward
+        compatibility with agent prompts that expect scenario['locations'].
+        """
+        data = json.loads(scenario.model_dump_json())
+        # Flatten game_world.locations to top-level 'locations' for agents
+        if 'game_world' in data and 'locations' in data['game_world']:
+            data['locations'] = data['game_world']['locations']
+        return data
 
     def _player_state_to_dict(self, player: PlayerState) -> dict:
         """Convert PlayerState to dict for agent consumption."""

@@ -1,12 +1,12 @@
 """
-Pydantic models ported from Specs.md — Knowledge Graph schema.
+Pydantic models ported from new schema — Knowledge Graph schema.
 These define the immutable "Ground Truth" for each game scenario.
 """
 
 from __future__ import annotations
 
 from enum import Enum
-from typing import Dict, List, Optional, Literal
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -25,46 +25,80 @@ class CharacterType(str, Enum):
 
 
 class ConnectionState(str, Enum):
+    UNLOCKED = "unlocked"
+    LOCKED = "locked"
+
+
+class ContainerState(str, Enum):
     OPEN = "open"
     CLOSED = "closed"
     LOCKED = "locked"
-    LOCKED_FROM_INSIDE = "locked from inside"
+
+
+class PersonState(str, Enum):
+    ALIVE = "alive"
+    DEAD = "dead"
+
+
+class ObjectCategory(str, Enum):
+    SURFACE = "surface"
+    CONTAINER = "container"
+    ITEM = "item"
 
 
 # ─── Location sub-models ─────────────────────────────────────────────
 
-class SceneObject(BaseModel):
-    item_id: str = Field(..., description="Unique identifier or name of the item.")
-    visibility: VisibilityState = Field(..., description="How visible the object is initially.")
-    hidden_by: Optional[str] = Field(None, description="What is concealing it, if hidden.")
-
-
-class SurfaceOrContainer(BaseModel):
-    id: str = Field(..., description="Name of the furniture or area.")
-    type: Literal["surface", "container"] = Field(..., description="Whether items rest ON it or INSIDE it.")
-    spatial_relationship: str = Field(..., description="Where it is located in the room.")
-    objects: List[SceneObject] = Field(default_factory=list)
-
-
 class Connection(BaseModel):
-    target_location: str = Field(..., description="The connected Location name.")
-    mechanism: str = Field(..., description="The physical boundary (door, window, path).")
-    state: ConnectionState = Field(..., description="Current traversal state.")
+    location_id: str = Field(..., description="The ID of the destination location.")
+    state: ConnectionState = Field(
+        default=ConnectionState.UNLOCKED,
+        description="Whether the path to the target location is currently open or blocked."
+    )
 
 
-class VisualMetadata(BaseModel):
-    """Hierarchical visual representation for scene reconstruction."""
-    setting: str = Field(..., description="Rich atmospheric description of the room.")
-    connections: List[Connection] = Field(default_factory=list)
-    surfaces_and_containers: List[SurfaceOrContainer] = Field(default_factory=list)
+class Person(BaseModel):
+    id: str = Field(..., description="Unique descriptive ID for the character.")
+    name: str = Field(..., description="The display name of the person.")
+    description: str = Field(..., description="Appearance and current role of the character.")
+    notes: str = Field(..., description="AI context regarding personality, secrets, and behavior.")
+    state: PersonState = Field(
+        default=PersonState.ALIVE,
+        description="The current biological status of the person."
+    )
+
+
+class GameObject(BaseModel):
+    id: str = Field(..., description="Unique descriptive ID for this specific object instance.")
+    category: ObjectCategory = Field(..., description="The type of object: surface, container, or item.")
+    name: str = Field(..., description="The display name of the object.")
+    description: str = Field(..., description="Surfaces, containers, or loose items found in this location. Prose describing what this object looks like in the room.")
+    notes: str = Field(..., description="Internal flavor text, secrets, or AI instructions.")
+    state: Optional[ContainerState] = Field(
+        default=None,
+        description="The physical state of the object. Applicable to containers only."
+    )
+    contains: Optional[List["GameObject"]] = Field(
+        default=None,
+        description="A list of items held by this object. Can only be from item category."
+    )
 
 
 class Location(BaseModel):
-    description: str = Field(..., description="Text description shown to the player.")
-    items: List[str] = Field(default_factory=list, description="Physical inventory items here.")
-    clues: List[str] = Field(default_factory=list, description="Observations/deductions found here.")
-    base_ascii: str = Field("", description="ASCII art of the room layout.")
-    visual_metadata: VisualMetadata = Field(..., description="Structured spatial data.")
+    description: str = Field(..., description="Text provided to player when entering.")
+    clues: List[str] = Field(default_factory=list, description="Intangible deductions.")
+    people: List[Person] = Field(
+        default_factory=list,
+        description="NPCs currently present in this location."
+    )
+    objects: List[GameObject] = Field(
+        default_factory=list,
+        description="Surfaces, containers, or loose items found in this location."
+    )
+    connections: List[Connection] = Field(
+        default_factory=list,
+        description="A list of directed paths leading to other locations."
+    )
+    setting: str = Field(..., description="Atmospheric description of the room's aesthetic.")
 
 
 # ─── Character models ────────────────────────────────────────────────
@@ -96,7 +130,7 @@ class Character(BaseModel):
 
 class Phase(BaseModel):
     """Breakpoints controlling narrative pacing."""
-    id: int
+    id: int = Field(..., description="Unique identifier for the phase. Should start at 0 and increment sequentially.")
     name: str
     objective: str
     unlocked_locations: List[str]
@@ -104,9 +138,9 @@ class Phase(BaseModel):
 
 
 class WinConditions(BaseModel):
-    required_evidence: List[str]
-    required_suspect: List[str]
-    required_motive: List[str]
+    required_evidence: List[str] = Field(..., description="Item(s) evidence required to win.")
+    required_suspect: List[str] = Field(..., description="culprit(s) required to win.")
+    required_motive: List[str] = Field(..., description="Motive(s) required to win.")
 
 
 class ScenarioDifficulty(str, Enum):
@@ -116,12 +150,21 @@ class ScenarioDifficulty(str, Enum):
     HARD = "hard"
 
 
-# ─── Root Scenario model ────────────────────────────────────────────
-
 class ScenarioVisibility(str, Enum):
     PUBLIC = "public"
     PRIVATE = "private"
 
+
+# ─── GameWorld model ─────────────────────────────────────────────────
+
+class GameWorld(BaseModel):
+    locations: Dict[str, Location] = Field(
+        ...,
+        description="A mapping of location IDs to their full definitions, representing the game world."
+    )
+
+
+# ─── Root Scenario model ────────────────────────────────────────────
 
 class Scenario(BaseModel):
     """The root Knowledge Graph object."""
@@ -134,8 +177,8 @@ class Scenario(BaseModel):
     start_time: str = Field(..., description="In-game starting time.")
     win_conditions: WinConditions
     phases: List[Phase]
-    locations: Dict[str, Location]
     characters: Dict[str, Character]
+    game_world: GameWorld = Field(..., description="The game world containing all locations.")
     difficulty: ScenarioDifficulty = Field(ScenarioDifficulty.MEDIUM, description="Pre-set difficulty classification.")
     owner_id: Optional[str] = Field(None, description="User ID of the creator. None for built-in scenarios.")
     owner_name: Optional[str] = Field(None, description="Display name of the creator.")

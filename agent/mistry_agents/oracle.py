@@ -27,8 +27,7 @@ class OracleResponse(BaseModel):
     picked_up_items: List[str] = Field(default_factory=list, description="New items taken.")
     items_remaining_in_room: List[str] = Field(default_factory=list, description="Leftover items.")
     time_cost_minutes: float = Field(5.0, description="In-game time cost of this action.")
-    updated_room_ascii: Optional[str] = None
-    updated_visual_metadata: Optional[Dict[str, Any]] = None
+    updated_visual_metadata: Optional[Dict[str, Any]] = Field(None, description="Updated room objects/connections state.")
     advance_phase: bool = Field(False, description="Whether to advance to the next phase.")
 
 
@@ -65,6 +64,14 @@ class GamemakerOracle:
         locations = scenario.get("locations", {})
         current_location_data = locations.get(current_loc_name, {})
 
+        # Build room data from the new schema
+        # - setting: atmospheric description of the room
+        # - objects: list of GameObjects (surfaces, containers, items)
+        # - connections: list of Connection objects with location_id and state
+        room_setting = current_location_data.get("setting", "")
+        room_objects = current_location_data.get("objects", [])
+        room_connections = current_location_data.get("connections", [])
+
         return template.render(
             scenario_title=scenario.get("title", "Unknown"),
             current_phase_name=current_phase.get("name", "Unknown"),
@@ -75,8 +82,9 @@ class GamemakerOracle:
             elapsed_minutes=player_state.get("elapsed_minutes", 0),
             time_limit=scenario.get("time_limit_minutes", 180),
             unlocked_locations=current_phase.get("unlocked_locations", []),
-            current_room_ascii=current_location_data.get("base_ascii", ""),
-            current_visual_metadata=json.dumps(current_location_data.get("visual_metadata", {}), indent=2),
+            current_room_setting=room_setting,
+            current_room_objects=json.dumps(room_objects, indent=2),
+            current_room_connections=json.dumps(room_connections, indent=2),
         )
 
     def create_agent(

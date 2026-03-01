@@ -19,7 +19,7 @@ import json
 import os
 import re
 from enum import Enum
-from typing import List, Optional, Dict, Literal
+from typing import List, Optional, Dict
 from dataclasses import dataclass
 
 from pydantic import BaseModel, Field
@@ -54,44 +54,78 @@ class CharacterType(str, Enum):
 
 
 class ConnectionState(str, Enum):
+    UNLOCKED = "unlocked"
+    LOCKED = "locked"
+
+
+class ContainerState(str, Enum):
     OPEN = "open"
     CLOSED = "closed"
     LOCKED = "locked"
-    LOCKED_FROM_INSIDE = "locked from inside"
 
 
-class SceneObject(BaseModel):
-    item_id: str = Field(..., description="Unique identifier or name of the item.")
-    visibility: VisibilityState = Field(..., description="How visible the object is initially.")
-    hidden_by: Optional[str] = Field(None, description="What is concealing it, if hidden.")
+class PersonState(str, Enum):
+    ALIVE = "alive"
+    DEAD = "dead"
 
 
-class SurfaceOrContainer(BaseModel):
-    id: str = Field(..., description="Name of the furniture or area.")
-    type: Literal["surface", "container"] = Field(..., description="Whether items rest ON it or INSIDE it.")
-    spatial_relationship: str = Field(..., description="Where it is located in the room.")
-    objects: List[SceneObject] = Field(default_factory=list)
+class ObjectCategory(str, Enum):
+    SURFACE = "surface"
+    CONTAINER = "container"
+    ITEM = "item"
 
 
 class Connection(BaseModel):
-    target_location: str = Field(..., description="The connected Location name.")
-    mechanism: str = Field(..., description="The physical boundary (door, window, path).")
-    state: ConnectionState = Field(..., description="Current traversal state.")
+    location_id: str = Field(..., description="The ID of the destination location.")
+    state: ConnectionState = Field(
+        default=ConnectionState.UNLOCKED,
+        description="Whether the path to the target location is currently open or blocked."
+    )
 
 
-class VisualMetadata(BaseModel):
-    """Hierarchical visual representation for scene reconstruction."""
-    setting: str = Field(..., description="Rich atmospheric description of the room.")
-    connections: List[Connection] = Field(default_factory=list)
-    surfaces_and_containers: List[SurfaceOrContainer] = Field(default_factory=list)
+class Person(BaseModel):
+    id: str = Field(..., description="Unique descriptive ID for the character.")
+    name: str = Field(..., description="The display name of the person.")
+    description: str = Field(..., description="Appearance and current role of the character.")
+    notes: str = Field(..., description="AI context regarding personality, secrets, and behavior.")
+    state: PersonState = Field(
+        default=PersonState.ALIVE,
+        description="The current biological status of the person."
+    )
+
+
+class GameObject(BaseModel):
+    id: str = Field(..., description="Unique descriptive ID for this specific object instance.")
+    category: ObjectCategory = Field(..., description="The type of object: surface, container, or item.")
+    name: str = Field(..., description="The display name of the object.")
+    description: str = Field(..., description="Prose describing what this object looks like in the room.")
+    notes: str = Field(..., description="Internal flavor text, secrets, or AI instructions.")
+    state: Optional[ContainerState] = Field(
+        default=None,
+        description="The physical state of the object. Applicable to containers only."
+    )
+    contains: Optional[List["GameObject"]] = Field(
+        default=None,
+        description="A list of items held by this object. Can only be from item category."
+    )
 
 
 class Location(BaseModel):
-    description: str = Field(..., description="Text description shown to the player.")
-    items: List[str] = Field(default_factory=list, description="Physical inventory items here.")
-    clues: List[str] = Field(default_factory=list, description="Observations/deductions found here.")
-    base_ascii: str = Field("", description="ASCII art of the room layout.")
-    visual_metadata: VisualMetadata = Field(..., description="Structured spatial data.")
+    description: str = Field(..., description="Text provided to player when entering.")
+    clues: List[str] = Field(default_factory=list, description="Intangible deductions.")
+    people: List[Person] = Field(
+        default_factory=list,
+        description="NPCs currently present in this location."
+    )
+    objects: List[GameObject] = Field(
+        default_factory=list,
+        description="Surfaces, containers, or loose items found in this location."
+    )
+    connections: List[Connection] = Field(
+        default_factory=list,
+        description="A list of directed paths leading to other locations."
+    )
+    setting: str = Field(..., description="Atmospheric description of the room's aesthetic.")
 
 
 class ConditionalBehavior(BaseModel):
@@ -119,7 +153,7 @@ class Character(BaseModel):
 
 class Phase(BaseModel):
     """Breakpoints controlling narrative pacing."""
-    id: int
+    id: int = Field(..., description="Unique identifier for the phase.")
     name: str
     objective: str
     unlocked_locations: List[str]
@@ -127,9 +161,9 @@ class Phase(BaseModel):
 
 
 class WinConditions(BaseModel):
-    required_evidence: List[str]
-    required_suspect: List[str]
-    required_motive: List[str]
+    required_evidence: List[str] = Field(..., description="Item(s) evidence required to win.")
+    required_suspect: List[str] = Field(..., description="culprit(s) required to win.")
+    required_motive: List[str] = Field(..., description="Motive(s) required to win.")
 
 
 class ScenarioDifficulty(str, Enum):
@@ -144,6 +178,13 @@ class ScenarioVisibility(str, Enum):
     PRIVATE = "private"
 
 
+class GameWorld(BaseModel):
+    locations: Dict[str, Location] = Field(
+        ...,
+        description="A mapping of location IDs to their full definitions, representing the game world."
+    )
+
+
 class Scenario(BaseModel):
     """The root Knowledge Graph object."""
     title: str
@@ -155,8 +196,8 @@ class Scenario(BaseModel):
     start_time: str = Field(..., description="In-game starting time.")
     win_conditions: WinConditions
     phases: List[Phase]
-    locations: Dict[str, Location]
     characters: Dict[str, Character]
+    game_world: GameWorld = Field(..., description="The game world containing all locations.")
     difficulty: ScenarioDifficulty = Field(ScenarioDifficulty.MEDIUM, description="Pre-set difficulty classification.")
     owner_id: Optional[str] = Field(None, description="User ID of the creator. None for built-in scenarios.")
     owner_name: Optional[str] = Field(None, description="Display name of the creator.")
@@ -351,7 +392,7 @@ CRITICAL REQUIREMENTS - You MUST include ALL of these extracted entities:
 === culprits (use as required_suspect in win_conditions) ===
 {entities.culprits}
 
-=== LOCATIONS (create a game location for EACH of these) ===
+=== LOCATIONS (create a game location for EACH of these under game_world.locations) ===
 {locations_list}
 
 === CHARACTERS (include ALL of these as game characters) ===
@@ -360,23 +401,32 @@ CRITICAL REQUIREMENTS - You MUST include ALL of these extracted entities:
 === CLUES (distribute ALL across locations - each location should have clues) ===
 {clues_list}
 
-=== ITEMS (distribute ALL across locations - place in items or surfaces_and_containers) ===
+=== ITEMS (distribute ALL across locations - place as GameObject with category "item") ===
 {items_list}
 
 INSTRUCTIONS:
-1. Create a Location entry for EVERY extracted location above
-2. Create a Character entry for EVERY extracted character above
+1. Create a Location entry for EVERY extracted location under game_world.locations
+2. Create a Character entry for EVERY extracted character in the characters dict
 3. Place EVERY extracted clue in some location's "clues" array
-4. Place EVERY extracted item in some location's "items" array or in surfaces_and_containers
+4. Place EVERY extracted item as a GameObject with category "item" in location's "objects" array
 5. Design 3-4 phases that unlock locations/characters progressively
 6. Set the culprits as required_suspect in win_conditions
-7. Create 6-8 line ASCII maps for each location
+7. For each location, create appropriate objects (surfaces, containers, items)
+8. Create connections between locations using the Connection model (location_id, state)
+9. Add people (Person objects) to locations where characters should be present initially
+
+SCHEMA NOTES:
+- game_world.locations is a Dict[str, Location] where key is the location ID
+- Location has: description, clues, people, objects, connections, setting
+- GameObject has: id, category (surface/container/item), name, description, notes, state (for containers), contains (nested items)
+- Connection has: location_id (destination), state (unlocked/locked)
+- Person has: id, name, description, notes, state (alive/dead)
 
 VALIDATION CHECKLIST (ensure all are met):
-- Number of locations in output >= {len(entities.locations)}
+- Number of locations in game_world.locations >= {len(entities.locations)}
 - Number of characters in output >= {len(entities.characters)}
 - All {len(entities.clues)} clues appear somewhere in locations
-- All {len(entities.items)} items appear somewhere in locations
+- All {len(entities.items)} items appear as GameObjects in locations
 
 Respond with ONLY valid JSON matching this schema:
 {json.dumps(schema, indent=2)}"""
@@ -386,15 +436,25 @@ Respond with ONLY valid JSON matching this schema:
         return f"""Generate a complete Game State Graph JSON for this mystery.
 
 MANDATORY ENTITY COUNTS TO INCLUDE:
-- Locations: {len(entities.locations)} (create all of them)
+- Locations: {len(entities.locations)} (create all under game_world.locations)
 - Characters: {len(entities.characters)} (include all of them)
 - Clues: {len(entities.clues)} (place all in various locations)
-- Items: {len(entities.items)} (place all in various locations)
+- Items: {len(entities.items)} (place all as GameObjects with category "item")
 
 ORIGINAL STORY FOR CONTEXT AND ATMOSPHERE:
 {story_data['text']}
 
 Generate the Scenario JSON. Ensure EVERY extracted entity appears in the output. Output ONLY valid JSON."""
+
+    def _collect_items_from_objects(self, objects: List[dict]) -> List[str]:
+        """Recursively collect item IDs from GameObject structures."""
+        items = []
+        for obj in objects:
+            if obj.get('category') == 'item':
+                items.append(obj.get('id', obj.get('name', '')))
+            if obj.get('contains'):
+                items.extend(self._collect_items_from_objects(obj['contains']))
+        return items
 
     def validate_coverage(self, game_graph: dict, entities: ExtractedEntities) -> CoverageReport:
         """
@@ -407,19 +467,18 @@ Generate the Scenario JSON. Ensure EVERY extracted entity appears in the output.
         Returns:
             CoverageReport with statistics for each entity type
         """
-        graph_locations = list(game_graph.get('locations', {}).keys())
+        # Get locations from game_world.locations
+        game_world = game_graph.get('game_world', {})
+        graph_locations = list(game_world.get('locations', {}).keys())
         graph_characters = list(game_graph.get('characters', {}).keys())
 
         graph_clues = []
         graph_items = []
-        for loc_data in game_graph.get('locations', {}).values():
+        for loc_data in game_world.get('locations', {}).values():
             graph_clues.extend(loc_data.get('clues', []))
-            graph_items.extend(loc_data.get('items', []))
-            visual_meta = loc_data.get('visual_metadata', {})
-            for surface in visual_meta.get('surfaces_and_containers', []):
-                for obj in surface.get('objects', []):
-                    if obj.get('item_id'):
-                        graph_items.append(obj['item_id'])
+            # Collect items from objects (new schema)
+            objects = loc_data.get('objects', [])
+            graph_items.extend(self._collect_items_from_objects(objects))
 
         return CoverageReport(
             locations=CoverageStats(len(entities.locations), len(graph_locations)),
@@ -574,8 +633,9 @@ Generate the Scenario JSON. Ensure EVERY extracted entity appears in the output.
         self.save_graph(game_graph, output_path)
 
         if verbose:
+            game_world = game_graph.get('game_world', {})
             print(f"\nSummary:")
-            print(f"  Locations: {len(game_graph.get('locations', {}))}")
+            print(f"  Locations: {len(game_world.get('locations', {}))}")
             print(f"  Characters: {len(game_graph.get('characters', {}))}")
             print(f"  Phases: {len(game_graph.get('phases', []))}")
 
