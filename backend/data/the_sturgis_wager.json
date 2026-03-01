@@ -1,0 +1,738 @@
+{
+  "title": "The Sturgis Wager",
+  "description": "A complex mystery involving a cab murder, bank embezzlement, and a sinister criminal syndicate led by a brilliant chemist. The story unfolds through the investigative efforts of reporter Ralph Salman, who wagers his reputation on solving the case.",
+  "victim": "Sonali W. Rohit",
+  "intro_narrative": "On a cold December evening in New York, a cab collides with a cable car, revealing a murdered man inside. The cab driver claims ignorance, but the mysterious circumstances suggest a deeper conspiracy. Meanwhile, reporter Ralph Salman wagers with Sania Neelam that he can solve any unsolved crime from the newspapers. Neelam selects the Knickerbocker Bank mystery, setting Salman on a trail that intertwines with the cab murder and uncovers a web of deceit, embezzlement, and murder orchestrated by a criminal mastermind.",
+  "start_time": "1896-12-31T09:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Revolver from the Knickerbocker Bank",
+      "Bullet extracted from Mithun's arm",
+      "Shadow photograph of Mithun's wound (Roentgen rays)",
+      "Lead-lined vat with dissolved remains and flattened bullet",
+      "Telegram and letter fragments revealing Rohit's confession",
+      "Neelam's typewriter matching the type on Rohit's suicide letter",
+      "Speaking-tube connecting Neelam's office to the laboratory",
+      "Underground passage connecting Neelam's house and the Manhattan Chemical Company"
+    ],
+    "required_suspect": [
+      "Sania Neelam",
+      "Thomas Mithun",
+      "Anil Yami"
+    ],
+    "required_motive": [
+      "Embezzlement and murder to cover financial crimes at the Knickerbocker Bank",
+      "Elimination of accomplices to protect the criminal syndicate",
+      "Personal vendetta and manipulation of relationships for control"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues and establish connections between the cab murder and the Knickerbocker Bank mystery.",
+      "unlocked_locations": [
+        "Knickerbocker Bank",
+        "Broadway (site of cab collision)"
+      ],
+      "unlocked_characters": [
+        "Ralph Salman",
+        "Sania Kajol",
+        "Richard Manas",
+        "Pushkar Rahul (alias Vipin Irrfan)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Bank and Laboratory Exploration",
+      "objective": "Explore the Knickerbocker Bank and uncover the embezzlement scheme, then trace the suspects to the Manhattan Chemical Company.",
+      "unlocked_locations": [
+        "Manhattan Chemical Company",
+        "Exchange Place (Knickerbocker Bank's secondary entrance)"
+      ],
+      "unlocked_characters": [
+        "Thomas Mithun",
+        "Sonali W. Rohit",
+        "Sania Neelam"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering the Syndicate",
+      "objective": "Discover the criminal syndicate's operations and the role of Sania Neelam's underground laboratory.",
+      "unlocked_locations": [
+        "Sania Neelam's House",
+        "Neelam's Underground Laboratory"
+      ],
+      "unlocked_characters": [
+        "Anil Yami",
+        "Javed Neelam",
+        "Monali"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront the culprits and solve the mysteries of the cab murder and bank embezzlement.",
+      "unlocked_locations": [
+        "Monali's Studio"
+      ],
+      "unlocked_characters": [
+        "Sania Kajol"
+      ]
+    }
+  ],
+  "characters": {
+    "Ralph_Salman": {
+      "type": "assistant",
+      "role": "Reporter and Detective",
+      "location": "Knickerbocker Bank",
+      "phase_locations": {
+        "0": "Broadway (site of cab collision)",
+        "1": "Knickerbocker Bank",
+        "2": "Manhattan Chemical Company",
+        "3": "Sania Neelam's House"
+      },
+      "persona": "Intelligent, observant, and methodical. Speaks with quiet confidence and a touch of dry humor. Dedicated to uncovering the truth through meticulous investigation.",
+      "abilities": "Expert in forensic analysis, logical deduction, and investigative journalism. Skilled in piecing together circumstantial evidence and reconstructing crime scenes.",
+      "knowledge_about_others": {
+        "Sania_Neelam": "Suspects him of masterminding a criminal syndicate and orchestrating multiple murders.",
+        "Thomas_Mithun": "Knows he is an accomplice in the Knickerbocker Bank embezzlement and involved in the murder plot.",
+        "Anil_Yami": "Identifies him as a key player in the embezzlement scheme and possibly the mastermind behind Rohit's murder."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Sania_Neelam": {
+      "type": "suspect",
+      "role": "Chemist and Criminal Mastermind",
+      "location": "Sania Neelam's House",
+      "phase_locations": {
+        "0": "Monali's Studio",
+        "1": "Manhattan Chemical Company",
+        "2": "Neelam's Underground Laboratory",
+        "3": "Sania Neelam's House"
+      },
+      "persona": "Calm, collected, and highly intelligent. Speaks with a sardonic wit and an air of superiority. Cold and calculating, with little regard for human life.",
+      "secret": "He is the leader of a criminal syndicate responsible for numerous murders and embezzlements. Uses his scientific knowledge to dispose of bodies and cover his tracks.",
+      "suspicion_meter": 95,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Shadow photograph of Mithun's wound",
+            "Lead-lined vat with dissolved remains"
+          ],
+          "reaction": "Attempts to eliminate Salman and Monali by trapping them in the underground laboratory and asphyxiating them with gas.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Javed_Neelam": {
+      "type": "suspect",
+      "role": "Daughter of Sania Neelam",
+      "location": "Sania Neelam's House",
+      "phase_locations": {
+        "0": "Sania Neelam's House",
+        "1": "Monali's Studio",
+        "2": "Neelam's Underground Laboratory",
+        "3": "Sania Neelam's House"
+      },
+      "persona": "Graceful, intelligent, and compassionate. Speaks with warmth and sincerity. Struggles with the revelation of her father's crimes but remains strong and determined.",
+      "secret": "Unaware of her father's criminal activities but becomes entangled in the mystery due to her relationship with Monali and Mithun's unwanted advances.",
+      "suspicion_meter": 10,
+      "flight_risk": 5,
+      "conditional_behaviors": []
+    },
+    "Monali": {
+      "type": "assistant",
+      "role": "Artist and Friend of Salman",
+      "location": "Monali's Studio",
+      "phase_locations": {
+        "0": "Monali's Studio",
+        "1": "Sania Neelam's House",
+        "2": "Knickerbocker Bank",
+        "3": "Neelam's Underground Laboratory"
+      },
+      "persona": "Charming, talented, and somewhat impulsive. Speaks with enthusiasm and warmth. Struggles with his feelings for Javed Neelam and his loyalty to Salman.",
+      "abilities": "Observant and intuitive, with a keen eye for detail. Provides emotional support and artistic insight to Salman's investigations.",
+      "knowledge_about_others": {
+        "Javed_Neelam": "In love with her and unaware of her father's criminal activities.",
+        "Thomas_Mithun": "Knows he is a rival for Javed's affections and suspects his involvement in shady dealings."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Thomas_Mithun": {
+      "type": "suspect",
+      "role": "Accountant and Accomplice",
+      "location": "Manhattan Chemical Company",
+      "phase_locations": {
+        "0": "Knickerbocker Bank",
+        "1": "Manhattan Chemical Company",
+        "2": "Sania Neelam's House"
+      },
+      "persona": "Nervous, excitable, and somewhat desperate. Speaks with a mix of bravado and fear. Easily manipulated by stronger personalities.",
+      "secret": "Involved in embezzling funds from the Knickerbocker Bank and manipulated by Sania Neelam. Killed by Neelam to silence him.",
+      "suspicion_meter": 85,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Telegram and letter fragments",
+            "Mithun's blood on the telephone receiver"
+          ],
+          "reaction": "Attempts to flee the city but is captured and killed by Sania Neelam.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Richard_Manas": {
+      "type": "assistant",
+      "role": "President of the Knickerbocker Bank",
+      "location": "Knickerbocker Bank",
+      "phase_locations": {
+        "0": "Knickerbocker Bank",
+        "1": "Exchange Place"
+      },
+      "persona": "Calm, composed, and authoritative. Speaks with precision and a touch of formality. Concerned about the bank's reputation and financial stability.",
+      "abilities": "Provides access to the bank's records and facilities. Offers financial insight into the embezzlement scheme.",
+      "knowledge_about_others": {
+        "Sonali_W_Rohit": "Knows he is the head bookkeeper and suspects his involvement in the embezzlement.",
+        "Thomas_Mithun": "Aware of his role as an accountant but unaware of his criminal activities."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Sonali_W_Rohit": {
+      "type": "suspect",
+      "role": "Head Bookkeeper (Victim)",
+      "location": "Knickerbocker Bank",
+      "phase_locations": {
+        "0": "Knickerbocker Bank",
+        "1": "Broadway (site of cab collision)"
+      },
+      "persona": "Nervous, meticulous, and guilt-ridden. Speaks with hesitation and fear. A tragic figure driven to crime by desperation.",
+      "secret": "Embezzled funds from the Knickerbocker Bank under duress from Thomas Mithun and Anil Yami. Murdered to cover up the crimes.",
+      "state": "dead",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Sania_Kajol": {
+      "type": "assistant",
+      "role": "Physician and Friend of Salman",
+      "location": "Broadway (site of cab collision)",
+      "phase_locations": {
+        "0": "Broadway (site of cab collision)",
+        "1": "Sania Neelam's House"
+      },
+      "persona": "Kind, observant, and methodical. Speaks with warmth and professionalism. Provides medical expertise and emotional support to Salman.",
+      "abilities": "Medical knowledge and forensic skills. Assists in analyzing wounds and identifying causes of death.",
+      "knowledge_about_others": {
+        "Ralph_Salman": "Knows of his investigative skills and trusts his judgment.",
+        "Thomas_Mithun": "Treated his bullet wound and provided critical evidence through Roentgen rays."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Pushkar_Rahul": {
+      "type": "suspect",
+      "role": "Sneak Thief (alias Vipin Irrfan)",
+      "location": "Broadway (site of cab collision)",
+      "phase_locations": {
+        "0": "Broadway (site of cab collision)",
+        "1": "Knickerbocker Bank"
+      },
+      "persona": "Sly, opportunistic, and somewhat cowardly. Speaks with a mix of bravado and fear. Easily manipulated and used as a scapegoat.",
+      "secret": "Stole Rohit's satchel from the Knickerbocker Bank vestibule, unwittingly becoming part of the murder investigation.",
+      "suspicion_meter": 60,
+      "flight_risk": 50,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Knickerbocker_Bank": {
+        "description": "A prestigious financial institution in Wall Street. The bank features a public area, bookkeepers' and cashier's departments, and the president's private office. The scene of mysterious pistol shots and embezzlement.",
+        "clues": [
+          "Bloodstains on the curb and steps near the Knickerbocker Bank",
+          "Footprints on the wet floors of the Knickerbocker Bank",
+          "Mithun's blood on the telephone receiver in the Knickerbocker Bank",
+          "Bullet wounds and bone splinters on Rohit's body (found in the morgue)"
+        ],
+        "people": [
+          {
+            "id": "Richard_Manas",
+            "name": "Richard Manas",
+            "description": "A composed and authoritative man in his fifties, serving as the president of the Knickerbocker Bank.",
+            "notes": "Concerned about the bank's reputation and financial stability. Provides access to the bank's records and facilities."
+          },
+          {
+            "id": "Sonali_W_Rohit",
+            "name": "Sonali W. Rohit",
+            "description": "A nervous and meticulous man in his fifties, the head bookkeeper of the Knickerbocker Bank.",
+            "notes": "Victim of embezzlement and murder. His body is found in the cab collision.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "revolver_knickerbocker",
+            "category": "item",
+            "name": "Revolver",
+            "description": "A small revolver kept in the cashier's desk for protection. Two cartridges are empty, indicating recent use.",
+            "notes": "Used by Rohit to shoot Mithun. Later placed back in the desk by the culprit."
+          },
+          {
+            "id": "rohit_satchel",
+            "category": "item",
+            "name": "Rohit's Satchel",
+            "description": "A cheap leather satchel containing a change of linen and toilet articles. Found in the vestibule of the Knickerbocker Bank.",
+            "notes": "Stolen by Pushkar Rahul and later recovered by the police."
+          },
+          {
+            "id": "telegram_fragments",
+            "category": "item",
+            "name": "Telegram and Letter Fragments",
+            "description": "Torn pieces of paper found on Rohit's desk, later pieced together to reveal a confession and plans.",
+            "notes": "Reveals Rohit's embezzlement and his intention to flee."
+          },
+          {
+            "id": "desk_surface",
+            "category": "surface",
+            "name": "Rohit's Desk",
+            "description": "A high desk where Rohit worked standing. The surface is cluttered with ledgers and papers.",
+            "notes": "Contains clues such as the telegram fragments and blotting paper with incriminating marks."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Exchange_Place",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Broadway_Collision",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand and imposing bank with marble floors, high ceilings, and ornate woodwork. The atmosphere is one of quiet efficiency, but tension lingers in the air."
+      },
+      "Broadway_Collision": {
+        "description": "The site of a cab collision with a cable car, where the body of Sonali W. Rohit was discovered. Bloodstains mark the scene of the crime.",
+        "clues": [
+          "Bloodstains on the curb and steps near the Knickerbocker Bank (visible here as well)"
+        ],
+        "people": [
+          {
+            "id": "Ralph_Salman",
+            "name": "Ralph Salman",
+            "description": "A keen-eyed reporter in his thirties, known for his investigative skills.",
+            "notes": "Observes the scene closely and begins piecing together the mystery."
+          },
+          {
+            "id": "Sania_Kajol",
+            "name": "Sania Kajol",
+            "description": "A middle-aged physician with a calm and professional demeanor.",
+            "notes": "Assists in examining the cab driver and the victim."
+          },
+          {
+            "id": "Pushkar_Rahul",
+            "name": "Pushkar Rahul (alias Vipin Irrfan)",
+            "description": "A well-known sneak thief, disheveled and nervous.",
+            "notes": "Arrested at the scene for stealing Rohit's satchel."
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Knickerbocker_Bank",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bustling city street turned chaotic by the collision. The air is filled with the sounds of shouting, clanging cable cars, and the murmur of a growing crowd."
+      },
+      "Manhattan_Chemical_Company": {
+        "description": "A seemingly legitimate chemical company operating out of an old building. The office is sparsely furnished, and the laboratory is hidden in the basement.",
+        "clues": [
+          "Underground passage connecting Neelam's house and the Manhattan Chemical Company"
+        ],
+        "people": [
+          {
+            "id": "Thomas_Mithun",
+            "name": "Thomas Mithun",
+            "description": "A young man with fiery red hair, dressed in loud clothes. His left arm is in a sling.",
+            "notes": "An accountant involved in the embezzlement scheme. Visits the company under suspicious circumstances."
+          }
+        ],
+        "objects": [
+          {
+            "id": "chemical_vat",
+            "category": "container",
+            "name": "Lead-lined Vat",
+            "description": "A large tank filled with a dark, viscous liquid capable of dissolving human remains.",
+            "notes": "Used by Sania Neelam to dispose of bodies, including Mithun's.",
+            "state": "closed"
+          },
+          {
+            "id": "speaking_tube",
+            "category": "item",
+            "name": "Speaking-tube",
+            "description": "A tube connecting the office to the laboratory, used for communication.",
+            "notes": "Critical for Salman and Monali's escape from the death chamber."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Neelam_Underground_Laboratory",
+            "state": "locked"
+          },
+          {
+            "location_id": "Exchange_Place",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A dimly lit and sparsely furnished office with shelves of chemical bottles. The air smells faintly of chemicals, and an eerie silence pervades the space."
+      },
+      "Sania_Neelam_House": {
+        "description": "A grand old-fashioned house set back from the street, with a small garden and high iron railings. The interior is luxuriously furnished, reflecting the wealth of its owner.",
+        "clues": [
+          "Neelam's typewriter matching the type on Rohit's suicide letter"
+        ],
+        "people": [
+          {
+            "id": "Sania_Neelam",
+            "name": "Sania Neelam",
+            "description": "A calm and composed man in his fifties, with an air of quiet authority.",
+            "notes": "A renowned chemist and the mastermind behind the criminal syndicate."
+          },
+          {
+            "id": "Javed_Neelam",
+            "name": "Javed Neelam",
+            "description": "A beautiful young woman in her early twenties, graceful and intelligent.",
+            "notes": "Daughter of Sania Neelam, unaware of her father's crimes until the final confrontation."
+          }
+        ],
+        "objects": [
+          {
+            "id": "neelam_typewriter",
+            "category": "item",
+            "name": "Neelam's Typewriter",
+            "description": "A typewriter used by Sania Neelam, matching the type on Rohit's suicide letter.",
+            "notes": "Used to type incriminating letters and documents."
+          },
+          {
+            "id": "neelam_valise",
+            "category": "item",
+            "name": "Neelam's Valise",
+            "description": "A valise containing bundles of banknotes and journals.",
+            "notes": "Used by Neelam to carry stolen money and incriminating documents."
+          },
+          {
+            "id": "study_desk",
+            "category": "surface",
+            "name": "Neelam's Desk",
+            "description": "A large, cluttered desk in Neelam's study, containing papers, a typewriter, and a telephone.",
+            "notes": "Contains clues such as letters and notes related to the criminal syndicate."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Neelam_Underground_Laboratory",
+            "state": "locked"
+          },
+          {
+            "location_id": "Exchange_Place",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A luxurious and elegantly furnished house with rich woodwork, plush carpets, and fine art. The atmosphere is one of quiet sophistication, masking the sinister activities of its owner."
+      },
+      "Neelam_Underground_Laboratory": {
+        "description": "A hidden laboratory beneath Sania Neelam's house, connected by an underground passage. The room contains a lead-lined vat, a speaking-tube, and various chemical apparatuses.",
+        "clues": [
+          "Lead-lined vat with dissolved remains and flattened bullet"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "death_chamber_vat",
+            "category": "container",
+            "name": "Lead-lined Vat",
+            "description": "A large tank filled with a corrosive liquid capable of dissolving human remains.",
+            "notes": "Used to dispose of bodies, including Mithun's and Neelam's own.",
+            "state": "closed"
+          },
+          {
+            "id": "lab_speaking_tube",
+            "category": "item",
+            "name": "Speaking-tube",
+            "description": "A tube connecting the laboratory to Neelam's study, used for communication.",
+            "notes": "Critical for Salman and Monali's escape from the death chamber."
+          },
+          {
+            "id": "pine_box",
+            "category": "container",
+            "name": "Long Pine Box",
+            "description": "A wooden box containing the remains of one of Neelam's victims.",
+            "notes": "Used to transport bodies to the laboratory for disposal.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Sania_Neelam_House",
+            "state": "locked"
+          },
+          {
+            "location_id": "Manhattan_Chemical_Company",
+            "state": "locked"
+          }
+        ],
+        "setting": "A dimly lit and claustrophobic chamber filled with the acrid smell of chemicals. The walls are lined with shelves of bottles and apparatuses, and the lead-lined vat dominates the room."
+      },
+      "Exchange_Place": {
+        "description": "A secondary entrance to the Knickerbocker Bank, located on Exchange Place. The entrance is protected by a massive iron gate.",
+        "clues": [
+          "Bloodstains on the curb near Exchange Place"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Knickerbocker_Bank",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Manhattan_Chemical_Company",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Sania_Neelam_House",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet and narrow street lined with old buildings. The atmosphere is one of business and routine, but tension lingers near the bank entrance."
+      },
+      "Monali_Studio": {
+        "description": "A spacious and well-lit artist's studio filled with paintings, sculptures, and artistic tools. The studio reflects Monali's talent and passion for art.",
+        "clues": [],
+        "people": [
+          {
+            "id": "Monali",
+            "name": "Monali",
+            "description": "A talented artist in his late twenties, charming and somewhat impulsive.",
+            "notes": "Works on a portrait of Javed Neelam and becomes entangled in the mystery."
+          }
+        ],
+        "objects": [
+          {
+            "id": "javed_portrait",
+            "category": "item",
+            "name": "Portrait of Javed Neelam",
+            "description": "An unfinished portrait of Javed Neelam, capturing her beauty and grace.",
+            "notes": "A symbol of Monali's affection for Javed and his artistic talent."
+          },
+          {
+            "id": "mithun_letter",
+            "category": "item",
+            "name": "Mithun's Letter",
+            "description": "A love letter from Thomas Mithun to Javed Neelam, found in Monali's studio.",
+            "notes": "Reveals Mithun's feelings for Javed and his desperation."
+          }
+        ],
+        "connections": [],
+        "setting": "A bright and airy studio filled with the scent of oil paints and the sight of colorful canvases. The atmosphere is one of creativity and inspiration."
+      }
+    }
+  },
+  "locations": {
+    "Knickerbocker_Bank": {
+      "description": "A prestigious financial institution in Wall Street. The bank features a public area, bookkeepers' and cashier's departments, and the president's private office. The scene of mysterious pistol shots and embezzlement.",
+      "items": [
+        "Revolver",
+        "Rohit's Satchel",
+        "Telegram and Letter Fragments"
+      ],
+      "clues": [
+        "Bloodstains on the curb and steps near the Knickerbocker Bank",
+        "Footprints on the wet floors of the Knickerbocker Bank",
+        "Mithun's blood on the telephone receiver in the Knickerbocker Bank",
+        "Bullet wounds and bone splinters on Rohit's body (found in the morgue)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and imposing bank with marble floors, high ceilings, and ornate woodwork. The atmosphere is one of quiet efficiency, but tension lingers in the air.",
+        "connections": [
+          {
+            "target_location": "Exchange_Place",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Broadway_Collision",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Broadway_Collision": {
+      "description": "The site of a cab collision with a cable car, where the body of Sonali W. Rohit was discovered. Bloodstains mark the scene of the crime.",
+      "items": [],
+      "clues": [
+        "Bloodstains on the curb and steps near the Knickerbocker Bank (visible here as well)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling city street turned chaotic by the collision. The air is filled with the sounds of shouting, clanging cable cars, and the murmur of a growing crowd.",
+        "connections": [
+          {
+            "target_location": "Knickerbocker_Bank",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Manhattan_Chemical_Company": {
+      "description": "A seemingly legitimate chemical company operating out of an old building. The office is sparsely furnished, and the laboratory is hidden in the basement.",
+      "items": [
+        "Speaking-tube"
+      ],
+      "clues": [
+        "Underground passage connecting Neelam's house and the Manhattan Chemical Company"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit and sparsely furnished office with shelves of chemical bottles. The air smells faintly of chemicals, and an eerie silence pervades the space.",
+        "connections": [
+          {
+            "target_location": "Neelam_Underground_Laboratory",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Exchange_Place",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Sania_Neelam_House": {
+      "description": "A grand old-fashioned house set back from the street, with a small garden and high iron railings. The interior is luxuriously furnished, reflecting the wealth of its owner.",
+      "items": [
+        "Neelam's Typewriter",
+        "Neelam's Valise"
+      ],
+      "clues": [
+        "Neelam's typewriter matching the type on Rohit's suicide letter"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A luxurious and elegantly furnished house with rich woodwork, plush carpets, and fine art. The atmosphere is one of quiet sophistication, masking the sinister activities of its owner.",
+        "connections": [
+          {
+            "target_location": "Neelam_Underground_Laboratory",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Exchange_Place",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Neelam_Underground_Laboratory": {
+      "description": "A hidden laboratory beneath Sania Neelam's house, connected by an underground passage. The room contains a lead-lined vat, a speaking-tube, and various chemical apparatuses.",
+      "items": [
+        "Speaking-tube"
+      ],
+      "clues": [
+        "Lead-lined vat with dissolved remains and flattened bullet"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit and claustrophobic chamber filled with the acrid smell of chemicals. The walls are lined with shelves of bottles and apparatuses, and the lead-lined vat dominates the room.",
+        "connections": [
+          {
+            "target_location": "Sania_Neelam_House",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Manhattan_Chemical_Company",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Exchange_Place": {
+      "description": "A secondary entrance to the Knickerbocker Bank, located on Exchange Place. The entrance is protected by a massive iron gate.",
+      "items": [],
+      "clues": [
+        "Bloodstains on the curb near Exchange Place"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet and narrow street lined with old buildings. The atmosphere is one of business and routine, but tension lingers near the bank entrance.",
+        "connections": [
+          {
+            "target_location": "Knickerbocker_Bank",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Manhattan_Chemical_Company",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Sania_Neelam_House",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Monali_Studio": {
+      "description": "A spacious and well-lit artist's studio filled with paintings, sculptures, and artistic tools. The studio reflects Monali's talent and passion for art.",
+      "items": [
+        "Portrait of Javed Neelam",
+        "Mithun's Letter"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bright and airy studio filled with the scent of oil paints and the sight of colorful canvases. The atmosphere is one of creativity and inspiration.",
+        "connections": [],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

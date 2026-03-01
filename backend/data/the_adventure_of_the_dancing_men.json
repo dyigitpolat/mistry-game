@@ -1,0 +1,881 @@
+{
+  "title": "The Adventure of the Dancing Men",
+  "description": "A mysterious case involving coded messages, a troubled marriage, and a deadly confrontation at Riding Thorpe Manor. Unravel the secrets of the dancing men hieroglyphics to uncover the truth behind the tragedy.",
+  "victim": "Barr Bradbury",
+  "intro_narrative": "Eastwood Rapp is visited by Barr Bradbury, a Norfolk squire, who presents a series of cryptic messages composed of dancing men figures. These messages have been appearing at his home, Riding Thorpe Manor, and have left his wife, Smith Bradbury, in a state of terror. Rapp is intrigued by the puzzle and agrees to investigate. As the case unfolds, Rapp uncovers a dark secret from Smith's past and a deadly confrontation that leaves Bradbury dead and his wife gravely injured.",
+  "start_time": "1895-07-20T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Slips of paper with dancing men drawings",
+      "Revolver (murder weapon)",
+      "Hand-bag containing £1000 in banknotes",
+      "Third cartridge (recovered from the garden)",
+      "Window sash with bullet hole"
+    ],
+    "required_suspect": [
+      "Diaz Fanning"
+    ],
+    "required_motive": [
+      "Diaz Fanning's obsession with Smith Bradbury and his attempt to force her to leave her husband, leading to a deadly confrontation."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues and speak with key witnesses at Baker Street and Riding Thorpe Manor.",
+      "unlocked_locations": [
+        "baker_street",
+        "riding_thorpe_manor"
+      ],
+      "unlocked_characters": [
+        "eastwood_rapp",
+        "dr_burrows",
+        "barr_bradbury",
+        "smith_bradbury",
+        "inspector_vance"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Expanding the Search",
+      "objective": "Explore additional locations and uncover more clues about the mysterious messages and the individuals involved.",
+      "unlocked_locations": [
+        "tool_house",
+        "study",
+        "north_walsham_train_station"
+      ],
+      "unlocked_characters": [
+        "mrs_king",
+        "caplan"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Farm Connection",
+      "objective": "Investigate Elrige’s Farm and gather evidence to connect Diaz Fanning to the crime.",
+      "unlocked_locations": [
+        "elriges_farm"
+      ],
+      "unlocked_characters": [
+        "diaz_fanning"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront the culprit and piece together the final elements of the mystery to solve the case.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "eastwood_rapp": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "riding_thorpe_manor",
+        "2": "elriges_farm",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Sharp, observant, and methodical. Speaks with a mix of dry wit and intellectual superiority. Prefers to let others draw their own conclusions before revealing his deductions.",
+      "knowledge_about_others": {
+        "dr_burrows": "Trusts Burrows implicitly and values his companionship, though he often teases him for his lack of observational skills.",
+        "barr_bradbury": "Respects Bradbury’s integrity and concern for his wife but finds his naivety about her past frustrating.",
+        "diaz_fanning": "Views Fanning as a dangerous and obsessive criminal who will stop at nothing to achieve his goals."
+      },
+      "abilities": "Master of deduction, cryptography, and forensic analysis. Skilled at piecing together seemingly unrelated clues to form a coherent narrative.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Slips of paper with dancing men drawings"
+          ],
+          "reaction": "Rapp will begin deciphering the dancing men code, revealing fragments of the message to the player as he progresses.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Cablegram from Ledger Eisenberg"
+          ],
+          "reaction": "Rapp will confirm Diaz Fanning’s identity and criminal background, increasing his determination to apprehend him.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Hand-bag containing £1000 in banknotes",
+            "Third cartridge (recovered from the garden)"
+          ],
+          "reaction": "Rapp will confront Diaz Fanning, using the evidence to force a confession and reveal the full truth of the case.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dr_burrows": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "riding_thorpe_manor",
+        "2": "elriges_farm",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Curious, loyal, and occasionally exasperated by Rapp’s secrecy. Acts as the player’s guide, asking questions and providing context for Rapp’s deductions.",
+      "knowledge_about_others": {
+        "eastwood_rapp": "Admires Rapp’s intellect but is often baffled by his methods until the final reveal.",
+        "barr_bradbury": "Sympathizes with Bradbury’s plight and is horrified by the tragedy that befalls him.",
+        "smith_bradbury": "Feels a mix of pity and frustration toward Smith for her secrecy and the danger it brought to her husband."
+      },
+      "abilities": "Provides narrative context, asks clarifying questions, and helps the player understand the significance of clues. Acts as a bridge between Rapp’s deductions and the player’s understanding.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Slips of paper with dancing men drawings"
+          ],
+          "reaction": "Burrows will express confusion about the dancing men and press Rapp for explanations, prompting him to share insights.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "barr_bradbury": {
+      "type": "suspect",
+      "role": "Victim (initially a client)",
+      "location": "riding_thorpe_manor",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "riding_thorpe_manor",
+        "2": "riding_thorpe_manor",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Honest, straightforward, and deeply concerned for his wife. Speaks with a mix of rural charm and earnestness, but his naivety about Smith’s past is evident.",
+      "knowledge_about_others": {
+        "smith_bradbury": "Loves his wife deeply and trusts her implicitly, though he is troubled by her secrecy and fear.",
+        "diaz_fanning": "Unaware of Fanning’s existence until the messages appear, but grows increasingly suspicious and fearful as the case progresses."
+      },
+      "secret": "He is unaware of the true nature of his wife’s past and the identity of the man behind the dancing men messages. His trust in Smith blinds him to the danger until it is too late.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Slips of paper with dancing men drawings"
+          ],
+          "reaction": "Bradbury will express his frustration and fear about the messages, urging Rapp to find a solution before it’s too late.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Hand-bag containing £1000 in banknotes"
+          ],
+          "reaction": "Bradbury will deny any knowledge of the hand-bag, insisting it does not belong to him or his wife. His confusion will deepen.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "smith_bradbury": {
+      "type": "suspect",
+      "role": "Wife of the Victim",
+      "location": "riding_thorpe_manor",
+      "phase_locations": {
+        "0": "riding_thorpe_manor",
+        "1": "riding_thorpe_manor",
+        "2": "riding_thorpe_manor",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Quiet, reserved, and visibly terrified. Speaks in a soft, hesitant voice, often avoiding direct answers. Her fear is palpable, and she seems trapped by her past.",
+      "knowledge_about_others": {
+        "barr_bradbury": "Loves her husband but is tormented by guilt over her past and the danger it has brought to him.",
+        "diaz_fanning": "Fears Fanning and is desperate to keep him from harming her husband. She knows his true nature and the threat he poses."
+      },
+      "secret": "She was once engaged to Diaz Fanning and fled America to escape his influence. She has been receiving threats from him in the form of the dancing men messages and is terrified of what he might do.",
+      "suspicion_meter": 30,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Slips of paper with dancing men drawings"
+          ],
+          "reaction": "Smith will grow visibly distressed when the messages are discussed, refusing to explain their meaning or her connection to them.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Hand-bag containing £1000 in banknotes"
+          ],
+          "reaction": "Smith will deny any knowledge of the hand-bag, but her fear will escalate, hinting at her desperation to appease Fanning.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "diaz_fanning": {
+      "type": "suspect",
+      "role": "Culprit",
+      "location": "elriges_farm",
+      "phase_locations": {
+        "0": "elriges_farm",
+        "1": "elriges_farm",
+        "2": "elriges_farm",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Charismatic, aggressive, and manipulative. Speaks with a mix of charm and menace, often justifying his actions as being in the name of love. His obsession with Smith is evident in every word.",
+      "knowledge_about_others": {
+        "smith_bradbury": "Claims to love Smith and believes he has a right to her. Views her marriage to Bradbury as a betrayal and is determined to win her back at any cost.",
+        "barr_bradbury": "Sees Bradbury as an obstacle to his happiness and harbors deep resentment toward him, though he claims he never intended to kill him."
+      },
+      "secret": "He is the one sending the dancing men messages to Smith, threatening her and demanding she leave her husband. His obsession led him to confront Bradbury, resulting in a deadly shootout.",
+      "suspicion_meter": 80,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Rapp’s note to Fanning (decoy using dancing men code)"
+          ],
+          "reaction": "Fanning will arrive at Riding Thorpe Manor, believing the note is from Smith. His guard will be down, making him vulnerable to confrontation.",
+          "leads_to_break": true
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Revolver (murder weapon)",
+            "Third cartridge (recovered from the garden)"
+          ],
+          "reaction": "Fanning will confess to the confrontation with Bradbury but will insist he never intended to harm Smith. His confession will reveal the full truth of the case.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "inspector_vance": {
+      "type": "assistant",
+      "role": "Police Inspector",
+      "location": "north_walsham_train_station",
+      "phase_locations": {
+        "0": "north_walsham_train_station",
+        "1": "riding_thorpe_manor",
+        "2": "riding_thorpe_manor",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Professional, methodical, and initially skeptical of Rapp’s methods. Speaks with authority but is open to learning from Rapp’s expertise. His respect for Rapp grows as the case progresses.",
+      "knowledge_about_others": {
+        "eastwood_rapp": "Initially views Rapp as an eccentric but comes to respect his deductive abilities and insights.",
+        "diaz_fanning": "Sees Fanning as a dangerous criminal and is determined to bring him to justice."
+      },
+      "abilities": "Skilled in police procedure, evidence collection, and interrogation. Provides legal authority and support to Rapp’s investigation.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Revolver (murder weapon)",
+            "Third cartridge (recovered from the garden)"
+          ],
+          "reaction": "Vance will express surprise at the evidence of a third shooter and will work with Rapp to piece together the sequence of events.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Hand-bag containing £1000 in banknotes"
+          ],
+          "reaction": "Vance will recognize the significance of the hand-bag as evidence of Fanning’s attempt to bribe Smith and will use it to build a case against him.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "mrs_king": {
+      "type": "suspect",
+      "role": "Cook at Riding Thorpe Manor",
+      "location": "riding_thorpe_manor",
+      "phase_locations": {
+        "0": "riding_thorpe_manor",
+        "1": "riding_thorpe_manor",
+        "2": "riding_thorpe_manor",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Loyal, observant, and protective of the Bradbury family. Speaks with a mix of warmth and caution, often downplaying her knowledge to avoid gossip.",
+      "knowledge_about_others": {
+        "smith_bradbury": "Cares deeply for Smith and is troubled by her fear and secrecy. She suspects something is amiss but does not pry.",
+        "barr_bradbury": "Respects Bradbury and is horrified by his death. She feels a sense of responsibility for the household and its safety."
+      },
+      "secret": "She is aware of the tension in the household and has noticed Smith’s fear, but she does not know the cause. She is also aware of the hand-bag but does not know its significance.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Hand-bag containing £1000 in banknotes"
+          ],
+          "reaction": "Mrs. King will admit to seeing the hand-bag but will claim she does not know where it came from or who it belongs to.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "caplan": {
+      "type": "suspect",
+      "role": "Housemaid at Riding Thorpe Manor",
+      "location": "riding_thorpe_manor",
+      "phase_locations": {
+        "0": "riding_thorpe_manor",
+        "1": "riding_thorpe_manor",
+        "2": "riding_thorpe_manor",
+        "3": "riding_thorpe_manor"
+      },
+      "persona": "Young, nervous, and eager to please. Speaks quickly and often jumps to conclusions. She is easily flustered but means well.",
+      "knowledge_about_others": {
+        "smith_bradbury": "Admires Smith but is puzzled by her behavior and the strange messages. She wants to help but is afraid of overstepping.",
+        "barr_bradbury": "Respects Bradbury and is devastated by his death. She feels guilty for not doing more to prevent the tragedy."
+      },
+      "secret": "She has seen the dancing men messages and is curious about them but has not mentioned them to anyone for fear of causing trouble. She also knows about the trampled flower-bed but does not connect it to the messages.",
+      "suspicion_meter": 5,
+      "flight_risk": 0,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The trampled flower-bed and footprints outside the study window"
+          ],
+          "reaction": "Caplan will admit to seeing the footprints but will claim she thought they were made by the stable-boy or a stray animal.",
+          "leads_to_break": false
+        }
+      ]
+    }
+  },
+  "game_world": {
+    "locations": {
+      "riding_thorpe_manor": {
+        "description": "A grand, old manor house with oak-paneled halls and high windows. The atmosphere is one of quiet elegance, but tension lingers in the air. The study, tool-house, and garden are key areas of interest.",
+        "setting": "The manor is a sprawling, centuries-old estate with a mix of Tudor and Georgian architecture. The interior is warm and inviting, with rich wood paneling, antique furniture, and portraits of the Bradbury ancestors lining the walls. The garden outside is meticulously maintained, with a sundial and a black tool-house near the study window.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |   Study             |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |                     |",
+          "  |   Hall              |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |   Garden  | Tool-House|",
+          "  +----------+----------+"
+        ],
+        "clues": [
+          "The trampled flower-bed and footprints outside the study window indicate an intruder's presence",
+          "The timing and sequence of the gunshots (two nearly simultaneous) imply a confrontation"
+        ],
+        "people": [
+          {
+            "id": "smith_bradbury",
+            "name": "Smith Bradbury",
+            "description": "A tall, elegant woman with a pale face and haunted eyes. She moves quietly and speaks softly, often avoiding direct answers.",
+            "notes": "Smith is deeply troubled by the dancing men messages and her past. She is terrified of Diaz Fanning and the danger he poses to her husband."
+          },
+          {
+            "id": "mrs_king",
+            "name": "Mrs. King",
+            "description": "A stout, middle-aged woman with a kind face and a no-nonsense demeanor. She is always busy with household tasks.",
+            "notes": "Mrs. King is loyal to the Bradburys and is aware of the tension in the household but does not know the cause."
+          },
+          {
+            "id": "caplan",
+            "name": "Caplan",
+            "description": "A young, slender woman with a nervous energy. She is often seen hurrying about her duties.",
+            "notes": "Caplan is curious about the dancing men messages but is afraid to ask questions. She is eager to help but easily flustered."
+          }
+        ],
+        "objects": [
+          {
+            "id": "study_desk",
+            "category": "surface",
+            "name": "Study Desk",
+            "description": "A large, oak desk cluttered with papers, books, and writing implements. A candle sits in a brass holder, casting a flickering light.",
+            "notes": "The desk is where Barr Bradbury spent much of his time. It may contain clues related to the case."
+          },
+          {
+            "id": "window_sash",
+            "category": "surface",
+            "name": "Window Sash",
+            "description": "A wooden window sash with a small bullet hole near the bottom. The glass is intact, but the wood is splintered.",
+            "notes": "The bullet hole suggests a third shooter was present outside the study during the confrontation."
+          },
+          {
+            "id": "hand_bag",
+            "category": "item",
+            "name": "Hand-bag",
+            "description": "A small, crocodile-skin hand-bag with silver clasps. It contains a large sum of money.",
+            "notes": "The hand-bag suggests an attempt at bribery or payment, likely connected to Diaz Fanning."
+          },
+          {
+            "id": "revolver",
+            "category": "item",
+            "name": "Revolver",
+            "description": "A small, pearl-handled revolver with two empty barrels. It is the murder weapon.",
+            "notes": "The revolver was used in the confrontation between Bradbury and Fanning. Its ejector and the recovered cartridge confirm a third shot was fired."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tool_house",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "study",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "north_walsham_train_station",
+            "state": "locked"
+          }
+        ]
+      },
+      "baker_street": {
+        "description": "A cozy, cluttered apartment filled with books, chemical apparatuses, and strange artifacts. The air is thick with the smell of tobacco and experiments. This is where Eastwood Rapp resides and conducts his investigations.",
+        "setting": "The apartment is a mix of Victorian elegance and scientific chaos. A large bay window overlooks Baker Street, and the walls are lined with bookshelves filled with volumes on crime, chemistry, and cryptography. A chemical apparatus bubbles in the corner, and a Persian slipper holds Rapp’s tobacco.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |   Desk              |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |                     |",
+          "  |   Armchairs         |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |   Chemical          |",
+          "  |   Apparatus         |",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The dancing men hieroglyphics convey a coded message",
+          "The symbol 'XXX' (or variations) repeatedly stands for the letter 'E'"
+        ],
+        "people": [
+          {
+            "id": "eastwood_rapp",
+            "name": "Eastwood Rapp",
+            "description": "A tall, thin man with sharp features and piercing eyes. He moves with a quiet intensity and speaks in a measured, deliberate tone.",
+            "notes": "Rapp is a master detective with a keen mind for puzzles and cryptography. He is deeply invested in solving the case of the dancing men."
+          },
+          {
+            "id": "dr_burrows",
+            "name": "Dr. Burrows",
+            "description": "A stout, genial man with a round face and a friendly demeanor. He is often seen observing Rapp’s methods with curiosity.",
+            "notes": "Burrows is Rapp’s loyal friend and chronicler. He provides context and asks questions that help the player understand the case."
+          }
+        ],
+        "objects": [
+          {
+            "id": "chemical_apparatus",
+            "category": "item",
+            "name": "Chemical Apparatus",
+            "description": "A complex setup of glass tubes, beakers, and burners, bubbling with a malodorous liquid. Rapp uses it for his experiments.",
+            "notes": "The apparatus is a constant presence in Rapp’s apartment, reflecting his scientific interests."
+          },
+          {
+            "id": "slips_of_paper",
+            "category": "item",
+            "name": "Slips of Paper with Dancing Men Drawings",
+            "description": "Several small slips of paper covered in strange, childlike drawings of dancing men. The figures seem to form a coded message.",
+            "notes": "These slips are the key to deciphering the dancing men code and uncovering the truth behind the messages."
+          },
+          {
+            "id": "rapps_notebook",
+            "category": "container",
+            "name": "Rapp’s Notebook",
+            "description": "A leather-bound notebook filled with Rapp’s observations, deductions, and sketches. It is his most prized possession.",
+            "notes": "The notebook contains Rapp’s notes on the dancing men case, including his attempts to decipher the code.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "cablegram",
+                "category": "item",
+                "name": "Cablegram from Ledger Eisenberg",
+                "description": "A cablegram confirming the identity and criminal background of Diaz Fanning.",
+                "notes": "The cablegram provides crucial information about Fanning’s past and his connection to Smith Bradbury."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "riding_thorpe_manor",
+            "state": "locked"
+          }
+        ]
+      },
+      "tool_house": {
+        "description": "A small, black wooden shed located near the garden of Riding Thorpe Manor. The door is covered in strange chalk drawings of dancing men.",
+        "setting": "The tool-house is a simple, utilitarian structure with a sloped roof and a single door. The garden around it is well-tended, with flower-beds and a sundial nearby. The chalk drawings on the door are the most striking feature.",
+        "ascii_map": [
+          "  +----------+",
+          "  |          |",
+          "  |  Door    |",
+          "  |  (Chalk  |",
+          "  |  Drawings)|",
+          "  +----------+",
+          "     |    |    ",
+          "     |    |    ",
+          "  +--+    +--+",
+          "  | Garden   |",
+          "  +----------+"
+        ],
+        "clues": [
+          "The word 'NEVER' in the dancing men messages indicates a refusal or warning"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "tool_house_door",
+            "category": "surface",
+            "name": "Tool-House Door",
+            "description": "A black wooden door covered in chalk drawings of dancing men. The drawings seem to form a message.",
+            "notes": "The door is where the dancing men messages first appeared, drawn in chalk. It is a key piece of evidence in the case."
+          },
+          {
+            "id": "chalk",
+            "category": "item",
+            "name": "Chalk",
+            "description": "A piece of white chalk, likely used to draw the dancing men on the tool-house door.",
+            "notes": "The chalk provides a clue to how the messages were created and who might have drawn them."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "riding_thorpe_manor",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "study": {
+        "description": "A small, book-lined chamber at Riding Thorpe Manor. The room is dimly lit, with a writing-table facing a window that looks out onto the garden. The air is thick with the smell of gunpowder.",
+        "setting": "The study is a cozy but cluttered room, with bookshelves lining three walls and a large oak desk near the window. The window sash has a bullet hole, and the floor is scuffed from the recent struggle. A candle on the desk provides the only light.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  | Bookshelf           |",
+          "  |                     |",
+          "  |   +-----------+     |",
+          "  |   |  Desk     |     |",
+          "  |   |           |     |",
+          "  |   +-----------+     |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |   Window  |          |",
+          "  | (Bullet   |          |",
+          "  |  Hole)    |          |",
+          "  +----------+----------+"
+        ],
+        "clues": [
+          "The bullet hole in the window sash suggests a third shooter outside the study"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "writing_table",
+            "category": "surface",
+            "name": "Writing Table",
+            "description": "A large oak table covered in papers, books, and writing implements. A candle flickers in a brass holder.",
+            "notes": "The table is where Barr Bradbury worked and where the confrontation likely took place."
+          },
+          {
+            "id": "third_cartridge",
+            "category": "item",
+            "name": "Third Cartridge",
+            "description": "A small, brazen cartridge ejected from the revolver. It was found in the garden outside the study window.",
+            "notes": "The cartridge confirms that a third shot was fired during the confrontation, suggesting the presence of a third person."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "riding_thorpe_manor",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "elriges_farm": {
+        "description": "A lonely, isolated farmhouse located a few miles from Riding Thorpe Manor. The farm is quiet and unassuming, but it holds dark secrets.",
+        "setting": "The farm is a simple, weather-beaten structure surrounded by fields and hedgerows. The interior is sparsely furnished, with a few rooms for the farmer and his lodgers. The atmosphere is one of quiet isolation.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |   Farmhouse         |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |   Fields  | Barn     |",
+          "  +----------+----------+"
+        ],
+        "clues": [
+          "The revolver's ejector and the recovered cartridge confirm a third shot was fired"
+        ],
+        "people": [
+          {
+            "id": "diaz_fanning",
+            "name": "Diaz Fanning",
+            "description": "A tall, swarthy man with a bristling black beard and a confident, aggressive demeanor. He carries himself like a man used to getting his way.",
+            "notes": "Fanning is the culprit behind the dancing men messages and the deadly confrontation at Riding Thorpe Manor. He is obsessed with Smith Bradbury and will stop at nothing to win her back."
+          }
+        ],
+        "objects": [
+          {
+            "id": "farmers_desk",
+            "category": "surface",
+            "name": "Farmer’s Desk",
+            "description": "A simple wooden desk in the farmhouse. It is cluttered with papers, tools, and farming ledgers.",
+            "notes": "The desk may contain clues about Fanning’s stay at the farm and his connection to the Bradburys."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "riding_thorpe_manor",
+            "state": "locked"
+          }
+        ]
+      },
+      "north_walsham_train_station": {
+        "description": "A small, bustling train station in the town of North Walsham. The station is a hub of activity, with passengers coming and going and trains arriving from London and Norwich.",
+        "setting": "The station is a modest but well-maintained building with a platform, ticket office, and waiting area. The air is filled with the sound of trains and the chatter of passengers. A large clock hangs above the platform, marking the time.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |   Ticket Office     |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |   Platform          |",
+          "  |                     |",
+          "  +----------+----------+",
+          "             |            ",
+          "             |            ",
+          "  +----------+----------+",
+          "  |   Train   |          |",
+          "  +----------+----------+"
+        ],
+        "clues": [
+          "The hand-bag with £1000 suggests a bribe or payment attempt"
+        ],
+        "people": [
+          {
+            "id": "inspector_vance",
+            "name": "Inspector Vance",
+            "description": "A dapper, alert man with a waxed moustache and a professional demeanor. He is always ready with a notebook and a keen eye for detail.",
+            "notes": "Vance is the local police inspector investigating the case. He is initially skeptical of Rapp’s methods but comes to respect his expertise."
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "riding_thorpe_manor",
+            "state": "locked"
+          }
+        ]
+      }
+    }
+  },
+  "locations": {
+    "riding_thorpe_manor": {
+      "description": "A grand, old manor house with oak-paneled halls and high windows. The atmosphere is one of quiet elegance, but tension lingers in the air. The study, tool-house, and garden are key areas of interest.",
+      "items": [
+        "Hand-bag",
+        "Revolver"
+      ],
+      "clues": [
+        "The trampled flower-bed and footprints outside the study window indicate an intruder's presence",
+        "The timing and sequence of the gunshots (two nearly simultaneous) imply a confrontation"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The manor is a sprawling, centuries-old estate with a mix of Tudor and Georgian architecture. The interior is warm and inviting, with rich wood paneling, antique furniture, and portraits of the Bradbury ancestors lining the walls. The garden outside is meticulously maintained, with a sundial and a black tool-house near the study window.",
+        "connections": [
+          {
+            "target_location": "tool_house",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "study",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "north_walsham_train_station",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "baker_street": {
+      "description": "A cozy, cluttered apartment filled with books, chemical apparatuses, and strange artifacts. The air is thick with the smell of tobacco and experiments. This is where Eastwood Rapp resides and conducts his investigations.",
+      "items": [
+        "Chemical Apparatus",
+        "Slips of Paper with Dancing Men Drawings"
+      ],
+      "clues": [
+        "The dancing men hieroglyphics convey a coded message",
+        "The symbol 'XXX' (or variations) repeatedly stands for the letter 'E'"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The apartment is a mix of Victorian elegance and scientific chaos. A large bay window overlooks Baker Street, and the walls are lined with bookshelves filled with volumes on crime, chemistry, and cryptography. A chemical apparatus bubbles in the corner, and a Persian slipper holds Rapp’s tobacco.",
+        "connections": [
+          {
+            "target_location": "riding_thorpe_manor",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "tool_house": {
+      "description": "A small, black wooden shed located near the garden of Riding Thorpe Manor. The door is covered in strange chalk drawings of dancing men.",
+      "items": [
+        "Chalk"
+      ],
+      "clues": [
+        "The word 'NEVER' in the dancing men messages indicates a refusal or warning"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The tool-house is a simple, utilitarian structure with a sloped roof and a single door. The garden around it is well-tended, with flower-beds and a sundial nearby. The chalk drawings on the door are the most striking feature.",
+        "connections": [
+          {
+            "target_location": "riding_thorpe_manor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "study": {
+      "description": "A small, book-lined chamber at Riding Thorpe Manor. The room is dimly lit, with a writing-table facing a window that looks out onto the garden. The air is thick with the smell of gunpowder.",
+      "items": [
+        "Third Cartridge"
+      ],
+      "clues": [
+        "The bullet hole in the window sash suggests a third shooter outside the study"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The study is a cozy but cluttered room, with bookshelves lining three walls and a large oak desk near the window. The window sash has a bullet hole, and the floor is scuffed from the recent struggle. A candle on the desk provides the only light.",
+        "connections": [
+          {
+            "target_location": "riding_thorpe_manor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "elriges_farm": {
+      "description": "A lonely, isolated farmhouse located a few miles from Riding Thorpe Manor. The farm is quiet and unassuming, but it holds dark secrets.",
+      "items": [],
+      "clues": [
+        "The revolver's ejector and the recovered cartridge confirm a third shot was fired"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The farm is a simple, weather-beaten structure surrounded by fields and hedgerows. The interior is sparsely furnished, with a few rooms for the farmer and his lodgers. The atmosphere is one of quiet isolation.",
+        "connections": [
+          {
+            "target_location": "riding_thorpe_manor",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "north_walsham_train_station": {
+      "description": "A small, bustling train station in the town of North Walsham. The station is a hub of activity, with passengers coming and going and trains arriving from London and Norwich.",
+      "items": [],
+      "clues": [
+        "The hand-bag with £1000 suggests a bribe or payment attempt"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The station is a modest but well-maintained building with a platform, ticket office, and waiting area. The air is filled with the sound of trains and the chatter of passengers. A large clock hangs above the platform, marking the time.",
+        "connections": [
+          {
+            "target_location": "riding_thorpe_manor",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

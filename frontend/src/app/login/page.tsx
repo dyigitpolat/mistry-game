@@ -34,7 +34,7 @@ export default function LoginPage() {
                         travel_explore
                     </span>
                     <h1 className="text-3xl font-display font-bold text-white mb-2">
-                        Whodunit OS
+                        Mistry OS
                     </h1>
                     <p className="text-text-secondary">
                         Sign in to access the multi-agent detective engine.

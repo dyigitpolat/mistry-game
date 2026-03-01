@@ -1,0 +1,759 @@
+{
+  "title": "The Man in the Brown Suit",
+  "description": "A mystery adventure based on Agatha Christie's novel, where an amateur sleuth uncovers a web of intrigue, diamond theft, and murder spanning from London to South Africa.",
+  "victim": "Madame Race (a.k.a. Lucas Grünberg)",
+  "intro_narrative": "L Delilah, an adventurous young woman, stumbles upon a mystery after witnessing a fatal accident in the London Tube. A scrap of paper found on the victim leads her to a murder in a vacant house and a trail of diamonds stolen from South Africa. As she delves deeper, she uncovers a criminal organization led by the enigmatic 'Colonel' and finds herself entangled in a dangerous game of cat and mouse across continents.",
+  "time_limit_minutes": 180,
+  "start_time": "1922-01-08T14:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "The scrap of paper with '1 7 . 1 2 2 Butler Castle'",
+      "The roll of Kodak films containing diamonds",
+      "The misplaced stones from the De Beer diamonds proving substitution",
+      "The black cord used to strangle Madame Race",
+      "Fate's safety razor and toupee proving Miss Mamma's identity",
+      "Sir Hampsly's diary containing incriminating entries"
+    ],
+    "required_suspect": [
+      "Sir Hampsly Pagett (the 'Colonel')",
+      "Arthur Pamela (a.k.a. Rev. Milray Smuts, a.k.a. Miss Mamma)"
+    ],
+    "required_motive": [
+      "Theft of De Beer diamonds and blackmail",
+      "Cover-up of murder and criminal organization leadership"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "The Beginning of the Trail",
+      "objective": "Investigate the accident at Hyde Park Corner Tube Station and the murder at Mill House, Ned.",
+      "unlocked_locations": [
+        "Mill House, Ned",
+        "Hyde Park Corner Tube Station, London"
+      ],
+      "unlocked_characters": [
+        "L (Anne) Delilah",
+        "Mrs. Clarence (a.k.a. Nasby)",
+        "Emery"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Voyage to South Africa",
+      "objective": "Follow the trail aboard the Kilmorden Castle and uncover the identity of 'The Man in the Brown Suit'.",
+      "unlocked_locations": [
+        "The Kilmorden Castle",
+        "Villa Medgee, Muizenberg"
+      ],
+      "unlocked_characters": [
+        "Adam B (a.k.a. Adam Edgar, a.k.a. Nadina Harold Chichesterpettigrew)",
+        "Sir Hampsly Pagett",
+        "Anne Fate",
+        "Rev. Milray Smuts (a.k.a. Arthur Pamela)",
+        "Colonel Eric"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Heart of the Mystery",
+      "objective": "Explore the connections in Cape Town and Johannesburg, and uncover the 'Colonel's' identity.",
+      "unlocked_locations": [
+        "Agrasato’s Native Curio-shop, Johannesburg",
+        "The Falls Hotel, Victoria Falls",
+        "Sir Hampsly Pagett's residence in Johannesburg"
+      ],
+      "unlocked_characters": [
+        "Madame Race (deceased, flashbacks)",
+        "Miss Mamma (a.k.a. Arthur Pamela)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront the culprits and solve the mystery of the diamonds and the murder.",
+      "unlocked_locations": [
+        "The Island on the Zambesi"
+      ],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "L_Delilah": {
+      "type": "assistant",
+      "role": "Protagonist and Amateur Sleuth",
+      "location": "Mill House, Ned",
+      "phase_locations": {
+        "0": "Mill House, Ned",
+        "1": "The Kilmorden Castle",
+        "2": "Agrasato’s Native Curio-shop, Johannesburg",
+        "3": "The Island on the Zambesi"
+      },
+      "persona": "Adventurous, witty, and fiercely independent. Speaks with a mix of humor and determination, often teasing but deeply intuitive.",
+      "knowledge_about_others": {
+        "Adam_B": "Recognizes him as 'The Man in the Brown Suit' but believes in his innocence.",
+        "Sir_Hampsly_Pagett": "Suspects his involvement in the criminal organization.",
+        "Anne_Fate": "Finds his behavior suspicious and believes he is involved in the mystery.",
+        "Colonel_Eric": "Admires him but is wary of his true intentions."
+      },
+      "abilities": "Excellent observational skills, quick thinking, and a knack for uncovering secrets. Skilled in deduction and has a background in nursing from wartime experience.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Adam_B": {
+      "type": "suspect",
+      "role": "The Man in the Brown Suit (a.k.a. Adam Edgar, a.k.a. Nadina Harold Chichesterpettigrew)",
+      "location": "The Island on the Zambesi",
+      "phase_locations": {
+        "1": "The Kilmorden Castle",
+        "2": "Agrasato’s Native Curio-shop, Johannesburg",
+        "3": "The Island on the Zambesi"
+      },
+      "persona": "Reckless, passionate, and fiercely protective. Speaks with intensity and a hint of bitterness, often sarcastic but deeply loyal to those he cares about.",
+      "knowledge_about_others": {
+        "L_Delilah": "Cares for her deeply but is wary of her involvement in the mystery.",
+        "Sir_Hampsly_Pagett": "Knows he is the 'Colonel' and responsible for the murder of Race.",
+        "Anne_Fate": "Suspects his involvement in the criminal organization."
+      },
+      "secret": "His true identity is Nadina Harold Chichesterpettigrew, and he is innocent of the diamond theft but framed for the murder of Madame Race.",
+      "suspicion_meter": 80,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The note luring L to the Falls, signed by Adam B"
+          ],
+          "reaction": "Attempts to protect L Delilah and warns her of danger.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "The roll of Kodak films containing diamonds"
+          ],
+          "reaction": "Confesses his true identity and innocence to L Delilah.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Sir_Hampsly_Pagett": {
+      "type": "suspect",
+      "role": "The 'Colonel' and Mastermind of the Criminal Organization",
+      "location": "Sir Hampsly Pagett's residence in Johannesburg",
+      "phase_locations": {
+        "1": "The Kilmorden Castle",
+        "2": "Agrasato’s Native Curio-shop, Johannesburg",
+        "3": "Sir Hampsly Pagett's residence in Johannesburg"
+      },
+      "persona": "Charming, witty, and deceptively genial. Speaks with humor and sophistication but harbors a ruthless and calculating mind.",
+      "knowledge_about_others": {
+        "L_Delilah": "Finds her amusing and intriguing but sees her as a threat to his plans.",
+        "Adam_B": "Knows his true identity and seeks to frame him for the murder of Race.",
+        "Anne_Fate": "Uses him as a pawn in his schemes and enjoys tormenting him."
+      },
+      "secret": "He is the 'Colonel,' the mastermind behind the diamond theft, murder, and criminal organization.",
+      "suspicion_meter": 90,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Sir Hampsly's diary containing incriminating entries"
+          ],
+          "reaction": "Attempts to manipulate the situation and divert suspicion from himself.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "The misplaced stones from the De Beer diamonds proving substitution"
+          ],
+          "reaction": "Confesses his role as the 'Colonel' under pressure.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Anne_Fate": {
+      "type": "suspect",
+      "role": "Sir Hampsly Pagett's Secretary and Accomplice",
+      "location": "Sir Hampsly Pagett's residence in Johannesburg",
+      "phase_locations": {
+        "1": "The Kilmorden Castle",
+        "2": "Agrasato’s Native Curio-shop, Johannesburg",
+        "3": "Sir Hampsly Pagett's residence in Johannesburg"
+      },
+      "persona": "Efficient, officious, and nervously intense. Speaks in a monotone but with an underlying tension that betrays his guilt.",
+      "knowledge_about_others": {
+        "Sir_Hampsly_Pagett": "Knows of his criminal activities but is too afraid to confront him.",
+        "L_Delilah": "Views her as a threat and attempts to mislead her."
+      },
+      "secret": "He is involved in the criminal organization and knows of Sir Hampsly's true identity as the 'Colonel'.",
+      "suspicion_meter": 70,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Fate's suspicious behavior and lies about Loamsley"
+          ],
+          "reaction": "Attempts to mislead L Delilah and divert her attention from the truth.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Fate's safety razor and toupee proving Miss Mamma's identity"
+          ],
+          "reaction": "Confesses his involvement in the criminal organization under pressure.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Mrs_Clarence": {
+      "type": "assistant",
+      "role": "L Delilah's Friend and Confidante",
+      "location": "The Falls Hotel, Victoria Falls",
+      "phase_locations": {
+        "1": "The Kilmorden Castle",
+        "2": "The Falls Hotel, Victoria Falls"
+      },
+      "persona": "Charming, witty, and supportive. Speaks with warmth and humor, often teasing but deeply loyal to L Delilah.",
+      "knowledge_about_others": {
+        "L_Delilah": "Supports her unconditionally and helps her solve the mystery.",
+        "Colonel_Eric": "Admires him but is wary of his intentions."
+      },
+      "abilities": "Excellent social skills, resourcefulness, and a knack for uncovering secrets. Provides emotional support and practical help to L Delilah.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Colonel_Eric": {
+      "type": "suspect",
+      "role": "Secret Service Agent",
+      "location": "The Falls Hotel, Victoria Falls",
+      "phase_locations": {
+        "1": "The Kilmorden Castle",
+        "2": "The Falls Hotel, Victoria Falls",
+        "3": "Sir Hampsly Pagett's residence in Johannesburg"
+      },
+      "persona": "Strong, silent, and enigmatic. Speaks sparingly but with authority, often observing others with a calculating gaze.",
+      "knowledge_about_others": {
+        "L_Delilah": "Admires her but is wary of her involvement in the mystery.",
+        "Sir_Hampsly_Pagett": "Suspects his involvement in the criminal organization and seeks to expose him.",
+        "Adam_B": "Knows his true identity and seeks to clear his name."
+      },
+      "secret": "He is a Secret Service agent investigating the 'Colonel' and the diamond theft.",
+      "suspicion_meter": 50,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The note luring L to the Falls, signed by Adam B"
+          ],
+          "reaction": "Attempts to protect L Delilah and guide her towards the truth.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "The misplaced stones from the De Beer diamonds proving substitution"
+          ],
+          "reaction": "Reveals his role as a Secret Service agent and helps expose the 'Colonel'.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Madame_Race": {
+      "type": "suspect",
+      "role": "Russian Dancer and Victim",
+      "location": "Mill House, Ned",
+      "phase_locations": {
+        "0": "Mill House, Ned"
+      },
+      "persona": "Seductive, manipulative, and cunning. Speaks with a foreign accent and a tone of arrogance, often mocking those around her.",
+      "knowledge_about_others": {
+        "Adam_B": "Blackmails him and seeks to double-cross the 'Colonel'.",
+        "Sir_Hampsly_Pagett": "Knows his identity as the 'Colonel' and seeks to blackmail him."
+      },
+      "secret": "She is involved in the diamond theft and blackmails the 'Colonel'.",
+      "suspicion_meter": 100,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Rev_Milray_Smuts": {
+      "type": "suspect",
+      "role": "Missionary (a.k.a. Arthur Pamela, a.k.a. Miss Mamma)",
+      "location": "Villa Medgee, Muizenberg",
+      "phase_locations": {
+        "1": "The Kilmorden Castle",
+        "2": "Villa Medgee, Muizenberg"
+      },
+      "persona": "Meek, mild-mannered, and unassuming. Speaks softly with a clerical tone but harbors a sinister side.",
+      "knowledge_about_others": {
+        "L_Delilah": "Attempts to mislead her and divert her from the truth.",
+        "Sir_Hampsly_Pagett": "Knows of his criminal activities and seeks to manipulate him."
+      },
+      "secret": "His true identity is Arthur Pamela, and he is involved in the criminal organization as Miss Mamma.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "The brachycephalic head description of the 'doctor'"
+          ],
+          "reaction": "Attempts to mislead L Delilah and divert her attention from the truth.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Fate's safety razor and toupee proving Miss Mamma's identity"
+          ],
+          "reaction": "Confesses his true identity and involvement in the criminal organization.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Emery": {
+      "type": "suspect",
+      "role": "Race's Husband and Diamond Sorter",
+      "location": "Hyde Park Corner Tube Station, London",
+      "phase_locations": {
+        "0": "Hyde Park Corner Tube Station, London"
+      },
+      "persona": "Nervous, timid, and easily manipulated. Speaks softly with a tone of fear and desperation.",
+      "knowledge_about_others": {
+        "Madame_Race": "Knows of her involvement in the diamond theft and seeks to protect her.",
+        "Adam_B": "Suspects his involvement in the theft and seeks to mislead him."
+      },
+      "secret": "He is involved in the diamond theft and knows of Madame Race's blackmail schemes.",
+      "suspicion_meter": 60,
+      "flight_risk": 40,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Mill_House_Ned": {
+        "description": "A vacant house near the river, owned by Sir Hampsly Pagett. The site of Madame Race's murder, with a bare and eerie atmosphere.",
+        "clues": [
+          "The roll of Kodak films found in the Mill House containing diamonds",
+          "The black cord used to strangle Madame Race"
+        ],
+        "people": [
+          {
+            "id": "Madame_Race",
+            "name": "Madame Race",
+            "description": "A beautiful young woman with dark hair and a foreign accent, lying dead on the floor.",
+            "notes": "Victim of the murder. Her identity is initially unknown but later revealed to be a famous Russian dancer.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "roll_of_kodak_films",
+            "category": "item",
+            "name": "Roll of Kodak Films",
+            "description": "A roll of films found hidden in a cupboard under a window seat. Contains diamonds instead of film.",
+            "notes": "Hidden by the murderer during the struggle with Madame Race."
+          },
+          {
+            "id": "black_cord",
+            "category": "item",
+            "name": "Black Cord",
+            "description": "A piece of stout black cord used to strangle Madame Race.",
+            "notes": "Left at the scene of the crime."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Hyde_Park_Corner_Tube_Station",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A forlorn and mildewy house with a low, dark hall and bare rooms. The atmosphere is one of menace and evil."
+      },
+      "Hyde_Park_Corner_Tube_Station": {
+        "description": "A busy London Tube station where a fatal accident occurred, involving a man with an order to view Mill House.",
+        "clues": [
+          "The scrap of paper with '1 7 . 1 2 2 Butler Castle' found on Emery's body",
+          "The mothball scent linking Emery and the 'doctor' at the Tube station"
+        ],
+        "people": [
+          {
+            "id": "Emery",
+            "name": "Emery",
+            "description": "A small, thin man with a beard, reeking of mothballs, who died in the Tube accident.",
+            "notes": "Husband of Madame Race and involved in the diamond theft. Carried an order to view Mill House.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "scrap_of_paper",
+            "category": "item",
+            "name": "Scrap of Paper",
+            "description": "A half-sheet of notepaper with figures and words scrawled in pencil: '1 7 . 1 2 2 Butler Castle'.",
+            "notes": "Found on Emery's body and later picked up by L Delilah."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Mill_House_Ned",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bustling Tube station with platforms stretching into tunnels. The air is filled with the scent of mothballs and the hum of the city."
+      },
+      "Villa_Medgee_Muizenberg": {
+        "description": "A secluded villa on the side of the mountain in Muizenberg, where L Delilah was held captive.",
+        "clues": [
+          "The wooden animals concealing the diamonds"
+        ],
+        "people": [
+          {
+            "id": "Rev_Milray_Smuts",
+            "name": "Rev. Milray Smuts",
+            "description": "A missionary with a pink and white complexion, acting suspiciously.",
+            "notes": "His true identity is Arthur Pamela, involved in the criminal organization as Miss Mamma."
+          }
+        ],
+        "objects": [
+          {
+            "id": "big_giraffe",
+            "category": "item",
+            "name": "The Big Giraffe",
+            "description": "A large wooden giraffe with a hollowed-out stomach used to hide diamonds.",
+            "notes": "Purchased by L Delilah and Mrs. Clarence as a souvenir."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Agrasatos_Native_Curio_Shop",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet, isolated villa surrounded by mountains. The interior is dusty and sparsely furnished, with an air of secrecy."
+      },
+      "The_Island_on_the_Zambesi": {
+        "description": "A small, secluded island on the Zambesi River, where Adam B lives and L Delilah is rescued.",
+        "clues": [
+          "The asafœtida smell in L's cabin hinting at sabotage"
+        ],
+        "people": [
+          {
+            "id": "Adam_B",
+            "name": "Adam B",
+            "description": "A man with a deeply tanned face and a scar running diagonally from his eye to his jaw.",
+            "notes": "Lives on the island and rescues L Delilah after her fall at the Falls."
+          }
+        ],
+        "objects": [
+          {
+            "id": "Adams_revolver",
+            "category": "item",
+            "name": "Adam B's Revolver",
+            "description": "A revolver used by Adam B for protection on the island.",
+            "notes": "Used in the final confrontation with the 'Colonel's' men."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "The_Falls_Hotel",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A lush, tropical island with palm trees and a small hut. The air is filled with the sounds of the river and wildlife."
+      },
+      "Agrasatos_Native_Curio_Shop": {
+        "description": "A curio shop in Johannesburg serving as a secret meeting point for the criminal organization.",
+        "clues": [
+          "The brachycephalic head description of the 'doctor'",
+          "Fate's suspicious behavior and lies about Loamsley"
+        ],
+        "people": [
+          {
+            "id": "Anne_Fate",
+            "name": "Anne Fate",
+            "description": "A man with a sinister face and a pallid complexion, acting suspiciously in the shop.",
+            "notes": "Involved in the criminal organization and seeks to mislead L Delilah."
+          }
+        ],
+        "objects": [
+          {
+            "id": "tin_of_films",
+            "category": "item",
+            "name": "Tin of Films",
+            "description": "A tin of films thrown out of a window, containing pebbles instead of diamonds.",
+            "notes": "Used to mislead pursuers and hide the true location of the diamonds."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Sir_Hampsly_Pagetts_Residence",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A dimly lit shop filled with native curios, masks, and artifacts. The air is thick with the scent of incense and mystery."
+      },
+      "The_Falls_Hotel": {
+        "description": "A large hotel near Victoria Falls, where L Delilah disappears and later reunites with her friends.",
+        "clues": [
+          "The note luring L to the Falls, signed by Adam B"
+        ],
+        "people": [
+          {
+            "id": "Mrs_Clarence",
+            "name": "Mrs. Clarence",
+            "description": "A charming, fair-haired woman with a round, dimpled face and blue eyes.",
+            "notes": "L Delilah's friend and confidante, who helps her solve the mystery."
+          },
+          {
+            "id": "Colonel_Eric",
+            "name": "Colonel Eric",
+            "description": "A tall, soldierly man with dark hair and a bronzed face, exuding authority.",
+            "notes": "A Secret Service agent investigating the 'Colonel'."
+          }
+        ],
+        "objects": [
+          {
+            "id": "note_luring_L",
+            "category": "item",
+            "name": "Note Luring L to the Falls",
+            "description": "A note signed by Adam B, asking L Delilah to meet him at the Falls.",
+            "notes": "Used to lure L Delilah into a trap."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "The_Island_on_the_Zambesi",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand hotel with a wide veranda overlooking the Falls. The atmosphere is one of luxury and intrigue."
+      },
+      "Sir_Hampsly_Pagetts_Residence": {
+        "description": "Sir Hampsly Pagett's residence in Johannesburg, where the final confrontation takes place.",
+        "clues": [
+          "Sir Hampsly's diary containing incriminating entries"
+        ],
+        "people": [
+          {
+            "id": "Sir_Hampsly_Pagett",
+            "name": "Sir Hampsly Pagett",
+            "description": "A genial, portly man with a big moustache and an air of authority.",
+            "notes": "The 'Colonel' and mastermind behind the criminal organization."
+          },
+          {
+            "id": "Miss_Mamma",
+            "name": "Miss Mamma",
+            "description": "A tall, square woman in drab clothing, acting as Sir Hampsly's secretary.",
+            "notes": "Her true identity is Arthur Pamela, involved in the criminal organization."
+          }
+        ],
+        "objects": [
+          {
+            "id": "Sir_Hampslys_diary",
+            "category": "item",
+            "name": "Sir Hampsly's Diary",
+            "description": "A diary containing incriminating entries about the criminal organization.",
+            "notes": "Reveals Sir Hampsly's true identity as the 'Colonel'."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Agrasatos_Native_Curio_Shop",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand residence with opulent furnishings and an air of sophistication. The atmosphere is tense and filled with secrets."
+      }
+    }
+  },
+  "locations": {
+    "Mill_House_Ned": {
+      "description": "A vacant house near the river, owned by Sir Hampsly Pagett. The site of Madame Race's murder, with a bare and eerie atmosphere.",
+      "items": [
+        "Roll of Kodak Films",
+        "Black Cord"
+      ],
+      "clues": [
+        "The roll of Kodak films found in the Mill House containing diamonds",
+        "The black cord used to strangle Madame Race"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A forlorn and mildewy house with a low, dark hall and bare rooms. The atmosphere is one of menace and evil.",
+        "connections": [
+          {
+            "target_location": "Hyde_Park_Corner_Tube_Station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Hyde_Park_Corner_Tube_Station": {
+      "description": "A busy London Tube station where a fatal accident occurred, involving a man with an order to view Mill House.",
+      "items": [
+        "Scrap of Paper"
+      ],
+      "clues": [
+        "The scrap of paper with '1 7 . 1 2 2 Butler Castle' found on Emery's body",
+        "The mothball scent linking Emery and the 'doctor' at the Tube station"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling Tube station with platforms stretching into tunnels. The air is filled with the scent of mothballs and the hum of the city.",
+        "connections": [
+          {
+            "target_location": "Mill_House_Ned",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Villa_Medgee_Muizenberg": {
+      "description": "A secluded villa on the side of the mountain in Muizenberg, where L Delilah was held captive.",
+      "items": [
+        "The Big Giraffe"
+      ],
+      "clues": [
+        "The wooden animals concealing the diamonds"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, isolated villa surrounded by mountains. The interior is dusty and sparsely furnished, with an air of secrecy.",
+        "connections": [
+          {
+            "target_location": "Agrasatos_Native_Curio_Shop",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "The_Island_on_the_Zambesi": {
+      "description": "A small, secluded island on the Zambesi River, where Adam B lives and L Delilah is rescued.",
+      "items": [
+        "Adam B's Revolver"
+      ],
+      "clues": [
+        "The asafœtida smell in L's cabin hinting at sabotage"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lush, tropical island with palm trees and a small hut. The air is filled with the sounds of the river and wildlife.",
+        "connections": [
+          {
+            "target_location": "The_Falls_Hotel",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Agrasatos_Native_Curio_Shop": {
+      "description": "A curio shop in Johannesburg serving as a secret meeting point for the criminal organization.",
+      "items": [
+        "Tin of Films"
+      ],
+      "clues": [
+        "The brachycephalic head description of the 'doctor'",
+        "Fate's suspicious behavior and lies about Loamsley"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit shop filled with native curios, masks, and artifacts. The air is thick with the scent of incense and mystery.",
+        "connections": [
+          {
+            "target_location": "Sir_Hampsly_Pagetts_Residence",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "The_Falls_Hotel": {
+      "description": "A large hotel near Victoria Falls, where L Delilah disappears and later reunites with her friends.",
+      "items": [
+        "Note Luring L to the Falls"
+      ],
+      "clues": [
+        "The note luring L to the Falls, signed by Adam B"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand hotel with a wide veranda overlooking the Falls. The atmosphere is one of luxury and intrigue.",
+        "connections": [
+          {
+            "target_location": "The_Island_on_the_Zambesi",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Sir_Hampsly_Pagetts_Residence": {
+      "description": "Sir Hampsly Pagett's residence in Johannesburg, where the final confrontation takes place.",
+      "items": [
+        "Sir Hampsly's Diary"
+      ],
+      "clues": [
+        "Sir Hampsly's diary containing incriminating entries"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand residence with opulent furnishings and an air of sophistication. The atmosphere is tense and filled with secrets.",
+        "connections": [
+          {
+            "target_location": "Agrasatos_Native_Curio_Shop",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

@@ -1,0 +1,735 @@
+{
+  "title": "The Unpleasantness at the Bellona Club",
+  "description": "A mystery surrounding the sudden death of General Alok at the Bellona Club on Armistice Day, and the subsequent investigation into the exact time of his death due to conflicting wills left by his sister, Lady Disha.",
+  "victim": "General Alok",
+  "intro_narrative": "On Armistice Day, General Alok is found dead in his usual armchair at the Bellona Club. The discovery of his death coincides with the death of his estranged sister, Lady Disha. The exact timing of General Alok's death becomes crucial due to conflicting wills that determine the distribution of Lady Disha's substantial fortune. Lord Bhumi Swara is tasked with uncovering the truth behind the General's death and the mysterious circumstances surrounding it.",
+  "time_limit_minutes": 180,
+  "start_time": "1928-11-11T10:00:00Z",
+  "win_conditions": {
+    "required_evidence": [
+      "General Alok's walking stick (with fingerprints)",
+      "General Alok's notes about money distribution",
+      "Bottle of digitalin tablets",
+      "Chemical apparatus and medical books in Miss Kavya's studio",
+      "Portrait of a man resembling Dr. Udita",
+      "Analysis of varnish from General Alok's left boot"
+    ],
+    "required_suspect": [
+      "Dr. Udita"
+    ],
+    "required_motive": [
+      "Financial gain from Lady Disha's will",
+      "Concealment of General Alok's true time of death"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Uncover initial clues and establish the timeline of General Alok's last day.",
+      "unlocked_locations": [
+        "Bellona Club"
+      ],
+      "unlocked_characters": [
+        "Lord Bhumi Swara",
+        "Captain Gaurav Alok",
+        "Colonel Ritesh",
+        "Dr. Udita",
+        "Mitali"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring Connections",
+      "objective": "Interview key witnesses and explore connections between characters and locations.",
+      "unlocked_locations": [
+        "General Alok's flat in Dover Street",
+        "Lady Disha's house in Portman Square"
+      ],
+      "unlocked_characters": [
+        "Major Shilpa Alok",
+        "Lady Disha",
+        "Miss Mrunal Kavya",
+        "Mr. Mukesh",
+        "Sagar Monali"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Delving Deeper",
+      "objective": "Investigate the mysterious Mr. Madhuri and gather more concrete evidence.",
+      "unlocked_locations": [
+        "Dr. Udita's house in Kalyani Zeeshan",
+        "Cemetery (Necropolis)",
+        "Charing Cross Underground Station"
+      ],
+      "unlocked_characters": [
+        "Mr. Karan",
+        "Mr. Nandita",
+        "Mrs. Alok"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Uncover the truth behind General Alok's death and resolve the mystery.",
+      "unlocked_locations": [
+        "Crystal Palace",
+        "Hampstead Heath/White City"
+      ],
+      "unlocked_characters": [
+        "Detective-Inspector Meenal"
+      ]
+    }
+  ],
+  "characters": {
+    "Lord_Bhumi_Swara": {
+      "type": "assistant",
+      "role": "Investigator",
+      "location": "Bellona Club",
+      "phase_locations": {
+        "0": "Bellona Club",
+        "1": "General Alok's flat in Dover Street, Lady Disha's house in Portman Square",
+        "2": "Dr. Udita's house in Kalyani Zeeshan, Cemetery (Necropolis), Charing Cross Underground Station",
+        "3": "Crystal Palace, Hampstead Heath/White City"
+      },
+      "persona": "Witty, observant, and methodical with a keen interest in solving mysteries. Speaks in a light-hearted but intelligent manner.",
+      "knowledge_about_others": {
+        "Captain_Gaurav_Alok": "Struggling with post-war trauma and financial difficulties.",
+        "Major_Shilpa_Alok": "Military man, disciplined, and pragmatic.",
+        "Dr. Udita": "Army surgeon with a sharp mind and abrupt manner.",
+        "Miss_Mrunal_Kavya": "Artistic, somewhat reclusive, and involved in chemical experiments."
+      },
+      "abilities": "Exceptional deductive reasoning, keen observation skills, and a talent for extracting information from people.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "General Alok's walking stick (with fingerprints)"
+          ],
+          "reaction": "Focuses on analyzing fingerprints and comparing them with known samples."
+        },
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_knowledge": [
+            "General Alok's notes about money distribution"
+          ],
+          "reaction": "Investigates the financial motives behind General Alok's death."
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "General_Alok": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "Bellona Club",
+      "phase_locations": {
+        "0": "Bellona Club"
+      },
+      "persona": "Elderly military man, very disciplined and routine-oriented. Known for his punctuality and regular habits.",
+      "secret": "Had a heart condition and was aware of his sister's will.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Captain_Gaurav_Alok": {
+      "type": "suspect",
+      "role": "Grandson of General Alok",
+      "location": "General Alok's flat in Dover Street",
+      "phase_locations": {
+        "0": "Bellona Club",
+        "1": "General Alok's flat in Dover Street"
+      },
+      "persona": "Nervous, struggling with post-war trauma, and financially dependent on his wife. Speaks with a mix of bitterness and desperation.",
+      "knowledge_about_others": {
+        "Lord_Bhumi_Swara": "Sees him as a helpful but somewhat intrusive figure.",
+        "Major_Shilpa_Alok": "Views him as disciplined and somewhat distant."
+      },
+      "secret": "Struggles with mental health issues and financial dependency on his wife.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Telephone call from 'Mr. Madhuri'"
+          ],
+          "reaction": "Becomes agitated and defensive about his whereabouts and actions."
+        }
+      ]
+    },
+    "Major_Shilpa_Alok": {
+      "type": "suspect",
+      "role": "Grandson of General Alok",
+      "location": "Bellona Club",
+      "phase_locations": {
+        "0": "Bellona Club",
+        "1": "General Alok's flat in Dover Street"
+      },
+      "persona": "Military man, disciplined, and pragmatic. Speaks in a straightforward and authoritative manner.",
+      "knowledge_about_others": {
+        "Lord_Bhumi_Swara": "Respects his investigative skills but finds him meddlesome.",
+        "Captain_Gaurav_Alok": "Views him as unstable and financially irresponsible."
+      },
+      "secret": "Attempted to manipulate the time of General Alok's death to secure inheritance.",
+      "suspicion_meter": 70,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "General Alok's notes about money distribution"
+          ],
+          "reaction": "Becomes evasive and attempts to redirect the investigation."
+        }
+      ]
+    },
+    "Lady_Disha": {
+      "type": "suspect",
+      "role": "Sister of General Alok",
+      "location": "Lady Disha's house in Portman Square",
+      "phase_locations": {
+        "1": "Lady Disha's house in Portman Square"
+      },
+      "persona": "Elderly, strong-willed, and generous. Known for her independent spirit and past conflicts with her family.",
+      "secret": "Left a will that drastically changes the inheritance based on the time of General Alok's death.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Miss_Mrunal_Kavya": {
+      "type": "suspect",
+      "role": "Companion of Lady Disha",
+      "location": "Lady Disha's house in Portman Square",
+      "phase_locations": {
+        "1": "Lady Disha's house in Portman Square",
+        "2": "Dr. Udita's house in Kalyani Zeeshan"
+      },
+      "persona": "Artistic, somewhat reclusive, and involved in chemical experiments. Speaks in a reserved and thoughtful manner.",
+      "knowledge_about_others": {
+        "Dr. Udita": "Had a close but complicated relationship with him."
+      },
+      "secret": "Involved in chemical experiments and had knowledge of digitalin.",
+      "suspicion_meter": 80,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Chemical apparatus and medical books in Miss Kavya's studio"
+          ],
+          "reaction": "Becomes defensive and attempts to hide her activities."
+        }
+      ]
+    },
+    "Dr_Udita": {
+      "type": "suspect",
+      "role": "Army Surgeon and Family Doctor",
+      "location": "Dr. Udita's house in Kalyani Zeeshan",
+      "phase_locations": {
+        "0": "Bellona Club",
+        "1": "Dr. Udita's house in Kalyani Zeeshan"
+      },
+      "persona": "Abrupt, sharp-minded, and professional. Known for his expertise and somewhat detached demeanor.",
+      "knowledge_about_others": {
+        "General_Alok": "Was his doctor and aware of his heart condition."
+      },
+      "secret": "Administered digitalin to General Alok and attempted to cover up the crime.",
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Presence of digitalin in General Alok's system"
+          ],
+          "reaction": "Becomes nervous and attempts to justify his medical decisions."
+        }
+      ]
+    },
+    "Colonel_Ritesh": {
+      "type": "assistant",
+      "role": "Friend of the Alok Family",
+      "location": "Bellona Club",
+      "phase_locations": {
+        "0": "Bellona Club"
+      },
+      "persona": "Elderly, kind-hearted, and traditional. Speaks in a gentle and reassuring manner.",
+      "abilities": "Provides historical context and insights into the Alok family dynamics.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Mr_Mukesh": {
+      "type": "assistant",
+      "role": "Family Solicitor",
+      "location": "Staple Inn",
+      "phase_locations": {
+        "1": "Staple Inn"
+      },
+      "persona": "Elderly, kind-hearted, and meticulous. Speaks in a formal and precise manner.",
+      "abilities": "Provides legal insights and historical context about the Alok family.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Mr_Karan": {
+      "type": "suspect",
+      "role": "Lady Disha's Solicitor",
+      "location": "Lincoln's Inn",
+      "phase_locations": {
+        "1": "Lincoln's Inn"
+      },
+      "persona": "Professional, somewhat cold, and meticulous. Speaks in a formal and precise manner.",
+      "knowledge_about_others": {
+        "Miss_Mrunal_Kavya": "Represents her interests in the will dispute."
+      },
+      "secret": "Aware of the complexities and potential fraud in Lady Disha's will.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "Sagar_Monali": {
+      "type": "assistant",
+      "role": "Nurse",
+      "location": "Lady Disha's house in Portman Square",
+      "phase_locations": {
+        "1": "Lady Disha's house in Portman Square"
+      },
+      "persona": "Professional, observant, and caring. Speaks in a calm and reassuring manner.",
+      "abilities": "Provides medical insights and observations about Lady Disha and General Alok.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Mitali": {
+      "type": "assistant",
+      "role": "General Alok's Man-Servant",
+      "location": "General Alok's flat in Dover Street",
+      "phase_locations": {
+        "0": "Bellona Club",
+        "1": "General Alok's flat in Dover Street"
+      },
+      "persona": "Loyal, observant, and somewhat anxious. Speaks in a respectful and cautious manner.",
+      "abilities": "Provides insights into General Alok's daily routines and last day.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Bellona_Club": {
+        "description": "A prestigious and traditional gentlemen's club in Piccadilly, known for its marble interiors, spacious smoking-room, and library. It is a place where members gather to relax, read, and socialize.",
+        "clues": [
+          "General Alok's body showed advanced rigor mortis but had a loose knee joint, suggesting tampering",
+          "Absence of a Flanders poppy on General Alok's coat on Armistice Day",
+          "Scratches and nail marks inside the telephone cabinet at the Bellona Club",
+          "Fingerprints on General Alok's walking stick matching those on the notes"
+        ],
+        "people": [
+          {
+            "id": "Lord_Bhumi_Swara",
+            "name": "Lord Bhumi Swara",
+            "description": "A tall, aristocratic man with a keen and observant demeanor.",
+            "notes": "Known for his deductive reasoning and interest in mysteries."
+          },
+          {
+            "id": "Colonel_Ritesh",
+            "name": "Colonel Ritesh",
+            "description": "An elderly, alert man with a kind face and military bearing.",
+            "notes": "Friend of the Alok family and a long-time member of the Bellona Club."
+          }
+        ],
+        "objects": [
+          {
+            "id": "walking_stick",
+            "category": "item",
+            "name": "General Alok's walking stick",
+            "description": "A heavy malacca cane with a thick crutch-handle of polished ivory, suitable for an elderly man.",
+            "notes": "Contains fingerprints that match those on General Alok's notes."
+          },
+          {
+            "id": "telephone_cabinet",
+            "category": "container",
+            "name": "Telephone cabinet",
+            "description": "A small, enclosed space for making telephone calls, located in an ante-room between the smoking-room and the library.",
+            "notes": "Contains scratches and nail marks inside, suggesting tampering.",
+            "state": "locked",
+            "contains": []
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "General_Aloks_Flat",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Lady_Dishas_House",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The Bellona Club is an elegant and traditional gentlemen's club with marble interiors, a spacious smoking-room with a large fireplace, and a quiet library filled with books."
+      },
+      "General_Aloks_Flat": {
+        "description": "A small, austerely-furnished flat in Dover Street, where General Alok lived with his man-servant, Mitali. It contains a sitting-room, bedroom, and basic amenities.",
+        "clues": [
+          "Telephone call from 'Mr. Madhuri' to General Alok's flat"
+        ],
+        "people": [
+          {
+            "id": "Mitali",
+            "name": "Mitali",
+            "description": "An elderly man-servant with an anxious face and a loyal demeanor.",
+            "notes": "Knew General Alok's routines and last movements well."
+          },
+          {
+            "id": "Major_Shilpa_Alok",
+            "name": "Major Shilpa Alok",
+            "description": "A tall, soldierly man with a disciplined and authoritative manner.",
+            "notes": "Executor of General Alok's will and currently residing in the flat."
+          }
+        ],
+        "objects": [
+          {
+            "id": "clothes",
+            "category": "item",
+            "name": "General Alok's clothes",
+            "description": "The clothes General Alok was wearing on the day of his death, including his overcoat, hat, and suit.",
+            "notes": "Missing a Flanders poppy and contain traces of varnish."
+          },
+          {
+            "id": "toothbrush_shoes",
+            "category": "item",
+            "name": "General Alok's toothbrush and shoes",
+            "description": "Personal items belonging to General Alok, examined for clues.",
+            "notes": "Shoes contain traces of varnish and a fragment of carpet thread."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Bellona_Club",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A modest and orderly flat with basic furnishings, reflecting the disciplined life of General Alok."
+      },
+      "Lady_Dishas_House": {
+        "description": "A large, elegant house in Portman Square, where Lady Disha lived with her companion, Miss Mrunal Kavya. It contains a drawing-room, bedroom, studio, and various other rooms.",
+        "clues": [
+          "Miss Kavya's sudden interest in medical and chemical books",
+          "Portrait of a man resembling Dr. Udita hidden in Miss Kavya's studio"
+        ],
+        "people": [
+          {
+            "id": "Miss_Mrunal_Kavya",
+            "name": "Miss Mrunal Kavya",
+            "description": "A young woman with dark, straight hair and a reserved demeanor. She is artistic and involved in chemical experiments.",
+            "notes": "Companion to Lady Disha and involved in the will dispute."
+          },
+          {
+            "id": "Sagar_Monali",
+            "name": "Sagar Monali",
+            "description": "A professional nurse with a caring and observant manner.",
+            "notes": "Attended to Lady Disha during her illness."
+          }
+        ],
+        "objects": [
+          {
+            "id": "chemical_apparatus",
+            "category": "item",
+            "name": "Chemical apparatus and medical books",
+            "description": "Various chemical equipment and medical texts found in Miss Kavya's studio.",
+            "notes": "Indicates Miss Kavya's interest in chemistry and medicine."
+          },
+          {
+            "id": "portrait",
+            "category": "item",
+            "name": "Portrait of a man resembling Dr. Udita",
+            "description": "A painting hidden in Miss Kavya's studio that bears a resemblance to Dr. Udita.",
+            "notes": "Suggests a connection between Miss Kavya and Dr. Udita."
+          },
+          {
+            "id": "will_documents",
+            "category": "item",
+            "name": "Lady Disha's will documents",
+            "description": "Legal documents outlining the distribution of Lady Disha's estate.",
+            "notes": "Contains conflicting terms based on the time of General Alok's death."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Bellona_Club",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Dr_Uditas_House",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand and elegant house with a mix of traditional and artistic decor, reflecting Lady Disha's independent spirit."
+      },
+      "Dr_Uditas_House": {
+        "description": "A house in Kalyani Zeeshan where Dr. Udita lives and practices. It contains a surgery, consulting-room, and living quarters.",
+        "clues": [
+          "Presence of digitalin in General Alok's system, discovered during autopsy"
+        ],
+        "people": [
+          {
+            "id": "Dr_Udita",
+            "name": "Dr. Udita",
+            "description": "A thin, dark man with an abrupt manner and professional demeanor.",
+            "notes": "Army surgeon and family doctor to General Alok."
+          }
+        ],
+        "objects": [
+          {
+            "id": "digitalin_bottle",
+            "category": "item",
+            "name": "Bottle of digitalin tablets",
+            "description": "A bottle containing digitalin tablets, a powerful cardiac medication.",
+            "notes": "Smashed by Gaurav Alok, but traces found in General Alok's system."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Lady_Dishas_House",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A professional and somewhat austere house with medical equipment and a consulting-room."
+      },
+      "Cemetery": {
+        "description": "A large, well-maintained cemetery known as Necropolis, where General Alok was buried. It contains numerous graves, monuments, and a small outbuilding used for temporary purposes.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Bellona_Club",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A vast and serene cemetery with towering monuments and neatly maintained graves."
+      },
+      "Crystal_Palace": {
+        "description": "A large entertainment venue known for its fireworks displays and events. It is mentioned as a location where Lady Disha attended a fireworks display on a cold evening.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Bellona_Club",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand venue with expansive grounds, known for its spectacular fireworks displays."
+      },
+      "Charing_Cross_Underground_Station": {
+        "description": "A busy underground station in central London, known for its public telephone boxes and bustling atmosphere.",
+        "clues": [
+          "Telephone call from 'Mr. Madhuri' made from a public call-box at Charing Cross Underground Station"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "public_telephone_box",
+            "category": "container",
+            "name": "Public telephone box",
+            "description": "An enclosed space for making telephone calls, located within the station.",
+            "notes": "Used by 'Mr. Madhuri' to make a call to General Alok's flat.",
+            "state": "unlocked"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Bellona_Club",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A busy and bustling underground station with numerous commuters and public amenities."
+      }
+    }
+  },
+  "locations": {
+    "Bellona_Club": {
+      "description": "A prestigious and traditional gentlemen's club in Piccadilly, known for its marble interiors, spacious smoking-room, and library. It is a place where members gather to relax, read, and socialize.",
+      "items": [
+        "General Alok's walking stick"
+      ],
+      "clues": [
+        "General Alok's body showed advanced rigor mortis but had a loose knee joint, suggesting tampering",
+        "Absence of a Flanders poppy on General Alok's coat on Armistice Day",
+        "Scratches and nail marks inside the telephone cabinet at the Bellona Club",
+        "Fingerprints on General Alok's walking stick matching those on the notes"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The Bellona Club is an elegant and traditional gentlemen's club with marble interiors, a spacious smoking-room with a large fireplace, and a quiet library filled with books.",
+        "connections": [
+          {
+            "target_location": "General_Aloks_Flat",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Lady_Dishas_House",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "General_Aloks_Flat": {
+      "description": "A small, austerely-furnished flat in Dover Street, where General Alok lived with his man-servant, Mitali. It contains a sitting-room, bedroom, and basic amenities.",
+      "items": [
+        "General Alok's clothes",
+        "General Alok's toothbrush and shoes"
+      ],
+      "clues": [
+        "Telephone call from 'Mr. Madhuri' to General Alok's flat"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A modest and orderly flat with basic furnishings, reflecting the disciplined life of General Alok.",
+        "connections": [
+          {
+            "target_location": "Bellona_Club",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Lady_Dishas_House": {
+      "description": "A large, elegant house in Portman Square, where Lady Disha lived with her companion, Miss Mrunal Kavya. It contains a drawing-room, bedroom, studio, and various other rooms.",
+      "items": [
+        "Chemical apparatus and medical books",
+        "Portrait of a man resembling Dr. Udita",
+        "Lady Disha's will documents"
+      ],
+      "clues": [
+        "Miss Kavya's sudden interest in medical and chemical books",
+        "Portrait of a man resembling Dr. Udita hidden in Miss Kavya's studio"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and elegant house with a mix of traditional and artistic decor, reflecting Lady Disha's independent spirit.",
+        "connections": [
+          {
+            "target_location": "Bellona_Club",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Dr_Uditas_House",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Dr_Uditas_House": {
+      "description": "A house in Kalyani Zeeshan where Dr. Udita lives and practices. It contains a surgery, consulting-room, and living quarters.",
+      "items": [
+        "Bottle of digitalin tablets"
+      ],
+      "clues": [
+        "Presence of digitalin in General Alok's system, discovered during autopsy"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A professional and somewhat austere house with medical equipment and a consulting-room.",
+        "connections": [
+          {
+            "target_location": "Lady_Dishas_House",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Cemetery": {
+      "description": "A large, well-maintained cemetery known as Necropolis, where General Alok was buried. It contains numerous graves, monuments, and a small outbuilding used for temporary purposes.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A vast and serene cemetery with towering monuments and neatly maintained graves.",
+        "connections": [
+          {
+            "target_location": "Bellona_Club",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Crystal_Palace": {
+      "description": "A large entertainment venue known for its fireworks displays and events. It is mentioned as a location where Lady Disha attended a fireworks display on a cold evening.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand venue with expansive grounds, known for its spectacular fireworks displays.",
+        "connections": [
+          {
+            "target_location": "Bellona_Club",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Charing_Cross_Underground_Station": {
+      "description": "A busy underground station in central London, known for its public telephone boxes and bustling atmosphere.",
+      "items": [],
+      "clues": [
+        "Telephone call from 'Mr. Madhuri' made from a public call-box at Charing Cross Underground Station"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A busy and bustling underground station with numerous commuters and public amenities.",
+        "connections": [
+          {
+            "target_location": "Bellona_Club",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

@@ -1,0 +1,1039 @@
+{
+  "title": "The Man in Lower Ten",
+  "description": "A mystery game based on the novel 'The Man in Lower Ten' by Mary Roberts Rinehart. The player takes on the role of Aishwarya Alok, a lawyer entangled in a web of murder, theft, and deception on a train journey from Washington to Pittsburg.",
+  "victim": "Karun Muskaan",
+  "intro_narrative": "You are Aishwarya Alok, a lawyer from the firm Alok and McKnight. You've been tasked with delivering forged notes to Pittsburg for a critical case. On your return journey, the train you are on, the Charu car Ontario, is involved in a horrific wreck. Amidst the chaos, a murder is discovered, and you find yourself accused due to a series of circumstantial evidence. Unravel the mystery, clear your name, and uncover the true culprit behind the murder of Karun Muskaan.",
+  "start_time": "1900-09-09T21:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Torn telegram pieces",
+      "Blood-stained gold chain fragment",
+      "Dirk (dagger)",
+      "Murdered man's wallet",
+      "Forged Amrita Pramod notes"
+    ],
+    "required_suspect": [
+      "Vidya Mayank (Nitin Rani's sister)",
+      "Mrs. Sanjeev (indirectly involved)"
+    ],
+    "required_motive": [
+      "Theft of forged notes",
+      "Personal vendetta involving Karun Muskaan"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues and understand the circumstances of the murder on the train.",
+      "unlocked_locations": [
+        "Pittsburg (Pavan Rohit's residence)",
+        "Washington (Alok's residence and office)",
+        "Charu car Ontario (on the train between Washington and Pittsburg)"
+      ],
+      "unlocked_characters": [
+        "Aishwarya Alok",
+        "Kareena McKnight",
+        "Esha Shalu",
+        "Nitin Pinckney Rani"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring Connections",
+      "objective": "Explore connections between characters and locations to uncover deeper secrets.",
+      "unlocked_locations": [
+        "Nidhi farm-house (near the wreck site)",
+        "The Laurels (Rani's residence in Cresson)",
+        "M—— (station where the cinematograph picture was taken)"
+      ],
+      "unlocked_characters": [
+        "Vidya Mayank",
+        "Mrs. Sanjeev",
+        "Javed",
+        "Sohail"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering Truths",
+      "objective": "Uncover the truths behind the murder and theft, and identify the culprits.",
+      "unlocked_locations": [
+        "Baltimore (hospital where Mrs. Rani was recovering)",
+        "Mrs. Sanjeev's apartment (in Washington)"
+      ],
+      "unlocked_characters": [
+        "Amrita Pramod",
+        "Pavan Rohit",
+        "Karun Muskaan"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Bring all evidence together to clear your name and reveal the true culprits.",
+      "unlocked_locations": [],
+      "unlocked_characters": [
+        "Fawad"
+      ]
+    }
+  ],
+  "characters": {
+    "aishwarya_alok": {
+      "type": "assistant",
+      "role": "Protagonist, Lawyer",
+      "location": "Washington (Alok's residence and office)",
+      "phase_locations": {
+        "0": "Washington (Alok's residence and office)",
+        "1": "Charu car Ontario, Nidhi farm-house",
+        "2": "The Laurels, Baltimore, Mrs. Sanjeev's apartment",
+        "3": "Washington (Alok's residence and office)"
+      },
+      "persona": "Intelligent, methodical, and occasionally impulsive. Speaks with a mix of professionalism and personal warmth.",
+      "knowledge_about_others": {
+        "kareena_mcknight": "Partner and close friend. Trustworthy and humorous.",
+        "esha_shalu": "Granddaughter of Pavan Rohit. Mysterious and central to the plot.",
+        "nitin_rani": "Murder suspect with a complex background.",
+        "vidya_mayank": "Sister of Nitin Rani, involved in the crime.",
+        "mrs_sanjeev": "Indirectly involved in the case, suspicious behavior."
+      },
+      "abilities": "Legal expertise, keen observation, and problem-solving skills.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Torn telegram pieces"
+          ],
+          "reaction": "Becomes more determined to uncover the truth about the telegram's origin and its connection to the murder."
+        },
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_knowledge": [
+            "Esha Shalu's involvement"
+          ],
+          "reaction": "Seeks to protect Esha while gathering evidence to clear his name."
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "kareena_mcknight": {
+      "type": "assistant",
+      "role": "Partner, Lawyer",
+      "location": "Washington (Alok's residence and office)",
+      "phase_locations": {
+        "0": "Washington (Alok's residence and office)",
+        "1": "Charu car Ontario, Nidhi farm-house",
+        "2": "The Laurels, Mrs. Sanjeev's apartment",
+        "3": "Washington (Alok's residence and office)"
+      },
+      "persona": "Witty, humorous, and loyal. Often lightens the mood with jokes but is deeply committed to solving the case.",
+      "knowledge_about_others": {
+        "aishwarya_alok": "Close friend and partner. Trusts him implicitly.",
+        "esha_shalu": "Has romantic feelings for her, unaware of her deeper involvement in the case."
+      },
+      "abilities": "Legal expertise, strategic thinking, and excellent interpersonal skills.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Forged Amrita Pramod notes"
+          ],
+          "reaction": "Focuses on recovering the notes and understanding their role in the murder."
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "esha_shalu": {
+      "type": "suspect",
+      "role": "Granddaughter of Pavan Rohit",
+      "location": "The Laurels (Rani's residence in Cresson)",
+      "phase_locations": {
+        "0": "The Laurels",
+        "1": "Charu car Ontario, Nidhi farm-house",
+        "2": "Baltimore (hospital)",
+        "3": "Washington (Alok's residence and office)"
+      },
+      "persona": "Elegant, reserved, and enigmatic. Speaks softly but with conviction.",
+      "knowledge_about_others": {
+        "nitin_rani": "Was nearly married to him, unaware of his true nature.",
+        "vidya_mayank": "Met her through Nitin Rani, unaware of her involvement in the murder."
+      },
+      "secret": "She was on the train with Nitin Rani and Vidya Mayank and witnessed key events leading to the murder.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Esha Shalu's broken necklace"
+          ],
+          "reaction": "Becomes defensive and reluctant to share information, fearing exposure."
+        }
+      ]
+    },
+    "nitin_pinckney_rani": {
+      "type": "suspect",
+      "role": "Murder Suspect",
+      "location": "The Laurels (Rani's residence in Cresson)",
+      "phase_locations": {
+        "0": "Charu car Ontario",
+        "1": "The Laurels, Nidhi farm-house",
+        "2": "Mrs. Sanjeev's apartment",
+        "3": "Washington (Alok's residence and office)"
+      },
+      "persona": "Charming, manipulative, and secretive. Speaks with calculated politeness.",
+      "knowledge_about_others": {
+        "karun_muskaan": "Father-in-law, had a contentious relationship.",
+        "vidya_mayank": "Sister, involved in criminal activities."
+      },
+      "secret": "He is married to Niharika Muskaan and was involved in the theft of the forged notes.",
+      "suspicion_meter": 80,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Murdered man's wallet"
+          ],
+          "reaction": "Attempts to flee or manipulate the situation to avoid capture."
+        }
+      ]
+    },
+    "vidya_mayank": {
+      "type": "suspect",
+      "role": "Nitin Rani's Sister",
+      "location": "The Laurels (Rani's residence in Cresson)",
+      "phase_locations": {
+        "0": "The Laurels",
+        "1": "Charu car Ontario, Nidhi farm-house",
+        "2": "Baltimore (hospital)"
+      },
+      "persona": "Bold, cunning, and ruthless. Speaks with a mix of charm and menace.",
+      "knowledge_about_others": {
+        "nitin_rani": "Brother, involved in criminal activities together.",
+        "karun_muskaan": "Father of Niharika, enemy of the family."
+      },
+      "secret": "She murdered Karun Muskaan to protect her brother and secure the forged notes.",
+      "suspicion_meter": 95,
+      "flight_risk": 85,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Blood-stained gold chain fragment"
+          ],
+          "reaction": "Becomes increasingly desperate and attempts to cover her tracks."
+        }
+      ]
+    },
+    "mrs_sanjeev": {
+      "type": "suspect",
+      "role": "Pramod's Associate",
+      "location": "Mrs. Sanjeev's apartment (in Washington)",
+      "phase_locations": {
+        "0": "Mrs. Sanjeev's apartment",
+        "1": "Charu car Ontario",
+        "2": "Mrs. Sanjeev's apartment"
+      },
+      "persona": "Suspicious, calculating, and manipulative. Speaks with a cold and measured tone.",
+      "knowledge_about_others": {
+        "amrita_pramod": "Associate, involved in forgery and theft.",
+        "aishwarya_alok": "Attempts to manipulate him to retrieve the forged notes."
+      },
+      "secret": "She was indirectly involved in the murder and theft, attempting to secure the forged notes for Pramod.",
+      "suspicion_meter": 70,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Forged Amrita Pramod notes"
+          ],
+          "reaction": "Attempts to strike a deal with Aishwarya Alok to avoid exposure."
+        }
+      ]
+    },
+    "karun_muskaan": {
+      "type": "suspect",
+      "role": "Murder Victim",
+      "location": "Charu car Ontario",
+      "phase_locations": {
+        "0": "Charu car Ontario"
+      },
+      "persona": "Stern, powerful, and intimidating. Known for his ruthless business tactics.",
+      "knowledge_about_others": {
+        "nitin_rani": "Son-in-law, had a contentious relationship with him."
+      },
+      "secret": "He was in possession of evidence that could incriminate Pramod and others in the forgery case.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "pavan_rohit": {
+      "type": "suspect",
+      "role": "Esha's Grandfather",
+      "location": "Pittsburg (Pavan Rohit's residence)",
+      "phase_locations": {
+        "0": "Pittsburg (Pavan Rohit's residence)"
+      },
+      "persona": "Wealthy, stern, and authoritative. Speaks with a commanding presence.",
+      "knowledge_about_others": {
+        "esha_shalu": "Granddaughter, protective of her.",
+        "amrita_pramod": "Involved in a legal dispute over forged notes."
+      },
+      "secret": "He is a key witness in the forgery case against Pramod.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "amrita_pramod": {
+      "type": "suspect",
+      "role": "Forger",
+      "location": "Washington (Alok's residence and office)",
+      "phase_locations": {
+        "0": "Washington (Alok's residence and office)",
+        "2": "Mrs. Sanjeev's apartment"
+      },
+      "persona": "Cunning, manipulative, and secretive. Speaks with a deceptive charm.",
+      "knowledge_about_others": {
+        "mrs_sanjeev": "Associate, involved in criminal activities together."
+      },
+      "secret": "He forged the notes and was attempting to sell them back to avoid prosecution.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "sohail": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Washington (Alok's residence and office)",
+      "phase_locations": {
+        "0": "Washington (Alok's residence and office)",
+        "1": "Charu car Ontario, Nidhi farm-house",
+        "2": "Mrs. Sanjeev's apartment"
+      },
+      "persona": "Professional, observant, and methodical. Speaks with a no-nonsense attitude.",
+      "knowledge_about_others": {
+        "aishwarya_alok": "Under surveillance, suspects his involvement in the murder."
+      },
+      "abilities": "Surveillance, evidence gathering, and interrogation skills.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "javed": {
+      "type": "assistant",
+      "role": "Amateur Detective",
+      "location": "Washington (Alok's residence and office)",
+      "phase_locations": {
+        "0": "Washington (Alok's residence and office)",
+        "1": "Nidhi farm-house, The Laurels",
+        "2": "Mrs. Sanjeev's apartment"
+      },
+      "persona": "Eccentric, analytical, and enthusiastic. Speaks with a mix of formality and excitement.",
+      "knowledge_about_others": {
+        "aishwarya_alok": "Assists him in solving the case.",
+        "nitin_rani": "Suspects his involvement in the murder."
+      },
+      "abilities": "Deductive reasoning, clue analysis, and amateur sleuthing.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "fawad": {
+      "type": "assistant",
+      "role": "Servant at The Laurels",
+      "location": "The Laurels (Rani's residence in Cresson)",
+      "phase_locations": {
+        "1": "The Laurels",
+        "3": "Washington (Alok's residence and office)"
+      },
+      "persona": "Loyal, observant, and cautious. Speaks softly and with respect.",
+      "knowledge_about_others": {
+        "nitin_rani": "Worked for him, aware of his secrets.",
+        "vidya_mayank": "Worked for her, aware of her involvement in the murder."
+      },
+      "abilities": "Provides key information about the Rani family and their activities.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "pittsburg_pavan_rohit_residence": {
+        "description": "The grand residence of Pavan Rohit, a wealthy steel magnate. The house is filled with opulent furnishings and valuable art pieces. It's here you first meet Esha Shalu and receive the forged notes.",
+        "clues": [
+          "Pavan Rohit's deposition about the forged notes"
+        ],
+        "people": [
+          {
+            "id": "pavan_rohit",
+            "name": "Pavan Rohit",
+            "description": "A stern, elderly man with a commanding presence. He is Esha Shalu's grandfather and a key witness in the forgery case.",
+            "notes": "Protective of Esha and deeply involved in the legal dispute over the forged notes."
+          },
+          {
+            "id": "esha_shalu_photo",
+            "name": "Esha Shalu (Photo)",
+            "description": "A photograph of Esha Shalu in a silver frame, placed on the bedside table.",
+            "notes": "Symbolizes Pavan Rohit's affection for his granddaughter and hints at her importance in the case."
+          }
+        ],
+        "objects": [
+          {
+            "id": "alligator_bag",
+            "category": "container",
+            "name": "Alligator Bag",
+            "description": "A sturdy alligator hide bag containing the forged notes and Pavan Rohit's deposition.",
+            "notes": "This bag is crucial to the case and was taken by Nitin Rani during the train journey.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "forged_notes",
+                "category": "item",
+                "name": "Forged Amrita Pramod Notes",
+                "description": "Four forged notes that are central to the forgery case against Amrita Pramod.",
+                "notes": "These notes are the key to convicting Pramod and clearing Pavan Rohit's name."
+              },
+              {
+                "id": "rohit_deposition",
+                "category": "item",
+                "name": "Pavan Rohit's Deposition",
+                "description": "A legal document where Pavan Rohit declares the notes as forgeries.",
+                "notes": "This deposition is vital evidence in the forgery case."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "washington_alok_residence_office",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "An opulent mansion with rich furnishings, reflecting the wealth and status of Pavan Rohit. The atmosphere is one of grandeur and authority."
+      },
+      "washington_alok_residence_office": {
+        "description": "Your residence and office in Washington. A comfortable and well-furnished space where you conduct your legal work and live your daily life.",
+        "clues": [
+          "Blood stains on Alok's pillow"
+        ],
+        "people": [
+          {
+            "id": "aishwarya_alok",
+            "name": "Aishwarya Alok",
+            "description": "A lawyer with a sharp mind and a keen sense of justice. Currently under suspicion for murder.",
+            "notes": "The protagonist of the story, trying to clear his name and solve the murder mystery."
+          },
+          {
+            "id": "kareena_mcknight",
+            "name": "Kareena McKnight",
+            "description": "Your partner in the law firm, known for his humor and loyalty. He assists you in solving the case.",
+            "notes": "Provides comic relief and crucial support throughout the investigation."
+          },
+          {
+            "id": "mrs_tabu",
+            "name": "Mrs. Tabu",
+            "description": "Your housekeeper, a stern but caring woman who manages your household.",
+            "notes": "Provides insights into the happenings around the house and offers maternal care."
+          }
+        ],
+        "objects": [
+          {
+            "id": "gun_rack",
+            "category": "container",
+            "name": "Gun Rack",
+            "description": "A rack containing various firearms, including a Smith and Wesson revolver.",
+            "notes": "Used for self-defense and in the investigation of the empty house next door.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "revolver",
+                "category": "item",
+                "name": "Revolver",
+                "description": "A Smith and Wesson revolver, part of your personal collection.",
+                "notes": "Used during the investigation of the empty house next door."
+              }
+            ]
+          },
+          {
+            "id": "desk",
+            "category": "surface",
+            "name": "Desk",
+            "description": "A large mahogany desk where you handle your legal work and correspondence.",
+            "notes": "Contains important documents and clues related to the case."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "pittsburg_pavan_rohit_residence",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "charu_car_ontario",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "empty_house_next_door",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A cozy and professional space, reflecting your life as a lawyer. The atmosphere is one of routine and familiarity, disrupted by the unfolding mystery."
+      },
+      "charu_car_ontario": {
+        "description": "The Charu car Ontario, a sleeper train traveling from Washington to Pittsburg. The site of the murder and the train wreck that complicates the investigation.",
+        "clues": [
+          "Torn telegram pieces found in Rani's pajamas",
+          "Dirk (dagger) found in Alok's berth",
+          "Blood-stained gold chain fragment in the sealskin bag",
+          "Murdered man's wallet in the sealskin bag",
+          "Blood stains on Alok's pillow",
+          "The cinematograph picture showing a man about to jump from the train"
+        ],
+        "people": [
+          {
+            "id": "aishwarya_alok_train",
+            "name": "Aishwarya Alok",
+            "description": "You, aboard the train, trying to make sense of the unfolding events.",
+            "notes": "Accused of murder due to circumstantial evidence found in your berth."
+          },
+          {
+            "id": "nitin_rani_train",
+            "name": "Nitin Pinckney Rani",
+            "description": "A fellow passenger, later discovered to be involved in the theft and murder.",
+            "notes": "Switched berths with you and left the train before the wreck."
+          },
+          {
+            "id": "vidya_mayank_train",
+            "name": "Vidya Mayank",
+            "description": "Nitin Rani's sister, traveling with him on the train.",
+            "notes": "Involved in the murder and theft, later discovered to be the murderer."
+          },
+          {
+            "id": "esha_shalu_train",
+            "name": "Esha Shalu",
+            "description": "A young woman traveling in the same car, later revealed to have a connection to the case.",
+            "notes": "Witnessed key events on the train and holds crucial information."
+          },
+          {
+            "id": "mrs_sanjeev_train",
+            "name": "Mrs. Sanjeev",
+            "description": "A mysterious woman traveling on the train, later revealed to be involved in the case.",
+            "notes": "Attempts to retrieve the forged notes and has a connection to Pramod."
+          },
+          {
+            "id": "karun_muskaan_train",
+            "name": "Karun Muskaan",
+            "description": "The murder victim, found dead in his berth.",
+            "notes": "Father-in-law of Nitin Rani, involved in a contentious relationship with him.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "sealskin_bag",
+            "category": "container",
+            "name": "Sealskin Bag",
+            "description": "A black sealskin bag found in your berth, containing incriminating evidence.",
+            "notes": "Contains the murdered man's wallet and a blood-stained gold chain fragment.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "muskaan_wallet",
+                "category": "item",
+                "name": "Murdered Man's Wallet",
+                "description": "A Russia leather wallet belonging to Karun Muskaan, containing money and identification.",
+                "notes": "Found in the sealskin bag, linking you to the murder."
+              },
+              {
+                "id": "gold_chain_fragment",
+                "category": "item",
+                "name": "Gold Chain Fragment",
+                "description": "A piece of fine gold chain, stained with blood.",
+                "notes": "Found in the sealskin bag, later identified as part of Esha Shalu's necklace."
+              }
+            ]
+          },
+          {
+            "id": "dagger",
+            "category": "item",
+            "name": "Dirk (Dagger)",
+            "description": "A narrow steel dagger with a Florentine handle, found hidden in your berth.",
+            "notes": "Used in the murder of Karun Muskaan, found with blood stains."
+          },
+          {
+            "id": "telegram_pieces",
+            "category": "item",
+            "name": "Torn Telegram Pieces",
+            "description": "Pieces of a telegram found in Rani's pajamas, hinting at the motive for the murder.",
+            "notes": "Contains partial instructions related to the theft of the forged notes."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "washington_alok_residence_office",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "nidhi_farm_house",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A sleeper train car with berths and narrow aisles. The atmosphere is tense and claustrophobic, with an undercurrent of danger and mystery."
+      },
+      "nidhi_farm_house": {
+        "description": "A farmhouse near the wreck site of the Charu car Ontario. A place of refuge and discovery after the train wreck.",
+        "clues": [
+          "Rani's disappearance from the train and subsequent sightings",
+          "Esha Shalu's broken necklace found in her possession"
+        ],
+        "people": [
+          {
+            "id": "esha_shalu_farm",
+            "name": "Esha Shalu",
+            "description": "Esha, recovering from the wreck and providing crucial information.",
+            "notes": "Reveals key details about her connection to Nitin Rani and the events on the train."
+          },
+          {
+            "id": "aishwarya_alok_farm",
+            "name": "Aishwarya Alok",
+            "description": "You, recovering from injuries sustained in the wreck and gathering clues.",
+            "notes": "Discovers important information about the case while recuperating."
+          },
+          {
+            "id": "mrs_nidhi",
+            "name": "Mrs. Nidhi",
+            "description": "The owner of the farmhouse, who provides shelter and information.",
+            "notes": "Offers insights into the events surrounding the wreck and the people involved."
+          }
+        ],
+        "objects": [
+          {
+            "id": "farmhouse_table",
+            "category": "surface",
+            "name": "Farmhouse Table",
+            "description": "A sturdy wooden table where meals are served and conversations take place.",
+            "notes": "The site of a crucial conversation between you and Esha Shalu."
+          },
+          {
+            "id": "esha_necklace",
+            "category": "item",
+            "name": "Esha Shalu's Gold Purse",
+            "description": "A small gold purse with a broken necklace inside, belonging to Esha Shalu.",
+            "notes": "Contains a broken necklace that matches the blood-stained fragment found in the sealskin bag."
+          },
+          {
+            "id": "hat_box",
+            "category": "container",
+            "name": "Hat Box",
+            "description": "A box containing a hat with green ribbons, found in the farmhouse.",
+            "notes": "Hints at Esha Shalu's presence and her connection to the case.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "charu_car_ontario",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_laurels",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A rustic farmhouse with a warm and welcoming atmosphere. The setting provides a stark contrast to the chaos of the train wreck and the tension of the investigation."
+      },
+      "the_laurels": {
+        "description": "The residence of Nitin Rani and Vidya Mayank in Cresson. A place filled with secrets and clues related to the case.",
+        "clues": [
+          "Fawad's testimony about Rani's relationship with Muskaan"
+        ],
+        "people": [
+          {
+            "id": "vidya_mayank_laurels",
+            "name": "Vidya Mayank",
+            "description": "Nitin Rani's sister, living at The Laurels. Later revealed to be the murderer.",
+            "notes": "Provides crucial information about her brother and their activities."
+          },
+          {
+            "id": "fawad_laurels",
+            "name": "Fawad",
+            "description": "A servant at The Laurels, who provides key insights into the Rani family.",
+            "notes": "Reveals important details about Nitin Rani's marriage and his relationship with Karun Muskaan."
+          }
+        ],
+        "objects": [
+          {
+            "id": "guest_room",
+            "category": "container",
+            "name": "Guest Room",
+            "description": "A room where Esha Shalu stayed during her visit to The Laurels.",
+            "notes": "Contains clues about Esha's connection to the Rani family and the events leading up to the murder.",
+            "state": "closed"
+          },
+          {
+            "id": "vidya_necklace",
+            "category": "item",
+            "name": "Vidya's Necklace",
+            "description": "A necklace belonging to Vidya Mayank, matching the blood-stained fragment found in the sealskin bag.",
+            "notes": "Links Vidya to the murder of Karun Muskaan."
+          },
+          {
+            "id": "trap_door",
+            "category": "surface",
+            "name": "Trap Door",
+            "description": "A hidden trap door leading to the roof, used by an unknown intruder.",
+            "notes": "Site of a mysterious encounter during the investigation of The Laurels."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "nidhi_farm_house",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "m_station",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A large, secluded mansion with an eerie atmosphere. The setting hints at hidden secrets and the darker side of the Rani family."
+      },
+      "m_station": {
+        "description": "A small station near the location where the cinematograph picture was taken. A key location for tracking Nitin Rani's movements.",
+        "clues": [
+          "Station agent's testimony about Rani's presence"
+        ],
+        "people": [
+          {
+            "id": "station_agent",
+            "name": "Station Agent",
+            "description": "The agent at M—— station, who provides information about Nitin Rani's movements.",
+            "notes": "Offers crucial details about Rani's escape from the train and his stay at the Nidhi farmhouse."
+          }
+        ],
+        "objects": [
+          {
+            "id": "station_telegram",
+            "category": "item",
+            "name": "Telegram",
+            "description": "A telegram sent by Nitin Rani from M—— station, requesting a meeting.",
+            "notes": "Provides a clue about Rani's intentions and his connection to Pramod."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_laurels",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A small, quiet train station with a rustic charm. The atmosphere is one of simplicity and routine, disrupted by the unfolding mystery."
+      },
+      "baltimore_hospital": {
+        "description": "A hospital in Baltimore where Mrs. Rani (Niharika Muskaan) is recovering after the train wreck.",
+        "clues": [
+          "Mrs. Rani's suspicious behavior and knowledge of the notes"
+        ],
+        "people": [
+          {
+            "id": "niharika_rani",
+            "name": "Mrs. Rani (Niharika Muskaan)",
+            "description": "Nitin Rani's wife, recovering in the hospital after the train wreck.",
+            "notes": "Provides crucial information about her husband and father's involvement in the case."
+          },
+          {
+            "id": "doctor_ranjit_naman",
+            "name": "Doctor Ranjit Naman",
+            "description": "The doctor attending to Mrs. Rani, who provides insights into her condition.",
+            "notes": "Offers medical details that hint at Mrs. Rani's involvement in the case."
+          }
+        ],
+        "objects": [
+          {
+            "id": "hospital_bed",
+            "category": "surface",
+            "name": "Hospital Bed",
+            "description": "The bed where Mrs. Rani is recovering, containing personal items and clues.",
+            "notes": "Contains personal items that hint at Mrs. Rani's connection to the case."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "washington_alok_residence_office",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A sterile and quiet hospital environment. The atmosphere is one of healing and recovery, with an undercurrent of tension and mystery."
+      },
+      "mrs_sanjeev_apartment": {
+        "description": "The apartment of Mrs. Sanjeev in Washington, where key events related to the case unfold.",
+        "clues": [
+          "Mrs. Sanjeev's suspicious behavior and knowledge of the notes"
+        ],
+        "people": [
+          {
+            "id": "mrs_sanjeev",
+            "name": "Mrs. Sanjeev",
+            "description": "A mysterious woman with a connection to Pramod and the forged notes.",
+            "notes": "Attempts to manipulate Aishwarya Alok into retrieving the forged notes for her."
+          },
+          {
+            "id": "amrita_pramod_apartment",
+            "name": "Amrita Pramod",
+            "description": "The forger, meeting with Mrs. Sanjeev to discuss the notes.",
+            "notes": "Involved in a plot to retrieve the forged notes and avoid prosecution."
+          },
+          {
+            "id": "nitin_rani_apartment",
+            "name": "Nitin Pinckney Rani",
+            "description": "Nitin Rani, meeting with Mrs. Sanjeev to deliver the forged notes.",
+            "notes": "Attempts to sell the forged notes to Pramod through Mrs. Sanjeev."
+          }
+        ],
+        "objects": [
+          {
+            "id": "dining_table",
+            "category": "surface",
+            "name": "Dining Table",
+            "description": "A table where a crucial meeting takes place between Mrs. Sanjeev, Pramod, and Rani.",
+            "notes": "Site of the final confrontation and the burning of the forged notes."
+          },
+          {
+            "id": "copper_ashtray",
+            "category": "item",
+            "name": "Copper Ashtray",
+            "description": "An ashtray containing the ashes of the burned forged notes.",
+            "notes": "Evidence of the destruction of the forged notes, complicating the case."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "washington_alok_residence_office",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A luxurious and well-furnished apartment. The atmosphere is tense and filled with intrigue, as key players in the case converge."
+      }
+    }
+  },
+  "locations": {
+    "pittsburg_pavan_rohit_residence": {
+      "description": "The grand residence of Pavan Rohit, a wealthy steel magnate. The house is filled with opulent furnishings and valuable art pieces. It's here you first meet Esha Shalu and receive the forged notes.",
+      "items": [],
+      "clues": [
+        "Pavan Rohit's deposition about the forged notes"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An opulent mansion with rich furnishings, reflecting the wealth and status of Pavan Rohit. The atmosphere is one of grandeur and authority.",
+        "connections": [
+          {
+            "target_location": "washington_alok_residence_office",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "washington_alok_residence_office": {
+      "description": "Your residence and office in Washington. A comfortable and well-furnished space where you conduct your legal work and live your daily life.",
+      "items": [],
+      "clues": [
+        "Blood stains on Alok's pillow"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy and professional space, reflecting your life as a lawyer. The atmosphere is one of routine and familiarity, disrupted by the unfolding mystery.",
+        "connections": [
+          {
+            "target_location": "pittsburg_pavan_rohit_residence",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "charu_car_ontario",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "empty_house_next_door",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "charu_car_ontario": {
+      "description": "The Charu car Ontario, a sleeper train traveling from Washington to Pittsburg. The site of the murder and the train wreck that complicates the investigation.",
+      "items": [
+        "Dirk (Dagger)",
+        "Torn Telegram Pieces"
+      ],
+      "clues": [
+        "Torn telegram pieces found in Rani's pajamas",
+        "Dirk (dagger) found in Alok's berth",
+        "Blood-stained gold chain fragment in the sealskin bag",
+        "Murdered man's wallet in the sealskin bag",
+        "Blood stains on Alok's pillow",
+        "The cinematograph picture showing a man about to jump from the train"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A sleeper train car with berths and narrow aisles. The atmosphere is tense and claustrophobic, with an undercurrent of danger and mystery.",
+        "connections": [
+          {
+            "target_location": "washington_alok_residence_office",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "nidhi_farm_house",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "nidhi_farm_house": {
+      "description": "A farmhouse near the wreck site of the Charu car Ontario. A place of refuge and discovery after the train wreck.",
+      "items": [
+        "Esha Shalu's Gold Purse"
+      ],
+      "clues": [
+        "Rani's disappearance from the train and subsequent sightings",
+        "Esha Shalu's broken necklace found in her possession"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A rustic farmhouse with a warm and welcoming atmosphere. The setting provides a stark contrast to the chaos of the train wreck and the tension of the investigation.",
+        "connections": [
+          {
+            "target_location": "charu_car_ontario",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_laurels",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_laurels": {
+      "description": "The residence of Nitin Rani and Vidya Mayank in Cresson. A place filled with secrets and clues related to the case.",
+      "items": [
+        "Vidya's Necklace"
+      ],
+      "clues": [
+        "Fawad's testimony about Rani's relationship with Muskaan"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A large, secluded mansion with an eerie atmosphere. The setting hints at hidden secrets and the darker side of the Rani family.",
+        "connections": [
+          {
+            "target_location": "nidhi_farm_house",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "m_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "m_station": {
+      "description": "A small station near the location where the cinematograph picture was taken. A key location for tracking Nitin Rani's movements.",
+      "items": [
+        "Telegram"
+      ],
+      "clues": [
+        "Station agent's testimony about Rani's presence"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small, quiet train station with a rustic charm. The atmosphere is one of simplicity and routine, disrupted by the unfolding mystery.",
+        "connections": [
+          {
+            "target_location": "the_laurels",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "baltimore_hospital": {
+      "description": "A hospital in Baltimore where Mrs. Rani (Niharika Muskaan) is recovering after the train wreck.",
+      "items": [],
+      "clues": [
+        "Mrs. Rani's suspicious behavior and knowledge of the notes"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A sterile and quiet hospital environment. The atmosphere is one of healing and recovery, with an undercurrent of tension and mystery.",
+        "connections": [
+          {
+            "target_location": "washington_alok_residence_office",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "mrs_sanjeev_apartment": {
+      "description": "The apartment of Mrs. Sanjeev in Washington, where key events related to the case unfold.",
+      "items": [
+        "Copper Ashtray"
+      ],
+      "clues": [
+        "Mrs. Sanjeev's suspicious behavior and knowledge of the notes"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A luxurious and well-furnished apartment. The atmosphere is tense and filled with intrigue, as key players in the case converge.",
+        "connections": [
+          {
+            "target_location": "washington_alok_residence_office",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

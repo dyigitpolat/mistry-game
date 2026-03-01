@@ -20,6 +20,7 @@ import {
     connectClues,
     accuseCase,
     getScenario,
+    generateSceneImage,
     getDiscordStatus,
     getDiscordNotes,
     BACKEND_URL,
@@ -539,10 +540,11 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         let mounted = true;
         if (scenarioId && currentLocation) {
             setSceneImageUrl(undefined); // clear old image
-            fetch(`${BACKEND_URL}/scenes/${scenarioId}/generate?location_name=${encodeURIComponent(currentLocation)}`, { method: "POST" })
-                .then(res => res.json())
+
+            generateSceneImage(scenarioId, currentLocation)
                 .then(data => {
                     if (mounted && data.image_url) {
+                        // image_url is returned as a relative path like `/scenes/file.png`
                         setSceneImageUrl(`${BACKEND_URL}${data.image_url}`);
                     }
                 })

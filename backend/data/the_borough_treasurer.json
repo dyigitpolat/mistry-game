@@ -1,0 +1,742 @@
+{
+  "title": "The Borough Treasurer",
+  "description": "A mystery novel involving blackmail, murder, and the uncovering of past identities in the small town of Highmarket. The story revolves around the murder of an ex-detective, Burnett, and the subsequent investigation that reveals dark secrets about the town's prominent figures.",
+  "victim": "Burnett",
+  "intro_narrative": "Halfway along the north side of Highmarket's main street stands an ancient stone gateway leading to the yard of Mallalieu and Hill, Builders and Contractors. One October afternoon, Milford Hill, the Borough Treasurer, receives a visit from his new tenant, Burnett, who reveals a shocking secret from Hill's past. Burnett, an ex-detective, recognizes Hill and his partner, Anthony Sandler, as the men he saw convicted for fraud thirty years prior at Criss Assizes. Burnett threatens to expose their past unless they pay him off. This revelation sets off a chain of events leading to Burnett's murder and the unraveling of long-buried secrets.",
+  "start_time": "1890-10-15T16:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "The grey cord used in the murder",
+      "Burnett's scrapbook",
+      "Koshy's pocketbook with notes on the Criss case",
+      "The anonymous letter with banknotes",
+      "Sandler's oak walking stick",
+      "Banknotes found in Cruz's shed",
+      "Burnett's will"
+    ],
+    "required_suspect": [
+      "Anthony Sandler"
+    ],
+    "required_motive": [
+      "Blackmail and fear of exposure of past crimes"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Discovery",
+      "objective": "Uncover the initial clues and understand Burnett's revelation about Hill and Sandler's past.",
+      "unlocked_locations": [
+        "Highmarket",
+        "Highmarket Town Hall"
+      ],
+      "unlocked_characters": [
+        "Milford Hill",
+        "Anthony Sandler",
+        "Burnett",
+        "Zane Cruz",
+        "Gifford Kauffman"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Investigation Begins",
+      "objective": "Explore the crime scene and gather evidence related to Burnett's murder.",
+      "unlocked_locations": [
+        "Burnett's cottage on the Shawl",
+        "Hobwick Quarry",
+        "The moors near Highmarket"
+      ],
+      "unlocked_characters": [
+        "John Cruz",
+        "Tyson Diaz",
+        "Miss Diaz",
+        "Portman O'hara"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Deepening Mystery",
+      "objective": "Follow leads and interrogate suspects to uncover the truth behind the murders.",
+      "unlocked_locations": [
+        "Cruz's cottage",
+        "Norcaster Gaol"
+      ],
+      "unlocked_characters": [
+        "Teller Hill",
+        "Gifford Kauffman"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the culprits and solve the mystery of Burnett's and Koshy's murders.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "milford_hill": {
+      "type": "suspect",
+      "role": "Borough Treasurer and Partner in Mallalieu and Hill",
+      "location": "Highmarket",
+      "phase_locations": {
+        "0": "Highmarket",
+        "1": "Highmarket Town Hall",
+        "2": "Burnett's cottage on the Shawl",
+        "3": "Norcaster Gaol"
+      },
+      "persona": "Nervous, quick-witted, and deeply concerned about his reputation and his daughter's future.",
+      "knowledge_about_others": {
+        "anthony_sandler": "Partner and ex-convict from Criss Assizes.",
+        "burnett": "Ex-detective who recognized Hill and Sandler from their past.",
+        "zane_cruz": "Daughter of John Cruz, who is wrongly accused."
+      },
+      "secret": "He and Sandler were convicted for fraud thirty years ago under different names.",
+      "suspicion_meter": 70,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Burnett's scrapbook"
+          ],
+          "required_knowledge": [
+            "Burnett's true identity"
+          ],
+          "reaction": "Attempts to silence Burnett and later Koshy to protect his secret.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "anthony_sandler": {
+      "type": "suspect",
+      "role": "Sheen of Highmarket and Partner in Mallalieu and Hill",
+      "location": "Highmarket",
+      "phase_locations": {
+        "0": "Highmarket",
+        "1": "Highmarket Town Hall",
+        "2": "Burnett's cottage on the Shawl",
+        "3": "Hobwick Quarry"
+      },
+      "persona": "Sly, observant, and self-satisfied with a strong sense of self-preservation.",
+      "knowledge_about_others": {
+        "milford_hill": "Partner and ex-convict from Criss Assizes.",
+        "burnett": "Ex-detective who threatens to expose their past.",
+        "koshy": "Clerk who discovered their secret."
+      },
+      "secret": "He and Hill were convicted for fraud thirty years ago and changed their identities.",
+      "suspicion_meter": 85,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The grey cord used in the murder",
+            "Koshy's pocketbook"
+          ],
+          "required_knowledge": [
+            "Koshy's discovery of their past"
+          ],
+          "reaction": "Murders Koshy to silence him and attempts to flee.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "burnett": {
+      "type": "suspect",
+      "role": "Ex-Detective and Tenant",
+      "location": "Burnett's cottage on the Shawl",
+      "phase_locations": {
+        "0": "Burnett's cottage on the Shawl"
+      },
+      "persona": "Quiet, observant, and purposeful with a penchant for blackmail.",
+      "knowledge_about_others": {
+        "milford_hill": "Recognizes him as Knopfler from Criss Assizes.",
+        "anthony_sandler": "Recognizes him as Choi from Criss Assizes."
+      },
+      "secret": "Knows the true identities of Hill and Sandler from their past conviction.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "zane_cruz": {
+      "type": "assistant",
+      "role": "Daughter of John Cruz",
+      "location": "Cruz's cottage",
+      "phase_locations": {
+        "0": "Cruz's cottage",
+        "1": "Burnett's cottage on the Shawl",
+        "2": "Highmarket"
+      },
+      "persona": "Intelligent, composed, and determined to prove her father's innocence.",
+      "abilities": "Gathers information, supports the investigation, and provides crucial insights.",
+      "knowledge_about_others": {
+        "john_cruz": "Her father, wrongly accused of murder.",
+        "gifford_kauffman": "Barrister defending her father."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "john_cruz": {
+      "type": "suspect",
+      "role": "Pig-Killer and Poacher",
+      "location": "Cruz's cottage",
+      "phase_locations": {
+        "0": "Cruz's cottage",
+        "1": "Norcaster Gaol"
+      },
+      "persona": "Mysterious, obstinate, and fiercely protective of his secrets.",
+      "knowledge_about_others": {
+        "zane_cruz": "His daughter, who he wants to protect.",
+        "anthony_sandler": "Attempts to frame him for murder."
+      },
+      "secret": "Knows about a powerful ally who can prove his innocence but refuses to reveal it.",
+      "suspicion_meter": 80,
+      "flight_risk": 40,
+      "conditional_behaviors": []
+    },
+    "tyson_diaz": {
+      "type": "suspect",
+      "role": "Solicitor",
+      "location": "Highmarket",
+      "phase_locations": {
+        "0": "Highmarket"
+      },
+      "persona": "Crafty and opportunistic, focused on exploiting situations for personal gain.",
+      "knowledge_about_others": {
+        "miss_diaz": "His aunt and partner in crime."
+      },
+      "secret": "Involved in blackmail schemes and covering up crimes.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "miss_diaz": {
+      "type": "suspect",
+      "role": "Housekeeper of Burnett",
+      "location": "Burnett's cottage on the Shawl",
+      "phase_locations": {
+        "0": "Burnett's cottage on the Shawl"
+      },
+      "persona": "Stern, secretive, and manipulative with a history of suspicious activities.",
+      "knowledge_about_others": {
+        "burnett": "Her employer, whose murder she may have orchestrated.",
+        "tyson_diaz": "Her nephew and accomplice."
+      },
+      "secret": "Has a past involving the suspicious deaths of previous employers.",
+      "suspicion_meter": 75,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    },
+    "gifford_kauffman": {
+      "type": "assistant",
+      "role": "Barrister",
+      "location": "Highmarket",
+      "phase_locations": {
+        "0": "Highmarket",
+        "1": "Highmarket Town Hall",
+        "2": "Burnett's cottage on the Shawl"
+      },
+      "persona": "Sharp, observant, and methodical with a strong sense of justice.",
+      "abilities": "Legal expertise, keen investigative skills, and ability to uncover hidden truths.",
+      "knowledge_about_others": {
+        "zane_cruz": "Client's daughter and key to solving the mystery.",
+        "milford_hill": "Suspect with a hidden past."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "portman_ohara": {
+      "type": "assistant",
+      "role": "Manufacturer and Friend of Gifford Kauffman",
+      "location": "Highmarket",
+      "phase_locations": {
+        "0": "Highmarket"
+      },
+      "persona": "Ambitious, loyal, and supportive with a strong moral compass.",
+      "abilities": "Provides resources, support, and a different perspective on the case.",
+      "knowledge_about_others": {
+        "teller_hill": "Fiancée and daughter of Milford Hill.",
+        "gifford_kauffman": "Close friend and barrister."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "teller_hill": {
+      "type": "assistant",
+      "role": "Daughter of Milford Hill",
+      "location": "Highmarket",
+      "phase_locations": {
+        "0": "Highmarket"
+      },
+      "persona": "Calm, composed, and pragmatic with a strong sense of loyalty to her family.",
+      "abilities": "Provides emotional support and helps navigate family secrets.",
+      "knowledge_about_others": {
+        "milford_hill": "Her father, whose past she learns about.",
+        "portman_ohara": "Her fiancé."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "highmarket": {
+        "description": "A small, quiet town with an ancient stone gateway leading to the yard of Mallalieu and Hill, Builders and Contractors. The main street is lined with shops, and the town hall stands prominently in the market square.",
+        "clues": [
+          "Koshy's notes about the Criss Assizes case"
+        ],
+        "people": [
+          {
+            "id": "milford_hill",
+            "name": "Milford Hill",
+            "description": "A slightly built, wiry man with nervous and quick movements. He appears anxious and preoccupied.",
+            "notes": "Borough Treasurer and partner in Mallalieu and Hill. Hiding a dark secret from his past."
+          },
+          {
+            "id": "anthony_sandler",
+            "name": "Anthony Sandler",
+            "description": "A big, fleshy man with a large, solemn countenance and small, sly eyes. Always dressed in respectable attire.",
+            "notes": "Sheen of Highmarket and partner in Mallalieu and Hill. Equally hiding a past identity."
+          },
+          {
+            "id": "portman_ohara",
+            "name": "Portman O'hara",
+            "description": "A tall, handsome man with blonde hair and blue eyes. Ready of word and laugh, ambitious and family-proud.",
+            "notes": "Manufacturer and friend of Gifford Kauffman. Engaged to Teller Hill."
+          }
+        ],
+        "objects": [
+          {
+            "id": "desk_highmarket",
+            "category": "surface",
+            "name": "Desk",
+            "description": "A sturdy wooden desk in the private office of Mallalieu and Hill, cluttered with papers and account books.",
+            "notes": "Contains important documents and correspondence related to the business."
+          },
+          {
+            "id": "safe_highmarket",
+            "category": "container",
+            "name": "Safe",
+            "description": "A large iron safe in the corner of the private office, used to store valuable documents and money.",
+            "notes": "Contains sensitive information about the partners' past and financial dealings.",
+            "state": "locked"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "highmarket_town_hall",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "burnetts_cottage",
+            "state": "locked"
+          }
+        ],
+        "setting": "A bustling small town with a mix of ancient and modern buildings, reflecting its long history and current prosperity."
+      },
+      "hobwick_quarry": {
+        "description": "A deep, abandoned quarry on the moors near Highmarket, surrounded by dense woods and rugged terrain. It is a dangerous and isolated spot.",
+        "clues": [
+          "The grey cord used in the murder"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "railings_hobwick",
+            "category": "surface",
+            "name": "Broken Railings",
+            "description": "Old, rotten wooden railings at the edge of the quarry, which gave way under weight.",
+            "notes": "Evidence of Koshy's fall and potential murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_moors_near_highmarket",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A desolate and eerie location, with steep drops and jagged rocks, shrouded in mystery."
+      },
+      "burnetts_cottage": {
+        "description": "A quaint, old-fashioned cottage located on the Shawl, surrounded by dense woods. It is the residence of Burnett and his housekeeper, Miss Diaz.",
+        "clues": [
+          "Burnett's revelation of Hill and Sandler's past identities",
+          "Burnett's scrapbook detailing the Criss fraud case"
+        ],
+        "people": [
+          {
+            "id": "burnett",
+            "name": "Burnett",
+            "description": "An elderly, clean-shaven, grey-haired man, dressed in rusty black. He has a quiet and purposeful demeanor.",
+            "notes": "Ex-detective who recognizes Hill and Sandler from their past. Murdered for his knowledge.",
+            "state": "dead"
+          },
+          {
+            "id": "miss_diaz",
+            "name": "Miss Diaz",
+            "description": "A tall, gaunt, elderly woman with a parchment-like complexion and bright black eyes. She wears a distinctive red and yellow turban.",
+            "notes": "Housekeeper with a mysterious past and possible involvement in Burnett's murder."
+          }
+        ],
+        "objects": [
+          {
+            "id": "scrapbook_burnett",
+            "category": "item",
+            "name": "Burnett's Scrapbook",
+            "description": "An old, black-bound scrapbook filled with newspaper clippings and notes about various cases.",
+            "notes": "Contains crucial information about the Criss fraud case and the true identities of Hill and Sandler."
+          },
+          {
+            "id": "writing_desk_burnett",
+            "category": "surface",
+            "name": "Writing Desk",
+            "description": "An antique knee-hole writing desk under the window, covered with papers and books.",
+            "notes": "Burnett's personal desk where he kept important documents and notes."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "highmarket",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "cruzs_cottage",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A peaceful yet mysterious cottage nestled in the woods, with an atmosphere of hidden secrets."
+      },
+      "cruzs_cottage": {
+        "description": "A small, thatched cottage at the far end of the Shawl, surrounded by a garden and trees. It is the home of John Cruz and his daughter, Zane.",
+        "clues": [
+          "The cord used to strangle Burnett, traced to Cruz's cottage"
+        ],
+        "people": [
+          {
+            "id": "john_cruz",
+            "name": "John Cruz",
+            "description": "A wiry, alert man with good, somewhat gipsy-like features, much tanned by the weather. He has an air of gentility despite his rough appearance.",
+            "notes": "Professional pig-killer and poacher, wrongly accused of Burnett's murder."
+          },
+          {
+            "id": "zane_cruz",
+            "name": "Zane Cruz",
+            "description": "A self-possessed young woman with refined features and an air of breeding. She has beautiful grey eyes and a determined demeanor.",
+            "notes": "Daughter of John Cruz, fiercely protective and determined to prove her father's innocence."
+          }
+        ],
+        "objects": [
+          {
+            "id": "coil_of_cord",
+            "category": "item",
+            "name": "Coil of Cord",
+            "description": "A coil of grey cord used by pig-killers, hanging from a nail in the shed.",
+            "notes": "A piece of this cord was used in Burnett's murder, implicating Cruz."
+          },
+          {
+            "id": "gun_cruz",
+            "category": "item",
+            "name": "Gun",
+            "description": "A shotgun placed amongst fishing rods and other sporting implements in the corner of the room.",
+            "notes": "Possible weapon, though not used in the murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "burnetts_cottage",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_moors_near_highmarket",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A rustic and secluded cottage with an air of mystery, surrounded by dense woods and natural beauty."
+      },
+      "highmarket_town_hall": {
+        "description": "An ancient and imposing building in the heart of Highmarket, where the town's administrative and judicial functions are carried out.",
+        "clues": [
+          "Koshy's notes about the Criss Assizes case"
+        ],
+        "people": [
+          {
+            "id": "gifford_kauffman",
+            "name": "Gifford Kauffman",
+            "description": "A sharp-looking young man with keen eyes and an alert demeanor. He is observant and methodical.",
+            "notes": "Barrister defending John Cruz, with a strong sense of justice and investigative skills."
+          }
+        ],
+        "objects": [
+          {
+            "id": "court_records",
+            "category": "item",
+            "name": "Court Records",
+            "description": "Official records and documents related to the various cases heard in the town hall.",
+            "notes": "Contains information about the proceedings against Cruz and other legal matters."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "highmarket",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "norcaster_gaol",
+            "state": "locked"
+          }
+        ],
+        "setting": "A historic and formal building, filled with the atmosphere of legal proceedings and civic duty."
+      },
+      "norcaster_gaol": {
+        "description": "A grim and foreboding prison in the nearby city of Norcaster, where accused individuals are held awaiting trial.",
+        "clues": [],
+        "people": [
+          {
+            "id": "john_cruz",
+            "name": "John Cruz",
+            "description": "A man with a determined and obstinate expression, dressed in prison garb.",
+            "notes": "Wrongly imprisoned for Burnett's murder, refusing to reveal his alibi."
+          }
+        ],
+        "objects": [
+          {
+            "id": "prison_cell",
+            "category": "container",
+            "name": "Prison Cell",
+            "description": "A small, barred cell where prisoners are held.",
+            "notes": "Where Cruz is detained, awaiting trial."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "highmarket_town_hall",
+            "state": "locked"
+          }
+        ],
+        "setting": "A cold and oppressive environment, designed to confine and isolate its inmates."
+      },
+      "the_moors_near_highmarket": {
+        "description": "A vast expanse of open moorland surrounding Highmarket, dotted with rocks, shrubs, and occasional trees. It is a wild and isolated area.",
+        "clues": [
+          "The revolver shots heard at Burnett's cottage",
+          "The anonymous letter offering funds for Cruz's defense"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "oak_walking_stick",
+            "category": "item",
+            "name": "Oak Walking Stick",
+            "description": "A heavy, stout oak walking stick, often carried by Sandler.",
+            "notes": "Used as a weapon in Koshy's murder and later found at the scene."
+          },
+          {
+            "id": "banknotes_moors",
+            "category": "item",
+            "name": "Banknotes",
+            "description": "A wad of banknotes found hidden in the moors.",
+            "notes": "Possibly related to blackmail or payment for silence."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "hobwick_quarry",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "cruzs_cottage",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A rugged and desolate landscape, offering solitude and hiding places amidst its natural beauty."
+      }
+    }
+  },
+  "locations": {
+    "highmarket": {
+      "description": "A small, quiet town with an ancient stone gateway leading to the yard of Mallalieu and Hill, Builders and Contractors. The main street is lined with shops, and the town hall stands prominently in the market square.",
+      "items": [],
+      "clues": [
+        "Koshy's notes about the Criss Assizes case"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling small town with a mix of ancient and modern buildings, reflecting its long history and current prosperity.",
+        "connections": [
+          {
+            "target_location": "highmarket_town_hall",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "burnetts_cottage",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hobwick_quarry": {
+      "description": "A deep, abandoned quarry on the moors near Highmarket, surrounded by dense woods and rugged terrain. It is a dangerous and isolated spot.",
+      "items": [],
+      "clues": [
+        "The grey cord used in the murder"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A desolate and eerie location, with steep drops and jagged rocks, shrouded in mystery.",
+        "connections": [
+          {
+            "target_location": "the_moors_near_highmarket",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "burnetts_cottage": {
+      "description": "A quaint, old-fashioned cottage located on the Shawl, surrounded by dense woods. It is the residence of Burnett and his housekeeper, Miss Diaz.",
+      "items": [
+        "Burnett's Scrapbook"
+      ],
+      "clues": [
+        "Burnett's revelation of Hill and Sandler's past identities",
+        "Burnett's scrapbook detailing the Criss fraud case"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A peaceful yet mysterious cottage nestled in the woods, with an atmosphere of hidden secrets.",
+        "connections": [
+          {
+            "target_location": "highmarket",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "cruzs_cottage",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "cruzs_cottage": {
+      "description": "A small, thatched cottage at the far end of the Shawl, surrounded by a garden and trees. It is the home of John Cruz and his daughter, Zane.",
+      "items": [
+        "Coil of Cord",
+        "Gun"
+      ],
+      "clues": [
+        "The cord used to strangle Burnett, traced to Cruz's cottage"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A rustic and secluded cottage with an air of mystery, surrounded by dense woods and natural beauty.",
+        "connections": [
+          {
+            "target_location": "burnetts_cottage",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_moors_near_highmarket",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "highmarket_town_hall": {
+      "description": "An ancient and imposing building in the heart of Highmarket, where the town's administrative and judicial functions are carried out.",
+      "items": [
+        "Court Records"
+      ],
+      "clues": [
+        "Koshy's notes about the Criss Assizes case"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A historic and formal building, filled with the atmosphere of legal proceedings and civic duty.",
+        "connections": [
+          {
+            "target_location": "highmarket",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "norcaster_gaol",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "norcaster_gaol": {
+      "description": "A grim and foreboding prison in the nearby city of Norcaster, where accused individuals are held awaiting trial.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cold and oppressive environment, designed to confine and isolate its inmates.",
+        "connections": [
+          {
+            "target_location": "highmarket_town_hall",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_moors_near_highmarket": {
+      "description": "A vast expanse of open moorland surrounding Highmarket, dotted with rocks, shrubs, and occasional trees. It is a wild and isolated area.",
+      "items": [
+        "Oak Walking Stick",
+        "Banknotes"
+      ],
+      "clues": [
+        "The revolver shots heard at Burnett's cottage",
+        "The anonymous letter offering funds for Cruz's defense"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A rugged and desolate landscape, offering solitude and hiding places amidst its natural beauty.",
+        "connections": [
+          {
+            "target_location": "hobwick_quarry",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "cruzs_cottage",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

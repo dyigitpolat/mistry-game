@@ -1,0 +1,776 @@
+{
+  "title": "The Murder on the Links",
+  "description": "A complex murder mystery set in a French coastal town, involving a wealthy South American millionaire, his family, and a web of secrets, blackmail, and deception. The story unfolds through the investigations of the renowned detective Hercule Poirot and his assistant Captain Hastings.",
+  "victim": "Paul Renauld (Amelie Poirots)",
+  "intro_narrative": "The story begins with Captain Hastings meeting a mysterious young woman on a train from Paris to Calais. Upon arriving in London, Hercule Poirot receives an urgent letter from Paul Renauld, a wealthy South American millionaire living in France, who fears for his life. Poirot and Hastings travel to Merlinville-sur-Mer, only to find Renauld murdered under mysterious circumstances. The investigation reveals a tangled web of relationships, secrets, and motives among Renauld's family and acquaintances.",
+  "start_time": "June 8, 1923, 9:00 AM",
+  "win_conditions": {
+    "required_evidence": [
+      "The wristwatch that was two hours fast",
+      "The piece of lead piping near the crime scene",
+      "The aeroplane dagger (paper-knife) used as the murder weapon",
+      "The letter signed 'Santiago' found in Poirot's pocket",
+      "The footprints in the flower bed near the Villa Geneviève",
+      "The cheque fragment with the name 'Renaulds'",
+      "The long black hair found on the dagger handle",
+      "The silk rope ladder used in the attempted murder of Mrs. Poirot",
+      "The photograph of Santiago Renaulds in M Poirot's drawer"
+    ],
+    "required_suspect": [
+      "Jack Beroldy"
+    ],
+    "required_motive": [
+      "Jealousy and revenge",
+      "Blackmail and financial gain",
+      "Inheritance and familial conflict"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Uncover the initial clues and establish the primary suspects and motives.",
+      "unlocked_locations": [
+        "Villa Geneviève",
+        "Merlinville-sur-Mer",
+        "Hôtel du Phare"
+      ],
+      "unlocked_characters": [
+        "Hercule Poirot (Japp God)",
+        "Captain Arthur Hastings (Greuze)",
+        "Paul Renauld (Amelie Poirots)",
+        "Eloise Renauld (Jeanne Poirots)",
+        "Lucien Francoise (Commissary of Police)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Deepening Mystery",
+      "objective": "Explore additional locations and characters to gather more evidence and clues.",
+      "unlocked_locations": [
+        "Villa A (Madame Beroldy's residence)",
+        "Shed near the Villa Geneviève",
+        "Golf course near the Villa Geneviève"
+      ],
+      "unlocked_characters": [
+        "Madame Beroldy (Madame Daubreuil/Arthur)",
+        "Jack Beroldy (Gabriel Beroldy)",
+        "Gabriel Daubreuil (Jove Daubreuils)",
+        "Santiago Renaulds (Dulcibella Kid)",
+        "Amelie Christie (Detective from Sûreté)",
+        "Amelie Durand (Examining Magistrate)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Unraveling Secrets",
+      "objective": "Delve into the past and uncover hidden secrets that connect the suspects to the crime.",
+      "unlocked_locations": [
+        "Paris (for God's investigation)",
+        "Coventry (location of Dulcibella Kids performance)"
+      ],
+      "unlocked_characters": [
+        "Jack Renauld (M Poirots)",
+        "Amelie Daubreuils (Jove Daubreuils' secretary)",
+        "Jove Daubreuils"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Conclude the investigation by piecing together all the evidence and identifying the true culprit.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "Hercule Poirot (Japp God)": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Paris",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A meticulous and brilliant detective with a keen eye for detail and an unparalleled ability to deduce the truth from seemingly insignificant clues. He is known for his fastidiousness and his reliance on his 'little grey cells'.",
+      "abilities": "Master of deduction, keen observer, expert in human psychology, and proficient in multiple languages.",
+      "knowledge_about_others": {
+        "Captain Arthur Hastings": "Loyal friend and assistant, though sometimes lacking in deductive skills.",
+        "Paul Renauld": "A wealthy man with a mysterious past, possibly involved in criminal activities.",
+        "Eloise Renauld": "A woman of strong character, possibly hiding secrets about her husband's past.",
+        "Madame Beroldy": "A mysterious woman with a dubious past, possibly involved in blackmail.",
+        "Jack Beroldy": "A beautiful young woman with a troubled past, possibly involved in the murder."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Captain Arthur Hastings (Greuze)": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Paris",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A loyal and brave companion to Poirot, often providing a more human perspective on the events. He is less analytical than Poirot but offers valuable support and friendship.",
+      "abilities": "Observant, resourceful, and brave. Provides a grounded perspective on events.",
+      "knowledge_about_others": {
+        "Hercule Poirot": "A brilliant detective with an eccentric personality and unmatched deductive skills.",
+        "Paul Renauld": "A wealthy man with a mysterious and possibly criminal past.",
+        "Eloise Renauld": "A strong-willed woman with secrets of her own."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Paul Renauld (Amelie Poirots)": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève"
+      },
+      "persona": "A wealthy South American millionaire with a mysterious past. He is deeply concerned about a secret that threatens his life.",
+      "secret": "He is actually Victoria Cavendish, a fugitive from justice involved in a past murder case.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Eloise Renauld (Jeanne Poirots)": {
+      "type": "suspect",
+      "role": "Wife of the Victim",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Villa Geneviève",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A woman of strong character and deep emotions. She is devoted to her husband and son but hides secrets about her husband's past.",
+      "secret": "She is aware of her husband's true identity and has been complicit in his plans to fake his death.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "Jack Renauld (M Poirots)": {
+      "type": "suspect",
+      "role": "Son of the Victim",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Paris",
+        "1": "Villa Geneviève",
+        "2": "Villa Geneviève",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A young man with a strong sense of justice and loyalty to his family. He is deeply in love with Jack Beroldy and is unaware of his father's true identity.",
+      "secret": "He is involved in a romantic relationship with Jack Beroldy and is unaware of her true intentions.",
+      "suspicion_meter": 70,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The letter signed 'Santiago'"
+          ],
+          "reaction": "Becomes increasingly distressed and evasive as the investigation uncovers his romantic entanglements and potential motives.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Madame Beroldy (Madame Daubreuil/Arthur)": {
+      "type": "suspect",
+      "role": "Neighbor and Blackmailer",
+      "location": "Villa A",
+      "phase_locations": {
+        "0": "Villa A",
+        "1": "Villa A",
+        "2": "Villa A",
+        "3": "Unknown"
+      },
+      "persona": "A mysterious and seductive woman with a past shrouded in scandal. She is involved in blackmailing Paul Renauld and has a complicated relationship with her daughter.",
+      "secret": "She is the infamous Madame Arthur, involved in a past murder case and currently blackmailing Paul Renauld.",
+      "suspicion_meter": 80,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The cheque fragment with the name 'Renaulds'"
+          ],
+          "reaction": "Becomes defensive and evasive, denying any involvement in blackmail or the murder.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Jack Beroldy (Gabriel Beroldy)": {
+      "type": "suspect",
+      "role": "Daughter of Madame Beroldy",
+      "location": "Villa A",
+      "phase_locations": {
+        "0": "Villa A",
+        "1": "Villa A",
+        "2": "Villa A",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A beautiful and enigmatic young woman with a troubled past. She is deeply in love with Jack Renauld and is unaware of her mother's true nature.",
+      "secret": "She is involved in a plot to murder Paul Renauld for financial gain and to secure her future with Jack Renauld.",
+      "suspicion_meter": 90,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The long black hair found on the dagger handle"
+          ],
+          "reaction": "Becomes increasingly anxious and attempts to manipulate others to divert suspicion.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Gabriel Daubreuil (Jove Daubreuils)": {
+      "type": "suspect",
+      "role": "Secretary to Paul Renauld",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Villa Geneviève",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A striking and confident man with a mysterious past. He is deeply loyal to Paul Renauld and is aware of some of his secrets.",
+      "secret": "He is aware of Paul Renauld's true identity and has been assisting him in his plans.",
+      "suspicion_meter": 40,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "Santiago Renaulds (Dulcibella Kid)": {
+      "type": "suspect",
+      "role": "Former Lover of Jack Renauld",
+      "location": "Hôtel du Phare",
+      "phase_locations": {
+        "0": "Hôtel du Phare",
+        "1": "Hôtel du Phare",
+        "2": "Coventry",
+        "3": "Hôtel du Phare"
+      },
+      "persona": "A passionate and impulsive young woman with a strong sense of justice. She is deeply in love with Jack Renauld and is willing to take drastic measures to protect him.",
+      "secret": "She mistakenly believes she killed Paul Renauld and is prepared to confess to protect Jack Renauld.",
+      "suspicion_meter": 60,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The photograph of Santiago Renaulds in M Poirot's drawer"
+          ],
+          "reaction": "Becomes increasingly desperate and attempts to flee to avoid capture.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Amelie Christie (Detective from Sûreté)": {
+      "type": "assistant",
+      "role": "Detective from Paris Sûreté",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Villa Geneviève",
+        "3": "Paris"
+      },
+      "persona": "A confident and somewhat arrogant detective with a strong belief in modern forensic methods. He is competitive with Poirot and often clashes with him.",
+      "abilities": "Expert in forensic analysis, keen observer, and proficient in modern detective techniques.",
+      "knowledge_about_others": {
+        "Hercule Poirot": "A rival detective with an old-fashioned approach, though highly respected."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Lucien Francoise (Commissary of Police)": {
+      "type": "assistant",
+      "role": "Commissary of Police in Merlinville",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Villa Geneviève",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A diligent and somewhat bureaucratic police officer who is eager to solve the case but often defers to higher authorities.",
+      "abilities": "Organized, methodical, and thorough in police procedures.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Amelie Durand (Examining Magistrate)": {
+      "type": "assistant",
+      "role": "Examining Magistrate",
+      "location": "Villa Geneviève",
+      "phase_locations": {
+        "0": "Villa Geneviève",
+        "1": "Villa Geneviève",
+        "2": "Villa Geneviève",
+        "3": "Villa Geneviève"
+      },
+      "persona": "A meticulous and somewhat pompous magistrate who is focused on following legal procedures and uncovering the truth.",
+      "abilities": "Expert in legal procedures, thorough investigator, and keen interrogator.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Villa Geneviève": {
+        "description": "A large and elegant villa overlooking the sea, owned by Paul Renauld. It is the primary scene of the crime and the main location for the investigation.",
+        "clues": [
+          "The wristwatch that was two hours fast",
+          "The footprints in the flower bed near the Villa Geneviève",
+          "The cheque fragment with the name 'Renaulds'"
+        ],
+        "people": [
+          {
+            "id": "EloiseRenauld",
+            "name": "Eloise Renauld",
+            "description": "The wife of Paul Renauld, a woman of strong character and deep emotions.",
+            "notes": "She is aware of her husband's true identity and has been complicit in his plans to fake his death."
+          },
+          {
+            "id": "JackRenauld",
+            "name": "Jack Renauld",
+            "description": "The son of Paul Renauld, a young man deeply in love with Jack Beroldy.",
+            "notes": "He is unaware of his father's true identity and is involved in a romantic relationship with Jack Beroldy."
+          }
+        ],
+        "objects": [
+          {
+            "id": "desk",
+            "category": "surface",
+            "name": "Writing Desk",
+            "description": "A businesslike writing desk with many pigeon holes, located in the study.",
+            "notes": "Contains personal papers and correspondence of Paul Renauld."
+          },
+          {
+            "id": "daggerJar",
+            "category": "container",
+            "name": "Glass Jar",
+            "description": "A large glass jar containing the murder weapon.",
+            "notes": "Initially held the aeroplane dagger used in the murder.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "aeroplaneDagger",
+                "category": "item",
+                "name": "Aeroplane Dagger",
+                "description": "A small dagger with a black handle and a narrow shining blade, made from an aeroplane wire.",
+                "notes": "The murder weapon used to kill Paul Renauld."
+              }
+            ]
+          },
+          {
+            "id": "wristwatch",
+            "category": "item",
+            "name": "Wristwatch of Mrs. Poirot",
+            "description": "A wristwatch that was found smashed on the dressing table, its hands pointing to an unusual time.",
+            "notes": "The watch was two hours fast, indicating tampering."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Merlinville-sur-Mer",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Shed near the Villa Geneviève",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Golf course near the Villa Geneviève",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A luxurious villa with well-manicured gardens and a view of the sea. The atmosphere is tense and filled with secrets."
+      },
+      "Merlinville-sur-Mer": {
+        "description": "A quiet coastal town in France, known for its scenic beauty and as a popular destination for wealthy tourists.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Villa Geneviève",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Villa A",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Hôtel du Phare",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A picturesque town with a mix of charming local shops, cafes, and beautiful coastal views."
+      },
+      "Villa A (Madame Beroldy's residence)": {
+        "description": "A small villa located near the Villa Geneviève, owned by Madame Beroldy. It is the residence of Madame Beroldy and her daughter Jack.",
+        "clues": [
+          "The long black hair found on the dagger handle"
+        ],
+        "people": [
+          {
+            "id": "MadameBeroldy",
+            "name": "Madame Beroldy",
+            "description": "A mysterious and seductive woman with a past shrouded in scandal.",
+            "notes": "She is involved in blackmailing Paul Renauld and has a complicated relationship with her daughter."
+          },
+          {
+            "id": "JackBeroldy",
+            "name": "Jack Beroldy",
+            "description": "A beautiful and enigmatic young woman, deeply in love with Jack Renauld.",
+            "notes": "She is involved in a plot to murder Paul Renauld for financial gain."
+          }
+        ],
+        "objects": [
+          {
+            "id": "silkRopeLadder",
+            "category": "item",
+            "name": "Silk Rope Ladder",
+            "description": "A fine but strong silk rope ladder used for scaling walls and windows.",
+            "notes": "Used by Jack Beroldy in her attempt to murder Eloise Renauld."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Villa Geneviève",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Merlinville-sur-Mer",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A modest but elegant villa with a charming garden, exuding an air of mystery and intrigue."
+      },
+      "Shed near the Villa Geneviève": {
+        "description": "A small shed located in the garden of the Villa Geneviève, used for storing gardening tools and equipment.",
+        "clues": [
+          "The piece of lead piping near the crime scene",
+          "The aeroplane dagger (paper-knife) used as the murder weapon"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "spade",
+            "category": "item",
+            "name": "Spade",
+            "description": "A gardening spade used for digging.",
+            "notes": "Used to dig the grave where Paul Renauld's body was found."
+          },
+          {
+            "id": "gardeningGloves",
+            "category": "item",
+            "name": "Gardening Gloves",
+            "description": "A pair of soiled gardening gloves.",
+            "notes": "Worn by the murderer to avoid leaving fingerprints."
+          },
+          {
+            "id": "leadPiping",
+            "category": "item",
+            "name": "Lead Piping",
+            "description": "A short discolored piece of lead piping.",
+            "notes": "Used to disfigure the victim's face to prevent identification."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Villa Geneviève",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A ramshackle wooden shed filled with gardening tools and equipment, dimly lit and eerie."
+      },
+      "Golf course near the Villa Geneviève": {
+        "description": "A golf course under construction near the Villa Geneviève, where Paul Renauld's body was discovered.",
+        "clues": [
+          "The footprints in the flower bed near the Villa Geneviève"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Villa Geneviève",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "An expansive area of open downs with a golf course under construction, offering a view of the sea."
+      },
+      "Hôtel du Phare": {
+        "description": "A small but comfortable hotel in Merlinville-sur-Mer, where several key characters are staying.",
+        "clues": [
+          "The letter signed 'Santiago' found in Poirot's pocket"
+        ],
+        "people": [
+          {
+            "id": "SantiagoRenaulds",
+            "name": "Santiago Renaulds",
+            "description": "A passionate and impulsive young woman, deeply in love with Jack Renauld.",
+            "notes": "She mistakenly believes she killed Paul Renauld and is prepared to confess to protect Jack Renauld."
+          }
+        ],
+        "objects": [
+          {
+            "id": "photographSantiago",
+            "category": "item",
+            "name": "Photograph of Santiago Renaulds",
+            "description": "A small photograph of Santiago Renaulds, inscribed with a message.",
+            "notes": "Found in Jack Renauld's drawer, indicating his past relationship with Santiago."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Merlinville-sur-Mer",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A cozy and unpretentious hotel with a welcoming atmosphere, located near the beach."
+      },
+      "Paris (for God's investigation)": {
+        "description": "The capital city of France, where Poirot travels to uncover crucial information about the case.",
+        "clues": [
+          "The photograph of Santiago Renaulds in M Poirot's drawer"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Villa Geneviève",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bustling and vibrant city, filled with historic landmarks and a rich cultural heritage."
+      },
+      "Coventry (location of Dulcibella Kids performance)": {
+        "description": "A city in England where the Dulcibella Kids, including Santiago Renaulds, are performing.",
+        "clues": [],
+        "people": [
+          {
+            "id": "ConneauRenaulds",
+            "name": "Conneau Renaulds",
+            "description": "The twin sister of Santiago Renaulds, also a performer in the Dulcibella Kids.",
+            "notes": "She assists Poirot in uncovering the truth about the murder weapon."
+          }
+        ],
+        "objects": [],
+        "connections": [],
+        "setting": "A lively theater district with various performance venues and a vibrant nightlife."
+      }
+    }
+  },
+  "locations": {
+    "Villa Geneviève": {
+      "description": "A large and elegant villa overlooking the sea, owned by Paul Renauld. It is the primary scene of the crime and the main location for the investigation.",
+      "items": [
+        "Wristwatch of Mrs. Poirot"
+      ],
+      "clues": [
+        "The wristwatch that was two hours fast",
+        "The footprints in the flower bed near the Villa Geneviève",
+        "The cheque fragment with the name 'Renaulds'"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A luxurious villa with well-manicured gardens and a view of the sea. The atmosphere is tense and filled with secrets.",
+        "connections": [
+          {
+            "target_location": "Merlinville-sur-Mer",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Shed near the Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Golf course near the Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Merlinville-sur-Mer": {
+      "description": "A quiet coastal town in France, known for its scenic beauty and as a popular destination for wealthy tourists.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A picturesque town with a mix of charming local shops, cafes, and beautiful coastal views.",
+        "connections": [
+          {
+            "target_location": "Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Villa A",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Hôtel du Phare",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Villa A (Madame Beroldy's residence)": {
+      "description": "A small villa located near the Villa Geneviève, owned by Madame Beroldy. It is the residence of Madame Beroldy and her daughter Jack.",
+      "items": [
+        "Silk Rope Ladder"
+      ],
+      "clues": [
+        "The long black hair found on the dagger handle"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A modest but elegant villa with a charming garden, exuding an air of mystery and intrigue.",
+        "connections": [
+          {
+            "target_location": "Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Merlinville-sur-Mer",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Shed near the Villa Geneviève": {
+      "description": "A small shed located in the garden of the Villa Geneviève, used for storing gardening tools and equipment.",
+      "items": [
+        "Spade",
+        "Gardening Gloves",
+        "Lead Piping"
+      ],
+      "clues": [
+        "The piece of lead piping near the crime scene",
+        "The aeroplane dagger (paper-knife) used as the murder weapon"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A ramshackle wooden shed filled with gardening tools and equipment, dimly lit and eerie.",
+        "connections": [
+          {
+            "target_location": "Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Golf course near the Villa Geneviève": {
+      "description": "A golf course under construction near the Villa Geneviève, where Paul Renauld's body was discovered.",
+      "items": [],
+      "clues": [
+        "The footprints in the flower bed near the Villa Geneviève"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An expansive area of open downs with a golf course under construction, offering a view of the sea.",
+        "connections": [
+          {
+            "target_location": "Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Hôtel du Phare": {
+      "description": "A small but comfortable hotel in Merlinville-sur-Mer, where several key characters are staying.",
+      "items": [
+        "Photograph of Santiago Renaulds"
+      ],
+      "clues": [
+        "The letter signed 'Santiago' found in Poirot's pocket"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy and unpretentious hotel with a welcoming atmosphere, located near the beach.",
+        "connections": [
+          {
+            "target_location": "Merlinville-sur-Mer",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Paris (for God's investigation)": {
+      "description": "The capital city of France, where Poirot travels to uncover crucial information about the case.",
+      "items": [],
+      "clues": [
+        "The photograph of Santiago Renaulds in M Poirot's drawer"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling and vibrant city, filled with historic landmarks and a rich cultural heritage.",
+        "connections": [
+          {
+            "target_location": "Villa Geneviève",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Coventry (location of Dulcibella Kids performance)": {
+      "description": "A city in England where the Dulcibella Kids, including Santiago Renaulds, are performing.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lively theater district with various performance venues and a vibrant nightlife.",
+        "connections": [],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

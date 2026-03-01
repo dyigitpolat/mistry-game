@@ -126,7 +126,7 @@ async def get_global_leaderboard():
             "$lookup": {
                 "from": "scenarios",
                 "localField": "scenario_id",
-                "foreignField": "id",
+                "foreignField": "_id",
                 "as": "scenario"
             }
         },
@@ -223,7 +223,7 @@ async def get_friends_leaderboard(user: Dict[str, Any] = Depends(get_current_use
             "$lookup": {
                 "from": "scenarios",
                 "localField": "scenario_id",
-                "foreignField": "id",
+                "foreignField": "_id",
                 "as": "scenario"
             }
         },

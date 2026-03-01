@@ -1,0 +1,786 @@
+{
+  "title": "Trent's Last Case",
+  "description": "A mystery game based on the classic novel 'Trent's Last Case' by E.C. Bentley, where players must uncover the truth behind the murder of the financier Abhay Vikrant at his estate, Kiara Vinita.",
+  "victim": "Abhay Vikrant",
+  "intro_narrative": "Between what matters and what seems to matter, how should the world we know judge wisely? When the scheming, indomitable brain of Abhay Vikrant was scattered by a shot from an unknown hand, that world lost nothing worth a single tear. But when the news of his end came, it seemed to those living in the great vortices of business as if the earth too shuddered under a blow. The financier's body was found near a shed in the grounds of Kiara Vinita, his estate near Bishopsbridge. The mystery deepens as the household and the authorities struggle to piece together the events of that fateful night.",
+  "start_time": "1900-06-10T22:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Marks on Vikrant's wrists indicating a struggle",
+      "Fingerprints on the glass bowl and window in Mrs. Vikrant's room",
+      "Footprints in the gravel outside the French window",
+      "Arvind's revolver found with traces of recent use",
+      "Vikrant's shoes showing signs of being worn by someone else"
+    ],
+    "required_suspect": [
+      "Abhay Vikrant"
+    ],
+    "required_motive": [
+      "Jealousy and suspicion of an affair between Aditya Vikrant and Kavita Arvind",
+      "Financial manipulation and revenge by disgruntled parties"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Arrival and Initial Investigation",
+      "objective": "Explore Kiara Vinita and its immediate surroundings, gather initial clues, and interview key characters present at the estate.",
+      "unlocked_locations": [
+        "Kiara Vinita, Shalini",
+        "Shalini Hotel",
+        "Bishopsbridge"
+      ],
+      "unlocked_characters": [
+        "Simran",
+        "Célestine",
+        "Inspector Akshay"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Deepening the Mystery",
+      "objective": "Uncover more clues about Vikrant's last hours, explore additional locations, and interview more characters to piece together the events leading to the murder.",
+      "unlocked_locations": [
+        "The Three Tuns Inn",
+        "Vikrant's bedroom at Kiara Vinita",
+        "Library at Kiara Vinita"
+      ],
+      "unlocked_characters": [
+        "Kavita Arvind",
+        "Calvin Tia",
+        "Rajesh Neerja"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Confrontation and Revelation",
+      "objective": "Confront suspects with evidence, unlock final locations, and gather the last pieces of the puzzle to identify the culprit.",
+      "unlocked_locations": [
+        "Golf-course near Kiara Vinita",
+        "Gardener's shed in Kiara Vinita grounds"
+      ],
+      "unlocked_characters": [
+        "Aditya Vikrant",
+        "Shraddha Shriman"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Resolution",
+      "objective": "Compile all evidence, motives, and testimonies to solve the mystery and present the findings.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "abhay_vikrant": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "0": "Kiara Vinita, Shalini"
+      },
+      "persona": "A powerful and ruthless financier with a complex personality, known for his sharp intellect and secretive nature. His recent behavior has been erratic and suspicious.",
+      "knowledge_about_others": {
+        "aditya_vikrant": "Believes she is having an affair with Kavita Arvind.",
+        "kavita_arvind": "Suspects him of plotting against his marriage.",
+        "calvin_tia": "Trusts him implicitly with business affairs.",
+        "simran": "Relies on him for household management but keeps him at a distance."
+      },
+      "secret": "He was plotting to frame Kavita Arvind for his own murder to exact revenge for a suspected affair with his wife.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "aditya_vikrant": {
+      "type": "suspect",
+      "role": "Widow of the Victim",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "0": "Kiara Vinita, Shalini"
+      },
+      "persona": "A graceful and composed woman with a strong sense of dignity. She is deeply affected by her husband's death but maintains her composure in public.",
+      "knowledge_about_others": {
+        "abhay_vikrant": "Knew of his suspicions and recent coldness towards her.",
+        "kavita_arvind": "Considers him a close friend and confidant.",
+        "rajesh_neerja": "Trusts him as a family friend and advisor.",
+        "shraddha_shriman": "Respects his investigative skills and trusts his discretion."
+      },
+      "secret": "She is unaware of the full extent of her husband's plot but harbors her own secrets about her marriage.",
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "kavita_arvind": {
+      "type": "suspect",
+      "role": "Secretary to Abhay Vikrant",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "1": "Kiara Vinita, Shalini"
+      },
+      "persona": "A calm and intelligent young man with a keen mind. He is reserved but observant, with a talent for mimicry and acting.",
+      "knowledge_about_others": {
+        "abhay_vikrant": "Understands his business acumen but is unaware of his personal vendetta.",
+        "aditya_vikrant": "Shares a close but platonic friendship with her.",
+        "calvin_tia": "Works closely with him on business matters.",
+        "rajesh_neerja": "Respects his wisdom and experience."
+      },
+      "secret": "He impersonated Vikrant on the night of the murder to create an alibi but is innocent of the actual murder.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Arvind's revolver found with traces of recent use"
+          ],
+          "reaction": "Becomes defensive and insists on his innocence, providing alibi details.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "calvin_tia": {
+      "type": "suspect",
+      "role": "Business Secretary to Abhay Vikrant",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "1": "Kiara Vinita, Shalini"
+      },
+      "persona": "A sharp and methodical American with a dry sense of humor. He is highly efficient and deeply loyal to Vikrant's business interests.",
+      "knowledge_about_others": {
+        "abhay_vikrant": "Understands his business strategies and personal quirks.",
+        "kavita_arvind": "Works closely with him but finds him enigmatic.",
+        "aditya_vikrant": "Respects her but keeps a professional distance."
+      },
+      "secret": "He is unaware of Vikrant's personal vendetta but knows of his recent erratic behavior.",
+      "suspicion_meter": 20,
+      "flight_risk": 5,
+      "conditional_behaviors": []
+    },
+    "simran": {
+      "type": "suspect",
+      "role": "Butler at Kiara Vinita",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "0": "Kiara Vinita, Shalini"
+      },
+      "persona": "A dignified and observant butler with impeccable manners. He is discreet and highly attentive to detail.",
+      "knowledge_about_others": {
+        "abhay_vikrant": "Knew his habits and preferences intimately.",
+        "aditya_vikrant": "Respects her and is protective of her well-being.",
+        "kavita_arvind": "Observes his interactions with the household."
+      },
+      "secret": "He is aware of Vikrant's late-night habits and may have overheard critical conversations.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "rajesh_neerja": {
+      "type": "assistant",
+      "role": "Family Friend and Advisor",
+      "location": "Shalini Hotel",
+      "phase_locations": {
+        "1": "Shalini Hotel"
+      },
+      "persona": "A kind and thoughtful older gentleman with a philosophical outlook. He is deeply concerned about Aditya Vikrant's well-being.",
+      "knowledge_about_others": {
+        "aditya_vikrant": "Acts as a mentor and confidant to her.",
+        "abhay_vikrant": "Disliked his treatment of Aditya but respected his business acumen.",
+        "kavita_arvind": "Has a favorable opinion of him."
+      },
+      "abilities": "Provides emotional support and wise counsel to Aditya. Has knowledge of the family's history and dynamics.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "shraddha_shriman": {
+      "type": "assistant",
+      "role": "Investigator and Journalist",
+      "location": "Shalini Hotel",
+      "phase_locations": {
+        "2": "Shalini Hotel"
+      },
+      "persona": "A clever and resourceful investigator with a keen eye for detail. He is witty and enjoys solving complex mysteries.",
+      "knowledge_about_others": {
+        "aditya_vikrant": "Admires her strength and dignity.",
+        "kavita_arvind": "Suspects him but respects his intelligence.",
+        "inspector_akshay": "Respects his professionalism and experience."
+      },
+      "abilities": "Skilled in gathering and analyzing evidence, interviewing suspects, and piecing together complex narratives.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "inspector_akshay": {
+      "type": "assistant",
+      "role": "Detective from Scotland Yard",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "0": "Kiara Vinita, Shalini"
+      },
+      "persona": "A seasoned and methodical detective with a calm demeanor. He is thorough and relies on evidence to guide his investigations.",
+      "knowledge_about_others": {
+        "shraddha_shriman": "Respects his investigative skills and enjoys their professional rivalry.",
+        "abhay_vikrant": "Investigates his murder with an open mind.",
+        "kavita_arvind": "Considers him a prime suspect."
+      },
+      "abilities": "Expert in forensic analysis, evidence collection, and suspect interrogation.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "celestine": {
+      "type": "suspect",
+      "role": "Lady's Maid to Aditya Vikrant",
+      "location": "Kiara Vinita, Shalini",
+      "phase_locations": {
+        "0": "Kiara Vinita, Shalini"
+      },
+      "persona": "A spirited and outspoken Frenchwoman with a sharp tongue. She is fiercely loyal to Aditya Vikrant.",
+      "knowledge_about_others": {
+        "aditya_vikrant": "Deeply cares for her and is protective of her reputation.",
+        "abhay_vikrant": "Disliked him intensely for his treatment of Aditya.",
+        "kavita_arvind": "Finds him charming and enjoys his company."
+      },
+      "secret": "She harbors strong feelings against Abhay Vikrant and may have overheard critical conversations.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "shriman_shraddha": {
+      "type": "assistant",
+      "role": "Artist and Investigator",
+      "location": "Shalini Hotel",
+      "phase_locations": {
+        "2": "Shalini Hotel"
+      },
+      "persona": "A charismatic and observant artist with a talent for solving mysteries. He is deeply empathetic and values truth and justice.",
+      "abilities": "Skilled in observation, analysis, and creative problem-solving. Uses artistic skills to document evidence.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "kiara_vinita_shalini": {
+        "description": "A grand estate near Shalini, owned by Abhay Vikrant. The house is a modern two-story building with beautifully kept grounds, including gardens, a golf course, and a gardener's shed where the body was found.",
+        "clues": [
+          "Marks on Vikrant's wrists indicating a struggle",
+          "Discrepancies in Vikrant's clothing and dressing habits",
+          "Fingerprints on the glass bowl and window in Mrs. Vikrant's room",
+          "Footprints in the gravel outside the French window"
+        ],
+        "people": [
+          {
+            "id": "aditya_vikrant",
+            "name": "Aditya Vikrant",
+            "description": "A graceful and composed woman, dressed in black, with a dignified presence.",
+            "notes": "Widow of the victim, deeply affected but maintains composure. May hold secrets about her marriage."
+          },
+          {
+            "id": "simran",
+            "name": "Simran",
+            "description": "A dignified butler with impeccable manners, always attentive to detail.",
+            "notes": "Knows the household's routines and may have critical information about the night of the murder."
+          },
+          {
+            "id": "celestine",
+            "name": "Célestine",
+            "description": "A spirited French lady's maid with a sharp tongue and a protective nature.",
+            "notes": "Loyal to Aditya Vikrant and may have overheard important conversations."
+          }
+        ],
+        "objects": [
+          {
+            "id": "vikrants_bedroom_door",
+            "category": "surface",
+            "name": "Vikrant's Bedroom Door",
+            "description": "A sturdy wooden door leading to Vikrant's bedroom, often left ajar.",
+            "notes": "May have fingerprints or other traces from the night of the murder."
+          },
+          {
+            "id": "vikrants_shoes",
+            "category": "item",
+            "name": "Vikrant's Patent Leather Shoes",
+            "description": "A pair of well-worn patent leather shoes, neatly polished.",
+            "notes": "Shows signs of being worn by someone else, possibly indicating an impersonation."
+          },
+          {
+            "id": "false_teeth",
+            "category": "item",
+            "name": "False Teeth (Dental Plate)",
+            "description": "A dental plate containing all the visible teeth of the upper jaw, found in a glass bowl by Vikrant's bedside.",
+            "notes": "Left behind in a hurry, suggesting unusual behavior on the night of the murder."
+          },
+          {
+            "id": "glass_bowl",
+            "category": "item",
+            "name": "Glass Bowl from Vikrant's Bedroom",
+            "description": "A shallow glass bowl used to hold Vikrant's false teeth at night.",
+            "notes": "Contains fingerprints that may provide critical evidence."
+          },
+          {
+            "id": "vikrants_diary_leaves",
+            "category": "item",
+            "name": "Vikrant's Diary Leaves",
+            "description": "Two leaves cut from a diary, found in Vikrant's bedroom.",
+            "notes": "May contain clues about Vikrant's plans or secrets."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "shalini_hotel",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "library_at_kiara_vinita",
+            "state": "locked"
+          },
+          {
+            "location_id": "vikrants_bedroom_at_kiara_vinita",
+            "state": "locked"
+          }
+        ],
+        "setting": "A grand and modern estate with sprawling gardens, a golf course, and a sense of opulence. The atmosphere is tense and filled with secrets."
+      },
+      "shalini_hotel": {
+        "description": "A comfortable hotel in the village of Shalini, where many of the key characters are staying during the investigation.",
+        "clues": [
+          "Unusual amount of whisky missing from Vikrant's decanter"
+        ],
+        "people": [
+          {
+            "id": "rajesh_neerja",
+            "name": "Rajesh Neerja",
+            "description": "A kind and thoughtful older gentleman with a philosophical outlook.",
+            "notes": "Acts as a mentor to Aditya Vikrant and provides emotional support."
+          },
+          {
+            "id": "shraddha_shriman",
+            "name": "Shraddha Shriman",
+            "description": "A clever and resourceful investigator with a keen eye for detail.",
+            "notes": "Skilled in gathering and analyzing evidence, enjoys solving complex mysteries."
+          }
+        ],
+        "objects": [
+          {
+            "id": "whisky_decanter",
+            "category": "item",
+            "name": "Whisky Decanter and Glass",
+            "description": "A crystal decanter and glass set from Vikrant's private collection, found in the hotel.",
+            "notes": "An unusual amount of whisky is missing, suggesting recent use."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kiara_vinita_shalini",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "bishopsbridge",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_three_tuns_inn",
+            "state": "locked"
+          }
+        ],
+        "setting": "A cozy and comfortable hotel with a relaxed atmosphere, serving as a hub for the investigation."
+      },
+      "bishopsbridge": {
+        "description": "A nearby town where the local police and other authorities are based. It serves as a key location for official investigations.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "shalini_hotel",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "kiara_vinita_shalini",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bustling town with a mix of official buildings and local businesses, where the investigation takes on a formal tone."
+      },
+      "the_three_tuns_inn": {
+        "description": "A quaint inn near the golf course, known for its plain but good food. It is a popular spot for locals and visitors alike.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "kiara_vinita_shalini",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A rustic and charming inn with a warm atmosphere, offering a quiet retreat from the investigation."
+      },
+      "vikrants_bedroom_at_kiara_vinita": {
+        "description": "A small and sparsely furnished bedroom where Abhay Vikrant slept. It is connected to Aditya Vikrant's bedroom by a door that is usually left ajar.",
+        "clues": [
+          "Vikrant's false teeth left in the bedroom",
+          "Vikrant's shoes showing signs of being worn by someone else"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "vikrants_bed",
+            "category": "surface",
+            "name": "Vikrant's Bed",
+            "description": "A narrow wooden bedstead with tumbled sheets and blankets, indicating recent use.",
+            "notes": "The bed was not made on the morning of the murder, suggesting Vikrant left in a hurry."
+          },
+          {
+            "id": "vikrants_clothing",
+            "category": "item",
+            "name": "Vikrant's Clothing",
+            "description": "A set of clothes left untidily on a chair, including a shirt, trousers, and a jacket.",
+            "notes": "Shows discrepancies in dressing habits, indicating unusual behavior."
+          },
+          {
+            "id": "vikrants_shoe_shelf",
+            "category": "surface",
+            "name": "Shoe Shelf",
+            "description": "A long low shelf holding an extensive collection of shoes, all neatly treed and polished.",
+            "notes": "Contains shoes that show signs of being worn by someone else."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kiara_vinita_shalini",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "library_at_kiara_vinita",
+            "state": "locked"
+          }
+        ],
+        "setting": "A small and austere bedroom with a sense of simplicity and order, contrasting with the opulence of the rest of the estate."
+      },
+      "library_at_kiara_vinita": {
+        "description": "A large and light library at the corner of the house, where Vikrant spent much of his time. It contains a roll-top desk, a telephone, and numerous books.",
+        "clues": [
+          "Banknotes and unset diamonds found in Vikrant's desk"
+        ],
+        "people": [
+          {
+            "id": "inspector_akshay",
+            "name": "Inspector Akshay",
+            "description": "A seasoned detective with a calm and methodical demeanor.",
+            "notes": "Leads the official investigation and is thorough in his evidence collection."
+          }
+        ],
+        "objects": [
+          {
+            "id": "roll_top_desk",
+            "category": "container",
+            "name": "Roll-Top Desk",
+            "description": "A large roll-top desk where Vikrant conducted his business affairs. It is locked but contains important documents.",
+            "notes": "Contains banknotes and unset diamonds, suggesting recent financial transactions.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "banknotes",
+                "category": "item",
+                "name": "Banknotes",
+                "description": "A large sum of money in banknotes, found in Vikrant's desk.",
+                "notes": "Indicates recent financial activity, possibly related to the murder."
+              },
+              {
+                "id": "unset_diamonds",
+                "category": "item",
+                "name": "Unset Diamonds",
+                "description": "Two small bags of unset diamonds, found in Vikrant's desk.",
+                "notes": "Suggests Vikrant was involved in diamond speculation, which may be relevant to the case."
+              }
+            ]
+          },
+          {
+            "id": "vikrants_leather_letter_case",
+            "category": "item",
+            "name": "Vikrant's Leather Letter-Case",
+            "description": "A stout leather letter-case, about eight inches by six, fastened with a strap and lock.",
+            "notes": "Found in Vikrant's possession and may contain critical documents or evidence."
+          },
+          {
+            "id": "photographic_negatives",
+            "category": "item",
+            "name": "Photographic Negatives of Fingerprints",
+            "description": "Negatives of fingerprints taken from various surfaces in the house.",
+            "notes": "Provides critical evidence for identifying individuals present at the crime scene."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kiara_vinita_shalini",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "vikrants_bedroom_at_kiara_vinita",
+            "state": "locked"
+          }
+        ],
+        "setting": "A spacious and well-lit room filled with books and business documents, reflecting Vikrant's intellectual and professional pursuits."
+      },
+      "golf_course_near_kiara_vinita": {
+        "description": "A well-maintained golf course near Kiara Vinita, where Vikrant's body was found. It is a peaceful and scenic location, now marred by the crime.",
+        "clues": [
+          "Footprints in the gravel outside the French window"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "kiara_vinita_shalini",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "gardener_shed_in_kiara_vinita_grounds",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A serene and picturesque golf course with rolling greens and well-kept fairways, now the scene of a gruesome discovery."
+      },
+      "gardener_shed_in_kiara_vinita_grounds": {
+        "description": "A small wooden shed located in the grounds of Kiara Vinita, near where Vikrant's body was found. It is used to store gardening tools and equipment.",
+        "clues": [
+          "Absence of murder weapon near the body"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "arvinds_revolver",
+            "category": "item",
+            "name": "Arvind's Revolver",
+            "description": "A small and light revolver with beautiful workmanship, engraved with the initials 'J. M.'",
+            "notes": "Found with traces of recent use, suggesting it was the murder weapon."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "golf_course_near_kiara_vinita",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A modest and utilitarian shed filled with gardening tools, now a critical location in the murder investigation."
+      }
+    }
+  },
+  "locations": {
+    "kiara_vinita_shalini": {
+      "description": "A grand estate near Shalini, owned by Abhay Vikrant. The house is a modern two-story building with beautifully kept grounds, including gardens, a golf course, and a gardener's shed where the body was found.",
+      "items": [
+        "Vikrant's Patent Leather Shoes",
+        "False Teeth (Dental Plate)",
+        "Glass Bowl from Vikrant's Bedroom",
+        "Vikrant's Diary Leaves"
+      ],
+      "clues": [
+        "Marks on Vikrant's wrists indicating a struggle",
+        "Discrepancies in Vikrant's clothing and dressing habits",
+        "Fingerprints on the glass bowl and window in Mrs. Vikrant's room",
+        "Footprints in the gravel outside the French window"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and modern estate with sprawling gardens, a golf course, and a sense of opulence. The atmosphere is tense and filled with secrets.",
+        "connections": [
+          {
+            "target_location": "shalini_hotel",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "library_at_kiara_vinita",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "vikrants_bedroom_at_kiara_vinita",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "shalini_hotel": {
+      "description": "A comfortable hotel in the village of Shalini, where many of the key characters are staying during the investigation.",
+      "items": [
+        "Whisky Decanter and Glass"
+      ],
+      "clues": [
+        "Unusual amount of whisky missing from Vikrant's decanter"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy and comfortable hotel with a relaxed atmosphere, serving as a hub for the investigation.",
+        "connections": [
+          {
+            "target_location": "kiara_vinita_shalini",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "bishopsbridge",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_three_tuns_inn",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "bishopsbridge": {
+      "description": "A nearby town where the local police and other authorities are based. It serves as a key location for official investigations.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling town with a mix of official buildings and local businesses, where the investigation takes on a formal tone.",
+        "connections": [
+          {
+            "target_location": "shalini_hotel",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "kiara_vinita_shalini",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_three_tuns_inn": {
+      "description": "A quaint inn near the golf course, known for its plain but good food. It is a popular spot for locals and visitors alike.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A rustic and charming inn with a warm atmosphere, offering a quiet retreat from the investigation.",
+        "connections": [
+          {
+            "target_location": "kiara_vinita_shalini",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "vikrants_bedroom_at_kiara_vinita": {
+      "description": "A small and sparsely furnished bedroom where Abhay Vikrant slept. It is connected to Aditya Vikrant's bedroom by a door that is usually left ajar.",
+      "items": [
+        "Vikrant's Clothing"
+      ],
+      "clues": [
+        "Vikrant's false teeth left in the bedroom",
+        "Vikrant's shoes showing signs of being worn by someone else"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small and austere bedroom with a sense of simplicity and order, contrasting with the opulence of the rest of the estate.",
+        "connections": [
+          {
+            "target_location": "kiara_vinita_shalini",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "library_at_kiara_vinita",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "library_at_kiara_vinita": {
+      "description": "A large and light library at the corner of the house, where Vikrant spent much of his time. It contains a roll-top desk, a telephone, and numerous books.",
+      "items": [
+        "Vikrant's Leather Letter-Case",
+        "Photographic Negatives of Fingerprints"
+      ],
+      "clues": [
+        "Banknotes and unset diamonds found in Vikrant's desk"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A spacious and well-lit room filled with books and business documents, reflecting Vikrant's intellectual and professional pursuits.",
+        "connections": [
+          {
+            "target_location": "kiara_vinita_shalini",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "vikrants_bedroom_at_kiara_vinita",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "golf_course_near_kiara_vinita": {
+      "description": "A well-maintained golf course near Kiara Vinita, where Vikrant's body was found. It is a peaceful and scenic location, now marred by the crime.",
+      "items": [],
+      "clues": [
+        "Footprints in the gravel outside the French window"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A serene and picturesque golf course with rolling greens and well-kept fairways, now the scene of a gruesome discovery.",
+        "connections": [
+          {
+            "target_location": "kiara_vinita_shalini",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "gardener_shed_in_kiara_vinita_grounds",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "gardener_shed_in_kiara_vinita_grounds": {
+      "description": "A small wooden shed located in the grounds of Kiara Vinita, near where Vikrant's body was found. It is used to store gardening tools and equipment.",
+      "items": [
+        "Arvind's Revolver"
+      ],
+      "clues": [
+        "Absence of murder weapon near the body"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A modest and utilitarian shed filled with gardening tools, now a critical location in the murder investigation.",
+        "connections": [
+          {
+            "target_location": "golf_course_near_kiara_vinita",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

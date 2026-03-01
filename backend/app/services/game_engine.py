@@ -281,18 +281,23 @@ class GameEngine:
         db = await get_database()
         if db is None:
             return
+        
         try:
             cursor = db["scenarios"].find({})
+            count = 0
             async for doc in cursor:
-                sid = doc.get("_id") or doc.get("title", "").lower().replace(" ", "_")
+                _id = doc.get("_id")
+                sid = str(_id) if _id else doc.get("title", "").lower().replace(" ", "_")
                 doc.pop("_id", None)
                 try:
                     self._normalize_scenario_payload(doc)
                     scenario = Scenario.model_validate(doc)
                     if sid not in self.scenarios:
                         self.scenarios[sid] = scenario
+                        count += 1
                 except Exception as e:
                     print(f"⚠️ Failed to load DB scenario {sid}: {e}")
+            print(f"🔮 GameEngine: Loaded {count} new scenarios from DB")
         except Exception as e:
             print(f"⚠️ Failed to load scenarios from MongoDB: {e}")
 

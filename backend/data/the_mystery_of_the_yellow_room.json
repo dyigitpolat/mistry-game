@@ -1,0 +1,871 @@
+{
+  "title": "The Mystery of the Yellow Room",
+  "description": "A complex and intricate mystery involving a locked-room murder attempt at the Château du Arnold, the disappearance of a murderer from a guarded gallery, and the unraveling of secrets tied to the victim's past.",
+  "victim": "Crowe Black",
+  "intro_narrative": "On the night of October 24th, 1892, an attempt was made on the life of Crowe Black in the Yellow Room at the Château du Arnold. The room was locked from the inside, and despite immediate efforts to break in, the assailant vanished without a trace. This incident sets off a chain of events leading to the involvement of Sutherland Quaid, a young and brilliant reporter, who must solve the mystery before an innocent man is convicted.",
+  "start_time": "1892-10-25T08:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Footprints of neat boots matching those of Devine Jolie Ronan",
+      "Blood-stained handkerchief and Basque cap in The Yellow Room",
+      "Scorched piece of paper with the phrase 'The presbytery has lost nothing of its charm, nor the garden its brightness'",
+      "Marks of a heavy rectangular parcel and hobnailed boots in the lavatory",
+      "Eye-glasses found in Crowe Black's room",
+      "Blood-stained mutton-bone found in The Yellow Room",
+      "Advertisement in the newspaper for a lost reticule containing a brass-headed key",
+      "Iron peg found in the cornice supporting the terrace",
+      "Blond hair stained with blood found on the overturned table in The Yellow Room"
+    ],
+    "required_suspect": [
+      "Frédéric Elliott (alias Dunst)"
+    ],
+    "required_motive": [
+      "Frédéric Elliott's obsession with Crowe Black and desire to prevent her marriage to Devine Jolie Ronan",
+      "Frédéric Elliott's criminal past and intent to blackmail Crowe Black"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Explore the Château du Arnold and gather initial clues about the attack on Crowe Black in The Yellow Room.",
+      "unlocked_locations": [
+        "Château du Arnold",
+        "The Yellow Room",
+        "Laboratory (Pavilion)",
+        "Vestibule (Pavilion)"
+      ],
+      "unlocked_characters": [
+        "Sutherland Quaid",
+        "Crowe Black",
+        "Devine Black",
+        "Cyndi Portman",
+        "Madame Dunaway (Concierge)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Expanding the Search",
+      "objective": "Investigate additional locations and uncover deeper secrets about the crime and the characters involved.",
+      "unlocked_locations": [
+        "Oak Grove (Park of Château du Arnold)",
+        "Donjon Inn",
+        "Epinay-sur-Orge Station"
+      ],
+      "unlocked_characters": [
+        "Devine Jolie Ronan",
+        "Frédéric Elliott (Dunst)",
+        "Nicholson Walken (The Green Man)",
+        "Burrows Caine"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Unraveling the Past",
+      "objective": "Delve into the past of Crowe Black and the mysterious Frédéric Elliott to uncover hidden motives and secrets.",
+      "unlocked_locations": [
+        "Grands Magasins de la Louvre",
+        "Grotto of Sainte-Geneviève"
+      ],
+      "unlocked_characters": [
+        "Devine de Davidson (Examining Magistrate)",
+        "Devine Beckinsale"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the culprit and solve the mystery of The Yellow Room and the inexplicable gallery.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "sutherland_quaid": {
+      "type": "assistant",
+      "role": "Reporter and Detective",
+      "location": "Château du Arnold",
+      "phase_locations": {
+        "0": "Château du Arnold",
+        "1": "Château du Arnold",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Sharp, analytical, and intuitive with a keen sense of observation. Speaks in a straightforward manner but often uses cryptic phrases to provoke reactions.",
+      "abilities": "Exceptional deductive reasoning, keen observation skills, and ability to piece together disparate clues into a coherent narrative.",
+      "knowledge_about_others": {
+        "crowe_black": "Knows about her past and her connection to Frédéric Elliott.",
+        "devine_jolie_ronan": "Suspects his innocence but understands his silence due to Crowe Black's secrets.",
+        "frederic_elliott": "Aware of his true identity as Dunst and his criminal past."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Scorched piece of paper with the phrase"
+          ],
+          "reaction": "Uses the phrase to provoke reactions from characters, particularly Devine Jolie Ronan.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "crowe_black": {
+      "type": "suspect",
+      "role": "Victim and Central Figure",
+      "location": "The Yellow Room",
+      "phase_locations": {
+        "0": "The Yellow Room",
+        "1": "The Yellow Room",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Elegant, reserved, and deeply troubled. Speaks softly and often avoids direct answers.",
+      "secret": "She was previously married to Frédéric Elliott (Dunst) and has a hidden past that includes a child.",
+      "knowledge_about_others": {
+        "devine_jolie_ronan": "Trusts him implicitly and relies on his silence to protect her secrets.",
+        "frederic_elliott": "Knows his true identity and fears his obsession with her."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "devine_black": {
+      "type": "suspect",
+      "role": "Father of the Victim",
+      "location": "Laboratory (Pavilion)",
+      "phase_locations": {
+        "0": "Laboratory (Pavilion)",
+        "1": "Laboratory (Pavilion)",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Distinguished, intellectual, and deeply protective of his daughter. Speaks with authority and a touch of sadness.",
+      "secret": "Aware of some aspects of Crowe's past but not the full extent of her connection to Frédéric Elliott.",
+      "knowledge_about_others": {
+        "crowe_black": "Knows she has secrets but respects her privacy.",
+        "devine_jolie_ronan": "Trusts and respects him as a future son-in-law."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "devine_jolie_ronan": {
+      "type": "suspect",
+      "role": "Fiancé of the Victim",
+      "location": "Château du Arnold",
+      "phase_locations": {
+        "0": "Château du Arnold",
+        "1": "Château du Arnold",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Refined, melancholic, and deeply in love with Crowe Black. Speaks with a sense of despair and urgency.",
+      "secret": "Knows about Crowe's past with Frédéric Elliott but remains silent to protect her.",
+      "knowledge_about_others": {
+        "crowe_black": "Aware of her past and her fears regarding Frédéric Elliott.",
+        "frederic_elliott": "Suspects his true identity and motives."
+      },
+      "suspicion_meter": 70,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Footprints of neat boots matching those of Devine Jolie Ronan"
+          ],
+          "reaction": "Becomes visibly agitated and avoids direct questions about his whereabouts.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "frederic_elliott": {
+      "type": "suspect",
+      "role": "Detective and Culprit",
+      "location": "Château du Arnold",
+      "phase_locations": {
+        "0": "Château du Arnold",
+        "1": "Château du Arnold",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Calm, methodical, and deceptive. Speaks with authority but often misleads others with false theories.",
+      "secret": "His true identity is Dunst, a notorious criminal with a history of swindling and murder. He is obsessed with Crowe Black.",
+      "knowledge_about_others": {
+        "crowe_black": "Knows her past and uses it to manipulate her.",
+        "devine_jolie_ronan": "Plants evidence to frame him for the crime."
+      },
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Eye-glasses found in Crowe Black's room"
+          ],
+          "reaction": "Attempts to divert suspicion by focusing on other clues and characters.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "cyndi_portman": {
+      "type": "suspect",
+      "role": "Servant at Château du Arnold",
+      "location": "Laboratory (Pavilion)",
+      "phase_locations": {
+        "0": "Laboratory (Pavilion)",
+        "1": "Laboratory (Pavilion)",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Loyal, talkative, and somewhat superstitious. Speaks in a straightforward manner but often shares unnecessary details.",
+      "secret": "Involved in minor poaching activities but is innocent of the crime.",
+      "knowledge_about_others": {
+        "crowe_black": "Deeply cares for her and is protective.",
+        "devine_black": "Respects and admires him."
+      },
+      "suspicion_meter": 20,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "devine_de_davidson": {
+      "type": "assistant",
+      "role": "Examining Magistrate",
+      "location": "Château du Arnold",
+      "phase_locations": {
+        "0": "Château du Arnold",
+        "1": "Château du Arnold",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Formal, methodical, and somewhat theatrical. Speaks with authority and enjoys the dramatic aspects of the case.",
+      "abilities": "Legal expertise and thorough investigative methods.",
+      "knowledge_about_others": {
+        "devine_jolie_ronan": "Initially suspects him due to circumstantial evidence.",
+        "frederic_elliott": "Relies on his theories but is unaware of his true identity."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "madame_dunaway": {
+      "type": "suspect",
+      "role": "Concierge at Château du Arnold",
+      "location": "Château du Arnold",
+      "phase_locations": {
+        "0": "Château du Arnold",
+        "1": "Château du Arnold",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Friendly, helpful, and somewhat naive. Speaks warmly and openly.",
+      "secret": "Involved in minor poaching activities with her husband.",
+      "knowledge_about_others": {
+        "cyndi_portman": "Considers him a friend and ally."
+      },
+      "suspicion_meter": 15,
+      "flight_risk": 5,
+      "conditional_behaviors": []
+    },
+    "burrows_caine": {
+      "type": "suspect",
+      "role": "American Scientist and Acquaintance of the Blacks",
+      "location": "Château du Arnold",
+      "phase_locations": {
+        "0": "Château du Arnold",
+        "1": "Château du Arnold",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Charming, somewhat mysterious, and prone to heavy drinking. Speaks with a mix of wit and melancholy.",
+      "secret": "Harbors unrequited love for Crowe Black and has a complicated past with the Black family.",
+      "knowledge_about_others": {
+        "crowe_black": "Knows about her past in America and her connection to Dunst.",
+        "devine_black": "Respects him as a scientist and mentor."
+      },
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "nicholson_walken": {
+      "type": "suspect",
+      "role": "Forest-Keeper at Château du Arnold",
+      "location": "Donjon Inn",
+      "phase_locations": {
+        "0": "Donjon Inn",
+        "1": "Donjon Inn",
+        "2": "Château du Arnold",
+        "3": "Château du Arnold"
+      },
+      "persona": "Rugged, enigmatic, and somewhat intimidating. Speaks sparingly and with a sense of authority.",
+      "secret": "Involved in a clandestine relationship with Madame Bean and has a contentious relationship with the landlord of the Donjon Inn.",
+      "knowledge_about_others": {
+        "madame_bean": "Engaged in a secret affair with her.",
+        "cyndi_bean": "Holds a grudge against him due to his affair with Madame Bean."
+      },
+      "suspicion_meter": 50,
+      "flight_risk": 40,
+      "conditional_behaviors": []
+    },
+    "cyndi_bean": {
+      "type": "suspect",
+      "role": "Landlord of the Donjon Inn",
+      "location": "Donjon Inn",
+      "phase_locations": {
+        "0": "Donjon Inn",
+        "1": "Donjon Inn",
+        "2": "Donjon Inn",
+        "3": "Donjon Inn"
+      },
+      "persona": "Gruff, suspicious, and prone to outbursts. Speaks in a harsh and direct manner.",
+      "secret": "Aware of his wife's affair with Nicholson Walken and harbors deep resentment.",
+      "knowledge_about_others": {
+        "madame_bean": "Suspects her infidelity and resents her.",
+        "nicholson_walken": "Hates him due to his affair with Madame Bean."
+      },
+      "suspicion_meter": 40,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "chateau_du_arnold": {
+        "description": "An ancient and sprawling château with a mix of architectural styles, surrounded by dense woods. It is the primary residence of Professor Devine Black and his daughter Crowe Black.",
+        "clues": [
+          "Footprints of neat boots matching those of Devine Jolie Ronan near the pavilion"
+        ],
+        "people": [
+          {
+            "id": "devine_black",
+            "name": "Devine Black",
+            "description": "A distinguished and elderly scientist with a noble bearing. He is deeply devoted to his daughter and his work.",
+            "notes": "Father of Crowe Black; unaware of the full extent of her past."
+          },
+          {
+            "id": "crowe_black",
+            "name": "Crowe Black",
+            "description": "A beautiful and elegant woman in her thirties, with a reserved demeanor. She appears deeply troubled and secretive.",
+            "notes": "Victim of the attack; has a hidden past involving Frédéric Elliott."
+          }
+        ],
+        "objects": [
+          {
+            "id": "devine_blacks_desk",
+            "category": "surface",
+            "name": "Devine Black's Desk",
+            "description": "A large, sturdy desk covered with scientific papers, reports, and various instruments.",
+            "notes": "Contains important documents related to Devine Black's research."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_yellow_room",
+            "state": "locked"
+          },
+          {
+            "location_id": "laboratory_pavilion",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "oak_grove",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "donjon_inn",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The château is grand but somewhat dilapidated, with a mix of ancient and modern furnishings. The atmosphere is one of quiet elegance, tinged with an air of mystery and foreboding."
+      },
+      "the_yellow_room": {
+        "description": "A small, cozy bedroom with yellow walls and minimal furnishings. It is where Crowe Black was attacked.",
+        "clues": [
+          "Blood-stained handkerchief and Basque cap",
+          "Blood-stained mutton-bone found at the foot of the bed",
+          "Blond hair stained with blood found on the overturned table"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "crowe_blacks_bed",
+            "category": "surface",
+            "name": "Crowe Black's Bed",
+            "description": "A large iron bedstead with a single mattress, overturned during the struggle.",
+            "notes": "The site of the attack on Crowe Black."
+          },
+          {
+            "id": "night_table",
+            "category": "surface",
+            "name": "Night Table",
+            "description": "A small table beside the bed, containing a drawer where Crowe Black kept a revolver.",
+            "notes": "The drawer was found open after the attack."
+          },
+          {
+            "id": "basque_cap",
+            "category": "item",
+            "name": "Basque Cap",
+            "description": "An old, worn cap found in the room after the attack.",
+            "notes": "Belonged to Cyndi Portman but was planted by the murderer."
+          },
+          {
+            "id": "blood_stained_handkerchief",
+            "category": "item",
+            "name": "Blood-Stained Handkerchief",
+            "description": "A large handkerchief with red and blue stripes, stained with blood.",
+            "notes": "Planted by the murderer to mislead investigators."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "laboratory_pavilion",
+            "state": "locked"
+          }
+        ],
+        "setting": "The room is small and sparsely furnished, with a sense of disarray following the attack. The yellow walls give it a warm but eerie atmosphere."
+      },
+      "laboratory_pavilion": {
+        "description": "A separate building in the park of the château, used by Devine Black for his scientific experiments. It contains a laboratory and The Yellow Room.",
+        "clues": [
+          "Scorched piece of paper with the phrase 'The presbytery has lost nothing of its charm, nor the garden its brightness'",
+          "Marks of a heavy rectangular parcel and hobnailed boots in the lavatory"
+        ],
+        "people": [
+          {
+            "id": "cyndi_portman",
+            "name": "Cyndi Portman",
+            "description": "An elderly servant with a long white beard, dressed in velveteen. He is loyal and talkative.",
+            "notes": "Servant of the Black family; involved in minor poaching activities."
+          }
+        ],
+        "objects": [
+          {
+            "id": "laboratory_desk",
+            "category": "surface",
+            "name": "Laboratory Desk",
+            "description": "A large desk covered with scientific instruments, papers, and chemical apparatus.",
+            "notes": "Where Devine Black conducts his experiments."
+          },
+          {
+            "id": "cabinet",
+            "category": "container",
+            "name": "Cabinet",
+            "description": "A fire-proof iron cabinet where Devine Black stores his most valuable documents.",
+            "notes": "Contains the records of Devine Black's research; was robbed using a brass-headed key.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "brass_headed_key",
+                "category": "item",
+                "name": "Brass-Headed Key",
+                "description": "A small key with a brass head, used to open the cabinet.",
+                "notes": "Lost by Crowe Black and used by the murderer to steal documents."
+              }
+            ]
+          },
+          {
+            "id": "mutton_bone",
+            "category": "item",
+            "name": "Mutton-Bone",
+            "description": "A large, blood-stained mutton-bone found in The Yellow Room.",
+            "notes": "Used as a weapon by the murderer."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_yellow_room",
+            "state": "locked"
+          },
+          {
+            "location_id": "vestibule_pavilion",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "chateau_du_arnold",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The laboratory is a large, well-lit room filled with scientific equipment. The atmosphere is one of intense focus and intellectual pursuit, with an underlying tension due to recent events."
+      },
+      "vestibule_pavilion": {
+        "description": "A small, well-lit room in the pavilion that serves as an entrance to the laboratory and The Yellow Room.",
+        "clues": [
+          "Footprints of neat boots near the window"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "vestibule_window",
+            "category": "surface",
+            "name": "Vestibule Window",
+            "description": "A window with solid iron blinds, which was found open after the murderer's escape.",
+            "notes": "The murderer escaped through this window."
+          },
+          {
+            "id": "lavatory",
+            "category": "container",
+            "name": "Lavatory",
+            "description": "A small room at the back of the vestibule, containing a sink and some cleaning supplies.",
+            "notes": "Contains marks of hobnailed boots and a heavy rectangular parcel.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "laboratory_pavilion",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The vestibule is a small, functional space with red tiled floors. It is the main entrance to the pavilion and is often used by Cyndi Portman for cleaning."
+      },
+      "oak_grove": {
+        "description": "A dense grove of ancient oak trees in the park of the château. It is a secluded and atmospheric location.",
+        "clues": [
+          "Footprints of neat boots matching those of Devine Jolie Ronan"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "chateau_du_arnold",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "grotto_of_sainte_genevieve",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The oak grove is a dark and foreboding place, with ancient trees and a thick carpet of fallen leaves. It is often used as a hiding place by those who wish to remain unseen."
+      },
+      "donjon_inn": {
+        "description": "A rustic inn located near the château, known for its old-world charm and hearty meals.",
+        "clues": [
+          "Advertisement in the newspaper for a lost reticule containing a brass-headed key"
+        ],
+        "people": [
+          {
+            "id": "cyndi_bean",
+            "name": "Cyndi Bean",
+            "description": "The landlord of the Donjon Inn, a gruff and suspicious man with a crabbed face.",
+            "notes": "Husband of Madame Bean; harbors resentment towards Nicholson Walken."
+          },
+          {
+            "id": "madame_bean",
+            "name": "Madame Bean",
+            "description": "The landlady of the Donjon Inn, a beautiful and gentle woman with large, tender eyes.",
+            "notes": "Wife of Cyndi Bean; involved in a secret affair with Nicholson Walken."
+          },
+          {
+            "id": "nicholson_walken",
+            "name": "Nicholson Walken",
+            "description": "The forest-keeper, dressed in green velvet with a rugged and handsome appearance.",
+            "notes": "Known as 'The Green Man'; involved in a secret affair with Madame Bean."
+          }
+        ],
+        "objects": [
+          {
+            "id": "inn_table",
+            "category": "surface",
+            "name": "Inn Table",
+            "description": "A heavy wooden table where guests are served meals.",
+            "notes": "Often used by guests for dining and conversation."
+          },
+          {
+            "id": "cyndi_portmans_revolver",
+            "category": "item",
+            "name": "Cyndi Portman's Revolver",
+            "description": "A revolver belonging to Cyndi Portman, used by Crowe Black during the attack.",
+            "notes": "Taken by Crowe Black without Cyndi Portman's knowledge."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "chateau_du_arnold",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The Donjon Inn is a cozy, rustic establishment with old wooden beams and a warm fireplace. It has an atmosphere of old-world charm but is tinged with tension due to the landlord's suspicions."
+      },
+      "grotto_of_sainte_genevieve": {
+        "description": "A small grotto located in the forest near the château, dedicated to Sainte-Geneviève. It is a place of quiet reflection.",
+        "clues": [
+          "Drugged state of Quaid and Elliott during the night of the keeper's murder"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "oak_grove",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The grotto is a serene and peaceful location, surrounded by nature. It is often visited by those seeking solitude or spiritual reflection."
+      },
+      "epinay_sur_orge_station": {
+        "description": "A small railway station near the château, used by travelers to and from Paris.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "station_bench",
+            "category": "surface",
+            "name": "Station Bench",
+            "description": "A wooden bench where travelers wait for their trains.",
+            "notes": "A common meeting place for characters traveling to and from the château."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "chateau_du_arnold",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The station is a small, functional building with a platform for boarding trains. It is a hub of activity for those traveling between the château and Paris."
+      },
+      "grands_magasins_de_la_louvre": {
+        "description": "A large department store in Paris where Crowe Black lost her reticule containing the brass-headed key.",
+        "clues": [
+          "Advertisement in the newspaper for a lost reticule containing a brass-headed key"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "reticule",
+            "category": "item",
+            "name": "Reticule",
+            "description": "A small handbag lost by Crowe Black, containing a brass-headed key.",
+            "notes": "Lost by Crowe Black; stolen by Frédéric Elliott."
+          }
+        ],
+        "connections": [],
+        "setting": "The Grands Magasins de la Louvre is a bustling and elegant department store, filled with a variety of goods and shoppers."
+      }
+    }
+  },
+  "locations": {
+    "chateau_du_arnold": {
+      "description": "An ancient and sprawling château with a mix of architectural styles, surrounded by dense woods. It is the primary residence of Professor Devine Black and his daughter Crowe Black.",
+      "items": [],
+      "clues": [
+        "Footprints of neat boots matching those of Devine Jolie Ronan near the pavilion"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The château is grand but somewhat dilapidated, with a mix of ancient and modern furnishings. The atmosphere is one of quiet elegance, tinged with an air of mystery and foreboding.",
+        "connections": [
+          {
+            "target_location": "the_yellow_room",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "laboratory_pavilion",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "oak_grove",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "donjon_inn",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_yellow_room": {
+      "description": "A small, cozy bedroom with yellow walls and minimal furnishings. It is where Crowe Black was attacked.",
+      "items": [
+        "Basque Cap",
+        "Blood-Stained Handkerchief"
+      ],
+      "clues": [
+        "Blood-stained handkerchief and Basque cap",
+        "Blood-stained mutton-bone found at the foot of the bed",
+        "Blond hair stained with blood found on the overturned table"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is small and sparsely furnished, with a sense of disarray following the attack. The yellow walls give it a warm but eerie atmosphere.",
+        "connections": [
+          {
+            "target_location": "laboratory_pavilion",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "laboratory_pavilion": {
+      "description": "A separate building in the park of the château, used by Devine Black for his scientific experiments. It contains a laboratory and The Yellow Room.",
+      "items": [
+        "Mutton-Bone"
+      ],
+      "clues": [
+        "Scorched piece of paper with the phrase 'The presbytery has lost nothing of its charm, nor the garden its brightness'",
+        "Marks of a heavy rectangular parcel and hobnailed boots in the lavatory"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The laboratory is a large, well-lit room filled with scientific equipment. The atmosphere is one of intense focus and intellectual pursuit, with an underlying tension due to recent events.",
+        "connections": [
+          {
+            "target_location": "the_yellow_room",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "vestibule_pavilion",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "chateau_du_arnold",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "vestibule_pavilion": {
+      "description": "A small, well-lit room in the pavilion that serves as an entrance to the laboratory and The Yellow Room.",
+      "items": [],
+      "clues": [
+        "Footprints of neat boots near the window"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The vestibule is a small, functional space with red tiled floors. It is the main entrance to the pavilion and is often used by Cyndi Portman for cleaning.",
+        "connections": [
+          {
+            "target_location": "laboratory_pavilion",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "oak_grove": {
+      "description": "A dense grove of ancient oak trees in the park of the château. It is a secluded and atmospheric location.",
+      "items": [],
+      "clues": [
+        "Footprints of neat boots matching those of Devine Jolie Ronan"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The oak grove is a dark and foreboding place, with ancient trees and a thick carpet of fallen leaves. It is often used as a hiding place by those who wish to remain unseen.",
+        "connections": [
+          {
+            "target_location": "chateau_du_arnold",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "grotto_of_sainte_genevieve",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "donjon_inn": {
+      "description": "A rustic inn located near the château, known for its old-world charm and hearty meals.",
+      "items": [
+        "Cyndi Portman's Revolver"
+      ],
+      "clues": [
+        "Advertisement in the newspaper for a lost reticule containing a brass-headed key"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The Donjon Inn is a cozy, rustic establishment with old wooden beams and a warm fireplace. It has an atmosphere of old-world charm but is tinged with tension due to the landlord's suspicions.",
+        "connections": [
+          {
+            "target_location": "chateau_du_arnold",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "grotto_of_sainte_genevieve": {
+      "description": "A small grotto located in the forest near the château, dedicated to Sainte-Geneviève. It is a place of quiet reflection.",
+      "items": [],
+      "clues": [
+        "Drugged state of Quaid and Elliott during the night of the keeper's murder"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The grotto is a serene and peaceful location, surrounded by nature. It is often visited by those seeking solitude or spiritual reflection.",
+        "connections": [
+          {
+            "target_location": "oak_grove",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "epinay_sur_orge_station": {
+      "description": "A small railway station near the château, used by travelers to and from Paris.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The station is a small, functional building with a platform for boarding trains. It is a hub of activity for those traveling between the château and Paris.",
+        "connections": [
+          {
+            "target_location": "chateau_du_arnold",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "grands_magasins_de_la_louvre": {
+      "description": "A large department store in Paris where Crowe Black lost her reticule containing the brass-headed key.",
+      "items": [
+        "Reticule"
+      ],
+      "clues": [
+        "Advertisement in the newspaper for a lost reticule containing a brass-headed key"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The Grands Magasins de la Louvre is a bustling and elegant department store, filled with a variety of goods and shoppers.",
+        "connections": [],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

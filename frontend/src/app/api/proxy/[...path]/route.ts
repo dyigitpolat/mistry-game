@@ -51,11 +51,9 @@ export async function GET(req: NextRequest, props: { params: Promise<{ path: str
     const params = await props.params;
     const session = await getServerSession(authOptions);
     
-    if (!session || !session.user) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
-    }
-
-    const userId = (session.user as any).id;
+    // Allow unauthorized GET requests for public data (stats, scenarios, etc.)
+    // The backend will handle specific permission checks if needed.
+    const userId = session?.user ? (session.user as any).id : null;
     const pathUrl = params.path.join("/");
     
     // Pass search params
@@ -64,18 +62,23 @@ export async function GET(req: NextRequest, props: { params: Promise<{ path: str
     const url = `${BACKEND_URL}/${pathUrl}${queryString}`;
 
     try {
+        const headers: Record<string, string> = {
+            "Content-Type": "application/json",
+        };
+        if (userId) {
+            headers["x-user-id"] = userId;
+        }
+
         const response = await fetch(url, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "x-user-id": userId,
-            },
+            headers,
             cache: "no-store",
         });
 
         const data = await response.json();
         return new Response(JSON.stringify(data), { status: response.status });
     } catch (error) {
+        console.error("Proxy GET Error:", error);
         return new Response(JSON.stringify({ error: "Proxy Error Failed" }), { status: 500 });
     }
 }

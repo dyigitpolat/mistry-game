@@ -1,0 +1,622 @@
+{
+  "title": "The Adventure of the Golden Pince-Nez",
+  "description": "A mysterious murder at Yoxley Old Place leaves young Amrita Aadil dead in Professor Manisha's study. Sherlock Rahul must unravel the secrets hidden within the household to uncover the truth behind the crime.",
+  "victim": "Amrita Aadil",
+  "intro_narrative": "On a wild, tempestuous night in November, Stanley Saira arrives at Baker Street with a perplexing case. Young Amrita Aadil has been found dead in Professor Manisha's study at Yoxley Old Place under mysterious circumstances. The only clues are the victim's dying words and a golden pince-nez clutched in his hand. Sherlock Rahul and Kiran are called to investigate this tangled web of secrets and betrayal.",
+  "start_time": "1894-11-25T21:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Golden pince-nez",
+      "Sealing-wax knife",
+      "Packet of documents"
+    ],
+    "required_suspect": [
+      "Shakuntala (Professor Manisha's wife)"
+    ],
+    "required_motive": [
+      "Theft of documents to secure a comrade's release from Siberia"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues at Baker Street and Yoxley Old Place. Interview key witnesses and explore the study and garden path.",
+      "unlocked_locations": [
+        "Baker Street (Rahul's residence)",
+        "Yoxley Old Place",
+        "Professor Manisha's study"
+      ],
+      "unlocked_characters": [
+        "Sherlock Rahul",
+        "Kiran",
+        "Stanley Saira",
+        "Mrs. Swara",
+        "Mahesh Darshan"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Household",
+      "objective": "Investigate the professor's bedroom and interview additional household members. Uncover hidden secrets and motives.",
+      "unlocked_locations": [
+        "Professor Manisha's bedroom"
+      ],
+      "unlocked_characters": [
+        "Professor Manisha (Dharmendra)",
+        "Ashok"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering the Truth",
+      "objective": "Piece together the clues to identify the culprit and their motive. Confront the suspect with evidence.",
+      "unlocked_locations": [
+        "Garden path at Yoxley Old Place"
+      ],
+      "unlocked_characters": [
+        "Shakuntala"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Resolution",
+      "objective": "Final confrontation and resolution of the case. Present the evidence and motive to conclude the investigation.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "Sherlock_Rahul": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Baker Street (Rahul's residence)",
+      "phase_locations": {
+        "0": "Baker Street (Rahul's residence)",
+        "1": "Yoxley Old Place",
+        "2": "Yoxley Old Place",
+        "3": "Yoxley Old Place"
+      },
+      "persona": "Brilliant, observant, and deductive. Speaks in a precise and analytical manner, often with a touch of dry humor. Known for his rapid consumption of cigarettes when deep in thought.",
+      "abilities": "Master of deduction, keen observer of minute details, and expert in forensic analysis. Can reconstruct events from minimal evidence.",
+      "knowledge_about_others": {
+        "Kiran": "Trusts Kiran implicitly and values his observations, though often teases him for his lack of deductive prowess.",
+        "Stanley_Saira": "Respects Saira's diligence but finds his methods lacking in subtlety.",
+        "Shakuntala": "Recognizes her intelligence and resolve, though initially unaware of her true identity."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Golden pince-nez",
+            "Cigarette ash"
+          ],
+          "reaction": "Reveals the hidden bookcase door in the professor's bedroom by pointing out the disturbed cigarette ash.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Kiran": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "Baker Street (Rahul's residence)",
+      "phase_locations": {
+        "0": "Baker Street (Rahul's residence)",
+        "1": "Yoxley Old Place",
+        "2": "Yoxley Old Place",
+        "3": "Yoxley Old Place"
+      },
+      "persona": "Thoughtful, loyal, and curious. Often serves as the audience surrogate, asking questions to clarify Rahul's deductions. Speaks in a measured and reflective tone.",
+      "abilities": "Skilled in medical knowledge and observational support. Acts as a sounding board for Rahul's theories.",
+      "knowledge_about_others": {
+        "Sherlock_Rahul": "Admires Rahul's intellect but is often baffled by his methods until they are explained.",
+        "Stanley_Saira": "Finds Saira's straightforward approach a good counterbalance to Rahul's complexity."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Stanley_Saira": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Baker Street (Rahul's residence)",
+      "phase_locations": {
+        "0": "Baker Street (Rahul's residence)",
+        "1": "Yoxley Old Place",
+        "2": "Yoxley Old Place",
+        "3": "Yoxley Old Place"
+      },
+      "persona": "Eager, diligent, and methodical. Speaks with enthusiasm and a touch of naivety. Admires Rahul's deductive skills.",
+      "abilities": "Proficient in police procedures and evidence collection. Acts as the official liaison between Rahul and the local authorities.",
+      "knowledge_about_others": {
+        "Sherlock_Rahul": "Holds Rahul in high regard and seeks his approval.",
+        "Kiran": "Respects Kiran's medical insights and narrative perspective."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Amrita_Aadil": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "Professor Manisha's study",
+      "phase_locations": {
+        "0": "Professor Manisha's study"
+      },
+      "persona": "Quiet, hardworking, and diligent. Described as having no known enemies. His dying words hint at the unexpected identity of his assailant.",
+      "secret": "Unwittingly became involved in a plot to retrieve stolen documents. His murder was accidental.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Professor_Manisha": {
+      "type": "suspect",
+      "role": "Homeowner and Scholar",
+      "location": "Professor Manisha's bedroom",
+      "phase_locations": {
+        "1": "Professor Manisha's bedroom",
+        "2": "Professor Manisha's bedroom",
+        "3": "Professor Manisha's bedroom"
+      },
+      "persona": "Eccentric, intelligent, and secretive. Speaks with a mincing accent and has a penchant for cigarettes. Appears frail but is cunning.",
+      "secret": "Former Russian revolutionary who betrayed his comrades, including his wife Shakuntala, to save himself. Hides Shakuntala in his home to protect his own life.",
+      "knowledge_about_others": {
+        "Shakuntala": "Knows her true identity and motives but pretends ignorance to protect himself.",
+        "Amrita_Aadil": "Regards Aadil as a competent assistant but is unaware of his indirect involvement in Shakuntala's plans."
+      },
+      "suspicion_meter": 70,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Golden pince-nez",
+            "Packet of documents"
+          ],
+          "reaction": "Attempts to deflect blame and insists on the theory of suicide or accident. Becomes increasingly agitated as Rahul closes in on the truth.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Shakuntala": {
+      "type": "suspect",
+      "role": "Culprit",
+      "location": "Professor Manisha's bedroom",
+      "phase_locations": {
+        "2": "Professor Manisha's bedroom",
+        "3": "Professor Manisha's bedroom"
+      },
+      "persona": "Determined, intelligent, and vengeful. Speaks with a foreign accent and carries herself with dignity despite her circumstances. Her actions are driven by a desire to free a wrongly imprisoned comrade.",
+      "secret": "Former Russian revolutionary and wife of Professor Manisha. Killed Amrita Aadil accidentally while attempting to retrieve stolen documents. Hides in the professor's home to avoid capture.",
+      "knowledge_about_others": {
+        "Professor_Manisha": "Knows his true identity and past betrayals. Holds him in contempt but depends on him for survival.",
+        "Amrita_Aadil": "Met Aadil on the road and used him to gain entry to the house. Regrets his death."
+      },
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Golden pince-nez",
+            "Packet of documents"
+          ],
+          "reaction": "Confesses to the crime and reveals her true identity and motive. Attempts to deliver the packet of documents before succumbing to poison.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Mahesh_Darshan": {
+      "type": "suspect",
+      "role": "Maid",
+      "location": "Professor Manisha's study",
+      "phase_locations": {
+        "0": "Professor Manisha's study",
+        "1": "Professor Manisha's study",
+        "2": "Professor Manisha's study"
+      },
+      "persona": "Honest, observant, and somewhat timid. Speaks in a straightforward manner and is eager to assist the investigation. Provides key details about the morning of the murder.",
+      "secret": "None. She is a witness to the events but has no hidden involvement in the crime.",
+      "knowledge_about_others": {
+        "Amrita_Aadil": "Respected Aadil and was shocked by his death.",
+        "Professor_Manisha": "Views the professor as a kind but eccentric employer."
+      },
+      "suspicion_meter": 10,
+      "flight_risk": 5,
+      "conditional_behaviors": []
+    },
+    "Mrs_Swara": {
+      "type": "suspect",
+      "role": "Housekeeper",
+      "location": "Professor Manisha's study",
+      "phase_locations": {
+        "0": "Professor Manisha's study",
+        "1": "Professor Manisha's study",
+        "2": "Professor Manisha's study"
+      },
+      "persona": "Practical, no-nonsense, and loyal. Speaks with a maternal tone and is protective of the household. Provides insights into the professor's habits.",
+      "secret": "None. She is unaware of the deeper secrets within the household.",
+      "knowledge_about_others": {
+        "Professor_Manisha": "Knows the professor's routines and eccentricities but is unaware of his past.",
+        "Mahesh_Darshan": "Regards Mahesh as a reliable and hardworking colleague."
+      },
+      "suspicion_meter": 5,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Ashok": {
+      "type": "suspect",
+      "role": "Gardener",
+      "location": "Garden path at Yoxley Old Place",
+      "phase_locations": {
+        "1": "Garden path at Yoxley Old Place",
+        "2": "Garden path at Yoxley Old Place"
+      },
+      "persona": "Stoic, hardworking, and loyal. Speaks sparingly but provides useful information about the grounds and the professor's habits.",
+      "secret": "None. He is unaware of the events unfolding inside the house.",
+      "knowledge_about_others": {
+        "Professor_Manisha": "Respects the professor but is unaware of his secrets.",
+        "Mahesh_Darshan": "Has a friendly relationship with Mahesh."
+      },
+      "suspicion_meter": 5,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Yoxley_Old_Place": {
+        "description": "A secluded country house in Kent, surrounded by overgrown gardens. The house itself is old and labyrinthine, with narrow corridors and hidden nooks. The atmosphere is one of quiet academia, tinged with an air of mystery.",
+        "setting": "The exterior of Yoxley Old Place is imposing, with ivy-clad walls and a large, unkempt garden. The interior is filled with the scent of old books and tobacco smoke. The house feels isolated, as if cut off from the outside world.",
+        "clues": [
+          "Footprints on the grass border of the garden path, indicating someone walked cautiously to avoid leaving tracks."
+        ],
+        "people": [
+          {
+            "id": "Ashok",
+            "name": "Ashok",
+            "description": "An elderly gardener with a military bearing. He is dressed in practical work clothes and speaks with the authority of a former army pensioner.",
+            "notes": "Ashok is loyal to the professor and maintains the grounds of Yoxley Old Place. He is unaware of the secrets hidden within the house."
+          }
+        ],
+        "objects": [
+          {
+            "id": "garden_path",
+            "category": "surface",
+            "name": "Garden Path",
+            "description": "A narrow, tiled path leading from the garden gate to the back door of the house. It is bordered by a strip of grass and flower beds.",
+            "notes": "The path is where the culprit walked to avoid leaving footprints. Look closely for disturbances in the grass."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Professor_Manishas_study",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Garden_path_at_Yoxley_Old_Place",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "Professor_Manishas_study": {
+        "description": "A scantily furnished room dominated by a large writing-table with a fixed bureau. The walls are lined with bookshelves, and the air is thick with the scent of tobacco. This is where Amrita Aadil met his untimely end.",
+        "setting": "The study is a place of quiet scholarship, with papers and books scattered across the desk. The bureau is the focal point, its drawers open and cupboard locked. The atmosphere is heavy with the weight of the recent tragedy.",
+        "clues": [
+          "Amrita Aadil's dying words: 'The professor—it was she.'",
+          "Scratch marks on the bureau near the keyhole, suggesting an attempt to open it.",
+          "The victim’s mention of a woman he had met earlier on the road, linking to Shakuntala."
+        ],
+        "people": [
+          {
+            "id": "Mahesh_Darshan",
+            "name": "Mahesh Darshan",
+            "description": "A young maid with a timid demeanor. She is dressed in a simple uniform and speaks softly, still shaken by the events of the morning.",
+            "notes": "Mahesh discovered the body of Amrita Aadil and heard his dying words. She is a key witness but is unaware of the larger conspiracy."
+          },
+          {
+            "id": "Mrs_Swara",
+            "name": "Mrs. Swara",
+            "description": "An elderly housekeeper with a no-nonsense attitude. She is dressed in a practical dress and apron, and her expression is one of concern and determination.",
+            "notes": "Mrs. Swara is loyal to the professor and manages the household. She is unaware of the secrets hidden within the house."
+          }
+        ],
+        "objects": [
+          {
+            "id": "bureau",
+            "category": "container",
+            "name": "Bureau",
+            "description": "A large wooden bureau with a double column of drawers and a central cupboard. The drawers are open, but the cupboard is locked.",
+            "notes": "The bureau is the target of the break-in. Look for signs of tampering near the keyhole.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "packet_of_documents",
+                "category": "item",
+                "name": "Packet of Documents",
+                "description": "A small packet of papers tied with string. The documents appear to be of a sensitive nature, possibly related to the professor's past.",
+                "notes": "These documents are the motive for the crime. They hold the key to freeing Shakuntala's comrade from Siberia."
+              }
+            ]
+          },
+          {
+            "id": "sealing_wax_knife",
+            "category": "item",
+            "name": "Sealing-Wax Knife",
+            "description": "A small knife with an ivory handle and a stiff blade. It is part of the fittings of the professor's desk and was used as the murder weapon.",
+            "notes": "The knife was used in the struggle between Amrita Aadil and Shakuntala. It was left on the carpet beside the body."
+          },
+          {
+            "id": "golden_pince_nez",
+            "category": "item",
+            "name": "Golden Pince-Nez",
+            "description": "A delicate pair of golden eyeglasses with broken black silk cords. They are of remarkable strength and appear to belong to someone with poor eyesight.",
+            "notes": "The pince-nez was clutched in Amrita Aadil's hand as he died. It is a key clue to the identity of the culprit."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Yoxley_Old_Place",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Professor_Manishas_bedroom",
+            "state": "locked"
+          }
+        ]
+      },
+      "Professor_Manishas_bedroom": {
+        "description": "A large, cluttered chamber lined with innumerable books. The bed is in the center of the room, and the air is thick with stale tobacco smoke. This is where Professor Manisha spends most of his time.",
+        "setting": "The room is a testament to the professor's scholarly pursuits, with books piled high on every available surface. The atmosphere is one of seclusion and secrecy, with a hint of tension in the air.",
+        "clues": [
+          "Cigarette ash distribution revealing the hidden bookcase door in the professor's room.",
+          "Professor Manisha’s unusual appetite after the crime, hinting at a hidden person."
+        ],
+        "people": [
+          {
+            "id": "Professor_Manisha",
+            "name": "Professor Manisha",
+            "description": "An elderly man with a gaunt, aquiline face and piercing dark eyes. He is propped up in bed, surrounded by books and papers, with a cigarette smoldering in his hand.",
+            "notes": "Professor Manisha is a former Russian revolutionary who betrayed his comrades to save himself. He is hiding Shakuntala in his home to protect his own life."
+          },
+          {
+            "id": "Shakuntala_phase_3",
+            "name": "Shakuntala",
+            "description": "A woman with a determined expression, dressed in dusty clothes. Her face is streaked with grime, and she wears a pair of thick glasses. She carries herself with dignity despite her circumstances.",
+            "notes": "Shakuntala is the culprit, driven by a desire to retrieve stolen documents and free her comrade from Siberia. She is hiding in the professor's bedroom.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "bookcase_door",
+            "category": "container",
+            "name": "Bookcase",
+            "description": "A large bookcase filled with books. One section of the bookcase is clear of books, hinting at a hidden compartment.",
+            "notes": "The bookcase hides a secret door where Shakuntala is concealed. Look for signs of disturbance in the cigarette ash.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "Shakuntala_hidden",
+                "category": "item",
+                "name": "Hidden Compartment",
+                "description": "A dark, dusty space behind the bookcase. It is cramped and filled with cobwebs, but large enough to conceal a person.",
+                "notes": "This is where Shakuntala has been hiding. She emerges when confronted with the evidence."
+              }
+            ]
+          },
+          {
+            "id": "professors_cigarettes",
+            "category": "item",
+            "name": "Professor Manisha’s Cigarettes",
+            "description": "A tin of specially prepared cigarettes from Alexandria. The professor is rarely seen without one.",
+            "notes": "The cigarettes are used by Rahul to test his theory about the hidden bookcase door. The ash reveals footprints."
+          },
+          {
+            "id": "Chubbs_key",
+            "category": "item",
+            "name": "Chubb’s Key",
+            "description": "A small, intricate key that fits the lock of the bureau in the study. It is kept on the professor's watch-chain.",
+            "notes": "The key is essential for opening the bureau. It shows no signs of tampering, indicating the culprit had their own key."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Professor_Manishas_study",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "Garden_path_at_Yoxley_Old_Place": {
+        "description": "A narrow strip of grass bordering the garden path. It leads from the garden gate to the back door of the house and is where the culprit walked to avoid leaving footprints.",
+        "setting": "The garden path is overgrown and muddy, with a strip of grass running alongside it. The path itself is tiled, but the grass shows signs of disturbance.",
+        "clues": [
+          "Footprints on the grass border of the garden path, indicating someone walked cautiously to avoid leaving tracks."
+        ],
+        "people": [
+          {
+            "id": "Ashok_garden",
+            "name": "Ashok",
+            "description": "The gardener is seen tending to the grounds. He is dressed in work clothes and speaks with a quiet authority.",
+            "notes": "Ashok maintains the garden and is unaware of the events inside the house. He can provide information about the grounds and the professor's habits."
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Yoxley_Old_Place",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "Baker_Street": {
+        "description": "A cozy sitting room at 221B Baker Street, filled with books, papers, and the paraphernalia of Sherlock Rahul's investigations. The room is warm and inviting, with a fire crackling in the grate.",
+        "setting": "The room is a haven of intellectual pursuit, with a large window overlooking Baker Street. The walls are lined with bookshelves, and a chemistry set sits on a side table. The atmosphere is one of quiet anticipation, as if waiting for the next case to unfold.",
+        "clues": [],
+        "people": [
+          {
+            "id": "Sherlock_Rahul_baker",
+            "name": "Sherlock Rahul",
+            "description": "A tall, lean man with sharp features and piercing eyes. He is dressed in a dressing gown and is engaged in deciphering an ancient manuscript.",
+            "notes": "Rahul is the world's only consulting detective, known for his brilliant deductive skills. He is deeply engrossed in the case of Yoxley Old Place."
+          },
+          {
+            "id": "Kiran_baker",
+            "name": "Kiran",
+            "description": "A thoughtful man with a medical background. He is dressed comfortably and is deep in a treatise on surgery.",
+            "notes": "Kiran is Rahul's loyal friend and chronicler. He provides a grounded perspective on Rahul's theories."
+          },
+          {
+            "id": "Stanley_Saira_baker",
+            "name": "Stanley Saira",
+            "description": "A young detective with an eager expression. He is dressed in a waterproof coat and speaks with enthusiasm about the case.",
+            "notes": "Saira is a promising detective who seeks Rahul's help in solving the mystery at Yoxley Old Place."
+          }
+        ],
+        "objects": [
+          {
+            "id": "palimpsest",
+            "category": "item",
+            "name": "Palimpsest",
+            "description": "An ancient manuscript with a faded inscription. Rahul has been deciphering it with a powerful lens.",
+            "notes": "The palimpsest is a distraction for Rahul, who sets it aside when the case is presented."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Yoxley_Old_Place",
+            "state": "locked"
+          }
+        ]
+      }
+    }
+  },
+  "locations": {
+    "Yoxley_Old_Place": {
+      "description": "A secluded country house in Kent, surrounded by overgrown gardens. The house itself is old and labyrinthine, with narrow corridors and hidden nooks. The atmosphere is one of quiet academia, tinged with an air of mystery.",
+      "items": [],
+      "clues": [
+        "Footprints on the grass border of the garden path, indicating someone walked cautiously to avoid leaving tracks."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The exterior of Yoxley Old Place is imposing, with ivy-clad walls and a large, unkempt garden. The interior is filled with the scent of old books and tobacco smoke. The house feels isolated, as if cut off from the outside world.",
+        "connections": [
+          {
+            "target_location": "Professor_Manishas_study",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Garden_path_at_Yoxley_Old_Place",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Professor_Manishas_study": {
+      "description": "A scantily furnished room dominated by a large writing-table with a fixed bureau. The walls are lined with bookshelves, and the air is thick with the scent of tobacco. This is where Amrita Aadil met his untimely end.",
+      "items": [
+        "Sealing-Wax Knife",
+        "Golden Pince-Nez"
+      ],
+      "clues": [
+        "Amrita Aadil's dying words: 'The professor—it was she.'",
+        "Scratch marks on the bureau near the keyhole, suggesting an attempt to open it.",
+        "The victim’s mention of a woman he had met earlier on the road, linking to Shakuntala."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The study is a place of quiet scholarship, with papers and books scattered across the desk. The bureau is the focal point, its drawers open and cupboard locked. The atmosphere is heavy with the weight of the recent tragedy.",
+        "connections": [
+          {
+            "target_location": "Yoxley_Old_Place",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Professor_Manishas_bedroom",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Professor_Manishas_bedroom": {
+      "description": "A large, cluttered chamber lined with innumerable books. The bed is in the center of the room, and the air is thick with stale tobacco smoke. This is where Professor Manisha spends most of his time.",
+      "items": [
+        "Professor Manisha’s Cigarettes",
+        "Chubb’s Key"
+      ],
+      "clues": [
+        "Cigarette ash distribution revealing the hidden bookcase door in the professor's room.",
+        "Professor Manisha’s unusual appetite after the crime, hinting at a hidden person."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is a testament to the professor's scholarly pursuits, with books piled high on every available surface. The atmosphere is one of seclusion and secrecy, with a hint of tension in the air.",
+        "connections": [
+          {
+            "target_location": "Professor_Manishas_study",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Garden_path_at_Yoxley_Old_Place": {
+      "description": "A narrow strip of grass bordering the garden path. It leads from the garden gate to the back door of the house and is where the culprit walked to avoid leaving footprints.",
+      "items": [],
+      "clues": [
+        "Footprints on the grass border of the garden path, indicating someone walked cautiously to avoid leaving tracks."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The garden path is overgrown and muddy, with a strip of grass running alongside it. The path itself is tiled, but the grass shows signs of disturbance.",
+        "connections": [
+          {
+            "target_location": "Yoxley_Old_Place",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Baker_Street": {
+      "description": "A cozy sitting room at 221B Baker Street, filled with books, papers, and the paraphernalia of Sherlock Rahul's investigations. The room is warm and inviting, with a fire crackling in the grate.",
+      "items": [
+        "Palimpsest"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is a haven of intellectual pursuit, with a large window overlooking Baker Street. The walls are lined with bookshelves, and a chemistry set sits on a side table. The atmosphere is one of quiet anticipation, as if waiting for the next case to unfold.",
+        "connections": [
+          {
+            "target_location": "Yoxley_Old_Place",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

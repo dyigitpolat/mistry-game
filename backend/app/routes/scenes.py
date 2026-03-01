@@ -9,6 +9,8 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
+from app.services.game_engine import GameEngine
+
 router = APIRouter()
 
 # Check if scene generation is available
@@ -19,6 +21,11 @@ try:
         _scene_gen = SceneGenerator()
 except ImportError:
     pass
+
+def get_engine():
+    if GameEngine._shared_instance is None:
+        return GameEngine()
+    return GameEngine._shared_instance
 
 
 def _resolve_location_name(engine, scenario_id: str, location_name: str, locations: dict):
@@ -48,8 +55,7 @@ async def generate_scene(scenario_id: str, location_name: str):
             detail="Scene generation unavailable. Set GEMINI_API_KEY and install mistry-agents."
         )
 
-    from app.services.game_engine import GameEngine
-    engine = GameEngine._shared_instance or GameEngine()
+    engine = get_engine()
     scenario = engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
@@ -89,8 +95,7 @@ async def generate_hero(scenario_id: str):
             detail="Scene generation unavailable. Set GEMINI_API_KEY and install mistry-agents."
         )
 
-    from app.services.game_engine import GameEngine
-    engine = GameEngine._shared_instance or GameEngine()
+    engine = get_engine()
     scenario = engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
@@ -99,7 +104,7 @@ async def generate_hero(scenario_id: str):
         title=scenario.title,
         description=scenario.description,
         victim=scenario.victim,
-        narrative=scenario.narrative,
+        narrative=scenario.intro_narrative,
         scenario_id=scenario_id,
     )
 
@@ -120,8 +125,7 @@ async def generate_all_scenes(scenario_id: str):
             detail="Scene generation unavailable."
         )
 
-    from app.services.game_engine import GameEngine
-    engine = GameEngine._shared_instance or GameEngine()
+    engine = get_engine()
     scenario = engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")

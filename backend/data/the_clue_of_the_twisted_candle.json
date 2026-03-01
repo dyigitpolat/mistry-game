@@ -1,0 +1,859 @@
+{
+  "title": "The Clue of the Twisted Candle",
+  "description": "A mystery involving the murder of Remington Kara, a wealthy Greek with a dark past, and the intricate web of clues leading to the truth behind his death. The story explores themes of revenge, deception, and the complexities of criminal investigation.",
+  "victim": "Remington Kara",
+  "intro_narrative": "John Lexman, a renowned mystery writer, finds himself entangled in a deadly plot after borrowing money from the sinister moneylender Vassalaro, introduced to him by Remington Kara. When Vassalaro is found murdered, Lexman becomes the prime suspect. His wife, Grace, disappears under mysterious circumstances, and Lexman is convicted and imprisoned. Years later, Lexman escapes from Dartmoor Prison with the help of Kara, only to discover Kara's true malevolent nature. The narrative unfolds as Lexman seeks revenge and uncovers the dark secrets surrounding Kara's death.",
+  "start_time": "1900-03-03T21:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Twisted candle found in Kara's room",
+      "Missing revolver belonging to Vassalaro",
+      "Letter written on chemically treated paper (burnt)",
+      "Thumbprint on blackmail note (Fisher)",
+      "Bloodstained scissors (Belinda Mary's)",
+      "Telephone call from Kara's room during murder",
+      "Artificial arm (Gathercole's right arm, not left)",
+      "Candle chips and grease traces in Kara's room",
+      "Dog killed in cellar (evidence of struggle)"
+    ],
+    "required_suspect": [
+      "John Lexman"
+    ],
+    "required_motive": [
+      "Revenge for the death of Grace Lexman",
+      "Kara's history of cruelty and manipulation",
+      "Kara's involvement in blackmail and murder"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Introduction and Setup",
+      "objective": "Gather initial clues and understand the relationships between characters.",
+      "unlocked_locations": [
+        "Beston Priory",
+        "Cadogan Square (Kara's house)",
+        "Lewes railway station"
+      ],
+      "unlocked_characters": [
+        "John Lexman",
+        "Grace Lexman",
+        "Remington Kara",
+        "T. X. Meredith",
+        "Superintendent Mansus"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Investigation and Suspicion",
+      "objective": "Explore deeper connections and uncover hidden motives.",
+      "unlocked_locations": [
+        "Eastbourne Road (crossroads)",
+        "Whitehall (T. X. Meredith's office)",
+        "Black Museum (Scotland Yard)"
+      ],
+      "unlocked_characters": [
+        "George Gathercole",
+        "Fisher (Kara's valet)",
+        "Belinda Mary Bartholomew"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Escape and Revelations",
+      "objective": "Uncover the truth behind Lexman's escape and Kara's murder.",
+      "unlocked_locations": [
+        "Dartmoor Prison",
+        "Durazzo (Albania)",
+        "Kara's palazzo (Albania)"
+      ],
+      "unlocked_characters": [
+        "Hussein Effendi"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Resolution and Justice",
+      "objective": "Solve the mystery and bring the culprit to justice.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "John Lexman": {
+      "type": "suspect",
+      "role": "Protagonist and Suspect",
+      "location": "Beston Priory",
+      "phase_locations": {
+        "0": "Beston Priory",
+        "1": "Beston Priory",
+        "2": "Dartmoor Prison",
+        "3": "Beston Priory"
+      },
+      "persona": "Intelligent, introspective, and deeply emotional. A writer with a keen sense of justice and a strong moral compass.",
+      "knowledge_about_others": {
+        "Grace Lexman": "Loving husband, deeply protective.",
+        "Remington Kara": "Initial friend turned enemy, manipulator.",
+        "T. X. Meredith": "Friend and investigator, trustworthy."
+      },
+      "secret": "Escaped convict seeking revenge for his wife's suffering and death.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    },
+    "Grace Lexman": {
+      "type": "suspect",
+      "role": "Victim and Witness",
+      "location": "Kara's palazzo (Albania)",
+      "phase_locations": {
+        "0": "Beston Priory",
+        "1": "Cadogan Square (Kara's house)",
+        "2": "Kara's palazzo (Albania)",
+        "3": "Beston Priory"
+      },
+      "persona": "Brave, compassionate, and resilient. A loving wife with a strong will to survive.",
+      "knowledge_about_others": {
+        "John Lexman": "Loving husband, deeply protective.",
+        "Remington Kara": "Abductor and tormentor."
+      },
+      "secret": "Survived Kara's imprisonment and returned to England secretly.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Remington Kara": {
+      "type": "suspect",
+      "role": "Antagonist and Victim",
+      "location": "Cadogan Square (Kara's house)",
+      "phase_locations": {
+        "0": "Cadogan Square (Kara's house)",
+        "1": "Cadogan Square (Kara's house)",
+        "2": "Kara's palazzo (Albania)",
+        "3": "Cadogan Square (Kara's house)"
+      },
+      "persona": "Charming, manipulative, and ruthless. A wealthy Greek with a penchant for control and cruelty.",
+      "knowledge_about_others": {
+        "John Lexman": "Enemy and victim of manipulation.",
+        "Grace Lexman": "Obsession and tormentor.",
+        "T. X. Meredith": "Investigator and adversary."
+      },
+      "secret": "Mastermind behind multiple crimes, including blackmail and murder.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "T. X. Meredith": {
+      "type": "assistant",
+      "role": "Investigator",
+      "location": "Whitehall (T. X. Meredith's office)",
+      "phase_locations": {
+        "0": "Whitehall (T. X. Meredith's office)",
+        "1": "Whitehall (T. X. Meredith's office)",
+        "2": "Whitehall (T. X. Meredith's office)",
+        "3": "Whitehall (T. X. Meredith's office)"
+      },
+      "persona": "Witty, intelligent, and persistent. A skilled investigator with a flair for solving complex mysteries.",
+      "knowledge_about_others": {
+        "John Lexman": "Friend and suspect.",
+        "Grace Lexman": "Victim and witness.",
+        "Remington Kara": "Antagonist and criminal."
+      },
+      "abilities": "Expert in criminal investigation, adept at piecing together clues and uncovering hidden motives.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Superintendent Mansus": {
+      "type": "assistant",
+      "role": "Police Officer",
+      "location": "Whitehall (T. X. Meredith's office)",
+      "phase_locations": {
+        "0": "Whitehall (T. X. Meredith's office)",
+        "1": "Whitehall (T. X. Meredith's office)",
+        "2": "Whitehall (T. X. Meredith's office)",
+        "3": "Whitehall (T. X. Meredith's office)"
+      },
+      "persona": "Methodical, diligent, and thorough. A reliable officer who assists T. X. in investigations.",
+      "knowledge_about_others": {
+        "T. X. Meredith": "Superior and colleague.",
+        "John Lexman": "Suspect and person of interest."
+      },
+      "abilities": "Skilled in evidence collection and police procedures.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "George Gathercole": {
+      "type": "suspect",
+      "role": "Explorer and Witness",
+      "location": "Durazzo (Albania)",
+      "phase_locations": {
+        "0": "Durazzo (Albania)",
+        "1": "Durazzo (Albania)",
+        "2": "Durazzo (Albania)"
+      },
+      "persona": "Eccentric, brave, and taciturn. An explorer with a mysterious past and a missing arm.",
+      "knowledge_about_others": {
+        "Remington Kara": "Employer and manipulator."
+      },
+      "secret": "Died under mysterious circumstances, impersonated by John Lexman.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Fisher (Kara's valet)": {
+      "type": "suspect",
+      "role": "Servant and Accomplice",
+      "location": "Cadogan Square (Kara's house)",
+      "phase_locations": {
+        "0": "Cadogan Square (Kara's house)",
+        "1": "Cadogan Square (Kara's house)",
+        "2": "Cadogan Square (Kara's house)"
+      },
+      "persona": "Deferential, cunning, and opportunistic. A servant with a criminal past.",
+      "knowledge_about_others": {
+        "Remington Kara": "Employer and criminal associate."
+      },
+      "secret": "Former convict involved in Kara's schemes.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Belinda Mary Bartholomew": {
+      "type": "assistant",
+      "role": "Witness and Helper",
+      "location": "Cadogan Square (Kara's house)",
+      "phase_locations": {
+        "0": "Cadogan Square (Kara's house)",
+        "1": "Cadogan Square (Kara's house)",
+        "2": "Cadogan Square (Kara's house)",
+        "3": "Cadogan Square (Kara's house)"
+      },
+      "persona": "Intelligent, resourceful, and compassionate. A young woman with a strong sense of justice.",
+      "knowledge_about_others": {
+        "Grace Lexman": "Rescuer and protector.",
+        "T. X. Meredith": "Ally and investigator."
+      },
+      "abilities": "Quick-thinking and brave, capable of uncovering hidden truths.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Hussein Effendi": {
+      "type": "assistant",
+      "role": "Ally and Rescuer",
+      "location": "Durazzo (Albania)",
+      "phase_locations": {
+        "2": "Durazzo (Albania)"
+      },
+      "persona": "Wise, brave, and honorable. A Turkish merchant with a strong moral code.",
+      "knowledge_about_others": {
+        "John Lexman": "Rescuer and ally."
+      },
+      "abilities": "Skilled in survival and combat, knowledgeable about Albania.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Beston Priory": {
+        "description": "A quaint and cozy cottage with a rich history, serving as the home of John and Grace Lexman. It features a study filled with books and manuscripts, and a drawing-room with a warm, inviting atmosphere.",
+        "clues": [
+          "Twisted candle found in Kara's room (reference to Lexman's past)"
+        ],
+        "people": [
+          {
+            "id": "john_lexman",
+            "name": "John Lexman",
+            "description": "A tall, slim man with a strong face and deep grey eyes. He is a writer with a keen intellect and a troubled past.",
+            "notes": "Protagonist and suspect in the murder of Vassalaro. Deeply in love with his wife, Grace."
+          },
+          {
+            "id": "grace_lexman",
+            "name": "Grace Lexman",
+            "description": "A brave and sweet woman with a compassionate heart. She is John Lexman's wife and a central figure in the mystery.",
+            "notes": "Victim of Kara's schemes, presumed dead but secretly alive."
+          }
+        ],
+        "objects": [
+          {
+            "id": "browning_pistol",
+            "category": "item",
+            "name": "Browning Pistol",
+            "description": "A small, ornate pistol sent to John Lexman by an unknown admirer. It becomes a crucial piece of evidence in the murder of Vassalaro.",
+            "notes": "Murder weapon in the Vassalaro case, sent by Kara."
+          },
+          {
+            "id": "writing_desk",
+            "category": "container",
+            "name": "Writing Desk",
+            "description": "A large, solid-oak desk covered with books and manuscripts. It contains drawers and compartments for storing important documents.",
+            "notes": "Contains evidence related to Lexman's financial troubles and correspondence with Kara.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "promissory_note",
+                "category": "item",
+                "name": "Promissory Note",
+                "description": "A document signed by John Lexman, detailing his debt to Vassalaro.",
+                "notes": "Key evidence in the financial dispute between Lexman and Vassalaro."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Lewes railway station",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Eastbourne Road (crossroads)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A charming and historic cottage with a warm, literary atmosphere. The study is filled with books and manuscripts, reflecting John Lexman's profession as a writer."
+      },
+      "Cadogan Square (Kara's house)": {
+        "description": "A grand and luxurious house in Cadogan Square, owned by Remington Kara. It features ornate rooms, a secure safe, and a hidden cellar.",
+        "clues": [
+          "Twisted candle found in Kara's room",
+          "Candle chips and grease traces in Kara's room",
+          "Telephone call from Kara's room during murder"
+        ],
+        "people": [
+          {
+            "id": "remington_kara",
+            "name": "Remington Kara",
+            "description": "A tall, handsome man with a commanding presence. He is wealthy, charming, and deeply manipulative.",
+            "notes": "Antagonist and mastermind behind multiple crimes, including blackmail and murder."
+          },
+          {
+            "id": "fisher",
+            "name": "Fisher",
+            "description": "A deferential and cunning valet who serves Remington Kara. He has a criminal past and is involved in Kara's schemes.",
+            "notes": "Former convict and accomplice to Kara."
+          },
+          {
+            "id": "belinda_mary",
+            "name": "Belinda Mary Bartholomew",
+            "description": "A young, intelligent woman with a strong sense of justice. She becomes involved in the mystery through her interactions with Kara.",
+            "notes": "Witness and helper, rescuer of Grace Lexman."
+          }
+        ],
+        "objects": [
+          {
+            "id": "steel_latch",
+            "category": "item",
+            "name": "Steel Latch",
+            "description": "A secure locking mechanism on Kara's bedroom door, designed to keep intruders out.",
+            "notes": "Key to Kara's security system, manipulated during the murder."
+          },
+          {
+            "id": "kara_safe",
+            "category": "container",
+            "name": "Kara's Safe",
+            "description": "A large, secure safe built into the wall of Kara's bedroom. It contains valuable documents and items.",
+            "notes": "Contains evidence of Kara's criminal activities and blackmail materials.",
+            "state": "locked"
+          },
+          {
+            "id": "telephone",
+            "category": "item",
+            "name": "Telephone",
+            "description": "A telephone used by Kara to communicate with the outside world. It plays a crucial role in the murder investigation.",
+            "notes": "Used to trigger the alarm during the murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Beston Priory",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Whitehall (T. X. Meredith's office)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A luxurious and opulent house with ornate furnishings and a sense of grandeur. The bedroom features a secure safe and advanced locking mechanisms."
+      },
+      "Dartmoor Prison": {
+        "description": "A grim and foreboding prison located on the moors of Dartmoor. It is known for its harsh conditions and isolated location.",
+        "clues": [
+          "Dog killed in cellar (evidence of struggle)"
+        ],
+        "people": [
+          {
+            "id": "john_lexman_prisoner",
+            "name": "John Lexman",
+            "description": "A prisoner in Dartmoor, dressed in convict garb. He appears haggard and worn from his experiences.",
+            "notes": "Escaped convict seeking revenge for his wife's suffering."
+          },
+          {
+            "id": "warder",
+            "name": "Warder",
+            "description": "A prison guard responsible for overseeing the inmates. He is bribed by Kara to assist in Lexman's escape.",
+            "notes": "Accomplice in Lexman's escape from Dartmoor Prison."
+          }
+        ],
+        "objects": [
+          {
+            "id": "prison_chains",
+            "category": "item",
+            "name": "Prison Chains",
+            "description": "Heavy chains used to restrain prisoners. They are a symbol of the harsh conditions in Dartmoor Prison.",
+            "notes": "Used to restrain Lexman during his imprisonment."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Beston Priory",
+            "state": "locked"
+          }
+        ],
+        "setting": "A bleak and isolated prison with harsh conditions. The cells are grim and foreboding, reflecting the brutal reality of life in Dartmoor."
+      },
+      "Durazzo (Albania)": {
+        "description": "A port city in Albania, serving as a gateway to the wild and rugged Albanian countryside. It is a place of intrigue and danger.",
+        "clues": [
+          "Artificial arm (Gathercole's right arm, not left)"
+        ],
+        "people": [
+          {
+            "id": "hussein_effendi",
+            "name": "Hussein Effendi",
+            "description": "A tall, grey-bearded Turk with a commanding presence. He is a merchant and an honorable man who aids John Lexman.",
+            "notes": "Ally and rescuer of John Lexman, knowledgeable about Albania."
+          }
+        ],
+        "objects": [
+          {
+            "id": "dagger",
+            "category": "item",
+            "name": "Dagger",
+            "description": "A long, slim knife with a rusted and stained blade. It is inscribed with Arabic near the hilt.",
+            "notes": "Murder weapon used by Hussein Effendi, later used in Kara's murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Kara's palazzo (Albania)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bustling port city with a mix of cultures and influences. The surrounding countryside is wild and rugged, filled with danger and intrigue."
+      },
+      "Kara's palazzo (Albania)": {
+        "description": "A grand and imposing palace located in the Albanian countryside. It is built in a mix of Moorish and Italian architectural styles and features hidden dungeons.",
+        "clues": [
+          "Bloodstained scissors (Belinda Mary's)"
+        ],
+        "people": [
+          {
+            "id": "grace_lexman_prisoner",
+            "name": "Grace Lexman",
+            "description": "A prisoner in Kara's palazzo, appearing weak and traumatized. She is held in a hidden dungeon.",
+            "notes": "Victim of Kara's imprisonment, secretly rescued by Belinda Mary."
+          },
+          {
+            "id": "salvolio",
+            "name": "Salvolio",
+            "description": "A cruel and unscrupulous servant of Kara. He is responsible for tormenting Grace Lexman during her imprisonment.",
+            "notes": "Accomplice to Kara, killed by Hussein Effendi."
+          }
+        ],
+        "objects": [
+          {
+            "id": "hidden_dungeon",
+            "category": "container",
+            "name": "Hidden Dungeon",
+            "description": "A dark and foreboding dungeon cut into the solid rock beneath Kara's palazzo. It is used to imprison Grace Lexman.",
+            "notes": "Location of Grace Lexman's imprisonment, later discovered by Belinda Mary.",
+            "state": "locked"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Durazzo (Albania)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand and opulent palace with hidden dungeons and secret passages. The atmosphere is one of danger and intrigue, reflecting Kara's malevolent nature."
+      },
+      "Lewes railway station": {
+        "description": "A small railway station serving the town of Lewes. It is a quiet and unassuming place, but plays a crucial role in the story.",
+        "clues": [
+          "Thumbprint on blackmail note (Fisher)"
+        ],
+        "people": [
+          {
+            "id": "john_lexman_station",
+            "name": "John Lexman",
+            "description": "A weary traveler arriving at Lewes railway station. He is returning home after a difficult journey.",
+            "notes": "Protagonist returning from London, involved in the murder investigation."
+          }
+        ],
+        "objects": [
+          {
+            "id": "train_ticket",
+            "category": "item",
+            "name": "Train Ticket",
+            "description": "A ticket for the train from Victoria to Lewes, held up due to a derailment.",
+            "notes": "Evidence of Lexman's travel plans and alibi."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Beston Priory",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Eastbourne Road (crossroads)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A small and quiet railway station with a sense of anticipation and travel. The atmosphere is one of transition and movement."
+      },
+      "Eastbourne Road (crossroads)": {
+        "description": "A quiet crossroads between Beston Tracey and the Eastbourne Road. It is the site of Vassalaro's murder and a key location in the mystery.",
+        "clues": [
+          "Missing revolver belonging to Vassalaro"
+        ],
+        "people": [
+          {
+            "id": "vassalaro",
+            "name": "Vassalaro",
+            "description": "A small, ferocious Greek moneylender. He is involved in a deadly confrontation with John Lexman.",
+            "notes": "Victim of the murder, involved in a financial dispute with Lexman."
+          }
+        ],
+        "objects": [
+          {
+            "id": "revolver",
+            "category": "item",
+            "name": "Revolver",
+            "description": "A small, ornate revolver belonging to Vassalaro. It is the murder weapon in the confrontation with Lexman.",
+            "notes": "Murder weapon, later found in a ditch by the roadside."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Beston Priory",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Lewes railway station",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet and isolated crossroads with a sense of foreboding. The atmosphere is tense and ominous, reflecting the deadly confrontation that took place here."
+      },
+      "Whitehall (T. X. Meredith's office)": {
+        "description": "A bustling office located in Whitehall, serving as the headquarters of T. X. Meredith and his team. It is a place of investigation and intrigue.",
+        "clues": [
+          "Letter written on chemically treated paper (burnt)"
+        ],
+        "people": [
+          {
+            "id": "t_x_meredith",
+            "name": "T. X. Meredith",
+            "description": "A young and flamboyant Assistant Commissioner of Police. He is intelligent, witty, and persistent in his investigations.",
+            "notes": "Investigator and ally of John Lexman, skilled in solving complex mysteries."
+          },
+          {
+            "id": "superintendent_mansus",
+            "name": "Superintendent Mansus",
+            "description": "A methodical and diligent police officer. He assists T. X. in his investigations and is known for his thoroughness.",
+            "notes": "Assistant to T. X. Meredith, skilled in evidence collection."
+          }
+        ],
+        "objects": [
+          {
+            "id": "black_museum",
+            "category": "container",
+            "name": "Black Museum",
+            "description": "A collection of criminal artifacts and evidence housed in Scotland Yard. It contains items related to famous cases.",
+            "notes": "Contains twisted candles and other evidence from Kara's murder.",
+            "state": "locked"
+          },
+          {
+            "id": "desk",
+            "category": "container",
+            "name": "Desk",
+            "description": "A large desk used by T. X. Meredith. It contains drawers and compartments for storing important documents and evidence.",
+            "notes": "Contains case files and evidence related to the Kara murder investigation.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Cadogan Square (Kara's house)",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Black Museum (Scotland Yard)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A busy and professional office environment with a sense of urgency and investigation. The atmosphere is one of intrigue and discovery."
+      },
+      "Black Museum (Scotland Yard)": {
+        "description": "A museum within Scotland Yard dedicated to criminal artifacts and evidence. It is a place of historical significance and intrigue.",
+        "clues": [
+          "Twisted candles (found at crime scene)"
+        ],
+        "objects": [
+          {
+            "id": "twisted_candles",
+            "category": "item",
+            "name": "Twisted Candles",
+            "description": "Two twisted candles found at the scene of Kara's murder. They are a key clue in the investigation.",
+            "notes": "Key evidence in Kara's murder, symbolizing the method of the crime."
+          },
+          {
+            "id": "kara_diary",
+            "category": "item",
+            "name": "Kara's Diary",
+            "description": "A diary belonging to Remington Kara, detailing his criminal activities and schemes.",
+            "notes": "Contains evidence of Kara's involvement in blackmail and murder."
+          },
+          {
+            "id": "snuffbox",
+            "category": "item",
+            "name": "Snuffbox",
+            "description": "An elaborate snuffbox presented to Lady Bartholomew's husband's father by one of the Czars. It is a valuable and significant item.",
+            "notes": "Stolen property, key to Kara's blackmail of Lady Bartholomew."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Whitehall (T. X. Meredith's office)",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A historical and intriguing museum filled with criminal artifacts. The atmosphere is one of mystery and discovery, reflecting the dark history of crime."
+      }
+    }
+  },
+  "locations": {
+    "Beston Priory": {
+      "description": "A quaint and cozy cottage with a rich history, serving as the home of John and Grace Lexman. It features a study filled with books and manuscripts, and a drawing-room with a warm, inviting atmosphere.",
+      "items": [
+        "Browning Pistol"
+      ],
+      "clues": [
+        "Twisted candle found in Kara's room (reference to Lexman's past)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A charming and historic cottage with a warm, literary atmosphere. The study is filled with books and manuscripts, reflecting John Lexman's profession as a writer.",
+        "connections": [
+          {
+            "target_location": "Lewes railway station",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Eastbourne Road (crossroads)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Cadogan Square (Kara's house)": {
+      "description": "A grand and luxurious house in Cadogan Square, owned by Remington Kara. It features ornate rooms, a secure safe, and a hidden cellar.",
+      "items": [
+        "Steel Latch",
+        "Telephone"
+      ],
+      "clues": [
+        "Twisted candle found in Kara's room",
+        "Candle chips and grease traces in Kara's room",
+        "Telephone call from Kara's room during murder"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A luxurious and opulent house with ornate furnishings and a sense of grandeur. The bedroom features a secure safe and advanced locking mechanisms.",
+        "connections": [
+          {
+            "target_location": "Beston Priory",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Whitehall (T. X. Meredith's office)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Dartmoor Prison": {
+      "description": "A grim and foreboding prison located on the moors of Dartmoor. It is known for its harsh conditions and isolated location.",
+      "items": [
+        "Prison Chains"
+      ],
+      "clues": [
+        "Dog killed in cellar (evidence of struggle)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bleak and isolated prison with harsh conditions. The cells are grim and foreboding, reflecting the brutal reality of life in Dartmoor.",
+        "connections": [
+          {
+            "target_location": "Beston Priory",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Durazzo (Albania)": {
+      "description": "A port city in Albania, serving as a gateway to the wild and rugged Albanian countryside. It is a place of intrigue and danger.",
+      "items": [
+        "Dagger"
+      ],
+      "clues": [
+        "Artificial arm (Gathercole's right arm, not left)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling port city with a mix of cultures and influences. The surrounding countryside is wild and rugged, filled with danger and intrigue.",
+        "connections": [
+          {
+            "target_location": "Kara's palazzo (Albania)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Kara's palazzo (Albania)": {
+      "description": "A grand and imposing palace located in the Albanian countryside. It is built in a mix of Moorish and Italian architectural styles and features hidden dungeons.",
+      "items": [],
+      "clues": [
+        "Bloodstained scissors (Belinda Mary's)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and opulent palace with hidden dungeons and secret passages. The atmosphere is one of danger and intrigue, reflecting Kara's malevolent nature.",
+        "connections": [
+          {
+            "target_location": "Durazzo (Albania)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Lewes railway station": {
+      "description": "A small railway station serving the town of Lewes. It is a quiet and unassuming place, but plays a crucial role in the story.",
+      "items": [
+        "Train Ticket"
+      ],
+      "clues": [
+        "Thumbprint on blackmail note (Fisher)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small and quiet railway station with a sense of anticipation and travel. The atmosphere is one of transition and movement.",
+        "connections": [
+          {
+            "target_location": "Beston Priory",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Eastbourne Road (crossroads)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Eastbourne Road (crossroads)": {
+      "description": "A quiet crossroads between Beston Tracey and the Eastbourne Road. It is the site of Vassalaro's murder and a key location in the mystery.",
+      "items": [
+        "Revolver"
+      ],
+      "clues": [
+        "Missing revolver belonging to Vassalaro"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet and isolated crossroads with a sense of foreboding. The atmosphere is tense and ominous, reflecting the deadly confrontation that took place here.",
+        "connections": [
+          {
+            "target_location": "Beston Priory",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Lewes railway station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Whitehall (T. X. Meredith's office)": {
+      "description": "A bustling office located in Whitehall, serving as the headquarters of T. X. Meredith and his team. It is a place of investigation and intrigue.",
+      "items": [],
+      "clues": [
+        "Letter written on chemically treated paper (burnt)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A busy and professional office environment with a sense of urgency and investigation. The atmosphere is one of intrigue and discovery.",
+        "connections": [
+          {
+            "target_location": "Cadogan Square (Kara's house)",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Black Museum (Scotland Yard)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Black Museum (Scotland Yard)": {
+      "description": "A museum within Scotland Yard dedicated to criminal artifacts and evidence. It is a place of historical significance and intrigue.",
+      "items": [
+        "Twisted Candles",
+        "Kara's Diary",
+        "Snuffbox"
+      ],
+      "clues": [
+        "Twisted candles (found at crime scene)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A historical and intriguing museum filled with criminal artifacts. The atmosphere is one of mystery and discovery, reflecting the dark history of crime.",
+        "connections": [
+          {
+            "target_location": "Whitehall (T. X. Meredith's office)",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

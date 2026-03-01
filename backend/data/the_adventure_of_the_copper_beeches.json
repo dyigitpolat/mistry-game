@@ -1,0 +1,832 @@
+{
+  "title": "The Adventure of the Copper Beeches",
+  "description": "A young governess, Irwin Ledger, seeks the help of detective Wood Bateman after accepting a suspiciously lucrative position at the isolated estate of the Copper Beeches. Strange conditions, locked wings, and eerie occurrences suggest a dark secret hidden within the household. Bateman and his assistant Zeta must unravel the mystery before it's too late.",
+  "victim": "Miss Banks Ice",
+  "intro_narrative": "On a cold spring morning in Baker Street, Wood Bateman and his assistant Zeta are visited by Irwin Ledger, a governess who has accepted a peculiar position at the Copper Beeches, the estate of Garfunkel Ice. The unusually high salary and bizarre demands—such as cutting her hair and wearing a specific dress—have left her uneasy. Bateman senses something sinister and agrees to investigate. As the case unfolds, they uncover a web of deception, imprisonment, and danger lurking in the isolated countryside.",
+  "start_time": "1889-03-15T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "The coil of hair (found in the locked drawer, matching Irwin's)",
+      "The hand-mirror fragment (used by Irwin to see behind her)",
+      "The ladder (used for Miss Banks Ice's escape)",
+      "Mrs. Burrows' confession (knowledge of the imprisoned daughter)"
+    ],
+    "required_suspect": [
+      "Garfunkel Ice"
+    ],
+    "required_motive": [
+      "To prevent Miss Banks Ice from marrying Mr. Hudson and claiming her inheritance",
+      "To maintain control over Miss Banks Ice's fortune by imprisoning her"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Consultation",
+      "objective": "Meet Irwin Ledger at Baker Street and gather initial details about her suspicious employment.",
+      "unlocked_locations": [
+        "baker_street"
+      ],
+      "unlocked_characters": [
+        "wood_bateman",
+        "zeta",
+        "irwin_ledger"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Investigation Begins",
+      "objective": "Travel to Winchester and meet Irwin Ledger at the Black Swan Hotel to learn more about the Copper Beeches.",
+      "unlocked_locations": [
+        "winchester_black_swan",
+        "southampton_road"
+      ],
+      "unlocked_characters": [
+        "mrs_ice",
+        "burrows",
+        "mrs_burrows"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Exploring the Estate",
+      "objective": "Gain access to the Copper Beeches and uncover the secrets of the locked wing.",
+      "unlocked_locations": [
+        "copper_beeches",
+        "locked_wing"
+      ],
+      "unlocked_characters": [
+        "garfunkel_ice",
+        "mr_hudson"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Confrontation and Resolution",
+      "objective": "Confront Garfunkel Ice, rescue Miss Banks Ice, and expose the truth.",
+      "unlocked_locations": [],
+      "unlocked_characters": [
+        "miss_banks_ice"
+      ]
+    }
+  ],
+  "characters": {
+    "wood_bateman": {
+      "type": "suspect",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "winchester_black_swan",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Sharp, analytical, and somewhat arrogant. Speaks in a measured tone, often deducing details before others notice them. Prefers logic over emotion but has a strong sense of justice.",
+      "knowledge_about_others": {
+        "irwin_ledger": "Believes she is brave and observant but in over her head.",
+        "garfunkel_ice": "Suspects him of foul play but lacks concrete evidence.",
+        "mrs_burrows": "Thinks she knows more than she lets on."
+      },
+      "secret": "Initially underestimates the danger of the situation but is determined to solve the case.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "zeta": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "winchester_black_swan",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Observant, curious, and occasionally skeptical. Speaks in a conversational tone, often questioning Bateman's deductions. Acts as the player's proxy in the story.",
+      "abilities": "Can document clues, provide narrative context, and assist in physical tasks (e.g., breaking down doors).",
+      "knowledge_about_others": {
+        "wood_bateman": "Admires his deductive skills but finds him insufferably arrogant at times.",
+        "irwin_ledger": "Sympathizes with her plight and admires her courage."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "irwin_ledger": {
+      "type": "suspect",
+      "role": "Governess and Client",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "winchester_black_swan",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Intelligent, resourceful, and determined. Speaks with a mix of nervousness and resolve. Quick-witted but occasionally overwhelmed by the strangeness of her situation.",
+      "knowledge_about_others": {
+        "garfunkel_ice": "Finds him charming but increasingly sinister.",
+        "mrs_ice": "Thinks she is unhappy and possibly complicit in her husband's schemes.",
+        "mrs_burrows": "Suspects she knows more about the locked wing than she admits."
+      },
+      "secret": "Has begun to suspect that she is impersonating someone else but doesn't know who or why.",
+      "suspicion_meter": 10,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The coil of hair (found in the locked drawer, matching Irwin's)"
+          ],
+          "reaction": "Becomes visibly distressed and admits she fears she is not the first governess in this role.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "garfunkel_ice": {
+      "type": "suspect",
+      "role": "Perpetrator and Employer",
+      "location": "copper_beeches",
+      "phase_locations": {
+        "0": "copper_beeches",
+        "1": "copper_beeches",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Charming, jovial, and manipulative. Speaks in a booming, friendly voice but can turn cold and threatening in an instant. Uses humor to disarm suspicion.",
+      "knowledge_about_others": {
+        "irwin_ledger": "Sees her as a pawn in his scheme and believes she is too naive to suspect anything.",
+        "mrs_ice": "Views her as a tool to control Miss Banks Ice and maintain appearances.",
+        "mrs_burrows": "Trusts her to keep the secret of the locked wing but is wary of her loyalty."
+      },
+      "secret": "Has imprisoned his daughter, Miss Banks Ice, to prevent her from marrying and claiming her inheritance. Has hired Irwin to impersonate her and deceive Mr. Hudson.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The bearded man (Mr. Hudson) seen watching the house from the Southampton Road"
+          ],
+          "reaction": "Becomes agitated and orders the mastiff to be released early. Accuses Irwin of spying.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "The ladder (used for Miss Banks Ice's escape)"
+          ],
+          "reaction": "Attempts to flee the estate with Miss Banks Ice but is attacked by the mastiff.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "mrs_ice": {
+      "type": "suspect",
+      "role": "Wife of Garfunkel Ice",
+      "location": "copper_beeches",
+      "phase_locations": {
+        "0": "copper_beeches",
+        "1": "copper_beeches",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Quiet, pale, and melancholic. Speaks softly and rarely, often with a sad or anxious tone. Seems trapped in her own home.",
+      "knowledge_about_others": {
+        "garfunkel_ice": "Fears him but is also devoted to him. Knows about the imprisonment but feels powerless to stop it.",
+        "miss_banks_ice": "Pities her but is complicit in her imprisonment.",
+        "irwin_ledger": "Views her as a threat but also pities her for being caught in the scheme."
+      },
+      "secret": "Is aware of her husband's crimes but feels too weak to oppose him. Hopes Irwin will not suffer the same fate as Miss Banks Ice.",
+      "suspicion_meter": 50,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "miss_banks_ice": {
+      "type": "suspect",
+      "role": "Imprisoned Daughter",
+      "location": "locked_wing",
+      "phase_locations": {
+        "0": "locked_wing",
+        "1": "locked_wing",
+        "2": "locked_wing",
+        "3": "copper_beeches"
+      },
+      "persona": "Frail, frightened, and hopeful. Speaks in a whisper, often looking over her shoulder. Desperate for freedom but resigned to her fate.",
+      "knowledge_about_others": {
+        "garfunkel_ice": "Hates him for imprisoning her and cutting off her hair.",
+        "mr_hudson": "Longs for him and believes he will rescue her.",
+        "irwin_ledger": "Feels guilty for being the reason Irwin was brought into the scheme."
+      },
+      "secret": "Has been imprisoned for months and is unaware of the outside world. Her hair was cut during an illness, and she has been forced to write letters to deceive Mr. Hudson.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "mr_hudson": {
+      "type": "suspect",
+      "role": "Miss Banks Ice's Fiancé",
+      "location": "southampton_road",
+      "phase_locations": {
+        "0": "southampton_road",
+        "1": "southampton_road",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Determined, resourceful, and protective. Speaks with a mix of urgency and tenderness. Willing to take risks to rescue Miss Banks Ice.",
+      "knowledge_about_others": {
+        "miss_banks_ice": "Believes she is being held against her will and is desperate to save her.",
+        "garfunkel_ice": "Distrusts him and suspects he is behind the deception.",
+        "mrs_burrows": "Has bribed her to help him gain access to the estate."
+      },
+      "secret": "Has been watching the Copper Beeches for weeks, trying to find a way to rescue Miss Banks Ice. Has arranged for a ladder to be placed for her escape.",
+      "suspicion_meter": 20,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "mrs_burrows": {
+      "type": "suspect",
+      "role": "Servant with Key Information",
+      "location": "copper_beeches",
+      "phase_locations": {
+        "0": "copper_beeches",
+        "1": "copper_beeches",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Stern, pragmatic, and secretive. Speaks in a no-nonsense tone but softens when discussing Miss Banks Ice. Knows more than she initially lets on.",
+      "knowledge_about_others": {
+        "garfunkel_ice": "Fears him but also pities him for his obsession with control.",
+        "miss_banks_ice": "Feels protective of her and regrets her role in the imprisonment.",
+        "mr_hudson": "Has been bribed by him to help with the escape plan."
+      },
+      "secret": "Has been complicit in the imprisonment of Miss Banks Ice but regrets her actions. Has accepted money from Mr. Hudson to help with the escape.",
+      "suspicion_meter": 70,
+      "flight_risk": 40,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Mrs. Burrows' knowledge of the imprisoned daughter and her eventual confession"
+          ],
+          "reaction": "Confesses her role in the scheme and reveals the truth about Miss Banks Ice's imprisonment.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "burrows": {
+      "type": "suspect",
+      "role": "Drunken Servant and Mastiff Handler",
+      "location": "copper_beeches",
+      "phase_locations": {
+        "0": "copper_beeches",
+        "1": "copper_beeches",
+        "2": "copper_beeches",
+        "3": "copper_beeches"
+      },
+      "persona": "Rough, uncouth, and often drunk. Speaks in a slurred, aggressive tone. Indifferent to the suffering of others but loyal to those who pay him.",
+      "knowledge_about_others": {
+        "garfunkel_ice": "Respects him but also fears his temper.",
+        "mrs_burrows": "Views her as a nag but relies on her for stability.",
+        "the_mastiff": "Is the only one who can control the dog and takes pride in this."
+      },
+      "secret": "Has been paid by Mr. Hudson to look the other way during the escape. Is too drunk to be fully aware of the consequences of his actions.",
+      "suspicion_meter": 30,
+      "flight_risk": 50,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A cozy, cluttered sitting-room at 221B Baker Street, filled with the scent of tobacco and the faint hum of the city outside. A cheery fire crackles in the hearth, casting flickering shadows on the walls lined with books, chemical apparatus, and odd curiosities. The table is still set with the remnants of breakfast, and the morning papers lie scattered about. The fog outside presses against the windows, obscuring the view of the street below.",
+        "setting": "A warm, intellectual atmosphere with a touch of eccentricity. The room is a mix of comfort and chaos, reflecting the mind of its occupant. The gaslight flickers, adding to the sense of mystery and anticipation.",
+        "clues": [
+          "The telegram from Irwin Ledger (summoning Bateman for help)"
+        ],
+        "people": [
+          {
+            "id": "wood_bateman",
+            "name": "Wood Bateman",
+            "description": "A tall, lean man with sharp features and piercing eyes. He is dressed in a dressing-gown, puffing on a cherry-wood pipe. His demeanor is calm but alert, as if he is already piecing together the puzzle before him.",
+            "notes": "The detective is in a contemplative mood, eager for a new case to challenge his deductive skills."
+          },
+          {
+            "id": "zeta",
+            "name": "Zeta",
+            "description": "A stout, middle-aged man with a kind face and a thoughtful expression. He is dressed in a suit and sits comfortably in an armchair, observing Bateman with amusement.",
+            "notes": "Zeta is the narrator and assistant, often serving as the voice of reason and the player's guide through the mystery."
+          }
+        ],
+        "objects": [
+          {
+            "id": "breakfast_table",
+            "category": "surface",
+            "name": "Breakfast Table",
+            "description": "A sturdy wooden table covered with a white cloth. The remnants of breakfast—plates, cups, and cutlery—are scattered across its surface. A few crumbs and a half-empty teapot suggest a meal interrupted.",
+            "notes": "The table is a testament to the hurried nature of the morning. A crumpled letter lies near the edge, hinting at the day's events."
+          },
+          {
+            "id": "crumpled_letter",
+            "category": "item",
+            "name": "Crumpled Letter",
+            "description": "A letter from Irwin Ledger, detailing her concerns about her new position at the Copper Beeches. The paper is slightly torn and bears the marks of having been read and reread.",
+            "notes": "This letter is the catalyst for the investigation. It mentions the unusually high salary and the strange demands made by her employer."
+          },
+          {
+            "id": "pipe",
+            "category": "item",
+            "name": "Cherry-Wood Pipe",
+            "description": "A long, elegant pipe made of cherry-wood. It is well-used, with a faint scent of tobacco clinging to it. Bateman often smokes it when deep in thought.",
+            "notes": "The pipe is a symbol of Bateman's contemplative nature. It is often lit when he is working through a particularly tricky deduction."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "winchester_black_swan",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |   221B Baker  |",
+          "      |    Street     |",
+          "      |_______________|",
+          "          |     |",
+          "          |     |",
+          "   _______|     |_______",
+          "  |                       |",
+          "  |   [Fireplace]         |",
+          "  |       ^               |",
+          "  |       |               |",
+          "  |   [Table]             |",
+          "  |   [Chairs]            |",
+          "  |_______________________|",
+          "          |     |",
+          "          |     |",
+          "      [Door] [Window]"
+        ]
+      },
+      "winchester_black_swan": {
+        "description": "A bustling inn located in the High Street of Winchester, not far from the train station. The Black Swan is a place of warmth and activity, with travelers and locals filling the common room. The sitting-room reserved for Irwin Ledger is quiet and private, with a table set for lunch. The walls are adorned with hunting trophies and old maps of the countryside, giving the room a rustic charm.",
+        "setting": "A lively yet cozy atmosphere, with the hum of conversation and the clinking of glasses in the background. The sitting-room is a haven of calm, offering a stark contrast to the tension of the Copper Beeches.",
+        "clues": [
+          "The bearded man (Mr. Hudson) seen watching the house from the Southampton Road"
+        ],
+        "people": [
+          {
+            "id": "irwin_ledger",
+            "name": "Irwin Ledger",
+            "description": "A young woman with a bright, quick face and neatly cut chestnut hair. She is dressed plainly but with care, and her eyes dart around the room as she speaks, betraying her nervousness. Despite her anxiety, she speaks with determination and intelligence.",
+            "notes": "Irwin is eager to share her story and seeks reassurance from Bateman. She is observant and resourceful but overwhelmed by the strangeness of her situation."
+          }
+        ],
+        "objects": [
+          {
+            "id": "lunch_table",
+            "category": "surface",
+            "name": "Lunch Table",
+            "description": "A round wooden table set for three, with plates of cold meats, cheese, and bread. A jug of ale and three glasses sit in the center, along with a small vase of wildflowers.",
+            "notes": "The table is set for Bateman, Zeta, and Irwin. The meal is simple but hearty, reflecting the inn's reputation for good food."
+          },
+          {
+            "id": "telegram",
+            "category": "item",
+            "name": "Telegram",
+            "description": "A yellowed telegram from Irwin Ledger, urgently requesting Bateman's presence at the Black Swan Hotel. The message is brief but desperate, hinting at the danger she feels.",
+            "notes": "This telegram is the reason Bateman and Zeta have traveled to Winchester. It suggests that Irwin is in immediate need of help."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "copper_beeches",
+            "state": "locked"
+          },
+          {
+            "location_id": "southampton_road",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Black Swan   |",
+          "      |    Hotel      |",
+          "      |_______________|",
+          "          |     |",
+          "          |     |",
+          "   _______|     |_______",
+          "  |                       |",
+          "  |   [Table]             |",
+          "  |   [Chairs]            |",
+          "  |   [Fireplace]         |",
+          "  |_______________________|",
+          "          |     |",
+          "          |     |",
+          "      [Door] [Window]"
+        ]
+      },
+      "copper_beeches": {
+        "description": "A large, square block of a house, whitewashed but stained and streaked with damp. The estate is surrounded by woods on three sides, with a field sloping down to the Southampton Road on the fourth. The house itself is imposing but unwelcoming, with a sense of isolation that is palpable. The front door is flanked by a clump of copper beeches, their dark leaves rustling in the wind. The grounds are well-kept but eerily quiet, save for the occasional bark of the mastiff.",
+        "setting": "A cold, foreboding atmosphere hangs over the estate. The house feels like a prison, with its shuttered windows and locked doors. The woods surrounding the property add to the sense of isolation, making it feel as though the house is cut off from the rest of the world.",
+        "clues": [
+          "The unusually high salary (£100/year) offered to Irwin Ledger for trivial duties",
+          "The demand for Irwin to cut her hair and wear a specific blue dress",
+          "The mastiff's presence and its release at night to deter trespassers",
+          "Garfunkel Ice's violent reaction when Irwin was caught near the locked wing"
+        ],
+        "people": [
+          {
+            "id": "garfunkel_ice",
+            "name": "Garfunkel Ice",
+            "description": "A prodigiously stout man with a smiling face and a heavy chin that rolls down in folds over his throat. He is dressed in a tweed suit and speaks in a booming, jovial voice. His eyes, however, are small and shrewd, betraying a cunning intelligence.",
+            "notes": "Ice is charming and affable on the surface but can turn cold and threatening in an instant. He is the mastermind behind the scheme to imprison his daughter."
+          },
+          {
+            "id": "mrs_ice",
+            "name": "Mrs. Ice",
+            "description": "A pale, silent woman with light grey eyes that seem to wander restlessly. She is much younger than her husband, with a sad, anxious expression. She dresses simply but elegantly, and her movements are quiet and unobtrusive.",
+            "notes": "Mrs. Ice is complicit in her husband's crimes but seems to regret her role. She is trapped in a marriage that has brought her nothing but sorrow."
+          },
+          {
+            "id": "burrows",
+            "name": "Burrows",
+            "description": "A rough, uncouth man with grizzled hair and whiskers. He smells of drink and moves with a slow, unsteady gait. His face is weathered, and his eyes are bloodshot, suggesting a life of hard living.",
+            "notes": "Burrows is the handler of the mastiff and is often drunk. He is loyal to Ice but can be bribed to look the other way."
+          },
+          {
+            "id": "mrs_burrows",
+            "name": "Mrs. Burrows",
+            "description": "A tall, strong woman with a sour face and a stern demeanor. She speaks little but carries herself with an air of quiet authority. Her hands are rough and calloused, hinting at a life of hard work.",
+            "notes": "Mrs. Burrows knows more about the locked wing than she lets on. She is protective of Miss Banks Ice and regrets her role in the imprisonment."
+          }
+        ],
+        "objects": [
+          {
+            "id": "blue_dress",
+            "category": "item",
+            "name": "Blue Dress",
+            "description": "A dress of a peculiar shade of electric blue, made of excellent material but bearing signs of previous wear. It fits Irwin perfectly, as if it were made for her.",
+            "notes": "This dress is a key part of the deception. It was worn by Miss Banks Ice before her imprisonment and is now used to make Irwin resemble her."
+          },
+          {
+            "id": "mastiff",
+            "category": "item",
+            "name": "Mastiff",
+            "description": "A giant dog, as large as a calf, with a tawny coat, hanging jowl, and a black muzzle. Its eyes glow in the darkness, and its presence is enough to strike fear into the hearts of intruders.",
+            "notes": "The mastiff is used to guard the estate and deter trespassers. It is released at night and is fiercely loyal to Burrows, its handler."
+          },
+          {
+            "id": "keys",
+            "category": "item",
+            "name": "Keys to the Locked Wing",
+            "description": "A set of heavy iron keys, one of which fits the lock to the locked wing of the house. The keys are old and rusted, suggesting they have not been used in some time.",
+            "notes": "These keys are held by Garfunkel Ice and Burrows. They are the only means of accessing the locked wing, where Miss Banks Ice is imprisoned."
+          },
+          {
+            "id": "locked_wing_door",
+            "category": "container",
+            "name": "Locked Wing Door",
+            "description": "A sturdy wooden door at the end of a narrow passage. It is barricaded with an iron bed bar, padlocked at one end to a ring in the wall. The door itself is locked, and the key is missing.",
+            "notes": "This door leads to the locked wing of the house, where Miss Banks Ice is imprisoned. It is heavily secured to prevent escape.",
+            "state": "locked"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "winchester_black_swan",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "locked_wing",
+            "state": "locked"
+          },
+          {
+            "location_id": "southampton_road",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Copper       |",
+          "      |   Beeches     |",
+          "      |_______________|",
+          "          |     |",
+          "          |     |",
+          "   _______|     |_______",
+          "  |                       |",
+          "  |   [Front Door]        |",
+          "  |       ^               |",
+          "  |       |               |",
+          "  |   [Hallway]           |",
+          "  |   [Staircase]         |",
+          "  |_______________________|",
+          "          |     |",
+          "          |     |",
+          "      [Woods] [Field]"
+        ]
+      },
+      "southampton_road": {
+        "description": "A quiet, rural road that curves past the Copper Beeches estate. The road is bordered by railings, with a field sloping down from the house on one side. The area is usually deserted, save for the occasional traveler or local. A small bearded man in a grey suit has been seen leaning against the railings, watching the house with a keen eye.",
+        "setting": "A peaceful, pastoral scene, with the beauty of the countryside on full display. The road is an important highway, but at this moment, it feels eerily quiet, as if holding its breath.",
+        "clues": [
+          "The bearded man (Mr. Hudson) seen watching the house from the Southampton Road"
+        ],
+        "people": [
+          {
+            "id": "mr_hudson",
+            "name": "Mr. Hudson",
+            "description": "A small, bearded man in a grey suit. He leans against the railings, watching the Copper Beeches with a determined expression. His eyes are sharp, and his posture suggests a man on a mission.",
+            "notes": "Mr. Hudson is Miss Banks Ice's fiancé and has been watching the house in an attempt to rescue her. He is resourceful and determined but cautious."
+          }
+        ],
+        "objects": [
+          {
+            "id": "railings",
+            "category": "surface",
+            "name": "Railings",
+            "description": "A set of iron railings bordering the Southampton Road. They are rusted in places but sturdy, providing a vantage point for anyone watching the Copper Beeches.",
+            "notes": "Mr. Hudson has been seen leaning against these railings, observing the house. They offer a clear view of the estate's front door and windows."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "winchester_black_swan",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "copper_beeches",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      | Southampton   |",
+          "      |    Road       |",
+          "      |_______________|",
+          "          |     |",
+          "          |     |",
+          "   _______|     |_______",
+          "  |                       |",
+          "  |   [Railings]          |",
+          "  |       ^               |",
+          "  |       |               |",
+          "  |   [Field]             |",
+          "  |_______________________|",
+          "          |",
+          "          |",
+          "      [Copper Beeches]"
+        ]
+      },
+      "locked_wing": {
+        "description": "A deserted wing of the Copper Beeches, consisting of a narrow passage that turns at a right angle. The walls are unpapered and uncarpeted, and the air is thick with dust. Three doors line the passage, the first and third leading to empty, dusty rooms. The center door is barricaded with an iron bed bar and padlocked to the wall. A skylight above lets in a dim, eerie light, illuminating the sinister atmosphere of the place.",
+        "setting": "A cold, oppressive silence hangs over the locked wing. The dust and decay suggest that no one has set foot here in months. The barricaded door and the skylight hint at a desperate attempt to keep someone—or something—contained.",
+        "clues": [
+          "The locked wing of the house with a barricaded door and shuttered window",
+          "The discovery of Irwin's hair in a locked drawer, suggesting a prior occupant",
+          "The ladder found at the skylight, indicating an escape route",
+          "Mrs. Burrows' knowledge of the imprisoned daughter and her eventual confession"
+        ],
+        "people": [
+          {
+            "id": "miss_banks_ice",
+            "name": "Miss Banks Ice",
+            "description": "A frail, frightened young woman with short, unevenly cut hair. She is dressed in a simple gown and looks as though she has not seen sunlight in months. Her eyes are wide with fear, but there is a spark of hope in them as well.",
+            "notes": "Miss Banks Ice has been imprisoned in this wing for months. She is unaware of the outside world and is desperate for freedom."
+          }
+        ],
+        "objects": [
+          {
+            "id": "coil_of_hair",
+            "category": "item",
+            "name": "Coil of Hair",
+            "description": "A coil of chestnut hair, identical to Irwin's. It is thick and lustrous, suggesting it was cut from a healthy head of hair. The hair is tied with a ribbon and hidden in a locked drawer.",
+            "notes": "This hair belongs to Miss Banks Ice. Its discovery suggests that she was the prior occupant of Irwin's room and that her hair was cut during an illness."
+          },
+          {
+            "id": "hand_mirror_fragment",
+            "category": "item",
+            "name": "Hand-Mirror Fragment",
+            "description": "A small piece of broken mirror, wrapped in a handkerchief. It is just large enough to reflect a sliver of the room behind the user.",
+            "notes": "Irwin used this fragment to see what was happening behind her while she sat in the window. It is a key piece of evidence linking her to the deception."
+          },
+          {
+            "id": "ladder",
+            "category": "item",
+            "name": "Ladder",
+            "description": "A long, light ladder, propped against the eaves of the locked wing. It is sturdy but portable, suggesting it was placed here recently.",
+            "notes": "This ladder was used by Miss Banks Ice to escape through the skylight. It was likely placed here by Mr. Hudson as part of his rescue plan."
+          },
+          {
+            "id": "locked_drawer",
+            "category": "container",
+            "name": "Locked Drawer",
+            "description": "A small drawer in an old chest, locked with a simple mechanism. The drawer is dusty but contains a single item: the coil of hair.",
+            "notes": "This drawer was locked but easily opened by Irwin. Its contents suggest that Miss Banks Ice was the prior occupant of the room.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "coil_of_hair",
+                "category": "item",
+                "name": "Coil of Hair",
+                "description": "A coil of chestnut hair, identical to Irwin's. It is thick and lustrous, suggesting it was cut from a healthy head of hair.",
+                "notes": "This hair belongs to Miss Banks Ice. Its discovery suggests that she was the prior occupant of Irwin's room."
+              }
+            ]
+          },
+          {
+            "id": "iron_bed_bar",
+            "category": "item",
+            "name": "Iron Bed Bar",
+            "description": "A heavy iron bar, padlocked at one end to a ring in the wall and fastened at the other with stout cord. It is used to barricade the door to the prisoner's room.",
+            "notes": "This bar is part of the security measures used to keep Miss Banks Ice imprisoned. It is a physical manifestation of the cruelty of her captivity."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "copper_beeches",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Locked Wing  |",
+          "      |_______________|",
+          "          |     |",
+          "          |     |",
+          "   _______|     |_______",
+          "  |                       |",
+          "  |   [Barricaded Door]   |",
+          "  |       ^               |",
+          "  |       |               |",
+          "  |   [Empty Rooms]       |",
+          "  |   [Skylight]          |",
+          "  |_______________________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A cozy, cluttered sitting-room at 221B Baker Street, filled with the scent of tobacco and the faint hum of the city outside. A cheery fire crackles in the hearth, casting flickering shadows on the walls lined with books, chemical apparatus, and odd curiosities. The table is still set with the remnants of breakfast, and the morning papers lie scattered about. The fog outside presses against the windows, obscuring the view of the street below.",
+      "items": [
+        "Crumpled Letter",
+        "Cherry-Wood Pipe"
+      ],
+      "clues": [
+        "The telegram from Irwin Ledger (summoning Bateman for help)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A warm, intellectual atmosphere with a touch of eccentricity. The room is a mix of comfort and chaos, reflecting the mind of its occupant. The gaslight flickers, adding to the sense of mystery and anticipation.",
+        "connections": [
+          {
+            "target_location": "winchester_black_swan",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "winchester_black_swan": {
+      "description": "A bustling inn located in the High Street of Winchester, not far from the train station. The Black Swan is a place of warmth and activity, with travelers and locals filling the common room. The sitting-room reserved for Irwin Ledger is quiet and private, with a table set for lunch. The walls are adorned with hunting trophies and old maps of the countryside, giving the room a rustic charm.",
+      "items": [
+        "Telegram"
+      ],
+      "clues": [
+        "The bearded man (Mr. Hudson) seen watching the house from the Southampton Road"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lively yet cozy atmosphere, with the hum of conversation and the clinking of glasses in the background. The sitting-room is a haven of calm, offering a stark contrast to the tension of the Copper Beeches.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "copper_beeches",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "southampton_road",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "copper_beeches": {
+      "description": "A large, square block of a house, whitewashed but stained and streaked with damp. The estate is surrounded by woods on three sides, with a field sloping down to the Southampton Road on the fourth. The house itself is imposing but unwelcoming, with a sense of isolation that is palpable. The front door is flanked by a clump of copper beeches, their dark leaves rustling in the wind. The grounds are well-kept but eerily quiet, save for the occasional bark of the mastiff.",
+      "items": [
+        "Blue Dress",
+        "Mastiff",
+        "Keys to the Locked Wing"
+      ],
+      "clues": [
+        "The unusually high salary (£100/year) offered to Irwin Ledger for trivial duties",
+        "The demand for Irwin to cut her hair and wear a specific blue dress",
+        "The mastiff's presence and its release at night to deter trespassers",
+        "Garfunkel Ice's violent reaction when Irwin was caught near the locked wing"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cold, foreboding atmosphere hangs over the estate. The house feels like a prison, with its shuttered windows and locked doors. The woods surrounding the property add to the sense of isolation, making it feel as though the house is cut off from the rest of the world.",
+        "connections": [
+          {
+            "target_location": "winchester_black_swan",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "locked_wing",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "southampton_road",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "southampton_road": {
+      "description": "A quiet, rural road that curves past the Copper Beeches estate. The road is bordered by railings, with a field sloping down from the house on one side. The area is usually deserted, save for the occasional traveler or local. A small bearded man in a grey suit has been seen leaning against the railings, watching the house with a keen eye.",
+      "items": [],
+      "clues": [
+        "The bearded man (Mr. Hudson) seen watching the house from the Southampton Road"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A peaceful, pastoral scene, with the beauty of the countryside on full display. The road is an important highway, but at this moment, it feels eerily quiet, as if holding its breath.",
+        "connections": [
+          {
+            "target_location": "winchester_black_swan",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "copper_beeches",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "locked_wing": {
+      "description": "A deserted wing of the Copper Beeches, consisting of a narrow passage that turns at a right angle. The walls are unpapered and uncarpeted, and the air is thick with dust. Three doors line the passage, the first and third leading to empty, dusty rooms. The center door is barricaded with an iron bed bar and padlocked to the wall. A skylight above lets in a dim, eerie light, illuminating the sinister atmosphere of the place.",
+      "items": [
+        "Coil of Hair",
+        "Hand-Mirror Fragment",
+        "Ladder",
+        "Iron Bed Bar"
+      ],
+      "clues": [
+        "The locked wing of the house with a barricaded door and shuttered window",
+        "The discovery of Irwin's hair in a locked drawer, suggesting a prior occupant",
+        "The ladder found at the skylight, indicating an escape route",
+        "Mrs. Burrows' knowledge of the imprisoned daughter and her eventual confession"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cold, oppressive silence hangs over the locked wing. The dust and decay suggest that no one has set foot here in months. The barricaded door and the skylight hint at a desperate attempt to keep someone—or something—contained.",
+        "connections": [
+          {
+            "target_location": "copper_beeches",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

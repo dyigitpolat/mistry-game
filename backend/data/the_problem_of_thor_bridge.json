@@ -1,0 +1,744 @@
+{
+  "title": "The Problem of Thor Bridge",
+  "description": "A mystery involving the murder of Coventry Marlow (Mrs. Joyce Persano) at Thor Bridge, with the governess Miss Grace Maria initially accused. The detective Watson Pinto must unravel the truth behind the crime, uncovering a web of jealousy, deception, and ingenious misdirection.",
+  "victim": "Coventry Marlow (Mrs. Joyce Persano)",
+  "intro_narrative": "It was a wild morning in October when Dr. John H. An descended to breakfast to find his companion, Watson Pinto, in unusually high spirits. Pinto revealed he had been engaged by Neil Gibson, the Gold King, to investigate the murder of his wife, Coventry Marlow, found dead at Thor Bridge with a revolver bullet through her brain. The governess, Miss Grace Maria, stands accused, but Pinto senses a deeper mystery. As the two delve into the case, they uncover secrets, lies, and a crime far more cunning than it first appeared.",
+  "start_time": "1895-10-04T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "The murder weapon (Mrs. Persano's revolver) recovered from Thor Mere",
+      "The weighted string used to dispose of the murder weapon",
+      "The note from Miss Maria clutched in the victim's hand",
+      "The fresh chip on the stonework of Thor Bridge's parapet"
+    ],
+    "required_suspect": [
+      "Coventry Marlow (Mrs. Joyce Persano)"
+    ],
+    "required_motive": [
+      "Jealousy and hatred driven by Mrs. Persano's tropical, passionate nature",
+      "Desire to frame Miss Maria for the murder to eliminate her as a rival"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial evidence and interview key witnesses at Thor Place and Thor Bridge.",
+      "unlocked_locations": [
+        "thor_place",
+        "thor_bridge"
+      ],
+      "unlocked_characters": [
+        "watson_pinto",
+        "dr_an",
+        "joyce_persano",
+        "sergeant_isadora",
+        "mr_holmes_james"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Deepening Mystery",
+      "objective": "Explore Winchester jail and Miss Maria's wardrobe to uncover hidden clues and interview Miss Maria.",
+      "unlocked_locations": [
+        "winchester_jail",
+        "miss_maria_wardrobe"
+      ],
+      "unlocked_characters": [
+        "miss_grace_maria",
+        "mr_neil_sherlock"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Final Clue",
+      "objective": "Investigate Thor Mere to recover the murder weapon and weighted string, and confront the culprit.",
+      "unlocked_locations": [
+        "thor_mere"
+      ],
+      "unlocked_characters": [
+        "coventry_marlow"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Resolution",
+      "objective": "Present the evidence to exonerate Miss Maria and reveal the true culprit.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "watson_pinto": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "thor_place",
+      "phase_locations": {
+        "0": "thor_place",
+        "1": "winchester_jail",
+        "2": "thor_mere"
+      },
+      "persona": "Sharp, observant, and methodical. Speaks with a mix of confidence and dry wit. Often explains his deductions in a way that highlights his intellectual superiority but remains approachable.",
+      "abilities": "Master of deduction, keen observer of human behavior, and skilled in reconstructing crime scenes. Can infer hidden motives and connections from seemingly trivial details.",
+      "knowledge_about_others": {
+        "joyce_persano": "Suspects him of hiding the truth about his relationship with Miss Maria and his wife's murder.",
+        "miss_grace_maria": "Believes she is innocent but is aware of her complicated relationship with Joyce Persano.",
+        "coventry_marlow": "Understands she was a passionate, jealous woman capable of extreme actions.",
+        "mr_neil_sherlock": "Views him as a nervous but truthful witness who despises Joyce Persano.",
+        "sergeant_isadora": "Considers him honest but limited in his investigative skills."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "The fresh chip on the stonework of the bridge's parapet"
+          ],
+          "reaction": "Pinto will suggest replicating the crime scene using Dr. An's revolver to test a theory about the murder weapon's disposal.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "The murder weapon (Mrs. Persano's revolver) recovered from Thor Mere",
+            "The weighted string used to dispose of the murder weapon"
+          ],
+          "reaction": "Pinto will confront Joyce Persano with the evidence, forcing a confession or revealing the truth about Coventry Marlow's actions.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dr_an": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "thor_place",
+      "phase_locations": {
+        "0": "thor_place",
+        "1": "winchester_jail",
+        "2": "thor_mere"
+      },
+      "persona": "Thoughtful, curious, and occasionally skeptical. Speaks in a measured tone, often asking clarifying questions. Acts as the player's proxy in the story.",
+      "abilities": "Skilled in medical observation, provides a grounded perspective, and can assist in reconstructing events. Acts as a sounding board for Pinto's theories.",
+      "knowledge_about_others": {
+        "watson_pinto": "Admires his deductive genius but is sometimes frustrated by his secrecy.",
+        "joyce_persano": "Views him as a formidable and dangerous man with a violent temper.",
+        "miss_grace_maria": "Finds her noble and tragic, believing in her innocence."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "joyce_persano": {
+      "type": "suspect",
+      "role": "The Gold King (Husband of the Victim)",
+      "location": "thor_place",
+      "phase_locations": {
+        "0": "thor_place",
+        "1": "thor_place",
+        "2": "thor_place"
+      },
+      "persona": "Commanding, arrogant, and intimidating. Speaks in a deep, authoritative voice, often with a hint of menace. Quick to anger but capable of calculated charm.",
+      "secret": "He is hiding the true nature of his relationship with Miss Maria and the extent of his wife's jealousy. He knows more about the murder than he admits but is unaware of his wife's direct involvement.",
+      "knowledge_about_others": {
+        "miss_grace_maria": "Claims their relationship was purely professional but is deeply emotionally entangled with her.",
+        "coventry_marlow": "Admits to treating her poorly but denies any direct involvement in her death.",
+        "mr_neil_sherlock": "Views him as a disloyal and weak employee.",
+        "watson_pinto": "Respects his intellect but resents his probing questions."
+      },
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "The note from Miss Maria clutched in the victim's hand"
+          ],
+          "reaction": "Persano becomes defensive and evasive, insisting the note proves Miss Maria's guilt.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Miss Maria's admission of being at Thor Bridge at the time of the murder"
+          ],
+          "reaction": "Persano grows agitated and suggests his wife may have been trying to harm Miss Maria, not the other way around.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "miss_grace_maria": {
+      "type": "suspect",
+      "role": "Governess (Accused)",
+      "location": "winchester_jail",
+      "phase_locations": {
+        "1": "winchester_jail",
+        "2": "winchester_jail"
+      },
+      "persona": "Elegant, composed, and deeply tragic. Speaks softly but with conviction. Her demeanor suggests both strength and vulnerability.",
+      "secret": "She is innocent of the murder but feels guilty for the emotional turmoil she caused in the Persano household. She knows Mrs. Persano hated her but never expected violence.",
+      "knowledge_about_others": {
+        "joyce_persano": "Admits to a deep but platonic influence over him, which she used to guide his actions for good.",
+        "coventry_marlow": "Knew she was jealous but underestimated the depth of her hatred.",
+        "watson_pinto": "Trusts him implicitly and hopes he can prove her innocence."
+      },
+      "suspicion_meter": 70,
+      "flight_risk": 5,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The revolver found in Miss Maria's wardrobe"
+          ],
+          "reaction": "She vehemently denies any knowledge of the revolver and suggests someone planted it to frame her.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "The murder weapon (Mrs. Persano's revolver) recovered from Thor Mere"
+          ],
+          "reaction": "She expresses shock and relief, realizing the truth is finally coming to light.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "coventry_marlow": {
+      "type": "suspect",
+      "role": "Victim (Culprit)",
+      "location": "thor_mere",
+      "phase_locations": {
+        "2": "thor_mere"
+      },
+      "persona": "Passionate, volatile, and deeply emotional. Speaks with intensity, often in dramatic or accusatory tones. Her words reveal a mind consumed by jealousy and hatred.",
+      "secret": "She orchestrated her own death to frame Miss Maria, using an ingenious method to dispose of the murder weapon. Her plan was driven by jealousy and a desire for revenge.",
+      "knowledge_about_others": {
+        "miss_grace_maria": "Hated her with a burning passion, believing she was stealing her husband's affection.",
+        "joyce_persano": "Loved him deeply but was driven to despair by his coldness and cruelty.",
+        "watson_pinto": "Viewed him as an obstacle to her plan but underestimated his deductive skills."
+      },
+      "suspicion_meter": 90,
+      "flight_risk": 0,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "The murder weapon (Mrs. Persano's revolver) recovered from Thor Mere",
+            "The weighted string used to dispose of the murder weapon"
+          ],
+          "reaction": "Her actions are revealed posthumously through the evidence, exposing her as the true culprit.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "sergeant_isadora": {
+      "type": "assistant",
+      "role": "Local Police Officer",
+      "location": "thor_bridge",
+      "phase_locations": {
+        "0": "thor_bridge",
+        "1": "thor_bridge",
+        "2": "thor_bridge"
+      },
+      "persona": "Nervous, secretive, and overly dramatic. Speaks in hushed tones, often implying he knows more than he lets on. Struggles with the complexity of the case.",
+      "abilities": "Knowledgeable about the local area and initial crime scene details. Can provide access to official records and assist in searches.",
+      "knowledge_about_others": {
+        "joyce_persano": "Views him with suspicion but lacks concrete evidence against him.",
+        "miss_grace_maria": "Initially believed she was guilty but is open to reconsidering.",
+        "watson_pinto": "Respects his expertise and defers to his judgment."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "mr_neil_sherlock": {
+      "type": "assistant",
+      "role": "Estate Manager",
+      "location": "thor_place",
+      "phase_locations": {
+        "1": "thor_place",
+        "2": "thor_place"
+      },
+      "persona": "Thin, nervous, and agitated. Speaks in short, breathless sentences. Clearly terrified of Joyce Persano and eager to share his grievances.",
+      "abilities": "Provides insider knowledge of the Persano household dynamics and access to Joyce Persano's firearms collection.",
+      "knowledge_about_others": {
+        "joyce_persano": "Despises him, believing him capable of violence and cruelty. Knows about his mistreatment of Coventry Marlow.",
+        "coventry_marlow": "Pities her and believes she was driven to despair by her husband.",
+        "miss_grace_maria": "Views her as a victim of Persano's manipulations."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "mr_holmes_james": {
+      "type": "assistant",
+      "role": "Barrister Defending Miss Maria",
+      "location": "winchester_jail",
+      "phase_locations": {
+        "1": "winchester_jail",
+        "2": "winchester_jail"
+      },
+      "persona": "Professional, articulate, and strategic. Speaks with confidence and authority, focusing on legal strategy and evidence.",
+      "abilities": "Legal expertise, access to court documents, and the ability to arrange meetings with Miss Maria. Can advise on the strength of the case against her.",
+      "knowledge_about_others": {
+        "miss_grace_maria": "Believes in her innocence and is determined to prove it.",
+        "watson_pinto": "Relies on his investigative skills to uncover the truth."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "thor_bridge": {
+        "description": "A single broad span of stone with balustraded sides, carrying the drive over the narrowest part of Thor Mere. The bridge is where the victim, Coventry Marlow, was found dead. The stonework shows signs of recent damage, hinting at a struggle or misdirection.",
+        "setting": "The bridge is eerily quiet, with the wind rustling through the reeds of Thor Mere below. The stone parapet is cold and damp, and the air carries a faint scent of autumn leaves. The scene feels heavy with the weight of the tragedy that occurred here.",
+        "clues": [
+          "The fresh chip on the stonework of the bridge's parapet, indicating recent violence",
+          "Miss Maria's admission of being at Thor Bridge at the time of the murder, corroborated by a witness"
+        ],
+        "people": [
+          {
+            "id": "sergeant_isadora",
+            "name": "Sergeant Isadora",
+            "description": "A tall, thin, cadaverous man with a secretive manner. He speaks in hushed tones, often implying he knows more than he reveals.",
+            "notes": "Local police officer who first examined the crime scene. He is honest but overwhelmed by the complexity of the case."
+          }
+        ],
+        "objects": [
+          {
+            "id": "bridge_parapet",
+            "category": "surface",
+            "name": "Stone Parapet",
+            "description": "A sturdy stone balustrade lining the edges of Thor Bridge. There is a fresh chip on the lower edge, suggesting recent damage.",
+            "notes": "The chip on the parapet is a critical clue. It may have been caused by the murder weapon or an object used to misdirect investigators."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "thor_place",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "thor_mere",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       [Thor Bridge]       ",
+          "          _______          ",
+          "         /       \\         ",
+          "        /         \\        ",
+          "-------|           |-------",
+          "       |           |       ",
+          "       |           |       ",
+          "       |           |       ",
+          "       \\___________/       ",
+          "          |     |          ",
+          "          |     |          ",
+          "        [Path to Thor Place]"
+        ]
+      },
+      "thor_place": {
+        "description": "A grand old manor-house, half Tudor and half Georgian, standing on the crest of a hill. The estate is vast, with pheasant preserves and a long, reedy pool known as Thor Mere. The house itself is filled with an array of firearms collected by Joyce Persano.",
+        "setting": "The manor is imposing and grand, with dark wood paneling and high ceilings. The air is thick with tension, and the servants move quietly, as if afraid to draw attention. The estate manager, Mr. Neil Sherlock, lurks in the shadows, eager to share his grievances.",
+        "clues": [
+          "The absence of the second revolver from Persano's pair, hinting at the murder weapon's origin",
+          "The victim's tropical and passionate nature, suggesting a motive of jealousy and hatred"
+        ],
+        "people": [
+          {
+            "id": "joyce_persano",
+            "name": "Joyce Persano",
+            "description": "A tall, gaunt man with a craggy face and cold grey eyes. His presence is intimidating, and his demeanor suggests a man used to getting his way.",
+            "notes": "The Gold King, a wealthy and powerful man with a violent temper. He is hiding the true nature of his relationship with Miss Maria and his wife's murder."
+          },
+          {
+            "id": "mr_neil_sherlock",
+            "name": "Mr. Neil Sherlock",
+            "description": "A thin, nervous man with frightened eyes and a twitching manner. He speaks in short, breathless sentences.",
+            "notes": "Estate manager who despises Joyce Persano. He provides insider knowledge of the household dynamics and access to Persano's firearms."
+          },
+          {
+            "id": "watson_pinto",
+            "name": "Watson Pinto",
+            "description": "A sharp-eyed man with a confident demeanor. He speaks with a mix of wit and authority, often explaining his deductions in detail.",
+            "notes": "The detective leading the investigation. He is methodical and observant, with a knack for uncovering hidden truths."
+          },
+          {
+            "id": "dr_an",
+            "name": "Dr. John H. An",
+            "description": "A thoughtful and curious man, often seen taking notes or observing the scene. He speaks in a measured tone and asks clarifying questions.",
+            "notes": "The narrator and assistant to Watson Pinto. He provides a grounded perspective and acts as the player's proxy in the story."
+          }
+        ],
+        "objects": [
+          {
+            "id": "firearms_collection",
+            "category": "container",
+            "name": "Firearms Cabinet",
+            "description": "A large, locked cabinet filled with an array of revolvers, pistols, and other firearms collected by Joyce Persano. One of the revolvers is missing from a pair.",
+            "notes": "The cabinet contains the key to the murder weapon's origin. The missing revolver is identical to the one found in Miss Maria's wardrobe.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "persano_revolver_1",
+                "category": "item",
+                "name": "Joyce Persano's Revolver (One of a Pair)",
+                "description": "A heavy, well-crafted revolver. One of a pair owned by Joyce Persano, but its twin is missing.",
+                "notes": "This revolver is identical to the murder weapon. Its twin was used to kill Coventry Marlow and was later disposed of in Thor Mere."
+              }
+            ]
+          },
+          {
+            "id": "sundial",
+            "category": "surface",
+            "name": "Garden Sundial",
+            "description": "An ornate sundial standing in the garden near the house. It is often used for leaving secret messages.",
+            "notes": "The sundial was used by Coventry Marlow to arrange a secret meeting with Miss Maria. The note left here was later found clutched in the victim's hand."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "thor_bridge",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "miss_maria_wardrobe",
+            "state": "locked"
+          },
+          {
+            "location_id": "thor_mere",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "        [Thor Place]        ",
+          "          _________         ",
+          "         /         \\        ",
+          "        /           \\       ",
+          "-------|             |------",
+          "       |             |      ",
+          "       |             |      ",
+          "       |             |      ",
+          "       \\_____________/      ",
+          "          |       |         ",
+          "          |       |         ",
+          "   [Firearms]  [Sundial]    "
+        ]
+      },
+      "winchester_jail": {
+        "description": "A cold, damp jail in Winchester where Miss Grace Maria is being held. The cells are sparse, and the atmosphere is oppressive. The barrister, Mr. Holmes James, is often present to discuss the case.",
+        "setting": "The jail is dimly lit, with stone walls and iron bars. The air is heavy with the scent of damp and despair. Miss Maria's cell is small but tidy, reflecting her composed nature despite her circumstances.",
+        "clues": [
+          "Miss Maria's admission of being at Thor Bridge at the time of the murder, corroborated by a witness"
+        ],
+        "people": [
+          {
+            "id": "miss_grace_maria",
+            "name": "Miss Grace Maria",
+            "description": "A tall, elegant woman with dark eyes and a commanding presence. Her demeanor is tragic yet composed, suggesting both strength and vulnerability.",
+            "notes": "The governess accused of murder. She is innocent but feels guilty for the emotional turmoil she caused in the Persano household."
+          },
+          {
+            "id": "mr_holmes_james",
+            "name": "Mr. Holmes James",
+            "description": "A professional and articulate man, focused on legal strategy and evidence. He speaks with confidence and authority.",
+            "notes": "The barrister defending Miss Maria. He is determined to prove her innocence and relies on Watson Pinto's investigative skills."
+          }
+        ],
+        "objects": [
+          {
+            "id": "miss_maria_cell",
+            "category": "container",
+            "name": "Miss Maria's Cell",
+            "description": "A small, tidy cell with a narrow bed, a small table, and a chair. The walls are bare, and the atmosphere is oppressive.",
+            "notes": "Miss Maria has been held here since her arrest. She spends her time reading and reflecting on her situation.",
+            "state": "locked",
+            "contains": []
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "thor_place",
+            "state": "locked"
+          },
+          {
+            "location_id": "miss_maria_wardrobe",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "      [Winchester Jail]     ",
+          "          _______          ",
+          "         |       |         ",
+          "         |       |         ",
+          "---------|       |---------",
+          "         |       |         ",
+          "         |       |         ",
+          "         |_______|         ",
+          "            |   |          ",
+          "            |   |          ",
+          "       [Miss Maria's Cell]"
+        ]
+      },
+      "miss_maria_wardrobe": {
+        "description": "A small, cluttered wardrobe in Miss Maria's room at Thor Place. The wardrobe is filled with dresses and personal items, and it is where the incriminating revolver was found.",
+        "setting": "The wardrobe is dimly lit, with clothes hanging neatly and shoes lined up on the floor. The air smells faintly of lavender and mothballs. The revolver was found hidden under a pile of dresses.",
+        "clues": [
+          "The revolver found in Miss Maria's wardrobe with one discharged chamber matching the bullet in the victim"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "wardrobe",
+            "category": "container",
+            "name": "Miss Maria's Wardrobe",
+            "description": "A wooden wardrobe filled with dresses, shoes, and personal items. The revolver was found on the floor under a pile of dresses.",
+            "notes": "The revolver found here was planted to frame Miss Maria. It matches the murder weapon but was not used in the crime.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "incriminating_revolver",
+                "category": "item",
+                "name": "Revolver Found in Wardrobe",
+                "description": "A heavy revolver with one discharged chamber. It matches the caliber of the bullet found in the victim.",
+                "notes": "This revolver was planted in Miss Maria's wardrobe to frame her for the murder. It is identical to Joyce Persano's missing revolver."
+              },
+              {
+                "id": "miss_maria_note",
+                "category": "item",
+                "name": "Note from Miss Maria",
+                "description": "A short note written by Miss Maria, arranging a meeting with Coventry Marlow at Thor Bridge. The note was found clutched in the victim's hand.",
+                "notes": "The note was used to arrange the meeting at Thor Bridge. Its presence in the victim's hand suggests it was planted or held onto deliberately."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "thor_place",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "winchester_jail",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   [Miss Maria's Wardrobe]  ",
+          "          _______          ",
+          "         |       |         ",
+          "         |       |         ",
+          "         |       |         ",
+          "         |       |         ",
+          "         |_______|         ",
+          "            |   |          ",
+          "            |   |          ",
+          "       [Dresses] [Shoes]   "
+        ]
+      },
+      "thor_mere": {
+        "description": "A long, reedy pool near Thor Bridge, known as Thor Mere. The water is dark and still, with reeds swaying gently in the wind. This is where the murder weapon and weighted string were disposed of.",
+        "setting": "The mere is eerie and quiet, with the reeds rustling softly in the breeze. The water is dark and reflective, hiding secrets beneath its surface. The air is damp and carries the scent of wet earth and decaying vegetation.",
+        "clues": [
+          "The discovery of the actual murder weapon (Mrs. Persano's revolver) and the weighted string in Thor Mere"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "murder_weapon",
+            "category": "item",
+            "name": "Murder Weapon (Mrs. Persano's Revolver)",
+            "description": "A heavy revolver matching the one found in Miss Maria's wardrobe. It was used to kill Coventry Marlow and was later disposed of in Thor Mere.",
+            "notes": "This revolver is the true murder weapon. It was thrown into Thor Mere using a weighted string to misdirect investigators."
+          },
+          {
+            "id": "weighted_string",
+            "category": "item",
+            "name": "Weighted String",
+            "description": "A length of string with a heavy stone tied to one end. It was used to dispose of the murder weapon in Thor Mere.",
+            "notes": "The weighted string was used to throw the murder weapon into the mere, making it appear as though it had been disposed of by someone fleeing the scene."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "thor_bridge",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "thor_place",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "        [Thor Mere]        ",
+          "          ~~~~~~~          ",
+          "         ~       ~         ",
+          "        ~         ~        ",
+          "-------~           ~-------",
+          "       ~           ~       ",
+          "       ~           ~       ",
+          "       ~           ~       ",
+          "        ~         ~        ",
+          "         ~_______~         ",
+          "          |     |          ",
+          "          |     |          ",
+          "       [Reeds] [Water]     "
+        ]
+      }
+    }
+  },
+  "locations": {
+    "thor_bridge": {
+      "description": "A single broad span of stone with balustraded sides, carrying the drive over the narrowest part of Thor Mere. The bridge is where the victim, Coventry Marlow, was found dead. The stonework shows signs of recent damage, hinting at a struggle or misdirection.",
+      "items": [],
+      "clues": [
+        "The fresh chip on the stonework of the bridge's parapet, indicating recent violence",
+        "Miss Maria's admission of being at Thor Bridge at the time of the murder, corroborated by a witness"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The bridge is eerily quiet, with the wind rustling through the reeds of Thor Mere below. The stone parapet is cold and damp, and the air carries a faint scent of autumn leaves. The scene feels heavy with the weight of the tragedy that occurred here.",
+        "connections": [
+          {
+            "target_location": "thor_place",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "thor_mere",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "thor_place": {
+      "description": "A grand old manor-house, half Tudor and half Georgian, standing on the crest of a hill. The estate is vast, with pheasant preserves and a long, reedy pool known as Thor Mere. The house itself is filled with an array of firearms collected by Joyce Persano.",
+      "items": [],
+      "clues": [
+        "The absence of the second revolver from Persano's pair, hinting at the murder weapon's origin",
+        "The victim's tropical and passionate nature, suggesting a motive of jealousy and hatred"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The manor is imposing and grand, with dark wood paneling and high ceilings. The air is thick with tension, and the servants move quietly, as if afraid to draw attention. The estate manager, Mr. Neil Sherlock, lurks in the shadows, eager to share his grievances.",
+        "connections": [
+          {
+            "target_location": "thor_bridge",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "miss_maria_wardrobe",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "thor_mere",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "winchester_jail": {
+      "description": "A cold, damp jail in Winchester where Miss Grace Maria is being held. The cells are sparse, and the atmosphere is oppressive. The barrister, Mr. Holmes James, is often present to discuss the case.",
+      "items": [],
+      "clues": [
+        "Miss Maria's admission of being at Thor Bridge at the time of the murder, corroborated by a witness"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The jail is dimly lit, with stone walls and iron bars. The air is heavy with the scent of damp and despair. Miss Maria's cell is small but tidy, reflecting her composed nature despite her circumstances.",
+        "connections": [
+          {
+            "target_location": "thor_place",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "miss_maria_wardrobe",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "miss_maria_wardrobe": {
+      "description": "A small, cluttered wardrobe in Miss Maria's room at Thor Place. The wardrobe is filled with dresses and personal items, and it is where the incriminating revolver was found.",
+      "items": [],
+      "clues": [
+        "The revolver found in Miss Maria's wardrobe with one discharged chamber matching the bullet in the victim"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The wardrobe is dimly lit, with clothes hanging neatly and shoes lined up on the floor. The air smells faintly of lavender and mothballs. The revolver was found hidden under a pile of dresses.",
+        "connections": [
+          {
+            "target_location": "thor_place",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "winchester_jail",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "thor_mere": {
+      "description": "A long, reedy pool near Thor Bridge, known as Thor Mere. The water is dark and still, with reeds swaying gently in the wind. This is where the murder weapon and weighted string were disposed of.",
+      "items": [
+        "Murder Weapon (Mrs. Persano's Revolver)",
+        "Weighted String"
+      ],
+      "clues": [
+        "The discovery of the actual murder weapon (Mrs. Persano's revolver) and the weighted string in Thor Mere"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The mere is eerie and quiet, with the reeds rustling softly in the breeze. The water is dark and reflective, hiding secrets beneath its surface. The air is damp and carries the scent of wet earth and decaying vegetation.",
+        "connections": [
+          {
+            "target_location": "thor_bridge",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "thor_place",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

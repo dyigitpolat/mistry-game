@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import tempfile
 import uuid
 from pathlib import Path
@@ -87,16 +88,30 @@ async def generate_scenario(
         input_path.write_text(json.dumps(input_data, indent=2, ensure_ascii=False), encoding="utf-8")
 
         # --- Step 1: Run story generation ---
-        try:
-            story_result = await _run_story_generation(input_path, output_path)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Story generation failed: {e}")
+        story_cache = Path("/tmp/mistry_story_cache.json")
+        if os.getenv("MISTRY_USE_CACHE") == "true" and story_cache.exists():
+            print("📦 Using cached story result from /tmp/mistry_story_cache.json")
+            story_result = json.loads(story_cache.read_text(encoding="utf-8"))
+        else:
+            try:
+                story_result = await _run_story_generation(input_path, output_path)
+                # Cache for debugging
+                story_cache.write_text(json.dumps(story_result, indent=2, ensure_ascii=False), encoding="utf-8")
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Story generation failed: {e}")
 
         # --- Step 2: Run game graph generation ---
-        try:
-            game_graph = await _run_graph_generation(story_result, graph_path)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Graph generation failed: {e}")
+        graph_cache = Path("/tmp/mistry_graph_cache.json")
+        if os.getenv("MISTRY_USE_CACHE") == "true" and graph_cache.exists():
+            print("📦 Using cached graph result from /tmp/mistry_graph_cache.json")
+            game_graph = json.loads(graph_cache.read_text(encoding="utf-8"))
+        else:
+            try:
+                game_graph = await _run_graph_generation(story_result, graph_path)
+                # Cache for debugging
+                graph_cache.write_text(json.dumps(game_graph, indent=2, ensure_ascii=False), encoding="utf-8")
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Graph generation failed: {e}")
 
         # --- Step 3: Validate against schema ---
         try:
@@ -178,8 +193,9 @@ async def _run_story_generation(input_path: Path, output_path: Path) -> dict:
     Run the story generation step using the procedural_gen CLI via subprocess.
     Returns the story output dict.
     """
+    import sys
     cmd = [
-        "uv", "run", "python", "-c",
+        sys.executable, "-c",
         (
             "import json, sys; "
             "sys.path.insert(0, '.'); "
@@ -225,8 +241,9 @@ async def _run_graph_generation(story_data: dict, graph_path: Path) -> dict:
     """
     story_json = json.dumps(story_data, ensure_ascii=False)
 
+    import sys
     cmd = [
-        "uv", "run", "python", "-c",
+        sys.executable, "-c",
         (
             "import json, sys; "
             "sys.path.insert(0, '.'); "

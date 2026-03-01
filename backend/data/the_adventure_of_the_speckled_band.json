@@ -1,0 +1,675 @@
+{
+  "title": "The Adventure of the Speckled Band",
+  "description": "A chilling mystery involving the death of Navya Kalyani under suspicious circumstances, with her twin sister Nithya seeking the truth behind the 'speckled band' and the sinister Dr. Meena Karisma.",
+  "victim": "Navya Kalyani",
+  "intro_narrative": "On a cold April morning, Shabana Jaya and her associate Dr. Chandni are visited by a terrified young woman, Nithya Kalyani. She recounts the mysterious death of her twin sister Navya two years prior, under eerie circumstances involving a 'speckled band' and nocturnal whistles. With her own life now in danger, Nithya seeks Jaya's help to unravel the truth before history repeats itself.",
+  "start_time": "07:15",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "swamp adder",
+      "dummy bell-rope",
+      "dark-lantern",
+      "dog lash",
+      "saucer of milk",
+      "twisted poker"
+    ],
+    "required_suspect": [
+      "Dr. Meena Karisma"
+    ],
+    "required_motive": [
+      "Financial gain to prevent daughters' marriages and retain their inheritance."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Consultation",
+      "objective": "Meet Nithya Kalyani and gather initial details about the case.",
+      "unlocked_locations": [
+        "baker_street"
+      ],
+      "unlocked_characters": [
+        "shabana_jaya",
+        "dr_chandni",
+        "nithya_kalyani"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Investigation at Baker Street",
+      "objective": "Analyze clues and prepare for the visit to Kiran Rakul.",
+      "unlocked_locations": [
+        "baker_street",
+        "the_crown_inn"
+      ],
+      "unlocked_characters": [
+        "shabana_jaya",
+        "dr_chandni",
+        "nithya_kalyani",
+        "miss_sohail_sanjeev"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Exploration of Kiran Rakul",
+      "objective": "Explore the manor house and uncover secrets hidden within.",
+      "unlocked_locations": [
+        "kiran_rakul",
+        "miss_kalyani_bedroom",
+        "corridor",
+        "dr_karisma_bedroom"
+      ],
+      "unlocked_characters": [
+        "shabana_jaya",
+        "dr_chandni",
+        "nithya_kalyani",
+        "dr_meena_karisma",
+        "miss_sohail_sanjeev"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Confrontation and Resolution",
+      "objective": "Confront the culprit and solve the mystery of the speckled band.",
+      "unlocked_locations": [
+        "kiran_rakul",
+        "miss_kalyani_bedroom",
+        "corridor",
+        "dr_karisma_bedroom"
+      ],
+      "unlocked_characters": [
+        "shabana_jaya",
+        "dr_chandni",
+        "nithya_kalyani",
+        "dr_meena_karisma",
+        "miss_sohail_sanjeev"
+      ]
+    }
+  ],
+  "characters": {
+    "shabana_jaya": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "kiran_rakul",
+        "3": "kiran_rakul"
+      },
+      "persona": "Sharp, observant, and logical. Speaks with confidence and authority, often using deductive reasoning to unravel mysteries.",
+      "abilities": "Master of deduction, keen observer, and skilled in unarmed combat. Can analyze clues and reconstruct events with precision.",
+      "knowledge_about_others": {
+        "dr_meena_karisma": "Suspects him of foul play due to his violent temper and financial motives.",
+        "nithya_kalyani": "Believes her story but suspects she may be withholding details out of fear."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "dr_chandni": {
+      "type": "assistant",
+      "role": "Associate and Narrator",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "kiran_rakul",
+        "3": "kiran_rakul"
+      },
+      "persona": "Thoughtful and analytical, often serving as the voice of reason. Speaks with a mix of curiosity and caution.",
+      "abilities": "Medical knowledge, keen observer, and supportive partner to Jaya. Skilled in documenting and analyzing evidence.",
+      "knowledge_about_others": {
+        "nithya_kalyani": "Sympathizes with her plight and believes her account of events."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "nithya_kalyani": {
+      "type": "suspect",
+      "role": "Client and Victim's Sister",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "kiran_rakul",
+        "3": "kiran_rakul"
+      },
+      "persona": "Nervous and fearful, but determined to uncover the truth. Speaks softly and hesitantly, often looking over her shoulder.",
+      "secret": "She suspects her stepfather, Dr. Karisma, but is too afraid to accuse him outright.",
+      "suspicion_meter": 10,
+      "flight_risk": 30,
+      "knowledge_about_others": {
+        "dr_meena_karisma": "Fears him and believes he is responsible for her sister's death."
+      },
+      "conditional_behaviors": []
+    },
+    "dr_meena_karisma": {
+      "type": "suspect",
+      "role": "Stepfather and Culprit",
+      "location": "kiran_rakul",
+      "phase_locations": {
+        "1": "the_crown_inn",
+        "2": "kiran_rakul",
+        "3": "dr_karisma_bedroom"
+      },
+      "persona": "Aggressive, intimidating, and volatile. Speaks in a loud, commanding tone, often with threats and anger.",
+      "secret": "He orchestrated the murder of Navya Kalyani using a swamp adder to secure her inheritance and prevent her marriage.",
+      "suspicion_meter": 90,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "twisted poker",
+            "dog lash"
+          ],
+          "reaction": "Becomes increasingly aggressive and attempts to intimidate Jaya and Chandni. May try to flee if cornered.",
+          "leads_to_break": true
+        }
+      ],
+      "knowledge_about_others": {
+        "nithya_kalyani": "Views her as a threat to his plans and is prepared to silence her if necessary."
+      }
+    },
+    "navya_kalyani": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "miss_kalyani_bedroom",
+      "phase_locations": {
+        "2": "miss_kalyani_bedroom"
+      },
+      "persona": "Deceased, but her presence is felt through her diary entries and the accounts of others. Described as kind and gentle.",
+      "secret": "She was engaged to be married, which threatened Dr. Karisma's control over her inheritance.",
+      "state": "dead",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "miss_sohail_sanjeev": {
+      "type": "suspect",
+      "role": "Aunt of the Kalyani Sisters",
+      "location": "the_crown_inn",
+      "phase_locations": {
+        "1": "the_crown_inn",
+        "2": "kiran_rakul"
+      },
+      "persona": "Warm and protective, but somewhat naive. Speaks kindly and offers support to Nithya.",
+      "secret": "She is unaware of the true extent of Dr. Karisma's cruelty but suspects he is hiding something.",
+      "suspicion_meter": 20,
+      "flight_risk": 5,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A cozy, cluttered apartment at 221B Baker Street, filled with books, chemical apparatus, and the remnants of past cases. The sitting-room is warm and inviting, with a fireplace crackling softly.",
+        "setting": "A Victorian-era apartment with a mix of comfort and intellectual chaos. The walls are lined with bookshelves, and a large window overlooks the bustling street below.",
+        "clues": [
+          "The 'speckled band' mentioned by the dying sister."
+        ],
+        "people": [
+          {
+            "id": "shabana_jaya",
+            "name": "Shabana Jaya",
+            "description": "A sharp-eyed woman with a keen intellect, dressed in a tailored suit. She exudes confidence and curiosity.",
+            "notes": "The detective leading the investigation. Known for her deductive reasoning and sharp wit."
+          },
+          {
+            "id": "dr_chandni",
+            "name": "Dr. Chandni",
+            "description": "A thoughtful and observant woman, dressed in practical attire. She carries a medical bag and notebook.",
+            "notes": "Jaya's associate and narrator of the case. Skilled in medical knowledge and documentation."
+          }
+        ],
+        "objects": [
+          {
+            "id": "case_notes",
+            "category": "item",
+            "name": "Case Notes",
+            "description": "A leather-bound notebook filled with Jaya's observations and deductions from past cases.",
+            "notes": "Contains references to similar cases and potential leads for the current investigation."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_crown_inn",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________________",
+          "  /                     \\",
+          " /   221B Baker Street   \\",
+          "|   ___________________   |",
+          "|  |                   |  |",
+          "|  |   Sitting-Room    |  |",
+          "|  |                   |  |",
+          "|  |   [Fireplace]     |  |",
+          "|  |   [Bookshelves]   |  |",
+          "|  |___________________|  |",
+          "|_______________________|"
+        ]
+      },
+      "kiran_rakul": {
+        "description": "A decaying manor house with a high central portion and two curving wings. The right-hand wing is inhabited, while the left is in ruins. The atmosphere is eerie and foreboding.",
+        "setting": "An old, Gothic-style manor house with ivy-covered walls and a sense of neglect. The lawn is overgrown, and the air is thick with tension.",
+        "clues": [
+          "The low whistle heard at night before the sister's death."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "scaffolding",
+            "category": "surface",
+            "name": "Scaffolding",
+            "description": "Wooden scaffolding erected against the end wall of the manor, though no workmen are present.",
+            "notes": "Recently added, possibly as an excuse to move Nithya from her room."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "miss_kalyani_bedroom",
+            "state": "locked"
+          },
+          {
+            "location_id": "corridor",
+            "state": "locked"
+          },
+          {
+            "location_id": "the_crown_inn",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      /               \\",
+          "     /    Kiran Rakul  \\",
+          "    /                   \\",
+          "   /   _____     _____   \\",
+          "  /   |     |   |     |   \\",
+          " /    |     |   |     |    \\",
+          "|     |_____|   |_____|     |",
+          "|  Left Wing   Right Wing  |",
+          "|_________________________|"
+        ]
+      },
+      "miss_kalyani_bedroom": {
+        "description": "A small, homely bedroom with a low ceiling and a gaping fireplace. The bed is clamped to the floor, and a dummy bell-rope hangs beside it.",
+        "setting": "A modest, old-fashioned bedroom with worm-eaten oak paneling and a sense of claustrophobia. The air is stale, and the room feels oppressive.",
+        "clues": [
+          "The metallic clang heard by Nithya Kalyani.",
+          "The dummy bell-rope and non-functional ventilator in the bedroom.",
+          "The bed clamped to the floor, preventing movement."
+        ],
+        "people": [
+          {
+            "id": "navya_kalyani",
+            "name": "Navya Kalyani",
+            "description": "A ghostly presence, described as a kind and gentle woman. Her spirit lingers in the room where she met her fate.",
+            "notes": "The victim of the mystery. Her death is the central focus of the investigation.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "bed",
+            "category": "surface",
+            "name": "Bed",
+            "description": "A narrow white-counterpaned bed clamped to the floor. It is positioned directly under the ventilator.",
+            "notes": "The bed's immobility is suspicious and suggests it was deliberately fixed in place."
+          },
+          {
+            "id": "dummy_bell_rope",
+            "category": "item",
+            "name": "Dummy Bell-Rope",
+            "description": "A thick bell-rope hanging beside the bed, though it is not attached to any wire and serves no functional purpose.",
+            "notes": "Used to guide the swamp adder into the room."
+          },
+          {
+            "id": "ventilator",
+            "category": "surface",
+            "name": "Ventilator",
+            "description": "A small, non-functional ventilator connecting this room to Dr. Karisma's bedroom.",
+            "notes": "Too narrow for a person to pass through, but large enough for a snake."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "corridor",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________",
+          "  |               |",
+          "  |   Bedroom     |",
+          "  |               |",
+          "  |  [Bed]        |",
+          "  |   |           |",
+          "  |  [Rope]       |",
+          "  |   |           |",
+          "  |  [Vent]       |",
+          "  |_______________|"
+        ]
+      },
+      "dr_karisma_bedroom": {
+        "description": "A plainly furnished room with a camp-bed, a wooden shelf of books, and a large iron safe. A saucer of milk sits atop the safe.",
+        "setting": "A stark, utilitarian bedroom with an air of coldness. The walls are bare, and the room feels devoid of personality.",
+        "clues": [
+          "The saucer of milk in Dr. Karisma's room (used to train the snake).",
+          "The looped dog lash in Dr. Karisma's room (used to control the snake)."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "iron_safe",
+            "category": "container",
+            "name": "Iron Safe",
+            "description": "A large, sturdy iron safe with its door ajar. It is used to store Dr. Karisma's business papers.",
+            "notes": "Also used to house the swamp adder when not in use.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "swamp_adder",
+                "category": "item",
+                "name": "Swamp Adder",
+                "description": "A deadly snake with a diamond-shaped head and speckled markings. It is the murder weapon in this case.",
+                "notes": "The deadliest snake in India, trained by Dr. Karisma to respond to a whistle."
+              }
+            ]
+          },
+          {
+            "id": "saucer_of_milk",
+            "category": "item",
+            "name": "Saucer of Milk",
+            "description": "A small saucer of milk placed atop the iron safe.",
+            "notes": "Used to train the swamp adder to return to Dr. Karisma's room."
+          },
+          {
+            "id": "dog_lash",
+            "category": "item",
+            "name": "Dog Lash",
+            "description": "A looped dog lash hanging on the corner of the bed, tied to form a noose.",
+            "notes": "Used to control and guide the swamp adder."
+          },
+          {
+            "id": "dark_lantern",
+            "category": "item",
+            "name": "Dark-Lantern",
+            "description": "A lantern with a shutter that can be adjusted to control the light.",
+            "notes": "Used by Dr. Karisma to signal the swamp adder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "corridor",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________",
+          "  |               |",
+          "  |   Bedroom     |",
+          "  |               |",
+          "  |  [Safe]       |",
+          "  |   |           |",
+          "  |  [Milk]       |",
+          "  |   |           |",
+          "  |  [Lash]       |",
+          "  |_______________|"
+        ]
+      },
+      "the_crown_inn": {
+        "description": "A quaint inn near Kiran Rakul, with a cozy sitting-room and comfortable bedrooms. The innkeeper is friendly but curious about the investigators' presence.",
+        "setting": "A rustic, welcoming inn with wooden beams and a warm fireplace. The atmosphere is relaxed, but tension lingers beneath the surface.",
+        "clues": [
+          "The snake's hiss heard by Jaya and Chandni during their vigil."
+        ],
+        "people": [
+          {
+            "id": "miss_sohail_sanjeev",
+            "name": "Miss Sohail Sanjeev",
+            "description": "A warm, elderly woman with a kind face. She is Nithya's aunt and offers her support.",
+            "notes": "Unaware of the full extent of Dr. Karisma's actions but suspicious of him."
+          }
+        ],
+        "objects": [
+          {
+            "id": "inn_register",
+            "category": "item",
+            "name": "Inn Register",
+            "description": "A ledger containing the names and details of recent guests at the inn.",
+            "notes": "May contain information about Dr. Karisma's movements."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kiran_rakul",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________",
+          "  /               \\",
+          " /   The Crown    \\",
+          "|     Inn         |",
+          "|  _____________  |",
+          "| |             | |",
+          "| |  Sitting    | |",
+          "| |   Room      | |",
+          "| |_____________| |",
+          "|_________________|"
+        ]
+      },
+      "corridor": {
+        "description": "A narrow, whitewashed corridor connecting the bedrooms. The walls are bare, and the atmosphere is cold and unwelcoming.",
+        "setting": "A dimly lit, claustrophobic corridor with small windows that let in little light. The air is stale and oppressive.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "twisted_poker",
+            "category": "item",
+            "name": "Twisted Poker",
+            "description": "A fireplace poker twisted into a curve, evidence of Dr. Karisma's immense strength and temper.",
+            "notes": "Found in Dr. Karisma's room, suggesting a violent outburst."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "miss_kalyani_bedroom",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "dr_karisma_bedroom",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "kiran_rakul",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________",
+          "  |               |",
+          "  |   Corridor    |",
+          "  |               |",
+          "|----|       |----|",
+          "|    |       |    |",
+          "|    |       |    |",
+          "|----|       |----|",
+          "  |               |",
+          "  |_______________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A cozy, cluttered apartment at 221B Baker Street, filled with books, chemical apparatus, and the remnants of past cases. The sitting-room is warm and inviting, with a fireplace crackling softly.",
+      "items": [
+        "Case Notes"
+      ],
+      "clues": [
+        "The 'speckled band' mentioned by the dying sister."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A Victorian-era apartment with a mix of comfort and intellectual chaos. The walls are lined with bookshelves, and a large window overlooks the bustling street below.",
+        "connections": [
+          {
+            "target_location": "the_crown_inn",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "kiran_rakul": {
+      "description": "A decaying manor house with a high central portion and two curving wings. The right-hand wing is inhabited, while the left is in ruins. The atmosphere is eerie and foreboding.",
+      "items": [],
+      "clues": [
+        "The low whistle heard at night before the sister's death."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An old, Gothic-style manor house with ivy-covered walls and a sense of neglect. The lawn is overgrown, and the air is thick with tension.",
+        "connections": [
+          {
+            "target_location": "miss_kalyani_bedroom",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "corridor",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "the_crown_inn",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "miss_kalyani_bedroom": {
+      "description": "A small, homely bedroom with a low ceiling and a gaping fireplace. The bed is clamped to the floor, and a dummy bell-rope hangs beside it.",
+      "items": [
+        "Dummy Bell-Rope"
+      ],
+      "clues": [
+        "The metallic clang heard by Nithya Kalyani.",
+        "The dummy bell-rope and non-functional ventilator in the bedroom.",
+        "The bed clamped to the floor, preventing movement."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A modest, old-fashioned bedroom with worm-eaten oak paneling and a sense of claustrophobia. The air is stale, and the room feels oppressive.",
+        "connections": [
+          {
+            "target_location": "corridor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "dr_karisma_bedroom": {
+      "description": "A plainly furnished room with a camp-bed, a wooden shelf of books, and a large iron safe. A saucer of milk sits atop the safe.",
+      "items": [
+        "Saucer of Milk",
+        "Dog Lash",
+        "Dark-Lantern"
+      ],
+      "clues": [
+        "The saucer of milk in Dr. Karisma's room (used to train the snake).",
+        "The looped dog lash in Dr. Karisma's room (used to control the snake)."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A stark, utilitarian bedroom with an air of coldness. The walls are bare, and the room feels devoid of personality.",
+        "connections": [
+          {
+            "target_location": "corridor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_crown_inn": {
+      "description": "A quaint inn near Kiran Rakul, with a cozy sitting-room and comfortable bedrooms. The innkeeper is friendly but curious about the investigators' presence.",
+      "items": [
+        "Inn Register"
+      ],
+      "clues": [
+        "The snake's hiss heard by Jaya and Chandni during their vigil."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A rustic, welcoming inn with wooden beams and a warm fireplace. The atmosphere is relaxed, but tension lingers beneath the surface.",
+        "connections": [
+          {
+            "target_location": "kiran_rakul",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "corridor": {
+      "description": "A narrow, whitewashed corridor connecting the bedrooms. The walls are bare, and the atmosphere is cold and unwelcoming.",
+      "items": [
+        "Twisted Poker"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit, claustrophobic corridor with small windows that let in little light. The air is stale and oppressive.",
+        "connections": [
+          {
+            "target_location": "miss_kalyani_bedroom",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "dr_karisma_bedroom",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "kiran_rakul",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

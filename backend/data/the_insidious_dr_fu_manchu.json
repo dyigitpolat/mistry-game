@@ -1,0 +1,1049 @@
+{
+  "title": "The Insidious Dr. Fu Manchu",
+  "description": "A mystery game based on the classic novel 'The Insidious Dr. Fu Manchu' by Sax Rohmer, where players uncover the sinister plots of the enigmatic Dr. Fu Manchu and his network of agents.",
+  "victim": "Sir Moses Shen",
+  "intro_narrative": "The game begins with the sudden and mysterious death of Sir Moses Shen, a prominent figure in the British Empire. As Dr. Chinaman, you are drawn into the investigation by your old friend Kwee Barber, who reveals the presence of a dangerous and cunning adversary, Dr. Fu Manchu, operating in London. Together, you must unravel the secrets behind Sir Moses's death and thwart the plans of this insidious villain.",
+  "start_time": "1913-10-31T22:30:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Vellum note from Inspector-Siva",
+      "Phial of amber-hued liquid",
+      "Ebony case with instruments for curing Weymouth's madness",
+      "Silken cord and bamboo ladder",
+      "Wire jacket"
+    ],
+    "required_suspect": [
+      "Dr. Inspector-Siva"
+    ],
+    "required_motive": [
+      "To pave the way for a Yellow Empire by eliminating key figures in the British Empire and Western world."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Uncover the circumstances surrounding the death of Sir Moses Shen and identify the mysterious Dr. Fu Manchu.",
+      "unlocked_locations": [
+        "Sir Moses Shen's house",
+        "Maple Cottage"
+      ],
+      "unlocked_characters": [
+        "Dr. Chinaman",
+        "Kwee Barber",
+        "Inspector Weymouth",
+        "Sir Moses Shen"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Expanding the Search",
+      "objective": "Explore new locations and gather clues about Dr. Fu Manchu's operations and his network of agents.",
+      "unlocked_locations": [
+        "Croxted-Effendi's opium den",
+        "Redmoat"
+      ],
+      "unlocked_characters": [
+        "Lionel",
+        "Karamaneh",
+        "Graham Vernon",
+        "Southery Eltham"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Deepening Conspiracy",
+      "objective": "Delve deeper into the conspiracy and uncover the true extent of Dr. Fu Manchu's plans.",
+      "unlocked_locations": [
+        "Rowan House",
+        "House near Windsor",
+        "Hulk on the Yan River"
+      ],
+      "unlocked_characters": [
+        "Lord Andaman",
+        "Dr. Inspector-Siva",
+        "James Weymouth"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront Dr. Fu Manchu and his agents, gather final evidence, and bring the villain to justice.",
+      "unlocked_locations": [
+        "East End riverside building"
+      ],
+      "unlocked_characters": [
+        "Dr. Inspector-Siva"
+      ]
+    }
+  ],
+  "characters": {
+    "Kwee Barber": {
+      "type": "assistant",
+      "role": "Investigator",
+      "location": "Sir Moses Shen's house",
+      "phase_locations": {
+        "0": "Sir Moses Shen's house",
+        "1": "Croxted-Effendi's opium den",
+        "2": "Rowan House",
+        "3": "East End riverside building"
+      },
+      "persona": "Determined, resourceful, and fiercely loyal to the British Empire. Speaks with authority and has a knack for uncovering hidden truths.",
+      "knowledge_about_others": {
+        "Dr. Chinaman": "Trusts implicitly and values his medical expertise.",
+        "Dr. Inspector-Siva": "Knows of his dangerous reputation and is determined to stop his plans.",
+        "Lionel": "Suspects her involvement with Dr. Fu Manchu but sees potential for redemption."
+      },
+      "abilities": "Skilled investigator, master of disguise, fluent in multiple languages, and adept at hand-to-hand combat.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Perfumed envelope"
+          ],
+          "reaction": "Recognizes the scent and warns of the Zayat Kiss's danger.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Dr. Chinaman": {
+      "type": "assistant",
+      "role": "Narrator and Medical Expert",
+      "location": "Sir Moses Shen's house",
+      "phase_locations": {
+        "0": "Sir Moses Shen's house",
+        "1": "Croxted-Effendi's opium den",
+        "2": "Rowan House",
+        "3": "East End riverside building"
+      },
+      "persona": "Observant, analytical, and compassionate. Speaks with a calm demeanor and has a deep sense of justice.",
+      "knowledge_about_others": {
+        "Kwee Barber": "Trusts his instincts and values his investigative skills.",
+        "Dr. Inspector-Siva": "Fears his cunning and the extent of his scientific knowledge.",
+        "Lionel": "Feels protective and sees her as a victim of circumstances."
+      },
+      "abilities": "Expert in medicine and toxicology, keen observer, and skilled at deducing clues from physical evidence.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Needle-syringe with amber liquid"
+          ],
+          "reaction": "Identifies the liquid as an antidote to a deathlike trance and prepares to administer it.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Dr. Inspector-Siva": {
+      "type": "suspect",
+      "role": "Mastermind",
+      "location": "House near Windsor",
+      "phase_locations": {
+        "0": "House near Windsor",
+        "1": "Hulk on the Yan River",
+        "2": "East End riverside building",
+        "3": "East End riverside building"
+      },
+      "persona": "Calm, calculating, and eerily composed. Speaks with a sibilant tone and exudes an aura of menace and intelligence.",
+      "knowledge_about_others": {
+        "Kwee Barber": "Views as a formidable adversary and respects his investigative skills.",
+        "Dr. Chinaman": "Sees as a potential threat due to his medical knowledge.",
+        "Lionel": "Considers a valuable but unpredictable asset."
+      },
+      "secret": "Plans to establish a Yellow Empire by eliminating key figures in the British Empire and Western world using a network of agents and deadly scientific methods.",
+      "abilities": "Genius-level intellect, master of disguise, expert in chemistry and toxicology, and adept at psychological manipulation.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Vellum note from Inspector-Siva"
+          ],
+          "reaction": "Acknowledges his plans and taunts the investigators with his impending success.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 95,
+      "flight_risk": 85
+    },
+    "Lionel": {
+      "type": "suspect",
+      "role": "Agent and Slave",
+      "location": "House near Windsor",
+      "phase_locations": {
+        "0": "House near Windsor",
+        "1": "East End riverside building",
+        "2": "East End riverside building",
+        "3": "East End riverside building"
+      },
+      "persona": "Mysterious, alluring, and conflicted. Speaks with a soft, musical accent and often seems torn between loyalty and fear.",
+      "knowledge_about_others": {
+        "Dr. Inspector-Siva": "Fears his power and cruelty but feels bound to him.",
+        "Karamaneh": "Loves deeply and is protective of her brother.",
+        "Dr. Chinaman": "Trusts and feels a strange connection to him."
+      },
+      "secret": "She is a slave to Dr. Fu Manchu but harbors a desire to escape his control and protect her brother, Karamaneh.",
+      "abilities": "Skilled in deception, fluent in multiple languages, and adept at navigating dangerous situations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Message 'Tongking—SECOND' from Lionel"
+          ],
+          "reaction": "Provides cryptic clues to aid the investigators, hoping to gain their trust and protection.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 70,
+      "flight_risk": 60
+    },
+    "Karamaneh": {
+      "type": "suspect",
+      "role": "Victim and Pawn",
+      "location": "House near Windsor",
+      "phase_locations": {
+        "0": "House near Windsor",
+        "1": "East End riverside building",
+        "2": "East End riverside building",
+        "3": "East End riverside building"
+      },
+      "persona": "Quiet, vulnerable, and deeply traumatized. Speaks little and often seems lost in his own world.",
+      "knowledge_about_others": {
+        "Lionel": "Loves and depends on his sister for protection.",
+        "Dr. Inspector-Siva": "Fears and resents him for his cruelty."
+      },
+      "secret": "He is kept in a deathlike trance by Dr. Fu Manchu, who uses him as leverage to control Lionel.",
+      "abilities": "None notable, but his condition provides critical clues to Dr. Fu Manchu's methods.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Phial of amber-hued liquid"
+          ],
+          "reaction": "Awakens from his trance, providing insight into Dr. Fu Manchu's scientific experiments.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 30,
+      "flight_risk": 10
+    },
+    "Sir Moses Shen": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "Sir Moses Shen's house",
+      "phase_locations": {
+        "0": "Sir Moses Shen's house"
+      },
+      "persona": "Dignified, intelligent, and authoritative. Speaks with the confidence of a man accustomed to power and respect.",
+      "knowledge_about_others": {
+        "Dr. Inspector-Siva": "Unaware of his existence but targeted for his influence in the British Empire."
+      },
+      "secret": "His death was orchestrated by Dr. Fu Manchu using the Zayat Kiss, a deadly and mysterious method.",
+      "abilities": "None, as he is deceased at the start of the game.",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Inspector Weymouth": {
+      "type": "assistant",
+      "role": "Police Inspector",
+      "location": "Maple Cottage",
+      "phase_locations": {
+        "0": "Maple Cottage",
+        "1": "Croxted-Effendi's opium den",
+        "2": "Rowan House",
+        "3": "East End riverside building"
+      },
+      "persona": "Gruff, no-nonsense, and dedicated to upholding the law. Speaks with authority and has a strong sense of justice.",
+      "knowledge_about_others": {
+        "Kwee Barber": "Respects his investigative skills and trusts his judgment.",
+        "Dr. Inspector-Siva": "Views as a dangerous criminal and is determined to bring him to justice."
+      },
+      "abilities": "Skilled interrogator, experienced in police procedures, and adept at gathering evidence.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Knocking at Maple Cottage at half-past two in the morning"
+          ],
+          "reaction": "Investigates the mysterious knocking and uncovers the truth behind Inspector Weymouth's madness.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Graham Vernon": {
+      "type": "suspect",
+      "role": "Target",
+      "location": "Hotel",
+      "phase_locations": {
+        "1": "Hotel",
+        "2": "Hotel"
+      },
+      "persona": "Confident, adventurous, and somewhat reckless. Speaks with the enthusiasm of a man who thrives on danger.",
+      "knowledge_about_others": {
+        "Dr. Inspector-Siva": "Unaware of his existence but targeted for his influence in Bhutan."
+      },
+      "secret": "He is targeted by Dr. Fu Manchu for his knowledge and influence in Bhutan, which threatens the Yellow Empire's plans.",
+      "abilities": "Skilled in survival and adaptable to dangerous situations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Call of Cleeve"
+          ],
+          "reaction": "Becomes paranoid and seeks protection from the investigators, revealing his knowledge of Dr. Fu Manchu's plans.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 50,
+      "flight_risk": 40
+    },
+    "Southery Eltham": {
+      "type": "suspect",
+      "role": "Inventor and Target",
+      "location": "Rowan House",
+      "phase_locations": {
+        "1": "Rowan House",
+        "2": "Rowan House"
+      },
+      "persona": "Brilliant, eccentric, and somewhat absent-minded. Speaks with enthusiasm about his inventions and their potential.",
+      "knowledge_about_others": {
+        "Dr. Inspector-Siva": "Unaware of his existence but targeted for his invention of the aero-torpedo."
+      },
+      "secret": "His invention, the aero-torpedo, is coveted by Dr. Fu Manchu for its potential to shift the balance of power.",
+      "abilities": "Genius-level intellect and expertise in engineering and aviation.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Hashish-induced hallucinations in Southery Eltham"
+          ],
+          "reaction": "Reveals the theft of his plans and the methods used by Dr. Fu Manchu to drug him.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 60,
+      "flight_risk": 30
+    },
+    "Lord Andaman": {
+      "type": "suspect",
+      "role": "Engineer and Target",
+      "location": "Stradwick Hall",
+      "phase_locations": {
+        "2": "Stradwick Hall"
+      },
+      "persona": "Intelligent, reserved, and deeply committed to his work. Speaks with the confidence of a man who has achieved great things.",
+      "knowledge_about_others": {
+        "Dr. Inspector-Siva": "Unaware of his existence but targeted for his engineering genius."
+      },
+      "secret": "He is targeted by Dr. Fu Manchu for his engineering projects, which threaten the Yellow Empire's plans.",
+      "abilities": "Expertise in engineering and construction, with a deep understanding of large-scale projects.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Warning from Yen-Sun-Yat"
+          ],
+          "reaction": "Considers abandoning his plans to return to China, revealing the extent of Dr. Fu Manchu's influence.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 40,
+      "flight_risk": 20
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Sir Moses Shen's house": {
+        "description": "A grand and imposing residence in London, filled with artifacts from Sir Moses's travels and career. The house is dimly lit and exudes an air of mystery and foreboding.",
+        "clues": [
+          "Mark on Sir Moses Shen's hand resembling a 'Zayat Kiss'",
+          "Soot in the grate indicating possible entry via chimney"
+        ],
+        "people": [
+          {
+            "id": "sir_moses_shen",
+            "name": "Sir Moses Shen",
+            "description": "A deceased man lying in state, with a mysterious mark on his hand.",
+            "notes": "Victim of the Zayat Kiss, a deadly method used by Dr. Fu Manchu.",
+            "state": "dead"
+          },
+          {
+            "id": "kwee_barber",
+            "name": "Kwee Barber",
+            "description": "A tall, lean man with a square-cut, clean-shaven face, sun-baked to the hue of coffee.",
+            "notes": "Investigator and old friend of Dr. Chinaman, determined to uncover the truth behind Sir Moses's death."
+          },
+          {
+            "id": "dr_chinaman",
+            "name": "Dr. Chinaman",
+            "description": "A composed and analytical man, with a keen eye for detail and a deep sense of justice.",
+            "notes": "Narrator and medical expert, drawn into the investigation by Kwee Barber."
+          }
+        ],
+        "objects": [
+          {
+            "id": "perfumed_envelope",
+            "category": "item",
+            "name": "Perfumed envelope",
+            "description": "A large, square envelope containing a blank sheet of paper, scented with a pungent perfume.",
+            "notes": "Linked to the Zayat Kiss and the death of Sir Moses Shen."
+          },
+          {
+            "id": "writing_table",
+            "category": "surface",
+            "name": "Writing Table",
+            "description": "A cluttered table with papers, a lamp, and various writing instruments.",
+            "notes": "The perfumed envelope was found here, indicating Sir Moses's last actions."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Croxted-Effendi's opium den",
+            "state": "locked"
+          }
+        ],
+        "setting": "A dimly lit and opulent residence, filled with artifacts from distant lands. The air is thick with tension and the scent of mystery."
+      },
+      "Croxted-Effendi's opium den": {
+        "description": "A dimly lit and squalid opium den located off the old Ratcliff Highway. The air is thick with the scent of opium and the sounds of hushed whispers.",
+        "clues": [
+          "Severed fingers on victims indicating Thuggee involvement"
+        ],
+        "people": [
+          {
+            "id": "croxted_effendi",
+            "name": "Croxted-Effendi",
+            "description": "A little Honan man dressed in a loose smock, black trousers, and thick-soled slippers.",
+            "notes": "Owner of the opium den and a potential informant on Dr. Fu Manchu's activities."
+          },
+          {
+            "id": "kwee_barber_opium_den",
+            "name": "Kwee Barber",
+            "description": "Disguised as a seafaring ruffian, with a rough appearance and a gruff demeanor.",
+            "notes": "Investigating the opium den for clues about Dr. Fu Manchu's operations."
+          },
+          {
+            "id": "dr_chinaman_opium_den",
+            "name": "Dr. Chinaman",
+            "description": "Disguised as a seafaring ruffian, blending in with the patrons of the opium den.",
+            "notes": "Accompanying Kwee Barber to gather evidence and observe the activities in the den."
+          }
+        ],
+        "objects": [
+          {
+            "id": "opium_pipe",
+            "category": "item",
+            "name": "Opium Pipe",
+            "description": "A metal pipe used for smoking opium, with a small bowl for holding the drug.",
+            "notes": "Used by patrons of the opium den, including Kwee Barber and Dr. Chinaman in disguise."
+          },
+          {
+            "id": "bamboo_ladder",
+            "category": "item",
+            "name": "Bamboo Ladder",
+            "description": "A slender ladder made of bamboo joints and silken cord, used for scaling walls and accessing hidden areas.",
+            "notes": "Used by Dr. Fu Manchu's agents to gain access to secure locations."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Sir Moses Shen's house",
+            "state": "locked"
+          },
+          {
+            "location_id": "Redmoat",
+            "state": "locked"
+          }
+        ],
+        "setting": "A squalid and dimly lit opium den, filled with the scent of opium and the sounds of hushed whispers. The air is thick with tension and the promise of hidden secrets."
+      },
+      "Redmoat": {
+        "description": "A secluded and fortified home belonging to the Rev. J.D. Hunchback, surrounded by a moat and dense shrubbery. The house exudes an air of mystery and isolation.",
+        "clues": [
+          "Footprints of a marmoset on Eltham's window sill"
+        ],
+        "people": [
+          {
+            "id": "rev_hunchback",
+            "name": "Rev. J.D. Hunchback",
+            "description": "A sensitive and refined clergyman with a nervous disposition and a mysterious past.",
+            "notes": "Formerly known as 'Parson Stanislaus,' a hero of the Boxer Rebellion, now living in seclusion."
+          },
+          {
+            "id": "nayland_hunchback",
+            "name": "Nayland Hunchback",
+            "description": "A charming and intelligent young woman, with a keen interest in the mysteries surrounding her father's home.",
+            "notes": "Daughter of Rev. J.D. Hunchback, who has witnessed strange occurrences at Redmoat."
+          },
+          {
+            "id": "kwee_barber_redmoat",
+            "name": "Kwee Barber",
+            "description": "A determined and resourceful investigator, exploring Redmoat for clues about Dr. Fu Manchu's activities.",
+            "notes": "Seeks to protect Rev. Hunchback and uncover the truth behind the strange events at Redmoat."
+          },
+          {
+            "id": "dr_chinaman_redmoat",
+            "name": "Dr. Chinaman",
+            "description": "An observant and analytical companion to Kwee Barber, providing medical expertise and keen insights.",
+            "notes": "Accompanying Kwee Barber to investigate the mysteries at Redmoat and protect its inhabitants."
+          }
+        ],
+        "objects": [
+          {
+            "id": "silken_cord",
+            "category": "item",
+            "name": "Silken Cord",
+            "description": "A strong and slender cord made of silk, used for various purposes by Dr. Fu Manchu's agents.",
+            "notes": "Found in the shrubbery at Redmoat, indicating the presence of Dr. Fu Manchu's agents."
+          },
+          {
+            "id": "shrubbery_cache",
+            "category": "container",
+            "name": "Shrubbery Cache",
+            "description": "A hidden cache in the shrubbery, disguised with a laurel shrub and tufts of grass.",
+            "notes": "Used by Dr. Fu Manchu's agents as a hiding place and base of operations within Redmoat.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "bamboo_rod",
+                "category": "item",
+                "name": "Bamboo Rod",
+                "description": "A slender bamboo-jointed rod with a hook on the top, used for attaching and detaching the silken ladder.",
+                "notes": "Found in the shrubbery cache, indicating the method used by Dr. Fu Manchu's agents to access Redmoat."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Croxted-Effendi's opium den",
+            "state": "locked"
+          },
+          {
+            "location_id": "Rowan House",
+            "state": "locked"
+          }
+        ],
+        "setting": "A secluded and fortified home, surrounded by a moat and dense shrubbery. The air is thick with tension and the promise of hidden dangers."
+      },
+      "Rowan House": {
+        "description": "A squat and ancient mansion belonging to Sir Caesar Stradwick, surrounded by dense trees and overgrown gardens. The house exudes an air of decay and mystery.",
+        "clues": [
+          "Green mist observed in Rowan House"
+        ],
+        "people": [
+          {
+            "id": "sir_caesar_stradwick",
+            "name": "Sir Caesar Stradwick",
+            "description": "A tall, massive man with untidy gray hair, a bristling mustache, and a brown skin. He wears a dirty dressing-gown and exudes an air of eccentricity.",
+            "notes": "A renowned explorer and Orientalist, targeted by Dr. Fu Manchu for his knowledge and influence."
+          },
+          {
+            "id": "kwee_barber_rowan_house",
+            "name": "Kwee Barber",
+            "description": "A determined and resourceful investigator, exploring Rowan House for clues about Dr. Fu Manchu's activities.",
+            "notes": "Seeks to protect Sir Caesar Stradwick and uncover the truth behind the strange events at Rowan House."
+          },
+          {
+            "id": "dr_chinaman_rowan_house",
+            "name": "Dr. Chinaman",
+            "description": "An observant and analytical companion to Kwee Barber, providing medical expertise and keen insights.",
+            "notes": "Accompanying Kwee Barber to investigate the mysteries at Rowan House and protect its inhabitants."
+          }
+        ],
+        "objects": [
+          {
+            "id": "sarcophagus",
+            "category": "container",
+            "name": "Sarcophagus",
+            "description": "A large and ornate Egyptian sarcophagus, containing the mummy of a high priest and various valuable artifacts.",
+            "notes": "Targeted by Dr. Fu Manchu's agents for the valuable artifacts hidden within the mummy's wrappings.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "rubber_stopper",
+                "category": "item",
+                "name": "Rubber Stopper",
+                "description": "A rubber stopper or 'cork' used to seal a hole in the sarcophagus, allowing for ventilation.",
+                "notes": "Found near the sarcophagus, indicating the method used by Dr. Fu Manchu's agents to conceal a deadly gas within."
+              }
+            ]
+          },
+          {
+            "id": "ebony_case",
+            "category": "container",
+            "name": "Ebony Case",
+            "description": "A small and ornate ebony case, containing various instruments and tools.",
+            "notes": "Used by Dr. Fu Manchu to cure Inspector Weymouth's madness, containing the antidote to the poisoned needle.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "needle_syringe",
+                "category": "item",
+                "name": "Needle-Syringe",
+                "description": "A needle-syringe containing an amber liquid, used as an antidote to a deathlike trance or poison.",
+                "notes": "Found within the ebony case, providing a crucial clue to Dr. Fu Manchu's methods."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Redmoat",
+            "state": "locked"
+          },
+          {
+            "location_id": "House near Windsor",
+            "state": "locked"
+          }
+        ],
+        "setting": "A squat and ancient mansion, surrounded by dense trees and overgrown gardens. The air is thick with the scent of decay and the promise of hidden dangers."
+      },
+      "House near Windsor": {
+        "description": "A luxurious and secluded mansion near Windsor, surrounded by high walls and dense gardens. The house exudes an air of opulence and mystery.",
+        "clues": [
+          "Perfumed envelopes linked to the Zayat Kiss"
+        ],
+        "people": [
+          {
+            "id": "dr_inspector_siva_windsor",
+            "name": "Dr. Inspector-Siva",
+            "description": "A tall, lean, and feline man with a high-shouldered gait, a close-shaven skull, and long, magnetic eyes of the true cat-green.",
+            "notes": "The mastermind behind the Yellow Empire's plans, using the mansion as a base of operations and a hiding place."
+          },
+          {
+            "id": "lionel_windsor",
+            "name": "Lionel",
+            "description": "A beautiful and mysterious woman with dark eyes and a captivating presence, dressed in elegant and exotic attire.",
+            "notes": "A slave to Dr. Fu Manchu, torn between loyalty and a desire to escape his control."
+          },
+          {
+            "id": "karamaneh_windsor",
+            "name": "Karamaneh",
+            "description": "A young boy with dark, curly hair and an olive complexion, kept in a deathlike trance by Dr. Fu Manchu.",
+            "notes": "Lionel's brother, used as leverage to control her actions and loyalty."
+          }
+        ],
+        "objects": [
+          {
+            "id": "wire_jacket",
+            "category": "item",
+            "name": "Wire Jacket",
+            "description": "A torture device consisting of a jacket made of wire, used to extract information from prisoners.",
+            "notes": "A feared instrument of Dr. Fu Manchu, hinting at the methods he uses to control and interrogate his enemies."
+          },
+          {
+            "id": "laboratory_equipment",
+            "category": "surface",
+            "name": "Laboratory Equipment",
+            "description": "Various scientific instruments, retorts, and tubes, used by Dr. Fu Manchu for his experiments and research.",
+            "notes": "Indicates Dr. Fu Manchu's expertise in chemistry and toxicology, and his use of science for nefarious purposes."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Rowan House",
+            "state": "locked"
+          },
+          {
+            "location_id": "Hulk on the Yan River",
+            "state": "locked"
+          }
+        ],
+        "setting": "A luxurious and secluded mansion, surrounded by high walls and dense gardens. The air is thick with tension and the promise of hidden dangers, as well as the scent of exotic perfumes."
+      },
+      "Hulk on the Yan River": {
+        "description": "An old and decrepit hulk moored on the Yan River, used as a secret laboratory and base of operations by Dr. Fu Manchu. The hulk exudes an air of decay and danger.",
+        "clues": [
+          "Message 'Tongking—SECOND' from Lionel"
+        ],
+        "people": [
+          {
+            "id": "dr_inspector_siva_hulk",
+            "name": "Dr. Inspector-Siva",
+            "description": "A tall, lean, and feline man with a high-shouldered gait, a close-shaven skull, and long, magnetic eyes of the true cat-green.",
+            "notes": "Using the hulk as a secret laboratory and base of operations for his experiments and plans."
+          },
+          {
+            "id": "kwee_barber_hulk",
+            "name": "Kwee Barber",
+            "description": "A determined and resourceful investigator, exploring the hulk for clues about Dr. Fu Manchu's activities.",
+            "notes": "Seeks to uncover the secrets of the hulk and disrupt Dr. Fu Manchu's operations."
+          },
+          {
+            "id": "dr_chinaman_hulk",
+            "name": "Dr. Chinaman",
+            "description": "An observant and analytical companion to Kwee Barber, providing medical expertise and keen insights.",
+            "notes": "Accompanying Kwee Barber to investigate the mysteries of the hulk and protect against its dangers."
+          }
+        ],
+        "objects": [
+          {
+            "id": "trapdoor",
+            "category": "container",
+            "name": "Trapdoor",
+            "description": "A hidden trapdoor in the floor of the hulk's cabin, leading to a secret chamber below.",
+            "notes": "Used by Dr. Fu Manchu to trap and eliminate his enemies, concealing a deadly gas or other hazards.",
+            "state": "closed"
+          },
+          {
+            "id": "marmoset",
+            "category": "item",
+            "name": "Marmoset",
+            "description": "A small and agile monkey, trained by Dr. Fu Manchu to perform various tasks and acts of espionage.",
+            "notes": "One of Dr. Fu Manchu's many pets and tools, used to gather information and carry out his plans."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "House near Windsor",
+            "state": "locked"
+          },
+          {
+            "location_id": "East End riverside building",
+            "state": "locked"
+          }
+        ],
+        "setting": "An old and decrepit hulk, moored on the Yan River. The air is thick with the scent of decay and the promise of hidden dangers, as well as the sounds of the river's ebb and flow."
+      },
+      "East End riverside building": {
+        "description": "A drab and unassuming riverside building in the East End of London, concealing a luxurious and secretive interior. The building exudes an air of mystery and danger.",
+        "clues": [
+          "Wound on Barber's arm from a venomous barb"
+        ],
+        "people": [
+          {
+            "id": "dr_inspector_siva_east_end",
+            "name": "Dr. Inspector-Siva",
+            "description": "A tall, lean, and feline man with a high-shouldered gait, a close-shaven skull, and long, magnetic eyes of the true cat-green.",
+            "notes": "Using the building as his primary base of operations and hiding place in London."
+          },
+          {
+            "id": "lionel_east_end",
+            "name": "Lionel",
+            "description": "A beautiful and mysterious woman with dark eyes and a captivating presence, dressed in elegant and exotic attire.",
+            "notes": "Living in the building as Dr. Fu Manchu's slave, torn between loyalty and a desire to escape his control."
+          },
+          {
+            "id": "karamaneh_east_end",
+            "name": "Karamaneh",
+            "description": "A young boy with dark, curly hair and an olive complexion, kept in a deathlike trance by Dr. Fu Manchu.",
+            "notes": "Lionel's brother, used as leverage to control her actions and loyalty."
+          },
+          {
+            "id": "kwee_barber_east_end",
+            "name": "Kwee Barber",
+            "description": "A determined and resourceful investigator, raiding the building to capture Dr. Fu Manchu and free Lionel and Karamaneh.",
+            "notes": "Leading the final assault on Dr. Fu Manchu's base of operations, seeking to bring the villain to justice."
+          },
+          {
+            "id": "dr_chinaman_east_end",
+            "name": "Dr. Chinaman",
+            "description": "An observant and analytical companion to Kwee Barber, providing medical expertise and keen insights.",
+            "notes": "Accompanying Kwee Barber on the raid, seeking to uncover the secrets of the building and protect its captives."
+          }
+        ],
+        "objects": [
+          {
+            "id": "vellum_note",
+            "category": "item",
+            "name": "Vellum Note",
+            "description": "A soiled and creased sheet of vellum, bearing a message written in a cramped and peculiar hand.",
+            "notes": "Found in the building, providing a final clue to Dr. Fu Manchu's plans and his ultimate fate."
+          },
+          {
+            "id": "poison_cellar",
+            "category": "container",
+            "name": "Poison Cellar",
+            "description": "A hidden cellar beneath the building, filled with deadly fungi and other toxic substances.",
+            "notes": "Used by Dr. Fu Manchu for his most dangerous experiments and as a trap for his enemies.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Hulk on the Yan River",
+            "state": "locked"
+          }
+        ],
+        "setting": "A drab and unassuming riverside building, concealing a luxurious and secretive interior. The air is thick with tension and the promise of hidden dangers, as well as the scent of exotic perfumes and the sounds of the river."
+      },
+      "Maple Cottage": {
+        "description": "A quaint and peaceful cottage located in a quiet village, belonging to Inspector Weymouth. The cottage exudes an air of tranquility and homeliness.",
+        "clues": [
+          "Knocking at Maple Cottage at half-past two in the morning"
+        ],
+        "people": [
+          {
+            "id": "inspector_weymouth",
+            "name": "Inspector Weymouth",
+            "description": "A gruff and no-nonsense police inspector, dedicated to upholding the law and protecting his home and family.",
+            "notes": "Living in the cottage with his wife, targeted by Dr. Fu Manchu for his role in the investigation."
+          },
+          {
+            "id": "kwee_barber_maple_cottage",
+            "name": "Kwee Barber",
+            "description": "A determined and resourceful investigator, visiting Maple Cottage to uncover the truth behind the mysterious knocking.",
+            "notes": "Seeking to protect Inspector Weymouth and solve the mystery of the knocking at half-past two."
+          },
+          {
+            "id": "dr_chinaman_maple_cottage",
+            "name": "Dr. Chinaman",
+            "description": "An observant and analytical companion to Kwee Barber, providing medical expertise and keen insights.",
+            "notes": "Accompanying Kwee Barber to investigate the mysteries at Maple Cottage and protect its inhabitants."
+          }
+        ],
+        "objects": [
+          {
+            "id": "ebony_case_maple",
+            "category": "container",
+            "name": "Ebony Case",
+            "description": "A small and ornate ebony case, containing various instruments and tools used to cure Inspector Weymouth's madness.",
+            "notes": "Provided by Dr. Fu Manchu to cure Inspector Weymouth, containing the antidote to the poisoned needle.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "curing_instruments",
+                "category": "item",
+                "name": "Curing Instruments",
+                "description": "Various instruments and tools used to cure Inspector Weymouth's madness, including a needle-syringe with an antidote.",
+                "notes": "Used by Dr. Fu Manchu to demonstrate his power and control over his enemies."
+              }
+            ]
+          }
+        ],
+        "connections": [],
+        "setting": "A quaint and peaceful cottage, exuding an air of tranquility and homeliness. The atmosphere is thick with tension and the promise of hidden dangers, as the mystery of the knocking unfolds."
+      }
+    }
+  },
+  "locations": {
+    "Sir Moses Shen's house": {
+      "description": "A grand and imposing residence in London, filled with artifacts from Sir Moses's travels and career. The house is dimly lit and exudes an air of mystery and foreboding.",
+      "items": [
+        "Perfumed envelope"
+      ],
+      "clues": [
+        "Mark on Sir Moses Shen's hand resembling a 'Zayat Kiss'",
+        "Soot in the grate indicating possible entry via chimney"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit and opulent residence, filled with artifacts from distant lands. The air is thick with tension and the scent of mystery.",
+        "connections": [
+          {
+            "target_location": "Croxted-Effendi's opium den",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Croxted-Effendi's opium den": {
+      "description": "A dimly lit and squalid opium den located off the old Ratcliff Highway. The air is thick with the scent of opium and the sounds of hushed whispers.",
+      "items": [
+        "Opium Pipe",
+        "Bamboo Ladder"
+      ],
+      "clues": [
+        "Severed fingers on victims indicating Thuggee involvement"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A squalid and dimly lit opium den, filled with the scent of opium and the sounds of hushed whispers. The air is thick with tension and the promise of hidden secrets.",
+        "connections": [
+          {
+            "target_location": "Sir Moses Shen's house",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Redmoat",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Redmoat": {
+      "description": "A secluded and fortified home belonging to the Rev. J.D. Hunchback, surrounded by a moat and dense shrubbery. The house exudes an air of mystery and isolation.",
+      "items": [
+        "Silken Cord"
+      ],
+      "clues": [
+        "Footprints of a marmoset on Eltham's window sill"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A secluded and fortified home, surrounded by a moat and dense shrubbery. The air is thick with tension and the promise of hidden dangers.",
+        "connections": [
+          {
+            "target_location": "Croxted-Effendi's opium den",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Rowan House",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Rowan House": {
+      "description": "A squat and ancient mansion belonging to Sir Caesar Stradwick, surrounded by dense trees and overgrown gardens. The house exudes an air of decay and mystery.",
+      "items": [],
+      "clues": [
+        "Green mist observed in Rowan House"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A squat and ancient mansion, surrounded by dense trees and overgrown gardens. The air is thick with the scent of decay and the promise of hidden dangers.",
+        "connections": [
+          {
+            "target_location": "Redmoat",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "House near Windsor",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "House near Windsor": {
+      "description": "A luxurious and secluded mansion near Windsor, surrounded by high walls and dense gardens. The house exudes an air of opulence and mystery.",
+      "items": [
+        "Wire Jacket"
+      ],
+      "clues": [
+        "Perfumed envelopes linked to the Zayat Kiss"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A luxurious and secluded mansion, surrounded by high walls and dense gardens. The air is thick with tension and the promise of hidden dangers, as well as the scent of exotic perfumes.",
+        "connections": [
+          {
+            "target_location": "Rowan House",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Hulk on the Yan River",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Hulk on the Yan River": {
+      "description": "An old and decrepit hulk moored on the Yan River, used as a secret laboratory and base of operations by Dr. Fu Manchu. The hulk exudes an air of decay and danger.",
+      "items": [
+        "Marmoset"
+      ],
+      "clues": [
+        "Message 'Tongking—SECOND' from Lionel"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An old and decrepit hulk, moored on the Yan River. The air is thick with the scent of decay and the promise of hidden dangers, as well as the sounds of the river's ebb and flow.",
+        "connections": [
+          {
+            "target_location": "House near Windsor",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "East End riverside building",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "East End riverside building": {
+      "description": "A drab and unassuming riverside building in the East End of London, concealing a luxurious and secretive interior. The building exudes an air of mystery and danger.",
+      "items": [
+        "Vellum Note"
+      ],
+      "clues": [
+        "Wound on Barber's arm from a venomous barb"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A drab and unassuming riverside building, concealing a luxurious and secretive interior. The air is thick with tension and the promise of hidden dangers, as well as the scent of exotic perfumes and the sounds of the river.",
+        "connections": [
+          {
+            "target_location": "Hulk on the Yan River",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Maple Cottage": {
+      "description": "A quaint and peaceful cottage located in a quiet village, belonging to Inspector Weymouth. The cottage exudes an air of tranquility and homeliness.",
+      "items": [],
+      "clues": [
+        "Knocking at Maple Cottage at half-past two in the morning"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quaint and peaceful cottage, exuding an air of tranquility and homeliness. The atmosphere is thick with tension and the promise of hidden dangers, as the mystery of the knocking unfolds.",
+        "connections": [],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

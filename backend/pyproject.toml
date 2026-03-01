@@ -16,6 +16,10 @@ dependencies = [
     "langfuse>=2.0.0",
     "mistry-agents[all-providers]",
     "mistry-asset-generation",
+    "py-cord>=2.7.1",
+    "requests>=2.32.5",
+    "pynacl>=1.6.2",
+    "python-multipart>=0.0.22",
 ]
 
 [project.optional-dependencies]
