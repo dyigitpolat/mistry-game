@@ -8,12 +8,50 @@ interface ClueItem {
     type: "clue" | "epiphany";
 }
 
+interface DiscordClue {
+    name: string;
+    description: string;
+    significance: string;
+}
+
+interface DiscordSuspect {
+    name: string;
+    motive?: string;
+    alibi?: string;
+    suspicion_level: string;
+    notes: string;
+}
+
+interface DiscordTheory {
+    theory: string;
+    supporting_evidence: string[];
+    counter_evidence: string[];
+    proposed_by?: string;
+}
+
+interface DiscordNote {
+    id: string;
+    session_id: string;
+    summary: string;
+    key_points: string[];
+    clues: DiscordClue[];
+    suspects: DiscordSuspect[];
+    theories: DiscordTheory[];
+    action_items: string[];
+    unresolved_questions: string[];
+    recorded_at: string;
+    duration_seconds?: number;
+}
+
 interface DeductionBoardProps {
     clues: ClueItem[];
     inventory: string[];
     notes: string;
     onNotesChange?: (notes: string) => void;
     onConnectClues?: (clues: string[], reasoning: string) => void;
+    discordNotes?: DiscordNote[];
+    discordLinked?: boolean;
+    discordGuildName?: string;
 }
 
 export default function DeductionBoard({
@@ -22,13 +60,17 @@ export default function DeductionBoard({
     notes,
     onNotesChange,
     onConnectClues,
+    discordNotes = [],
+    discordLinked = false,
+    discordGuildName,
 }: DeductionBoardProps) {
     const [selectedClues, setSelectedClues] = useState<Set<number>>(new Set());
     const [reasoning, setReasoning] = useState("");
     const [isConnecting, setIsConnecting] = useState(false);
     const [editingNotes, setEditingNotes] = useState(false);
     const [noteText, setNoteText] = useState(notes);
-    const [activeTab, setActiveTab] = useState<"clues" | "evidence" | "notes">("clues");
+    const [activeTab, setActiveTab] = useState<"clues" | "evidence" | "notes" | "discord">("clues");
+    const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
 
     const toggleClue = useCallback((idx: number) => {
         setSelectedClues((prev) => {
@@ -86,7 +128,7 @@ export default function DeductionBoard({
 
                 {/* Tabs */}
                 <div className="flex gap-1 bg-background-dark rounded-lg p-0.5">
-                    {(["clues", "evidence", "notes"] as const).map((tab) => (
+                    {(["clues", "evidence", "notes", "discord"] as const).map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
@@ -95,7 +137,15 @@ export default function DeductionBoard({
                                     : "text-text-secondary hover:text-white"
                                 }`}
                         >
-                            {tab === "clues" ? `Clues (${regularClues.length})` : tab === "evidence" ? `Items (${inventory.length})` : "Notes"}
+                            {tab === "clues" ? `Clues (${regularClues.length})`
+                                : tab === "evidence" ? `Items (${inventory.length})`
+                                : tab === "discord" ? (
+                                    <span className="flex items-center justify-center gap-1">
+                                        <span className="material-symbols-outlined text-[10px]">mic</span>
+                                        {discordNotes.length > 0 ? discordNotes.length : ""}
+                                    </span>
+                                )
+                                : "Notes"}
                         </button>
                     ))}
                 </div>
@@ -260,6 +310,191 @@ export default function DeductionBoard({
                                     <p className="text-text-secondary text-sm italic">Click to add notes...</p>
                                 )}
                             </div>
+                        )}
+                    </div>
+                )}
+
+                {activeTab === "discord" && (
+                    <div className="space-y-3">
+                        {/* Discord link status banner */}
+                        {discordLinked ? (
+                            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3 flex items-center gap-2">
+                                <span className="material-symbols-outlined text-purple-400 text-sm">smart_toy</span>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-xs text-purple-300 font-bold truncate">
+                                        Connected to {discordGuildName || "Discord"}
+                                    </p>
+                                    <p className="text-[10px] text-purple-300/60">
+                                        Voice discussions will appear here
+                                    </p>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="bg-surface-dark border border-border-dark rounded-lg p-4 text-center">
+                                <span className="material-symbols-outlined text-3xl text-purple-400/50 mb-2">smart_toy</span>
+                                <p className="text-sm text-slate-300 font-bold">Discord Not Connected</p>
+                                <p className="text-xs text-text-secondary mt-1 mb-3">
+                                    Use the Mistry Discord bot to record voice discussions
+                                </p>
+                                <p className="text-[10px] text-text-secondary/60">
+                                    Run <code className="bg-background-dark px-1 rounded">/mystery link</code> in Discord
+                                </p>
+                            </div>
+                        )}
+
+                        {/* Discord notes list */}
+                        {discordNotes.length === 0 ? (
+                            discordLinked && (
+                                <div className="text-center py-4">
+                                    <p className="text-text-secondary text-xs">
+                                        No discussion notes yet.
+                                    </p>
+                                    <p className="text-text-secondary/60 text-[10px] mt-1">
+                                        Use <code className="bg-surface-dark px-1 rounded">/mystery record</code> in Discord
+                                    </p>
+                                </div>
+                            )
+                        ) : (
+                            discordNotes.map((note) => {
+                                const isExpanded = expandedNoteId === note.id;
+                                const hasDetails = note.clues.length > 0 || note.suspects.length > 0 || note.theories.length > 0;
+
+                                return (
+                                    <div
+                                        key={note.id}
+                                        className="bg-purple-500/5 border border-purple-500/20 rounded-lg overflow-hidden"
+                                    >
+                                        {/* Note header */}
+                                        <div
+                                            onClick={() => hasDetails && setExpandedNoteId(isExpanded ? null : note.id)}
+                                            className={`p-3 ${hasDetails ? "cursor-pointer hover:bg-purple-500/10" : ""} transition-colors`}
+                                        >
+                                            <div className="flex items-start gap-2">
+                                                <span className="material-symbols-outlined text-purple-400 text-sm mt-0.5">mic</span>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-xs text-slate-200 leading-relaxed">
+                                                        {note.summary}
+                                                    </p>
+                                                    <div className="flex items-center gap-2 mt-2 text-[10px] text-purple-300/60">
+                                                        {note.duration_seconds && (
+                                                            <span>{Math.round(note.duration_seconds)}s</span>
+                                                        )}
+                                                        <span>
+                                                            {new Date(note.recorded_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                                                        </span>
+                                                        {hasDetails && (
+                                                            <span className="ml-auto flex items-center gap-1">
+                                                                {note.clues.length > 0 && <span>{note.clues.length} clues</span>}
+                                                                {note.suspects.length > 0 && <span>{note.suspects.length} suspects</span>}
+                                                                <span className="material-symbols-outlined text-xs">
+                                                                    {isExpanded ? "expand_less" : "expand_more"}
+                                                                </span>
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Expanded details */}
+                                        {isExpanded && (
+                                            <div className="border-t border-purple-500/20 p-3 space-y-3 bg-purple-500/5">
+                                                {/* Key points */}
+                                                {note.key_points.length > 0 && (
+                                                    <div>
+                                                        <p className="text-[10px] font-bold uppercase tracking-wider text-purple-400 mb-1">Key Points</p>
+                                                        <ul className="text-xs text-slate-300 space-y-1">
+                                                            {note.key_points.map((point, i) => (
+                                                                <li key={i} className="flex items-start gap-1">
+                                                                    <span className="text-purple-400">•</span>
+                                                                    {point}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
+
+                                                {/* Clues discussed */}
+                                                {note.clues.length > 0 && (
+                                                    <div>
+                                                        <p className="text-[10px] font-bold uppercase tracking-wider text-purple-400 mb-1">Clues Discussed</p>
+                                                        <div className="space-y-1">
+                                                            {note.clues.map((clue, i) => (
+                                                                <div key={i} className="text-xs bg-background-dark/50 p-2 rounded">
+                                                                    <span className="font-bold text-slate-200">{clue.name}</span>
+                                                                    <span className={`ml-2 text-[10px] px-1 rounded ${
+                                                                        clue.significance === "high" ? "bg-red-500/20 text-red-300" :
+                                                                        clue.significance === "medium" ? "bg-yellow-500/20 text-yellow-300" :
+                                                                        "bg-slate-500/20 text-slate-400"
+                                                                    }`}>
+                                                                        {clue.significance}
+                                                                    </span>
+                                                                    <p className="text-slate-400 mt-0.5">{clue.description}</p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Suspects discussed */}
+                                                {note.suspects.length > 0 && (
+                                                    <div>
+                                                        <p className="text-[10px] font-bold uppercase tracking-wider text-purple-400 mb-1">Suspects Discussed</p>
+                                                        <div className="space-y-1">
+                                                            {note.suspects.map((suspect, i) => (
+                                                                <div key={i} className="text-xs bg-background-dark/50 p-2 rounded">
+                                                                    <span className="font-bold text-slate-200">{suspect.name}</span>
+                                                                    <span className={`ml-2 text-[10px] px-1 rounded ${
+                                                                        suspect.suspicion_level === "high" ? "bg-red-500/20 text-red-300" :
+                                                                        suspect.suspicion_level === "medium" ? "bg-yellow-500/20 text-yellow-300" :
+                                                                        "bg-slate-500/20 text-slate-400"
+                                                                    }`}>
+                                                                        {suspect.suspicion_level}
+                                                                    </span>
+                                                                    {suspect.motive && <p className="text-slate-400 mt-0.5">Motive: {suspect.motive}</p>}
+                                                                    {suspect.alibi && <p className="text-slate-400">Alibi: {suspect.alibi}</p>}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Theories */}
+                                                {note.theories.length > 0 && (
+                                                    <div>
+                                                        <p className="text-[10px] font-bold uppercase tracking-wider text-purple-400 mb-1">Theories</p>
+                                                        <div className="space-y-1">
+                                                            {note.theories.map((theory, i) => (
+                                                                <div key={i} className="text-xs bg-background-dark/50 p-2 rounded">
+                                                                    <p className="text-slate-200">{theory.theory}</p>
+                                                                    {theory.proposed_by && (
+                                                                        <p className="text-[10px] text-slate-500 mt-1">— {theory.proposed_by}</p>
+                                                                    )}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Action items */}
+                                                {note.action_items.length > 0 && (
+                                                    <div>
+                                                        <p className="text-[10px] font-bold uppercase tracking-wider text-purple-400 mb-1">Next Steps</p>
+                                                        <ul className="text-xs text-slate-300 space-y-1">
+                                                            {note.action_items.map((item, i) => (
+                                                                <li key={i} className="flex items-start gap-1">
+                                                                    <span className="material-symbols-outlined text-[10px] text-purple-400">check_box_outline_blank</span>
+                                                                    {item}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })
                         )}
                     </div>
                 )}

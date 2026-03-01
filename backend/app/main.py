@@ -19,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 _project_root = Path(__file__).parent.parent.parent
 load_dotenv(_project_root / ".env")
 
-from app.routes import game, generate, scenarios, scenes, stats, profile  # noqa: E402
+from app.routes import game, generate, scenarios, scenes, stats, profile, discord  # noqa: E402
 from app.db.mongodb import connect_to_mongo, close_mongo_connection
 from app.db.redis_cache import connect_to_redis, close_redis_connection
 
@@ -36,6 +36,10 @@ async def lifespan(app: FastAPI):
         print("📊 Langfuse telemetry enabled")
     if os.getenv("GEMINI_API_KEY"):
         print("🎨 Google Nanobanana scene generation enabled")
+    if os.getenv("MISTRAL_API_KEY"):
+        print("🎙️ Voxtral speech summarization enabled")
+    if os.getenv("DISCORD_BOT_TOKEN"):
+        print("🎮 Discord integration available")
 
     # Scenes directory is resolved globally
     # Connect to Databases
@@ -84,6 +88,7 @@ app.include_router(generate.router, prefix="/scenarios", tags=["generation"])
 app.include_router(scenes.router, prefix="/scenes", tags=["scenes"])
 app.include_router(stats.router, prefix="/stats", tags=["stats"])
 app.include_router(profile.router, prefix="/profile", tags=["profile"])
+app.include_router(discord.router, prefix="/discord", tags=["discord"])
 
 
 # ── Health Check ──────────────────────────────────────────────────────

@@ -133,7 +133,7 @@ export default function StudioDashboardPage() {
 
           <nav className="flex-1 overflow-y-auto p-3">
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">
-              Mistry Engine
+              Mistery
             </p>
             <div className="space-y-0.5">
               {SIDEBAR_NAV.map((item) => (
@@ -141,8 +141,8 @@ export default function StudioDashboardPage() {
                   key={item.key}
                   onClick={() => setActiveNav(item.key)}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${activeNav === item.key
-                      ? "bg-primary/15 text-primary"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                    ? "bg-primary/15 text-primary"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
                     }`}
                 >
                   <span className="material-symbols-outlined text-[20px]">

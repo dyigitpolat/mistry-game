@@ -18,11 +18,15 @@ import {
     accuseCase,
     getScenario,
     generateSceneImage,
+    getDiscordStatus,
+    getDiscordNotes,
     BACKEND_URL,
     type GameSession,
     type Scenario,
     type ActionResponse,
     type AccusationResult,
+    type DiscordNote,
+    type DiscordStatus,
 } from "@/lib/api";
 
 // ── Types ──────────────────────────────────────────────────────────
@@ -58,6 +62,10 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
     const [toasts, setToasts] = useState<Toast[]>([]);
     const [sceneImageUrl, setSceneImageUrl] = useState<string | undefined>();
     const toastCounter = useRef(0);
+
+    // Discord integration state
+    const [discordStatus, setDiscordStatus] = useState<DiscordStatus | null>(null);
+    const [discordNotes, setDiscordNotes] = useState<DiscordNote[]>([]);
 
     // Modal state
     const [showAccusation, setShowAccusation] = useState(false);
@@ -141,6 +149,42 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         }
         init();
     }, [scenarioId, addLog]);
+
+    // ── Discord status and notes polling ────────────────────────────
+    useEffect(() => {
+        if (!session?.id) return;
+
+        // Initial fetch
+        const fetchDiscord = async () => {
+            try {
+                const [status, notes] = await Promise.all([
+                    getDiscordStatus(session.id),
+                    getDiscordNotes(session.id),
+                ]);
+                setDiscordStatus(status);
+                setDiscordNotes(notes);
+            } catch (err) {
+                // Discord not available, ignore
+                console.debug("Discord status not available:", err);
+            }
+        };
+
+        fetchDiscord();
+
+        // Poll every 10 seconds if Discord is linked
+        const interval = setInterval(async () => {
+            if (discordStatus?.is_linked) {
+                try {
+                    const notes = await getDiscordNotes(session.id);
+                    setDiscordNotes(notes);
+                } catch (err) {
+                    // Ignore polling errors
+                }
+            }
+        }, 10000);
+
+        return () => clearInterval(interval);
+    }, [session?.id, discordStatus?.is_linked]);
 
     // ── Process action response ─────────────────────────────────────
     const processResponse = useCallback(
@@ -495,7 +539,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             <div className="min-h-screen bg-background-dark flex items-center justify-center font-display">
                 <div className="text-center">
                     <span className="material-symbols-outlined text-6xl text-primary animate-spin">progress_activity</span>
-                    <p className="mt-4 text-lg text-text-secondary">Connecting to Mistry Engine…</p>
+                    <p className="mt-4 text-lg text-text-secondary">Connecting to Whodunit Engine…</p>
                 </div>
             </div>
         );
@@ -521,6 +565,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             <GameHeader
                 sessionTime={formatTime(playerState?.elapsed_minutes || 0)}
                 scenarioTitle={scenario?.title}
+                sessionId={session?.id}
             />
 
             <main className="flex-1 grid grid-cols-12 gap-0 overflow-hidden h-full">
@@ -530,6 +575,9 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                     inventory={playerState?.inventory || []}
                     notes={playerState?.notes || ""}
                     onConnectClues={handleConnectClues}
+                    discordNotes={discordNotes}
+                    discordLinked={discordStatus?.is_linked || false}
+                    discordGuildName={discordStatus?.guild_name}
                 />
 
                 {/* Center: Scene + Narrative */}
