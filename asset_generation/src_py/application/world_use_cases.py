@@ -268,13 +268,21 @@ class WorldService:
         descriptions = {
             loc_id: loc.description for loc_id, loc in request.world.locations.items()
         }
+        existing_objects: dict[str, list[str]] = {}
+        for loc_id, loc in request.world.locations.items():
+            names: list[str] = []
+            for obj in loc.objects:
+                names.append(obj.name)
+                if obj.contains:
+                    names.extend(item.name for item in obj.contains)
+            existing_objects[loc_id] = names
         start_preview_run(expected_total=expected)
         try:
             (artifacts, _, _), (variant_artifacts, _), moods, raw_decorations = await asyncio.gather(
                 self._artifacts.render_many(render_requests, request.profile),
                 self._artifacts.render_variant_groups(variant_requests, request.profile),
                 infer_room_moods(descriptions),
-                suggest_decorations(descriptions),
+                suggest_decorations(descriptions, existing_objects=existing_objects),
             )
             artifacts.update(variant_artifacts)
 
@@ -310,6 +318,14 @@ class WorldService:
         descriptions = {
             loc_id: loc.description for loc_id, loc in request.world.locations.items()
         }
+        existing_objects_upd: dict[str, list[str]] = {}
+        for loc_id, loc in request.world.locations.items():
+            names: list[str] = []
+            for obj in loc.objects:
+                names.append(obj.name)
+                if obj.contains:
+                    names.extend(item.name for item in obj.contains)
+            existing_objects_upd[loc_id] = names
         gate_map = {
             loc_id: loc.gates for loc_id, loc in request.layout.locations.items()
         }
@@ -319,7 +335,7 @@ class WorldService:
                 self._artifacts.render_many(render_requests, request.profile),
                 self._artifacts.render_variant_groups(variant_requests, request.profile),
                 infer_room_moods(descriptions),
-                suggest_decorations(descriptions),
+                suggest_decorations(descriptions, existing_objects=existing_objects_upd),
             )
             artifacts.update(variant_artifacts)
 

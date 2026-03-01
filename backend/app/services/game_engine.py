@@ -137,9 +137,15 @@ class GameEngine:
             raw["game_world"] = {"locations": raw.pop("locations")}
 
         locations = raw.get("game_world", {}).get("locations", {})
+
+        # Build a mapping from location key → human name found elsewhere
+        # in the scenario (unlocked_locations, phase_locations, character
+        # locations) so auto-generated names stay consistent.
+        ref_names = GameEngine._collect_location_ref_names(raw, locations)
+
         for loc_id, loc_data in locations.items():
             if "name" not in loc_data or not loc_data.get("name"):
-                loc_data["name"] = loc_id.replace("_", " ").title()
+                loc_data["name"] = ref_names.get(loc_id, loc_id.replace("_", " ").title())
             GameEngine._normalize_location(loc_data)
 
         # Ensure every connection is bidirectional
@@ -147,6 +153,39 @@ class GameEngine:
 
         # Populate Location.people from scenario characters
         GameEngine._populate_people(raw, locations)
+
+    @staticmethod
+    def _collect_location_ref_names(raw: dict, locations: dict) -> Dict[str, str]:
+        """Scan phases and characters for human-readable location references.
+
+        Returns {location_key: display_name} for keys that can be matched to
+        a reference string found in unlocked_locations or phase_locations.
+        """
+        import re as _re
+
+        ref_strings: set[str] = set()
+        for phase in raw.get("phases", []):
+            for loc_ref in phase.get("unlocked_locations", []):
+                ref_strings.add(loc_ref)
+        for char_data in raw.get("characters", {}).values():
+            if isinstance(char_data, dict):
+                if char_data.get("location"):
+                    ref_strings.add(char_data["location"])
+                for v in char_data.get("phase_locations", {}).values():
+                    if isinstance(v, str):
+                        ref_strings.add(v)
+
+        def _normalise(s: str) -> str:
+            return _re.sub(r"[^a-z0-9]", "", s.lower())
+
+        ref_by_norm = {_normalise(r): r for r in ref_strings}
+
+        result: Dict[str, str] = {}
+        for loc_id in locations:
+            norm_id = _normalise(loc_id)
+            if norm_id in ref_by_norm:
+                result[loc_id] = ref_by_norm[norm_id]
+        return result
 
     @staticmethod
     def _normalize_location(loc: dict) -> None:

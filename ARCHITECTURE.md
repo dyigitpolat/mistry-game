@@ -27,7 +27,7 @@ This repo contains the Mistry detective game: a **Next.js frontend** with an int
 - **Architecture**: layered — `src_py/domain` (models), `src_py/application` (use-cases), `src_py/infrastructure` (fal.ai renderer, disk cache), `src_py/api` (HTTP controllers).
 - **Artifact pipeline**: text-to-image via fal.ai Nano Banana 2 → state strip cropping → rembg background removal → base64 PNG.
 - **Mood inference**: per-room atmospheric moods inferred via Pydantic AI + Mistral.
-- **AI decorations**: 2–3 large floor objects per room suggested by AI, placed near walls.
+- **AI decorations**: 2–3 large floor objects per room suggested by AI, placed near walls. Existing world objects and container items are passed to the inference prompt and used for post-generation deduplication filtering.
 - **Caching**: disk-backed cache in `asset_generation/.artifact_cache/`. Persists across restarts.
 - **API** (served from main backend on port 8000):
   - `POST /v1/worlds/initialize` — raw world JSON
@@ -42,7 +42,7 @@ This repo contains the Mistry detective game: a **Next.js frontend** with an int
 - **Stack**: Next.js 16 (App Router), TypeScript, Tailwind v4, next-auth v4.
 - **Game page** (`src/app/game/[id]/page.tsx`): 12-column grid layout:
   - **Left (col-span-3)**: MinimapPanel (SVG room map) + DeductionBoard (clues, evidence, notes, Discord).
-  - **Center (col-span-6)**: Gemini scene background with GameplayView canvas overlay (15% E/W padding, 30% N padding) + NarrativeLog.
+  - **Center (col-span-6)**: Gemini scene background with GameplayView canvas overlay (slide-down animated on scene load, with drawer toggle) + NarrativeLog.
   - **Right (col-span-3)**: StatusPanel (objective, inventory with generated sprite thumbnails, characters, locations, Solve Case).
 
 ### Gameplay UI (`src/components/gameplay/`)
@@ -51,7 +51,7 @@ Ported from `ui/` — canvas-based top-down room renderer:
 
 - **GameplayView.tsx**: controlled component accepting dungeon state from the page.
 - **GameCanvas.jsx**: HTML5 canvas with `requestAnimationFrame` loop rendering floor tiles, walls, gates, objects, people, player sprite, and mood-driven effects (vignette, particles, color temperature).
-- **MinimapPanel.tsx**: SVG minimap showing visited rooms as square nodes with multi-line text labels.
+- **MinimapPanel.tsx**: SVG minimap with fixed viewport, drag-to-pan, scroll-to-zoom. Displays visited rooms with dimmed scene-image backgrounds, bright text labels with drop shadows. Auto-centers on current room when location changes.
 - **InteractionPanel.jsx**: floating panel for container/surface/person interaction. Includes "Take" buttons for items.
 - **hooks/useGameplayState.ts**: manages dungeon state, world initialization from backend session, room sync with narrative engine, and state patch application.
 - **hooks/useMovement.js**: path consumption; gate clicks fire `onRoomChangeRequest` callback instead of instant room switch.

@@ -28,6 +28,12 @@ def get_engine():
     return GameEngine._shared_instance
 
 
+def _normalize_key(s: str) -> str:
+    """Strip non-alphanumeric chars and lowercase for fuzzy comparison."""
+    import re
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
 def _resolve_location_name(engine, scenario_id: str, location_name: str, locations: dict):
     """Resolve a possibly display-name-mapped location to the original key."""
     if location_name in locations:
@@ -38,10 +44,15 @@ def _resolve_location_name(engine, scenario_id: str, location_name: str, locatio
     original = reverse.get(location_name)
     if original and original in locations:
         return original
-    # Fallback: case-insensitive partial match on location.name field
+    # Case-insensitive exact match on location.name field
     lower = location_name.lower().strip()
     for loc_id, loc in locations.items():
         if (loc.name or loc_id).lower().strip() == lower:
+            return loc_id
+    # Normalized match (ignoring punctuation differences)
+    norm = _normalize_key(location_name)
+    for loc_id, loc in locations.items():
+        if _normalize_key(loc.name or loc_id) == norm or _normalize_key(loc_id) == norm:
             return loc_id
     return None
 

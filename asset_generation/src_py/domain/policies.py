@@ -45,10 +45,16 @@ def object_render_description(
     base = description or name or "object"
     if category is ObjectCategory.CONTAINER and state is not None:
         if state is ContainerState.OPEN:
-            return f"{base}, open, interior visible"
+            return f"Storage furniture: {base}, open, interior visible"
         if state is ContainerState.LOCKED:
-            return f"{base}, closed and locked"
-        return f"{base}, closed and unlocked"
+            return f"Storage furniture: {base}, closed and locked"
+        return f"Storage furniture: {base}, closed and unlocked"
+    if category is ObjectCategory.SURFACE:
+        return f"Large furniture piece: {base}"
+    if category is ObjectCategory.ITEM:
+        return f"Small handheld item: {base}"
+    if category is ObjectCategory.DECORATION:
+        return f"Large floor decoration: {base}"
     return base
 
 

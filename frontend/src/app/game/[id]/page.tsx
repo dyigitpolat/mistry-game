@@ -64,6 +64,8 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
     const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
     const [toasts, setToasts] = useState<Toast[]>([]);
     const [sceneImageUrl, setSceneImageUrl] = useState<string | undefined>();
+    const [sceneImages, setSceneImages] = useState<Record<string, string>>({});
+    const [backendCharsInRoom, setBackendCharsInRoom] = useState<string[] | null>(null);
     const toastCounter = useRef(0);
 
     // Discord integration state
@@ -291,6 +293,11 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                 }
             }
 
+            // Characters in room (from backend location filtering)
+            if (response.characters_in_room) {
+                setBackendCharsInRoom(response.characters_in_room);
+            }
+
             // Error
             if (response.error) {
                 addLog(response.error, { type: "error" });
@@ -494,6 +501,10 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         [session, addLog]
     );
 
+    // ── Canvas slide-down animation (state only — effect depends on currentLocation, defined below) ──
+    const [canvasVisible, setCanvasVisible] = useState(false);
+    const canvasToggle = useCallback(() => setCanvasVisible(v => !v), []);
+
     // ── Gameplay canvas state (lifted here so both GameplayView and MinimapPanel share it) ──
     const gameplay = useGameplayState(session?.id ?? null, session?.player_state?.current_location);
 
@@ -535,6 +546,13 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
     const unlockedLocations = currentPhase?.unlocked_locations || [];
     const unlockedCharacters = currentPhase?.unlocked_characters || [];
 
+    // Canvas slide-down animation on location change
+    useEffect(() => {
+        setCanvasVisible(false);
+        const t = setTimeout(() => setCanvasVisible(true), 400);
+        return () => clearTimeout(t);
+    }, [currentLocation]);
+
     // Fetch scene image when location changes
     useEffect(() => {
         let mounted = true;
@@ -544,8 +562,9 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             generateSceneImage(scenarioId, currentLocation)
                 .then(data => {
                     if (mounted && data.image_url) {
-                        // image_url is returned as a relative path like `/scenes/file.png`
-                        setSceneImageUrl(`${BACKEND_URL}${data.image_url}`);
+                        const fullUrl = `${BACKEND_URL}${data.image_url}`;
+                        setSceneImageUrl(fullUrl);
+                        setSceneImages(prev => ({ ...prev, [currentLocation]: fullUrl }));
                     }
                 })
                 .catch(err => console.error("Failed to fetch scene image", err));
@@ -574,12 +593,11 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
     ];
 
     // Characters at current location with full info
-    const charactersInRoom = unlockedCharacters
+    const charNamesInRoom = backendCharsInRoom ?? unlockedCharacters;
+    const charactersInRoom = charNamesInRoom
         .filter((name) => {
             const char = scenario?.characters[name];
-            if (!char) return false;
-            // Show characters that are at the player's current location in this phase
-            return true; // Let's show all unlocked characters for now — the backend handles location filtering
+            return !!char;
         })
         .map((name) => {
             const charState = session?.character_states[name];
@@ -653,6 +671,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                         visitedRoomIds={gameplay.visitedRoomIds}
                         currentRoomId={gameplay.currentRoomId}
                         rooms={gameplay.dungeon?.rooms ?? {}}
+                        sceneImages={sceneImages}
                     />
                     <div className="flex-1 min-h-0 overflow-hidden">
                         <DeductionBoard
@@ -674,8 +693,17 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                         sceneImageUrl={sceneImageUrl}
                     >
                         {/* Gameplay canvas overlay — centered at 80% scale with vignette blending */}
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <div className="relative pointer-events-auto" style={{ width: "56%", maxHeight: "88%" }}>
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ overflow: "hidden" }}>
+                            <div
+                                className="relative pointer-events-auto"
+                                style={{
+                                    width: "56%",
+                                    maxHeight: "88%",
+                                    transform: canvasVisible ? "translateY(0)" : "translateY(-110%)",
+                                    opacity: canvasVisible ? 1 : 0,
+                                    transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out",
+                                }}
+                            >
                                 <GameplayView
                                     dungeon={gameplay.dungeon}
                                     currentRoomId={gameplay.currentRoomId}
@@ -708,6 +736,29 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                                      }} />
                             </div>
                         </div>
+                        {/* Drawer toggle handle */}
+                        <button
+                            onClick={canvasToggle}
+                            className="absolute left-1/2 z-20 flex items-center justify-center pointer-events-auto"
+                            style={{
+                                top: 8,
+                                transform: "translateX(-50%)",
+                                width: 48,
+                                height: 24,
+                                borderRadius: "0 0 10px 10px",
+                                background: "rgba(18, 88, 226, 0.5)",
+                                backdropFilter: "blur(6px)",
+                                border: "1px solid rgba(107, 163, 255, 0.3)",
+                                borderTop: "none",
+                                cursor: "pointer",
+                                transition: "background 0.2s",
+                            }}
+                            title={canvasVisible ? "Hide game view" : "Show game view"}
+                        >
+                            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" style={{ transform: canvasVisible ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
+                                <path d="M1 1L8 8L15 1" stroke="rgba(160,200,255,0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
                     </SceneView>
                     <NarrativeLog
                         entries={logEntries}

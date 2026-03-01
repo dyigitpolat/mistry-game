@@ -79,6 +79,7 @@ class GamemakerOracle:
             current_phase_objective=current_phase.get("objective", ""),
             player_location=current_loc_name,
             player_epiphanies=player_state.get("epiphanies", []),
+            player_inventory=player_state.get("inventory", []),
             elapsed_minutes=player_state.get("elapsed_minutes", 0),
             time_limit=scenario.get("time_limit_minutes", 180),
             unlocked_locations=current_phase.get("unlocked_locations", []),

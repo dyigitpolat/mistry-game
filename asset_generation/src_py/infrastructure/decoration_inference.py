@@ -63,15 +63,23 @@ DECOR_SYSTEM_PROMPT = (
 )
 
 
+def _normalize_name(s: str) -> str:
+    import re
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
 async def suggest_decorations(
     descriptions: dict[str, str],
     count_per_room: int = 3,
+    existing_objects: dict[str, list[str]] | None = None,
 ) -> dict[str, list[DecorationItem]]:
     """Suggest decorative objects per room using Pydantic AI with Mistral.
 
     Args:
         descriptions: mapping of location_id -> room description.
         count_per_room: number of decorations to suggest per room.
+        existing_objects: mapping of location_id -> list of object/item names already
+            present in the room, used to avoid duplicate decorations.
 
     Returns:
         mapping of location_id -> list of DecorationItem (without placement coords).
@@ -120,14 +128,19 @@ async def suggest_decorations(
             description="Map of location_id to its decoration suggestions"
         )
 
-    room_lines = "\n".join(
-        f"- {loc_id}: {desc}" for loc_id, desc in descriptions.items()
-    )
+    room_lines_parts: list[str] = []
+    for loc_id, desc in descriptions.items():
+        existing = (existing_objects or {}).get(loc_id, [])
+        existing_str = f" [EXISTING OBJECTS: {', '.join(existing)}]" if existing else ""
+        room_lines_parts.append(f"- {loc_id}: {desc}{existing_str}")
+    room_lines = "\n".join(room_lines_parts)
     prompt = (
         f"For each room below, suggest exactly {count_per_room} LARGE standalone floor objects "
         "that fit the room's atmosphere. These are non-interactive background props that occupy "
         "a 2×2 tile area — think furniture, barrels, large pots, statues, floor lamps, etc. "
-        "NEVER suggest small hand-held items.\n\n"
+        "NEVER suggest small hand-held items.\n"
+        "AVOID suggesting any objects that match or closely resemble the room's EXISTING OBJECTS "
+        "listed in brackets — those are already placed in the scene.\n\n"
         f"{room_lines}\n\n"
         "For each decoration, provide a short name and a concise visual description "
         "suitable for generating a pixel-art sprite. Keep descriptions under 20 words."
@@ -147,14 +160,22 @@ async def suggest_decorations(
         else:
             raise RuntimeError("Unexpected output type from decoration agent")
 
+        existing_norm: dict[str, set[str]] = {}
+        if existing_objects:
+            for loc_id, names in existing_objects.items():
+                existing_norm[loc_id] = {_normalize_name(n) for n in names}
+
         decorations: dict[str, list[DecorationItem]] = {}
         for loc_id in descriptions:
             room_decors = raw.get(loc_id)
             if not room_decors:
                 decorations[loc_id] = []
                 continue
+            blocked = existing_norm.get(loc_id, set())
             items: list[DecorationItem] = []
             for idx, suggestion in enumerate(room_decors.items[:count_per_room]):
+                if _normalize_name(suggestion.name) in blocked:
+                    continue
                 stable_id = hashlib.sha256(f"{loc_id}:{idx}:{suggestion.name}".encode()).hexdigest()[:8]
                 items.append(DecorationItem(
                     id=f"decor_{stable_id}",

@@ -374,17 +374,25 @@ class FalRenderer(RendererPort):
 # ── Prompt builders ───────────────────────────────────────────────────
 
 def _build_single_prompt(request: RenderRequest) -> str:
-    person_hint = ""
+    extra_hint = ""
     if request.subject_type.value == "world_person":
-        person_hint = (
+        extra_hint = (
             " Character must be strongly separated from white background with thick dark outline and saturated colors. "
             "Avoid white/very-light clothing and avoid glow that blends into white."
         )
+    elif request.subject_type.value == "world_item":
+        extra_hint = " Tiny object, fits in a pocket or hand. Do NOT draw a chest or box."
+    elif request.subject_type.value == "world_object":
+        category = (request.metadata or {}).get("category", "")
+        if category == "decoration":
+            extra_hint = " Large freestanding floor object, visible from top-down perspective."
+        else:
+            extra_hint = " Medium-to-large furniture piece."
     return (
         f"{PIXEL_ART_PROMPT_PREFIX} "
         f"{request.description}. "
         f"state: {request.state}. "
-        f"{person_hint}"
+        f"{extra_hint} "
         "single version only."
     )
 

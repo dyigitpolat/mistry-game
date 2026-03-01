@@ -25,8 +25,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/67/e2/d7cb819de8df6b5c1
 wheels = [
     { url = "https://files.pythonhosted.org/packages/50/25/da1f0b4dd970e52bf5a36c204c107e11a0c6d3ed195eba0bfbc664c312b2/aiofile-3.9.0-py3-none-any.whl", hash = "sha256:ce2f6c1571538cbdfa0143b04e16b208ecb0e9cb4148e528af8a640ed51cc8aa", size = 19539, upload-time = "2024-10-08T10:39:32.955Z" },
 ]
-
-[[package]]
 name = "aiohappyeyeballs"
 version = "2.6.1"
 source = { registry = "https://pypi.org/simple" }
@@ -228,6 +226,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "authlib"
 version = "1.6.8"
 source = { registry = "https://pypi.org/simple" }
@@ -240,6 +239,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "backoff"
 version = "2.2.1"
 source = { registry = "https://pypi.org/simple" }
@@ -692,7 +693,7 @@ wheels = [
 
 [[package]]
 name = "fastapi"
-version = "0.135.0"
+version = "0.134.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "annotated-doc" },
@@ -701,12 +702,13 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "typing-inspection" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a2/b5/386a9579a299a32365b34097e4eac6a0544ce0d7aa4bb95ce0d71607a999/fastapi-0.135.0.tar.gz", hash = "sha256:bd37903acf014d1284bda027096e460814dca9699f9dacfe11c275749d949f4d", size = 393855, upload-time = "2026-03-01T09:28:46.714Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/15/647ea81cb73b55b48fb095158a9cd64e42e9e4f1d34dbb5cc4a4939779d6/fastapi-0.134.0.tar.gz", hash = "sha256:3122b1ea0dbeaab48b5976e80b99ca7eda02be154bf03e126a33220e73255a9a", size = 385667, upload-time = "2026-02-27T21:18:12.931Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/38/fa5dd0e677e1e2e38f858933c4a125e80103e551151f1f661dd4f227210d/fastapi-0.135.0-py3-none-any.whl", hash = "sha256:31e2ddc78d6406c6f7d5d7b9996a057985e2600fbe7e9ba6ace8205d48dff688", size = 114496, upload-time = "2026-03-01T09:28:48.162Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/e6/fd49c28a54b7d6f5c64045155e40f6cff9ed4920055043fb5ac7969f7f2f/fastapi-0.134.0-py3-none-any.whl", hash = "sha256:f4e7214f24b2262258492e05c48cf21125e4ffc427e30dd32fb4f74049a3d56a", size = 110404, upload-time = "2026-02-27T21:18:10.809Z" },
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "fastavro"
 version = "1.12.1"
 source = { registry = "https://pypi.org/simple" }
@@ -805,6 +807,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "frozenlist"
 version = "1.8.0"
 source = { registry = "https://pypi.org/simple" }
@@ -910,6 +914,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "fsspec"
 version = "2026.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -972,6 +977,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "googleapis-common-protos"
 version = "1.72.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2080,6 +2087,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "mpmath"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2089,6 +2097,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "multidict"
 version = "6.7.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2206,6 +2216,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "networkx"
 version = "3.6.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2372,6 +2383,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "openai"
 version = "2.24.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2764,6 +2777,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "pooch"
 version = "1.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2790,6 +2804,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "propcache"
 version = "0.4.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2904,19 +2920,7 @@ wheels = [
 ]
 
 [[package]]
-name = "py-cord"
-version = "2.7.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "aiohttp" },
-    { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/0b/56/74d5a2c9e9c23c449a999b89abeaa2a77a2be56017d001218556d5886960/py_cord-2.7.1.tar.gz", hash = "sha256:100935f37e77ba8ac1e3eff0b180e6d69bcac083de81d4c83d42327d9a2eddee", size = 1132229, upload-time = "2026-02-09T08:54:59.949Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/25/ee/38f9707fd4d7381dea3257a5278de9d23f62d3b2781702b293ead12c0671/py_cord-2.7.1-py3-none-any.whl", hash = "sha256:d95301226f0642f6f3b23e21c31987ebbe23fdb7007cbc8143b010eb6780dec1", size = 1207918, upload-time = "2026-02-09T08:54:58.428Z" },
-]
-
-[[package]]
+<<<<<<< HEAD
 name = "py-key-value-aio"
 version = "0.4.4"
 source = { registry = "https://pypi.org/simple" }
@@ -2960,6 +2964,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e9/e6/78ebbb10a8c8e4b61a59249394a4a594c1a7af95593dc933a349c8d00964/pyasn1_modules-0.4.2.tar.gz", hash = "sha256:677091de870a80aae844b1ca6134f54652fa2c8c5a52aa396440ac3106e941e6", size = 307892, upload-time = "2025-03-28T02:41:22.17Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/47/8d/d529b5d697919ba8c11ad626e835d4039be708a35b0d22de83a269a6682c/pyasn1_modules-0.4.2-py3-none-any.whl", hash = "sha256:29253a9207ce32b64c3ac6600edc75368f98473906e8fd1043bd6b5b1de2c14a", size = 181259, upload-time = "2025-03-28T02:41:19.028Z" },
+=======
+name = "py-cord"
+version = "2.7.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0b/56/74d5a2c9e9c23c449a999b89abeaa2a77a2be56017d001218556d5886960/py_cord-2.7.1.tar.gz", hash = "sha256:100935f37e77ba8ac1e3eff0b180e6d69bcac083de81d4c83d42327d9a2eddee", size = 1132229, upload-time = "2026-02-09T08:54:59.949Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/ee/38f9707fd4d7381dea3257a5278de9d23f62d3b2781702b293ead12c0671/py_cord-2.7.1-py3-none-any.whl", hash = "sha256:d95301226f0642f6f3b23e21c31987ebbe23fdb7007cbc8143b010eb6780dec1", size = 1207918, upload-time = "2026-02-09T08:54:58.428Z" },
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 ]
 
 [[package]]
@@ -3329,6 +3345,14 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
+name = "pyperclip"
+version = "1.11.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e8/52/d87eba7cb129b81563019d1679026e7a112ef76855d6159d24754dbd2a51/pyperclip-1.11.0.tar.gz", hash = "sha256:244035963e4428530d9e3a6101a1ef97209c6825edab1567beac148ccc1db1b6", size = 12185, upload-time = "2025-09-26T14:40:37.245Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/df/80/fc9d01d5ed37ba4c42ca2b55b4339ae6e200b456be3a1aaddf4a9fa99b8c/pyperclip-1.11.0-py3-none-any.whl", hash = "sha256:299403e9ff44581cb9ba2ffeed69c7aa96a008622ad0c46cb575ca75b5b84273", size = 11063, upload-time = "2025-09-26T14:40:36.069Z" },
+=======
 name = "pynacl"
 version = "1.6.2"
 source = { registry = "https://pypi.org/simple" }
@@ -3361,15 +3385,7 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/48/47/e761c254f410c023a469284a9bc210933e18588ca87706ae93002c05114c/pynacl-1.6.2-cp38-abi3-win32.whl", hash = "sha256:5811c72b473b2f38f7e2a3dc4f8642e3a3e9b5e7317266e4ced1fba85cae41aa", size = 227421, upload-time = "2026-01-01T17:32:33.076Z" },
     { url = "https://files.pythonhosted.org/packages/41/ad/334600e8cacc7d86587fe5f565480fde569dfb487389c8e1be56ac21d8ac/pynacl-1.6.2-cp38-abi3-win_amd64.whl", hash = "sha256:62985f233210dee6548c223301b6c25440852e13d59a8b81490203c3227c5ba0", size = 239754, upload-time = "2026-01-01T17:32:34.557Z" },
     { url = "https://files.pythonhosted.org/packages/29/7d/5945b5af29534641820d3bd7b00962abbbdfee84ec7e19f0d5b3175f9a31/pynacl-1.6.2-cp38-abi3-win_arm64.whl", hash = "sha256:834a43af110f743a754448463e8fd61259cd4ab5bbedcf70f9dabad1d28a394c", size = 184801, upload-time = "2026-01-01T17:32:36.309Z" },
-]
-
-[[package]]
-name = "pyperclip"
-version = "1.11.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e8/52/d87eba7cb129b81563019d1679026e7a112ef76855d6159d24754dbd2a51/pyperclip-1.11.0.tar.gz", hash = "sha256:244035963e4428530d9e3a6101a1ef97209c6825edab1567beac148ccc1db1b6", size = 12185, upload-time = "2025-09-26T14:40:37.245Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/80/fc9d01d5ed37ba4c42ca2b55b4339ae6e200b456be3a1aaddf4a9fa99b8c/pyperclip-1.11.0-py3-none-any.whl", hash = "sha256:299403e9ff44581cb9ba2ffeed69c7aa96a008622ad0c46cb575ca75b5b84273", size = 11063, upload-time = "2025-09-26T14:40:36.069Z" },
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 ]
 
 [[package]]
@@ -3432,6 +3448,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "pywin32"
 version = "311"
 source = { registry = "https://pypi.org/simple" }
@@ -3460,6 +3477,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "pyyaml"
 version = "6.0.3"
 source = { registry = "https://pypi.org/simple" }
@@ -4580,6 +4599,7 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "xai-sdk"
 version = "1.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -4702,6 +4722,8 @@ wheels = [
 ]
 
 [[package]]
+=======
+>>>>>>> da590946129433ef87e1a95be785bde79c0e1549
 name = "yarl"
 version = "1.22.0"
 source = { registry = "https://pypi.org/simple" }
