@@ -537,7 +537,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             <div className="min-h-screen bg-background-dark flex items-center justify-center font-display">
                 <div className="text-center">
                     <span className="material-symbols-outlined text-6xl text-primary animate-spin">progress_activity</span>
-                    <p className="mt-4 text-lg text-text-secondary">Connecting to Whodunit Engine…</p>
+                    <p className="mt-4 text-lg text-text-secondary">Connecting to Mistery</p>
                 </div>
             </div>
         );
