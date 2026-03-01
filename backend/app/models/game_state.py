@@ -44,6 +44,7 @@ class GameSession(BaseModel):
     last_action_at: Optional[datetime] = None
     is_complete: bool = False
     outcome: Optional[str] = None  # "solved", "failed", "abandoned"
+    discord_guild_id: Optional[str] = Field(None, description="Linked Discord guild ID.")
 
 
 class ActionRequest(BaseModel):
