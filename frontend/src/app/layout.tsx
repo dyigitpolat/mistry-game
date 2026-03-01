@@ -3,9 +3,9 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Whodunit — AI Detective Game",
+  title: "Mistry — AI Detective Game",
   description:
-    "Immersive whodunit detective mysteries powered by a multi-agent AI engine. Investigate, interrogate, and deduce.",
+    "Immersive detective mysteries powered by a multi-agent AI engine. Investigate, interrogate, and deduce.",
 };
 
 export default function RootLayout({

@@ -1,7 +1,7 @@
 [project]
 name = "mistry-backend"
 version = "0.1.0"
-description = "Mistry Whodunit Game — FastAPI Backend"
+description = "Mistry Game — FastAPI Backend"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115.0",

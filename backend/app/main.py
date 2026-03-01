@@ -61,8 +61,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Mistry Whodunit Engine",
-    description="Backend API for the Whodunit multi-agent detective game. "
+    title="Mistry Engine",
+    description="Backend API for the Mistry multi-agent detective game. "
                 "Powered by GPT-5-mini via deepagents SDK with Langfuse observability.",
     version="0.2.0",
     lifespan=lifespan,

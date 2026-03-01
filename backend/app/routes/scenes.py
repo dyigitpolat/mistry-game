@@ -9,6 +9,8 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
+from app.services.game_engine import GameEngine
+
 router = APIRouter()
 
 # Check if scene generation is available
@@ -21,6 +23,14 @@ except ImportError:
     pass
 
 
+def _get_engine() -> GameEngine:
+    """Return the shared GameEngine instance instead of creating a new one."""
+    engine = GameEngine._shared_instance
+    if engine is None:
+        engine = GameEngine()
+    return engine
+
+
 @router.post("/{scenario_id}/generate")
 async def generate_scene(scenario_id: str, location_name: str):
     """Generate a scene image for a specific location."""
@@ -30,8 +40,7 @@ async def generate_scene(scenario_id: str, location_name: str):
             detail="Scene generation unavailable. Set GEMINI_API_KEY and install mistry-agents."
         )
 
-    from app.services.game_engine import GameEngine
-    engine = GameEngine()
+    engine = _get_engine()
     scenario = engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
@@ -65,8 +74,7 @@ async def generate_hero(scenario_id: str):
             detail="Scene generation unavailable. Set GEMINI_API_KEY and install mistry-agents."
         )
 
-    from app.services.game_engine import GameEngine
-    engine = GameEngine()
+    engine = _get_engine()
     scenario = engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
@@ -96,8 +104,7 @@ async def generate_all_scenes(scenario_id: str):
             detail="Scene generation unavailable."
         )
 
-    from app.services.game_engine import GameEngine
-    engine = GameEngine()
+    engine = _get_engine()
     scenario = engine.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")

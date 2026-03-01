@@ -75,10 +75,15 @@ def generate_story(
             f"LLM response must be a JSON object with {required!r} keys; missing: {missing}"
         )
     story_text = out.get("text") or out["story"]
+    culprits = [str(x) for x in out["culprits"]]
+    characters = [str(x) for x in out["characters"]]
+    for c in culprits:
+        if c not in characters:
+            characters.append(c)
     return {
         "title": str(out["title"]),
-        "culprits": [str(x) for x in out["culprits"]],
-        "characters": [str(x) for x in out["characters"]],
+        "culprits": culprits,
+        "characters": characters,
         "locations": [str(x) for x in out["locations"]],
         "clues": [str(x) for x in out["clues"]],
         "items": [str(x) for x in out["items"]],

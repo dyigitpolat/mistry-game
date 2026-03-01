@@ -2,7 +2,7 @@
 
 ---
 
-This document defines the core architecture and data structures for the Whodunit Multi-Agent Detective Engine. It is divided into two parts: the strict Pydantic schema used for dataset ingestion/knowledge graph construction, and the C4 architecture diagrams detailing the agent interactions.
+This document defines the core architecture and data structures for the Mistry Multi-Agent Detective Engine. It is divided into two parts: the strict Pydantic schema used for dataset ingestion/knowledge graph construction, and the C4 architecture diagrams detailing the agent interactions.
 
 ## Part 1: Pydantic Data Schema (Knowledge Graph)
 
@@ -117,7 +117,7 @@ class Scenario(BaseModel):
 
 ## Agentic Engine Specification
 
-The Whodunit OS uses a hub-and-spoke multi-agent architecture. The system relies on isolated working memories to prevent hallucinations and premature narrative spoilers.
+Mistry uses a hub-and-spoke multi-agent architecture. The system relies on isolated working memories to prevent hallucinations and premature narrative spoilers.
 
 NOTE that we use Gemini models for C4 diagrams but it is interchangeable with other LLMs
 
@@ -129,16 +129,16 @@ How the user interacts with the overarching platform.
 
 ```
 C4Context
-    title Context Diagram: Whodunit OS
+    title Context Diagram: Mistry
 
     Person(player, "The Detective (Player)", "Interacts via text, manages evidence, draws epiphanies.")
-    System(whodunit_os, "Whodunit OS", "Stateful game engine managing narrative progression and physics.")
+    System(mistry, "Mistry", "Stateful game engine managing narrative progression and physics.")
     System_Ext(gemini_flash, "Gemini Flash (LLM)", "Powers natural language routing, reasoning, and character dialog.")
     System_Ext(gemini_image, "Gemini Image (Nano Banana)", "Renders real-time visual metadata into environmental imagery.")
 
-    Rel(player, whodunit_os, "Executes commands, interrogates, connects clues")
-    Rel(whodunit_os, gemini_flash, "Sends prompts & state, receives structured JSON")
-    Rel(whodunit_os, gemini_image, "Sends visual metadata, receives Base64 images")
+    Rel(player, mistry, "Executes commands, interrogates, connects clues")
+    Rel(mistry, gemini_flash, "Sends prompts & state, receives structured JSON")
+    Rel(mistry, gemini_image, "Sends visual metadata, receives Base64 images")
 ```
 
 ### C4 Level 2: Container Diagram
@@ -147,7 +147,7 @@ The major deployable units and data stores.
 
 ```
 C4Container
-    title Container Diagram: Whodunit OS
+    title Container Diagram: Mistry
 
     Person(player, "The Detective")
 

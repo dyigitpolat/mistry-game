@@ -429,6 +429,14 @@ export async function unpublishScenario(
     });
 }
 
+export async function deleteScenario(
+    scenarioId: string
+): Promise<{ status: string; scenario_id: string }> {
+    return apiFetch(`/scenarios/${scenarioId}`, {
+        method: "DELETE",
+    });
+}
+
 export async function getUserProfileStats(): Promise<UserProfileStats> {
     return apiFetch("/profile/stats");
 }

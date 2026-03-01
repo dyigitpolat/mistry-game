@@ -112,7 +112,15 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
                     user_sessions[sid] = doc
         user_name = await _resolve_user_name(user["id"])
 
-    for sid, scenario in _engine.scenarios.items():
+    all_scenarios: Dict[str, Any] = dict(_engine.scenarios)
+    shared = GameEngine._shared_instance
+    if shared is not None and shared is not _engine:
+        for sid, sc in shared.scenarios.items():
+            if sid not in all_scenarios:
+                all_scenarios[sid] = sc
+
+    for sid, scenario in all_scenarios.items():
+        str_sid = str(sid)
         is_public = scenario.visibility.value == "public" if scenario.visibility else True
         is_owner = bool(user) and _check_ownership(scenario, user["id"], user_name) if user else False
 
@@ -120,7 +128,7 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
             continue
 
         summary = ScenarioSummary(
-            id=sid,
+            id=str_sid,
             title=scenario.title,
             author=getattr(scenario, 'author', '') or '',
             description=scenario.description,
@@ -158,6 +166,10 @@ async def _set_visibility(scenario_id: str, user: Dict[str, Any], target: str):
     from app.models.scenario import ScenarioVisibility
 
     scenario = _engine.load_scenario(scenario_id)
+    if scenario is None:
+        shared = GameEngine._shared_instance
+        if shared is not None and shared is not _engine:
+            scenario = shared.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
@@ -204,10 +216,49 @@ async def unpublish_scenario(
     return await _set_visibility(scenario_id, user, "private")
 
 
+@router.delete("/{scenario_id}")
+async def delete_scenario(
+    scenario_id: str,
+    user: Dict[str, Any] = Depends(get_current_user),
+):
+    """Delete a scenario. Only the owner can do this."""
+    scenario = _engine.load_scenario(scenario_id)
+    if scenario is None:
+        shared = GameEngine._shared_instance
+        if shared is not None and shared is not _engine:
+            scenario = shared.load_scenario(scenario_id)
+    if scenario is None:
+        raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
+
+    user_name = await _resolve_user_name(user["id"])
+    if not _check_ownership(scenario, user["id"], user_name):
+        raise HTTPException(status_code=403, detail="Only the owner can delete a scenario.")
+
+    _engine.scenarios.pop(scenario_id, None)
+    shared = GameEngine._shared_instance
+    if shared is not None and shared is not _engine:
+        shared.scenarios.pop(scenario_id, None)
+
+    db = await get_database()
+    if db is not None:
+        await db["scenarios"].delete_many({"title": scenario.title})
+
+    DEMO_CASE_ID = "the_phantom_of_blackwood_manor"
+    persist_path = Path(__file__).parent.parent.parent / "data" / f"{scenario_id}.json"
+    if persist_path.exists() and scenario_id != DEMO_CASE_ID:
+        persist_path.unlink()
+
+    return {"status": "deleted", "scenario_id": scenario_id}
+
+
 @router.get("/{scenario_id}")
 async def get_scenario(scenario_id: str):
     """Get full scenario data (Knowledge Graph)."""
     scenario = _engine.load_scenario(scenario_id)
+    if scenario is None:
+        shared = GameEngine._shared_instance
+        if shared is not None and shared is not _engine:
+            scenario = shared.load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
     return scenario

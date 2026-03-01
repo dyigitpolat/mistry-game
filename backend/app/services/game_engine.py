@@ -131,10 +131,18 @@ class GameEngine:
             cursor = db["scenarios"].find({})
             async for doc in cursor:
                 sid = doc.get("_id") or doc.get("title", "").lower().replace(" ", "_")
+                sid = str(sid)
                 doc.pop("_id", None)
                 try:
                     scenario = Scenario.model_validate(doc)
-                    if sid not in self.scenarios:
+                    existing_key = None
+                    for k, v in self.scenarios.items():
+                        if v.title == scenario.title:
+                            existing_key = k
+                            break
+                    if existing_key:
+                        self.scenarios[existing_key] = scenario
+                    elif sid not in self.scenarios:
                         self.scenarios[sid] = scenario
                 except Exception as e:
                     print(f"⚠️ Failed to load DB scenario {sid}: {e}")

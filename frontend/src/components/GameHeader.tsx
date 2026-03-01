@@ -13,7 +13,7 @@ export default function GameHeader({ sessionTime, scenarioTitle }: GameHeaderPro
                     <span className="material-symbols-outlined text-3xl">fingerprint</span>
                 </div>
                 <h2 className="text-slate-100 text-xl font-bold leading-tight tracking-[-0.015em]">
-                    Whodunit Engine
+                    Mistry Engine
                 </h2>
             </div>
             <div className="flex flex-1 justify-end gap-6 items-center">

@@ -91,7 +91,7 @@ Respond ONLY in JSON format:
 """
 
 EPIPHANY_SYSTEM_PROMPT = """\
-You are the **Epiphany Engine** for the Whodunit detective game "{{ scenario_title }}".
+You are the **Epiphany Engine** for the Mistry detective game "{{ scenario_title }}".
 
 ## Your Role
 You evaluate the player's deduction board (Red String Board). When the player \

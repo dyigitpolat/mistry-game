@@ -8,6 +8,7 @@ import {
   listScenarios,
   publishScenario,
   unpublishScenario,
+  deleteScenario,
   type ScenarioSummary,
 } from "@/lib/api";
 
@@ -102,6 +103,15 @@ export default function StudioDashboardPage() {
     }
   };
 
+  const handleDelete = async (scenarioId: string) => {
+    try {
+      await deleteScenario(scenarioId);
+      await loadScenarios();
+    } catch (err) {
+      console.error("Failed to delete scenario:", err);
+    }
+  };
+
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-background-dark text-slate-100 font-display">
       <AppHeader activeTab="cases" />
@@ -133,7 +143,7 @@ export default function StudioDashboardPage() {
 
           <nav className="flex-1 overflow-y-auto p-3">
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">
-              Whodunit Engine
+              Mistry Engine
             </p>
             <div className="space-y-0.5">
               {SIDEBAR_NAV.map((item) => (
@@ -299,6 +309,7 @@ export default function StudioDashboardPage() {
                     key={project.id}
                     project={project}
                     onToggleVisibility={handleToggleVisibility}
+                    onDelete={handleDelete}
                   />
                 ))}
               </div>
@@ -313,12 +324,15 @@ export default function StudioDashboardPage() {
 function StudioProjectCard({
   project,
   onToggleVisibility,
+  onDelete,
 }: {
   project: ProjectCard;
   onToggleVisibility: (id: string, currentVisibility: string) => void;
+  onDelete: (id: string) => Promise<void>;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [toggling, setToggling] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const visibility = (project.visibility || "public") as Visibility;
   const visCfg = VISIBILITY_CONFIG[visibility];
   const isPrivate = visibility === "private";
@@ -343,6 +357,16 @@ function StudioProjectCard({
       await onToggleVisibility(project.id, visibility);
     } finally {
       setToggling(false);
+      setMenuOpen(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      await onDelete(project.id);
+    } finally {
+      setDeleting(false);
       setMenuOpen(false);
     }
   };
@@ -466,11 +490,15 @@ function StudioProjectCard({
                   </span>
                   Duplicate
                 </button>
-                <button className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 transition-colors">
+                <button
+                  onClick={handleDelete}
+                  disabled={deleting}
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-50"
+                >
                   <span className="material-symbols-outlined text-[16px]">
                     delete
                   </span>
-                  Delete
+                  {deleting ? "Deleting..." : "Delete"}
                 </button>
               </div>
             </>

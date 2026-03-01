@@ -47,6 +47,36 @@ export async function POST(req: NextRequest, props: { params: Promise<{ path: st
     }
 }
 
+export async function DELETE(req: NextRequest, props: { params: Promise<{ path: string[] }> }) {
+    const params = await props.params;
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+    }
+
+    const userId = (session.user as any).id;
+    const pathUrl = params.path.join("/");
+    const url = `${BACKEND_URL}/${pathUrl}`;
+
+    try {
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "x-user-id": userId,
+            },
+            cache: "no-store",
+        });
+
+        const data = await response.json();
+        return new Response(JSON.stringify(data), { status: response.status });
+    } catch (error) {
+        console.error("Proxy DELETE Error:", error);
+        return new Response(JSON.stringify({ error: "Proxy Error Failed" }), { status: 500 });
+    }
+}
+
 export async function GET(req: NextRequest, props: { params: Promise<{ path: string[] }> }) {
     const params = await props.params;
     const session = await getServerSession(authOptions);

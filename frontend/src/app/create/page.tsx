@@ -38,6 +38,34 @@ const GENRES = [
   "Cold Case",
 ];
 
+const DEMO_CASE = {
+  caseTitle: "The Phantom of Blackwood Manor",
+  timePeriod: "Victorian Era (1837–1901)",
+  settingLocation: "Blackwood Manor, English Countryside",
+  settingDescription: "A sprawling gothic estate shrouded in perpetual mist, with creaking hallways, a locked east wing, and portraits whose eyes seem to follow you.",
+  genre: "Murder Mystery",
+  crimeSummary: "Lord Reginald Blackwood was found dead in his locked study, slumped over his desk with a shattered crystal decanter nearby. The doors were bolted from the inside and the only window was latched shut. The family doctor suspects poison, but the local constable insists it was a heart attack. Three guests were staying at the manor that stormy night, each with reason to want the lord silenced forever.",
+  characters: [
+    { type: "Suspect" as const, name: "Lady Vivienne Blackwood", role_archetype: "The Resentful Spouse", starting_location: "The Drawing Room", persona_and_secret: "Elegant and composed, Lady Vivienne has endured years of her husband's tyranny. She secretly changed her will last week and was overheard arguing with him about the family inheritance." },
+    { type: "Suspect" as const, name: "Dr. Edmund Hargrove", role_archetype: "The Family Physician", starting_location: "The Guest Suite", persona_and_secret: "A trusted family doctor for two decades. He owes massive gambling debts and Lord Blackwood had threatened to expose him to the medical board for malpractice." },
+    { type: "Suspect" as const, name: "Mr. Cecil Ashworth", role_archetype: "The Business Partner", starting_location: "The Library", persona_and_secret: "A charming financier who arrived that evening for 'urgent business.' He's been secretly embezzling funds from the Blackwood estate and was about to be found out." },
+    { type: "Assistant" as const, name: "Mrs. Prudence Finch", role_archetype: "The Head Housekeeper", starting_location: "The Kitchen", persona_and_secret: "Loyal to the household for 30 years, she knows every secret passage and hidden alcove. She discovered a torn letter in Lord Blackwood's fireplace that morning." },
+  ],
+  culprit: "Mr. Cecil Ashworth",
+  motive: "Cecil had been embezzling thousands from the Blackwood estate. Lord Blackwood discovered discrepancies in the accounts and summoned Cecil that evening to confront him. Faced with ruin and prison, Cecil poisoned the lord's favourite brandy before dinner.",
+  criticalEvidence: [
+    "A vial of arsenic hidden in Cecil's travel case",
+    "Forged accounting ledgers found in the library",
+    "The torn letter from Lord Blackwood's solicitor mentioning an audit",
+  ],
+  storyLength: "med" as const,
+  phases: [
+    { objective: "Examine the crime scene and gather initial clues from the locked study", required_twists_or_discoveries: "Discover that the decanter brandy smells of bitter almonds, suggesting poison", logic_complexity: "Low" as const },
+    { objective: "Interview the three suspects and the housekeeper to uncover motives", required_twists_or_discoveries: "Learn that each suspect had a private meeting with Lord Blackwood that evening", logic_complexity: "Medium" as const },
+    { objective: "Follow the evidence trail to identify and confront the killer", required_twists_or_discoveries: "Find the hidden vial and connect it to the forged ledgers", logic_complexity: "High" as const },
+  ],
+};
+
 const TIME_PERIODS = [
   "Victorian Era (1837–1901)",
   "Roaring Twenties (1920s)",
@@ -190,6 +218,21 @@ export default function CreateCasePage() {
     setCriticalEvidence((prev) => prev.map((e, i) => (i === idx ? value : e)));
   }, []);
 
+  const prefillDemo = useCallback(() => {
+    setCaseTitle(DEMO_CASE.caseTitle);
+    setTimePeriod(DEMO_CASE.timePeriod);
+    setSettingLocation(DEMO_CASE.settingLocation);
+    setSettingDescription(DEMO_CASE.settingDescription);
+    setGenre(DEMO_CASE.genre);
+    setCrimeSummary(DEMO_CASE.crimeSummary);
+    setCharacters(DEMO_CASE.characters);
+    setCulprit(DEMO_CASE.culprit);
+    setMotive(DEMO_CASE.motive);
+    setCriticalEvidence(DEMO_CASE.criticalEvidence);
+    setStoryLength(DEMO_CASE.storyLength);
+    setPhases(DEMO_CASE.phases);
+  }, []);
+
   const resolvedTimePeriod = timePeriod === "Custom" ? customTimePeriod : timePeriod;
 
   const suspectNames = characters.filter((c) => c.type === "Suspect" && c.name.trim()).map((c) => c.name);
@@ -258,6 +301,15 @@ export default function CreateCasePage() {
                 ? "Review and refine your case before regenerating it."
                 : "Craft your own mystery case. Define the foundation, cast your characters, plant the evidence, and let the AI weave it into a fully playable investigation."}
             </p>
+            {!editId && (
+              <button
+                onClick={prefillDemo}
+                className="mt-4 flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
+              >
+                <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
+                Magic Create!
+              </button>
+            )}
           </div>
         </div>
 

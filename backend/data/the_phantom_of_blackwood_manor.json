@@ -1,0 +1,814 @@
+{
+  "title": "The Phantom of Blackwood Manor",
+  "author": "AI Weaver",
+  "description": "In fogbound Blackwood Manor, Lord Reginald Blackwood is found dead in a locked study. Detective Elias Pembroke must untangle a locked-room poison mystery woven through inheritance, debts, and doctored accounts.",
+  "victim": "Lord Reginald Blackwood",
+  "intro_narrative": "Mist coils around Blackwood Manor as Detective Elias Pembroke arrives to find Lord Reginald Blackwood dead at his desk in a bolted study. The constable whispers of a heart seizure, but the house feels like it is hiding something: a bitter scent in the brandy, grit where it shouldn’t be, and a trail of private meetings that all lead back to money. In a manor full of locked doors and watching portraits, Pembroke must prove there was no phantom—only a patient hand and a common poison.",
+  "time_limit_minutes": 180,
+  "start_time": "08:10",
+  "win_conditions": {
+    "required_evidence": [
+      "Vial of arsenic",
+      "Mr. Cecil Ashworth’s travel case with a false lining",
+      "Forged accounting ledgers",
+      "Torn solicitor’s letter mentioning an audit",
+      "Brandy bottle with re-tied twine seal"
+    ],
+    "required_suspect": [
+      "Mr. Cecil Ashworth"
+    ],
+    "required_motive": [
+      "Prevent an impending audit from exposing forged/embezzled estate accounts and personal ruin."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Arrival & Crime Scene",
+      "objective": "Examine the locked study and its immediate surroundings to establish cause of death and the locked-room constraints.",
+      "unlocked_locations": [
+        "Blackwood Manor",
+        "The Stair Hall",
+        "The Corridor Outside the Study",
+        "The Locked Study"
+      ],
+      "unlocked_characters": [
+        "Detective Elias Pembroke",
+        "Constable James Reed",
+        "Mrs. Prudence Finch"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Interviews & Motives",
+      "objective": "Interview the household and guests; identify who had motive, access, and opportunity around the brandy and the study.",
+      "unlocked_locations": [
+        "The Drawing Room",
+        "The Guest Suite",
+        "The Kitchen",
+        "The Library"
+      ],
+      "unlocked_characters": [
+        "Lady Vivienne Blackwood",
+        "Dr. Edmund Hargrove",
+        "Mr. Cecil Ashworth"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Hidden Routes & Physical Trail",
+      "objective": "Follow the gritty mud trail and test house logistics: from yard to passage to library to study; confirm tampering with bottle/seal and records.",
+      "unlocked_locations": [
+        "The Servants' Passage",
+        "The Stables Yard",
+        "The East Wing Doorway"
+      ],
+      "unlocked_characters": [
+        "Lord Reginald Blackwood"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Confrontation",
+      "objective": "Assemble evidence, press contradictions, and force a break: connect audit letter + forged ledgers + hidden arsenic to the poisoned brandy.",
+      "unlocked_locations": [
+        "The Drawing Room",
+        "The Library",
+        "The Guest Suite",
+        "The Locked Study"
+      ],
+      "unlocked_characters": [
+        "Detective Elias Pembroke",
+        "Constable James Reed",
+        "Lady Vivienne Blackwood",
+        "Dr. Edmund Hargrove",
+        "Mrs. Prudence Finch",
+        "Mr. Cecil Ashworth"
+      ]
+    }
+  ],
+  "locations": {
+    "Blackwood Manor": {
+      "description": "A slate-coloured mass of blackened stone and dripping ivy, its timbers groaning as fog presses close to the high windows. The entire estate feels like a witness that has learned to keep secrets.",
+      "items": [],
+      "clues": [
+        "Each suspect privately met Lord Blackwood that evening, but only Ashworth had business motive tied directly to the threatened audit."
+      ],
+      "base_ascii": "  _____________\n /  TURRETS    \\\n|  []     []    |\n|      ____     |\n|  GATE|    |   |\n|______|____|___|\n     /  PATH  \\\n",
+      "visual_metadata": {
+        "setting": "Fog, wrought-iron gates, and a long facade of blackened stone. The manor’s sounds—timber groans, chain clicks—create a constant sense of pressure.",
+        "connections": [
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "front doors",
+            "state": "open"
+          },
+          {
+            "target_location": "The Stables Yard",
+            "mechanism": "gravel path around the house",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "front-porch-bench",
+            "type": "surface",
+            "spatial_relationship": "under the covered entry porch",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Locked Study": {
+      "description": "Lord Blackwood’s walnut desk and law books surround a slumped body; a low coal fire leaves sour warmth and drifting ash. A shattered decanter glitters on the rug, and the room’s order feels violently interrupted by one careless thumbprint.",
+      "items": [
+        "Shattered crystal decanter",
+        "Brandy glass with thumb-smudge",
+        "Latched study window",
+        "Study door bolts"
+      ],
+      "clues": [
+        "The study door was bolted from the inside and the window latched, suggesting the poisoner did not need to escape through either.",
+        "A shattered crystal decanter on the rug smelled faintly of bitter almonds, suggesting poison rather than a natural collapse.",
+        "A single brandy glass bore a greasy thumb-smudge at the rim inconsistent with Lord Blackwood’s tidy habits.",
+        "Mud with fine grit was found on the study hearthstone, unlike the manor’s softer garden soil."
+      ],
+      "base_ascii": " ______________________\n| [W] Curtain  |  Shelf |\n|  Window      | Books  |\n|              |        |\n|  Desk [D]  (X) Body   |\n|  Glass  Decanter碎     |\n|  Hearth *grit*  Door   |\n|_____[Bolt]____|_______|\n",
+      "visual_metadata": {
+        "setting": "A gentleman’s lair turned mausoleum: polished walnut desk, aligned writing implements, and shelves of law books. A low fire, a gritty smear at the hearthstone, and a decanter shattered near the victim’s hand.",
+        "connections": [
+          {
+            "target_location": "The Corridor Outside the Study",
+            "mechanism": "study door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "walnut-desk",
+            "type": "surface",
+            "spatial_relationship": "center-left of room, facing the window",
+            "objects": [
+              {
+                "item_id": "Brandy glass with thumb-smudge",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "sideboard",
+            "type": "container",
+            "spatial_relationship": "right wall near shelves",
+            "objects": []
+          },
+          {
+            "id": "fireplace-grate",
+            "type": "surface",
+            "spatial_relationship": "back wall opposite the desk",
+            "objects": []
+          },
+          {
+            "id": "study-window-latch",
+            "type": "surface",
+            "spatial_relationship": "on the window frame",
+            "objects": [
+              {
+                "item_id": "Latched study window",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "door-bolts",
+            "type": "surface",
+            "spatial_relationship": "inside face of the study door",
+            "objects": [
+              {
+                "item_id": "Study door bolts",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "rug-by-desk",
+            "type": "surface",
+            "spatial_relationship": "beneath the victim’s outstretched hand",
+            "objects": [
+              {
+                "item_id": "Shattered crystal decanter",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "The Corridor Outside the Study": {
+      "description": "A narrow, dark-oak corridor lined with portraits whose varnished eyes trap candlelight. The air is colder toward the east wing, as if the locked door there exhales.",
+      "items": [],
+      "clues": [
+        "The brandy bottle in the sideboard showed a newly cut twine knot, as though it had been opened and re-tied to look undisturbed."
+      ],
+      "base_ascii": " ______________________\n| Portrait | Portrait   |\n|   o      |     o      |\n|----------------------|\n|  Runner rug    [ ]   |\n|  Draft ->     Study  |\n|  East Wing Door  |   |\n|____Stairs______|____|\n",
+      "visual_metadata": {
+        "setting": "Portrait-lined hall with a runner rug; candlelight pools and drafts tug at chains and doors. The study door sits at the end; the east wing barrier feels ominous.",
+        "connections": [
+          {
+            "target_location": "The Locked Study",
+            "mechanism": "study door",
+            "state": "closed"
+          },
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "archway to stairs",
+            "state": "open"
+          },
+          {
+            "target_location": "The East Wing Doorway",
+            "mechanism": "heavy east-wing door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "portrait-row",
+            "type": "surface",
+            "spatial_relationship": "both corridor walls",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Drawing Room": {
+      "description": "Velvet curtains shut out the mist; oil lamps cast amber pools across oppressive luxury. A portrait of Lord Blackwood looms over a long sofa like a judge that never adjourns.",
+      "items": [],
+      "clues": [
+        "Lady Vivienne had argued about inheritance and changed her will, but she had no access to the brandy decanter after dinner."
+      ],
+      "base_ascii": " ______________________\n|  Curtain  [W]  Lamp   |\n|  ________      ____   |\n| | Sofa  |_____|    |  |\n| |______|  Rug   Tea    |\n|  Portrait (Lord)       |\n|  Door -> Hall          |\n|______________________|\n",
+      "visual_metadata": {
+        "setting": "Warm but stifling: velvet drapes, oil lamps, and a formal arrangement designed for appearances rather than comfort.",
+        "connections": [
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "double doors",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "tea-table",
+            "type": "surface",
+            "spatial_relationship": "in front of the sofa",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Library": {
+      "description": "Leather bindings and coal dust create a rich suffocation. A green-shaded lamp lights account books spread like a battlefield where numbers have been wounded and bandaged.",
+      "items": [
+        "Forged accounting ledgers",
+        "Ink blotter and pen from the library writing desk"
+      ],
+      "clues": [
+        "Mr. Ashworth arrived for “urgent business,” and was seen in the library handling the estate ledgers shortly before dinner.",
+        "Forged accounting ledgers in the library showed altered columns and fresh ink matching Ashworth’s blotter and pen-nib wear."
+      ],
+      "base_ascii": " ______________________\n| Shelves || Shelves    |\n| [====]  ||  [====]    |\n|----------------------|\n| Table: Ledgers  Lamp  |\n| Desk: Blotter+Pen     |\n| Door -> Corridor      |\n|______________________|\n",
+      "visual_metadata": {
+        "setting": "Dense shelves, a long table with account books, and a writing desk whose blotter bears fresh smears. The room invites quiet tampering.",
+        "connections": [
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "library door",
+            "state": "open"
+          },
+          {
+            "target_location": "The Corridor Outside the Study",
+            "mechanism": "short connecting hall",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "long-table",
+            "type": "surface",
+            "spatial_relationship": "center of room under green lamp",
+            "objects": [
+              {
+                "item_id": "Forged accounting ledgers",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "writing-desk",
+            "type": "surface",
+            "spatial_relationship": "near the shelves, left side",
+            "objects": [
+              {
+                "item_id": "Ink blotter and pen from the library writing desk",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "The Guest Suite": {
+      "description": "A damp, camphor-tinged room where rain taps at the window like restless fingers. Its neatness feels temporary, like a guest trying not to leave a fingerprint on the house.",
+      "items": [
+        "Mr. Cecil Ashworth’s travel case with a false lining",
+        "Vial of arsenic"
+      ],
+      "clues": [
+        "Dr. Hargrove had gambling debts and carried medicines, but his satchel lacked any arsenical preparation and he had treated the household for years without incident.",
+        "A vial of arsenic was discovered hidden in Mr. Ashworth’s travel case beneath a false lining."
+      ],
+      "base_ascii": " ______________________\n| [W] Rain  Curtain      |\n|  Bed _________         |\n|     |       |          |\n| Chair   Satchel(?)     |\n| Wardrobe   Case [!]    |\n| Door -> Hall           |\n|______________________|\n",
+      "visual_metadata": {
+        "setting": "Guest quarters with a made bed, wardrobe, and a travel case kept too close to the wall. The atmosphere is clean but tense.",
+        "connections": [
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "guest corridor door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "travel-case",
+            "type": "container",
+            "spatial_relationship": "near the wardrobe, partly shoved toward the wall",
+            "objects": [
+              {
+                "item_id": "Mr. Cecil Ashworth’s travel case with a false lining",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Vial of arsenic",
+                "visibility": "hidden",
+                "hidden_by": "false lining"
+              }
+            ]
+          },
+          {
+            "id": "bedside-table",
+            "type": "surface",
+            "spatial_relationship": "right of bed near window",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Kitchen": {
+      "description": "Stone floors scrubbed pale; copper pots hang like dull medals. The air holds onions, bread, and the steady competence of a housekeeper who has seen too much to be impressed.",
+      "items": [
+        "Torn solicitor’s letter mentioning an audit"
+      ],
+      "clues": [
+        "Mrs. Finch found a torn solicitor’s letter in the study fireplace mentioning an impending audit of the estate accounts."
+      ],
+      "base_ascii": " ______________________\n| Pots  Pots  Pots       |\n|  [ ]  [ ]  [ ]         |\n|----------------------|\n| Long Table  Letter     |\n| Stove/Range   Sink     |\n| Door -> Passage        |\n|______________________|\n",
+      "visual_metadata": {
+        "setting": "Practical brightness compared to the manor’s gloom: a worktable for assembling evidence as much as meals, with routes to back corridors.",
+        "connections": [
+          {
+            "target_location": "The Servants' Passage",
+            "mechanism": "back service door",
+            "state": "open"
+          },
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "swing door to main hall",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "worktable",
+            "type": "surface",
+            "spatial_relationship": "center of kitchen under hanging pots",
+            "objects": [
+              {
+                "item_id": "Torn solicitor’s letter mentioning an audit",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "The Servants' Passage": {
+      "description": "A cramped artery behind the manor’s fine rooms—bare boards, hooks, and half-seen doors. Footsteps here feel like confession: quick, practiced, and meant to go unnoticed.",
+      "items": [],
+      "clues": [
+        "The gritty mud on the hearthstone matched the stables yard, where Ashworth’s cab trunk had been set down."
+      ],
+      "base_ascii": " ______________________\n| Hooks | Coats | Brooms |\n|-----------------------|\n| Narrow boards  ->      |\n| To Kitchen   To Hall   |\n| To Yard Door (side)    |\n| Shadows behind panels  |\n|______________________|\n",
+      "visual_metadata": {
+        "setting": "Service corridor with minimal light, scuffed boards, and concealed utility doors—perfect for moving items unseen between yard and rooms.",
+        "connections": [
+          {
+            "target_location": "The Kitchen",
+            "mechanism": "service door",
+            "state": "open"
+          },
+          {
+            "target_location": "The Stair Hall",
+            "mechanism": "back hall arch",
+            "state": "open"
+          },
+          {
+            "target_location": "The Stables Yard",
+            "mechanism": "side yard door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "coat-hooks",
+            "type": "surface",
+            "spatial_relationship": "left wall near the kitchen end",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The East Wing Doorway": {
+      "description": "A heavy door with an iron latch seals the east wing. Cold seems to seep from its seams, and the house’s silence becomes deliberate in front of it.",
+      "items": [],
+      "clues": [
+        "Each suspect privately met Lord Blackwood that evening, but only Ashworth had business motive tied directly to the threatened audit."
+      ],
+      "base_ascii": " ______________________\n| Paneling  Portrait     |\n|----------------------|\n|      [IRON LATCH]     |\n|  EAST WING DOOR       |\n|  Keyhole (no key)     |\n|  Draft ->             |\n|____To Corridor_______|\n",
+      "visual_metadata": {
+        "setting": "An intimidating barrier: thick wood, iron hardware, and a palpable temperature drop that discourages curiosity.",
+        "connections": [
+          {
+            "target_location": "The Corridor Outside the Study",
+            "mechanism": "east wing door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "iron-latch",
+            "type": "surface",
+            "spatial_relationship": "centered at chest height on the door",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Stair Hall": {
+      "description": "A tall central hall where portraits climb the staircase like silent jurors. Footfalls echo too long, and every conversation feels overheard by the architecture.",
+      "items": [],
+      "clues": [
+        "Each suspect privately met Lord Blackwood that evening, but only Ashworth had business motive tied directly to the threatened audit."
+      ],
+      "base_ascii": " ______________________\n| Portraits up the stair |\n|   o    o    o          |\n|-----------____---------|\n|  Steps   /    \\        |\n| Hall -> Library/Room   |\n| Hall -> Corridor/Study |\n| Door -> Outside        |\n",
+      "visual_metadata": {
+        "setting": "Central circulation space with sweeping stairs and watchful paintings. It connects the public elegance of the manor to its locked, private tensions.",
+        "connections": [
+          {
+            "target_location": "Blackwood Manor",
+            "mechanism": "front doors",
+            "state": "open"
+          },
+          {
+            "target_location": "The Drawing Room",
+            "mechanism": "double doors",
+            "state": "open"
+          },
+          {
+            "target_location": "The Library",
+            "mechanism": "library door",
+            "state": "open"
+          },
+          {
+            "target_location": "The Corridor Outside the Study",
+            "mechanism": "corridor archway",
+            "state": "open"
+          },
+          {
+            "target_location": "The Kitchen",
+            "mechanism": "swing door",
+            "state": "open"
+          },
+          {
+            "target_location": "The Guest Suite",
+            "mechanism": "stairs to guest corridor",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "stair-landing",
+            "type": "surface",
+            "spatial_relationship": "midway up the stairs under portrait row",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "The Stables Yard": {
+      "description": "A square of churned mud and gravel slick with rain. Lantern light bows in the wind over wheel ruts and the spot where luggage was set down—where grit begins its quiet journey indoors.",
+      "items": [],
+      "clues": [
+        "The gritty mud on the hearthstone matched the stables yard, where Ashworth’s cab trunk had been set down."
+      ],
+      "base_ascii": " ______________________\n| Stable doors  [##]     |\n|----------------------|\n| Wheel ruts   Lantern   |\n| Mud+Gravel  *GRIT*     |\n| Trunk spot  [X]        |\n| Gate -> Manor Path     |\n|____Door-> Passage_____|\n",
+      "visual_metadata": {
+        "setting": "Rain-slick gravel and mud, with clear ruts from a cab. The grit here is distinct—fine, sharp, and easily tracked.",
+        "connections": [
+          {
+            "target_location": "Blackwood Manor",
+            "mechanism": "gravel path",
+            "state": "open"
+          },
+          {
+            "target_location": "The Servants' Passage",
+            "mechanism": "side yard door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "lantern-hook",
+            "type": "surface",
+            "spatial_relationship": "on a post near stable doors",
+            "objects": []
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Detective Elias Pembroke": {
+      "type": "assistant",
+      "role": "Player-aligned investigator; drives deductions, unlocks phases through evidence synthesis.",
+      "location": "The Stair Hall",
+      "phase_locations": {
+        "1": "The Stair Hall",
+        "2": "The Library",
+        "3": "The Corridor Outside the Study",
+        "4": "The Drawing Room"
+      },
+      "persona": "You are Detective Elias Pembroke: observant, skeptical of easy explanations, and methodical. Ask pointed questions, request to inspect objects, and explain deductions plainly. You never accept 'locked room' mystique when logistics and timing suffice.",
+      "knowledge_about_others": {
+        "Lady Vivienne Blackwood": "She admits arguments over inheritance and a changed will; watch for opportunity vs access.",
+        "Dr. Edmund Hargrove": "Long-standing physician with debts; assess means and medical plausibility.",
+        "Mrs. Prudence Finch": "Housekeeper with routines and knowledge of the manor’s old bones; likely reliable.",
+        "Constable James Reed": "Anxious and eager to call it a heart seizure; needs guidance.",
+        "Mr. Cecil Ashworth": "Businessman connected to estate ledgers; evaluate financial motive and document tampering."
+      },
+      "secret": "",
+      "abilities": "Can combine multiple clues into a new line of inquiry; can 'press' a suspect to trigger conditional behaviors once required evidence is held.",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Lady Vivienne Blackwood": {
+      "type": "suspect",
+      "role": "Lord Blackwood’s wife; possible inheritance motive, socially controlled and guarded.",
+      "location": "The Drawing Room",
+      "phase_locations": {
+        "1": "The Drawing Room",
+        "2": "The Drawing Room",
+        "3": "The Drawing Room",
+        "4": "The Drawing Room"
+      },
+      "persona": "You are Lady Vivienne Blackwood: poised, sharp, and resentful of your late husband’s control. You answer questions with precision and pride. You admit arguments and a changed will, but stress your lack of access to the decanter after dinner and disdain for vulgar crime.",
+      "knowledge_about_others": {
+        "Mr. Cecil Ashworth": "He came for 'urgent business' and lingered around the accounts; you suspect money is the real rot.",
+        "Dr. Edmund Hargrove": "A household doctor with rumored debts; you consider him professionally competent but personally weak.",
+        "Mrs. Prudence Finch": "A formidable servant who knows everything and says little."
+      },
+      "secret": "You altered your will and fought over inheritance, but you did not handle the brandy or enter the study after dinner; you fear scandal more than prison.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            4
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Lady Vivienne had argued about inheritance and changed her will, but she had no access to the brandy decanter after dinner."
+          ],
+          "reaction": "She stiffens, then insists: 'Motive is not access. After dinner I remained here; the decanter stayed in the study sideboard beyond my reach.'",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 25,
+      "flight_risk": 10
+    },
+    "Dr. Edmund Hargrove": {
+      "type": "suspect",
+      "role": "House physician; carries medicines and has gambling debts, but claims no arsenical preparations.",
+      "location": "The Guest Suite",
+      "phase_locations": {
+        "1": "The Guest Suite",
+        "2": "The Guest Suite",
+        "3": "The Guest Suite",
+        "4": "The Drawing Room"
+      },
+      "persona": "You are Dr. Edmund Hargrove: defensive about your reputation, exhausted, and prickly when accused. You speak clinically about symptoms and timing. You admit debts and a private meeting to discuss a will, but maintain you had no arsenic and would not poison a patient.",
+      "knowledge_about_others": {
+        "Lord Reginald Blackwood": "He pressured you to sign a sanity statement and enjoyed leverage.",
+        "Mr. Cecil Ashworth": "You saw him around the library; he presents as too smooth, too unbothered.",
+        "Mrs. Prudence Finch": "She runs the house; if something moved, she can tell you when."
+      },
+      "secret": "You have gambling debts and fear disgrace; you would consider bending rules, but you did not possess or use arsenic.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            4
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Dr. Hargrove had gambling debts and carried medicines, but his satchel lacked any arsenical preparation and he had treated the household for years without incident."
+          ],
+          "reaction": "He exhales sharply: 'Yes, I owe money. No, I do not carry arsenic. Check my satchel again if you like—my sins are financial, not homicidal.'",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 30,
+      "flight_risk": 15
+    },
+    "Mrs. Prudence Finch": {
+      "type": "assistant",
+      "role": "Housekeeper; provides routines, access knowledge, and recovered the audit letter fragments.",
+      "location": "The Kitchen",
+      "phase_locations": {
+        "1": "The Kitchen",
+        "2": "The Kitchen",
+        "3": "The Kitchen",
+        "4": "The Drawing Room"
+      },
+      "persona": "You are Mrs. Prudence Finch: competent, unflinching, and protective of the household’s order. You offer facts, timelines, and knowledge of passages when pressed. You dislike theatrics and prioritize practical truth.",
+      "knowledge_about_others": {
+        "Lady Vivienne Blackwood": "Stayed in the drawing room after dinner; had social motive but limited access.",
+        "Dr. Edmund Hargrove": "A familiar doctor; imperfect but not reckless with poisons.",
+        "Mr. Cecil Ashworth": "Insisted on keeping his travel case in his own room; lingered with the ledgers."
+      },
+      "secret": "",
+      "abilities": "Can reconstruct dinner-to-night timeline; can reveal which rooms contain what (brandy storage, sideboard, bottle handling) and open staff-only routes in later phases.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Mud with fine grit was found on the study hearthstone, unlike the manor’s softer garden soil."
+          ],
+          "reaction": "She nods once: 'That grit isn’t from our gardens. If you want where it comes from, you’ll find it where carts and boots grind stone—near the stables.'",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 5,
+      "flight_risk": 0
+    },
+    "Lord Reginald Blackwood": {
+      "type": "suspect",
+      "role": "Victim; appears via recollections and reconstructed timeline; his habits explain the locked-room conditions.",
+      "location": "The Locked Study",
+      "phase_locations": {
+        "1": "The Locked Study",
+        "2": "The Locked Study",
+        "3": "The Locked Study",
+        "4": "The Locked Study"
+      },
+      "persona": "You are Lord Reginald Blackwood in flashback/records only: controlling, meticulous, and habitually private. Through documents and others’ memories, your demands and threats surface. You do not provide new actions—only context.",
+      "knowledge_about_others": {
+        "Mr. Cecil Ashworth": "You suspected his accounting was false and triggered an audit threat.",
+        "Lady Vivienne Blackwood": "You weaponized inheritance and will changes to control her.",
+        "Dr. Edmund Hargrove": "You attempted to leverage an old professional error."
+      },
+      "secret": "You threatened an audit and privately confronted each suspect; your habitual bolting of the study door created the 'locked room' illusion.",
+      "abilities": "",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Constable James Reed": {
+      "type": "assistant",
+      "role": "Local constable; secured scene, initially favors natural causes; assists with arrest when proof is assembled.",
+      "location": "The Stair Hall",
+      "phase_locations": {
+        "1": "The Stair Hall",
+        "2": "The Corridor Outside the Study",
+        "3": "The Servants' Passage",
+        "4": "The Drawing Room"
+      },
+      "persona": "You are Constable James Reed: anxious, earnest, and slightly out of depth. You report what you saw and what procedures were followed, but you need clear direction. Once convinced, you act decisively.",
+      "knowledge_about_others": {
+        "Mrs. Prudence Finch": "First finder; insists staff touched nothing.",
+        "Mr. Cecil Ashworth": "A guest with confidence; Reed is wary but lacks proof.",
+        "Lady Vivienne Blackwood": "Appears composed; Reed reads it as suspicious without evidence."
+      },
+      "secret": "",
+      "abilities": "Can confirm procedural details (door forced, bolts, who was present), can accompany player to restricted areas, and can perform arrest in final phase.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Vial of arsenic",
+            "Mr. Cecil Ashworth’s travel case with a false lining"
+          ],
+          "required_knowledge": [],
+          "reaction": "He goes pale, then squares his shoulders: 'That’s enough for me, sir. Give the word and I’ll take him.'",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Mr. Cecil Ashworth": {
+      "type": "suspect",
+      "role": "Estate business agent; smooth, defensive, and the true poisoner hiding embezzlement through forged ledgers.",
+      "location": "The Library",
+      "phase_locations": {
+        "1": "The Library",
+        "2": "The Library",
+        "3": "The Guest Suite",
+        "4": "The Drawing Room"
+      },
+      "persona": "You are Mr. Cecil Ashworth: charming, practiced, and quick to reframe accusations as misunderstandings. You minimize document discrepancies and offer plausible deniability. When confronted with physical evidence (arsenic, forged ledgers, re-tied seal), your composure cracks into anger and self-justification.",
+      "knowledge_about_others": {
+        "Lady Vivienne Blackwood": "Inheritance conflict could divert suspicion; you imply she 'benefits'.",
+        "Dr. Edmund Hargrove": "Debts make him easy to smear; you hint at medical access.",
+        "Mrs. Prudence Finch": "Her routines threaten your timeline; you attempt to dismiss servants’ observations."
+      },
+      "secret": "You embezzled and forged estate ledgers; when an audit loomed, you poisoned Lord Blackwood’s brandy using arsenic concealed under a false lining in your travel case, relying on the victim’s habit of bolting the study door from inside.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3,
+            4
+          ],
+          "required_evidence": [
+            "Forged accounting ledgers",
+            "Torn solicitor’s letter mentioning an audit"
+          ],
+          "required_knowledge": [],
+          "reaction": "His smile tightens: 'Accounts are complex. An audit letter proves nothing but Lord Blackwood’s paranoia.'",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Vial of arsenic",
+            "Brandy bottle with re-tied twine seal",
+            "Forged accounting ledgers"
+          ],
+          "required_knowledge": [],
+          "reaction": "His charm fails; he turns cold and sharp. 'You cannot prove I used it. You cannot prove when the seal was cut.'",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Vial of arsenic",
+            "Mr. Cecil Ashworth’s travel case with a false lining",
+            "Forged accounting ledgers",
+            "Torn solicitor’s letter mentioning an audit",
+            "Brandy bottle with re-tied twine seal"
+          ],
+          "required_knowledge": [
+            "The gritty mud on the hearthstone matched the stables yard, where Ashworth’s cab trunk had been set down."
+          ],
+          "reaction": "He exhales as if surrendering a role. 'He would have ruined me. Do you know what debt does? Every corridor becomes a trap.' He all but admits the poisoning.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 70,
+      "flight_risk": 55
+    }
+  },
+  "difficulty": "medium",
+  "owner_id": "69a305adabb72dc52f9ac539",
+  "owner_name": "Unknown",
+  "visibility": "private",
+  "_id": "the_phantom_of_blackwood_manor"
+}

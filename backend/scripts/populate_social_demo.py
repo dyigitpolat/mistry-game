@@ -22,7 +22,7 @@ SCENARIOS = [
 ]
 
 DUMMY_USERS = [
-    {"_id": "dummy_1", "name": "Sherlock Holmes", "email": "sherlock@221b.com", "image": "https://images.unsplash.com/photo-1580128660010-fd027e1e587a?q=80&w=2070&auto=format&fit=crop"},
+    {"_id": "dummy_1", "name": "Sherlock Holmes", "email": "sherlock@221b.com", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop"},
     {"_id": "dummy_2", "name": "Hercule Poirot", "email": "poirot@belgium.com", "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"},
     {"_id": "dummy_3", "name": "Jane Marple", "email": "marple@stmarymead.com", "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976&auto=format&fit=crop"},
     {"_id": "dummy_4", "name": "Benoit Blanc", "email": "blanc@knivesout.com", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"},

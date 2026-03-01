@@ -28,26 +28,25 @@ export default function CaseDetailsPage() {
     useEffect(() => {
         async function load() {
             try {
-                // Fetch all to get the progress inject via listScenarios
                 const allSummaries = await listScenarios();
                 const foundSummary = allSummaries.find(s => s.id === id);
-                if (foundSummary) {
-                    setSummary(foundSummary);
-                }
+                if (foundSummary) setSummary(foundSummary);
+            } catch (err) {
+                console.error("Failed to load scenario list", err);
+            }
 
-                // Fetch full scenario for rich details if needed
-                const [fullScenario, fetchedStats, fetchedLeaderboard, fetchedComments] = await Promise.all([
+            try {
+                const [scenarioResult, statsResult, lbResult, commentsResult] = await Promise.allSettled([
                     getScenario(id),
                     getScenarioStats(id),
                     getLeaderboard(id),
                     getComments(id)
                 ]);
 
-                setScenario(fullScenario);
-                setStats(fetchedStats);
-                setLeaderboard(fetchedLeaderboard);
-                setComments(fetchedComments);
-
+                if (scenarioResult.status === "fulfilled") setScenario(scenarioResult.value);
+                if (statsResult.status === "fulfilled") setStats(statsResult.value);
+                if (lbResult.status === "fulfilled") setLeaderboard(lbResult.value);
+                if (commentsResult.status === "fulfilled") setComments(commentsResult.value);
             } catch (err) {
                 console.error("Failed to load case details", err);
             } finally {

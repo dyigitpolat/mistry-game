@@ -1,5 +1,5 @@
 """
-mistry_agents — Multi-Agent Engine for the Whodunit Detective Game.
+mistry_agents — Multi-Agent Engine for the Mistry Detective Game.
 
 Built on the deepagents SDK (LangGraph + LangChain).
 

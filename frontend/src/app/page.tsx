@@ -16,19 +16,17 @@ export default function HomePage() {
 
   useEffect(() => {
     async function load() {
-      try {
-        const [data, lbData, friendsData] = await Promise.all([
-          listScenarios(),
-          getGlobalLeaderboard(),
-          getFriendActivity(),
-        ]);
-        setScenarios(data);
-        setLeaderboard(lbData);
-        setFriends(friendsData);
-      } catch (e) {
-        console.error("Failed to load scenarios:", e);
+      const [scenariosResult, lbResult, friendsResult] = await Promise.allSettled([
+        listScenarios(),
+        getGlobalLeaderboard(),
+        getFriendActivity(),
+      ]);
+
+      if (scenariosResult.status === "fulfilled") {
+        setScenarios(scenariosResult.value);
+      } else {
+        console.error("Failed to load scenarios:", scenariosResult.reason);
         setError(true);
-        // Fallback: show demo data if API fails and we don't want to show an error page
         setScenarios([
           {
             id: "the_crooked_man",
@@ -40,9 +38,10 @@ export default function HomePage() {
             author: "Arthur Conan Doyle",
           },
         ]);
-      } finally {
-        setLoading(false);
       }
+      if (lbResult.status === "fulfilled") setLeaderboard(lbResult.value);
+      if (friendsResult.status === "fulfilled") setFriends(friendsResult.value);
+      setLoading(false);
     }
     load();
   }, []);

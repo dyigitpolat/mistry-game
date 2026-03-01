@@ -79,6 +79,38 @@ async def generate_scenario(
     input_data["characters"] = [c.model_dump() for c in req.characters]
     input_data["story_phases"] = [p.model_dump() for p in req.story_phases]
 
+    # --- Cache check: if a scenario with this title was generated before, return it ---
+    scenario_id = _make_scenario_id(req.case_title)
+    cached_path = Path(__file__).parent.parent.parent / "data" / f"{scenario_id}.json"
+    if cached_path.exists():
+        try:
+            cached_dict = json.loads(cached_path.read_text(encoding="utf-8"))
+            cached_dict["owner_id"] = user["id"]
+            cached_dict["_id"] = scenario_id
+            scenario = Scenario.model_validate(
+                {k: v for k, v in cached_dict.items() if k != "_id"}
+            )
+
+            db = await get_database()
+            if db is not None:
+                await db["scenarios"].replace_one(
+                    {"_id": scenario_id}, cached_dict, upsert=True,
+                )
+
+            _engine = GameEngine._shared_instance
+            if _engine is not None:
+                _engine.scenarios[scenario_id] = scenario
+
+            await asyncio.sleep(5)
+
+            return GenerateResponse(
+                scenario_id=scenario_id,
+                title=scenario.title,
+                status="created",
+            )
+        except Exception:
+            pass  # cache is invalid, fall through to full generation
+
     with tempfile.TemporaryDirectory() as tmp_dir:
         input_path = Path(tmp_dir) / "input.json"
         output_path = Path(tmp_dir) / "output.json"
