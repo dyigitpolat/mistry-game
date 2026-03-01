@@ -1,0 +1,582 @@
+{
+  "title": "The great depresssion",
+  "author": "AI Weaver",
+  "owner_name": "Taha Aksu",
+  "visibility": "private",
+  "description": "Chief scientist Kulu kills his 10x engineer Taha for not using AI",
+  "victim": "Taha Demir",
+  "intro_narrative": "The ASUS AIS building hums like a subway platform at noon—badge beeps, rolling chairs, overlapping standups. Detective Selin Aras is escorted past delivery boxes in the lobby toward the lab, where celebrated engineer Taha Demir has been found dead. The building’s official message is terse: “incident in lab—please stay at desks.” Selin must turn shock into timeline, and timeline into a name.",
+  "time_limit_minutes": 180,
+  "start_time": "2026-02-28T12:35:00",
+  "win_conditions": {
+    "required_evidence": [
+      "HDMI cable with ferrite bead",
+      "cleaning log sheet",
+      "Taha’s notebook",
+      "packaged replacement HDMI cable",
+      "security desk visitor log"
+    ],
+    "required_suspect": [
+      "Kuluhan Binici"
+    ],
+    "required_motive": [
+      "Protect leadership credibility by forcing AI compliance; Taha’s “Ship w/out AI—prove it can be faster” threatened Kuluhan’s status and exposed dependence on LLMs."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Phase 1 — The Method",
+      "objective": "Search the lab for clues on how the victim was killed.",
+      "unlocked_locations": [
+        "ASUS AIS lobby",
+        "ASUS AIS lab",
+        "ASUS AIS server aisle",
+        "ASUS AIS security desk"
+      ],
+      "unlocked_characters": [
+        "Detective Selin Aras",
+        "Mina Koç",
+        "Eren Şah"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Phase 2 — The Missing Cable",
+      "objective": "Find out who the cable belongs to and identify the workstation it came from.",
+      "unlocked_locations": [
+        "ASUS AIS open office",
+        "ASUS AIS pantry"
+      ],
+      "unlocked_characters": [
+        "Yeet"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Phase 3 — The Pressure Point",
+      "objective": "Link the cable’s damage to the lab vice and the off-schedule cleaning to a specific person.",
+      "unlocked_locations": [
+        "ASUS AIS meeting room 3B"
+      ],
+      "unlocked_characters": []
+    },
+    {
+      "id": 4,
+      "name": "Phase 4 — Accusation",
+      "objective": "Confront the culprit with the full chain: motive, opportunity, and physical linkage.",
+      "unlocked_locations": [],
+      "unlocked_characters": [
+        "Taha Demir"
+      ]
+    }
+  ],
+  "locations": {
+    "ASUS AIS lobby": {
+      "description": "A noisy lobby crowded with employees and delivery boxes stacked like a cardboard canyon toward the elevators. Badge beeps punctuate the air while security tries to keep pathways open.",
+      "items": [],
+      "clues": [
+        "The building-wide message “incident in lab—please stay at desks” suggests someone wanted movement minimized while evidence could be managed elsewhere."
+      ],
+      "base_ascii": "┌─────────────────────────┐\n│ [Boxes] [Boxes] [Boxes] │\n│   ┌───────┐   ┌───────┐ │\n│   │Elevatr│   │Elevatr│ │\n│   └───┬───┘   └───┬───┘ │\n│ Sec→  │   Crowd   │     │\n│       └── Hall ───┘     │\n└─────────────────────────┘",
+      "visual_metadata": {
+        "setting": "Corporate glass-and-chrome entry with a constant midday churn; the mood is forced-normal over a fresh shock.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS security desk",
+            "mechanism": "Rope stanchion corridor",
+            "state": "open"
+          },
+          {
+            "target_location": "ASUS AIS open office",
+            "mechanism": "Badge-gated glass door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Delivery box stacks",
+            "type": "surface",
+            "spatial_relationship": "north wall, forming a narrow lane",
+            "objects": []
+          },
+          {
+            "id": "Reception counter",
+            "type": "surface",
+            "spatial_relationship": "east side near elevators",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "ASUS AIS security desk": {
+      "description": "A compact security station facing the lobby flow. Multiple monitors mirror badge events. A paper visitor/badge log sits beside a stamped pen and an access map of internal zones.",
+      "items": [
+        "security desk visitor log"
+      ],
+      "clues": [
+        "Badge/visitor entries can place specific employees near the lab during the lunchtime rush window."
+      ],
+      "base_ascii": "┌──────────────────────────┐\n│ Lobby Flow  →→→           │\n│ ┌───────────────┐         │\n│ │ Security Desk │         │\n│ │ Monitors  [ ] │         │\n│ │ Logbook  (pen)│         │\n│ └───────┬───────┘         │\n│   Gate  │  Hallway        │\n└─────────┴─────────────────┘",
+      "visual_metadata": {
+        "setting": "Functional and watchful; fluorescent-lit with the faint smell of toner and hand sanitizer.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS lobby",
+            "mechanism": "Open passage",
+            "state": "open"
+          },
+          {
+            "target_location": "ASUS AIS open office",
+            "mechanism": "Badge-controlled gate",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Logbook tray",
+            "type": "container",
+            "spatial_relationship": "on the front edge of the desk",
+            "objects": [
+              {
+                "item_id": "security desk visitor log",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Security monitors",
+            "type": "surface",
+            "spatial_relationship": "back of the desk, facing guard",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "ASUS AIS lab": {
+      "description": "A bright aquarium of glass and LEDs. Workbenches hold disassembled boards, calipers, and anti-static trays. The air smells faintly of hot plastic and citrus cleaner; tension sticks to the silence.",
+      "items": [
+        "lab bench vice",
+        "Taha’s notebook"
+      ],
+      "clues": [
+        "Taha’s neck shows a thin, rectangular-patterned abrasion consistent with a cable sheath.",
+        "Taha’s notebook page reads: “Ship w/out AI—prove it can be faster,” marked with fresh fingerprint smudge at the corner.",
+        "The HDMI cable’s ferrite bead has a distinct scuff shaped like a bench vice jaw from the lab."
+      ],
+      "base_ascii": "┌──────────────────────────┐\n│ Glass wall / hallway      │\n│ ┌────Bench────┐  Sink     │\n│ │ tools  vice │  [ ]      │\n│ └─────┬───────┘           │\n│       │ door to aisle →   │\n│  Stool│  Body area        │\n│       └──→ Server Aisle   │\n└──────────────────────────┘",
+      "visual_metadata": {
+        "setting": "Sterile, bright, and too clean—except where haste left small tells: tacky shine, an ajar panel, a vice left slightly open.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS server aisle",
+            "mechanism": "Open doorway between benches and racks",
+            "state": "open"
+          },
+          {
+            "target_location": "ASUS AIS open office",
+            "mechanism": "Glass door with push bar",
+            "state": "closed"
+          },
+          {
+            "target_location": "ASUS AIS pantry",
+            "mechanism": "Hallway outside glass wall",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Main workbench",
+            "type": "surface",
+            "spatial_relationship": "west side under task lighting",
+            "objects": [
+              {
+                "item_id": "lab bench vice",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Side desk near stool",
+            "type": "surface",
+            "spatial_relationship": "southwest corner near the rolling stool",
+            "objects": [
+              {
+                "item_id": "Taha’s notebook",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ASUS AIS server aisle": {
+      "description": "A narrow corridor between two tall server racks, loud with fans and blinking status lights. The floor shows a tacky, recently wiped sheen; a lower panel sits slightly ajar on one rack.",
+      "items": [
+        "HDMI cable with ferrite bead",
+        "cleaning log sheet"
+      ],
+      "clues": [
+        "An HDMI cable is found behind a lab server with a smear of skin and redness on its jacket.",
+        "A lab cleaning log shows the server aisle was “spot-cleaned” outside the normal schedule."
+      ],
+      "base_ascii": "┌──────────────────────────┐\n│ Rack A  ||||||  Rack B    │\n│ [LEDs]  ||||||  [LEDs]    │\n│ Panel ajar → [gap]        │\n│  ┌───────────────┐        │\n│  │ Tacky floor   │        │\n│  │ (fresh wipe)  │        │\n│  └── behind srv ─┘        │\n└──────────────────────────┘",
+      "visual_metadata": {
+        "setting": "Hot air, fan roar, and the claustrophobic sense of something hidden in plain sight behind machine noise.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS lab",
+            "mechanism": "Open doorway",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Lower server shelf gap",
+            "type": "container",
+            "spatial_relationship": "behind Rack A, lower right",
+            "objects": [
+              {
+                "item_id": "HDMI cable with ferrite bead",
+                "visibility": "partially hidden",
+                "hidden_by": "Lower server shelf and cabling clutter"
+              }
+            ]
+          },
+          {
+            "id": "Cleaning clipboard hook",
+            "type": "surface",
+            "spatial_relationship": "near aisle entrance on the lab-side wall",
+            "objects": [
+              {
+                "item_id": "cleaning log sheet",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ASUS AIS open office": {
+      "description": "A sea of monitors and neat corporate rows of desks. Employees sit stiffly, half-working and half-listening. Cable loops hang behind screens like short black snakes—except at one workstation.",
+      "items": [
+        "Kuluhan Binici’s monitor",
+        "packaged replacement HDMI cable"
+      ],
+      "clues": [
+        "The only monitor in the open office missing an HDMI cable is on Kuluhan Binici’s desk.",
+        "Kuluhan Binici’s desk drawer contains a new, packaged HDMI cable of the same uncommon length as the one recovered."
+      ],
+      "base_ascii": "┌──────────────────────────┐\n│ Row A: [M][M][M][M]       │\n│ Row B: [M][M][M][M]       │\n│  Aisle  →→→               │\n│ Corner desk: CHIEF SCI    │\n│  [Monitor: No Signal]     │\n│  Drawer: [HDMI pkg]       │\n│ Door → Lab / Hall         │\n└──────────────────────────┘",
+      "visual_metadata": {
+        "setting": "Quiet panic under office etiquette—keyboard taps resume too quickly, eyes avoid the lab door, and status lights feel accusatory.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS lobby",
+            "mechanism": "Badge-gated glass door",
+            "state": "closed"
+          },
+          {
+            "target_location": "ASUS AIS lab",
+            "mechanism": "Glass door with push bar",
+            "state": "closed"
+          },
+          {
+            "target_location": "ASUS AIS meeting room 3B",
+            "mechanism": "Glass meeting-room door",
+            "state": "closed"
+          },
+          {
+            "target_location": "ASUS AIS pantry",
+            "mechanism": "Open corridor",
+            "state": "open"
+          },
+          {
+            "target_location": "ASUS AIS security desk",
+            "mechanism": "Badge-controlled gate",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Kuluhan Binici’s desk surface",
+            "type": "surface",
+            "spatial_relationship": "northeast corner labeled CHIEF SCIENTIST",
+            "objects": [
+              {
+                "item_id": "Kuluhan Binici’s monitor",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Kuluhan Binici’s desk drawer",
+            "type": "container",
+            "spatial_relationship": "under the corner desk surface",
+            "objects": [
+              {
+                "item_id": "packaged replacement HDMI cable",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ASUS AIS pantry": {
+      "description": "A crowded pantry with disinfectant notes of mint and lemon layered over tea. A queue forms around kettles and tulip-shaped glasses; people speak in low, clipped fragments.",
+      "items": [],
+      "clues": [
+        "Yeet mentions hearing Kuluhan Binici’s shoes in the lab hallway during the crowded lunchtime rush."
+      ],
+      "base_ascii": "┌──────────────────────────┐\n│ Counter: kettle  cups     │\n│ [Tea station] [Sugar]     │\n│ Queue: o o o o o          │\n│ Small tables  [ ] [ ]     │\n│ Trash / recycling         │\n│ Hall → Lab / Office       │\n│ Sink  (soap)              │\n└──────────────────────────┘",
+      "visual_metadata": {
+        "setting": "Social camouflage—noise, queues, and rituals of tea that hide sudden silences and overheard details.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS open office",
+            "mechanism": "Open corridor",
+            "state": "open"
+          },
+          {
+            "target_location": "ASUS AIS lab",
+            "mechanism": "Hallway past glass wall",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Tea counter",
+            "type": "surface",
+            "spatial_relationship": "north wall under cabinets",
+            "objects": []
+          },
+          {
+            "id": "Lost-and-found bin",
+            "type": "container",
+            "spatial_relationship": "near the pantry exit",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "ASUS AIS meeting room 3B": {
+      "description": "A glass-walled meeting room with a long table, whiteboard full of AI roadmaps, and a ceiling projector. The open office is visible through the glass—an audience pretending not to watch.",
+      "items": [],
+      "clues": [
+        "A meeting invite titled “AI Compliance” was created by Kuluhan Binici minutes before Taha’s estimated time of death."
+      ],
+      "base_ascii": "┌──────────────────────────┐\n│ Glass wall → Open Office  │\n│ ┌──────── Table ───────┐  │\n│ │  chairs   chairs     │  │\n│ └─────────┬────────────┘  │\n│ Whiteboard: AI roadmap     │\n│ Projector (ceiling)        │\n│ Door → Open Office         │\n└──────────────────────────┘",
+      "visual_metadata": {
+        "setting": "Corporate control theater: clean lines, strategic visibility, and the kind of room where power speaks softly and expects obedience.",
+        "connections": [
+          {
+            "target_location": "ASUS AIS open office",
+            "mechanism": "Glass meeting-room door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Meeting table",
+            "type": "surface",
+            "spatial_relationship": "center of room beneath projector",
+            "objects": []
+          },
+          {
+            "id": "Whiteboard ledge",
+            "type": "surface",
+            "spatial_relationship": "east wall under the whiteboard",
+            "objects": []
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Detective Selin Aras": {
+      "type": "assistant",
+      "role": "Lead detective and player viewpoint; reconstructs timeline and confronts suspects.",
+      "location": "ASUS AIS lobby",
+      "phase_locations": {
+        "1": "ASUS AIS lab",
+        "2": "ASUS AIS open office",
+        "3": "ASUS AIS meeting room 3B",
+        "4": "ASUS AIS meeting room 3B"
+      },
+      "persona": "Calm, precise, and observant; speaks in short, surgical questions and narrates deductions without raising her voice.",
+      "knowledge_about_others": {
+        "Mina Koç": "Reliable assistant; documents evidence and notices patterns quickly.",
+        "Eren Şah": "Lab tech; anxious and eager to be helpful, knows normal procedures.",
+        "Yeet": "Pantry server; hears everything during rush periods, dislikes attention but offers sharp observations.",
+        "Taha Demir": "Victim; celebrated engineer whose anti-AI stance created friction with leadership."
+      },
+      "secret": "",
+      "abilities": "Can bag evidence, compare physical marks to tools, and unlock confrontation options when evidence thresholds are met.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3,
+            4
+          ],
+          "required_evidence": [
+            "HDMI cable with ferrite bead",
+            "cleaning log sheet",
+            "packaged replacement HDMI cable",
+            "security desk visitor log"
+          ],
+          "required_knowledge": [
+            "The HDMI cable’s ferrite bead has a distinct scuff shaped like a bench vice jaw from the lab.",
+            "A meeting invite titled “AI Compliance” was created by Kuluhan Binici minutes before Taha’s estimated time of death."
+          ],
+          "reaction": "Selin can present a full chain argument: cable-as-ligature, vice scuff linkage, off-schedule cleaning, missing HDMI at Kuluhan’s desk, and lab entry window.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Mina Koç": {
+      "type": "assistant",
+      "role": "Forensics-minded assistant; photographs, cross-checks, and quietly corroborates timelines.",
+      "location": "ASUS AIS lab",
+      "phase_locations": {
+        "1": "ASUS AIS lab",
+        "2": "ASUS AIS open office",
+        "3": "ASUS AIS meeting room 3B",
+        "4": "ASUS AIS meeting room 3B"
+      },
+      "persona": "Soft-spoken, detail-first; communicates with clipped confirmations and careful caution around assumptions.",
+      "knowledge_about_others": {
+        "Detective Selin Aras": "Methodical; trusts Mina’s documentation to hold up under scrutiny.",
+        "Eren Şah": "Seems frightened; knows cleaning routines but is defensive about responsibility.",
+        "Yeet": "An accidental witness source; hears movement patterns during lunch.",
+        "Taha Demir": "Known internally as a performance outlier; kept notes and benchmarks."
+      },
+      "secret": "",
+      "abilities": "Can validate desk/cable anomalies, capture photographic comparisons, and corroborate badge-log implications once obtained.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "The only monitor in the open office missing an HDMI cable is on Kuluhan Binici’s desk."
+          ],
+          "reaction": "Mina points out the missing HDMI at Kuluhan’s workstation as uniquely anomalous among nearby desks.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "security desk visitor log"
+          ],
+          "required_knowledge": [],
+          "reaction": "Mina produces the access/visitor log placement that narrows the critical 12:10–12:20 window to a single actor.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Yeet": {
+      "type": "assistant",
+      "role": "Pantry attendant and high-traffic witness; provides sensory, time-stamped observations.",
+      "location": "ASUS AIS pantry",
+      "phase_locations": {
+        "1": "ASUS AIS pantry",
+        "2": "ASUS AIS pantry",
+        "3": "ASUS AIS pantry",
+        "4": "ASUS AIS pantry"
+      },
+      "persona": "Dry, ironic, and observant; resists drama but remembers sounds and patterns vividly.",
+      "knowledge_about_others": {
+        "Kuluhan Binici": "Recognizable by hard-soled, attention-seeking footsteps during lunch rush.",
+        "Detective Selin Aras": "The first person to ask the right time-window question."
+      },
+      "secret": "",
+      "abilities": "Can provide witness testimony that boosts suspicion toward the correct suspect when shoe/route evidence is discussed.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "If asked about 12:10–12:20, Yeet describes hard soles moving fast in the lab hallway during peak crowd noise—distinct from sneakers.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Taha Demir": {
+      "type": "assistant",
+      "role": "Victim; his notes and injuries provide motive and method evidence.",
+      "location": "ASUS AIS lab",
+      "phase_locations": {
+        "1": "ASUS AIS lab",
+        "2": "ASUS AIS lab",
+        "3": "ASUS AIS lab",
+        "4": "ASUS AIS lab"
+      },
+      "persona": "Only present through evidence; characterized as blunt, benchmark-driven, and contemptuous of cargo-cult process.",
+      "knowledge_about_others": {
+        "Kuluhan Binici": "Professional conflict implied by 'AI Compliance' pressure and the 'Ship w/out AI' note.",
+        "Mina Koç": "Handled his notebook as evidence.",
+        "Detective Selin Aras": "Investigating his death."
+      },
+      "secret": "",
+      "abilities": "N/A (victim state).",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Eren Şah": {
+      "type": "assistant",
+      "role": "Lab technician; gatekeeper to procedure knowledge (cleaning schedules, tool placement).",
+      "location": "ASUS AIS lab",
+      "phase_locations": {
+        "1": "ASUS AIS lab",
+        "2": "ASUS AIS lab",
+        "3": "ASUS AIS lab",
+        "4": "ASUS AIS lab"
+      },
+      "persona": "Nervous, literal, and compliance-minded; answers quickly but backtracks when frightened of blame.",
+      "knowledge_about_others": {
+        "Taha Demir": "Often worked late; used the server aisle for benchmarks and deployments.",
+        "Yeet": "Sees pantry traffic patterns but doesn’t socialize much.",
+        "Detective Selin Aras": "Presses on procedures; Eren worries about being treated as negligent."
+      },
+      "secret": "",
+      "abilities": "Can explain normal cleaning cadence and identify that the midday 'spot-cleaned' entry is abnormal.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "cleaning log sheet"
+          ],
+          "required_knowledge": [],
+          "reaction": "Eren confirms the server aisle is not cleaned midday and that the off-schedule entry is irregular, implying someone staged or minimized traces.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  },
+  "difficulty": "medium",
+  "_id": "the_great_depresssion"
+}

@@ -1,0 +1,89 @@
+You are a skilled mystery writer. Generate a complete whodunnit (detective) story.
+
+Requirements:
+- **Story structure:** Write a self-contained mystery with a clear crime (e.g. theft, disappearance, or murder), suspects, clues, and a resolution.
+- **Realism:** Keep the story plausible. Characters should be believable and their actions should make sense.
+- **Depth:** Weave clues into characters and their backgrounds. For example, the detective might need to obtain a clue from one character in order to extract another from someone else. This gives the story more depth.
+- **Mystery and pacing:** State clearly what mystery is being solved. Advance the solution scene by scene. For each scene:
+  - Describe the environment in detail (e.g. a room, building, or space), including items and characters present.
+  - Make the detective's objective in that scene clear to the reader.
+  - If a scene spans multiple locations, show how they connect.
+- **Culprit(s):** Include at least one culprit—the character(s) responsible for the crime must appear in the story and be revealed at the end. Each scene should contain at least one clue that gradually points to the culprit(s).
+
+{% if case_title %}
+- **Case title:** Use or adapt this title for the story: "{{ case_title }}".
+{% endif %}
+{% if time_period %}
+- **Time period:** Set the story in this era: {{ time_period }}.
+{% endif %}
+{% if setting_location %}
+- **Setting:** The story should take place in or around: {{ setting_location }}.
+{% endif %}
+{% if setting_description %}
+- **Setting description:** Use this atmosphere and mood for the location: {{ setting_description }}
+{% endif %}
+{% if genre %}
+- **Genre:** The story should fit this genre: {{ genre }}.
+{% endif %}
+{% if crime_summary %}
+- **Summary of the crime:** The core crime to be solved is: {{ crime_summary }}
+{% endif %}
+
+- Below are some additional requirements that you must follow given by the user. Make sure to follow them all but you can add more details to make the story more interesting and challenging.
+
+{% if characters and characters | length > 0 %}
+- **Cast:** The following character(s) must appear in the story. The detective should interact with them. Use their exact names and portray them as described. Suspects are potential culprits; Assistants are supporting characters who may or may not give clues.
+{% for ch in characters %}
+  - **{{ ch.name }}** ({{ ch.type | default('Character') }}){% if ch.role_archetype %}: role/archetype — {{ ch.role_archetype }}{% endif %}{% if ch.starting_location %} • starting location: {{ ch.starting_location }}{% endif %}
+    {{ ch.persona_and_secret | default(ch.summary) | default('No additional description.') }}
+{% endfor %}
+{% endif %}
+
+{% if culprit %}
+- **Assigned culprit:** The main culprit must be the character named exactly **{{ culprit }}**. Weave this character into the plot and reveal them as the culprit at the end.
+{% if motive %}
+- **Motive:** The culprit's motive should be reflected in the story: {{ motive }}
+{% endif %}
+{% if critical_evidence and critical_evidence | length > 0 %}
+- **Critical evidence:** The following evidence item(s) must appear in the story and be relevant to solving the mystery: {{ critical_evidence | join('; ') }}.
+{% endif %}
+{% else %}
+- **Culprit(s):** Invent the culprit(s); ensure they appear in the story and are revealed at the end.
+{% endif %}
+
+- **Fair play:** The story must be fair to the reader: all clues that point to the culprit(s) must appear in the narrative.
+
+{% if story_length %}
+- **Length:** Keep the story within this word count (one or two culprits is sufficient):
+{% if story_length == 'short' %}
+  roughly 500–1000 words (short).
+{% elif story_length == 'med' %}
+  roughly 1000–2000 words (medium).
+{% elif story_length == 'long' %}
+  roughly 2000–5000 words (long).
+{% else %}
+  roughly 1000–2000 words (medium).
+{% endif %}
+{% else %}
+- **Length:** Keep the story to roughly 1000–2000 words (medium). One or two culprits is sufficient.
+{% endif %}
+
+{% if story_phases and story_phases | length > 0 %}
+- **Narrative phases:** Structure the story so the investigation progresses through these phases in order. Each phase should have a clear objective and the indicated twist or discovery when appropriate. If a phase has a **logic complexity**, match the reasoning depth: Low/Linear = one clear step or single evidence to advance; Medium/Branching = connect a few clues or a small puzzle; High/Complex = multi-step reasoning, several clues or red herrings to navigate.
+{% for phase in story_phases %}
+  - Phase {{ loop.index }}: **Objective** — {{ phase.objective | default(phase.phase_objective) }}{% if phase.required_twists_or_discoveries or phase.required_twists %} **Twist/discovery** — {{ phase.required_twists_or_discoveries | default(phase.required_twists) }}{% endif %}{% if phase.logic_complexity %} **Logic complexity** — {{ phase.logic_complexity }}{% endif %}
+{% endfor %}
+{% endif %}
+
+**Output format:** Respond with a single valid JSON object only. Do not wrap it in markdown or a code fence. Use exactly these keys:
+- **"title"** (string): The story title (e.g. "The Case of the Missing Bracelet").
+- **"culprits"** (array of strings): Full name(s) of the character(s) responsible for the crime, as revealed at the end.
+- **"characters"** (array of strings): Full names of all other characters with a role (suspects, detective, witnesses, etc.). Do not include culprits here.
+- **"locations"** (array of strings): Every distinct location in the story (e.g. rooms, buildings, streets, venues).
+- **"clues"** (array of strings): Clues that appear in the story and help solve the mystery or point to the culprit(s). One short phrase or sentence per clue.
+- **"items"** (array of strings): Items used as evidence (e.g. objects, documents, physical evidence).
+- **"story"** (string): The full narrative in one coherent piece (you may start with the title). It must end with the revelation of the culprit(s).
+
+Example: `{"title": "...", "culprits": ["Name"], "characters": ["Detective X", "Witness Y"], "locations": ["The Manor", "Study"], "clues": ["The broken lock showed signs of..."], "items": ["bloody handkerchief", "letter"], "story": "Paragraphs..."}`
+
+Generate the whodunnit story now.

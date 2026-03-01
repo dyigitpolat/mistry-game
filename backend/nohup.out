@@ -1,0 +1,447 @@
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+INFO:     Started server process [23750]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+INFO:     Started server process [24159]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 48] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Mistry Backend starting up…
+📊 Langfuse telemetry enabled
+🎨 Google Nanobanana scene generation enabled
+🔮 Mistry Backend shutting down…
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Mistry Backend starting up…
+📊 Langfuse telemetry enabled
+🎨 Google Nanobanana scene generation enabled
+INFO:     127.0.0.1:64935 - "OPTIONS /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64935 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64935 - "OPTIONS /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64935 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+INFO:     127.0.0.1:64935 - "POST /scenes/the_crooked_man/generate?location_name=Watson%27s%20Hearth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64975 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65010 - "GET /scenes/the_crooked_man_watsons_hearth.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65171 - "OPTIONS /scenarios/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65171 - "GET /scenarios/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65216 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65216 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+INFO:     127.0.0.1:65216 - "POST /scenes/the_crooked_man/generate?location_name=Watson%27s%20Hearth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65277 - "GET /scenes/the_crooked_man_watsons_hearth.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65216 - "OPTIONS /game/d689da81-cc79-4645-915b-080a8c8129f7/chat?character_name=Neill%20Bhurtee&message=talk%20to%20Neill%20Bhurtee HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65216 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/chat?character_name=Neill%20Bhurtee&message=talk%20to%20Neill%20Bhurtee HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65455 - "OPTIONS /game/d689da81-cc79-4645-915b-080a8c8129f7/action HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65455 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/action HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49257 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/action HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49547 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/action HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49746 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/chat?character_name=Neill%20Bhurtee&message=talk%20to%20Neill%20Bhurtee HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50097 - "OPTIONS /game/d689da81-cc79-4645-915b-080a8c8129f7/chat?character_name=Neill%20Bhurtee&message=Talk%20to%20Neill%20Bhurtee HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50097 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/chat?character_name=Neill%20Bhurtee&message=Talk%20to%20Neill%20Bhurtee HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50339 - "POST /game/d689da81-cc79-4645-915b-080a8c8129f7/action HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+INFO:     Started server process [25415]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+🔮 Mistry Backend starting up…
+📊 Langfuse telemetry enabled
+🎨 Google Nanobanana scene generation enabled
+INFO:     127.0.0.1:51451 - "GET /scenarios/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51539 - "OPTIONS /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51539 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51539 - "OPTIONS /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51539 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+INFO:     127.0.0.1:51539 - "POST /scenes/the_crooked_man/generate?location_name=Watson%27s%20Hearth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51604 - "GET /scenarios/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51659 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51661 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51661 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51659 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+INFO:     127.0.0.1:51661 - "POST /scenes/the_crooked_man/generate?location_name=Watson%27s%20Hearth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51659 - "OPTIONS /scenarios/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51659 - "GET /scenarios/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51771 - "GET /scenes/the_crooked_man_watsons_hearth.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51876 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51876 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+INFO:     127.0.0.1:51876 - "POST /scenes/the_crooked_man/generate?location_name=Watson%27s%20Hearth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51939 - "GET /scenes/the_crooked_man_watsons_hearth.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52331 - "OPTIONS /game/ff6cb6a6-0581-4ea1-bac2-c24c3fa59aea/action HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52331 - "POST /game/ff6cb6a6-0581-4ea1-bac2-c24c3fa59aea/action HTTP/1.1" 200 OK
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+Both GOOGLE_API_KEY and GEMINI_API_KEY are set. Using GOOGLE_API_KEY.
+🔮 Agents initialized: Oracle=True, Character=True, Epiphany=True, SceneGen=True
+INFO:     127.0.0.1:52331 - "POST /scenes/the_crooked_man/generate?location_name=Hallway HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52541 - "GET /scenes/the_crooked_man_hallway.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52680 - "POST /game/ff6cb6a6-0581-4ea1-bac2-c24c3fa59aea/action HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54710 - "OPTIONS /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54714 - "OPTIONS /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54710 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "OPTIONS /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54720 - "OPTIONS /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54714 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54710 - "OPTIONS /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54720 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54710 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54714 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "GET /scenarios/the_crooked_man HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54720 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "POST /game/start?scenario_id=the_crooked_man&user_id=anonymous HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "POST /scenes/the_crooked_man/generate?location_name=Watson%27s%20Hearth HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 114, in _import_module
+    return importlib.import_module(module)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'langchain_mistralai'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 416, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 122, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 108, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 532, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 316, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/routes/scenes.py", line 34, in generate_scene
+    engine = GameEngine()
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/services/game_engine.py", line 77, in __init__
+    self._init_agents()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/services/game_engine.py", line 87, in _init_agents
+    self._oracle = GamemakerOracle(registry)
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/oracle.py", line 50, in __init__
+    self.model = registry.get_agent_model("gamemaker_oracle")
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/llm_registry.py", line 96, in get_agent_model
+    return self.get_model(model_id, temperature=temperature, max_tokens=max_tokens)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/llm_registry.py", line 71, in get_model
+    self._models[cache_key] = init_chat_model(
+                              ~~~~~~~~~~~~~~~^
+        model_id,
+        ^^^^^^^^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 464, in init_chat_model
+    return _init_chat_model_helper(
+        cast("str", model),
+        model_provider=model_provider,
+        **kwargs,
+    )
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 487, in _init_chat_model_helper
+    creator_func = _get_chat_model_creator(model_provider)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 154, in _get_chat_model_creator
+    module = _import_module(pkg, class_name)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 123, in _import_module
+    raise ImportError(msg) from e
+ImportError: Initializing ChatMistralAI requires the langchain-mistralai package. Please install it with `pip install langchain-mistralai`
+Traceback (most recent call last):
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 114, in _import_module
+    return importlib.import_module(module)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'langchain_mistralai'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/__main__.py", line 4, in <module>
+    uvicorn.main()
+    ~~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 1406, in main
+    rv = self.invoke(ctx)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/main.py", line 433, in main
+    run(
+    ~~~^
+        app,
+        ^^^^
+    ...<47 lines>...
+        h11_max_incomplete_event_size=h11_max_incomplete_event_size,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/main.py", line 606, in run
+    server.run()
+    ~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/server.py", line 79, in serve
+    await self._serve(sockets)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/server.py", line 86, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/config.py", line 441, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/main.py", line 22, in <module>
+    from app.routes import game, scenarios, scenes  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/routes/game.py", line 27, in <module>
+    _engine = GameEngine()
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/services/game_engine.py", line 77, in __init__
+    self._init_agents()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/services/game_engine.py", line 87, in _init_agents
+    self._oracle = GamemakerOracle(registry)
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/oracle.py", line 50, in __init__
+    self.model = registry.get_agent_model("gamemaker_oracle")
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/llm_registry.py", line 96, in get_agent_model
+    return self.get_model(model_id, temperature=temperature, max_tokens=max_tokens)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/llm_registry.py", line 71, in get_model
+    self._models[cache_key] = init_chat_model(
+                              ~~~~~~~~~~~~~~~^
+        model_id,
+        ^^^^^^^^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 464, in init_chat_model
+    return _init_chat_model_helper(
+        cast("str", model),
+        model_provider=model_provider,
+        **kwargs,
+    )
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 487, in _init_chat_model_helper
+    creator_func = _get_chat_model_creator(model_provider)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 154, in _get_chat_model_creator
+    module = _import_module(pkg, class_name)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 123, in _import_module
+    raise ImportError(msg) from e
+ImportError: Initializing ChatMistralAI requires the langchain-mistralai package. Please install it with `pip install langchain-mistralai`
+Traceback (most recent call last):
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 114, in _import_module
+    return importlib.import_module(module)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'langchain_mistralai'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/__main__.py", line 4, in <module>
+    uvicorn.main()
+    ~~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 1406, in main
+    rv = self.invoke(ctx)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/main.py", line 433, in main
+    run(
+    ~~~^
+        app,
+        ^^^^
+    ...<47 lines>...
+        h11_max_incomplete_event_size=h11_max_incomplete_event_size,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/main.py", line 606, in run
+    server.run()
+    ~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/server.py", line 79, in serve
+    await self._serve(sockets)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/server.py", line 86, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/config.py", line 441, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/main.py", line 22, in <module>
+    from app.routes import game, scenarios, scenes  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/routes/game.py", line 27, in <module>
+    _engine = GameEngine()
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/services/game_engine.py", line 77, in __init__
+    self._init_agents()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/app/services/game_engine.py", line 87, in _init_agents
+    self._oracle = GamemakerOracle(registry)
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/oracle.py", line 50, in __init__
+    self.model = registry.get_agent_model("gamemaker_oracle")
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/llm_registry.py", line 96, in get_agent_model
+    return self.get_model(model_id, temperature=temperature, max_tokens=max_tokens)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/agent/mistry_agents/llm_registry.py", line 71, in get_model
+    self._models[cache_key] = init_chat_model(
+                              ~~~~~~~~~~~~~~~^
+        model_id,
+        ^^^^^^^^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 464, in init_chat_model
+    return _init_chat_model_helper(
+        cast("str", model),
+        model_provider=model_provider,
+        **kwargs,
+    )
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 487, in _init_chat_model_helper
+    creator_func = _get_chat_model_creator(model_provider)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 154, in _get_chat_model_creator
+    module = _import_module(pkg, class_name)
+  File "/Users/aishiknagar/Desktop/mistry-game-main/backend/.venv/lib/python3.13/site-packages/langchain/chat_models/base.py", line 123, in _import_module
+    raise ImportError(msg) from e
+ImportError: Initializing ChatMistralAI requires the langchain-mistralai package. Please install it with `pip install langchain-mistralai`

@@ -1,0 +1,597 @@
+{
+  "title": "Another phd bites the dust",
+  "author": "Unknown",
+  "victim": "Prof Aishik",
+  "intro_narrative": "The summer term has left NUS eerily hollow. Detective Lin Meiying arrives at SOC3 after campus security reports what looks like a fourth-floor fall. The lobby is quiet, the air-conditioning hums, and everyone wants a simple story. Lin\u2019s job is to keep it from becoming one\u2014until the evidence earns it.",
+  "time_limit_minutes": 180,
+  "start_time": "08:20",
+  "win_conditions": {
+    "required_evidence": [
+      "thin utility rope",
+      "Prof Aishik\u2019s keyboard",
+      "access-card logs",
+      "cleaning-room inventory sheet",
+      "qualifying exam rubric (torn printout)",
+      "lab door camera log"
+    ],
+    "required_suspect": [
+      "Taha Aksu"
+    ],
+    "required_motive": [
+      "Desperation to obtain qualifying-exam materials; theft attempt escalated to murder when caught."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Arrival & Scene Control",
+      "objective": "Secure the immediate area and determine whether the death is truly an accident.",
+      "unlocked_locations": [
+        "Campus security post near SOC3",
+        "NUS SOC3 Building lobby",
+        "SOC3 4th-floor corridor",
+        "Prof Aishik's office (SOC3, 4th floor)"
+      ],
+      "unlocked_characters": [
+        "Detective Lin Meiying",
+        "Officer Goh",
+        "Taha Aksu"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Alibis & Access",
+      "objective": "Check suspects\u2019 opportunity: who could enter, and who can be placed elsewhere during the time of death.",
+      "unlocked_locations": [
+        "Graduate lab room (SOC3, 3rd floor)",
+        "Stairwell between basement and 4th floor"
+      ],
+      "unlocked_characters": [
+        "Yeet",
+        "Dr. Siti Rahman"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "The Rope Trail",
+      "objective": "Trace the murder weapon and verify who could source it and bring it upstairs unnoticed.",
+      "unlocked_locations": [
+        "Cleaning room (SOC3, basement)"
+      ],
+      "unlocked_characters": [
+        "Kuluhan Binici"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Synthesis & Confrontation",
+      "objective": "Connect method, access, and motive into a single narrative and force a break in the culprit\u2019s story.",
+      "unlocked_locations": [
+        "Campus security post near SOC3"
+      ],
+      "unlocked_characters": [
+        "Taha Aksu"
+      ]
+    }
+  ],
+  "locations": {
+    "NUS SOC3 Building lobby": {
+      "description": "Sunlight pools across polished tiles. The lobby feels abandoned\u2014just a vending machine blinking and the soft hiss of air-conditioning. Anyone entering SOC3 must pass through here, whether they want to be remembered or not.",
+      "items": [],
+      "clues": [
+        "The lobby is unusually empty and quiet for a weekday morning, suggesting few witnesses and making electronic access records unusually important."
+      ],
+      "base_ascii": "+----------------------+\n| GLASS DOORS   [SUN]  |\n|   -> to campus path  |\n|                      |\n| [VEND]     [SOFAS]   |\n|            [LIFTS]-> |\n|   SIGN-IN DESK       |\n+----------------------+",
+      "visual_metadata": {
+        "setting": "A bright, echoing university lobby with minimal foot traffic; every sound carries.",
+        "connections": [
+          {
+            "target_location": "Campus security post near SOC3",
+            "mechanism": "Short walkway past sign-in desk",
+            "state": "open"
+          },
+          {
+            "target_location": "SOC3 4th-floor corridor",
+            "mechanism": "Lift bank",
+            "state": "open"
+          },
+          {
+            "target_location": "Stairwell between basement and 4th floor",
+            "mechanism": "Stairwell fire door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Vending machine alcove",
+            "type": "surface",
+            "spatial_relationship": "Left wall near entrance",
+            "objects": []
+          },
+          {
+            "id": "Sign-in counter",
+            "type": "surface",
+            "spatial_relationship": "Near the center by the doors",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Prof Aishik's office (SOC3, 4th floor)": {
+      "description": "A cramped office packed with posters, journals, and a desk squeezed between a bookshelf and a filing cabinet. The door is ajar. A toppled chair and scattered papers frame Prof Aishik\u2019s body on the carpet. The window latch is clicked tight\u2014too tidy for a supposed fall.",
+      "items": [
+        "Prof Aishik\u2019s keyboard",
+        "qualifying exam rubric (torn printout)",
+        "thin utility rope"
+      ],
+      "clues": [
+        "A rope burn and bruising around Prof Aishik\u2019s neck indicate strangulation, not a fall.",
+        "A short length of thin rope is found coiled behind the office bookshelf, with frayed fibers matching neck abrasions.",
+        "Prof Aishik\u2019s keyboard has clear, fresh fingerprints that do not match the victim\u2019s usual touch points but match Taha Aksu.",
+        "The office window is shut and dustless, inconsistent with a staged \u2018fall\u2019 or open-window struggle.",
+        "A torn corner of a printed qualifying-exam rubric is wedged under the desk caster near the victim\u2019s shoe.",
+        "A faint smear of printer toner on the office desk edge matches fresh handling of printed documents."
+      ],
+      "base_ascii": "+--------------------------+\n| [WINDOW] (shut/dustless) |\n|   [POSTERS]              |\n| [BOOKSHELF]   [DESK]     |\n| (gap behind)  [KB][PC]   |\n|    X BODY   [TOPPLED]    |\n| [FILE CAB]   [TRASH]     |\n| DOOR -> corridor         |\n+--------------------------+",
+      "visual_metadata": {
+        "setting": "Overworked academic clutter: papers, posters, and a tension that lingers in the air like disinfectant.",
+        "connections": [
+          {
+            "target_location": "SOC3 4th-floor corridor",
+            "mechanism": "Office door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Desk surface",
+            "type": "surface",
+            "spatial_relationship": "Right side under posters",
+            "objects": [
+              {
+                "item_id": "Prof Aishik\u2019s keyboard",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Bookshelf (front row)",
+            "type": "container",
+            "spatial_relationship": "Left wall beside the body",
+            "objects": []
+          },
+          {
+            "id": "Bookshelf (hidden rear gap)",
+            "type": "container",
+            "spatial_relationship": "Behind the second row of journals, reachable by sliding books aside",
+            "objects": [
+              {
+                "item_id": "thin utility rope",
+                "visibility": "hidden",
+                "hidden_by": "Bookshelf (front row)"
+              }
+            ]
+          },
+          {
+            "id": "Trash bin",
+            "type": "container",
+            "spatial_relationship": "Under the desk",
+            "objects": [
+              {
+                "item_id": "qualifying exam rubric (torn printout)",
+                "visibility": "partially hidden",
+                "hidden_by": "Crumpled notes and drafts"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "SOC3 4th-floor corridor": {
+      "description": "A sterile corridor with a faint disinfectant sting, as if someone tried to clean the story before you arrived. The water cooler sits untouched. Doors are quiet and closed, but the building feels like it\u2019s listening.",
+      "items": [],
+      "clues": [
+        "Kuluhan Binici\u2019s keys cannot open Prof Aishik\u2019s inner office door; Taha\u2019s access card can.",
+        "Taha gives an overly specific account about \u2018finding the professor after he slipped,\u2019 before the cause of death is announced."
+      ],
+      "base_ascii": "+----------------------------+\n| DOORS | DOORS | DOORS      |\n| [WATER]        [NOTICE]    |\n|                            |\n|  -> to OFFICE (ajar)       |\n|  -> to LIFTS / LOBBY       |\n|  -> to STAIRWELL           |\n| (quiet, disinfectant smell)|\n+----------------------------+",
+      "visual_metadata": {
+        "setting": "A bright but lifeless academic hallway; the cleanliness reads as deliberate rather than routine.",
+        "connections": [
+          {
+            "target_location": "NUS SOC3 Building lobby",
+            "mechanism": "Lift doors",
+            "state": "open"
+          },
+          {
+            "target_location": "Prof Aishik's office (SOC3, 4th floor)",
+            "mechanism": "Office door",
+            "state": "open"
+          },
+          {
+            "target_location": "Stairwell between basement and 4th floor",
+            "mechanism": "Fire door to stairwell",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Water cooler station",
+            "type": "surface",
+            "spatial_relationship": "Mid-corridor near notice board",
+            "objects": []
+          },
+          {
+            "id": "Notice board ledge",
+            "type": "surface",
+            "spatial_relationship": "Next to the water cooler",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Graduate lab room (SOC3, 3rd floor)": {
+      "description": "The lab smells of solder and instant noodles. A fan clicks in the corner. Workbenches are lined with half-built prototypes, and a whiteboard screams deadlines. Yeet\u2019s posture is rigid\u2014defiance and fear in equal measure.",
+      "items": [
+        "lab door camera log"
+      ],
+      "clues": [
+        "Yeet\u2019s lab door camera log shows Yeet badging into the lab during the likely time of death."
+      ],
+      "base_ascii": "+---------------------------+\n| [WHITEBOARD]  [FAN]       |\n| BENCH  BENCH  BENCH       |\n| [TOOLS]   [PROTOTYPES]    |\n|        [LAPTOP] YEET      |\n|                           |\n| CABINETS   SINK           |\n| DOOR -> corridor/stairs   |\n+---------------------------+",
+      "visual_metadata": {
+        "setting": "A working graduate lab: noisy electronics, improvised meals, and security logs that speak louder than people.",
+        "connections": [
+          {
+            "target_location": "Stairwell between basement and 4th floor",
+            "mechanism": "Hall door to stairwell landing",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Lab bench (central)",
+            "type": "surface",
+            "spatial_relationship": "Center of room under fluorescent lights",
+            "objects": [
+              {
+                "item_id": "lab door camera log",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Wall cabinets",
+            "type": "container",
+            "spatial_relationship": "Back wall near sink",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Cleaning room (SOC3, basement)": {
+      "description": "A damp, detergent-heavy room of buckets, brooms, gloves, and trash bags. The floor is always a little wet. Everything is inventoried\u2014except, apparently, the things someone wanted not to be noticed.",
+      "items": [
+        "cleaning-room inventory sheet",
+        "thin utility rope"
+      ],
+      "clues": [
+        "The cleaning-room inventory shows a missing length of utility rope used for bundling trash bags."
+      ],
+      "base_ascii": "+---------------------------+\n| [RACK] [BAGS] [GLOVES]    |\n| [MOPS] [BROOMS]           |\n|                           |\n| [BUCKETS]   [DRAIN]       |\n|                           |\n| INVENTORY SHEET (taped)   |\n| HEAVY DOOR -> service hall|\n+---------------------------+",
+      "visual_metadata": {
+        "setting": "Service-space utilitarian and damp; the kind of room people enter only when they think no one is watching.",
+        "connections": [
+          {
+            "target_location": "Stairwell between basement and 4th floor",
+            "mechanism": "Service corridor door to stairwell access",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Metal supply rack",
+            "type": "container",
+            "spatial_relationship": "Back wall, stacked with consumables",
+            "objects": [
+              {
+                "item_id": "cleaning-room inventory sheet",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "thin utility rope",
+                "visibility": "partially hidden",
+                "hidden_by": "A roll of trash bags and folded gloves"
+              }
+            ]
+          },
+          {
+            "id": "Bucket cluster",
+            "type": "container",
+            "spatial_relationship": "Lower left, beside mops",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Stairwell between basement and 4th floor": {
+      "description": "Concrete steps and cool air. Each landing is a blind spot between worlds: lobby, lab, office, and basement. Footsteps echo long enough to feel like a second presence.",
+      "items": [],
+      "clues": [
+        "The stairwell\u2019s echoing, low-traffic route provides a discreet path between the basement cleaning supplies and the fourth-floor offices without passing the main lobby."
+      ],
+      "base_ascii": "+-----------------------+\n| 4F DOOR -> corridor    |\n| [LANDING]              |\n|   ||                   |\n|   ||  (echo)           |\n| [3F DOOR] -> lab       |\n|   ||                   |\n| [B DOOR] -> cleaning   |\n+-----------------------+",
+      "visual_metadata": {
+        "setting": "A utilitarian vertical corridor: stark concrete, fluorescent buzz, and perfect opportunities for unseen movement.",
+        "connections": [
+          {
+            "target_location": "SOC3 4th-floor corridor",
+            "mechanism": "4th-floor fire door",
+            "state": "closed"
+          },
+          {
+            "target_location": "Graduate lab room (SOC3, 3rd floor)",
+            "mechanism": "3rd-floor landing door",
+            "state": "open"
+          },
+          {
+            "target_location": "Cleaning room (SOC3, basement)",
+            "mechanism": "Basement service door",
+            "state": "open"
+          },
+          {
+            "target_location": "NUS SOC3 Building lobby",
+            "mechanism": "Ground-floor stair door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Landing window sill",
+            "type": "surface",
+            "spatial_relationship": "Small sill at the 3rd/4th landing",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Campus security post near SOC3": {
+      "description": "A small security booth with sign-in sheets, monitors, and a tired fan pushing warm air. This is where stories become records: timestamps, access, and who wants to be officially remembered.",
+      "items": [
+        "access-card logs"
+      ],
+      "clues": [
+        "Access-card logs show only one non-faculty entry to the fourth-floor area during the window: Taha Aksu at 07:03."
+      ],
+      "base_ascii": "+---------------------------+\n| [MONITORS] [RADIO]        |\n|                           |\n| COUNTER / SIGN-IN BOOK    |\n| [DRAWER]   [STAMP]        |\n|                           |\n| DOOR -> lobby walkway     |\n| FILE CABINET              |\n+---------------------------+",
+      "visual_metadata": {
+        "setting": "A cramped, fluorescent security post where data outlives excuses.",
+        "connections": [
+          {
+            "target_location": "NUS SOC3 Building lobby",
+            "mechanism": "Booth door to lobby",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Monitor desk",
+            "type": "surface",
+            "spatial_relationship": "Against the back wall under monitors",
+            "objects": [
+              {
+                "item_id": "access-card logs",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Filing drawer",
+            "type": "container",
+            "spatial_relationship": "Under the counter",
+            "objects": []
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Detective Lin Meiying": {
+      "type": "assistant",
+      "role": "Lead investigator; methodical, evidence-first.",
+      "location": "Campus security post near SOC3",
+      "phase_locations": {
+        "1": "Campus security post near SOC3",
+        "2": "SOC3 4th-floor corridor",
+        "3": "Cleaning room (SOC3, basement)",
+        "4": "SOC3 4th-floor corridor"
+      },
+      "persona": "Calm, precise, and patient; asks narrow questions and lets silence do work.",
+      "knowledge_about_others": {
+        "Officer Goh": "Capable but prone to accept the easiest narrative until evidence forces a shift.",
+        "Taha Aksu": "Ambitious; talks like someone pre-writing a defense.",
+        "Yeet": "Openly resentful of budget cuts, but willing to provide logs.",
+        "Kuluhan Binici": "Defensive and gruff; more concerned with being blamed than with the victim."
+      },
+      "secret": "",
+      "abilities": "Can summarize evidence chains, unlock deductions when multiple clues are collected, and trigger suspect confrontations in Phase 4.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "thin utility rope",
+            "Prof Aishik\u2019s keyboard",
+            "access-card logs",
+            "cleaning-room inventory sheet"
+          ],
+          "required_knowledge": [
+            "Motive involves qualifying-exam materials"
+          ],
+          "reaction": "Lin delivers a structured accusation tying rope source, office access, and keyboard prints into a single timeline, forcing the suspect to respond.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Yeet": {
+      "type": "suspect",
+      "role": "Graduate student with a public dispute (budget cut) and a strong paper trail alibi.",
+      "location": "Graduate lab room (SOC3, 3rd floor)",
+      "phase_locations": {
+        "1": "SOC3 4th-floor corridor",
+        "2": "Graduate lab room (SOC3, 3rd floor)",
+        "3": "Graduate lab room (SOC3, 3rd floor)",
+        "4": "Graduate lab room (SOC3, 3rd floor)"
+      },
+      "persona": "Blunt, tired, and defensive; speaks in clipped sentences and pushes receipts (logs) over emotion.",
+      "knowledge_about_others": {
+        "Taha Aksu": "New; 'too polished' for an empty campus day.",
+        "Prof Aishik": "Ran qualifying exams and kept rubrics/notes; students get desperate.",
+        "Dr. Siti Rahman": "Knows departmental processes; would know who should access what."
+      },
+      "secret": "They exaggerated how heated the budget argument was, fearing it would paint them as violent.",
+      "abilities": "",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Kuluhan Binici": {
+      "type": "suspect",
+      "role": "Cleaning staff; controls supply access but lacks office authorization.",
+      "location": "Cleaning room (SOC3, basement)",
+      "phase_locations": {
+        "1": "Cleaning room (SOC3, basement)",
+        "2": "Cleaning room (SOC3, basement)",
+        "3": "Cleaning room (SOC3, basement)",
+        "4": "Cleaning room (SOC3, basement)"
+      },
+      "persona": "Grumpy, literal, and quick to feel accused; answers with irritation but knows his inventories.",
+      "knowledge_about_others": {
+        "Officer Goh": "Came by earlier asking about supplies and keys.",
+        "Taha Aksu": "Has seen students tailgate into service areas; cannot always identify which ones."
+      },
+      "secret": "He sometimes leaves the cleaning-room door propped during rounds, making tailgating easier than he admits.",
+      "abilities": "",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Dr. Siti Rahman": {
+      "type": "assistant",
+      "role": "Faculty colleague; provides procedural context and confirms exam-material sensitivity.",
+      "location": "NUS SOC3 Building lobby",
+      "phase_locations": {
+        "1": "NUS SOC3 Building lobby",
+        "2": "SOC3 4th-floor corridor",
+        "3": "NUS SOC3 Building lobby",
+        "4": "Campus security post near SOC3"
+      },
+      "persona": "Professional and careful; speaks in measured, policy-aware language.",
+      "knowledge_about_others": {
+        "Prof Aishik": "Kept qualifying-exam rubrics and annotations; was strict about confidentiality.",
+        "Taha Aksu": "New PhD; requested 'forms' unusually early and seemed anxious about qualifying timelines.",
+        "Yeet": "Had budget disputes but is generally transparent and trackable in the lab."
+      },
+      "secret": "",
+      "abilities": "Can corroborate motives around qualifying-exam materials and explain access norms (who should have office entry).",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            4
+          ],
+          "required_evidence": [
+            "qualifying exam rubric (torn printout)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Siti confirms the rubric appears recently printed and sensitive, strengthening theft-as-motive rather than personal revenge.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Officer Goh": {
+      "type": "assistant",
+      "role": "Campus security officer; gatekeeper for records and initial response.",
+      "location": "SOC3 4th-floor corridor",
+      "phase_locations": {
+        "1": "SOC3 4th-floor corridor",
+        "2": "Campus security post near SOC3",
+        "3": "Cleaning room (SOC3, basement)",
+        "4": "SOC3 4th-floor corridor"
+      },
+      "persona": "Subdued and pragmatic; wants resolution but follows Lin\u2019s lead when evidence contradicts first impressions.",
+      "knowledge_about_others": {
+        "Kuluhan Binici": "Has access to service areas; has been blamed before.",
+        "Taha Aksu": "Registered in the access system; his card permissions are unusually broad for a new student.",
+        "Yeet": "Known to be outspoken; lab systems keep decent logs."
+      },
+      "secret": "",
+      "abilities": "Can retrieve access-card logs, verify key/door access, and authenticate camera logs.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            4
+          ],
+          "required_evidence": [
+            "access-card logs"
+          ],
+          "required_knowledge": [],
+          "reaction": "Goh confirms the access timeline and identifies the only relevant non-faculty entry during the window.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Taha Aksu": {
+      "type": "suspect",
+      "role": "New PhD student; primary suspect with access and behavioral slip.",
+      "location": "SOC3 4th-floor corridor",
+      "phase_locations": {
+        "1": "SOC3 4th-floor corridor",
+        "2": "SOC3 4th-floor corridor",
+        "3": "SOC3 4th-floor corridor",
+        "4": "SOC3 4th-floor corridor"
+      },
+      "persona": "Polished, controlled, and overly explanatory; when pressed, slips into rehearsed specifics and then silence.",
+      "knowledge_about_others": {
+        "Prof Aishik": "Had qualifying materials and could report misconduct.",
+        "Yeet": "Had a known argument with the professor\u2014useful as a decoy narrative.",
+        "Kuluhan Binici": "Cleaning supplies exist; basement is accessible if one tailgates."
+      },
+      "secret": "He entered the office to search for qualifying-exam materials; when caught, he panicked and used a thin utility rope to silence the professor.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "thin utility rope",
+            "Prof Aishik\u2019s keyboard",
+            "access-card logs",
+            "cleaning-room inventory sheet",
+            "qualifying exam rubric (torn printout)"
+          ],
+          "required_knowledge": [
+            "Taha gave the 'slipped' story before cause of death was announced"
+          ],
+          "reaction": "Taha\u2019s composure cracks; he shifts from denial to a panicked admission about being caught searching for exam materials.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 80,
+      "flight_risk": 35
+    }
+  }
+}

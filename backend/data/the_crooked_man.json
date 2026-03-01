@@ -1,0 +1,559 @@
+{
+  "title": "The Crooked Man",
+  "author": "Arthur Conan Doyle",
+  "visibility": "public",
+  "description": "One summer night, a mysterious visitor arrives with news of a bizarre murder in a locked room at Aldershot. Can you unravel the truth behind Colonel Morrison's death?",
+  "victim": "Colonel Watson Morrison",
+  "intro_narrative": "One summer night, you are seated by your own hearth smoking a last pipe when the bell clangs. To your astonishment, it is your old friend Neill Bhurtee. He needs your help investigating the strange murder of Colonel Morrison at Aldershot.",
+  "time_limit_minutes": 180,
+  "start_time": "11:45 PM",
+  "win_conditions": {
+    "required_evidence": [
+      "The sight of Sherlock David (Shock/Apoplexy)"
+    ],
+    "required_suspect": [
+      "Sherlock David"
+    ],
+    "required_motive": [
+      "Morrison betrayed David during the Indian Mutiny to steal Simpson Bathsheba."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "The Late Night Visitor",
+      "objective": "Talk to Neill Bhurtee to learn the initial facts of the case, then travel to the Hallway at Lachine Villa (Aldershot).",
+      "unlocked_locations": [
+        "Watson's Hearth",
+        "Hallway"
+      ],
+      "unlocked_characters": [
+        "Neill Bhurtee"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "The Locked Room",
+      "objective": "Investigate the Morning Room and the Lawn to figure out how the intruder entered and left the locked room.",
+      "unlocked_locations": [
+        "Watson's Hearth",
+        "Hallway",
+        "Morning Room",
+        "The Lawn"
+      ],
+      "unlocked_characters": [
+        "Neill Bhurtee",
+        "Jackson Barclay"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Neighbor's Secret",
+      "objective": "You found strange animal tracks and a missing key. Now, interrogate Miss Harry to trace Mrs. Morrison's steps before the murder.",
+      "unlocked_locations": [
+        "Watson's Hearth",
+        "Hallway",
+        "Morning Room",
+        "The Lawn",
+        "Miss Harry's Villa"
+      ],
+      "unlocked_characters": [
+        "Neill Bhurtee",
+        "Jackson Barclay",
+        "Miss Harry"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "The Crooked Man",
+      "objective": "Miss Harry revealed a confrontation with a deformed man named Sherlock on Hudson Street. Go there, find him, and extract the truth.",
+      "unlocked_locations": [
+        "Watson's Hearth",
+        "Hallway",
+        "Morning Room",
+        "The Lawn",
+        "Miss Harry's Villa",
+        "Hudson Street"
+      ],
+      "unlocked_characters": [
+        "Neill Bhurtee",
+        "Jackson Barclay",
+        "Miss Harry",
+        "Sherlock David"
+      ]
+    }
+  ],
+  "locations": {
+    "Watson's Hearth": {
+      "description": "Your cozy home. The fire is dying down, and the remains of your pipe sit on the table.",
+      "items": [],
+      "clues": [
+        "Colonel Morrison was murdered in a locked room.",
+        "His wife, Simpson Bathsheba, is the prime suspect."
+      ],
+      "base_ascii": "+-------------------------+\n|      [MANTLEPIECE]      |\n|        ( )   ( )        |\n|      __|||___|||__      |\n|     [   FIRE      ]     |\n+-------------------------+",
+      "visual_metadata": {
+        "setting": "A warm, dimly lit Victorian study. Shadows dance from the dying fireplace.",
+        "connections": [
+          {
+            "target_location": "Hallway",
+            "mechanism": "Front Door and Carriage",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Mantlepiece",
+            "type": "surface",
+            "spatial_relationship": "Above the fireplace on the North wall",
+            "objects": []
+          },
+          {
+            "id": "Side Table",
+            "type": "surface",
+            "spatial_relationship": "Next to Watson's armchair",
+            "objects": [
+              {
+                "item_id": "Smoking Pipe",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Hallway": {
+      "description": "Inside Lachine Villa. The door to the morning-room was locked from the inside. The servants heard screams here.",
+      "items": [
+        "Housemaid's Duster"
+      ],
+      "clues": [
+        "Voices heard inside: The wife yelled 'You coward!' repeatedly.",
+        "The word 'Teddy' was shouted."
+      ],
+      "base_ascii": "+-------------------------+\n|      [LOCKED DOOR]      |\n|         _||_            |\n|        |    |           |\n|        | O  |           |\n+-------------------------+",
+      "visual_metadata": {
+        "setting": "A high-ceilinged corridor outside the Morning Room. Gas lamps flicker anxiously.",
+        "connections": [
+          {
+            "target_location": "Morning Room",
+            "mechanism": "Morning Room Door",
+            "state": "locked"
+          },
+          {
+            "target_location": "The Lawn",
+            "mechanism": "Front Entrance",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Morning Room Door",
+            "type": "surface",
+            "spatial_relationship": "End of the corridor",
+            "objects": [
+              {
+                "item_id": "Lock Mechanism",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Hall Stand",
+            "type": "surface",
+            "spatial_relationship": "Against the left wall",
+            "objects": [
+              {
+                "item_id": "Housemaid's Duster",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Morning Room": {
+      "description": "The murder scene. French windows open to the lawn. Colonel Morrison lies dead, his head struck upon the fender. His face is frozen in pure horror.",
+      "items": [
+        "Wooden Club",
+        "Tea Cup"
+      ],
+      "clues": [
+        "The door key is missing.",
+        "The head wound matches the fender, not the club.",
+        "He died of extreme shock before hitting the ground."
+      ],
+      "base_ascii": "+-------[FRENCH WINDOW]---+\n|            |            |\n|  [CLUB]    |            |\n|       _O_  |            |\n|      / | \\ [FENDER]     |\n|  [BODY]                 |\n+-------------------------+",
+      "visual_metadata": {
+        "setting": "Opulent sitting room. The night breeze blows the curtains inward through open French windows.",
+        "connections": [
+          {
+            "target_location": "Hallway",
+            "mechanism": "Heavy oak door",
+            "state": "locked from inside"
+          },
+          {
+            "target_location": "The Lawn",
+            "mechanism": "French windows",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Floor",
+            "type": "surface",
+            "spatial_relationship": "Center of room",
+            "objects": [
+              {
+                "item_id": "Colonel's Body",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Wooden Club",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Fireplace Fender",
+            "type": "surface",
+            "spatial_relationship": "East wall",
+            "objects": [
+              {
+                "item_id": "Blood Splatter",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Sofa Table",
+            "type": "surface",
+            "spatial_relationship": "Near the locked door",
+            "objects": [
+              {
+                "item_id": "Tea Cup",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Window Curtains",
+            "type": "surface",
+            "spatial_relationship": "Framing the French windows",
+            "objects": [
+              {
+                "item_id": "Animal Tracks",
+                "visibility": "partially hidden",
+                "hidden_by": "Folds of the fabric"
+              }
+            ]
+          },
+          {
+            "id": "Inside Door Lock",
+            "type": "container",
+            "spatial_relationship": "On the heavy oak door",
+            "objects": [
+              {
+                "item_id": "Missing Door Key",
+                "visibility": "hidden",
+                "hidden_by": "It was taken away"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "The Lawn": {
+      "description": "Thirty yards of grass dividing the house from the high-road. A low wall bounds it.",
+      "items": [
+        "Muddy Prints"
+      ],
+      "clues": [
+        "Five distinct human footmarks coming from the road.",
+        "Small, 15-inch long animal tracks with claws (carnivorous).",
+        "Animal tracks lead up the window curtains."
+      ],
+      "base_ascii": "+-------------------------+\n|      [HIGH ROAD]        |\n|  ====================   |\n|      :: prints ::       |\n|  .. animal tracks ..    |\n|      [MORNING ROOM]     |\n+-------------------------+",
+      "visual_metadata": {
+        "setting": "Dark, damp grass under a cloudy night sky. A low stone wall separates it from the muddy road.",
+        "connections": [
+          {
+            "target_location": "Morning Room",
+            "mechanism": "French windows",
+            "state": "open"
+          },
+          {
+            "target_location": "Miss Harry's Villa",
+            "mechanism": "Gravel path",
+            "state": "open"
+          },
+          {
+            "target_location": "Hudson Street",
+            "mechanism": "High-road over the wall",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Soft Mud",
+            "type": "surface",
+            "spatial_relationship": "Between the wall and the windows",
+            "objects": [
+              {
+                "item_id": "Muddy Prints",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Animal Tracks",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Miss Harry's Villa": {
+      "description": "The neighboring house. Miss Harry lives here.",
+      "items": [],
+      "clues": [
+        "Mrs. Morrison met a deformed man on Hudson Street earlier.",
+        "The man yelled 'My God, it's Simpson!'",
+        "Mrs. Morrison called him 'Sherlock'."
+      ],
+      "base_ascii": "+-------------------------+\n|        [VILLA]          |\n|          _              |\n|         / \\             |\n|        |   |            |\n|        |___|            |\n+-------------------------+",
+      "visual_metadata": {
+        "setting": "A tidy, modest parlor in the neighboring villa.",
+        "connections": [
+          {
+            "target_location": "The Lawn",
+            "mechanism": "Front Door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Sofa",
+            "type": "surface",
+            "spatial_relationship": "Center of parlor",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Hudson Street": {
+      "description": "A quiet thoroughfare with a single lamp. Lodgings for entertainers.",
+      "items": [
+        "Animal Hutch",
+        "Indian Rupee"
+      ],
+      "clues": [
+        "Sherlock David lodges here with a mongoose named Uriah.",
+        "He pays with Indian currency."
+      ],
+      "base_ascii": "+-------------------------+\n|         [LAMP]          |\n|           |             |\n|           O             |\n|   [HUTCH]               |\n|          [LODGINGS]     |\n+-------------------------+",
+      "visual_metadata": {
+        "setting": "A dingy, cramped lodging room. A single fire burns in the grate making it suffocatingly hot.",
+        "connections": [
+          {
+            "target_location": "The Lawn",
+            "mechanism": "Street path",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Wooden Hutch",
+            "type": "container",
+            "spatial_relationship": "In the dark corner of the room",
+            "objects": [
+              {
+                "item_id": "Animal Hutch",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Mongoose",
+                "visibility": "hidden",
+                "hidden_by": "Inside the hutch"
+              }
+            ]
+          },
+          {
+            "id": "Landlady's Cashbox",
+            "type": "container",
+            "spatial_relationship": "Downstairs desk",
+            "objects": [
+              {
+                "item_id": "Indian Rupee",
+                "visibility": "hidden",
+                "hidden_by": "Inside the closed box"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Neill Bhurtee": {
+      "type": "assistant",
+      "role": "Consulting Detective",
+      "location": "Watson's Hearth",
+      "phase_locations": {
+        "0": "Watson's Hearth",
+        "1": "Morning Room",
+        "2": "Morning Room",
+        "3": "Morning Room"
+      },
+      "persona": "Sharp, observant, completely composed. He already suspects the police have the wrong angle.",
+      "knowledge_about_others": {
+        "Colonel Morrison": "A decorated soldier, but prone to dark moods.",
+        "Simpson Bathsheba": "The prime suspect, currently incapacitated by brain fever."
+      },
+      "secret": "",
+      "abilities": "Can provide the initial briefing and accompany you to evaluate clues.",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Jackson Barclay": {
+      "type": "assistant",
+      "role": "Housemaid",
+      "location": "Hallway",
+      "phase_locations": {
+        "0": "Hallway",
+        "1": "Hallway",
+        "2": "Hallway",
+        "3": "Hallway"
+      },
+      "persona": "Terrified, shaking. Eager to help but easily spooked.",
+      "knowledge_about_others": {
+        "Colonel Morrison": "He and the missus rarely fought, until tonight.",
+        "Simpson Bathsheba": "She came home from the Guild meeting very agitated."
+      },
+      "secret": "",
+      "abilities": "Can recount exact timelines and sounds from the house.",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Miss Harry": {
+      "type": "suspect",
+      "role": "Neighbor",
+      "location": "Miss Harry's Villa",
+      "phase_locations": {
+        "0": "Miss Harry's Villa",
+        "1": "Miss Harry's Villa",
+        "2": "Miss Harry's Villa",
+        "3": "Miss Harry's Villa"
+      },
+      "persona": "A little, ethereal slip of a girl, but shrewd. Defensive of her friend Mrs. Morrison.",
+      "knowledge_about_others": {
+        "Simpson Bathsheba": "We went to the Guild meeting together. She is innocent.",
+        "Colonel Morrison": "A respectable man, though quite possessive."
+      },
+      "secret": "She saw Mrs. Morrison confront a deformed man named Sherlock on Hudson Street.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Voices heard inside: The wife yelled 'You coward!' repeatedly."
+          ],
+          "reaction": "She becomes defensive, claiming couples fight but it doesn't mean murder.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "The door key is missing.",
+            "Small, 15-inch long animal tracks with claws (carnivorous)."
+          ],
+          "reaction": "She realizes the police are completely lost and breaks her promise to Mrs. Morrison, revealing the encounter on Hudson Street to save her friend.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 30,
+      "flight_risk": 0
+    },
+    "Sherlock David": {
+      "type": "suspect",
+      "role": "The Crooked Man",
+      "location": "Hudson Street",
+      "phase_locations": {
+        "0": "Hudson Street",
+        "1": "Hudson Street",
+        "2": "Hudson Street",
+        "3": "Hudson Street"
+      },
+      "persona": "Deformed, bent back, yellow-shot eyes. A former soldier twisted by torture. Fierce but honorable.",
+      "knowledge_about_others": {
+        "Simpson Bathsheba": "The finest girl that ever had the breath of life between her lips.",
+        "Colonel Morrison": "A traitor and a coward."
+      },
+      "secret": "He is Corporal David. Morrison betrayed him in India to steal Simpson. David confronted him tonight, and Morrison died of pure fright. David took the key to cover his tracks.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Indian Rupee"
+          ],
+          "required_knowledge": [],
+          "reaction": "He claims it's just a prop he uses for his magic tricks in the canteens.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "Small, 15-inch long animal tracks with claws (carnivorous).",
+            "Sherlock David lodges here with a mongoose named Uriah."
+          ],
+          "reaction": "He introduces his mongoose, Uriah, but insists he hasn't been near Lachine Villa.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Indian Rupee"
+          ],
+          "required_knowledge": [
+            "The word 'Teddy' was shouted.",
+            "Mrs. Morrison met a deformed man on Hudson Street earlier.",
+            "Small, 15-inch long animal tracks with claws (carnivorous)."
+          ],
+          "reaction": "He proudly confesses his true identity, the betrayal in India, and how the Colonel's guilty conscience killed him. He admits he took the key.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 60,
+      "flight_risk": 10
+    }
+  },
+  "difficulty": "medium"
+}

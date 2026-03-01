@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Whodunit - Case Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1258e2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1c2433",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-3 bg-background-light dark:bg-background-dark z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary dark:text-white">
+<div class="size-8">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Whodunit</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Case Studio</a>
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Social</a>
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Leaderboard</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-surface-dark overflow-hidden group focus-within:ring-2 ring-primary/50 transition-all">
+<div class="text-slate-500 dark:text-slate-400 flex border-none items-center justify-center pl-4">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 border-none bg-transparent focus:border-none h-full placeholder:text-slate-500 dark:placeholder:text-slate-400 px-4 pl-2 text-sm font-normal leading-normal" placeholder="Search cases..." value=""/>
+</div>
+</label>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 ring-2 ring-transparent hover:ring-primary cursor-pointer transition-all" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqYA0IrB3n6t5_23Sevpk8UXllYGaGMSvXDvO9oU0MA0FoPv3_WkvsyJee1wpMtxUjg0Z4uLhfZ8RXx8f6KLgmtGSx2xarzJ77l-t3EypJ9vxL40N8SPvlvwCZPFPjZ_PvYRRwwKajOo_EjPo8AEDrccm5RpjNkbKASJLtmYPy4WCXt3aWBnQfefr1_2jCBpBN3UOdJ-JKE0QU-HcDESFSaNOWVONzuIJ9lO6-Su8mTJLfscWh8WpiFSZMasODZypsfbbs3Er7y6pJ");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Hero Section -->
+<div class="w-full relative">
+<div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent z-10 pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10 pointer-events-none"></div>
+<div class="relative min-h-[560px] flex flex-col justify-end p-8 md:p-16 bg-cover bg-center" data-alt="Dark misty Victorian London street with gas lamps at night" data-location="London" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABIcR6NLwRNzKEtUzD0AMBuwdFpVyYy-2wAKoLR_-_MTu5FJQoid2IdsQmOUgDNd8QD63mMB6ZypGyv2910z9DgHMW7B3584bFP_ERokWpUzqVM-TZjlUE7LXA9mrWGEZvGFIj8EzNDhdqwRL0g6aQN8zRDlwzPHrUFnZfuRVWLXBuxa-ssBCHi5LHi0R4zApNfXwcFG-cSD4gROLjI0doJaIjDnsfytSoAUbclvWVsxZicjXPnw-5E7Ye6lkMzEYzvNVapAUrVe6m");'>
+<div class="relative z-20 max-w-2xl flex flex-col gap-4 animate-fade-in-up">
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">New Release</span>
+<span class="text-white/80 text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-yellow-400">star</span> 
+                                    4.9 Rating
+                                </span>
+</div>
+<h1 class="text-white text-5xl md:text-7xl font-black leading-tight tracking-tight drop-shadow-lg">
+                                The Crooked Man
+                            </h1>
+<p class="text-slate-200 text-lg md:text-xl font-normal leading-relaxed drop-shadow-md max-w-xl">
+                                A new grim tale awaits in the fog-laden streets of London. The body was found in a locked room, but the key was missing. Can you solve the mystery before the clock strikes twelve?
+                            </p>
+<div class="flex flex-wrap gap-4 mt-6">
+<button class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary/90 text-white text-base font-bold transition-all shadow-lg shadow-primary/25 group">
+<span class="material-symbols-outlined mr-2 group-hover:animate-pulse">visibility</span>
+                                    Start Investigation
+                                </button>
+<button class="flex items-center justify-center rounded-lg h-12 px-6 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-base font-bold transition-all border border-white/20">
+<span class="material-symbols-outlined mr-2">play_arrow</span>
+                                    View Trailer
+                                </button>
+<button class="flex items-center justify-center rounded-lg h-12 w-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all border border-white/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="px-8 pb-12 -mt-10 relative z-20">
+<!-- Section: Sherlock Holmes -->
+<div class="mb-12">
+<div class="flex justify-between items-end mb-4 px-2">
+<h2 class="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">Sherlock Holmes Classics</h2>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Vintage magnifying glass and old papers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQQmvlw3Pbm-DKB71v8dmxdWweHfIm8N5v4-X_R5WaFqngbYcPoAWJxhnZj-8qoa0VUGnwVn7xAB64d3Dh4TyerLiOtDUTbXFdlWth2xuznjM9Lhra6ts9_UX4Dxh4uKYE0zQNUpIqkT9DWo5IiyHlHuF6uD1V1tQ1TgKgHGMBxLlemIeFvR5sTv0es_RxWWAOesmISBVwdYmLREC1tTRI-kgMIpHNt2tNousw_pUVVNA_AV1q4z0w-8vVEm0CHWVW0BQDbR2y8X7z");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Hard</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">Study in Scarlet</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">The debut of the world's most famous consulting detective.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 95% Solved</span>
+<span class="flex items-center gap-1 text-primary">By Arthur C.D.</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Old foggy london bridge at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIeKYEEA5opoEy9p_G8cvMnD0DUAidU7hOO_WnoxdGutN1rlobD-p7F0_AZJFk-VoiII7D-ZwCmlY_Lf0iIg6eq3IxdQZz_JT9e9YNeinSV3GnIeDRm1BNsb9QfmBh6k66q7rwX-x6Q7qh22slQRyv4XzZnTvcmCXz2LsHBSR56lQPaTB0wb1M5r__Of5sLAjE1hYaBs_eQ2zFpinkKbONc7USyraTdoJz-miNR_PsS0bXcjIKZlN4CPYmupnOBnfh8J0k67MBb-Gj");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Medium</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">Sign of Four</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">A secret pact, a hidden treasure, and a mysterious tragedy.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 88% Solved</span>
+<span class="flex items-center gap-1 text-primary">By Arthur C.D.</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Misty moorland landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCWyZsRKhE0GBzJHux2Cbl5NPO5Op2lAMLjW0kaJovLCBIGSbUafhnFyz_E_R-akD6IDEU2X7omwaVrRAxf3GgiotHOu9v3dDJqw4pwzraqvGceImcjLjA2TftZp2fG-4hJ8NEbIAaAo5wdmqQzn3HGm45Wy6ZfzhKYCDfwU2cK3dgyfEY_hHRfgiPRCzK3b0vpYQ3PObiNBOm1rEcXDvaIgJtDwv5kRWr6LvoZ79Z3g7VAM-Lk6xA8IS2XzJnit8VfXCbeN-YKbhC_");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Hard</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">Hound of Baskervilles</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">A family curse and a phantom hound haunt the moors.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 92% Solved</span>
+<span class="flex items-center gap-1 text-primary">By Arthur C.D.</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Waterfalls and cliffs in Switzerland" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXuw5_vZQxqwjNiw756WANadstwRN4zXVHSd6d9_b53vk_xCB2DmCd42EGQdaDO12-AgfVhg5gtzdl_HQtM3XZHhYwVekH2Hv4hSkDZ9xlOEfVw4-ADL_9efTL_xniDTPgI0h4C7KWL9pPsCFnwxkCq02dyDC4G2PMhVJIXQJho3jLZLByxkHB_ADHfK-GdBYGddW9CBaJExJtrBrlE7dZAXZhKIZTQVc8UZLjq1wVOpexlJXdyIqNA7_OLOKFe-uzse4m8aoyUz4w");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Extreme</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">Final Problem</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">The ultimate confrontation between Holmes and Moriarty.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 65% Solved</span>
+<span class="flex items-center gap-1 text-primary">By Arthur C.D.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Agatha Christie -->
+<div class="mb-12">
+<div class="flex justify-between items-end mb-4 px-2">
+<h2 class="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">Agatha Christie Collection</h2>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Steam train moving through landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDULJf6m7gIgUPlnHOD0jjBmTf5TOpkvRMex3jqVodqkgh4z3o6BUNVDNrNGSEFbSRG2XlxFcEvisit0KhyM0Ay9dh5rjwb-yBMytHzJuxrm9J-WfXsEBHpK5Jd1eFVx2yztkdSM5XMmbKVxcdAX-nksgE1MSW-sK8nAkXfEp_rm3-bALWh9-qasvWA62WMG270iFndp_xg8eP0ftkQmDI6mH-aj4HQSr4MOAiAUuFlEjs_hM3iYPLAsLO-_cRJsTKWByFb0SJGcU86");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Medium</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">Murder on the Orient Express</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">A lavish trip through Europe quickly unfolds into a race against time.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 91% Solved</span>
+<span class="flex items-center gap-1 text-primary">By A. Christie</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="River Nile with boats" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDOynJuEP0h7T65-txmWHQXMRBIHZpl5Csadj8GP9inB-FMnbXLDdVbFIbD4LCgvM5sEw2Qf1jGpy-UO-JDE6t-WgXC4h6FyOtFiYdXVeA1D1IYjuRfgXazNIFfgBrjyW4V4pDK0OxEJb-xi_LtfM0S_eQtXr7iw6vtwUtgGNReBpzq1oYKjAD-cePIV172OnTI6tltCoPVkNpfdou3ngknntv_LTANIdvY3_H5UaS6j3AdG9SCFUFIqRTo88BSo9m1qe1r0mx7AdLq");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Easy</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">Death on the Nile</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">The tranquillity of a cruise along the Nile is shattered by murder.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 85% Solved</span>
+<span class="flex items-center gap-1 text-primary">By A. Christie</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Old english manor house exterior" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCu5V7ouSI0a5CeO9ehInTYv3iKqoyKfDWxAiWR6gplkwnNsFDKJ06jbp3AvF-oTEWU7VI1BWkYKDyHCpSDtjfUjfzFW9JENu6i65Em-D1wQcMqDcVtqpZP9wBNX5AJ_WdIK817r5hS5MgcfYnuNnWvfIXx_NvHOZmHqRckreIeLB1ZH5PCPBBBqneUe1Z7tJU5VTU-_Vhv-8KHfxB-6scQausKKnSeTthGnbVxeoyb4GkozFctq9e_993-LS4leeudbqcuMP_CObxj");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Medium</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">The Murder at the Vicarage</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">Miss Marple's first case involves the murder of a colonel.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 79% Solved</span>
+<span class="flex items-center gap-1 text-primary">By A. Christie</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col bg-slate-100 dark:bg-surface-dark rounded-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center relative" data-alt="Dinner table set for guests" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbuoQTwYMdG59liBRmDEONDqpOobZMkxXkFgOJIj36CfEIC5lW140Cyq0dxGUAxly5B1q6uKjHiDrLYV-flj-Em79DZULdfgyIS_rRbbnrFz4kmQoLPKMddiwDinRMVQJcvXtpRd4H-QLKf4LJyJGGIiDAO-5ThP9NkVASNFeHxck1LFlayCaJ0B55tiuVsCMYqRbQEfj_QWK-DBuSNjfWazomgrLzNB-7LOpMtU0a9gnqF6U-HXIqQgeSc648Axs17TjzPWlf0mz4");'>
+<div class="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">Hard</div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">And Then There Were None</h3>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">Ten strangers are lured to an island mansion and picked off one by one.</p>
+<div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group</span> 70% Solved</span>
+<span class="flex items-center gap-1 text-primary">By A. Christie</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Trending Community Cases -->
+<div class="mb-12">
+<div class="flex justify-between items-end mb-4 px-2">
+<h2 class="text-slate-900 dark:text-white text-2xl font-bold tracking-tight">Trending Community Cases</h2>
+<div class="flex gap-2">
+<button class="size-8 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-900 dark:text-white"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="size-8 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-900 dark:text-white"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Community Card 1 -->
+<div class="bg-slate-100 dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex gap-4 hover:bg-slate-200 dark:hover:bg-slate-800/80 transition-colors cursor-pointer group">
+<div class="w-24 h-24 shrink-0 rounded-lg bg-cover bg-center" data-alt="Broken smartphone screen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAL550uVCH6HbSwyAqLsqGlDkNwgCFhxurd3x0N1r2R7qOCQCMRgiiKsxQ6Lk85doFpJ8aU8RYCvfzMhBG-q_-Yut09cwsIvm4SasURz-v4V9abVwOUnEf7y2Atq3Yc0q5IB5odffR5ieiJk4-EyEMlxM_3h9kFtxTNppjIUU7lbxPa-LDNBYkHm0CNkRLUhcyAuin29bf3eCBDrjz11tE9yiE7QY8_twNsD8LL6lIb0bvAjcdDCCu3rkT8B_Cvp2LU2cdTMkNKJSS0");'></div>
+<div class="flex flex-col justify-between py-1 w-full min-w-0">
+<div>
+<h4 class="text-slate-900 dark:text-white font-bold text-base truncate group-hover:text-primary">Silicon Valley Shadows</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1 truncate">Corporate espionage gone wrong.</p>
+</div>
+<div class="flex items-center justify-between text-xs mt-2">
+<span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded">Medium</span>
+<span class="text-slate-500 dark:text-slate-400">By @tech_noir</span>
+</div>
+</div>
+</div>
+<!-- Community Card 2 -->
+<div class="bg-slate-100 dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex gap-4 hover:bg-slate-200 dark:hover:bg-slate-800/80 transition-colors cursor-pointer group">
+<div class="w-24 h-24 shrink-0 rounded-lg bg-cover bg-center" data-alt="Spooky abandoned attic" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHytqReJrnKLv1mw33va7QSwOLCnhtHLyQs4tiQFNuF4pJA9mt-gqSPhslSCh8rOfnV3MR4Fe8vvRlAhPWFCUCkirDW0p8Jexl0pqmGuFznPDJALgrsFtcUv39Nf7xem1GC0qijvaoDSWyNIxdrN8p_F0aPfNgD5TeQivwQw_mLkuvJ_l6dwXFhwUffghkVvOUrFust5a1MMWSe-OG6csGUkiVgsl5qIjVvUkhymuGB6H32lx2odTrYt4qf7hXJFoBnlSODAvvUX9d");'></div>
+<div class="flex flex-col justify-between py-1 w-full min-w-0">
+<div>
+<h4 class="text-slate-900 dark:text-white font-bold text-base truncate group-hover:text-primary">The Attic Whisperer</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1 truncate">A ghost story or a murder plot?</p>
+</div>
+<div class="flex items-center justify-between text-xs mt-2">
+<span class="text-green-600 dark:text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded">Easy</span>
+<span class="text-slate-500 dark:text-slate-400">By @ghost_hunter</span>
+</div>
+</div>
+</div>
+<!-- Community Card 3 -->
+<div class="bg-slate-100 dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex gap-4 hover:bg-slate-200 dark:hover:bg-slate-800/80 transition-colors cursor-pointer group">
+<div class="w-24 h-24 shrink-0 rounded-lg bg-cover bg-center" data-alt="Neon alleyway at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAD8FhCe-mtdf7W_LLlxaRVxm22FdtNgFO98SKRRDSlfKvQ-o3QpuANLqulCu_C7Af3wwNG6S-6OmGrYo9qnKjV7Q4-RqfyrKZt47Iq_MlpuhrAOw4f609a6z9mAWFem361GF2JNT1K3CGOohsanFqaw8Xj55ug50UMtujw-F3_oDO1jg8_ZcbisUpbwusdTp_yv_3OTa3Hj9wyQBV0G30qKqM-ixURBeBGP_xi1QmxzIITKycHDWwnxsIdYLaEcaQK58O6zVS0g2ay");'></div>
+<div class="flex flex-col justify-between py-1 w-full min-w-0">
+<div>
+<h4 class="text-slate-900 dark:text-white font-bold text-base truncate group-hover:text-primary">Neon Rain</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1 truncate">Cyberpunk noir mystery.</p>
+</div>
+<div class="flex items-center justify-between text-xs mt-2">
+<span class="text-red-600 dark:text-red-400 font-bold bg-red-500/10 px-2 py-0.5 rounded">Hard</span>
+<span class="text-slate-500 dark:text-slate-400">By @cyber_sleuth</span>
+</div>
+</div>
+</div>
+<!-- Community Card 4 -->
+<div class="bg-slate-100 dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex gap-4 hover:bg-slate-200 dark:hover:bg-slate-800/80 transition-colors cursor-pointer group">
+<div class="w-24 h-24 shrink-0 rounded-lg bg-cover bg-center" data-alt="Stormy ocean waves" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD72MUxlUZXrbQ2VwPeEcAG0-aqWDG9ZhniC5iP8lf3WVqUaOKTedvrwb5slHRV4eSR8WGB3ufSZNf9rNu0m3fLiCDe4OY0bIOdP9R8qqL2wZ7FagJtHfUz5R_Pdtkrd26SmiiNy0DYUFLVwzw8YuO2D5XFmmCj8g_JNYypwjX0pJQM_DEruB63wpzz3vAj7XVx3tKTvpI0tNG2jhIK6LwDuDRrJLvzsYh9jBTqd7y09Zr2aDsOXyzYGWp_qcbxqCNPM3vhVGmTAU4x");'></div>
+<div class="flex flex-col justify-between py-1 w-full min-w-0">
+<div>
+<h4 class="text-slate-900 dark:text-white font-bold text-base truncate group-hover:text-primary">Deep Blue Demise</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1 truncate">Lost at sea, but not alone.</p>
+</div>
+<div class="flex items-center justify-between text-xs mt-2">
+<span class="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded">Medium</span>
+<span class="text-slate-500 dark:text-slate-400">By @nautical_pi</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sidebar (Activity Feed) -->
+<aside class="hidden xl:flex flex-col w-80 border-l border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark p-6 overflow-y-auto">
+<!-- Friend Activity -->
+<div class="mb-8">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">group</span>
+                        Friend Activity
+                    </h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="size-8 rounded-full bg-cover bg-center shrink-0" data-alt="User avatar male" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYjUCvNeXQOWu67AqzgttWJHlwvY6F6uUTZ53sjgYmFMWqxN7T7dKlv-pI8sFQazLRYJ6u23BMNN5qq9IAaj1iUZkSG2_pNwrYTFpGJu1ZgxbSnW-na3twUTl1fQry5hqO8aGhPnKAdTUQw3tQXItpDzIQwqlDdRQqMIUvLTaaaHwT_ZmNMEZKncC_8y9qNimraM4SU0nmOwfdPwzgvmyk86apsrvNbi45GC3948-ny6OaJdeu9d-AK1WtDD6sXfWEFLPcpU_O4BaC");'>
+<div class="absolute bottom-0 right-0 size-2.5 bg-green-500 border-2 border-background-dark rounded-full"></div>
+</div>
+<div class="text-sm">
+<p class="text-slate-900 dark:text-white font-medium">Dr. Watson</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Started <span class="text-primary hover:underline cursor-pointer">Study in Scarlet</span></p>
+<p class="text-slate-600 dark:text-slate-500 text-[10px] mt-1">2 mins ago</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="size-8 rounded-full bg-cover bg-center shrink-0" data-alt="User avatar female" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD3ZnpORtdeAw4c0_mArgJxrp_fsYtVtUvlKcF7-HeMenew2EVfyry1c_nBcwL3ezUJTeYLwNgPUG2QFYoSQ-DCLtHSS3Q8uL4SLR0jOwlul7jSk5wGGNhRE3BwFG5bzCdFMCUDXUKqYXQuW7XhM6IvlyaPSjgcVUyNIXfzVBKj624H-buMjTmOMhpmk7oScYrujad15zW8ejfUX5NDI-DPWeNKLUqw41OVTDFYRcwUI11LUxI0GFV6cbSWSXxeyFTaKsYOikpXJ__9");'>
+<div class="absolute bottom-0 right-0 size-2.5 bg-yellow-500 border-2 border-background-dark rounded-full"></div>
+</div>
+<div class="text-sm">
+<p class="text-slate-900 dark:text-white font-medium">Miss Marple</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Solved <span class="text-primary hover:underline cursor-pointer">The ABC Murders</span></p>
+<p class="text-slate-600 dark:text-slate-500 text-[10px] mt-1">1 hour ago</p>
+</div>
+</div>
+<div class="flex items-start gap-3 opacity-60">
+<div class="size-8 rounded-full bg-cover bg-center shrink-0" data-alt="User avatar male with glasses" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARu8h9LL4yJxUb5soV4bzH3gnHJdkfx4esBLL5XKX8irxl4jGC_DPHNIfITB4v0Wu0-wkIVbNX4bBmSFrhHuVQ3_iudZp4xnAkGPDyOaklb_vnWaoBFjoZlMPc6sGmjrv4c6lVztfnXrpEF9uI2p0uqVKcfwxorxfNBRPefqmBzIB2Yi1mnDEhck_G5V0WASbs3f3LJFNY7_WmH6hESMf-JsHKLWtpup5T9d737l7qHrw6rONmu2PmZuk-3rzjZ6otUMyYg7Zpgpg3");'></div>
+<div class="text-sm">
+<p class="text-slate-900 dark:text-white font-medium">Poirot_Fan</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Rated <span class="text-yellow-500">★★★★★</span> for <span class="text-primary">Orient Express</span></p>
+<p class="text-slate-600 dark:text-slate-500 text-[10px] mt-1">5 hours ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Records -->
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-500">emoji_events</span>
+                        Global Records
+                    </h3>
+<div class="bg-slate-100 dark:bg-surface-dark rounded-xl p-3 border border-slate-200 dark:border-slate-800 flex flex-col gap-3">
+<div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
+<div class="flex items-center gap-2">
+<span class="text-yellow-500 font-black text-lg">1</span>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white text-sm font-bold">Sherlock_AI</span>
+<span class="text-[10px] text-slate-500">200 Cases Solved</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-yellow-500 text-sm">workspace_premium</span>
+</div>
+<div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 font-black text-lg">2</span>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white text-sm font-bold">NoirDetect</span>
+<span class="text-[10px] text-slate-500">189 Cases Solved</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-orange-700 font-black text-lg">3</span>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-white text-sm font-bold">Enola_H</span>
+<span class="text-[10px] text-slate-500">154 Cases Solved</span>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2 text-xs font-bold text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">View Full Leaderboard</button>
+</div>
+</aside>
+</div>
+</div>
+</body></html>

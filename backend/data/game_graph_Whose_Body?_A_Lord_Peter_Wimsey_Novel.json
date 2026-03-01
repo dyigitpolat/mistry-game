@@ -1,0 +1,731 @@
+{
+  "title": "Whose Body? A Lord Peter Wimsey Novel",
+  "author": "Dorothy L. Sayers",
+  "victim": "Sir Quaid Schumer",
+  "intro_narrative": "A naked corpse wearing only gold pince-nez turns up in a Battersea architect\u2019s bath. On the same night, financier Sir Quaid Schumer vanishes from Park Lane. Lord Dunst Kimmel threads the two riddles through rooftops, hospital ledgers, and staged traces\u2014until the surgeon Sir Ice Wright\u2019s immaculate method collapses under its own precision.",
+  "time_limit_minutes": 180,
+  "start_time": "1923-11-17T14:45:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Gold pince-nez with distinctive chain",
+      "Shaved beard hairs preserved by Wimsey",
+      "Shreds of coarse cotton / improvised rope or bandage fragments from roof gutter/chimney",
+      "Photographs of smudged/gloved fingerprints and window/bath marks taken by Meryl",
+      "Linoleum section/footprint evidence from Schumer\u2019s washstand area",
+      "Top-hat from Schumer\u2019s hat row containing mixed hair (black + auburn)",
+      "Poker (inferred murder implement for Schumer; blunt force to cervical vertebrae consistent with autopsy)",
+      "Wright\u2019s hypodermic syringe/injection attempt (attempted murder/cover-up of Wimsey; part of Wright\u2019s confession and arrest trigger)"
+    ],
+    "required_suspect": [
+      "Sir Ice Wright"
+    ],
+    "required_motive": [
+      "Jealousy and wounded vanity toward Lady Schumer, plus the opportunity and clinical detachment to execute a body-swap plan using hospital access and a vagrant corpse as decoy."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "The Bath Corpse",
+      "objective": "Secure the Battersea scene: determine the corpse is disguised and entered via roof/window.",
+      "unlocked_locations": [
+        "59 Queen Gadot Dreyfuss, Battersea",
+        "Scotland Yard",
+        "Rooftops/roof-traps along the Queen Gadot Dreyfuss block"
+      ],
+      "unlocked_characters": [
+        "Lord Dunst Kimmel",
+        "Inspector Watanabe",
+        "Travolta Saldana",
+        "Shyamalan Smith",
+        "Meryl"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Vanishing Financier",
+      "objective": "Investigate Schumer\u2019s staged bedroom and identify an impostor who slept there.",
+      "unlocked_locations": [
+        "9A Park Lane",
+        "Scotland Yard"
+      ],
+      "unlocked_characters": [
+        "Detective Devine",
+        "Sir Quaid Schumer",
+        "Dowager Duchess of Hutton"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Hospital Ledger & Workhouse Link",
+      "objective": "Trace the decoy corpse\u2019s origin through workhouse death and hospital body records; establish Wright\u2019s access and timeline.",
+      "unlocked_locations": [
+        "Chelsea Workhouse",
+        "St. Luke\u2019s Hospital, Battersea",
+        "St. Luke\u2019s House, Prince of Wales Road, Battersea"
+      ],
+      "unlocked_characters": [
+        "Sir Ice Wright"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Harley Street Trap & Arrest",
+      "objective": "Confront Wright; survive the injection attempt; coordinate warrant and arrest at Scotland Yard.",
+      "unlocked_locations": [
+        "Harley Street"
+      ],
+      "unlocked_characters": [
+        "Sir Ice Wright"
+      ]
+    }
+  ],
+  "locations": {
+    "59 Queen Gadot Dreyfuss, Battersea": {
+      "description": "A respectable top-floor flat overlooking Battersea Park. The bathroom is long and narrow, window over the bath, and the air still seems to hold traces of scent and antiseptic.",
+      "items": [
+        "Gold pince-nez with distinctive chain",
+        "Shaved beard hairs preserved by Wimsey"
+      ],
+      "clues": [
+        "Corpse in Saldana\u2019s bath has been cosmetically altered (fresh haircut/brilliantine, Parma violet scent, manicure) but shows contrary signs (filthy toenails, fleas, carbolic soap smell, blisters/calluses) \u2192 indicates deliberate disguise of a laboring vagrant.",
+        "Beard evidence: stiff hairs and dried shaving soap/hairs in the mouth \u2192 corpse shaved after death; body\u2019s presented identity is fabricated.",
+        "Roof/entry indicators: bathroom window left open; soot marks on sill; later roof search yields shreds of coarse cotton/cloth caught near gutter/chimney above Saldana\u2019s window \u2192 supports body being lowered from roof using cloth/bandage."
+      ],
+      "base_ascii": "  [Hall Door]----+------------------+\n                 |  Sitting Room    |\n  +--------------+------------------+\n  | Kitchen  | Boxroom | Passage     |\n  +----------+---------+------+------+\n  |         Bathroom (Window) | Bath |\n  +---------------------------+------+\n  (Rear yard below; Hospital next)",
+      "visual_metadata": {
+        "setting": "Respectable Edwardian mansions: cramped passage, a stark tiled bathroom, and a rear window aligned with reachable gutters and soot-streaks.",
+        "connections": [
+          {
+            "target_location": "Rooftops/roof-traps along the Queen Gadot Dreyfuss block",
+            "mechanism": "Stairwell roof door (shared access)",
+            "state": "closed"
+          },
+          {
+            "target_location": "Scotland Yard",
+            "mechanism": "Police cordon & evidence transfer",
+            "state": "open"
+          },
+          {
+            "target_location": "St. Luke\u2019s Hospital, Battersea",
+            "mechanism": "Footpath past rear yards to hospital grounds",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Bathroom window sill",
+            "type": "surface",
+            "spatial_relationship": "Above the head of the bath",
+            "objects": [
+              {
+                "item_id": "Photographs of smudged/gloved fingerprints and window/bath marks taken by Meryl",
+                "visibility": "partially hidden",
+                "hidden_by": "Only apparent after dusting/flash photography"
+              }
+            ]
+          },
+          {
+            "id": "Bath rim (far edge)",
+            "type": "surface",
+            "spatial_relationship": "Opposite the window, where a handler would steady themselves",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "St. Luke\u2019s Hospital, Battersea": {
+      "description": "A modern hospital complex with a dissecting-room that smells of carbolic and paper ledgers. Official order and clinical routine disguise unusual opportunity.",
+      "items": [
+        "Poker (inferred murder implement for Schumer; blunt force to cervical vertebrae consistent with autopsy)"
+      ],
+      "clues": [
+        "Chelsea Workhouse identification: \u2018unknown vagrant\u2019 injured in street accident, dies Monday, body delivered to St. Luke\u2019s by Wright \u2192 supplies the true origin of the \u201cbath corpse\u201d and ties Wright\u2019s hospital access to the swapped body."
+      ],
+      "base_ascii": "  +------------------------------+\n  |  Main Corridor               |\n  +----+---------------+---------+\n  |Reg.| Dissecting Rm | Store   |\n  +----+-------+-------+---------+\n  | Side Door -> Covered Way ->  |\n  |           St. Luke\u2019s House   |\n  +------------------------------+\n  (Ledgers + trolleys + antiseptic)",
+      "visual_metadata": {
+        "setting": "Bright electric light, tiled corridors, and a guarded dissecting-room where bodies are logged, moved, and \u2018prepared.\u2019",
+        "connections": [
+          {
+            "target_location": "St. Luke\u2019s House, Prince of Wales Road, Battersea",
+            "mechanism": "Private hospital side-door & covered passage",
+            "state": "open"
+          },
+          {
+            "target_location": "Chelsea Workhouse",
+            "mechanism": "Official body transfer route / paperwork chain",
+            "state": "open"
+          },
+          {
+            "target_location": "Scotland Yard",
+            "mechanism": "Records request and forensic liaison",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Body-receipt ledger cabinet",
+            "type": "container",
+            "spatial_relationship": "Against dissecting-room wall",
+            "objects": []
+          },
+          {
+            "id": "Instrument table (dissecting-room)",
+            "type": "surface",
+            "spatial_relationship": "Center of dissecting-room",
+            "objects": [
+              {
+                "item_id": "Poker (inferred murder implement for Schumer; blunt force to cervical vertebrae consistent with autopsy)",
+                "visibility": "hidden",
+                "hidden_by": "Logged as 'fire iron' among miscellaneous iron tools"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "St. Luke\u2019s House, Prince of Wales Road, Battersea": {
+      "description": "A large private residence attached to the hospital by a discreet passage. Too tidy, too controlled\u2014every room seems arranged to prevent surprise.",
+      "items": [],
+      "clues": [
+        "Wright\u2019s servant report (via Meryl): Wright had a late-night bath ~3 a.m., was in/out through private hospital door, and had a \u201cgentleman visitor\u201d Monday evening \u2192 corroborates timeline and method for moving bodies and masking noise."
+      ],
+      "base_ascii": "  +------------------------------+\n  | Hall + Staircase             |\n  | [Front]      [Private Door]  |\n  +-----------+------------------+\n  | Dining    | Kitchen/Servants |\n  +-----------+---------+--------+\n  | Bedrm -> Library    | Boxrm |\n  +---------------------+---+----+\n  | Roof trap / ladder access    |\n  +------------------------------+",
+      "visual_metadata": {
+        "setting": "Quiet, expensive domestic space with surgical precision: stairs, cistern-room plumbing, a box-room roof trap, and the private door that erases witnesses.",
+        "connections": [
+          {
+            "target_location": "St. Luke\u2019s Hospital, Battersea",
+            "mechanism": "Private door & covered way",
+            "state": "open"
+          },
+          {
+            "target_location": "Rooftops/roof-traps along the Queen Gadot Dreyfuss block",
+            "mechanism": "Box-room roof trap",
+            "state": "locked"
+          },
+          {
+            "target_location": "Harley Street",
+            "mechanism": "Professional commute / consulting schedule",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Cistern-room door",
+            "type": "surface",
+            "spatial_relationship": "Top floor beside servants' room",
+            "objects": []
+          },
+          {
+            "id": "Box-room (roof trap)",
+            "type": "container",
+            "spatial_relationship": "Top landing, opposite servants",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "9A Park Lane": {
+      "description": "A rich man\u2019s townhouse where habit and routine were weaponized. The bedroom looks normal until you start measuring what \u2018normal\u2019 should look like.",
+      "items": [
+        "Linoleum section/footprint evidence from Schumer\u2019s washstand area",
+        "Top-hat from Schumer\u2019s hat row containing mixed hair (black + auburn)"
+      ],
+      "clues": [
+        "Schumer case staging: in Park Lane bedroom, bed depression shorter than Schumer; two sets of hair in top-hat (black + auburn) and a small bare-foot print on washstand linoleum \u2192 someone impersonated Schumer overnight; impostor has auburn hair and smaller foot.",
+        "Fingerprint/dusting results: Schumer\u2019s scarred-thumb prints vs superimposed smudged/gloved prints on boots/umbrella; absence of impostor prints on hairbrush/book (avoided red hair transfer) \u2192 deliberate forensic caution by impersonator."
+      ],
+      "base_ascii": "  +-----------------------------+\n  | Hall -> Stairs              |\n  +-----------+-----------------+\n  | Dressing  | Bedroom (Bed)   |\n  |  Hats     | [Night table]   |\n  +-----+-----+--------+--------+\n  | Bath | Washstand | Linoleum |\n  +------+----------+----------+\n  (Quiet luxury; staged normalcy)",
+      "visual_metadata": {
+        "setting": "Polished wealth: thick carpet, a double bed, hat row, and a washstand where one careless barefoot step betrays an impostor.",
+        "connections": [
+          {
+            "target_location": "Scotland Yard",
+            "mechanism": "Case assignment / missing-person report",
+            "state": "open"
+          },
+          {
+            "target_location": "Harley Street",
+            "mechanism": "Medical consultation route (implied by Schumer\u2019s movements)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Hat row (top-hats inverted)",
+            "type": "surface",
+            "spatial_relationship": "Dressing-room wall by window",
+            "objects": [
+              {
+                "item_id": "Top-hat from Schumer\u2019s hat row containing mixed hair (black + auburn)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Washstand linoleum patch",
+            "type": "surface",
+            "spatial_relationship": "In front of washstand",
+            "objects": [
+              {
+                "item_id": "Linoleum section/footprint evidence from Schumer\u2019s washstand area",
+                "visibility": "partially hidden",
+                "hidden_by": "Only obvious after powdering/photographing"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Rooftops/roof-traps along the Queen Gadot Dreyfuss block": {
+      "description": "Flat lead roofs run the length of the block\u2014easy walking in daylight, a perilous highway in wet fog. Gutters, chimneys, and roof traps make a thief\u2019s corridor.",
+      "items": [
+        "Shreds of coarse cotton / improvised rope or bandage fragments from roof gutter/chimney"
+      ],
+      "clues": [
+        "Roof/entry indicators: bathroom window left open; soot marks on sill; later roof search yields shreds of coarse cotton/cloth caught near gutter/chimney above Saldana\u2019s window \u2192 supports body being lowered from roof using cloth/bandage."
+      ],
+      "base_ascii": "  +--------------------------------+\n  | Roof-trap doors  []  []  []     |\n  |--------------------------------|\n  | Flat leads (walkway)            |\n  |   Chimneys ^   Gutters ~~~      |\n  |   Parapet ||  Drop to yards     |\n  |--------------------------------|\n  | Above: Saldana bathroom window  |\n  +--------------------------------+",
+      "visual_metadata": {
+        "setting": "Lead sheets slick with rain, soot around chimneys, and gutters that snag cloth\u2014an overlooked route above respectable lives.",
+        "connections": [
+          {
+            "target_location": "59 Queen Gadot Dreyfuss, Battersea",
+            "mechanism": "Roof-trap down to stairwell / alignment over bathroom window",
+            "state": "open"
+          },
+          {
+            "target_location": "St. Luke\u2019s House, Prince of Wales Road, Battersea",
+            "mechanism": "Adjacent roof gap reachable by ladder/board (implied route)",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Gutter above bathroom window",
+            "type": "surface",
+            "spatial_relationship": "Roof edge aligned to Saldana\u2019s bath window",
+            "objects": [
+              {
+                "item_id": "Shreds of coarse cotton / improvised rope or bandage fragments from roof gutter/chimney",
+                "visibility": "partially hidden",
+                "hidden_by": "Soot and rainwater"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Chelsea Workhouse": {
+      "description": "Institutional poverty and paperwork. The infirmary smells of damp wool, boiled vegetables, and disinfectant. A dead vagrant\u2019s record is the missing bridge between identities.",
+      "items": [],
+      "clues": [
+        "Chelsea Workhouse identification: \u2018unknown vagrant\u2019 injured in street accident, dies Monday, body delivered to St. Luke\u2019s by Wright \u2192 supplies the true origin of the \u201cbath corpse\u201d and ties Wright\u2019s hospital access to the swapped body."
+      ],
+      "base_ascii": "  +------------------------------+\n  | Gate -> Receiving Hall       |\n  +-----------+------------------+\n  | Infirmary | Records Office   |\n  +-----+-----+---------+--------+\n  | Ward| Morgue/Body   | Yard   |\n  +-----+---------------+--------+\n  | Van bay -> Hospital transfers|\n  +------------------------------+",
+      "visual_metadata": {
+        "setting": "Austere charity medicine: ledgers, wards, and the quiet machinery by which the unwanted become \u2018subjects.\u2019",
+        "connections": [
+          {
+            "target_location": "St. Luke\u2019s Hospital, Battersea",
+            "mechanism": "Body transfer order / workhouse van",
+            "state": "open"
+          },
+          {
+            "target_location": "Scotland Yard",
+            "mechanism": "Police inquiry into unidentified dead",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Records desk",
+            "type": "surface",
+            "spatial_relationship": "Records office under a high window",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "Scotland Yard": {
+      "description": "A warren of offices where evidence becomes paperwork and arrests become procedure. Here the pince-nez becomes a file, and a theory becomes a warrant.",
+      "items": [],
+      "clues": [
+        "Peruvian Oil manipulation traced not to Schumer but to Sir Ice Wright \u2192 motive/tool to lure Schumer and finance/cover timing; links Wright to Schumer\u2019s last movements."
+      ],
+      "base_ascii": "  +------------------------------+\n  | Front Desk / Duty Sgt        |\n  +-----------+------------------+\n  | Evidence  | Detectives' Room |\n  +-----+-----+---------+--------+\n  | Cells     | Files/Telegraph  |\n  +-----------+------------------+\n  | Yard gate -> Vans depart     |\n  +------------------------------+",
+      "visual_metadata": {
+        "setting": "Brisk, smoky bureaucracy: files stacked high, telephones ringing, evidence lockers clanking shut.",
+        "connections": [
+          {
+            "target_location": "59 Queen Gadot Dreyfuss, Battersea",
+            "mechanism": "Evidence retrieval / scene reports",
+            "state": "open"
+          },
+          {
+            "target_location": "9A Park Lane",
+            "mechanism": "Missing-person detail assignment",
+            "state": "open"
+          },
+          {
+            "target_location": "Harley Street",
+            "mechanism": "Warrant execution coordination",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Evidence locker",
+            "type": "container",
+            "spatial_relationship": "Behind cage door",
+            "objects": [
+              {
+                "item_id": "Gold pince-nez with distinctive chain",
+                "visibility": "partially hidden",
+                "hidden_by": "Locked in evidence packet (logged)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Harley Street": {
+      "description": "Wright\u2019s consulting rooms: tasteful, expensive, and full of people who cannot afford to be seen suffering. A syringe here is as normal as a teacup\u2014until it isn\u2019t.",
+      "items": [
+        "Wright\u2019s hypodermic syringe/injection attempt (attempted murder/cover-up of Wimsey; part of Wright\u2019s confession and arrest trigger)"
+      ],
+      "clues": [],
+      "base_ascii": "  +------------------------------+\n  | Waiting Room (patients)      |\n  +-----------+------------------+\n  | Exam Rm   | Surgery/Tray     |\n  +-----------+------------------+\n  | Desk + Safe | Door to hall   |\n  +-----------+------------------+\n  | Street door -> foggy London  |\n  +------------------------------+",
+      "visual_metadata": {
+        "setting": "Polished medical authority: a calm waiting room, an inner consulting room, and a side surgery where a \u2018routine\u2019 injection can become a weapon.",
+        "connections": [
+          {
+            "target_location": "Scotland Yard",
+            "mechanism": "Arrest warrant & escort",
+            "state": "open"
+          },
+          {
+            "target_location": "St. Luke\u2019s House, Prince of Wales Road, Battersea",
+            "mechanism": "Private practice to hospital residence route",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Surgery tray",
+            "type": "surface",
+            "spatial_relationship": "Side room adjoining consulting room",
+            "objects": [
+              {
+                "item_id": "Wright\u2019s hypodermic syringe/injection attempt (attempted murder/cover-up of Wimsey; part of Wright\u2019s confession and arrest trigger)",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Lord Dunst Kimmel": {
+      "type": "assistant",
+      "role": "Amateur investigator; connects the Battersea corpse and Schumer disappearance into one scheme and drives the solution.",
+      "location": "Scotland Yard",
+      "phase_locations": {
+        "1": "59 Queen Gadot Dreyfuss, Battersea",
+        "2": "9A Park Lane",
+        "3": "Chelsea Workhouse",
+        "4": "Harley Street"
+      },
+      "persona": "Flippant, fast-talking aristocrat with sudden flashes of grim clarity; masks concentration with jokes and breezy slang; becomes coldly focused when logic locks in.",
+      "knowledge_about_others": {
+        "Inspector Watanabe": "Knows Watanabe\u2019s habits: rude when uncertain; prone to premature conclusions.",
+        "Detective Devine": "Trusts Devine\u2019s method and uses him as the official arm for warrants and records.",
+        "Sir Ice Wright": "Recognizes Wright\u2019s proximity, access, and temperament; suspects him before he can bear to name it."
+      },
+      "secret": "",
+      "abilities": "Rapid deduction; social access; can push officials via family influence; uses Meryl to collect and photograph evidence.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3,
+            4
+          ],
+          "required_evidence": [
+            "Shaved beard hairs preserved by Wimsey",
+            "Shreds of coarse cotton / improvised rope or bandage fragments from roof gutter/chimney",
+            "Linoleum section/footprint evidence from Schumer\u2019s washstand area"
+          ],
+          "required_knowledge": [],
+          "reaction": "Stops joking; lays out the unified body-swap theory and orders immediate warrant action.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Detective Devine": {
+      "type": "assistant",
+      "role": "Scotland Yard detective; investigates Schumer disappearance; corroborates evidence trail and coordinates procedural steps.",
+      "location": "Scotland Yard",
+      "phase_locations": {
+        "1": "Scotland Yard",
+        "2": "9A Park Lane",
+        "3": "St. Luke\u2019s Hospital, Battersea",
+        "4": "Harley Street"
+      },
+      "persona": "Methodical, dry, skeptical; speaks plainly; insists on corroboration and chain-of-custody; becomes quietly intense when the pieces align.",
+      "knowledge_about_others": {
+        "Lord Dunst Kimmel": "Sees him as brilliant but erratic; still relies on his leaps to open new lines.",
+        "Sir Ice Wright": "Initially treats as respected consultant; later reclassifies as suspect once Peruvian Oil and hospital access converge.",
+        "Inspector Watanabe": "Finds him obstructive and sloppy; still uses him for manpower when the arrest is imminent."
+      },
+      "secret": "",
+      "abilities": "Official authority, warrants, interviewing, record requests, coordinated arrests.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Top-hat from Schumer\u2019s hat row containing mixed hair (black + auburn)",
+            "Linoleum section/footprint evidence from Schumer\u2019s washstand area"
+          ],
+          "required_knowledge": [],
+          "reaction": "Opens the impostor hypothesis; shifts case from 'missing person' to 'staged presence' and escalates to homicide possibility.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Sir Ice Wright": {
+      "type": "suspect",
+      "role": "Surgeon/neurologist; manipulates bodies and evidence; ultimately revealed murderer.",
+      "location": "Harley Street",
+      "phase_locations": {
+        "1": "St. Luke\u2019s Hospital, Battersea",
+        "2": "St. Luke\u2019s House, Prince of Wales Road, Battersea",
+        "3": "Harley Street",
+        "4": "Scotland Yard"
+      },
+      "persona": "Controlled, authoritative, intellectually arrogant; speaks in clinical certainty; uses politeness as a scalpel; turns coldly dangerous when cornered.",
+      "knowledge_about_others": {
+        "Lord Dunst Kimmel": "Assesses him as intelligent and socially connected; attempts to neutralize him with an injection.",
+        "Sir Quaid Schumer": "Knows his routines, home layout, and weaknesses; uses financial bait to lure him.",
+        "Dowager Duchess of Hutton": "Knows she can connect old social history; tries to keep her uninformed."
+      },
+      "secret": "Murdered Sir Quaid Schumer with a blow to the cervical vertebrae, swapped his body with a workhouse vagrant delivered to St. Luke\u2019s, staged an impostor night at Park Lane, and planted the gold pince-nez as misdirection; attempted to kill Kimmel via syringe.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Peruvian Oil manipulation traced not to Schumer but to Sir Ice Wright \u2192 motive/tool to lure Schumer and finance/cover timing; links Wright to Schumer\u2019s last movements."
+          ],
+          "required_knowledge": [],
+          "reaction": "Feigns professional concern, offers treatment, then attempts to use the hypodermic syringe to silence the investigator.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 70,
+      "flight_risk": 85
+    },
+    "Sir Quaid Schumer": {
+      "type": "assistant",
+      "role": "Missing financier; ultimately identified as murdered victim.",
+      "location": "9A Park Lane",
+      "phase_locations": {
+        "1": "9A Park Lane",
+        "2": "St. Luke\u2019s House, Prince of Wales Road, Battersea",
+        "3": "Scotland Yard",
+        "4": "Chelsea Workhouse"
+      },
+      "persona": "Present only through traces: a domestic, routine-bound man whose habits are exploited to stage his presence; \u2018speaks\u2019 via objects and routines.",
+      "knowledge_about_others": {
+        "Sir Ice Wright": "Old acquaintance; trusts him enough to visit privately, which becomes the opening for murder."
+      },
+      "secret": "",
+      "abilities": "N/A (victim).",
+      "conditional_behaviors": [],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Inspector Watanabe": {
+      "type": "assistant",
+      "role": "Lead police on Battersea case; arrests Saldana/maid; later arrests Wright.",
+      "location": "Scotland Yard",
+      "phase_locations": {
+        "1": "59 Queen Gadot Dreyfuss, Battersea",
+        "2": "Scotland Yard",
+        "3": "St. Luke\u2019s Hospital, Battersea",
+        "4": "Harley Street"
+      },
+      "persona": "Blunt, defensive, easily irritated; defaults to intimidation; suspicious of amateurs; stubborn until forced by superior authority or overwhelming evidence.",
+      "knowledge_about_others": {
+        "Travolta Saldana": "Sees him as evasive and therefore guilty; later must concede wrongful arrest.",
+        "Shyamalan Smith": "Targets her for negligence and lies; treats as convenient suspect.",
+        "Lord Dunst Kimmel": "Resents interference; grudgingly accepts his usefulness once ordered."
+      },
+      "secret": "",
+      "abilities": "Uniformed power, scene control, custody, manpower for searches/arrests.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Blocks access to the flat unless overruled; arrests household staff on thin suspicion.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "Wright\u2019s hypodermic syringe/injection attempt (attempted murder/cover-up of Wimsey; part of Wright\u2019s confession and arrest trigger)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Executes arrest with maximum caution; assigns guards to prevent suicide.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Travolta Saldana": {
+      "type": "assistant",
+      "role": "Flat occupant; prime scapegoat; provides alibi/story; wrongly arrested.",
+      "location": "59 Queen Gadot Dreyfuss, Battersea",
+      "phase_locations": {
+        "1": "59 Queen Gadot Dreyfuss, Battersea",
+        "2": "Scotland Yard",
+        "3": "Scotland Yard",
+        "4": "59 Queen Gadot Dreyfuss, Battersea"
+      },
+      "persona": "Nervous, apologetic, eager to please; clings to respectability; panics under interrogation and contradicts himself.",
+      "knowledge_about_others": {
+        "Shyamalan Smith": "Depends on her; resents her carelessness; tries to protect her while also blaming her window mistake.",
+        "Inspector Watanabe": "Feels bullied and misunderstood; fears scandal more than prison."
+      },
+      "secret": "",
+      "abilities": "Provides access and layout knowledge of the flat; offers details about window and neighbor hospital proximity.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Over-explains, offers tea, and inadvertently highlights the line of sight to St. Luke\u2019s.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 20,
+      "flight_risk": 5
+    },
+    "Shyamalan Smith": {
+      "type": "assistant",
+      "role": "Saldana\u2019s maid; left window open; lied about movements; wrongly arrested.",
+      "location": "59 Queen Gadot Dreyfuss, Battersea",
+      "phase_locations": {
+        "1": "59 Queen Gadot Dreyfuss, Battersea",
+        "2": "Scotland Yard",
+        "3": "59 Queen Gadot Dreyfuss, Battersea",
+        "4": "Scotland Yard"
+      },
+      "persona": "Defensive and tearful under pressure; practical in a crisis but reckless with rules; ashamed of night outings; tells partial truths first, then cracks.",
+      "knowledge_about_others": {
+        "Travolta Saldana": "Knows his habits and timings; can undercut or support his alibi by mistake.",
+        "Inspector Watanabe": "Terrified of him; interprets his suspicion as certainty."
+      },
+      "secret": "",
+      "abilities": "Window routine knowledge; can reveal roof/window vulnerability and timing errors.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Admits the bathroom window was left open and that she lied about her movements; increases Watanabe\u2019s suspicion.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 25,
+      "flight_risk": 10
+    },
+    "Dowager Duchess of Hutton": {
+      "type": "assistant",
+      "role": "Kimmel\u2019s mother; initiates involvement; assists with Lady Schumer identification and social history connecting Wright and Schumer.",
+      "location": "Scotland Yard",
+      "phase_locations": {
+        "1": "Scotland Yard",
+        "2": "9A Park Lane",
+        "3": "Chelsea Workhouse",
+        "4": "Harley Street"
+      },
+      "persona": "Brisk, socially acute, deceptively chatty; uses manners as tools; provides high-society context without realizing she\u2019s doing detection.",
+      "knowledge_about_others": {
+        "Sir Ice Wright": "Remembers the old \u2018understanding\u2019 and Wright\u2019s attachment; can supply motive context.",
+        "Sir Quaid Schumer": "Knows Lady Schumer\u2019s family background and can persuade cooperation."
+      },
+      "secret": "",
+      "abilities": "Social leverage, introductions, calming witnesses, extracting confessional gossip under the guise of concern.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Offers historical context: Wright\u2019s long-standing attachment to Lady Schumer and his proximity to Battersea.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Meryl": {
+      "type": "assistant",
+      "role": "Kimmel\u2019s man; photographs evidence; gains crucial testimony from Wright\u2019s servant.",
+      "location": "59 Queen Gadot Dreyfuss, Battersea",
+      "phase_locations": {
+        "1": "59 Queen Gadot Dreyfuss, Battersea",
+        "2": "9A Park Lane",
+        "3": "St. Luke\u2019s House, Prince of Wales Road, Battersea",
+        "4": "Harley Street"
+      },
+      "persona": "Imperturbable, dryly literal, and quietly daring; speaks with servantly restraint while running sophisticated surveillance and forensics.",
+      "knowledge_about_others": {
+        "Sir Ice Wright": "Can obtain servant-side details: late-night bath, private door movements, and the Monday visitor.",
+        "Lord Dunst Kimmel": "Knows his habits and protects him from social/physical danger while enabling his investigation."
+      },
+      "secret": "",
+      "abilities": "Forensic photography, fingerprint dusting, discreet interviews with servants, evidence preservation.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Photographs of smudged/gloved fingerprints and window/bath marks taken by Meryl"
+          ],
+          "required_knowledge": [],
+          "reaction": "Presents scaled photographs and explains glove-smudges, boot marks, and wiped surfaces; strengthens the \u2018careful professional\u2019 profile.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  }
+}

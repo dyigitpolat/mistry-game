@@ -1,0 +1,269 @@
+{
+  "title": "The Red-Headed League",
+  "author": "Arthur Conan Doyle",
+  "victim": "None (consultation mystery; potential crime unclear at outset)",
+  "intro_narrative": "In autumn, Dr. Eileen visits Mr. Express Padma and finds him consulting a stout, fiery-red-haired tradesman, Mr. Jabez Peeves. Peeves produces a dirty, wrinkled newspaper and insists an advertisement within it is 'what began it all.' As Padma coolly deduces Peeves\u2019s background from small tells\u2014manual labor, snuff, Freemasonry, recent writing, and a China connection\u2014the room becomes a courtroom of inference, and the advertisement becomes the case\u2019s first hard lead.",
+  "time_limit_minutes": 180,
+  "start_time": "09:30",
+  "win_conditions": {
+    "required_evidence": [
+      "The advertisement in the newspaper (primary lead introduced in this excerpt)"
+    ],
+    "required_suspect": [],
+    "required_motive": [
+      "Determine whether a crime exists and what the advertisement was designed to achieve"
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Consultation Begins",
+      "objective": "Observe Peeves and the room; learn why Padma keeps Eileen present.",
+      "unlocked_locations": [
+        "Mr. Express Padma\u2019s room"
+      ],
+      "unlocked_characters": [
+        "Mr. Express Padma",
+        "Dr. Eileen",
+        "Mr. Jabez Peeves"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Inciting Paper",
+      "objective": "Obtain and inspect the dirty, wrinkled newspaper; locate the marked advertisement.",
+      "unlocked_locations": [
+        "Mr. Express Padma\u2019s room"
+      ],
+      "unlocked_characters": [
+        "Mr. Express Padma",
+        "Dr. Eileen",
+        "Mr. Jabez Peeves"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Method of Inference",
+      "objective": "Confirm Padma\u2019s deductions by examining Peeves\u2019s identifiers (Freemason pin, Chinese coin, tattoo).",
+      "unlocked_locations": [
+        "Mr. Express Padma\u2019s room"
+      ],
+      "unlocked_characters": [
+        "Mr. Express Padma",
+        "Dr. Eileen",
+        "Mr. Jabez Peeves"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Commit to the Lead",
+      "objective": "Formulate the next investigative step based on the advertisement and Peeves\u2019s background links.",
+      "unlocked_locations": [
+        "Mr. Express Padma\u2019s room"
+      ],
+      "unlocked_characters": [
+        "Mr. Express Padma",
+        "Dr. Eileen",
+        "Mr. Jabez Peeves"
+      ]
+    }
+  ],
+  "locations": {
+    "Mr. Express Padma\u2019s room": {
+      "description": "Padma\u2019s consulting room is intimate and controlled: an armchair set for judgment, a settee for guests, and a chair piled with a frayed top-hat and faded overcoat. Here, under Padma\u2019s steady gaze, Peeves flattens a dirty newspaper on his knee and points to an advertisement that, he claims, set everything in motion.",
+      "items": [
+        "Dirty, wrinkled newspaper (contains the key advertisement that begins the case)",
+        "The advertisement in the newspaper (primary lead introduced in this excerpt)",
+        "Arc-and-compass breastpin (evidence of Freemasonry; a personal identifier)",
+        "Chinese coin on Peeves\u2019s watch-chain (evidence of travel/connection to China)",
+        "Fish tattoo above Peeves\u2019s right wrist (distinctive identifying mark with a China link)"
+      ],
+      "clues": [
+        "Peeves produces a dirty, wrinkled newspaper and points out a specific advertisement as \u201cwhat began it all,\u201d indicating the ad is the inciting mystery element and likely a lead to be followed",
+        "Padma deduces from Peeves\u2019s appearance/background indicators (manual labor, snuff use, Freemasonry, recent writing, China tattoo/coin), establishing Padma\u2019s method of inference and suggesting Peeves\u2019s background details may later bear on motive/opportunity"
+      ],
+      "base_ascii": "  _____________PADMA'S ROOM_____________\n | [Window]                    [Door]  |\n |                                     |\n |  [Settee]            [Armchair/Padma]|\n |                                     |\n |  [Guest Chair]  [Side Table + Lamp]  |\n |  (coat & hat)     (papers, ink)      |\n |_____________________________________|",
+      "visual_metadata": {
+        "setting": "Warm but austere Victorian consulting room; everything arranged to favor observation and controlled conversation.",
+        "connections": [
+          {
+            "target_location": "Mr. Express Padma\u2019s room",
+            "mechanism": "Closed consulting-room door (kept shut for privacy)",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Settee",
+            "type": "surface",
+            "spatial_relationship": "Along the left wall beneath the window",
+            "objects": []
+          },
+          {
+            "id": "Padma's armchair",
+            "type": "surface",
+            "spatial_relationship": "Right side of room, angled to face the settee",
+            "objects": []
+          },
+          {
+            "id": "Guest chair",
+            "type": "surface",
+            "spatial_relationship": "Near center-left; where Peeves sits with his coat and hat nearby",
+            "objects": [
+              {
+                "item_id": "Dirty, wrinkled newspaper (contains the key advertisement that begins the case)",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "The advertisement in the newspaper (primary lead introduced in this excerpt)",
+                "visibility": "partially hidden",
+                "hidden_by": "Dirty, wrinkled newspaper (contains the key advertisement that begins the case)"
+              }
+            ]
+          },
+          {
+            "id": "Side table",
+            "type": "surface",
+            "spatial_relationship": "Beside Padma's armchair, within reach",
+            "objects": []
+          },
+          {
+            "id": "Peeves's person (observable identifiers)",
+            "type": "container",
+            "spatial_relationship": "On Mr. Jabez Peeves (pin on waistcoat; coin on watch-chain; tattoo on wrist)",
+            "objects": [
+              {
+                "item_id": "Arc-and-compass breastpin (evidence of Freemasonry; a personal identifier)",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Chinese coin on Peeves\u2019s watch-chain (evidence of travel/connection to China)",
+                "visibility": "visible",
+                "hidden_by": null
+              },
+              {
+                "item_id": "Fish tattoo above Peeves\u2019s right wrist (distinctive identifying mark with a China link)",
+                "visibility": "partially hidden",
+                "hidden_by": "Peeves\u2019s cuff (revealed when he moves or rolls his sleeve)"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Mr. Express Padma": {
+      "type": "assistant",
+      "role": "Investigator",
+      "location": "Mr. Express Padma\u2019s room",
+      "phase_locations": {
+        "1": "Mr. Express Padma\u2019s room",
+        "2": "Mr. Express Padma\u2019s room",
+        "3": "Mr. Express Padma\u2019s room",
+        "4": "Mr. Express Padma\u2019s room"
+      },
+      "persona": "Measured, incisive, and faintly theatrical; speaks in calm deductions and treats conversation like evidence-taking.",
+      "knowledge_about_others": {
+        "Dr. Eileen": "Trusts her to observe faithfully; tolerates mild embellishment but values her presence as a second set of eyes.",
+        "Mr. Jabez Peeves": "Has already noted physical tells: manual labor asymmetry, snuff habit, Freemason insignia, recent writing wear, and China-linked tattoo/coin."
+      },
+      "secret": "",
+      "abilities": "Inference: can convert observed items/marks into usable clues; can prompt witnesses to restate details precisely.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Dirty, wrinkled newspaper (contains the key advertisement that begins the case)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Padma asks for the newspaper to be held flat and well-lit, urging the player to read the advertisement line-by-line and note any odd constraints or promises.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Arc-and-compass breastpin (evidence of Freemasonry; a personal identifier)",
+            "Chinese coin on Peeves\u2019s watch-chain (evidence of travel/connection to China)",
+            "Fish tattoo above Peeves\u2019s right wrist (distinctive identifying mark with a China link)"
+          ],
+          "required_knowledge": [],
+          "reaction": "Padma demonstrates his method: he ties each identifier to a concrete life history, cautioning that such details often become motive or access later.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Dr. Eileen": {
+      "type": "assistant",
+      "role": "Narrator / witness to the consultation",
+      "location": "Mr. Express Padma\u2019s room",
+      "phase_locations": {
+        "1": "Mr. Express Padma\u2019s room",
+        "2": "Mr. Express Padma\u2019s room",
+        "3": "Mr. Express Padma\u2019s room",
+        "4": "Mr. Express Padma\u2019s room"
+      },
+      "persona": "Curious, candid, and observant; narrates impressions, admits uncertainty, and records Padma\u2019s deductions with a clinician\u2019s precision.",
+      "knowledge_about_others": {
+        "Mr. Express Padma": "Knows his habits\u2014fingertips together when judging; uses staged calm to control the room.",
+        "Mr. Jabez Peeves": "Sees him as commonplace except for blazing red hair and visible irritation; notes his pride when addressed as 'partner and helper' in past cases."
+      },
+      "secret": "",
+      "abilities": "Witness: can corroborate timelines and physical observations; can re-check what was said verbatim to prevent misremembering.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "If pressed, Eileen admits she could not deduce much from Peeves at first glance\u2014highlighting Padma\u2019s advantage and the value of specific identifiers.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Mr. Jabez Peeves": {
+      "type": "assistant",
+      "role": "Client whose situation sparks the case",
+      "location": "Mr. Express Padma\u2019s room",
+      "phase_locations": {
+        "1": "Mr. Express Padma\u2019s room",
+        "2": "Mr. Express Padma\u2019s room",
+        "3": "Mr. Express Padma\u2019s room",
+        "4": "Mr. Express Padma\u2019s room"
+      },
+      "persona": "Pompous but anxious; alternates between pride and chagrin, speaks in heavy, literal phrasing, quick to challenge and then laugh off what he cannot explain.",
+      "knowledge_about_others": {
+        "Mr. Express Padma": "Believes Padma has uncanny insight, then downplays it as 'nothing in it' when explained.",
+        "Dr. Eileen": "Treats her as an observer; offers quick, searching glances to judge whether she sides with Padma."
+      },
+      "secret": "",
+      "abilities": "Testimony: can restate his narrative from the beginning; can identify the exact advertisement that initiated events.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "If asked what started everything, Peeves insists on the advertisement and physically indicates its position in the column, urging the player to read it directly.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 5,
+      "flight_risk": 10
+    }
+  }
+}
