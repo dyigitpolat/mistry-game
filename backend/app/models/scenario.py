@@ -84,6 +84,7 @@ class GameObject(BaseModel):
 
 
 class Location(BaseModel):
+    name: str = Field("", description="Display name for the location.")
     description: str = Field(..., description="Text provided to player when entering.")
     clues: List[str] = Field(default_factory=list, description="Intangible deductions.")
     people: List[Person] = Field(

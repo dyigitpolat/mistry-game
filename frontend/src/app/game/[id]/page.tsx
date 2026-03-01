@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, use } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, use } from "react";
 import GameHeader from "@/components/GameHeader";
 import DeductionBoard from "@/components/DeductionBoard";
 import SceneView from "@/components/SceneView";
@@ -9,6 +9,9 @@ import StatusPanel from "@/components/StatusPanel";
 import AccusationModal from "@/components/AccusationModal";
 import PhaseTransition from "@/components/PhaseTransition";
 import ClueToast from "@/components/ClueToast";
+import GameplayView from "@/components/gameplay/GameplayView";
+import MinimapPanel from "@/components/gameplay/MinimapPanel";
+import { useGameplayState, type StatePatch } from "@/components/gameplay/hooks/useGameplayState";
 import {
     startGame,
     performAction,
@@ -65,6 +68,9 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
     // Discord integration state
     const [discordStatus, setDiscordStatus] = useState<DiscordStatus | null>(null);
     const [discordNotes, setDiscordNotes] = useState<DiscordNote[]>([]);
+
+    // Gameplay UI state patch (fed to GameplayView to sync visual state)
+    const [gameplayPatch, setGameplayPatch] = useState<StatePatch | null>(null);
 
     // Modal state
     const [showAccusation, setShowAccusation] = useState(false);
@@ -288,6 +294,28 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             if (response.error) {
                 addLog(response.error, { type: "error" });
             }
+
+            // Build a state patch for the gameplay canvas UI
+            const patch: StatePatch = {};
+            if (response.new_items?.length) {
+                patch.removedItems = response.new_items;
+            }
+            if (response.visual_metadata_diff) {
+                const diff = response.visual_metadata_diff;
+                if (Array.isArray(diff.object_changes)) {
+                    patch.objectStateChanges = diff.object_changes;
+                }
+                if (Array.isArray(diff.connection_changes)) {
+                    patch.connectionChanges = diff.connection_changes;
+                }
+            }
+            // Handle new entity artifacts (sprites generated on-the-fly)
+            if (response.new_entity_artifacts && typeof response.new_entity_artifacts === "object") {
+                patch.newArtifacts = response.new_entity_artifacts;
+            }
+            if (patch.removedItems || patch.objectStateChanges || patch.connectionChanges || patch.newArtifacts) {
+                setGameplayPatch({ ...patch });
+            }
         },
         [addLog, addToast]
     );
@@ -377,6 +405,22 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         [handleCommand]
     );
 
+    // ── Room change request from gameplay canvas ─────────────────────
+    const handleGameplayRoomChange = useCallback(
+        (locationName: string) => {
+            handleCommand(`Move to ${locationName}`);
+        },
+        [handleCommand]
+    );
+
+    // ── Take item request from gameplay canvas ─────────────────────
+    const handleTakeItem = useCallback(
+        (itemName: string) => {
+            handleCommand(`Take ${itemName}`);
+        },
+        [handleCommand]
+    );
+
     // ── Present evidence to character ──────────────────────────────
     const handlePresentEvidence = useCallback(
         async (characterName: string) => {
@@ -448,6 +492,39 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         },
         [session, addLog]
     );
+
+    // ── Gameplay canvas state (lifted here so both GameplayView and MinimapPanel share it) ──
+    const gameplay = useGameplayState(session?.id ?? null, session?.player_state?.current_location);
+
+    // Apply patches from action responses
+    const lastPatchRef = useRef<StatePatch | null>(null);
+    if (gameplayPatch && gameplayPatch !== lastPatchRef.current) {
+        lastPatchRef.current = gameplayPatch;
+        gameplay.applyStatePatch(gameplayPatch);
+    }
+
+    // ── Inventory image map (accumulates item images so they persist after pickup) ──
+    const inventoryImageMapRef = useRef<Record<string, string>>({});
+    const inventoryImages = useMemo(() => {
+        if (!gameplay.dungeon?.rooms) return inventoryImageMapRef.current;
+        const rooms = gameplay.dungeon.rooms as Record<string, any>;
+        for (const room of Object.values(rooms)) {
+            for (const obj of room.objects ?? []) {
+                for (const item of obj.items ?? []) {
+                    const imgKey = item.worldItemSvgKey;
+                    if (!imgKey) continue;
+                    const img = gameplay.getWorldImage(imgKey);
+                    if (img?.src) {
+                        const key = (item.name ?? item.id ?? "").toLowerCase();
+                        if (key && !inventoryImageMapRef.current[key]) {
+                            inventoryImageMapRef.current[key] = img.src;
+                        }
+                    }
+                }
+            }
+        }
+        return { ...inventoryImageMapRef.current };
+    }, [gameplay.dungeon, gameplay.getWorldImage]);
 
     // ── Derived state ──────────────────────────────────────────────
     const playerState = session?.player_state;
@@ -567,23 +644,69 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             />
 
             <main className="flex-1 grid grid-cols-12 gap-0 overflow-hidden h-full">
-                {/* Left: Deduction Board */}
-                <DeductionBoard
-                    clues={clueItems}
-                    inventory={playerState?.inventory || []}
-                    notes={playerState?.notes || ""}
-                    onConnectClues={handleConnectClues}
-                    discordNotes={discordNotes}
-                    discordLinked={discordStatus?.is_linked || false}
-                    discordGuildName={discordStatus?.guild_name}
-                />
+                {/* Left: Minimap + Deduction Board */}
+                <section className="col-span-3 flex flex-col min-h-0 border-r border-border-dark overflow-hidden">
+                    <MinimapPanel
+                        layout={gameplay.dungeon?.layout ?? {}}
+                        visitedRoomIds={gameplay.visitedRoomIds}
+                        currentRoomId={gameplay.currentRoomId}
+                        rooms={gameplay.dungeon?.rooms ?? {}}
+                    />
+                    <div className="flex-1 min-h-0 overflow-hidden">
+                        <DeductionBoard
+                            clues={clueItems}
+                            inventory={playerState?.inventory || []}
+                            notes={playerState?.notes || ""}
+                            onConnectClues={handleConnectClues}
+                            discordNotes={discordNotes}
+                            discordLinked={discordStatus?.is_linked || false}
+                            discordGuildName={discordStatus?.guild_name}
+                        />
+                    </div>
+                </section>
 
-                {/* Center: Scene + Narrative */}
+                {/* Center: Scene background + Gameplay canvas + Narrative */}
                 <section className="col-span-6 flex flex-col min-h-0 bg-[#0d121c] relative border-r border-border-dark">
                     <SceneView
                         locationName={playerState?.current_location || "Unknown"}
                         sceneImageUrl={sceneImageUrl}
-                    />
+                    >
+                        {/* Gameplay canvas overlay — centered at 80% scale with vignette blending */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="relative pointer-events-auto" style={{ width: "56%", maxHeight: "88%" }}>
+                                <GameplayView
+                                    dungeon={gameplay.dungeon}
+                                    currentRoomId={gameplay.currentRoomId}
+                                    setCurrentRoomId={gameplay.setCurrentRoomId}
+                                    visitedRoomIds={gameplay.visitedRoomIds}
+                                    addVisited={gameplay.addVisited}
+                                    room={gameplay.room}
+                                    setRoom={gameplay.setRoom}
+                                    playerPos={gameplay.playerPos}
+                                    setPlayerPos={gameplay.setPlayerPos}
+                                    path={gameplay.path}
+                                    setPath={gameplay.setPath}
+                                    selectedObjId={gameplay.selectedObjId}
+                                    setSelectedObjId={gameplay.setSelectedObjId}
+                                    pendingObjId={gameplay.pendingObjId}
+                                    setPendingObjId={gameplay.setPendingObjId}
+                                    getWorldImage={gameplay.getWorldImage}
+                                    worldLoadPending={gameplay.worldLoadPending}
+                                    worldLoadError={gameplay.worldLoadError}
+                                    worldLoadStage={gameplay.worldLoadStage}
+                                    worldLoadProgress={gameplay.worldLoadProgress}
+                                    worldLoadPreviewSrcs={gameplay.worldLoadPreviewSrcs}
+                                    onRoomChangeRequest={handleGameplayRoomChange}
+                                    onTakeItem={handleTakeItem}
+                                />
+                                {/* Vignette overlay to blend canvas edges into background */}
+                                <div className="absolute inset-0 pointer-events-none rounded"
+                                     style={{
+                                         boxShadow: "inset 0 0 50px 25px rgba(13,18,28,0.85)",
+                                     }} />
+                            </div>
+                        </div>
+                    </SceneView>
                     <NarrativeLog
                         entries={logEntries}
                         onCommand={handleCommand}
@@ -599,6 +722,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
                     objectiveText={currentPhase?.objective}
                     objectiveProgress={objectiveProgress}
                     inventory={playerState?.inventory || []}
+                    inventoryImages={inventoryImages}
                     charactersInRoom={charactersInRoom}
                     currentLocation={playerState?.current_location || "Unknown"}
                     unlockedLocations={unlockedLocations}

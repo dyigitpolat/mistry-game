@@ -7,8 +7,10 @@ No rule-based fallbacks — every action goes through the Oracle or Character ag
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
+import re
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -68,6 +70,8 @@ class GameEngine:
 
     def __init__(self):
         self.scenarios: Dict[str, Scenario] = {}
+        # Mapping: scenario_id -> {original_name: display_name}
+        self._display_names: Dict[str, Dict[str, str]] = {}
         self._load_builtin_scenarios()
 
         # Initialize agents
@@ -77,6 +81,7 @@ class GameEngine:
         self._scene_generator: Optional[SceneGenerator] = None
 
         self._init_agents()
+
         GameEngine._shared_instance = self
 
     def _init_agents(self):
@@ -132,8 +137,16 @@ class GameEngine:
             raw["game_world"] = {"locations": raw.pop("locations")}
 
         locations = raw.get("game_world", {}).get("locations", {})
-        for loc_data in locations.values():
+        for loc_id, loc_data in locations.items():
+            if "name" not in loc_data or not loc_data.get("name"):
+                loc_data["name"] = loc_id.replace("_", " ").title()
             GameEngine._normalize_location(loc_data)
+
+        # Ensure every connection is bidirectional
+        GameEngine._ensure_bidirectional_connections(locations)
+
+        # Populate Location.people from scenario characters
+        GameEngine._populate_people(raw, locations)
 
     @staticmethod
     def _normalize_location(loc: dict) -> None:
@@ -207,6 +220,56 @@ class GameEngine:
         loc.pop("visual_metadata", None)
         loc.pop("items", None)
         loc.pop("base_ascii", None)
+
+    @staticmethod
+    def _ensure_bidirectional_connections(locations: dict) -> None:
+        """For every A→B connection, ensure B→A also exists."""
+        for loc_id, loc_data in locations.items():
+            for conn in loc_data.get("connections", []):
+                target_id = conn.get("location_id", "")
+                if not target_id or target_id not in locations:
+                    continue
+                target_conns = locations[target_id].get("connections", [])
+                has_reverse = any(
+                    c.get("location_id") == loc_id for c in target_conns
+                )
+                if not has_reverse:
+                    target_conns.append({
+                        "location_id": loc_id,
+                        "state": conn.get("state", "unlocked"),
+                    })
+                    locations[target_id]["connections"] = target_conns
+
+    @staticmethod
+    def _populate_people(raw: dict, locations: dict) -> None:
+        """Inject Person entries into locations from scenario.characters."""
+        characters = raw.get("characters", {})
+        for char_name, char_data in characters.items():
+            if not isinstance(char_data, dict):
+                continue
+            phase_locs = char_data.get("phase_locations", {})
+            default_loc = char_data.get("location", "")
+            # Use first phase location, falling back to default location
+            start_loc = (
+                phase_locs.get("1")
+                or phase_locs.get(1)
+                or default_loc
+            )
+            if not start_loc or start_loc not in locations:
+                continue
+            existing_people = locations[start_loc].setdefault("people", [])
+            already_present = any(
+                p.get("name") == char_name for p in existing_people
+            )
+            if already_present:
+                continue
+            existing_people.append({
+                "id": char_name.lower().replace(" ", "_").replace('"', ""),
+                "name": char_name,
+                "description": char_data.get("persona", char_data.get("role", "")),
+                "notes": char_data.get("secret", ""),
+                "state": "alive",
+            })
 
     def load_scenario(self, scenario_id: str) -> Optional[Scenario]:
         """Get a scenario by ID."""
@@ -296,6 +359,324 @@ class GameEngine:
                 if phase_loc == player.current_location:
                     chars_in_room.append(name)
         return chars_in_room
+
+    # ═══ DISPLAY NAME SIMPLIFICATION ══════════════════════════════════
+
+    def _ensure_display_names(self, scenario_id: str) -> Dict[str, str]:
+        """Lazily generate and cache display names for a scenario on first use."""
+        if scenario_id in self._display_names:
+            return self._display_names[scenario_id]
+
+        scenario = self.scenarios.get(scenario_id)
+        if not scenario:
+            self._display_names[scenario_id] = {}
+            return {}
+
+        try:
+            mapping = self._generate_display_names(scenario)
+        except Exception as e:
+            print(f"⚠️ Display name generation failed for {scenario_id}: {e}")
+            mapping = {}
+
+        self._display_names[scenario_id] = mapping
+        return mapping
+
+    def _generate_display_names(self, scenario: Scenario) -> Dict[str, str]:
+        """Use an LLM to simplify all entity names in a scenario.
+
+        Returns a mapping {original_name: simplified_name} for locations,
+        characters, objects, and items whose names need shortening.
+        Names that are already short are kept as-is.
+        """
+        all_names: Dict[str, list[str]] = {
+            "locations": [],
+            "characters": list(scenario.characters.keys()),
+            "objects": [],
+            "items": [],
+        }
+        for loc_id, loc in scenario.game_world.locations.items():
+            all_names["locations"].append(loc.name or loc_id)
+            for obj in loc.objects:
+                all_names["objects"].append(obj.name)
+                if obj.contains:
+                    for child in obj.contains:
+                        all_names["items"].append(child.name)
+            for person in loc.people:
+                if person.name not in all_names["characters"]:
+                    all_names["characters"].append(person.name)
+
+        # Only send names that are long enough to benefit from simplification
+        THRESHOLD = 30
+        names_to_simplify: list[str] = []
+        for category_names in all_names.values():
+            for n in category_names:
+                if len(n) > THRESHOLD and n not in names_to_simplify:
+                    names_to_simplify.append(n)
+
+        if not names_to_simplify:
+            return {}
+
+        if not self._oracle:
+            return {}
+
+        prompt = (
+            "You are a game UI name shortener. Given these verbose entity names from "
+            "a detective game scenario, produce a concise display name (max 30 chars) "
+            "for each. Keep names recognizable. For locations, keep the key landmark. "
+            "For people, use their first name or shortest alias.\n\n"
+            f"Names:\n{json.dumps(names_to_simplify, indent=2)}\n\n"
+            "Return ONLY a JSON object mapping each original name to its simplified version.\n"
+            'Example: {"Very Long Location Name (with details)": "Short Name"}'
+        )
+
+        try:
+            result = self._oracle.model.invoke([
+                {"role": "system", "content": "You simplify game entity names. Respond ONLY with a JSON object."},
+                {"role": "user", "content": prompt},
+            ])
+            json_match = re.search(r"\{[\s\S]*\}", result.content)
+            if json_match:
+                parsed = json.loads(json_match.group())
+                mapping: Dict[str, str] = {}
+                for original, simplified in parsed.items():
+                    if isinstance(simplified, str) and simplified.strip():
+                        mapping[original] = simplified.strip()
+                print(f"📝 Display names generated: {len(mapping)} simplifications")
+                return mapping
+        except Exception as e:
+            print(f"⚠️ Display name generation LLM call failed: {e}")
+
+        return {}
+
+    def get_display_name(self, scenario_id: str, original: str) -> str:
+        """Get the simplified display name for an entity, or the original."""
+        names = self._ensure_display_names(scenario_id)
+        return names.get(original, original)
+
+    def apply_display_names(self, scenario_id: str, names: list[str]) -> list[str]:
+        """Apply display name mapping to a list of names."""
+        name_map = self._ensure_display_names(scenario_id)
+        if not name_map:
+            return names
+        return [name_map.get(n, n) for n in names]
+
+    # ═══ CANONICAL NAME MAPPING ════════════════════════════════════════
+
+    def _collect_canonical_names(self, scenario: Scenario, scenario_id: str | None = None) -> dict:
+        """Collect all canonical entity names from the scenario.
+
+        Also includes display-name aliases so the LLM can match either form.
+        """
+        items: set[str] = set()
+        location_names: list[str] = []
+        objects: set[str] = set()
+
+        for loc_id, loc in scenario.game_world.locations.items():
+            location_names.append(loc.name or loc_id)
+            for obj in loc.objects:
+                objects.add(obj.name)
+                if obj.category.value == "item":
+                    items.add(obj.name)
+                if obj.contains:
+                    for child in obj.contains:
+                        items.add(child.name)
+
+        characters = list(scenario.characters.keys())
+
+        # Add display-name aliases so canonical matching works both ways
+        display_map = self._ensure_display_names(scenario_id) if scenario_id else {}
+        all_loc_targets = list(location_names)
+        all_char_targets = list(characters)
+        all_item_targets = sorted(items)
+        for orig, disp in display_map.items():
+            if orig in location_names and disp not in all_loc_targets:
+                all_loc_targets.append(disp)
+            elif orig in characters and disp not in all_char_targets:
+                all_char_targets.append(disp)
+            elif orig in items and disp not in all_item_targets:
+                all_item_targets.append(disp)
+
+        return {
+            "items": all_item_targets,
+            "locations": all_loc_targets,
+            "characters": all_char_targets,
+            "objects": sorted(objects),
+        }
+
+    async def _canonicalize_names(
+        self, names: list[str], canonical_names: list[str], category: str
+    ) -> tuple[dict[str, str], list[str]]:
+        """Map names to canonical equivalents. Returns (mapping, new_names).
+
+        ``new_names`` contains entries the LLM mapped to ``null`` (truly new entities).
+        """
+        if not names or not canonical_names:
+            return {}, list(names or [])
+
+        mapping: dict[str, str] = {}
+        remaining: list[str] = []
+        canonical_lower = {c.lower().strip(): c for c in canonical_names}
+
+        for name in names:
+            if name in canonical_names:
+                mapping[name] = name
+            elif name.lower().strip() in canonical_lower:
+                mapping[name] = canonical_lower[name.lower().strip()]
+            else:
+                remaining.append(name)
+
+        if not remaining:
+            return mapping, []
+
+        prompt = (
+            f"Map each {category} name to its closest canonical equivalent.\n\n"
+            f"Canonical names: {json.dumps(canonical_names)}\n"
+            f"Names to map: {json.dumps(remaining)}\n\n"
+            f"Return ONLY a JSON object mapping each input name to the best "
+            f"canonical match. If no reasonable match exists (i.e. it is a genuinely "
+            f"new entity), map to null.\n"
+            f'Example: {{"some name": "Canonical Name", "brand new thing": null}}'
+        )
+
+        new_names: list[str] = []
+        try:
+            messages = [
+                {"role": "system", "content": (
+                    "You are an entity name resolver for a detective game. Map "
+                    "variant names to canonical equivalents. If the name refers "
+                    "to something genuinely new (not in the list), map to null. "
+                    "Respond ONLY with a JSON object."
+                )},
+                {"role": "user", "content": prompt},
+            ]
+            # Run synchronous LLM call in a thread so asyncio.gather
+            # can parallelize multiple categories concurrently
+            result = await asyncio.to_thread(self._oracle.model.invoke, messages)
+            json_match = re.search(r"\{[\s\S]*\}", result.content)
+            if json_match:
+                parsed = json.loads(json_match.group())
+                for name, canonical in parsed.items():
+                    if canonical and canonical in canonical_names:
+                        mapping[name] = canonical
+                    elif canonical is None:
+                        new_names.append(name)
+        except Exception as e:
+            print(f"⚠️ Canonical name mapping failed for {category}: {e}")
+
+        return mapping, new_names
+
+    async def _canonicalize_oracle_result(
+        self, result: any, scenario: Scenario, scenario_id: str
+    ) -> list[str]:
+        """Post-process Oracle result to replace non-canonical names in-place.
+
+        Runs independent category mappings in parallel via asyncio.gather.
+        Returns a list of entity names the LLM flagged as genuinely new.
+        """
+        canonical = self._collect_canonical_names(scenario, scenario_id)
+
+        # Build tasks for categories that need mapping
+        tasks: dict[str, asyncio.Task] = {}
+        if result.picked_up_items:
+            tasks["items"] = self._canonicalize_names(
+                result.picked_up_items, canonical["items"], "item"
+            )
+        if result.new_location:
+            tasks["location"] = self._canonicalize_names(
+                [result.new_location], canonical["locations"], "location"
+            )
+        if result.found_clues:
+            tasks["clues"] = self._canonicalize_names(
+                result.found_clues,
+                canonical["items"] + canonical["characters"],
+                "clue/entity",
+            )
+
+        if not tasks:
+            return []
+
+        # Run all mapping calls concurrently
+        keys = list(tasks.keys())
+        results_list = await asyncio.gather(*tasks.values(), return_exceptions=True)
+        resolved = dict(zip(keys, results_list))
+
+        all_new: list[str] = []
+
+        if "items" in resolved and not isinstance(resolved["items"], Exception):
+            item_map, new_items = resolved["items"]
+            result.picked_up_items = [
+                item_map.get(i, i) for i in result.picked_up_items
+            ]
+            all_new.extend(new_items)
+
+        if "location" in resolved and not isinstance(resolved["location"], Exception):
+            loc_map, _ = resolved["location"]
+            result.new_location = loc_map.get(
+                result.new_location, result.new_location
+            )
+
+        if "clues" in resolved and not isinstance(resolved["clues"], Exception):
+            clue_map, new_clues = resolved["clues"]
+            result.found_clues = [
+                clue_map.get(c, c) for c in result.found_clues
+            ]
+            all_new.extend(new_clues)
+
+        return all_new
+
+    async def _generate_new_entity_sprites(
+        self,
+        new_entity_names: list[str],
+        narrative_context: str,
+        scenario_id: str,
+    ) -> Optional[Dict[str, Dict]]:
+        """Generate sprite images for newly introduced entities.
+
+        Returns {artifact_key: {"content": base64_png, "mime_type": "image/png"}}.
+        """
+        if not new_entity_names:
+            return None
+
+        from src_py.api.dependencies import get_world_service
+        from src_py.domain.rendering import (
+            RenderRequest,
+            SubjectType,
+            RenderProfile,
+        )
+
+        service = get_world_service()
+        requests: list[RenderRequest] = []
+
+        for name in new_entity_names:
+            safe_id = name.lower().replace(" ", "_").replace('"', "")
+            key = f"new:{scenario_id}:{safe_id}"
+            description = f"{name} — {narrative_context[:200]}"
+            requests.append(
+                RenderRequest(
+                    key=key,
+                    subject_type=SubjectType.WORLD_ITEM,
+                    subject_id=safe_id,
+                    state="default",
+                    description=description,
+                )
+            )
+
+        if not requests:
+            return None
+
+        try:
+            profile = RenderProfile()
+            artifacts, _, _ = await service._artifacts.render_many(requests, profile)
+            result: Dict[str, Dict] = {}
+            for art_key, artifact in artifacts.items():
+                result[art_key] = {
+                    "content": artifact.content,
+                    "mime_type": artifact.mime_type,
+                }
+            return result if result else None
+        except Exception as e:
+            print(f"⚠️ New entity sprite generation failed: {e}")
+            return None
 
     async def process_action(
         self,
@@ -456,7 +837,6 @@ class GameEngine:
         try:
             result = self._oracle.model.invoke(messages)
             text = result.content
-            import re
             json_match = re.search(r'\{[\s\S]*\}', text)
             if json_match:
                 parsed = json.loads(json_match.group())
@@ -485,6 +865,15 @@ class GameEngine:
                 target=action.target,
                 message=action.message,
             )
+
+            # Canonicalize entity names returned by Oracle
+            new_entities: list[str] = []
+            try:
+                new_entities = await self._canonicalize_oracle_result(
+                    result, scenario, session.scenario_id,
+                )
+            except Exception as e:
+                print(f"⚠️ Canonical mapping step skipped: {e}")
 
             # Track what changed
             old_clues = set(session.player_state.clues)
@@ -524,6 +913,30 @@ class GameEngine:
             # Get characters at current location
             chars_in_room = self._get_characters_at_location(scenario, state_updates)
 
+            # Apply display names to response fields
+            sid = session.scenario_id
+            display_map = self._ensure_display_names(sid)
+            if display_map:
+                if new_location:
+                    new_location = display_map.get(new_location, new_location)
+                new_items = self.apply_display_names(sid, new_items)
+                new_clues = self.apply_display_names(sid, new_clues)
+                chars_in_room = self.apply_display_names(sid, chars_in_room)
+                if state_updates.current_location:
+                    state_updates.current_location = display_map.get(
+                        state_updates.current_location, state_updates.current_location,
+                    )
+
+            # Generate sprites for genuinely new entities
+            new_entity_artifacts = None
+            if new_entities:
+                try:
+                    new_entity_artifacts = await self._generate_new_entity_sprites(
+                        new_entities, result.narrative, session.scenario_id,
+                    )
+                except Exception as e:
+                    print(f"⚠️ New entity sprite generation skipped: {e}")
+
             return ActionResponse(
                 narrative=result.narrative,
                 state_updates=state_updates,
@@ -535,6 +948,8 @@ class GameEngine:
                 new_location=new_location,
                 visual_metadata_diff=result.updated_visual_metadata,
                 characters_in_room=chars_in_room,
+                display_name_map=display_map if display_map else None,
+                new_entity_artifacts=new_entity_artifacts,
             )
 
         except Exception as e:

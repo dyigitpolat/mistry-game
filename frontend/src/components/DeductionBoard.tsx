@@ -99,7 +99,7 @@ export default function DeductionBoard({
     const regularClues = clues.filter((c) => c.type === "clue");
 
     return (
-        <aside className="col-span-3 border-r border-border-dark bg-background-dark flex flex-col h-full overflow-hidden">
+        <aside className="bg-background-dark flex flex-col h-full overflow-hidden">
             {/* Header */}
             <div className="p-4 border-b border-border-dark bg-surface-dark/50">
                 <div className="flex justify-between items-center mb-3">

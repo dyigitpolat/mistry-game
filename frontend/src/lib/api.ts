@@ -73,6 +73,8 @@ export interface ActionResponse {
   scene_image_url: string | null;
   accusation_result: AccusationResult | null;
   characters_in_room: string[];
+  display_name_map: Record<string, string> | null;
+  new_entity_artifacts: Record<string, { content: string; mime_type: string }> | null;
 }
 
 export interface ScenarioSummary {

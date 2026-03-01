@@ -98,3 +98,5 @@ class ActionResponse(BaseModel):
     scene_image_url: Optional[str] = Field(None, description="Generated scene image URL for current location.")
     accusation_result: Optional[AccusationResult] = None
     characters_in_room: List[str] = Field(default_factory=list, description="Characters available at current location/phase.")
+    display_name_map: Optional[Dict[str, str]] = Field(None, description="Mapping from original to simplified display names.")
+    new_entity_artifacts: Optional[Dict[str, Dict]] = Field(None, description="Sprites for new entities: {key: {content: base64, mime_type: str}}.")

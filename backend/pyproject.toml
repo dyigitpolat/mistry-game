@@ -14,6 +14,8 @@ dependencies = [
     "pyyaml>=6.0",
     "httpx>=0.27.0",
     "langfuse>=2.0.0",
+    "mistry-agents[all-providers]",
+    "mistry-asset-generation",
 ]
 
 [project.optional-dependencies]
@@ -22,6 +24,10 @@ dev = [
     "pytest-asyncio>=0.24",
     "ruff>=0.8.0",
 ]
+
+[tool.uv.sources]
+mistry-agents = { path = "../agent", editable = true }
+mistry-asset-generation = { path = "../asset_generation", editable = true }
 
 [tool.hatch.build.targets.wheel]
 packages = ["app"]

@@ -12,6 +12,7 @@ interface StatusPanelProps {
     objectiveText?: string;
     objectiveProgress?: number;
     inventory: string[];
+    inventoryImages?: Record<string, string>;
     charactersInRoom: CharacterInRoom[];
     currentLocation: string;
     unlockedLocations?: string[];
@@ -27,6 +28,7 @@ export default function StatusPanel({
     objectiveText,
     objectiveProgress = 0,
     inventory,
+    inventoryImages = {},
     charactersInRoom,
     currentLocation,
     unlockedLocations = [],
@@ -96,15 +98,27 @@ export default function StatusPanel({
                         </div>
                     ) : (
                         <div className="space-y-1">
-                            {inventory.map((item, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-center gap-2 px-3 py-2 bg-background-dark rounded-lg border border-border-dark hover:border-emerald-500/30 transition-colors"
-                                >
-                                    <span className="material-symbols-outlined text-emerald-400 text-sm">inventory_2</span>
-                                    <span className="text-slate-200 text-sm truncate">{item}</span>
-                                </div>
-                            ))}
+                            {inventory.map((item, i) => {
+                                const imgSrc = inventoryImages[item.toLowerCase()];
+                                return (
+                                    <div
+                                        key={i}
+                                        className="flex items-center gap-2 px-3 py-2 bg-background-dark rounded-lg border border-border-dark hover:border-emerald-500/30 transition-colors"
+                                    >
+                                        {imgSrc ? (
+                                            <img
+                                                src={imgSrc}
+                                                alt={item}
+                                                className="w-7 h-7 object-contain rounded border border-emerald-500/20 bg-surface-dark shrink-0"
+                                                style={{ imageRendering: "pixelated" }}
+                                            />
+                                        ) : (
+                                            <span className="material-symbols-outlined text-emerald-400 text-sm">inventory_2</span>
+                                        )}
+                                        <span className="text-slate-200 text-sm truncate">{item}</span>
+                                    </div>
+                                );
+                            })}
                         </div>
                     )}
                 </div>
