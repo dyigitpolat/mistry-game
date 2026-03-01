@@ -112,10 +112,101 @@ class GameEngine:
         for fpath in data_dir.glob("*.json"):
             try:
                 raw = json.loads(fpath.read_text())
+                self._normalize_scenario_payload(raw)
                 scenario = Scenario.model_validate(raw)
                 self.scenarios[fpath.stem] = scenario
             except Exception as e:
                 print(f"⚠️  Failed to load scenario {fpath.name}: {e}")
+
+    @staticmethod
+    def _normalize_scenario_payload(raw: dict) -> None:
+        """Transform legacy JSON payloads into the current Pydantic schema format.
+
+        Handles two legacy patterns:
+        1. Flat ``locations`` at the top level (wraps into ``game_world``).
+        2. Per-location ``visual_metadata`` / ``items`` / ``base_ascii`` fields
+           that need to be unpacked into the new top-level ``setting``,
+           ``connections``, and ``objects`` fields.
+        """
+        if "game_world" not in raw and "locations" in raw:
+            raw["game_world"] = {"locations": raw.pop("locations")}
+
+        locations = raw.get("game_world", {}).get("locations", {})
+        for loc_data in locations.values():
+            GameEngine._normalize_location(loc_data)
+
+    @staticmethod
+    def _normalize_location(loc: dict) -> None:
+        """Normalise a single legacy location dict in-place."""
+        vm = loc.get("visual_metadata", {})
+
+        # ── setting ────────────────────────────────────────────────
+        if "setting" not in loc and "setting" in vm:
+            loc["setting"] = vm["setting"]
+        if "setting" not in loc:
+            loc["setting"] = loc.get("description", "")
+
+        # ── connections ────────────────────────────────────────────
+        if "connections" not in loc or not loc["connections"]:
+            new_conns = []
+            for c in vm.get("connections", []):
+                state_raw = (c.get("state") or "").lower()
+                state = "locked" if "lock" in state_raw else "unlocked"
+                new_conns.append({
+                    "location_id": c.get("target_location", c.get("targetLocation", "")),
+                    "state": state,
+                })
+            loc["connections"] = new_conns
+
+        # ── objects (from surfaces_and_containers + loose items) ───
+        if "objects" not in loc or not loc["objects"]:
+            objects: List[dict] = []
+
+            for sc in vm.get("surfaces_and_containers", []):
+                sc_type = sc.get("type", "surface")
+                category = sc_type if sc_type in ("surface", "container") else "surface"
+                contained: List[dict] = []
+                for child in sc.get("objects", []):
+                    item_name = child.get("item_id") or child.get("itemId", "unknown")
+                    vis = child.get("visibility", "visible")
+                    hid = child.get("hidden_by") or child.get("hiddenBy")
+                    desc = f"Visibility: {vis}"
+                    if hid:
+                        desc += f". Hidden by: {hid}"
+                    contained.append({
+                        "id": item_name.lower().replace(" ", "_"),
+                        "category": "item",
+                        "name": item_name,
+                        "description": desc,
+                        "notes": "",
+                    })
+
+                objects.append({
+                    "id": sc.get("id", "").lower().replace(" ", "_"),
+                    "category": category,
+                    "name": sc.get("id", ""),
+                    "description": sc.get("spatial_relationship", sc.get("spatialRelationship", "")),
+                    "notes": "",
+                    "state": "closed" if category == "container" else None,
+                    "contains": contained or None,
+                })
+
+            for item_name in loc.get("items", []):
+                if isinstance(item_name, str):
+                    objects.append({
+                        "id": item_name.lower().replace(" ", "_"),
+                        "category": "item",
+                        "name": item_name,
+                        "description": f"A loose item: {item_name}",
+                        "notes": "",
+                    })
+
+            loc["objects"] = objects
+
+        # ── cleanup legacy fields ─────────────────────────────────
+        loc.pop("visual_metadata", None)
+        loc.pop("items", None)
+        loc.pop("base_ascii", None)
 
     def load_scenario(self, scenario_id: str) -> Optional[Scenario]:
         """Get a scenario by ID."""
@@ -133,6 +224,7 @@ class GameEngine:
                 sid = doc.get("_id") or doc.get("title", "").lower().replace(" ", "_")
                 doc.pop("_id", None)
                 try:
+                    self._normalize_scenario_payload(doc)
                     scenario = Scenario.model_validate(doc)
                     if sid not in self.scenarios:
                         self.scenarios[sid] = scenario

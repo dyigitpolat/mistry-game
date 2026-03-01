@@ -19,7 +19,12 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     session: {
-        strategy: "jwt", // Use JWT for easier integration with FastAPI backend
+        strategy: "jwt",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+        signIn: "/login",
+        error: "/login",
     },
     callbacks: {
         async jwt({ token, user }) {

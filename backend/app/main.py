@@ -15,8 +15,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-# Load .env from project root
-_project_root = Path(__file__).parent.parent.parent
+# Load .env files — backend-local first, then project root as fallback.
+# Keys in the first-loaded file take precedence (override=False by default).
+_backend_root = Path(__file__).parent.parent
+_project_root = _backend_root.parent
+load_dotenv(_backend_root / ".env")
 load_dotenv(_project_root / ".env")
 
 from app.routes import game, generate, scenarios, scenes, stats, profile, discord  # noqa: E402
