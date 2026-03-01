@@ -444,3 +444,59 @@ export async function getGlobalLeaderboard(): Promise<GlobalLeaderboardEntry[]> 
 export async function getFriendsLeaderboard(): Promise<GlobalLeaderboardEntry[]> {
     return apiFetch("/stats/leaderboard/friends");
 }
+
+// ── Discord Integration ────────────────────────────────────────────
+
+export interface DiscordClue {
+    name: string;
+    description: string;
+    significance: string;
+}
+
+export interface DiscordSuspect {
+    name: string;
+    motive?: string;
+    alibi?: string;
+    suspicion_level: string;
+    notes: string;
+}
+
+export interface DiscordTheory {
+    theory: string;
+    supporting_evidence: string[];
+    counter_evidence: string[];
+    proposed_by?: string;
+}
+
+export interface DiscordNote {
+    id: string;
+    session_id: string;
+    summary: string;
+    key_points: string[];
+    clues: DiscordClue[];
+    suspects: DiscordSuspect[];
+    items: { name: string; relevance: string; location_found?: string }[];
+    locations: { name: string; significance: string; events: string[] }[];
+    theories: DiscordTheory[];
+    action_items: string[];
+    unresolved_questions: string[];
+    recorded_at: string;
+    duration_seconds?: number;
+}
+
+export interface DiscordStatus {
+    is_linked: boolean;
+    guild_id?: string;
+    guild_name?: string;
+    is_recording: boolean;
+    notes_count: number;
+    bot_invite_url: string;
+}
+
+export async function getDiscordStatus(sessionId: string): Promise<DiscordStatus> {
+    return apiFetch(`/discord/${sessionId}/status`);
+}
+
+export async function getDiscordNotes(sessionId: string): Promise<DiscordNote[]> {
+    return apiFetch(`/discord/${sessionId}/notes`);
+}

@@ -279,6 +279,15 @@ export default function CaseDetailsPage() {
                                         <span className="material-symbols-outlined mr-2 text-primary">group_add</span>
                                         Invite Friends
                                     </button>
+                                    <a
+                                        href={`https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || ""}&permissions=3147776&scope=bot%20applications.commands`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex-1 md:flex-none flex items-center justify-center rounded-lg h-12 px-6 bg-[#5865F2] hover:bg-[#4752C4] text-white text-base font-bold transition-all"
+                                    >
+                                        <span className="material-symbols-outlined mr-2">smart_toy</span>
+                                        Discord Mode
+                                    </a>
                                     <button className="flex-none flex items-center justify-center rounded-lg h-12 w-12 bg-surface-darker hover:bg-slate-800 text-slate-300 hover:text-white transition-all border border-slate-600 tooltip" title="Bookmark">
                                         <span className="material-symbols-outlined">bookmark_add</span>
                                     </button>

@@ -3,9 +3,10 @@
 interface GameHeaderProps {
     sessionTime: string;
     scenarioTitle?: string;
+    sessionId?: string;
 }
 
-export default function GameHeader({ sessionTime, scenarioTitle }: GameHeaderProps) {
+export default function GameHeader({ sessionTime, scenarioTitle, sessionId }: GameHeaderProps) {
     return (
         <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 py-3 bg-surface-dark shrink-0 z-20">
             <div className="flex items-center gap-4">
@@ -17,6 +18,21 @@ export default function GameHeader({ sessionTime, scenarioTitle }: GameHeaderPro
                 </h2>
             </div>
             <div className="flex flex-1 justify-end gap-6 items-center">
+                {/* Session ID for Discord */}
+                {sessionId && (
+                    <button
+                        onClick={() => {
+                            navigator.clipboard.writeText(sessionId);
+                            alert(`Session ID copied: ${sessionId}`);
+                        }}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 hover:bg-purple-500/20 transition-colors cursor-pointer"
+                        title="Click to copy Session ID for Discord"
+                    >
+                        <span className="material-symbols-outlined text-purple-400 text-sm">smart_toy</span>
+                        <span className="text-purple-300 text-xs font-mono max-w-[100px] truncate">{sessionId.slice(0, 12)}...</span>
+                        <span className="material-symbols-outlined text-purple-400 text-xs">content_copy</span>
+                    </button>
+                )}
                 {/* Clock */}
                 <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-background-dark border border-border-dark">
                     <span className="material-symbols-outlined text-text-secondary text-sm">schedule</span>
