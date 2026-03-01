@@ -1,0 +1,1015 @@
+{
+  "title": "X Y Z: A Detective Story",
+  "description": "A mystery set in Brandon, Massachusetts, where Detective uncovers a plot involving counterfeiters, a family secret, and a murder during a masquerade ball at the Benson Estate.",
+  "victim": "Mr. Benson",
+  "intro_narrative": "In the quiet village of Brandon, Massachusetts, a detective arrives to investigate mysterious letters addressed to X.Y.Z., suspecting a connection to a counterfeiting ring. As he delves deeper, he uncovers a web of deceit, family secrets, and murder during a masquerade ball at the Benson Estate. The detective must navigate a labyrinth of clues, hidden motives, and shifting alliances to unmask the culprit behind Mr. Benson's death.",
+  "start_time": "1881-06-15T12:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Letters addressed to X.Y.Z. with the word 'Counterfeit' as a countersign",
+      "The altered word in the rendezvous note (from 'northeast' to 'southwest')",
+      "Jonas' observation of the Yellow Domino near the wineglass",
+      "The presence of prussic acid in the wineglass",
+      "Hartley Benson's instructions to the Yellow Domino about the wineglass",
+      "Hartley's sudden and violent reaction to the detective's unmasking"
+    ],
+    "required_suspect": [
+      "Hartley Benson"
+    ],
+    "required_motive": [
+      "Hartley Benson's desire to frame his brother Joe for the murder of their father, Mr. Benson, possibly due to jealousy, financial motives, or a secret passion for Edith Underhill."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Arrival in Brandon",
+      "objective": "Investigate the mysterious letters addressed to X.Y.Z. and gather initial clues at the Brandon Post Office.",
+      "unlocked_locations": [
+        "brandon_massachusetts",
+        "brandon_post_office"
+      ],
+      "unlocked_characters": [
+        "detective",
+        "hartley_benson",
+        "joe_benson",
+        "postmaster"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Reconnaissance at Benson Estate",
+      "objective": "Explore the Benson Estate and gather information about the family and their upcoming masquerade ball.",
+      "unlocked_locations": [
+        "benson_estate",
+        "benson_grounds_shrubbery_sw",
+        "benson_grounds_shrubbery_ne"
+      ],
+      "unlocked_characters": [
+        "mr_benson",
+        "carrie_benson",
+        "jonas",
+        "edith_underhill"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Masquerade Ball",
+      "objective": "Attend the masquerade ball, uncover the rendezvous plot, and identify the Yellow Domino.",
+      "unlocked_locations": [
+        "benson_library",
+        "benson_mansion_ballroom"
+      ],
+      "unlocked_characters": [
+        "uncle_joe",
+        "doctor_travis"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Unmasking the Truth",
+      "objective": "Confront the culprit and gather final evidence to solve the murder of Mr. Benson.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "detective": {
+      "type": "assistant",
+      "role": "Protagonist and Investigator",
+      "location": "brandon_post_office",
+      "phase_locations": {
+        "0": "brandon_post_office",
+        "1": "benson_estate",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Astute, observant, and methodical. Speaks with confidence and authority, often using subtle probing questions to extract information. Maintains a calm and composed demeanor even in tense situations.",
+      "abilities": "Expert in deduction, disguise, and interrogation. Skilled at piecing together clues and uncovering hidden motives.",
+      "knowledge_about_others": {
+        "hartley_benson": "Suspects him of orchestrating his father's murder and framing his brother Joe.",
+        "joe_benson": "Believes him to be innocent and a victim of Hartley's machinations.",
+        "mr_benson": "Views him as a reclusive and troubled man with secrets tied to his family.",
+        "carrie_benson": "Sees her as a devoted but naive sister caught in Hartley's schemes.",
+        "edith_underhill": "Recognizes her as Joe's loyal fiancée, unaware of the full extent of Hartley's villainy.",
+        "uncle_joe": "Considers him a well-meaning but somewhat gullible ally of Joe.",
+        "jonas": "Views him as a loyal servant with critical observations about the night of the murder.",
+        "doctor_travis": "Sees him as a pragmatic coroner with key insights into Mr. Benson's death."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "hartley_benson": {
+      "type": "suspect",
+      "role": "Eldest Son and Culprit",
+      "location": "benson_estate",
+      "phase_locations": {
+        "0": "brandon_post_office",
+        "1": "benson_estate",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Cold, calculating, and manipulative. Speaks with a veneer of politeness and sophistication, but his words often carry an undercurrent of menace or deceit. Maintains an air of superiority and control.",
+      "secret": "He orchestrated his father's murder using prussic acid and attempted to frame his brother Joe for the crime. His motives may include financial gain, jealousy, or a secret passion for Edith Underhill.",
+      "suspicion_meter": 80,
+      "flight_risk": 90,
+      "knowledge_about_others": {
+        "detective": "Views him as an obstacle and a threat to his plans. Suspects the detective is closer to uncovering the truth than he lets on.",
+        "joe_benson": "Hates him and sees him as a rival for their father's affection and Edith's love. Wants to frame him for the murder.",
+        "mr_benson": "Feared and resented his father's authority and control over the family's wealth.",
+        "carrie_benson": "Manipulates her into aiding his schemes by playing on her loyalty and naivety.",
+        "edith_underhill": "Harbors a secret passion for her, which may have driven some of his actions.",
+        "uncle_joe": "Views him as a meddling old fool who supports Joe.",
+        "jonas": "Uses him as a pawn in his schemes, knowing the servant is loyal to the family but can be manipulated.",
+        "doctor_travis": "Sees him as a potential threat due to his medical knowledge and role as coroner."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Jonas' observation of the Yellow Domino near the wineglass"
+          ],
+          "reaction": "Hartley becomes increasingly agitated and attempts to shift blame onto Joe or the detective. He may try to intimidate or mislead others to protect his secret.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Hartley Benson's instructions to the Yellow Domino about the wineglass",
+            "Hartley's sudden and violent reaction to the detective's unmasking"
+          ],
+          "reaction": "Hartley's facade crumbles. He reacts with fury, attempting to flee or lash out violently. His true nature as a murderer and manipulator is revealed.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "joe_benson": {
+      "type": "suspect",
+      "role": "Youngest Son and Victim of Framing",
+      "location": "benson_grounds_shrubbery_sw",
+      "phase_locations": {
+        "0": "brandon_massachusetts",
+        "1": "benson_grounds_shrubbery_sw",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Honest, warm, and sincere. Speaks with passion and conviction, especially when defending his innocence or expressing his love for Edith. His emotions are often close to the surface.",
+      "secret": "He is innocent of the theft of the bonds and his father's murder. He has remained silent to protect someone he loves, possibly Edith or his sister Carrie.",
+      "suspicion_meter": 70,
+      "flight_risk": 30,
+      "knowledge_about_others": {
+        "detective": "Views him with suspicion at first but grows to trust him as the truth unfolds.",
+        "hartley_benson": "Distrusts and fears him, sensing his manipulative nature and hidden motives.",
+        "mr_benson": "Loved his father deeply but was hurt by his accusations and exile.",
+        "carrie_benson": "Shares a close bond with his sister and trusts her implicitly.",
+        "edith_underhill": "Deeply in love with her and determined to prove his innocence to be with her.",
+        "uncle_joe": "Sees him as a supportive and trustworthy figure.",
+        "jonas": "Views him as a loyal servant to the family, though he may not fully trust him.",
+        "doctor_travis": "Respects his medical expertise but is wary of his role in the investigation."
+      },
+      "conditional_behaviors": []
+    },
+    "mr_benson": {
+      "type": "suspect",
+      "role": "Father and Victim",
+      "location": "benson_library",
+      "phase_locations": {
+        "0": "benson_library",
+        "1": "benson_library",
+        "2": "benson_library",
+        "3": "benson_library"
+      },
+      "persona": "Stern, reserved, and authoritative. Speaks in a firm, measured tone, often laced with an undercurrent of sadness or regret. His words carry weight and command respect.",
+      "secret": "He harbored deep suspicions about Hartley's involvement in the theft of the bonds but never confronted him directly. His reclusive nature and secrets may have contributed to his tragic end.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "state": "dead",
+      "conditional_behaviors": []
+    },
+    "carrie_benson": {
+      "type": "suspect",
+      "role": "Daughter and Sister",
+      "location": "benson_estate",
+      "phase_locations": {
+        "0": "benson_estate",
+        "1": "benson_estate",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Gentle, kind, and somewhat naive. Speaks softly and with warmth, often expressing concern for her family. She is easily manipulated by those she trusts.",
+      "secret": "She unknowingly aided Hartley in his schemes, believing she was helping to reconcile Joe with their father. She is unaware of Hartley's true nature.",
+      "suspicion_meter": 20,
+      "flight_risk": 10,
+      "knowledge_about_others": {
+        "detective": "Views him with curiosity and gratitude as he uncovers the truth.",
+        "hartley_benson": "Trusts him implicitly, believing him to be a devoted brother.",
+        "joe_benson": "Loves and supports her brother, though she initially believed him guilty of the theft.",
+        "mr_benson": "Respected and feared her father, wishing for a closer relationship with him.",
+        "edith_underhill": "Views her as a future sister-in-law and a kindred spirit.",
+        "uncle_joe": "Sees him as a wise and supportive figure in the family.",
+        "jonas": "Trusts him as a loyal servant to the family.",
+        "doctor_travis": "Respects his medical opinion but is wary of his role in the investigation."
+      },
+      "conditional_behaviors": []
+    },
+    "uncle_joe": {
+      "type": "assistant",
+      "role": "Uncle and Family Friend",
+      "location": "benson_mansion_ballroom",
+      "phase_locations": {
+        "0": "brandon_massachusetts",
+        "1": "benson_estate",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Warm, jovial, and somewhat meddlesome. Speaks with enthusiasm and affection, often offering unsolicited advice or opinions. He is deeply loyal to Joe and Edith.",
+      "abilities": "Provides emotional support and historical context about the family. His insights into Joe's character and Hartley's behavior are invaluable.",
+      "knowledge_about_others": {
+        "detective": "Views him as a capable and trustworthy ally in uncovering the truth.",
+        "hartley_benson": "Distrusts him and suspects his motives, though he lacks concrete evidence.",
+        "joe_benson": "Deeply believes in his innocence and supports him unconditionally.",
+        "mr_benson": "Respected him but was frustrated by his reclusive nature and secrets.",
+        "carrie_benson": "Views her as a sweet but naive young woman who needs protection.",
+        "edith_underhill": "Adores her and sees her as the perfect match for Joe.",
+        "jonas": "Trusts him as a loyal servant but is unaware of his potential manipulation by Hartley.",
+        "doctor_travis": "Respects his medical expertise but is wary of his conclusions."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "edith_underhill": {
+      "type": "assistant",
+      "role": "Fiancée of Joe Benson",
+      "location": "benson_mansion_ballroom",
+      "phase_locations": {
+        "0": "brandon_massachusetts",
+        "1": "benson_estate",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Passionate, loyal, and fiercely protective. Speaks with conviction and emotion, especially when defending Joe or expressing her love for him. She is quick to anger when she senses injustice.",
+      "abilities": "Provides unwavering support for Joe and offers emotional insights into the family dynamics. Her belief in Joe's innocence is a driving force in the investigation.",
+      "knowledge_about_others": {
+        "detective": "Trusts him implicitly and sees him as Joe's savior.",
+        "hartley_benson": "Despises him and suspects his involvement in the theft and murder.",
+        "joe_benson": "Deeply in love with him and convinced of his innocence.",
+        "mr_benson": "Respected him but was frustrated by his treatment of Joe.",
+        "carrie_benson": "Views her as a kindred spirit and ally in supporting Joe.",
+        "uncle_joe": "Sees him as a wise and supportive figure.",
+        "jonas": "Trusts him as a loyal servant but is unaware of his potential manipulation.",
+        "doctor_travis": "Respects his medical opinion but is wary of his conclusions."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "jonas": {
+      "type": "assistant",
+      "role": "Servant to the Benson Family",
+      "location": "benson_estate",
+      "phase_locations": {
+        "0": "benson_estate",
+        "1": "benson_estate",
+        "2": "benson_mansion_ballroom",
+        "3": "benson_library"
+      },
+      "persona": "Loyal, observant, and somewhat timid. Speaks softly and with deference, often sharing critical observations about the family's activities. He is deeply devoted to the Bensons but fears Hartley's wrath.",
+      "abilities": "Provides key observations about the night of the murder, including Hartley's instructions and the presence of the Yellow Domino near the wineglass.",
+      "knowledge_about_others": {
+        "detective": "Views him with curiosity and respect, seeing him as a potential ally in uncovering the truth.",
+        "hartley_benson": "Fears and distrusts him, sensing his manipulative nature.",
+        "joe_benson": "Views him with sympathy and believes in his innocence.",
+        "mr_benson": "Was deeply loyal to him and respected his authority.",
+        "carrie_benson": "Cares for her and wants to protect her from Hartley's schemes.",
+        "edith_underhill": "Respects her loyalty to Joe and sees her as a positive influence on the family.",
+        "uncle_joe": "Views him as a supportive figure for Joe and Edith.",
+        "doctor_travis": "Respects his medical expertise but is wary of his conclusions."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "doctor_travis": {
+      "type": "assistant",
+      "role": "Coroner and Physician",
+      "location": "benson_library",
+      "phase_locations": {
+        "0": "brandon_massachusetts",
+        "1": "benson_estate",
+        "2": "benson_library",
+        "3": "benson_library"
+      },
+      "persona": "Pragmatic, authoritative, and somewhat blunt. Speaks with precision and confidence, often delivering critical medical insights. He is not easily swayed by emotion.",
+      "abilities": "Provides medical expertise and key insights into the cause of Mr. Benson's death. His observations about the prussic acid in the wineglass are crucial to solving the case.",
+      "knowledge_about_others": {
+        "detective": "Respects his investigative skills and sees him as a valuable ally.",
+        "hartley_benson": "Suspects his involvement in the murder but lacks concrete evidence.",
+        "joe_benson": "Believes in his innocence and sees him as a victim of Hartley's schemes.",
+        "mr_benson": "Respected him as a patient and was aware of his troubled nature.",
+        "carrie_benson": "Views her with sympathy and concern.",
+        "edith_underhill": "Respects her loyalty to Joe and sees her as a stabilizing influence.",
+        "uncle_joe": "Views him as a well-meaning but somewhat meddlesome figure.",
+        "jonas": "Trusts his observations but is aware of his potential manipulation by Hartley."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "brandon_massachusetts": {
+        "description": "A picturesque village with a long, straight street lined with maple trees. The atmosphere is serene, but beneath the surface, secrets and intrigue lurk in the shadows of its quaint buildings.",
+        "setting": "A charming New England village bathed in the warm glow of a June afternoon. The air is filled with the hum of idle chatter and the rustle of leaves. The Brandon Post Office stands at the center of the village, a hub of activity and gossip.",
+        "clues": [
+          "Rumors about the Benson family's sudden decision to host a masquerade ball after years of seclusion."
+        ],
+        "people": [
+          {
+            "id": "postmaster",
+            "name": "Postmaster",
+            "description": "A middle-aged man with a keen eye for detail and a penchant for gossip. He is the gatekeeper of the village's secrets, including the mysterious letters addressed to X.Y.Z.",
+            "notes": "The postmaster is a valuable source of information about the village's residents and their activities. He is aware of the letters addressed to X.Y.Z. and the stranger who picks them up."
+          }
+        ],
+        "objects": [
+          {
+            "id": "village_map",
+            "category": "item",
+            "name": "Village Map",
+            "description": "A detailed map of Brandon, Massachusetts, showing key locations such as the post office, Benson Estate, and tavern.",
+            "notes": "Provides an overview of the village and its layout, helping the detective navigate the area."
+          },
+          {
+            "id": "tavern_sign",
+            "category": "surface",
+            "name": "Tavern Sign",
+            "description": "A weathered wooden sign hanging above the entrance to the local tavern. It creaks gently in the breeze, inviting travelers to rest and refresh themselves.",
+            "notes": "The tavern is a gathering place for villagers and travelers alike, offering opportunities to eavesdrop on conversations and gather information."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "brandon_post_office",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "benson_estate",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________       ",
+          "      /               \\      ",
+          "     /                 \\     ",
+          "____/                   \\____",
+          "|   Brandon, Massachusetts   |",
+          "|                           |",
+          "|  [Post Office]  [Tavern]  |",
+          "|                           |",
+          "|___________________________|",
+          "     \\                   /     ",
+          "      \\_________________/      "
+        ]
+      },
+      "brandon_post_office": {
+        "description": "A small, bustling post office filled with the hum of activity. The air is thick with the scent of ink and paper, and the walls are lined with rows of mailboxes. The postmaster stands behind the counter, sorting letters and observing the comings and goings of the villagers.",
+        "setting": "A cozy, cluttered space with wooden floors and shelves overflowing with letters and packages. The atmosphere is one of organized chaos, with villagers eagerly awaiting their mail and sharing the latest gossip.",
+        "clues": [
+          "Letters addressed to X.Y.Z. with the word 'Counterfeit' as a countersign.",
+          "The postmaster's description of the stranger who picks up the letters."
+        ],
+        "people": [
+          {
+            "id": "detective",
+            "name": "Detective",
+            "description": "A sharp-eyed investigator with a keen mind for solving mysteries. He is dressed in plain clothes, blending in with the villagers while observing everything around him.",
+            "notes": "The detective is the protagonist of the story, tasked with uncovering the truth behind the mysterious letters and the murder at the Benson Estate."
+          },
+          {
+            "id": "hartley_benson",
+            "name": "Hartley Benson",
+            "description": "A tall, elegant man with a reserved demeanor and a piercing gaze. He carries himself with an air of authority and sophistication, but his eyes betray a cold, calculating nature.",
+            "notes": "Hartley is the eldest son of Mr. Benson and the primary suspect in the murder investigation. He is manipulative, cunning, and determined to protect his secrets at any cost."
+          },
+          {
+            "id": "joe_benson_post_office",
+            "name": "Joe Benson",
+            "description": "A broad-shouldered, handsome young man with light curling hair and a warm, open face. He exudes charm and sincerity, but his eyes reveal a hint of anxiety and impatience.",
+            "notes": "Joe is the youngest son of Mr. Benson and the victim of Hartley's framing. He is innocent of the theft and murder but has remained silent to protect someone he loves."
+          }
+        ],
+        "objects": [
+          {
+            "id": "mailbox_xyz",
+            "category": "container",
+            "name": "Mailbox X.Y.Z.",
+            "description": "A small, unassuming mailbox labeled with the initials X.Y.Z. It is tucked away in a corner of the post office, away from the prying eyes of the villagers.",
+            "notes": "Contains the mysterious letters addressed to X.Y.Z., which hold clues to the counterfeiting ring and the murder plot.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "letters_xyz",
+                "category": "item",
+                "name": "Letters to X.Y.Z.",
+                "description": "A bundle of letters addressed to X.Y.Z., each containing a written address and fifty cents' worth of stamps. One letter, in a blue envelope, stands out from the rest.",
+                "notes": "The letters are part of a counterfeiting scheme and contain clues to the rendezvous at the Benson Estate. The blue envelope holds a note with critical instructions for the meeting."
+              },
+              {
+                "id": "blue_envelope",
+                "category": "item",
+                "name": "Blue Envelope",
+                "description": "A distinctive blue envelope containing a short, cryptic letter. The envelope bears the words 'To be kept till called for' in the lower left-hand corner.",
+                "notes": "The letter inside the blue envelope contains instructions for a rendezvous in the shrubbery at the Benson Estate. The word 'northeast' has been altered to 'southwest' by the detective."
+              }
+            ]
+          },
+          {
+            "id": "post_office_counter",
+            "category": "surface",
+            "name": "Post Office Counter",
+            "description": "A long, wooden counter stretching across the width of the post office. It is cluttered with letters, packages, and various office supplies.",
+            "notes": "The counter is where villagers collect their mail and interact with the postmaster. It is a prime location for gathering information and eavesdropping on conversations."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "brandon_massachusetts",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "benson_estate",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________   ",
+          "  |                       |  ",
+          "  |    Brandon Post       |  ",
+          "  |       Office          |  ",
+          "  |                       |  ",
+          "  |  [Mailbox X.Y.Z.]     |  ",
+          "  |                       |  ",
+          "  |  _______________      |  ",
+          "  | |               |     |  ",
+          "  | |  Counter      |     |  ",
+          "  | |_______________|     |  ",
+          "  |_______________________|  ",
+          "      |               |       ",
+          "      |               |       "
+        ]
+      },
+      "benson_estate": {
+        "description": "A grand, imposing mansion surrounded by meticulously manicured grounds. The estate is encircled by a high iron fence, and the air is filled with the scent of blooming flowers and freshly cut grass. The mansion itself is a marvel of architectural beauty, with towering columns and expansive windows.",
+        "setting": "A serene and elegant estate, bathed in the golden light of the late afternoon sun. The grounds are alive with the sounds of nature, and the mansion exudes an air of opulence and mystery. The atmosphere is one of quiet tension, as the family prepares for the masquerade ball.",
+        "clues": [
+          "The presence of prussic acid in the wineglass (contextual clue, discovered later).",
+          "Observations about the Benson family's reclusive nature and sudden decision to host a masquerade ball."
+        ],
+        "people": [
+          {
+            "id": "carrie_benson",
+            "name": "Carrie Benson",
+            "description": "A graceful young woman with a gentle demeanor and a warm smile. She is dressed elegantly, her eyes reflecting a mix of excitement and apprehension about the evening's events.",
+            "notes": "Carrie is the daughter of Mr. Benson and the sister of Hartley and Joe. She is kind-hearted and naive, unknowingly aiding Hartley in his schemes."
+          },
+          {
+            "id": "jonas_estate",
+            "name": "Jonas",
+            "description": "An elderly servant with a weathered face and a quiet, observant demeanor. He moves with a sense of purpose, attending to his duties with unwavering loyalty to the Benson family.",
+            "notes": "Jonas is a loyal servant who provides critical observations about the night of the murder. He is aware of Hartley's instructions and the presence of the Yellow Domino near the wineglass."
+          },
+          {
+            "id": "mr_benson_estate",
+            "name": "Mr. Benson",
+            "description": "A tall, imposing man with a head of white hair and a stern, furrowed brow. His eyes betray a deep sadness, and his demeanor is one of quiet authority and reserve.",
+            "notes": "Mr. Benson is the patriarch of the family and the victim of the murder. His reclusive nature and secrets have contributed to the tragic events unfolding at the estate."
+          }
+        ],
+        "objects": [
+          {
+            "id": "estate_gate",
+            "category": "surface",
+            "name": "Estate Gate",
+            "description": "A grand, wrought-iron gate standing at the entrance to the Benson Estate. It is adorned with intricate designs and flanked by two stone pillars.",
+            "notes": "The gate is the main entrance to the estate and is guarded during the masquerade ball to prevent unauthorized entry."
+          },
+          {
+            "id": "estate_grounds_map",
+            "category": "item",
+            "name": "Estate Grounds Map",
+            "description": "A detailed map of the Benson Estate grounds, showing the layout of the mansion, gardens, and shrubbery.",
+            "notes": "Provides an overview of the estate's layout, helping the detective navigate the area and locate key locations such as the shrubbery."
+          },
+          {
+            "id": "shrubbery_ne",
+            "category": "container",
+            "name": "Northeast Shrubbery",
+            "description": "A dense thicket of evergreens and flowering shrubs located in the northeast corner of the estate grounds. The area is secluded and shrouded in shadows, making it an ideal spot for secret meetings.",
+            "notes": "The original rendezvous point mentioned in the letter to X.Y.Z. The detective altered the note to redirect the meeting to the southwest shrubbery.",
+            "state": "open"
+          },
+          {
+            "id": "shrubbery_sw",
+            "category": "container",
+            "name": "Southwest Shrubbery",
+            "description": "A dense thicket of evergreens and flowering shrubs located in the southwest corner of the estate grounds. The area is secluded and provides cover for those seeking privacy.",
+            "notes": "The altered rendezvous point where the detective meets the stranger in the Yellow Domino. The location is critical to uncovering the murder plot.",
+            "state": "open"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "brandon_massachusetts",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "brandon_post_office",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "benson_library",
+            "state": "locked"
+          },
+          {
+            "location_id": "benson_mansion_ballroom",
+            "state": "locked"
+          },
+          {
+            "location_id": "benson_grounds_shrubbery_ne",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "benson_grounds_shrubbery_sw",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________________________          ",
+          "         /                               \\         ",
+          "        /                                 \\        ",
+          "_______/                                   \\_______",
+          "|       Benson Estate Grounds                   |",
+          "|                                               |",
+          "|   [Northeast Shrubbery]       [Mansion]      |",
+          "|                                               |",
+          "|   [Southwest Shrubbery]                       |",
+          "|_______________________________________________|",
+          "        \\                                   /        ",
+          "         \\_______________________________/         "
+        ]
+      },
+      "benson_library": {
+        "description": "A grand, book-lined room filled with the scent of aged paper and polished wood. The walls are adorned with rich tapestries and works of art, and a large stained-glass window casts colorful patterns across the floor. A decanter and wineglass sit on a table near the center of the room.",
+        "setting": "A stately and imposing library, exuding an air of intellectual refinement and quiet contemplation. The atmosphere is one of solemnity and tension, as the family grapples with the aftermath of Mr. Benson's death.",
+        "clues": [
+          "The presence of prussic acid in the wineglass.",
+          "Hartley Benson's instructions to the Yellow Domino about the wineglass.",
+          "Hartley's sudden and violent reaction to the detective's unmasking."
+        ],
+        "people": [
+          {
+            "id": "mr_benson_library",
+            "name": "Mr. Benson",
+            "description": "A lifeless form lying on the floor, his face pale and still. His once-stern features are now relaxed in death, a tragic end to a troubled life.",
+            "notes": "Mr. Benson's body is the focal point of the investigation. His death by poisoning is the catalyst for uncovering Hartley's villainy.",
+            "state": "dead"
+          },
+          {
+            "id": "hartley_benson_library",
+            "name": "Hartley Benson",
+            "description": "A man on the edge of despair, his face pale and his eyes wild with fury. He clutches a chair, his knuckles white with tension, as he confronts the detective and the truth of his crimes.",
+            "notes": "Hartley's reaction to the detective's unmasking reveals his guilt and desperation. His final moments are marked by a violent outburst and a tragic end."
+          },
+          {
+            "id": "doctor_travis_library",
+            "name": "Doctor Travis",
+            "description": "A pragmatic, middle-aged man with a stern expression and a no-nonsense demeanor. He moves with precision, examining the body and the wineglass with a critical eye.",
+            "notes": "Doctor Travis provides medical expertise and key insights into the cause of Mr. Benson's death. His observations about the prussic acid in the wineglass are crucial to solving the case."
+          }
+        ],
+        "objects": [
+          {
+            "id": "library_table",
+            "category": "surface",
+            "name": "Library Table",
+            "description": "A large, ornate table made of polished mahogany. It is adorned with a decanter, a wineglass, and various books and papers.",
+            "notes": "The table holds the decanter and wineglass used to poison Mr. Benson. The wineglass contains traces of prussic acid, a key clue in the investigation.",
+            "contains": [
+              {
+                "id": "wineglass",
+                "category": "item",
+                "name": "Wineglass with Prussic Acid",
+                "description": "A delicate crystal wineglass containing a small amount of wine mixed with a white powder. The glass emits a faint scent of bitter almonds, indicative of prussic acid.",
+                "notes": "The wineglass was used to poison Mr. Benson. The presence of prussic acid is a critical clue linking Hartley to the murder."
+              },
+              {
+                "id": "decanter",
+                "category": "item",
+                "name": "Decanter",
+                "description": "A crystal decanter filled with wine. The decanter is nearly empty, with only a few drops of wine remaining at the bottom.",
+                "notes": "The decanter was used to mix the prussic acid with the wine. Its near-empty state suggests that Mr. Benson drank most of the poisoned wine."
+              }
+            ]
+          },
+          {
+            "id": "library_door",
+            "category": "surface",
+            "name": "Library Door",
+            "description": "A heavy wooden door leading to the library. It is adorned with intricate carvings and stands slightly ajar, revealing the somber scene within.",
+            "notes": "The door is a critical point of entry and exit during the investigation. It was locked by Mr. Benson but later opened by Hartley and Carrie."
+          },
+          {
+            "id": "library_curtain",
+            "category": "surface",
+            "name": "Library Curtain",
+            "description": "A heavy, floor-length curtain hanging beside the library door. It is gathered in thick folds, providing a hiding place for the detective during the investigation.",
+            "notes": "The curtain serves as a hiding place for the detective, allowing him to observe the events leading up to Mr. Benson's death without being seen."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "benson_estate",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "benson_mansion_ballroom",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________   ",
+          "  |                       |  ",
+          "  |    Benson Library     |  ",
+          "  |                       |  ",
+          "  |  [Table]              |  ",
+          "  |   |                   |  ",
+          "  |   |                   |  ",
+          "  |  [Curtain]   [Door]   |  ",
+          "  |_______________________|  ",
+          "      |               |       ",
+          "      |               |       "
+        ]
+      },
+      "benson_mansion_ballroom": {
+        "description": "A grand, opulent ballroom filled with the sounds of music and laughter. The room is adorned with colorful decorations, and guests in elaborate costumes mingle beneath the glow of chandeliers. The atmosphere is one of excitement and intrigue, as the masquerade ball unfolds.",
+        "setting": "A dazzling and vibrant ballroom, bathed in the warm light of chandeliers. The air is filled with the scent of flowers and the hum of conversation, as guests in masks and costumes dance and socialize. The atmosphere is electric with anticipation and hidden motives.",
+        "clues": [
+          "Jonas' observation of the Yellow Domino near the wineglass.",
+          "The altered word in the rendezvous note (from 'northeast' to 'southwest')."
+        ],
+        "people": [
+          {
+            "id": "edith_underhill_ballroom",
+            "name": "Edith Underhill",
+            "description": "A graceful woman clad entirely in white, her face hidden behind a delicate mask. She moves with elegance and poise, her eyes scanning the crowd for the Yellow Domino.",
+            "notes": "Edith is Joe's fiancée and a loyal ally in the investigation. Her belief in Joe's innocence drives her to uncover the truth about Hartley's schemes."
+          },
+          {
+            "id": "uncle_joe_ballroom",
+            "name": "Uncle Joe",
+            "description": "A jovial, elderly gentleman dressed in the costume of a 'potent, grave, and reverend signior.' He moves through the crowd with enthusiasm, engaging in conversation and observing the guests with a keen eye.",
+            "notes": "Uncle Joe provides emotional support and historical context about the family. His insights into Joe's character and Hartley's behavior are invaluable to the detective."
+          },
+          {
+            "id": "yellow_domino",
+            "name": "Yellow Domino",
+            "description": "A mysterious figure wrapped in a brilliant yellow domino adorned with black figures. The domino's mask conceals their identity, adding an air of intrigue to their presence.",
+            "notes": "The Yellow Domino is a critical figure in the investigation, representing the stranger who received the rendezvous note. The detective assumes this disguise to uncover the truth."
+          }
+        ],
+        "objects": [
+          {
+            "id": "ballroom_chandelier",
+            "category": "surface",
+            "name": "Ballroom Chandelier",
+            "description": "A grand, sparkling chandelier hanging from the ceiling of the ballroom. It casts a warm, golden light over the guests, illuminating their costumes and masks.",
+            "notes": "The chandelier is a focal point of the ballroom, providing light and atmosphere to the masquerade ball. It also serves as a vantage point for observing the guests."
+          },
+          {
+            "id": "yellow_domino_costume",
+            "category": "item",
+            "name": "Yellow Domino",
+            "description": "A brilliant yellow domino adorned with black figures representing fantastical creatures. The domino includes a mask that conceals the wearer's identity.",
+            "notes": "The Yellow Domino is a critical disguise used by the detective to infiltrate the rendezvous and uncover the murder plot. It is later used as evidence in the investigation."
+          },
+          {
+            "id": "ballroom_window",
+            "category": "surface",
+            "name": "Ballroom Window",
+            "description": "A large, open window leading to the balcony outside the ballroom. The window is adorned with heavy curtains, providing a secluded spot for private conversations.",
+            "notes": "The window is a key point of entry and exit for the detective during the masquerade ball. It leads to the balcony, where Jonas observes the Yellow Domino near the wineglass."
+          },
+          {
+            "id": "counterfeit_treasury_notes",
+            "category": "item",
+            "name": "Counterfeit Treasury Notes",
+            "description": "A collection of spurious Treasury notes, intricately designed but lacking the authenticity of genuine currency. The notes are a key piece of evidence in the counterfeiting investigation.",
+            "notes": "The counterfeit notes are the original focus of the detective's investigation. Their discovery at the Benson Estate links the family to the counterfeiting ring."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "benson_estate",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "benson_library",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________   ",
+          "  |                       |  ",
+          "  |   Benson Ballroom     |  ",
+          "  |                       |  ",
+          "  |  [Chandelier]         |  ",
+          "  |   |                   |  ",
+          "  |   |                   |  ",
+          "  |  [Window]             |  ",
+          "  |_______________________|  ",
+          "      |               |       ",
+          "      |               |       "
+        ]
+      },
+      "benson_grounds_shrubbery_ne": {
+        "description": "A dense thicket of evergreens and flowering shrubs located in the northeast corner of the Benson Estate grounds. The area is secluded and shrouded in shadows, with a narrow path winding through the foliage. The air is filled with the scent of pine and damp earth.",
+        "setting": "A quiet, secluded corner of the estate, hidden from view by the dense shrubbery. The atmosphere is one of mystery and anticipation, as the rendezvous point for the meeting mentioned in the letter to X.Y.Z.",
+        "clues": [
+          "The original rendezvous note (contextual clue, as the detective altered it to redirect the meeting)."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "shrubbery_ne_path",
+            "category": "surface",
+            "name": "Shrubbery Path",
+            "description": "A narrow, winding path leading through the dense shrubbery. The path is overgrown with weeds and fallen leaves, making it difficult to navigate.",
+            "notes": "The path is the original rendezvous point mentioned in the letter to X.Y.Z. The detective altered the note to redirect the meeting to the southwest shrubbery."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "benson_estate",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________   ",
+          "  |                       |  ",
+          "  |  Northeast Shrubbery  |  ",
+          "  |                       |  ",
+          "  |       [Path]          |  ",
+          "  |                       |  ",
+          "  |_______________________|  ",
+          "      |               |       ",
+          "      |               |       "
+        ]
+      },
+      "benson_grounds_shrubbery_sw": {
+        "description": "A dense thicket of evergreens and flowering shrubs located in the southwest corner of the Benson Estate grounds. The area is secluded and provides cover for those seeking privacy. The air is filled with the scent of blooming flowers and the distant sound of music from the ballroom.",
+        "setting": "A hidden and tranquil corner of the estate, bathed in the soft glow of moonlight. The atmosphere is one of secrecy and intrigue, as the detective awaits the arrival of the stranger in the Yellow Domino.",
+        "clues": [
+          "Hartley Benson's instructions to the Yellow Domino about the wineglass."
+        ],
+        "people": [
+          {
+            "id": "joe_benson_shrubbery",
+            "name": "Joe Benson",
+            "description": "A tall, broad-shouldered young man with light curling hair and a warm, open face. He paces nervously among the shrubs, his eyes scanning the area for signs of the rendezvous.",
+            "notes": "Joe is the intended recipient of the rendezvous note and the victim of Hartley's framing. His presence in the shrubbery is critical to uncovering the truth about the murder plot."
+          }
+        ],
+        "objects": [
+          {
+            "id": "shrubbery_sw_path",
+            "category": "surface",
+            "name": "Shrubbery Path",
+            "description": "A narrow, winding path leading through the dense shrubbery. The path is overgrown with weeds and fallen leaves, providing cover for those seeking privacy.",
+            "notes": "The path is the altered rendezvous point where the detective meets the stranger in the Yellow Domino. It is a critical location for uncovering the murder plot."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "benson_estate",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________   ",
+          "  |                       |  ",
+          "  |  Southwest Shrubbery  |  ",
+          "  |                       |  ",
+          "  |       [Path]          |  ",
+          "  |                       |  ",
+          "  |_______________________|  ",
+          "      |               |       ",
+          "      |               |       "
+        ]
+      }
+    }
+  },
+  "locations": {
+    "brandon_massachusetts": {
+      "description": "A picturesque village with a long, straight street lined with maple trees. The atmosphere is serene, but beneath the surface, secrets and intrigue lurk in the shadows of its quaint buildings.",
+      "items": [
+        "Village Map"
+      ],
+      "clues": [
+        "Rumors about the Benson family's sudden decision to host a masquerade ball after years of seclusion."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A charming New England village bathed in the warm glow of a June afternoon. The air is filled with the hum of idle chatter and the rustle of leaves. The Brandon Post Office stands at the center of the village, a hub of activity and gossip.",
+        "connections": [
+          {
+            "target_location": "brandon_post_office",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "benson_estate",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "brandon_post_office": {
+      "description": "A small, bustling post office filled with the hum of activity. The air is thick with the scent of ink and paper, and the walls are lined with rows of mailboxes. The postmaster stands behind the counter, sorting letters and observing the comings and goings of the villagers.",
+      "items": [],
+      "clues": [
+        "Letters addressed to X.Y.Z. with the word 'Counterfeit' as a countersign.",
+        "The postmaster's description of the stranger who picks up the letters."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy, cluttered space with wooden floors and shelves overflowing with letters and packages. The atmosphere is one of organized chaos, with villagers eagerly awaiting their mail and sharing the latest gossip.",
+        "connections": [
+          {
+            "target_location": "brandon_massachusetts",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "benson_estate",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "benson_estate": {
+      "description": "A grand, imposing mansion surrounded by meticulously manicured grounds. The estate is encircled by a high iron fence, and the air is filled with the scent of blooming flowers and freshly cut grass. The mansion itself is a marvel of architectural beauty, with towering columns and expansive windows.",
+      "items": [
+        "Estate Grounds Map"
+      ],
+      "clues": [
+        "The presence of prussic acid in the wineglass (contextual clue, discovered later).",
+        "Observations about the Benson family's reclusive nature and sudden decision to host a masquerade ball."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A serene and elegant estate, bathed in the golden light of the late afternoon sun. The grounds are alive with the sounds of nature, and the mansion exudes an air of opulence and mystery. The atmosphere is one of quiet tension, as the family prepares for the masquerade ball.",
+        "connections": [
+          {
+            "target_location": "brandon_massachusetts",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "brandon_post_office",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "benson_library",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "benson_mansion_ballroom",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "benson_grounds_shrubbery_ne",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "benson_grounds_shrubbery_sw",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "benson_library": {
+      "description": "A grand, book-lined room filled with the scent of aged paper and polished wood. The walls are adorned with rich tapestries and works of art, and a large stained-glass window casts colorful patterns across the floor. A decanter and wineglass sit on a table near the center of the room.",
+      "items": [],
+      "clues": [
+        "The presence of prussic acid in the wineglass.",
+        "Hartley Benson's instructions to the Yellow Domino about the wineglass.",
+        "Hartley's sudden and violent reaction to the detective's unmasking."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A stately and imposing library, exuding an air of intellectual refinement and quiet contemplation. The atmosphere is one of solemnity and tension, as the family grapples with the aftermath of Mr. Benson's death.",
+        "connections": [
+          {
+            "target_location": "benson_estate",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "benson_mansion_ballroom",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "benson_mansion_ballroom": {
+      "description": "A grand, opulent ballroom filled with the sounds of music and laughter. The room is adorned with colorful decorations, and guests in elaborate costumes mingle beneath the glow of chandeliers. The atmosphere is one of excitement and intrigue, as the masquerade ball unfolds.",
+      "items": [
+        "Yellow Domino",
+        "Counterfeit Treasury Notes"
+      ],
+      "clues": [
+        "Jonas' observation of the Yellow Domino near the wineglass.",
+        "The altered word in the rendezvous note (from 'northeast' to 'southwest')."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dazzling and vibrant ballroom, bathed in the warm light of chandeliers. The air is filled with the scent of flowers and the hum of conversation, as guests in masks and costumes dance and socialize. The atmosphere is electric with anticipation and hidden motives.",
+        "connections": [
+          {
+            "target_location": "benson_estate",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "benson_library",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "benson_grounds_shrubbery_ne": {
+      "description": "A dense thicket of evergreens and flowering shrubs located in the northeast corner of the Benson Estate grounds. The area is secluded and shrouded in shadows, with a narrow path winding through the foliage. The air is filled with the scent of pine and damp earth.",
+      "items": [],
+      "clues": [
+        "The original rendezvous note (contextual clue, as the detective altered it to redirect the meeting)."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, secluded corner of the estate, hidden from view by the dense shrubbery. The atmosphere is one of mystery and anticipation, as the rendezvous point for the meeting mentioned in the letter to X.Y.Z.",
+        "connections": [
+          {
+            "target_location": "benson_estate",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "benson_grounds_shrubbery_sw": {
+      "description": "A dense thicket of evergreens and flowering shrubs located in the southwest corner of the Benson Estate grounds. The area is secluded and provides cover for those seeking privacy. The air is filled with the scent of blooming flowers and the distant sound of music from the ballroom.",
+      "items": [],
+      "clues": [
+        "Hartley Benson's instructions to the Yellow Domino about the wineglass."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A hidden and tranquil corner of the estate, bathed in the soft glow of moonlight. The atmosphere is one of secrecy and intrigue, as the detective awaits the arrival of the stranger in the Yellow Domino.",
+        "connections": [
+          {
+            "target_location": "benson_estate",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

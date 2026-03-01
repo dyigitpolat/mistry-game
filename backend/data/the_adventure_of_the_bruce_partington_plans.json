@@ -1,0 +1,921 @@
+{
+  "title": "The Adventure of the Bruce-Partington Plans",
+  "description": "A dense yellow fog has settled over London, and the theft of top-secret submarine plans from Woolwich Arsenal has led to the mysterious death of a young clerk, Niffler Them Dungbomb. Detective Malfoy Harry must unravel the conspiracy before the plans fall into foreign hands.",
+  "victim": "Niffler Them Dungbomb",
+  "intro_narrative": "In the third week of November, 1895, a thick fog blankets London. Malfoy Harry, restless and bored, is drawn into a case of national importance when his brother Albus arrives with news of the theft of the Bruce-Partington submarine plans and the death of a young clerk, Niffler Them Dungbomb. The plans, some of which are still missing, were found on Dungbomb's body near Aldgate Station. Harry must navigate a web of treachery, foreign agents, and government secrets to uncover the truth.",
+  "start_time": "1895-11-21T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Bruce-Partington submarine plans (all three missing plans)",
+      "False keys",
+      "Life-preserver (murder weapon)",
+      "Daily Telegraph newspaper clippings (advertisements linking Dursley and Sorting)"
+    ],
+    "required_suspect": [
+      "Colonel Snitch Sorting",
+      "Where Dursley"
+    ],
+    "required_motive": [
+      "Financial gain (Colonel Sorting's Stock Exchange debt)",
+      "Espionage (Where Dursley's sale of plans to foreign agents)"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues and speak to key witnesses in Baker Street and Aldgate Station.",
+      "unlocked_locations": [
+        "baker_street",
+        "aldgate_station"
+      ],
+      "unlocked_characters": [
+        "malfoy_harry",
+        "tonks",
+        "albus_harry",
+        "thestral",
+        "miss_diggory_karkaroff"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Woolwich Arsenal Inquiry",
+      "objective": "Investigate the office where the plans were stolen and interview suspects at Woolwich Arsenal.",
+      "unlocked_locations": [
+        "woolwich_arsenal"
+      ],
+      "unlocked_characters": [
+        "fenrir_rubeus",
+        "niffler_them_dungbomb"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Kensington and Gloucester Road",
+      "objective": "Explore Dursley's residence and the Underground connections to uncover the method of the crime.",
+      "unlocked_locations": [
+        "caulfield_gardens",
+        "gloucester_road_station"
+      ],
+      "unlocked_characters": [
+        "where_dursley",
+        "colonel_snitch_sorting"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Set a trap at Charing Cross Hotel to capture the culprits and recover the missing plans.",
+      "unlocked_locations": [
+        "charing_cross_hotel"
+      ],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "malfoy_harry": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "woolwich_arsenal",
+        "2": "caulfield_gardens",
+        "3": "charing_cross_hotel"
+      },
+      "persona": "Sharp, observant, and deductive. Speaks in a precise, almost arrogant manner, with a dry wit. Impatient with those slower to understand his reasoning.",
+      "abilities": "Master of deduction, disguise, and forensic analysis. Skilled in lock-picking and observation.",
+      "knowledge_about_others": {
+        "albus_harry": "Knows Albus is the most indispensable man in the British government, though he pretends to be a subordinate.",
+        "colonel_snitch_sorting": "Suspects his involvement due to his access to the keys and financial troubles.",
+        "where_dursley": "Believes Dursley is the foreign agent responsible for the theft and murder."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "soot_marks_on_window_sill",
+            "blood_marks_on_window_sill"
+          ],
+          "reaction": "Realizes the body was placed on the train roof from Dursley's window. Plans to set a trap at Charing Cross Hotel.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "tonks": {
+      "type": "assistant",
+      "role": "Detective's Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "woolwich_arsenal",
+        "2": "caulfield_gardens",
+        "3": "charing_cross_hotel"
+      },
+      "persona": "Loyal, curious, and pragmatic. Often serves as the voice of reason and provides a grounding perspective for Harry's theories.",
+      "abilities": "Skilled in note-taking, research, and discreet observation. Acts as Harry's moral compass.",
+      "knowledge_about_others": {
+        "miss_diggory_karkaroff": "Sympathizes with her grief and believes in Dungbomb's innocence."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "albus_harry": {
+      "type": "suspect",
+      "role": "Government Official",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "3": "charing_cross_hotel"
+      },
+      "persona": "Solemn, authoritative, and highly intelligent. Speaks in a measured, deliberate manner, often with a hint of dry humor. Rarely leaves his routine.",
+      "secret": "He is the central figure in British intelligence, often referred to as 'the British government.' His involvement in the case is due to the national importance of the stolen plans.",
+      "knowledge_about_others": {
+        "colonel_snitch_sorting": "Knows of his financial troubles and access to the keys but does not suspect him initially.",
+        "where_dursley": "Aware of Dursley's reputation as a foreign agent but lacks concrete evidence."
+      },
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "niffler_them_dungbomb": {
+      "type": "suspect",
+      "role": "Victim (Clerk at Woolwich Arsenal)",
+      "location": "woolwich_arsenal",
+      "phase_locations": {
+        "1": "woolwich_arsenal"
+      },
+      "persona": "Hot-headed but patriotic. Described as single-minded and chivalrous by his fiancée.",
+      "secret": "His sudden disappearance and death are central to the mystery. His actions on the night of his death are suspicious, but his true motives remain unclear.",
+      "knowledge_about_others": {
+        "fenrir_rubeus": "Worked closely with Rubeus and may have suspected his involvement in the theft.",
+        "colonel_snitch_sorting": "May have seen Sorting with the stolen plans."
+      },
+      "state": "dead",
+      "suspicion_meter": 70,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "colonel_snitch_sorting": {
+      "type": "suspect",
+      "role": "Culprit (Brother of Sir Fleur Sorting)",
+      "location": "caulfield_gardens",
+      "phase_locations": {
+        "2": "caulfield_gardens"
+      },
+      "persona": "Charming and well-spoken, but desperate due to financial troubles. Acts with a sense of entitlement and arrogance.",
+      "secret": "He stole the plans to pay off a Stock Exchange debt and conspired with Where Dursley. He is responsible for Dungbomb's death, though he claims it was an accident.",
+      "knowledge_about_others": {
+        "where_dursley": "Worked with Dursley to sell the plans to foreign agents.",
+        "sir_fleur_sorting": "Used his brother's keys to access the plans."
+      },
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "daily_telegraph_clippings",
+            "tin_cash_box"
+          ],
+          "reaction": "Confesses to his role in the theft and murder when confronted with the evidence. Reveals Dursley's location.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "where_dursley": {
+      "type": "suspect",
+      "role": "Culprit (Foreign Agent)",
+      "location": "caulfield_gardens",
+      "phase_locations": {
+        "2": "caulfield_gardens"
+      },
+      "persona": "Smooth, calculating, and ruthless. Speaks with a foreign accent and carries himself with an air of superiority.",
+      "secret": "He orchestrated the theft of the Bruce-Partington plans and murdered Dungbomb to cover his tracks. He is attempting to sell the plans to foreign governments.",
+      "knowledge_about_others": {
+        "colonel_snitch_sorting": "Conspired with Sorting to steal the plans.",
+        "niffler_them_dungbomb": "Killed Dungbomb to prevent him from exposing the theft."
+      },
+      "suspicion_meter": 95,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "daily_telegraph_clippings",
+            "life_preserver"
+          ],
+          "reaction": "Attempts to flee when confronted but is captured at Charing Cross Hotel.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "sir_fleur_sorting": {
+      "type": "suspect",
+      "role": "Government Expert (Deceased)",
+      "location": "woolwich_arsenal",
+      "phase_locations": {
+        "1": "woolwich_arsenal"
+      },
+      "persona": "Stoic, patriotic, and highly respected. His death is shrouded in mystery and linked to the theft of the plans.",
+      "secret": "His keys were used to steal the plans, but it is unclear whether he was complicit or a victim.",
+      "state": "dead",
+      "knowledge_about_others": {
+        "colonel_snitch_sorting": "His brother, who may have used his keys to access the plans."
+      },
+      "suspicion_meter": 50,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "fenrir_rubeus": {
+      "type": "suspect",
+      "role": "Senior Clerk at Woolwich Arsenal",
+      "location": "woolwich_arsenal",
+      "phase_locations": {
+        "1": "woolwich_arsenal"
+      },
+      "persona": "Silent, morose, and unpopular with colleagues. Speaks in a gruff, dismissive manner.",
+      "secret": "He was the last person to lock up the office on the night of the theft. His whereabouts and actions are suspicious.",
+      "knowledge_about_others": {
+        "niffler_them_dungbomb": "Worked closely with Dungbomb and may have had a motive to frame him.",
+        "colonel_snitch_sorting": "May have seen Sorting near the office on the night of the theft."
+      },
+      "suspicion_meter": 60,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "miss_diggory_karkaroff": {
+      "type": "suspect",
+      "role": "Dungbomb's Fiancée",
+      "location": "woolwich_arsenal",
+      "phase_locations": {
+        "1": "woolwich_arsenal"
+      },
+      "persona": "Grieving but determined to clear her fiancé's name. Speaks with emotion and sincerity.",
+      "secret": "She knows more about Dungbomb's state of mind on the night of his death than she initially reveals.",
+      "knowledge_about_others": {
+        "niffler_them_dungbomb": "Noticed his nervous behavior and hints about the importance of the plans."
+      },
+      "suspicion_meter": 20,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "thestral": {
+      "type": "assistant",
+      "role": "Scotland Yard Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "woolwich_arsenal",
+        "3": "charing_cross_hotel"
+      },
+      "persona": "Professional, methodical, and slightly impatient with Harry's unorthodox methods. Speaks in a no-nonsense manner.",
+      "abilities": "Skilled in forensic analysis and legal procedures. Provides official support to Harry's investigation.",
+      "knowledge_about_others": {
+        "where_dursley": "Suspects Dursley's involvement but lacks evidence."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A cozy, cluttered sitting-room at 221B Baker Street, filled with books, chemical apparatus, and the lingering scent of pipe tobacco. The dense fog outside obscures the view from the windows.",
+        "setting": "A dimly lit, Victorian-era sitting-room with a fireplace crackling softly. The walls are lined with bookshelves, and a large armchair sits near the window. A desk is piled high with papers and notes.",
+        "clues": [
+          "Advertisements in the *Daily Telegraph* agony column linking Dursley and Sorting."
+        ],
+        "people": [
+          {
+            "id": "malfoy_harry",
+            "name": "Malfoy Harry",
+            "description": "A tall, lean man with sharp features and piercing eyes. He paces restlessly, his mind clearly occupied with the case.",
+            "notes": "The detective in charge of the investigation. His deductive skills are unmatched, but he is impatient with those who cannot keep up with his reasoning."
+          },
+          {
+            "id": "tonks",
+            "name": "Tonks",
+            "description": "A sturdy, reliable figure with a keen eye for detail. He sits near the desk, taking notes.",
+            "notes": "Harry's loyal assistant and chronicler. He provides a grounding perspective and often serves as Harry's moral compass."
+          },
+          {
+            "id": "albus_harry",
+            "name": "Albus Harry",
+            "description": "A tall, portly man with a masterful brow and alert, steel-grey eyes. He exudes an air of authority and intelligence.",
+            "notes": "Harry's brother and a high-ranking government official. His involvement signals the national importance of the case."
+          },
+          {
+            "id": "thestral",
+            "name": "Thestral",
+            "description": "A thin, austere man with a professional demeanor. He carries himself with the confidence of a Scotland Yard detective.",
+            "notes": "A detective from Scotland Yard who assists Harry in the investigation. He is methodical and slightly skeptical of Harry's unorthodox methods."
+          }
+        ],
+        "objects": [
+          {
+            "id": "desk",
+            "category": "surface",
+            "name": "Desk",
+            "description": "A large, cluttered desk covered in papers, notes, and chemical apparatus. A pipe and tobacco pouch sit near the edge.",
+            "notes": "Harry's primary workspace. Contains notes and clues related to the case."
+          },
+          {
+            "id": "bookshelf",
+            "category": "surface",
+            "name": "Bookshelf",
+            "description": "A tall bookshelf filled with volumes on crime, chemistry, and history. Some books are stacked haphazardly on top of others.",
+            "notes": "Contains Harry's extensive collection of reference materials."
+          },
+          {
+            "id": "armchair",
+            "category": "surface",
+            "name": "Armchair",
+            "description": "A well-worn armchair near the fireplace, its cushions slightly flattened from frequent use.",
+            "notes": "Harry's favorite spot for thinking and relaxing."
+          },
+          {
+            "id": "emerald_tie_pin",
+            "category": "item",
+            "name": "Emerald Tie-Pin",
+            "description": "A small, intricately designed emerald tie-pin. It gleams faintly in the firelight.",
+            "notes": "A reward given to Harry for solving the case. It is said to be a gift from a gracious lady."
+          },
+          {
+            "id": "dark_lantern",
+            "category": "item",
+            "name": "Dark Lantern",
+            "description": "A small, portable lantern with a shutter to control the light. It is designed for discreet use.",
+            "notes": "A tool used by Harry for nighttime investigations."
+          },
+          {
+            "id": "revolver",
+            "category": "item",
+            "name": "Revolver",
+            "description": "A sleek, well-maintained revolver. It is loaded and ready for use.",
+            "notes": "Harry's weapon of choice for dangerous situations."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "aldgate_station",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "charing_cross_hotel",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |   221B Baker  |",
+          "      |    Street     |",
+          "      |_______________|",
+          "          |       |",
+          "          |       |",
+          "   _______|       |_______",
+          "  |                       |",
+          "  |      Sitting Room     |",
+          "  |                       |",
+          "  |  [Desk]   [Armchair]  |",
+          "  |                       |",
+          "  |  [Bookshelf]          |",
+          "  |_______________________|"
+        ]
+      },
+      "aldgate_station": {
+        "description": "A dimly lit Underground station, shrouded in fog. The tracks stretch into the darkness, and the platform is eerily quiet. A body was found here, near the edge of the tracks.",
+        "setting": "A narrow, grimy platform with tiled walls. The tracks curve out of a tunnel, and the air is thick with the scent of coal and damp. A single gas lamp flickers weakly.",
+        "clues": [
+          "Body found near Aldgate Station with no ticket in pocket.",
+          "The absence of bleeding on the railway line where the body was found."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "platform_bench",
+            "category": "surface",
+            "name": "Platform Bench",
+            "description": "A wooden bench on the platform, its paint chipped and worn. It offers a place to sit and observe the tracks.",
+            "notes": "A potential spot for witnesses to have seen something unusual."
+          },
+          {
+            "id": "ticket_booth",
+            "category": "container",
+            "name": "Ticket Booth",
+            "description": "A small, enclosed booth where tickets are sold. The window is slightly ajar, and papers are scattered inside.",
+            "notes": "The clerk may have seen Dungbomb purchase a ticket.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "dungbomb_ticket_stub",
+                "category": "item",
+                "name": "Dungbomb's Ticket Stub",
+                "description": "A torn ticket stub with the time and destination partially legible.",
+                "notes": "Evidence that Dungbomb purchased a ticket to London Bridge."
+              }
+            ]
+          },
+          {
+            "id": "tracks",
+            "category": "surface",
+            "name": "Railway Tracks",
+            "description": "The tracks curve out of the tunnel and stretch into the distance. The rails gleam faintly in the dim light.",
+            "notes": "The body was found near this spot, with no signs of bleeding on the line."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "gloucester_road_station",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Aldgate      |",
+          "      |   Station     |",
+          "      |_______________|",
+          "          |       |",
+          "          |       |",
+          "   _______|       |_______",
+          "  |                       |",
+          "  |      Platform         |",
+          "  |                       |",
+          "  |  [Bench]   [Tracks]   |",
+          "  |                       |",
+          "  |  [Ticket Booth]       |",
+          "  |_______________________|"
+        ]
+      },
+      "woolwich_arsenal": {
+        "description": "A secure government office building where the Bruce-Partington plans were kept. The atmosphere is tense, with officials whispering in the hallways.",
+        "setting": "A large, austere building with long corridors and locked offices. The air smells of ink and paper, and the walls are lined with filing cabinets.",
+        "clues": [
+          "Seven of the ten stolen Bruce-Partington plans found on Dungbomb's body.",
+          "Three missing, essential plans not found on Dungbomb.",
+          "Dungbomb's sudden disappearance into the fog near the office.",
+          "Dungbomb's nervous and excited behavior when purchasing a train ticket."
+        ],
+        "people": [
+          {
+            "id": "fenrir_rubeus",
+            "name": "Fenrir Rubeus",
+            "description": "A thin, gruff man with bespectacled eyes and haggard cheeks. He twitches nervously as he speaks.",
+            "notes": "The senior clerk at Woolwich Arsenal. He was the last to lock up the office on the night of the theft."
+          },
+          {
+            "id": "niffler_them_dungbomb",
+            "name": "Niffler Them Dungbomb",
+            "description": "A young man with a determined expression. His body lies in the morgue, but his presence lingers in the office.",
+            "notes": "The victim of the case. His actions on the night of his death are suspicious.",
+            "state": "dead"
+          },
+          {
+            "id": "miss_diggory_karkaroff",
+            "name": "Miss Diggory Karkaroff",
+            "description": "A white-faced young lady with tear-stained cheeks. She clutches a handkerchief tightly.",
+            "notes": "Dungbomb's fiancée. She is determined to clear his name."
+          }
+        ],
+        "objects": [
+          {
+            "id": "safe",
+            "category": "container",
+            "name": "Safe",
+            "description": "A large, burglar-proof safe with an intricate lock. The door is slightly ajar, and the interior is empty.",
+            "notes": "Contained the Bruce-Partington plans before they were stolen.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "false_keys",
+                "category": "item",
+                "name": "False Keys",
+                "description": "A set of keys that appear to be duplicates of the safe and office keys.",
+                "notes": "Used to access the safe and office on the night of the theft."
+              }
+            ]
+          },
+          {
+            "id": "dungbomb_desk",
+            "category": "surface",
+            "name": "Dungbomb's Desk",
+            "description": "A cluttered desk with papers, a check-book, and theatre tickets. A small tin cash-box sits near the edge.",
+            "notes": "Contains personal items belonging to Dungbomb.",
+            "contains": [
+              {
+                "id": "dungbomb_check_book",
+                "category": "item",
+                "name": "Dungbomb's Check-Book",
+                "description": "A check-book from the Woolwich branch of the Capital and Counties Bank. It establishes Dungbomb's identity.",
+                "notes": "Used to confirm Dungbomb's identity after his death."
+              },
+              {
+                "id": "dungbomb_theatre_tickets",
+                "category": "item",
+                "name": "Dungbomb's Theatre Tickets",
+                "description": "Two dress-circle tickets for the Woolwich Theatre, dated for the night of Dungbomb's disappearance.",
+                "notes": "Provided an alibi attempt for Dungbomb's whereabouts."
+              },
+              {
+                "id": "tin_cash_box",
+                "category": "item",
+                "name": "Tin Cash-Box",
+                "description": "A small tin box containing calculations related to the submarine plans.",
+                "notes": "Contains technical notes that may link to the stolen plans."
+              }
+            ]
+          },
+          {
+            "id": "window",
+            "category": "surface",
+            "name": "Office Window",
+            "description": "A large window with iron shutters. The shutters are slightly ajar, and the sill is covered in soot.",
+            "notes": "The window overlooks the railway tracks and may have been used to place the body on the train."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          },
+          {
+            "location_id": "caulfield_gardens",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Woolwich     |",
+          "      |   Arsenal     |",
+          "      |_______________|",
+          "          |       |",
+          "          |       |",
+          "   _______|       |_______",
+          "  |                       |",
+          "  |      Office           |",
+          "  |                       |",
+          "  |  [Safe]   [Desk]      |",
+          "  |                       |",
+          "  |  [Window]             |",
+          "  |_______________________|"
+        ]
+      },
+      "caulfield_gardens": {
+        "description": "A row of grand, middle-Victorian houses in Kensington. Number 13 is dark and seemingly unoccupied, but signs of recent activity are evident.",
+        "setting": "A line of flat-faced, pillared houses with porticoed entrances. The fog obscures the upper floors, and the street is eerily quiet.",
+        "clues": [
+          "Blood marks found on the window sill and stair of Dursley's residence.",
+          "Soot marks on the window sill of Dursley's residence indicating body placement.",
+          "Train frequently stops beneath Dursley's back window, allowing placement of the body on the roof."
+        ],
+        "people": [
+          {
+            "id": "where_dursley",
+            "name": "Where Dursley",
+            "description": "A smooth, well-dressed man with a foreign accent. He carries himself with an air of superiority.",
+            "notes": "A foreign agent responsible for the theft of the plans and the murder of Dungbomb."
+          },
+          {
+            "id": "colonel_snitch_sorting",
+            "name": "Colonel Snitch Sorting",
+            "description": "A tall, handsome man with a light beard. His eyes are wild, and his cheeks are stained with tears.",
+            "notes": "The brother of the deceased Sir Fleur Sorting. He is desperate due to financial troubles and involved in the theft."
+          }
+        ],
+        "objects": [
+          {
+            "id": "window_sill",
+            "category": "surface",
+            "name": "Window Sill",
+            "description": "A narrow window sill coated in soot from passing trains. Blood marks and scratches are visible.",
+            "notes": "Evidence that the body was placed on the train roof from this window."
+          },
+          {
+            "id": "study_desk",
+            "category": "surface",
+            "name": "Study Desk",
+            "description": "A large desk littered with papers, books, and a small tin cash-box. The drawers are slightly ajar.",
+            "notes": "Contains correspondence and notes related to the theft.",
+            "contains": [
+              {
+                "id": "daily_telegraph_clippings",
+                "category": "item",
+                "name": "*Daily Telegraph* Clippings",
+                "description": "Newspaper clippings from the agony column, containing coded messages between Dursley and Sorting.",
+                "notes": "Links Dursley and Sorting in the conspiracy."
+              }
+            ]
+          },
+          {
+            "id": "life_preserver",
+            "category": "item",
+            "name": "Life-Preserver",
+            "description": "A short, weighted club used as a weapon. It is stained with blood.",
+            "notes": "The murder weapon used by Dursley to kill Dungbomb."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "woolwich_arsenal",
+            "state": "locked"
+          },
+          {
+            "location_id": "gloucester_road_station",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Caulfield    |",
+          "      |   Gardens     |",
+          "      |_______________|",
+          "          |       |",
+          "          |       |",
+          "   _______|       |_______",
+          "  |                       |",
+          "  |      Study            |",
+          "  |                       |",
+          "  |  [Desk]   [Window]    |",
+          "  |                       |",
+          "  |  [Life-Preserver]     |",
+          "  |_______________________|"
+        ]
+      },
+      "charing_cross_hotel": {
+        "description": "A grand hotel near Charing Cross Station, bustling with guests and staff. The smoking-room is quiet and secluded, the perfect spot for a clandestine meeting.",
+        "setting": "A lavish hotel with ornate decorations and plush furnishings. The smoking-room is dimly lit, with leather armchairs and a faint scent of tobacco.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "smoking_room_table",
+            "category": "surface",
+            "name": "Smoking-Room Table",
+            "description": "A small, round table in the smoking-room, surrounded by leather armchairs. A newspaper lies folded on the table.",
+            "notes": "The location for the trap set to capture Dursley.",
+            "contains": [
+              {
+                "id": "bruce_partington_plans",
+                "category": "item",
+                "name": "Bruce-Partington Submarine Plans",
+                "description": "A set of intricate technical drawings and patents for the submarine. The three missing plans are among them.",
+                "notes": "The stolen documents central to the case."
+              }
+            ]
+          },
+          {
+            "id": "hotel_register",
+            "category": "container",
+            "name": "Hotel Register",
+            "description": "A large book where guests sign in upon arrival. The pages are filled with names and dates.",
+            "notes": "May contain records of Dursley's stay or meetings.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Charing Cross|",
+          "      |     Hotel     |",
+          "      |_______________|",
+          "          |       |",
+          "          |       |",
+          "   _______|       |_______",
+          "  |                       |",
+          "  |    Smoking Room       |",
+          "  |                       |",
+          "  |  [Table]              |",
+          "  |                       |",
+          "  |  [Register]           |",
+          "  |_______________________|"
+        ]
+      },
+      "gloucester_road_station": {
+        "description": "A busy Underground station in Kensington. The tracks run close to the back windows of Caulfield Gardens, and trains frequently stop here.",
+        "setting": "A bustling station with a platform crowded with passengers. The tracks curve out of a tunnel, and the air is filled with the sound of trains.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "station_bench",
+            "category": "surface",
+            "name": "Station Bench",
+            "description": "A wooden bench on the platform, offering a view of the tracks and the backs of the houses on Caulfield Gardens.",
+            "notes": "A good spot to observe the trains stopping beneath Dursley's window."
+          },
+          {
+            "id": "tracks_gloucester",
+            "category": "surface",
+            "name": "Railway Tracks",
+            "description": "The tracks curve out of the tunnel and run close to the back windows of Caulfield Gardens. Trains frequently stop here.",
+            "notes": "The location where the body was placed on the train roof."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "aldgate_station",
+            "state": "locked"
+          },
+          {
+            "location_id": "caulfield_gardens",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Gloucester   |",
+          "      |   Road        |",
+          "      |   Station     |",
+          "      |_______________|",
+          "          |       |",
+          "          |       |",
+          "   _______|       |_______",
+          "  |                       |",
+          "  |      Platform         |",
+          "  |                       |",
+          "  |  [Bench]   [Tracks]   |",
+          "  |                       |",
+          "  |_______________________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A cozy, cluttered sitting-room at 221B Baker Street, filled with books, chemical apparatus, and the lingering scent of pipe tobacco. The dense fog outside obscures the view from the windows.",
+      "items": [
+        "Emerald Tie-Pin",
+        "Dark Lantern",
+        "Revolver"
+      ],
+      "clues": [
+        "Advertisements in the *Daily Telegraph* agony column linking Dursley and Sorting."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit, Victorian-era sitting-room with a fireplace crackling softly. The walls are lined with bookshelves, and a large armchair sits near the window. A desk is piled high with papers and notes.",
+        "connections": [
+          {
+            "target_location": "aldgate_station",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "charing_cross_hotel",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "aldgate_station": {
+      "description": "A dimly lit Underground station, shrouded in fog. The tracks stretch into the darkness, and the platform is eerily quiet. A body was found here, near the edge of the tracks.",
+      "items": [],
+      "clues": [
+        "Body found near Aldgate Station with no ticket in pocket.",
+        "The absence of bleeding on the railway line where the body was found."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A narrow, grimy platform with tiled walls. The tracks curve out of a tunnel, and the air is thick with the scent of coal and damp. A single gas lamp flickers weakly.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "gloucester_road_station",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "woolwich_arsenal": {
+      "description": "A secure government office building where the Bruce-Partington plans were kept. The atmosphere is tense, with officials whispering in the hallways.",
+      "items": [],
+      "clues": [
+        "Seven of the ten stolen Bruce-Partington plans found on Dungbomb's body.",
+        "Three missing, essential plans not found on Dungbomb.",
+        "Dungbomb's sudden disappearance into the fog near the office.",
+        "Dungbomb's nervous and excited behavior when purchasing a train ticket."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A large, austere building with long corridors and locked offices. The air smells of ink and paper, and the walls are lined with filing cabinets.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "caulfield_gardens",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "caulfield_gardens": {
+      "description": "A row of grand, middle-Victorian houses in Kensington. Number 13 is dark and seemingly unoccupied, but signs of recent activity are evident.",
+      "items": [
+        "Life-Preserver"
+      ],
+      "clues": [
+        "Blood marks found on the window sill and stair of Dursley's residence.",
+        "Soot marks on the window sill of Dursley's residence indicating body placement.",
+        "Train frequently stops beneath Dursley's back window, allowing placement of the body on the roof."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A line of flat-faced, pillared houses with porticoed entrances. The fog obscures the upper floors, and the street is eerily quiet.",
+        "connections": [
+          {
+            "target_location": "woolwich_arsenal",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "gloucester_road_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "charing_cross_hotel": {
+      "description": "A grand hotel near Charing Cross Station, bustling with guests and staff. The smoking-room is quiet and secluded, the perfect spot for a clandestine meeting.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lavish hotel with ornate decorations and plush furnishings. The smoking-room is dimly lit, with leather armchairs and a faint scent of tobacco.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "gloucester_road_station": {
+      "description": "A busy Underground station in Kensington. The tracks run close to the back windows of Caulfield Gardens, and trains frequently stop here.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling station with a platform crowded with passengers. The tracks curve out of a tunnel, and the air is filled with the sound of trains.",
+        "connections": [
+          {
+            "target_location": "aldgate_station",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "caulfield_gardens",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

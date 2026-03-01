@@ -1,0 +1,998 @@
+{
+  "title": "The Mystery of the Blue Train",
+  "description": "A murder mystery set across Europe involving the theft of priceless rubies and the murder of Viner Demetrius aboard the luxurious Blue Train. The detective Hercule Poirot (under the alias Flavelle Mason) must unravel the truth behind the crime, navigating a web of deceit, alibis, and hidden motives among the suspects.",
+  "victim": "Viner Demetrius",
+  "intro_narrative": "It was close on midnight when a man crossed the Place de la Concorde in Paris. A little man with a face like a rat, yet one who played a prominent part in the destiny of the world. This man, Ambrose Caux, had business to conduct—a transaction involving the legendary rubies known as the 'Heart of Fire.' Meanwhile, across Europe, a luxurious train known as the Blue Train carried passengers to the Riviera, among them Viner Demetrius, who harbored a secret rendezvous. By the time the train reached Nice, Viner Demetrius was dead, her face disfigured, and her priceless rubies stolen. The stage is set for a mystery that will unravel the darkest secrets of those aboard the Blue Train.",
+  "start_time": "1928-01-14T23:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Scarlet morocco case with initials 'R.V.K.' (jewel case)",
+      "Black cord (used for strangulation)",
+      "Cigarette case with initial 'K'",
+      "Auburn hairs on the rug in the train compartment",
+      "Letter from Armand (Goby de la Roche) to Viner"
+    ],
+    "required_suspect": [
+      "Kettering Joseph (aka The Marquis)",
+      "Ada Mirelle (aka Anitra Cooper)"
+    ],
+    "required_motive": [
+      "Theft of the 'Heart of Fire' rubies",
+      "Financial ruin and inheritance of Viner Demetrius's fortune",
+      "Revenge and blackmail"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Arrival in Paris",
+      "objective": "Investigate the initial transaction involving the rubies and gather clues about the victim's movements.",
+      "unlocked_locations": [
+        "Paris (Gare de Lyon and less reputable quarters)",
+        "Savoy Hotel, London"
+      ],
+      "unlocked_characters": [
+        "Hercule Poirot (Flavelle Mason)",
+        "Viner Demetrius",
+        "Kettering Joseph",
+        "Thomas Aarons",
+        "Ada Mirelle"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Journey on the Blue Train",
+      "objective": "Explore the Blue Train and its passengers to uncover the events leading to Viner Demetrius's murder.",
+      "unlocked_locations": [
+        "Blue Train (compartments and corridor)",
+        "Villa Marguerite, Riviera (Lady Rosalie's villa)"
+      ],
+      "unlocked_characters": [
+        "Pavett Kitty",
+        "The Demetrius",
+        "Goby de la Roche",
+        "Arthur (dancer)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Investigation in Nice",
+      "objective": "Interview suspects in Nice and gather evidence to identify the murderer and recover the stolen rubies.",
+      "unlocked_locations": [
+        "Nice (Gare de Nice, Prefecture of Police, Negresco Hotel)",
+        "Villa Marina, Antibes"
+      ],
+      "unlocked_characters": [
+        "Beatrice Catherine (antique dealer)",
+        "Cook Rosalie",
+        "Lady Rosalie"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the culprits and present the evidence to solve the mystery.",
+      "unlocked_locations": [
+        "St. Clothilde Mead, Kent (Pavett Kitty's village)",
+        "Curzon Street, London (Viner Demetrius's residence)"
+      ],
+      "unlocked_characters": [
+        "Miss Darling",
+        "Joseph's accomplice (unnamed)"
+      ]
+    }
+  ],
+  "characters": {
+    "viner_demetrius": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "Blue Train",
+      "phase_locations": {
+        "0": "Paris (Gare de Lyon and less reputable quarters)",
+        "1": "Blue Train (compartments and corridor)"
+      },
+      "persona": "Striking and self-assured, with auburn hair and dark eyes. She is the daughter of a wealthy American millionaire and married to The Demetrius for financial security. She harbors secrets about her past and her intentions on the Blue Train.",
+      "knowledge_about_others": {
+        "kettering_joseph": "Her father's secretary, who she suspects may have ulterior motives.",
+        "ada_mirelle": "Her maid, who she trusts but who may be involved in the theft of her jewels.",
+        "goby_de_la_roche": "A former lover who she plans to meet in secret."
+      },
+      "secret": "She plans to meet Goby de la Roche in Paris and is carrying the priceless 'Heart of Fire' rubies with her.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "kettering_joseph": {
+      "type": "suspect",
+      "role": "Secretary and Culprit (aka The Marquis)",
+      "location": "Savoy Hotel, London",
+      "phase_locations": {
+        "0": "Savoy Hotel, London",
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Nice (Gare de Nice, Prefecture of Police)"
+      },
+      "persona": "Quick, intelligent, and resourceful, with a charming manner. He speaks French fluently and has a limp that he camouflages. He is secretly a notorious criminal known as 'The Marquis.'",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her financial situation and her plans to meet Goby de la Roche.",
+        "thomas_aarons": "His business dealings and his purchase of the 'Heart of Fire' rubies.",
+        "ada_mirelle": "Her role as an accomplice in the theft and murder plot."
+      },
+      "secret": "He is the infamous criminal 'The Marquis,' responsible for the theft of the rubies and the murder of Viner Demetrius.",
+      "suspicion_meter": 50,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Cigarette case with initial 'K'",
+            "Auburn hairs on the rug in the train compartment"
+          ],
+          "required_knowledge": [
+            "Viner Demetrius's plans to meet Goby de la Roche"
+          ],
+          "reaction": "He becomes increasingly nervous and attempts to mislead the investigation by providing false alibis and framing others.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "ada_mirelle": {
+      "type": "suspect",
+      "role": "Maid and Culprit (aka Anitra Cooper)",
+      "location": "Blue Train",
+      "phase_locations": {
+        "0": "Paris (Gare de Lyon and less reputable quarters)",
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Nice (Gare de Nice)"
+      },
+      "persona": "A thin, gaunt woman with a prim and proper demeanor. She is an actress who has taken on the role of Viner Demetrius's maid to assist in the theft of the rubies.",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her plans to meet Goby de la Roche and her possession of the 'Heart of Fire' rubies.",
+        "kettering_joseph": "His true identity as 'The Marquis' and his role in the murder plot."
+      },
+      "secret": "She is Anitra Cooper, an actress and accomplice to Kettering Joseph in the theft and murder plot.",
+      "suspicion_meter": 60,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Scarlet morocco case with initials 'R.V.K.'",
+            "Disfigured face of the victim"
+          ],
+          "required_knowledge": [
+            "Kettering Joseph's true identity"
+          ],
+          "reaction": "She attempts to flee Nice and avoid capture by the police.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "hercule_poirot": {
+      "type": "assistant",
+      "role": "Detective (alias Flavelle Mason)",
+      "location": "Paris (Gare de Lyon and less reputable quarters)",
+      "phase_locations": {
+        "0": "Paris (Gare de Lyon and less reputable quarters)",
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Nice (Gare de Nice, Prefecture of Police)",
+        "3": "St. Clothilde Mead, Kent"
+      },
+      "persona": "A small man with an egg-shaped head and a waxed moustache. He speaks with a Belgian accent and has a keen eye for detail. He is modest about his abilities but always right in the end.",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her plans to meet Goby de la Roche and her possession of the rubies.",
+        "kettering_joseph": "His true identity as 'The Marquis' and his criminal past.",
+        "ada_mirelle": "Her role as an accomplice and her true identity as Anitra Cooper."
+      },
+      "abilities": "Master detective with unparalleled observational skills and deductive reasoning. He is adept at uncovering hidden motives and piecing together clues to solve complex mysteries.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "thomas_aarons": {
+      "type": "suspect",
+      "role": "Father of the Victim",
+      "location": "Savoy Hotel, London",
+      "phase_locations": {
+        "0": "Savoy Hotel, London",
+        "1": "Curzon Street, London",
+        "2": "Nice (Gare de Nice)"
+      },
+      "persona": "A hard man with plenty of hard cash. He is a self-made millionaire with a keen business sense and a protective nature towards his daughter, Viner Demetrius.",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her troubled marriage and her plans to divorce The Demetrius.",
+        "kettering_joseph": "His role as his secretary and his potential involvement in the murder.",
+        "goby_de_la_roche": "His history with Viner and his reputation as a scoundrel."
+      },
+      "secret": "He purchased the 'Heart of Fire' rubies for Viner and suspects her husband of foul play.",
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "the_demetrius": {
+      "type": "suspect",
+      "role": "Husband of the Victim",
+      "location": "Curzon Street, London",
+      "phase_locations": {
+        "0": "Curzon Street, London",
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Nice (Gare de Nice)"
+      },
+      "persona": "A charming and debonair man with a dark past. He is married to Viner Demetrius for her money and has a reputation as a gambler and womanizer.",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her plans to divorce him and her secret meetings with Goby de la Roche.",
+        "arthur": "His relationship with the dancer and her knowledge of his financial troubles."
+      },
+      "secret": "He is in financial ruin and stands to inherit Viner's fortune upon her death.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Cigarette case with initial 'K'",
+            "Joseph's testimony about seeing Mirelle at the Ritz in Paris"
+          ],
+          "required_knowledge": [
+            "Viner's plans to divorce him"
+          ],
+          "reaction": "He attempts to mislead the investigation and frame others for the murder.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "pavett_kitty": {
+      "type": "assistant",
+      "role": "Witness",
+      "location": "St. Clothilde Mead, Kent",
+      "phase_locations": {
+        "0": "St. Clothilde Mead, Kent",
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Villa Marguerite, Riviera (Lady Rosalie's villa)"
+      },
+      "persona": "A quiet, reflective woman with grey eyes and a sense of humor. She is a former companion who inherited a fortune and is drawn into the mystery aboard the Blue Train.",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her distress and plans to meet Goby de la Roche.",
+        "hercule_poirot": "His true identity and his investigation into the murder.",
+        "the_demetrius": "His presence on the Blue Train and his troubled marriage."
+      },
+      "abilities": "Observant and intuitive, with a knack for uncovering hidden truths. She provides crucial testimony about the events on the Blue Train.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "goby_de_la_roche": {
+      "type": "suspect",
+      "role": "Former Lover and Swindler",
+      "location": "Villa Marina, Antibes",
+      "phase_locations": {
+        "0": "Paris (Gare de Lyon and less reputable quarters)",
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Villa Marina, Antibes"
+      },
+      "persona": "A plausible scoundrel with a fatal fascination for women. He is a swindler and thief who preys on wealthy women, including Viner Demetrius.",
+      "knowledge_about_others": {
+        "viner_demetrius": "Her possession of the 'Heart of Fire' rubies and her plans to meet him.",
+        "arthur": "Her knowledge of his criminal activities and her potential involvement."
+      },
+      "secret": "He is a notorious swindler who planned to steal the rubies from Viner Demetrius.",
+      "suspicion_meter": 70,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Letter from Armand to Viner",
+            "Fake rubies (used by Goby de la Roche)"
+          ],
+          "required_knowledge": [
+            "Viner's possession of the rubies"
+          ],
+          "reaction": "He attempts to flee Nice and avoid capture by the police.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "arthur": {
+      "type": "suspect",
+      "role": "Dancer and Mistress",
+      "location": "Negresco Hotel, Nice",
+      "phase_locations": {
+        "1": "Blue Train (compartments and corridor)",
+        "2": "Negresco Hotel, Nice"
+      },
+      "persona": "An exotic dancer with a flamboyant personality. She is The Demetrius's mistress and has a penchant for expensive jewels.",
+      "knowledge_about_others": {
+        "the_demetrius": "His financial troubles and his plans to inherit Viner's fortune.",
+        "goby_de_la_roche": "His criminal activities and his plans to steal the rubies."
+      },
+      "secret": "She knows about The Demetrius's financial troubles and his potential involvement in the murder.",
+      "suspicion_meter": 40,
+      "flight_risk": 50,
+      "conditional_behaviors": []
+    },
+    "beatrice_catherine": {
+      "type": "suspect",
+      "role": "Antique Dealer",
+      "location": "Villa Marguerite, Riviera",
+      "phase_locations": {
+        "2": "Villa Marguerite, Riviera",
+        "3": "Paris (antique shop)"
+      },
+      "persona": "A venerable and patriarchal figure with a noble appearance. He is a dealer in antiques and a receiver of stolen goods, particularly jewels.",
+      "knowledge_about_others": {
+        "goby_de_la_roche": "His involvement in the theft of the rubies and his dealings with stolen goods.",
+        "hercule_poirot": "His investigation into the theft and murder."
+      },
+      "secret": "He is involved in the illegal trade of stolen jewels and has dealings with the Marquis.",
+      "suspicion_meter": 60,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "paris": {
+        "description": "The bustling city of Paris, known for its less reputable quarters where secret transactions and clandestine meetings take place. The Gare de Lyon is a major railway station where the Blue Train departs for the Riviera.",
+        "clues": [
+          "Joseph's testimony about seeing Mirelle at the Ritz in Paris",
+          "Viner's conversation with Pavett Kitty about meeting Goby de la Roche"
+        ],
+        "people": [
+          {
+            "id": "ambrose_caux",
+            "name": "Ambrose Caux",
+            "description": "A little man with a face like a rat, involved in the transaction of the 'Heart of Fire' rubies.",
+            "notes": "He is a key figure in the initial transaction of the rubies and may have information about their whereabouts.",
+            "state": "alive"
+          },
+          {
+            "id": "knighton_colton",
+            "name": "Knighton Colton",
+            "description": "A Russian girl with a broad Mongolian cast of countenance, assisting Ambrose Caux in the transaction.",
+            "notes": "She is aware of the transaction details and may provide insights into the initial theft of the rubies.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "rubies_parcel",
+            "category": "item",
+            "name": "Brown paper parcel",
+            "description": "A small brown paper parcel containing the 'Heart of Fire' rubies, wrapped in grimy newspaper.",
+            "notes": "This parcel is the key to the mystery and was involved in the initial transaction in Paris."
+          },
+          {
+            "id": "cigarette_case_k",
+            "category": "item",
+            "name": "Cigarette case with initial 'K'",
+            "description": "A soft blue leather cigarette case with the initial 'K' in gold.",
+            "notes": "This cigarette case was found in Viner's compartment and may belong to Kettering Joseph."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "blue_train",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "savoy_hotel_london",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The less reputable quarters of Paris are dimly lit and filled with the hustle and bustle of clandestine activities. The Gare de Lyon is a grand railway station with a sense of anticipation and mystery as passengers prepare to board the Blue Train."
+      },
+      "villa_marina_antibes": {
+        "description": "A luxurious villa on the French Riviera, leased by Goby de la Roche. It is a place of opulence and secrecy, where stolen goods may be hidden.",
+        "clues": [
+          "Joseph's knowledge of the rubies and their value",
+          "The letter from Armand found in Viner's handbag"
+        ],
+        "people": [
+          {
+            "id": "goby_de_la_roche",
+            "name": "Goby de la Roche",
+            "description": "A tall, aristocratic-looking man with a haughty demeanor, known for his charm and criminal activities.",
+            "notes": "He is a notorious swindler and thief who planned to steal the 'Heart of Fire' rubies from Viner Demetrius.",
+            "state": "alive"
+          },
+          {
+            "id": "punch",
+            "name": "Punch",
+            "description": "A wooden-faced man-servant to Goby de la Roche, with a swarthy complexion and gold rings in his ears.",
+            "notes": "He is aware of Goby's criminal activities and may provide information about the stolen rubies.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "fake_rubies",
+            "category": "item",
+            "name": "Fake rubies",
+            "description": "A set of fake rubies used by Goby de la Roche to deceive his victims.",
+            "notes": "These rubies were intended to replace the real 'Heart of Fire' rubies after the theft."
+          },
+          {
+            "id": "scarlet_morocco_case",
+            "category": "item",
+            "name": "Scarlet morocco case with initials 'R.V.K.'",
+            "description": "A small, shabby red velvet case with twisted initials surmounted by a crown.",
+            "notes": "This case contained the 'Heart of Fire' rubies and was stolen from Viner Demetrius's compartment."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "nice",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The villa is opulent and grand, with a terrace overlooking the Mediterranean. It is filled with luxurious furnishings and hidden secrets, reflecting the wealth and cunning of its owner."
+      },
+      "nice": {
+        "description": "A glamorous city on the French Riviera, known for its luxurious hotels, casinos, and beautiful coastline. The Gare de Nice is a bustling railway station where the Blue Train arrives.",
+        "clues": [
+          "Ada Mirelle's sudden certainty about the man in the train being The Demetrius",
+          "Cook Rosalie's observation about the possibility of the murderer not being on the train"
+        ],
+        "people": [
+          {
+            "id": "beatrice_hippolyte",
+            "name": "Beatrice Hippolyte",
+            "description": "The Commissary of Police in Nice, a pompous-looking official with a keen interest in solving the murder.",
+            "notes": "He is responsible for investigating the murder of Viner Demetrius and may provide crucial information about the suspects.",
+            "state": "alive"
+          },
+          {
+            "id": "beatrice_carrege",
+            "name": "Beatrice Carrege",
+            "description": "The Examining Magistrate in Nice, a long-nosed man with a pince-nez and a judicial demeanor.",
+            "notes": "He oversees the investigation and may provide insights into the legal proceedings surrounding the murder.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "black_cord",
+            "category": "item",
+            "name": "Black cord",
+            "description": "A length of black cord used to strangle Viner Demetrius.",
+            "notes": "This cord is a crucial piece of evidence linking the murderer to the crime."
+          },
+          {
+            "id": "newspaper_cutting",
+            "category": "item",
+            "name": "Newspaper cutting about Lady Rosalie's robbery",
+            "description": "A newspaper cutting detailing the robbery of Lady Rosalie's jewels, including famous emeralds.",
+            "notes": "This cutting may provide insights into the criminal activities of the suspects."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "villa_marina_antibes",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "villa_marguerite_riviera",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "negresco_hotel",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "Nice is a vibrant and glamorous city, with bustling streets, luxurious hotels, and a sense of intrigue and mystery. The Gare de Nice is a grand railway station filled with passengers and the promise of new adventures."
+      },
+      "blue_train": {
+        "description": "A luxurious train known as the 'Millionaire's Train,' traveling from Paris to the French Riviera. It is the setting for the murder of Viner Demetrius and the theft of the 'Heart of Fire' rubies.",
+        "clues": [
+          "Disfigured face of the victim suggesting identity confusion",
+          "Auburn hairs on the rug in the train compartment",
+          "Cigarette case with initial 'K' found in Viner's compartment"
+        ],
+        "people": [
+          {
+            "id": "viner_demetrius_train",
+            "name": "Viner Demetrius",
+            "description": "A striking woman with auburn hair and dark eyes, dressed in a fur coat and red lacquer hat.",
+            "notes": "She is the victim of the murder and was carrying the 'Heart of Fire' rubies with her.",
+            "state": "dead"
+          },
+          {
+            "id": "ada_mirelle_train",
+            "name": "Ada Mirelle",
+            "description": "A thin, gaunt woman dressed in black, acting as Viner Demetrius's maid.",
+            "notes": "She is an accomplice in the theft and murder plot and may have crucial information about the crime.",
+            "state": "alive"
+          },
+          {
+            "id": "the_demetrius_train",
+            "name": "The Demetrius",
+            "description": "A charming and debonair man with a dark past, traveling on the Blue Train.",
+            "notes": "He is a suspect in the murder and may have information about Viner's plans and the theft of the rubies.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "dinner_basket",
+            "category": "item",
+            "name": "Dinner basket",
+            "description": "A basket containing dinner ordered by Ada Mirelle for Viner Demetrius.",
+            "notes": "This basket was used to deceive the conductor into thinking Viner was still alive after the murder."
+          },
+          {
+            "id": "viner_fur_coat",
+            "category": "item",
+            "name": "Viner Demetrius's fur coat and red lacquer hat",
+            "description": "A sumptuous fur coat and distinctive red lacquer hat worn by Viner Demetrius.",
+            "notes": "These items were used by Ada Mirelle to impersonate Viner after the murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "paris",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "nice",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The Blue Train is a luxurious and opulent setting, with elegant compartments, a restaurant car, and a sense of anticipation and mystery. The train is filled with wealthy passengers and hidden secrets."
+      },
+      "curzon_street_london": {
+        "description": "A fashionable street in London where Viner Demetrius resides. It is the setting for important conversations and revelations about the victim's personal life.",
+        "clues": [
+          "Joseph's limp and its camouflage",
+          "Viner's conversation with Pavett Kitty about meeting Goby de la Roche"
+        ],
+        "people": [
+          {
+            "id": "viner_demetrius_london",
+            "name": "Viner Demetrius",
+            "description": "A striking woman with auburn hair and dark eyes, residing in a luxurious house on Curzon Street.",
+            "notes": "She is the victim of the murder and had plans to meet Goby de la Roche in Paris.",
+            "state": "alive"
+          },
+          {
+            "id": "the_demetrius_london",
+            "name": "The Demetrius",
+            "description": "A charming and debonair man with a dark past, visiting Viner Demetrius at her residence.",
+            "notes": "He is a suspect in the murder and may have information about Viner's plans and the theft of the rubies.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "telegram_viner_death",
+            "category": "item",
+            "name": "Telegram announcing Viner's death",
+            "description": "A telegram received by Thomas Aarons announcing the death of Viner Demetrius.",
+            "notes": "This telegram is a crucial piece of evidence that sets the investigation in motion."
+          },
+          {
+            "id": "rubies_case_london",
+            "category": "container",
+            "name": "Red velvet case with rubies",
+            "description": "A big, shabby red velvet case containing the 'Heart of Fire' rubies.",
+            "notes": "This case was given to Viner by her father and is the key to the mystery.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "heart_of_fire",
+                "category": "item",
+                "name": "Heart of Fire ruby",
+                "description": "A large, flawless ruby known as the 'Heart of Fire,' the centerpiece of the stolen necklace.",
+                "notes": "This ruby is the most valuable piece of the stolen jewels and is central to the mystery."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "savoy_hotel_london",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "Curzon Street is a fashionable and elegant setting, with luxurious houses and a sense of wealth and privilege. It is a place of secrets and hidden motives, where important conversations and revelations take place."
+      },
+      "savoy_hotel_london": {
+        "description": "A luxurious hotel in London where Thomas Aarons resides. It is the setting for important meetings and conversations about the investigation.",
+        "clues": [
+          "Joseph's knowledge of the rubies and their value"
+        ],
+        "people": [
+          {
+            "id": "thomas_aarons_savoy",
+            "name": "Thomas Aarons",
+            "description": "A hard man with plenty of hard cash, residing in a luxurious suite at the Savoy Hotel.",
+            "notes": "He is the father of the victim and is determined to uncover the truth behind her murder.",
+            "state": "alive"
+          },
+          {
+            "id": "kettering_joseph_savoy",
+            "name": "Kettering Joseph",
+            "description": "A quick, intelligent, and resourceful secretary to Thomas Aarons, with a charming manner and a hidden past.",
+            "notes": "He is a key suspect in the murder and theft, and may have crucial information about the crime.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "thomas_aarons_letters",
+            "category": "surface",
+            "name": "Desk with correspondence",
+            "description": "A desk in Thomas Aarons's suite, filled with correspondence and business papers.",
+            "notes": "This desk may contain important clues about the victim's plans and the suspects' motives.",
+            "contains": [
+              {
+                "id": "letter_from_armand",
+                "category": "item",
+                "name": "Letter from Armand",
+                "description": "A letter from Goby de la Roche to Viner Demetrius, arranging a secret meeting.",
+                "notes": "This letter is a crucial piece of evidence linking Goby de la Roche to the victim."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "curzon_street_london",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The Savoy Hotel is a luxurious and elegant setting, with opulent suites and a sense of wealth and privilege. It is a place of important meetings and conversations, where the investigation into the murder takes shape."
+      },
+      "st_clothilde_mead_kent": {
+        "description": "A quiet village in Kent where Pavett Kitty resides. It is a place of simplicity and tranquility, far removed from the glamour of the Riviera.",
+        "clues": [
+          "Pavett Kitty's testimony about the events on the Blue Train"
+        ],
+        "people": [
+          {
+            "id": "pavett_kitty_kent",
+            "name": "Pavett Kitty",
+            "description": "A quiet, reflective woman with grey eyes and a sense of humor, residing in a cottage in St. Clothilde Mead.",
+            "notes": "She is a key witness in the murder investigation and provides crucial testimony about the events on the Blue Train.",
+            "state": "alive"
+          },
+          {
+            "id": "miss_darling",
+            "name": "Miss Darling",
+            "description": "An elderly woman with a sharp tongue and a warm heart, residing in St. Clothilde Mead.",
+            "notes": "She is a friend of Pavett Kitty and may provide insights into her character and background.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "pavett_letter",
+            "category": "item",
+            "name": "Letter from Miss Darling",
+            "description": "A letter from Miss Darling to Pavett Kitty, offering her a home in St. Clothilde Mead.",
+            "notes": "This letter provides insights into Pavett's background and her connection to the village."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "villa_marguerite_riviera",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "St. Clothilde Mead is a quiet and peaceful village, with charming cottages and a sense of simplicity and tranquility. It is a place of refuge and reflection, far removed from the glamour and intrigue of the Riviera."
+      },
+      "villa_marguerite_riviera": {
+        "description": "A luxurious villa on the French Riviera owned by Lady Rosalie. It is a place of glamour and intrigue, where important conversations and revelations take place.",
+        "clues": [
+          "Cook Rosalie's observation about the possibility of the murderer not being on the train"
+        ],
+        "people": [
+          {
+            "id": "lady_rosalie",
+            "name": "Lady Rosalie",
+            "description": "A golden-haired, blue-eyed lady with a charming manner and a penchant for exploiting her connections.",
+            "notes": "She is a socialite on the Riviera and may provide insights into the suspects' backgrounds and motives.",
+            "state": "alive"
+          },
+          {
+            "id": "cook_rosalie",
+            "name": "Cook Rosalie",
+            "description": "A dark-haired woman with a sardonic sense of humor and a keen interest in the murder investigation.",
+            "notes": "She is Lady Rosalie's daughter and provides crucial insights into the suspects and their motives.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "lady_rosalie_jewels",
+            "category": "item",
+            "name": "Lady Rosalie's stolen jewels",
+            "description": "A collection of famous emeralds and other jewels stolen from Lady Rosalie's villa.",
+            "notes": "These jewels may provide insights into the criminal activities of the suspects."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "nice",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "st_clothilde_mead_kent",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The villa is a luxurious and glamorous setting, with opulent furnishings and a sense of wealth and privilege. It is a place of important conversations and revelations, where the investigation into the murder takes shape."
+      },
+      "negresco_hotel": {
+        "description": "A luxurious hotel in Nice where Arthur, the dancer, resides. It is a place of glamour and intrigue, where important conversations and revelations take place.",
+        "clues": [
+          "Arthur's knowledge of The Demetrius's financial troubles"
+        ],
+        "people": [
+          {
+            "id": "arthur_negresco",
+            "name": "Arthur",
+            "description": "An exotic dancer with a flamboyant personality and a penchant for expensive jewels.",
+            "notes": "She is The Demetrius's mistress and may have crucial information about his financial troubles and his involvement in the murder.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "arthur_jewels",
+            "category": "item",
+            "name": "Arthur's jewels",
+            "description": "A collection of expensive jewels worn by Arthur, including a ruby the size of a pigeon's egg.",
+            "notes": "These jewels may provide insights into Arthur's motives and her connection to the stolen rubies."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "nice",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "The Negresco Hotel is a luxurious and glamorous setting, with opulent suites and a sense of wealth and privilege. It is a place of important conversations and revelations, where the investigation into the murder takes shape."
+      }
+    }
+  },
+  "locations": {
+    "paris": {
+      "description": "The bustling city of Paris, known for its less reputable quarters where secret transactions and clandestine meetings take place. The Gare de Lyon is a major railway station where the Blue Train departs for the Riviera.",
+      "items": [
+        "Brown paper parcel",
+        "Cigarette case with initial 'K'"
+      ],
+      "clues": [
+        "Joseph's testimony about seeing Mirelle at the Ritz in Paris",
+        "Viner's conversation with Pavett Kitty about meeting Goby de la Roche"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The less reputable quarters of Paris are dimly lit and filled with the hustle and bustle of clandestine activities. The Gare de Lyon is a grand railway station with a sense of anticipation and mystery as passengers prepare to board the Blue Train.",
+        "connections": [
+          {
+            "target_location": "blue_train",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "savoy_hotel_london",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "villa_marina_antibes": {
+      "description": "A luxurious villa on the French Riviera, leased by Goby de la Roche. It is a place of opulence and secrecy, where stolen goods may be hidden.",
+      "items": [
+        "Fake rubies",
+        "Scarlet morocco case with initials 'R.V.K.'"
+      ],
+      "clues": [
+        "Joseph's knowledge of the rubies and their value",
+        "The letter from Armand found in Viner's handbag"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The villa is opulent and grand, with a terrace overlooking the Mediterranean. It is filled with luxurious furnishings and hidden secrets, reflecting the wealth and cunning of its owner.",
+        "connections": [
+          {
+            "target_location": "nice",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "nice": {
+      "description": "A glamorous city on the French Riviera, known for its luxurious hotels, casinos, and beautiful coastline. The Gare de Nice is a bustling railway station where the Blue Train arrives.",
+      "items": [
+        "Black cord",
+        "Newspaper cutting about Lady Rosalie's robbery"
+      ],
+      "clues": [
+        "Ada Mirelle's sudden certainty about the man in the train being The Demetrius",
+        "Cook Rosalie's observation about the possibility of the murderer not being on the train"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "Nice is a vibrant and glamorous city, with bustling streets, luxurious hotels, and a sense of intrigue and mystery. The Gare de Nice is a grand railway station filled with passengers and the promise of new adventures.",
+        "connections": [
+          {
+            "target_location": "villa_marina_antibes",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "villa_marguerite_riviera",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "negresco_hotel",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "blue_train": {
+      "description": "A luxurious train known as the 'Millionaire's Train,' traveling from Paris to the French Riviera. It is the setting for the murder of Viner Demetrius and the theft of the 'Heart of Fire' rubies.",
+      "items": [
+        "Dinner basket",
+        "Viner Demetrius's fur coat and red lacquer hat"
+      ],
+      "clues": [
+        "Disfigured face of the victim suggesting identity confusion",
+        "Auburn hairs on the rug in the train compartment",
+        "Cigarette case with initial 'K' found in Viner's compartment"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The Blue Train is a luxurious and opulent setting, with elegant compartments, a restaurant car, and a sense of anticipation and mystery. The train is filled with wealthy passengers and hidden secrets.",
+        "connections": [
+          {
+            "target_location": "paris",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "nice",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "curzon_street_london": {
+      "description": "A fashionable street in London where Viner Demetrius resides. It is the setting for important conversations and revelations about the victim's personal life.",
+      "items": [
+        "Telegram announcing Viner's death"
+      ],
+      "clues": [
+        "Joseph's limp and its camouflage",
+        "Viner's conversation with Pavett Kitty about meeting Goby de la Roche"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "Curzon Street is a fashionable and elegant setting, with luxurious houses and a sense of wealth and privilege. It is a place of secrets and hidden motives, where important conversations and revelations take place.",
+        "connections": [
+          {
+            "target_location": "savoy_hotel_london",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "savoy_hotel_london": {
+      "description": "A luxurious hotel in London where Thomas Aarons resides. It is the setting for important meetings and conversations about the investigation.",
+      "items": [],
+      "clues": [
+        "Joseph's knowledge of the rubies and their value"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The Savoy Hotel is a luxurious and elegant setting, with opulent suites and a sense of wealth and privilege. It is a place of important meetings and conversations, where the investigation into the murder takes shape.",
+        "connections": [
+          {
+            "target_location": "curzon_street_london",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "st_clothilde_mead_kent": {
+      "description": "A quiet village in Kent where Pavett Kitty resides. It is a place of simplicity and tranquility, far removed from the glamour of the Riviera.",
+      "items": [
+        "Letter from Miss Darling"
+      ],
+      "clues": [
+        "Pavett Kitty's testimony about the events on the Blue Train"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "St. Clothilde Mead is a quiet and peaceful village, with charming cottages and a sense of simplicity and tranquility. It is a place of refuge and reflection, far removed from the glamour and intrigue of the Riviera.",
+        "connections": [
+          {
+            "target_location": "villa_marguerite_riviera",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "villa_marguerite_riviera": {
+      "description": "A luxurious villa on the French Riviera owned by Lady Rosalie. It is a place of glamour and intrigue, where important conversations and revelations take place.",
+      "items": [
+        "Lady Rosalie's stolen jewels"
+      ],
+      "clues": [
+        "Cook Rosalie's observation about the possibility of the murderer not being on the train"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The villa is a luxurious and glamorous setting, with opulent furnishings and a sense of wealth and privilege. It is a place of important conversations and revelations, where the investigation into the murder takes shape.",
+        "connections": [
+          {
+            "target_location": "nice",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "st_clothilde_mead_kent",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "negresco_hotel": {
+      "description": "A luxurious hotel in Nice where Arthur, the dancer, resides. It is a place of glamour and intrigue, where important conversations and revelations take place.",
+      "items": [
+        "Arthur's jewels"
+      ],
+      "clues": [
+        "Arthur's knowledge of The Demetrius's financial troubles"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The Negresco Hotel is a luxurious and glamorous setting, with opulent suites and a sense of wealth and privilege. It is a place of important conversations and revelations, where the investigation into the murder takes shape.",
+        "connections": [
+          {
+            "target_location": "nice",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

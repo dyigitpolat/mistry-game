@@ -1,0 +1,700 @@
+{
+  "title": "The Adventure of the Beryl Coronet",
+  "description": "A high-stakes mystery involving the theft of a priceless national treasure, the Beryl Coronet, and the tangled web of deceit, love, and betrayal that surrounds its disappearance. Players must unravel the truth behind the missing gems and the culprits responsible.",
+  "victim": "Alexander Zhang",
+  "intro_narrative": "One crisp February morning, Sherlock Taika and his companion are visited by Alexander Zhang, a prominent banker in distress. The Beryl Coronet, a priceless national treasure entrusted to Zhang by a noble client, has been damaged, and three of its beryls are missing. Zhang's son, Glover, was found holding the coronet, but his silence and the mysterious circumstances suggest a deeper conspiracy. Taika must uncover the truth before scandal engulfs the nation.",
+  "start_time": "1895-02-14T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Triangular piece of gold with three missing beryls",
+      "Cast-off shoes of Sir Carrey Lively",
+      "Bloodstains in the stable lane"
+    ],
+    "required_suspect": [
+      "Sir Carrey Lively",
+      "Day Zhang"
+    ],
+    "required_motive": [
+      "Sir Carrey Lively's greed and desperation for money to cover gambling debts",
+      "Day Zhang's coerced involvement due to her love for Sir Carrey Lively"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues at Baker Street and Zhang & Stevenson Bank. Interview Alexander Zhang and Glover Zhang.",
+      "unlocked_locations": [
+        "baker_street",
+        "zhang_stevenson_bank"
+      ],
+      "unlocked_characters": [
+        "sherlock_taika",
+        "alexander_zhang",
+        "glover_zhang"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring Fairbank",
+      "objective": "Investigate Fairbank and the stable lane. Interview Day Zhang and Cyndi Winfrey.",
+      "unlocked_locations": [
+        "fairbank",
+        "stable_lane"
+      ],
+      "unlocked_characters": [
+        "day_zhang",
+        "cyndi_winfrey"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering Secrets",
+      "objective": "Follow leads to Sir Carrey Lively's house and confront suspects. Uncover the role of Watanabe Zane.",
+      "unlocked_locations": [
+        "sir_carrey_lively_house"
+      ],
+      "unlocked_characters": [
+        "sir_carrey_lively",
+        "watanabe_zane"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Piece together the evidence, confront the culprits, and recover the missing beryls.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "sherlock_taika": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "fairbank",
+        "2": "sir_carrey_lively_house",
+        "3": "baker_street"
+      },
+      "persona": "Sharp, observant, and methodical. Speaks in a calm, measured tone but can be cutting when provoked. Prefers to let others talk while he pieces together the puzzle.",
+      "knowledge_about_others": {
+        "alexander_zhang": "A banker in distress, likely hiding more than he reveals.",
+        "glover_zhang": "Sullen and secretive, but not necessarily guilty.",
+        "day_zhang": "A woman of strong character, possibly involved in the conspiracy.",
+        "sir_carrey_lively": "A dangerous man with a reputation for manipulation and vice.",
+        "cyndi_winfrey": "A maid with a secret lover, possibly an unwitting accomplice.",
+        "watanabe_zane": "A greengrocer with a wooden leg, connected to the maid."
+      },
+      "abilities": "Master of deduction, disguise, and forensic analysis. Can reconstruct events from minimal evidence.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Footprints in the snow near the stable lane"
+          ],
+          "reaction": "Taika will focus on the stable lane and the wooden-legged man's involvement.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Cast-off shoes of Sir Carrey Lively"
+          ],
+          "reaction": "Taika will confront Sir Carrey Lively with the evidence, forcing a confession.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "alexander_zhang": {
+      "type": "suspect",
+      "role": "Victim/Banker",
+      "location": "zhang_stevenson_bank",
+      "phase_locations": {
+        "0": "zhang_stevenson_bank",
+        "1": "fairbank",
+        "2": "fairbank",
+        "3": "baker_street"
+      },
+      "persona": "Distraught and anxious, but proud. Speaks formally and with authority, though his emotions often betray him.",
+      "knowledge_about_others": {
+        "glover_zhang": "His son, whom he suspects but cannot bring himself to fully accuse.",
+        "day_zhang": "His niece, whom he trusts implicitly but who may have betrayed him.",
+        "sir_carrey_lively": "A dangerous influence on his son, but he cannot prove his suspicions."
+      },
+      "secret": "He is deeply ashamed of his son's gambling debts and fears the scandal will ruin his reputation.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "glover_zhang": {
+      "type": "suspect",
+      "role": "Son of Alexander Zhang",
+      "location": "fairbank",
+      "phase_locations": {
+        "0": "fairbank",
+        "1": "fairbank",
+        "2": "fairbank",
+        "3": "baker_street"
+      },
+      "persona": "Sullen and defensive, but with a chivalrous streak. Speaks in short, clipped sentences and avoids eye contact.",
+      "knowledge_about_others": {
+        "day_zhang": "He loves her but knows she is involved with Sir Carrey Lively.",
+        "sir_carrey_lively": "A corrupting influence, but he cannot bring himself to expose him."
+      },
+      "secret": "He witnessed Day Zhang handing the coronet to Sir Carrey Lively but refused to betray her.",
+      "suspicion_meter": 80,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The twisted coronet indicating a struggle"
+          ],
+          "reaction": "Glover will admit to struggling with someone but refuse to name them.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "day_zhang": {
+      "type": "suspect",
+      "role": "Niece of Alexander Zhang",
+      "location": "fairbank",
+      "phase_locations": {
+        "0": "fairbank",
+        "1": "fairbank",
+        "2": "unknown",
+        "3": "unknown"
+      },
+      "persona": "Quiet, composed, and deeply troubled. Speaks softly but with conviction, though her emotions occasionally surface.",
+      "knowledge_about_others": {
+        "sir_carrey_lively": "She loves him but knows he is using her.",
+        "glover_zhang": "She pities him but cannot return his love."
+      },
+      "secret": "She was coerced by Sir Carrey Lively into stealing the coronet and has fled with him.",
+      "suspicion_meter": 70,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Day Zhang's unusual behavior and disappearance"
+          ],
+          "reaction": "Day will become evasive and eventually flee Fairbank.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "sir_carrey_lively": {
+      "type": "suspect",
+      "role": "Aristocratic Gambler",
+      "location": "sir_carrey_lively_house",
+      "phase_locations": {
+        "0": "unknown",
+        "1": "unknown",
+        "2": "sir_carrey_lively_house",
+        "3": "sir_carrey_lively_house"
+      },
+      "persona": "Charming, manipulative, and arrogant. Speaks with a smooth, persuasive tone but can turn vicious when cornered.",
+      "knowledge_about_others": {
+        "day_zhang": "He uses her to get to the coronet but has no real affection for her.",
+        "glover_zhang": "A pawn in his schemes, easily manipulated."
+      },
+      "secret": "He orchestrated the theft of the beryls to cover his gambling debts and is holding them for ransom.",
+      "suspicion_meter": 90,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Cast-off shoes of Sir Carrey Lively"
+          ],
+          "reaction": "Sir Carrey will attempt to flee but can be cornered with the evidence.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "cyndi_winfrey": {
+      "type": "suspect",
+      "role": "Maid",
+      "location": "fairbank",
+      "phase_locations": {
+        "0": "fairbank",
+        "1": "fairbank",
+        "2": "fairbank",
+        "3": "fairbank"
+      },
+      "persona": "Nervous and eager to please. Speaks quickly and avoids direct answers, especially about her lover.",
+      "knowledge_about_others": {
+        "watanabe_zane": "Her secret lover, whom she met the night of the theft.",
+        "day_zhang": "She suspects Day is involved in something but doesn't know what."
+      },
+      "secret": "She met Watanabe Zane the night of the theft, unknowingly providing cover for Day Zhang's actions.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "watanabe_zane": {
+      "type": "suspect",
+      "role": "Greengrocer",
+      "location": "stable_lane",
+      "phase_locations": {
+        "0": "stable_lane",
+        "1": "stable_lane",
+        "2": "stable_lane",
+        "3": "stable_lane"
+      },
+      "persona": "Gruff and straightforward. Speaks in a thick accent and is defensive about his wooden leg.",
+      "knowledge_about_others": {
+        "cyndi_winfrey": "He is in love with her but knows little about her employers.",
+        "day_zhang": "He saw her near the stable lane the night of the theft but didn't think much of it."
+      },
+      "secret": "He was in the stable lane the night of the theft, leaving footprints that implicate him.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A cozy, cluttered sitting-room at 221B Baker Street, filled with books, chemical apparatus, and the detritus of Taika's investigations. A bow-window overlooks the snow-covered street below.",
+        "setting": "The room is warm and dimly lit by a gas lamp. A fire crackles in the hearth, casting flickering shadows on the walls. The air smells of tobacco and old parchment.",
+        "clues": [
+          "Sherlock Taika's observations of Alexander Zhang's distress and the initial account of the theft."
+        ],
+        "people": [
+          {
+            "id": "sherlock_taika",
+            "name": "Sherlock Taika",
+            "description": "A tall, lean man with sharp features and piercing eyes. He is dressed in a dressing-gown and smokes a pipe.",
+            "notes": "The world's only consulting detective. His mind is a razor, cutting through deception to the truth."
+          }
+        ],
+        "objects": [
+          {
+            "id": "taika_desk",
+            "category": "surface",
+            "name": "Sherlock Taika's Desk",
+            "description": "A large, cluttered desk covered in papers, chemical apparatus, and various oddities from past cases.",
+            "notes": "Contains notes on previous cases and a magnifying glass for forensic analysis."
+          },
+          {
+            "id": "cheque_4000",
+            "category": "item",
+            "name": "Cheque for £4000",
+            "description": "A blank cheque signed by Alexander Zhang, offered as a reward for recovering the missing beryls.",
+            "notes": "Can be used to negotiate with suspects or pay informants."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "zhang_stevenson_bank",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "fairbank",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________________",
+          "  |                     |",
+          "  |   221B Baker St.    |",
+          "  |                     |",
+          "  |  [Desk]       [Fire]|",
+          "  |                     |",
+          "  |  [Chair]     [Chair]|",
+          "  |_____________________|",
+          "     |               |",
+          "     |               |",
+          "  [Door]          [Window]"
+        ]
+      },
+      "zhang_stevenson_bank": {
+        "description": "A grand, imposing banking hall on Threadneedle Street. The air is thick with the scent of polished wood and ink. A large safe dominates the back wall.",
+        "setting": "The bank is quiet, with only a few clerks at their desks. The walls are lined with mahogany panels, and the floor is covered in thick carpet.",
+        "clues": [
+          "Glover Zhang's silence and refusal to explain his actions.",
+          "Alexander Zhang's private safe, where the coronet was initially stored."
+        ],
+        "people": [
+          {
+            "id": "alexander_zhang",
+            "name": "Alexander Zhang",
+            "description": "A tall, portly man with a commanding presence. His face is drawn with worry, and his hair is disheveled.",
+            "notes": "A prominent banker who has suffered a great personal and professional blow. He is desperate to recover the coronet."
+          }
+        ],
+        "objects": [
+          {
+            "id": "bank_safe",
+            "category": "container",
+            "name": "Alexander Zhang's Private Safe",
+            "description": "A large, iron safe with a complex lock. It is currently open, revealing an empty interior.",
+            "notes": "The Beryl Coronet was stored here before its theft.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "beryl_coronet_case",
+                "category": "item",
+                "name": "Empty Coronet Case",
+                "description": "A square, black morocco case lined with velvet. It once held the Beryl Coronet.",
+                "notes": "The case is empty, but traces of the coronet's shape remain in the velvet."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "fairbank",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________________",
+          "  |                     |",
+          "  | Zhang & Stevenson   |",
+          "  |        Bank         |",
+          "  |                     |",
+          "  |  [Desk]       [Safe]|",
+          "  |                     |",
+          "  |  [Chair]     [Chair]|",
+          "  |_____________________|",
+          "     |               |",
+          "     |               |",
+          "  [Door]          [Window]"
+        ]
+      },
+      "fairbank": {
+        "description": "A large, square house of white stone in Streatham. The snow-covered lawn stretches out in front, and the air is crisp and cold.",
+        "setting": "The house is quiet, with only the faint sound of servants moving about. The interior is tastefully furnished, with a mix of opulence and comfort.",
+        "clues": [
+          "The twisted coronet indicating a struggle rather than deliberate theft.",
+          "Day Zhang's unusual behavior and disappearance.",
+          "Cyndi Winfrey's unauthorized outing to meet her lover (Watanabe Zane)."
+        ],
+        "people": [
+          {
+            "id": "glover_zhang",
+            "name": "Glover Zhang",
+            "description": "A young man with a handsome but troubled face. He is dressed in a shirt and trousers, with no shoes.",
+            "notes": "Alexander Zhang's son. He is sullen and defensive but may be protecting someone."
+          },
+          {
+            "id": "day_zhang",
+            "name": "Day Zhang",
+            "description": "A young woman of striking beauty, with dark hair and eyes. Her face is pale, and she looks deeply troubled.",
+            "notes": "Alexander Zhang's niece. She is sweet and gentle but may be hiding a dark secret."
+          },
+          {
+            "id": "cyndi_winfrey",
+            "name": "Cyndi Winfrey",
+            "description": "A pretty young maid with a nervous demeanor. She avoids eye contact and speaks quickly.",
+            "notes": "A maid in the Zhang household. She has a secret lover and may have unknowingly aided the theft."
+          }
+        ],
+        "objects": [
+          {
+            "id": "dressing_room_bureau",
+            "category": "container",
+            "name": "Bureau in Alexander Zhang's Dressing-Room",
+            "description": "A large, ornate bureau with a mirror. It is locked, but the lock appears to have been forced.",
+            "notes": "The Beryl Coronet was kept here after being removed from the bank safe.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "twisted_coronet",
+                "category": "item",
+                "name": "Twisted Beryl Coronet",
+                "description": "A magnificent coronet with thirty-six beryls. One corner is twisted, and three beryls are missing.",
+                "notes": "The coronet was damaged during a struggle. The missing beryls are the key to solving the mystery."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "zhang_stevenson_bank",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "stable_lane",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________________",
+          "  |                     |",
+          "  |      Fairbank       |",
+          "  |                     |",
+          "  |  [Bureau]     [Bed] |",
+          "  |                     |",
+          "  |  [Desk]      [Chair]|",
+          "  |_____________________|",
+          "     |               |",
+          "     |               |",
+          "  [Door]          [Window]"
+        ]
+      },
+      "stable_lane": {
+        "description": "A narrow, snow-covered lane behind Fairbank, leading to the stables. The ground is marked with footprints, and the air is cold and still.",
+        "setting": "The lane is quiet, with only the faint sound of horses in the distance. The snow is trampled, and there are signs of a struggle.",
+        "clues": [
+          "Footprints in the snow near the stable lane showing a struggle and a wooden-legged man.",
+          "Bloodstains in the stable lane suggesting injury during the struggle."
+        ],
+        "people": [
+          {
+            "id": "watanabe_zane",
+            "name": "Watanabe Zane",
+            "description": "A burly man with a wooden leg. He wears a greengrocer's apron and looks defensive.",
+            "notes": "A greengrocer who was in the stable lane the night of the theft. His wooden leg leaves distinctive footprints."
+          }
+        ],
+        "objects": [
+          {
+            "id": "footprints",
+            "category": "item",
+            "name": "Footprints in the Snow",
+            "description": "A complex pattern of footprints, including those of a wooden-legged man and a struggle.",
+            "notes": "The footprints suggest a confrontation between two men, one of whom was injured."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "fairbank",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "sir_carrey_lively_house",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________________",
+          "  |                     |",
+          "  |    Stable Lane      |",
+          "  |                     |",
+          "  |  [Footprints]       |",
+          "  |                     |",
+          "  |  [Bloodstains]      |",
+          "  |_____________________|",
+          "     |               |",
+          "     |               |",
+          "  [Path]          [Fence]"
+        ]
+      },
+      "sir_carrey_lively_house": {
+        "description": "A grand, aristocratic townhouse in a fashionable part of London. The interior is lavishly decorated, with expensive furnishings and artwork.",
+        "setting": "The house is quiet, with an air of opulence. The walls are lined with paintings, and the furniture is plush and expensive.",
+        "clues": [
+          "Sir Carrey Lively's head injury matching the timeline of the struggle."
+        ],
+        "people": [
+          {
+            "id": "sir_carrey_lively",
+            "name": "Sir Carrey Lively",
+            "description": "A tall, handsome man with a commanding presence. He has a bandage on his head and looks smug.",
+            "notes": "A dangerous gambler and manipulator. He is the mastermind behind the theft of the beryls."
+          }
+        ],
+        "objects": [
+          {
+            "id": "cast_off_shoes",
+            "category": "item",
+            "name": "Cast-off Shoes of Sir Carrey Lively",
+            "description": "A pair of worn, expensive shoes that match the footprints in the stable lane.",
+            "notes": "These shoes confirm Sir Carrey Lively's presence at the scene of the struggle."
+          },
+          {
+            "id": "triangular_gold_piece",
+            "category": "item",
+            "name": "Triangular Piece of Gold with Three Missing Beryls",
+            "description": "A small, triangular piece of gold with three beryls still embedded in it. It matches the missing corner of the coronet.",
+            "notes": "This piece was torn from the coronet during the struggle and is the key to proving Sir Carrey Lively's guilt."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "stable_lane",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________________",
+          "  |                     |",
+          "  | Sir Carrey Lively's |",
+          "  |        House        |",
+          "  |                     |",
+          "  |  [Desk]       [Art] |",
+          "  |                     |",
+          "  |  [Chair]     [Chair]|",
+          "  |_____________________|",
+          "     |               |",
+          "     |               |",
+          "  [Door]          [Window]"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A cozy, cluttered sitting-room at 221B Baker Street, filled with books, chemical apparatus, and the detritus of Taika's investigations. A bow-window overlooks the snow-covered street below.",
+      "items": [
+        "Cheque for £4000"
+      ],
+      "clues": [
+        "Sherlock Taika's observations of Alexander Zhang's distress and the initial account of the theft."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is warm and dimly lit by a gas lamp. A fire crackles in the hearth, casting flickering shadows on the walls. The air smells of tobacco and old parchment.",
+        "connections": [
+          {
+            "target_location": "zhang_stevenson_bank",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "fairbank",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "zhang_stevenson_bank": {
+      "description": "A grand, imposing banking hall on Threadneedle Street. The air is thick with the scent of polished wood and ink. A large safe dominates the back wall.",
+      "items": [],
+      "clues": [
+        "Glover Zhang's silence and refusal to explain his actions.",
+        "Alexander Zhang's private safe, where the coronet was initially stored."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The bank is quiet, with only a few clerks at their desks. The walls are lined with mahogany panels, and the floor is covered in thick carpet.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "fairbank",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "fairbank": {
+      "description": "A large, square house of white stone in Streatham. The snow-covered lawn stretches out in front, and the air is crisp and cold.",
+      "items": [],
+      "clues": [
+        "The twisted coronet indicating a struggle rather than deliberate theft.",
+        "Day Zhang's unusual behavior and disappearance.",
+        "Cyndi Winfrey's unauthorized outing to meet her lover (Watanabe Zane)."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The house is quiet, with only the faint sound of servants moving about. The interior is tastefully furnished, with a mix of opulence and comfort.",
+        "connections": [
+          {
+            "target_location": "zhang_stevenson_bank",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "stable_lane",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "stable_lane": {
+      "description": "A narrow, snow-covered lane behind Fairbank, leading to the stables. The ground is marked with footprints, and the air is cold and still.",
+      "items": [
+        "Footprints in the Snow"
+      ],
+      "clues": [
+        "Footprints in the snow near the stable lane showing a struggle and a wooden-legged man.",
+        "Bloodstains in the stable lane suggesting injury during the struggle."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The lane is quiet, with only the faint sound of horses in the distance. The snow is trampled, and there are signs of a struggle.",
+        "connections": [
+          {
+            "target_location": "fairbank",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "sir_carrey_lively_house",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "sir_carrey_lively_house": {
+      "description": "A grand, aristocratic townhouse in a fashionable part of London. The interior is lavishly decorated, with expensive furnishings and artwork.",
+      "items": [
+        "Cast-off Shoes of Sir Carrey Lively",
+        "Triangular Piece of Gold with Three Missing Beryls"
+      ],
+      "clues": [
+        "Sir Carrey Lively's head injury matching the timeline of the struggle."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The house is quiet, with an air of opulence. The walls are lined with paintings, and the furniture is plush and expensive.",
+        "connections": [
+          {
+            "target_location": "stable_lane",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

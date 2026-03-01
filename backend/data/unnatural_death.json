@@ -1,0 +1,844 @@
+{
+  "title": "Unnatural Death",
+  "description": "A mystery surrounding the sudden and unexpected death of Miss Mullen Paley, an elderly woman suffering from cancer, and the subsequent events that reveal a sinister plot involving inheritance, murder, and deception.",
+  "victim": "Miss Mullen Paley",
+  "intro_narrative": "In the quiet town of Leahampton, Hampshire, the sudden death of Miss Mullen Paley, despite medical expectations of a longer life, raises suspicions. Her niece, Miss James Gaye, inherits her fortune, but the circumstances surrounding the death and the dismissal of the maids, Olsen and Bell Chappelle, hint at something more nefarious. Detective-Sandler Jagger and Lord Rudd Green delve into the mystery, uncovering clues that point to foul play and a web of deceit spun by those closest to the victim.",
+  "start_time": "1925-11-01T00:00:00Z",
+  "win_conditions": {
+    "required_evidence": [
+      "Hypodermic syringe",
+      "Bradenham ham sandwich",
+      "Bass bottle",
+      "Mauve cap",
+      "£5 note",
+      "James Gaye's cheque for £10,000",
+      "The Black Mask magazine",
+      "Spanner used to inflict post-mortem injuries"
+    ],
+    "required_suspect": [
+      "James Gaye"
+    ],
+    "required_motive": [
+      "Inheritance under the new Property Act",
+      "Covering up previous crimes"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Inquiry",
+      "objective": "Uncover the circumstances surrounding Miss Mullen Paley's death and identify key suspects.",
+      "unlocked_locations": [
+        "Leahampton, Hampshire",
+        "The Grove, Wellington Avenue, Leahampton",
+        "Soho Restaurant, London"
+      ],
+      "unlocked_characters": [
+        "Lord Rudd Green",
+        "Detective-Sandler Jagger",
+        "Miss Mullen Paley",
+        "James Gaye",
+        "Dr. Bergman Collette"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring Connections",
+      "objective": "Investigate the relationships and motives of the suspects and gather evidence.",
+      "unlocked_locations": [
+        "110A Piccadilly, London",
+        "Crow’s Beach",
+        "Shelly Head"
+      ],
+      "unlocked_characters": [
+        "Theron Blythe",
+        "Theron Urban",
+        "Olsen Chappelle",
+        "Bell Chappelle (later Bell Roberts)",
+        "Mrs. O'dowd"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering the Truth",
+      "objective": "Follow leads to determine the method of murder and identify the culprit.",
+      "unlocked_locations": [
+        "South Audley Street, London",
+        "Turner, Warwickshire",
+        "Croftover Magna"
+      ],
+      "unlocked_characters": [
+        "Miss Alexandra Katherine Cage"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the culprit and bring them to justice.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "Lord Rudd Green": {
+      "type": "assistant",
+      "role": "Amateur Detective",
+      "location": "110A Piccadilly, London",
+      "phase_locations": {
+        "0": "110A Piccadilly, London",
+        "1": "110A Piccadilly, London",
+        "2": "110A Piccadilly, London"
+      },
+      "persona": "Eccentric, witty, and highly observant. Prefers a nonchalant approach but is deeply analytical.",
+      "knowledge_about_others": {
+        "James Gaye": "Suspect in the murder of Miss Mullen Paley and subsequent crimes.",
+        "Detective-Sandler Jagger": "Professional partner in solving the mystery.",
+        "Miss Mullen Paley": "Victim of an unnatural death.",
+        "Dr. Bergman Collette": "Attending physician with questionable ethics."
+      },
+      "abilities": "Brilliant deductive reasoning, keen observer of human nature, and adept at psychological manipulation.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Hypodermic syringe"
+          ],
+          "reaction": "Begins to suspect the use of air embolism as a murder method.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Detective-Sandler Jagger": {
+      "type": "assistant",
+      "role": "Professional Detective",
+      "location": "Scotland Yard, London",
+      "phase_locations": {
+        "0": "Scotland Yard, London",
+        "1": "Scotland Yard, London",
+        "2": "Scotland Yard, London"
+      },
+      "persona": "Methodical, thorough, and professional. Prefers a straightforward approach to solving crimes.",
+      "knowledge_about_others": {
+        "Lord Rudd Green": "Amateur partner with unique insights.",
+        "James Gaye": "Primary suspect in the investigation.",
+        "Miss Mullen Paley": "Victim of the crime under investigation."
+      },
+      "abilities": "Expert in forensic analysis, interrogation, and evidence collection.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "£5 note"
+          ],
+          "reaction": "Traces the £5 note back to Mrs. O'dowd, suspecting her involvement.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Miss Mullen Paley": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "The Grove, Wellington Avenue, Leahampton",
+      "phase_locations": {
+        "0": "The Grove, Wellington Avenue, Leahampton"
+      },
+      "persona": "Elderly, determined, and somewhat eccentric. Suffered from cancer and was wary of those around her.",
+      "knowledge_about_others": {
+        "James Gaye": "Niece and heir.",
+        "Dr. Bergman Collette": "Attending physician."
+      },
+      "secret": "Her unexpected death was not natural but orchestrated.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "James Gaye": {
+      "type": "suspect",
+      "role": "Primary Culprit",
+      "location": "The Grove, Wellington Avenue, Leahampton",
+      "phase_locations": {
+        "0": "The Grove, Wellington Avenue, Leahampton",
+        "1": "The Grove, Wellington Avenue, Leahampton",
+        "2": "South Audley Street, London"
+      },
+      "persona": "Tall, handsome, and authoritative. Skilled in manipulation and deception.",
+      "knowledge_about_others": {
+        "Miss Mullen Paley": "Aunt and victim.",
+        "Theron Blythe": "Former nurse with incriminating knowledge.",
+        "Mrs. O'dowd": "Accomplice in crimes."
+      },
+      "secret": "Murdered Miss Mullen Paley and others to secure inheritance and cover up previous crimes.",
+      "suspicion_meter": 95,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Scar on hand",
+            "Attempt to forge will"
+          ],
+          "reaction": "Attempts to silence witnesses and cover tracks.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Dr. Bergman Collette": {
+      "type": "suspect",
+      "role": "Attending Physician",
+      "location": "Leahampton, Hampshire",
+      "phase_locations": {
+        "0": "Leahampton, Hampshire",
+        "1": "Leahampton, Hampshire"
+      },
+      "persona": "Conscientious but lacking in worldly wisdom. Suspected of unethical behavior.",
+      "knowledge_about_others": {
+        "Miss Mullen Paley": "Patient who died under suspicious circumstances.",
+        "Theron Blythe": "Fiancée and former nurse."
+      },
+      "secret": "His professional judgment was questioned in the death of Miss Mullen Paley.",
+      "suspicion_meter": 50,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "Theron Blythe": {
+      "type": "suspect",
+      "role": "Former Nurse",
+      "location": "London",
+      "phase_locations": {
+        "0": "The Grove, Wellington Avenue, Leahampton",
+        "1": "London"
+      },
+      "persona": "Capable, intelligent, and observant. Deeply attached to her patients.",
+      "knowledge_about_others": {
+        "Miss Mullen Paley": "Patient under her care.",
+        "James Gaye": "Employer with suspicious behavior."
+      },
+      "secret": "Aware of suspicious activities surrounding Miss Paley's death but did not act.",
+      "suspicion_meter": 40,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "Theron Urban": {
+      "type": "suspect",
+      "role": "Replacement Nurse",
+      "location": "Leahampton, Hampshire",
+      "phase_locations": {
+        "0": "The Grove, Wellington Avenue, Leahampton"
+      },
+      "persona": "Professional and discreet. Less emotionally involved than Theron Blythe.",
+      "knowledge_about_others": {
+        "Miss Mullen Paley": "Patient under her care.",
+        "James Gaye": "Employer."
+      },
+      "secret": "Observed unusual behavior but did not report it.",
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "Olsen Chappelle": {
+      "type": "suspect",
+      "role": "Former Maid",
+      "location": "London",
+      "phase_locations": {
+        "0": "The Grove, Wellington Avenue, Leahampton",
+        "1": "London"
+      },
+      "persona": "Trusting and hardworking. Dismissed under suspicious circumstances.",
+      "knowledge_about_others": {
+        "Miss Mullen Paley": "Employer.",
+        "James Gaye": "Employer's niece."
+      },
+      "secret": "Possessed knowledge about the household that could implicate James Gaye.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Bell Chappelle (later Bell Roberts)": {
+      "type": "suspect",
+      "role": "Former Maid",
+      "location": "Canada",
+      "phase_locations": {
+        "0": "The Grove, Wellington Avenue, Leahampton",
+        "1": "Canada"
+      },
+      "persona": "Ambitious and resourceful. Moved to London for better opportunities.",
+      "knowledge_about_others": {
+        "Miss Mullen Paley": "Former employer.",
+        "James Gaye": "Employer's niece."
+      },
+      "secret": "Left England after her sister's death, possibly to escape danger.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "Mrs. O'dowd": {
+      "type": "suspect",
+      "role": "Accomplice",
+      "location": "South Audley Street, London",
+      "phase_locations": {
+        "1": "South Audley Street, London",
+        "2": "South Audley Street, London"
+      },
+      "persona": "Mysterious and manipulative. Lives a secretive life with irregular habits.",
+      "knowledge_about_others": {
+        "James Gaye": "Partner in crime.",
+        "Olsen Chappelle": "Victim of a staged kidnapping."
+      },
+      "secret": "Involved in the murder plot and cover-up with James Gaye.",
+      "suspicion_meter": 85,
+      "flight_risk": 70,
+      "conditional_behaviors": []
+    },
+    "Miss Alexandra Katherine Cage": {
+      "type": "assistant",
+      "role": "Inquiry Agent",
+      "location": "Leahampton, Hampshire",
+      "phase_locations": {
+        "1": "Leahampton, Hampshire",
+        "2": "Leahampton, Hampshire"
+      },
+      "persona": "Gossipy, observant, and highly inquisitive. Uses her social skills to gather information.",
+      "knowledge_about_others": {
+        "James Gaye": "Subject of her inquiries.",
+        "Miss Mullen Paley": "Former resident of Leahampton."
+      },
+      "abilities": "Expert in gathering information through social interactions and gossip.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Confession note"
+          ],
+          "reaction": "Discovers a crucial confession note that implicates James Gaye.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Leahampton, Hampshire": {
+        "description": "A quiet country town in Hampshire, known for its sandy soil and healthy environment. Home to Miss Mullen Paley and the center of the initial mystery.",
+        "clues": [
+          "Miss Paley's unexpected death despite medical expectations",
+          "The suspicious dismissal of the maids Olsen and Bell Chappelle"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "leahampton_newspaper",
+            "category": "item",
+            "name": "Local Newspaper",
+            "description": "A local newspaper containing articles about Miss Paley's death and community gossip.",
+            "notes": "Contains information about local events and public opinion."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "The Grove, Wellington Avenue, Leahampton",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Turner, Warwickshire",
+            "state": "locked"
+          }
+        ],
+        "setting": "A peaceful, small-town atmosphere with a close-knit community."
+      },
+      "The Grove, Wellington Avenue, Leahampton": {
+        "description": "A large house on Wellington Avenue, formerly the residence of Miss Mullen Paley and now occupied by James Gaye.",
+        "clues": [
+          "The attempt to get Miss Paley to sign a will without her knowledge",
+          "The faked footprints and evidence at the crime scene in Shelly Head"
+        ],
+        "people": [
+          {
+            "id": "james_gaye",
+            "name": "James Gaye",
+            "description": "A tall, authoritative woman who is the niece of Miss Mullen Paley.",
+            "notes": "Primary suspect in the investigation."
+          }
+        ],
+        "objects": [
+          {
+            "id": "hypodermic_syringe",
+            "category": "item",
+            "name": "Hypodermic Syringe",
+            "description": "A medical syringe found in the house, possibly used in the murder.",
+            "notes": "Could be linked to the method of murder."
+          },
+          {
+            "id": "typewriter",
+            "category": "item",
+            "name": "Typewriter",
+            "description": "A typewriter used to create documents, possibly including a forged will.",
+            "notes": "May contain fingerprints or other forensic evidence."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Leahampton, Hampshire",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Soho Restaurant, London",
+            "state": "locked"
+          }
+        ],
+        "setting": "A large, somewhat isolated house with a history of recent tragedy."
+      },
+      "Soho Restaurant, London": {
+        "description": "A small, intimate restaurant in Soho where Dr. Collette first shared his suspicions about Miss Paley's death.",
+        "clues": [
+          "The hypodermic syringe and air embolism method used to cause death without trace"
+        ],
+        "people": [
+          {
+            "id": "dr_bergman_collette",
+            "name": "Dr. Bergman Collette",
+            "description": "A conscientious but somewhat naive doctor who attended Miss Paley.",
+            "notes": "Shared initial suspicions about Miss Paley's death."
+          }
+        ],
+        "objects": [
+          {
+            "id": "bradenham_ham_sandwich",
+            "category": "item",
+            "name": "Bradenham Ham Sandwich",
+            "description": "A high-quality ham sandwich found at the crime scene in Adam Forest.",
+            "notes": "Indicates the presence of someone with expensive tastes."
+          },
+          {
+            "id": "bass_bottle",
+            "category": "item",
+            "name": "Bass Bottle",
+            "description": "An empty beer bottle found alongside the sandwich.",
+            "notes": "May contain fingerprints or other forensic evidence."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "110A Piccadilly, London",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "The Grove, Wellington Avenue, Leahampton",
+            "state": "locked"
+          }
+        ],
+        "setting": "A cozy, dimly lit restaurant with an atmosphere of quiet conversation."
+      },
+      "110A Piccadilly, London": {
+        "description": "The luxurious flat of Lord Rudd Green, where he and Detective-Sandler Jagger discuss the case.",
+        "clues": [
+          "The staged kidnapping and murder of Jason Brown to cover up previous crimes"
+        ],
+        "people": [
+          {
+            "id": "lord_rudd_green",
+            "name": "Lord Rudd Green",
+            "description": "An eccentric and brilliant amateur detective.",
+            "notes": "Hosts discussions and strategizes with Jagger."
+          },
+          {
+            "id": "detective_sandler_jagger",
+            "name": "Detective-Sandler Jagger",
+            "description": "A professional detective from Scotland Yard.",
+            "notes": "Works closely with Lord Rudd Green on the case."
+          }
+        ],
+        "objects": [
+          {
+            "id": "black_mask_magazine",
+            "category": "item",
+            "name": "The Black Mask Magazine",
+            "description": "A magazine found at the scene of Jason Brown's murder, possibly left by the culprit.",
+            "notes": "Contains stories of mystery and may provide clues."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Soho Restaurant, London",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "South Audley Street, London",
+            "state": "locked"
+          }
+        ],
+        "setting": "A sophisticated and comfortable flat filled with books and art."
+      },
+      "Crow’s Beach": {
+        "description": "A seaside location where Jason Brown's body was found, suggesting a kidnapping and murder plot.",
+        "clues": [
+          "The faked footprints and evidence at the crime scene in Shelly Head"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "spanner",
+            "category": "item",
+            "name": "Spanner",
+            "description": "A heavy tool used to inflict post-mortem injuries on Jason Brown.",
+            "notes": "Found at the crime scene and possibly used to mislead investigators."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Shelly Head",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet, scenic beach with a dark history of recent events."
+      },
+      "Shelly Head": {
+        "description": "A remote and isolated location near Crow’s Beach, where Jason Brown's body was discovered.",
+        "clues": [
+          "The faked footprints and evidence at the crime scene"
+        ],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Crow’s Beach",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A rugged and isolated headland with a view of the sea."
+      },
+      "South Audley Street, London": {
+        "description": "The location of Mrs. O'dowd's flat, where key evidence and interactions with suspects occur.",
+        "clues": [
+          "The £5 note found on Olsen Chappelle traced back to Mrs. O'dowd"
+        ],
+        "people": [
+          {
+            "id": "mrs_odowd",
+            "name": "Mrs. O'dowd",
+            "description": "A mysterious woman with a secretive lifestyle, living in an elegant flat.",
+            "notes": "Suspected accomplice in the murder plot."
+          }
+        ],
+        "objects": [
+          {
+            "id": "five_pound_note",
+            "category": "item",
+            "name": "£5 Note",
+            "description": "A banknote traced back to Mrs. O'dowd, found on Olsen Chappelle's body.",
+            "notes": "Key piece of evidence linking Mrs. O'dowd to the crime."
+          },
+          {
+            "id": "mauve_cap",
+            "category": "item",
+            "name": "Mauve Cap",
+            "description": "A distinctive cap found at the crime scene, possibly belonging to one of the culprits.",
+            "notes": "May contain forensic evidence or clues about the culprit's identity."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "110A Piccadilly, London",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "An elegant and discreet flat in a wealthy part of London."
+      },
+      "Turner, Warwickshire": {
+        "description": "A small village in Warwickshire, the former home of Miss Efron Gaye and Miss Mullen Paley.",
+        "clues": [
+          "Background information on the Paley and Gaye families"
+        ],
+        "people": [
+          {
+            "id": "criss_gooding",
+            "name": "Criss Gooding",
+            "description": "Former groom of Miss Efron Gaye, knowledgeable about the family history.",
+            "notes": "Provides insights into the Paley and Gaye families."
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Leahampton, Hampshire",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Croftover Magna",
+            "state": "locked"
+          }
+        ],
+        "setting": "A picturesque and quiet village with a rich history."
+      },
+      "Croftover Magna": {
+        "description": "A nearby town to Turner, where the solicitor Mr. Emmerich practiced.",
+        "clues": [
+          "Information about Miss Paley's legal affairs and the new Property Act"
+        ],
+        "people": [
+          {
+            "id": "mr_emmerich",
+            "name": "Mr. Emmerich",
+            "description": "A retired solicitor who managed Miss Paley's legal affairs.",
+            "notes": "Provides crucial information about the inheritance and legal implications."
+          }
+        ],
+        "objects": [
+          {
+            "id": "james_gaye_cheque",
+            "category": "item",
+            "name": "James Gaye's Cheque for £10,000",
+            "description": "A cheque signed by James Gaye, found in the possession of the Rev. Sheen Paley.",
+            "notes": "Key piece of evidence in the investigation."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Turner, Warwickshire",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A small town with a legal office that holds important documents."
+      }
+    }
+  },
+  "locations": {
+    "Leahampton, Hampshire": {
+      "description": "A quiet country town in Hampshire, known for its sandy soil and healthy environment. Home to Miss Mullen Paley and the center of the initial mystery.",
+      "items": [
+        "Local Newspaper"
+      ],
+      "clues": [
+        "Miss Paley's unexpected death despite medical expectations",
+        "The suspicious dismissal of the maids Olsen and Bell Chappelle"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A peaceful, small-town atmosphere with a close-knit community.",
+        "connections": [
+          {
+            "target_location": "The Grove, Wellington Avenue, Leahampton",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Turner, Warwickshire",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "The Grove, Wellington Avenue, Leahampton": {
+      "description": "A large house on Wellington Avenue, formerly the residence of Miss Mullen Paley and now occupied by James Gaye.",
+      "items": [
+        "Hypodermic Syringe",
+        "Typewriter"
+      ],
+      "clues": [
+        "The attempt to get Miss Paley to sign a will without her knowledge",
+        "The faked footprints and evidence at the crime scene in Shelly Head"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A large, somewhat isolated house with a history of recent tragedy.",
+        "connections": [
+          {
+            "target_location": "Leahampton, Hampshire",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Soho Restaurant, London",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Soho Restaurant, London": {
+      "description": "A small, intimate restaurant in Soho where Dr. Collette first shared his suspicions about Miss Paley's death.",
+      "items": [
+        "Bradenham Ham Sandwich",
+        "Bass Bottle"
+      ],
+      "clues": [
+        "The hypodermic syringe and air embolism method used to cause death without trace"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy, dimly lit restaurant with an atmosphere of quiet conversation.",
+        "connections": [
+          {
+            "target_location": "110A Piccadilly, London",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "The Grove, Wellington Avenue, Leahampton",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "110A Piccadilly, London": {
+      "description": "The luxurious flat of Lord Rudd Green, where he and Detective-Sandler Jagger discuss the case.",
+      "items": [
+        "The Black Mask Magazine"
+      ],
+      "clues": [
+        "The staged kidnapping and murder of Jason Brown to cover up previous crimes"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A sophisticated and comfortable flat filled with books and art.",
+        "connections": [
+          {
+            "target_location": "Soho Restaurant, London",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "South Audley Street, London",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Crow’s Beach": {
+      "description": "A seaside location where Jason Brown's body was found, suggesting a kidnapping and murder plot.",
+      "items": [
+        "Spanner"
+      ],
+      "clues": [
+        "The faked footprints and evidence at the crime scene in Shelly Head"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, scenic beach with a dark history of recent events.",
+        "connections": [
+          {
+            "target_location": "Shelly Head",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Shelly Head": {
+      "description": "A remote and isolated location near Crow’s Beach, where Jason Brown's body was discovered.",
+      "items": [],
+      "clues": [
+        "The faked footprints and evidence at the crime scene"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A rugged and isolated headland with a view of the sea.",
+        "connections": [
+          {
+            "target_location": "Crow’s Beach",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "South Audley Street, London": {
+      "description": "The location of Mrs. O'dowd's flat, where key evidence and interactions with suspects occur.",
+      "items": [
+        "£5 Note",
+        "Mauve Cap"
+      ],
+      "clues": [
+        "The £5 note found on Olsen Chappelle traced back to Mrs. O'dowd"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An elegant and discreet flat in a wealthy part of London.",
+        "connections": [
+          {
+            "target_location": "110A Piccadilly, London",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Turner, Warwickshire": {
+      "description": "A small village in Warwickshire, the former home of Miss Efron Gaye and Miss Mullen Paley.",
+      "items": [],
+      "clues": [
+        "Background information on the Paley and Gaye families"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A picturesque and quiet village with a rich history.",
+        "connections": [
+          {
+            "target_location": "Leahampton, Hampshire",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Croftover Magna",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Croftover Magna": {
+      "description": "A nearby town to Turner, where the solicitor Mr. Emmerich practiced.",
+      "items": [
+        "James Gaye's Cheque for £10,000"
+      ],
+      "clues": [
+        "Information about Miss Paley's legal affairs and the new Property Act"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small town with a legal office that holds important documents.",
+        "connections": [
+          {
+            "target_location": "Turner, Warwickshire",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

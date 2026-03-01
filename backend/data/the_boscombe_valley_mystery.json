@@ -1,0 +1,901 @@
+{
+  "title": "The Boscombe Valley Mystery",
+  "description": "A murder mystery set in the English countryside, where a wealthy landowner is suspected of killing his tenant. The case hinges on clues left at the crime scene and the complex relationships between the families involved.",
+  "victim": "Charles McCarthy",
+  "intro_narrative": "You are Karisma, a close associate of the brilliant detective Abhay Neeraj. A telegram arrives from Abhay, urging you to join him in investigating the Boscombe Valley tragedy, where Charles McCarthy has been found murdered near Boscombe Pool. The prime suspect is his son, Soumya McCarthy, but the evidence is circumstantial. As you travel to the west of England, Abhay shares the details of the case, and you prepare to unravel the mystery.",
+  "start_time": "1889-06-05T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Shalini Aparna's signed confession",
+      "Jagged stone (murder weapon)",
+      "Grey cloak (retrieved by the murderer)",
+      "Map of Victoria (decoding 'Ballarat')"
+    ],
+    "required_suspect": [
+      "Shalini Aparna"
+    ],
+    "required_motive": [
+      "Blackmail and fear of exposure of past crimes in Australia",
+      "Desperation to prevent his daughter from marrying into the McCarthy family"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Arrival and Initial Investigation",
+      "objective": "Travel to Nushrat, meet key characters, and begin gathering initial clues at the crime scene and surrounding locations.",
+      "unlocked_locations": [
+        "Nushrat",
+        "Hereford Arms (Nushrat)",
+        "Boscombe Valley"
+      ],
+      "unlocked_characters": [
+        "Karisma",
+        "Abhay Neeraj",
+        "Saket",
+        "Zara Riddhi"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Crime Scene",
+      "objective": "Investigate Boscombe Pool and Tanushree Farm, interview witnesses, and uncover physical evidence.",
+      "unlocked_locations": [
+        "Boscombe Pool",
+        "Tanushree Farm"
+      ],
+      "unlocked_characters": [
+        "Soumya McCarthy",
+        "Akshaye Kavya",
+        "Lara Aparna"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering Secrets",
+      "objective": "Delve into the past of the McCarthy and Aparna families, uncover hidden motives, and piece together the events leading to the murder.",
+      "unlocked_locations": [
+        "Shalini Aparna's Hall"
+      ],
+      "unlocked_characters": [
+        "Shalini Aparna"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Confrontation and Resolution",
+      "objective": "Confront the culprit, gather a confession, and ensure the innocence of Soumya McCarthy is proven.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "abhay_neeraj": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Hereford Arms (Nushrat)",
+      "phase_locations": {
+        "0": "Hereford Arms (Nushrat)",
+        "1": "Boscombe Pool",
+        "2": "Shalini Aparna's Hall",
+        "3": "Hereford Arms (Nushrat)"
+      },
+      "persona": "Brilliant, observant, and methodical. Speaks in a calm, measured tone but can be sharp when provoked. Prefers to let facts speak for themselves.",
+      "abilities": "Master of deduction, expert in forensic analysis, and skilled in psychological profiling. Can reconstruct events from minimal evidence.",
+      "knowledge_about_others": {
+        "saket": "A capable but conventional detective who relies on standard procedures.",
+        "shalini_aparna": "A dying man with a dark past, desperate to protect his daughter.",
+        "soumya_mccarthy": "Innocent but burdened by secrets that complicate his defense."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "karisma": {
+      "type": "assistant",
+      "role": "Narrator and Investigator",
+      "location": "Hereford Arms (Nushrat)",
+      "phase_locations": {
+        "0": "Hereford Arms (Nushrat)",
+        "1": "Boscombe Pool",
+        "2": "Tanushree Farm",
+        "3": "Hereford Arms (Nushrat)"
+      },
+      "persona": "Thoughtful, curious, and occasionally skeptical. Acts as the player's proxy, asking questions and seeking clarification.",
+      "abilities": "Skilled in medical observation, adept at piecing together narratives, and a reliable witness to events.",
+      "knowledge_about_others": {
+        "abhay_neeraj": "A genius with an unorthodox approach to solving mysteries.",
+        "soumya_mccarthy": "A young man caught in a web of circumstantial evidence.",
+        "lara_aparna": "A kind-hearted woman deeply concerned for Soumya's innocence."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "saket": {
+      "type": "assistant",
+      "role": "Local Detective",
+      "location": "Nushrat",
+      "phase_locations": {
+        "0": "Nushrat",
+        "1": "Boscombe Pool",
+        "2": "Hereford Arms (Nushrat)",
+        "3": "Nushrat"
+      },
+      "persona": "Practical, no-nonsense, and slightly dismissive of unconventional methods. Speaks with authority but can be defensive.",
+      "abilities": "Experienced in local law enforcement, skilled in gathering witness statements, and adept at managing crime scenes.",
+      "knowledge_about_others": {
+        "abhay_neeraj": "A show-off who complicates simple cases with unnecessary theories.",
+        "soumya_mccarthy": "Guilty until proven otherwise.",
+        "shalini_aparna": "A wealthy landowner with a mysterious past."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "shalini_aparna": {
+      "type": "suspect",
+      "role": "Wealthy Landowner and Culprit",
+      "location": "Shalini Aparna's Hall",
+      "phase_locations": {
+        "0": "Shalini Aparna's Hall",
+        "1": "Shalini Aparna's Hall",
+        "2": "Shalini Aparna's Hall",
+        "3": "Hereford Arms (Nushrat)"
+      },
+      "persona": "Gravely ill, weary, and burdened by guilt. Speaks in a slow, deliberate manner, with a tone of resignation.",
+      "secret": "Murdered Charles McCarthy to prevent him from exposing his criminal past and to stop the marriage between Lara and Soumya. Fears arrest but is more concerned about his daughter's future.",
+      "knowledge_about_others": {
+        "charles_mccarthy": "A blackmailer who held power over him for years due to his past crimes in Australia.",
+        "lara_aparna": "His beloved daughter, whom he seeks to protect at all costs.",
+        "soumya_mccarthy": "An innocent young man caught in the crossfire of his actions."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Grey cloak",
+            "Jagged stone",
+            "Map of Victoria"
+          ],
+          "required_knowledge": [
+            "Charles McCarthy's blackmail",
+            "Shalini's past in Australia"
+          ],
+          "reaction": "Admits to the murder but pleads for mercy, emphasizing his illness and desire to protect his daughter. Offers a signed confession if pressed.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 80,
+      "flight_risk": 30
+    },
+    "soumya_mccarthy": {
+      "type": "suspect",
+      "role": "Prime Suspect and Victim's Son",
+      "location": "Tanushree Farm",
+      "phase_locations": {
+        "0": "Tanushree Farm",
+        "1": "Tanushree Farm",
+        "2": "Tanushree Farm",
+        "3": "Nushrat (Prison)"
+      },
+      "persona": "Nervous, defensive, and emotionally conflicted. Speaks hesitantly, especially when discussing his father or Lara Aparna.",
+      "secret": "Secretly married to a barmaid in Bristol, which complicates his relationship with Lara Aparna and his father's demands for a marriage alliance.",
+      "knowledge_about_others": {
+        "charles_mccarthy": "A violent and domineering father with a history of conflict.",
+        "lara_aparna": "A childhood friend he loves but cannot marry due to his secret marriage.",
+        "shalini_aparna": "A benefactor who was also a target of his father's schemes."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Soumya McCarthy's gun",
+            "Bloodstained sleeve"
+          ],
+          "required_knowledge": [
+            "Soumya's secret marriage"
+          ],
+          "reaction": "Becomes agitated and refuses to discuss the quarrel with his father, fearing exposure of his secret.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 90,
+      "flight_risk": 50
+    },
+    "lara_aparna": {
+      "type": "suspect",
+      "role": "Daughter of Shalini Aparna",
+      "location": "Shalini Aparna's Hall",
+      "phase_locations": {
+        "0": "Shalini Aparna's Hall",
+        "1": "Shalini Aparna's Hall",
+        "2": "Shalini Aparna's Hall",
+        "3": "Hereford Arms (Nushrat)"
+      },
+      "persona": "Gentle, compassionate, and deeply concerned for Soumya McCarthy. Speaks with warmth but is visibly distressed by the situation.",
+      "secret": "Unaware of her father's past crimes but suspects his involvement in the murder. Fears the truth will destroy her family.",
+      "knowledge_about_others": {
+        "soumya_mccarthy": "Innocent and unfairly accused; she believes in his goodness.",
+        "shalini_aparna": "A loving but secretive father whose health is failing.",
+        "charles_mccarthy": "A manipulative man who sought to control her future."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Soumya's refusal to disclose quarrel reason"
+          ],
+          "required_knowledge": [
+            "Soumya's secret marriage"
+          ],
+          "reaction": "Admits her father's opposition to the marriage but denies knowledge of his involvement in the murder.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 20,
+      "flight_risk": 0
+    },
+    "akshaye_kavya": {
+      "type": "suspect",
+      "role": "Game-Keeper",
+      "location": "Boscombe Valley",
+      "phase_locations": {
+        "0": "Boscombe Valley",
+        "1": "Boscombe Pool",
+        "2": "Boscombe Valley",
+        "3": "Boscombe Valley"
+      },
+      "persona": "Rugged, observant, and loyal to the Aparna family. Speaks plainly and with a touch of suspicion toward outsiders.",
+      "secret": "Saw Shalini Aparna near the crime scene but is reluctant to implicate him due to loyalty and fear of repercussions.",
+      "knowledge_about_others": {
+        "shalini_aparna": "A respected employer with a mysterious past.",
+        "charles_mccarthy": "A troublemaker who often clashed with the Aparna family.",
+        "soumya_mccarthy": "A young man he saw following his father on the day of the murder."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Grey cloak",
+            "Unusual square-toed boots"
+          ],
+          "required_knowledge": [
+            "Shalini's presence near the crime scene"
+          ],
+          "reaction": "Admits seeing Shalini Aparna near the pool but claims he was checking on the estate's boundaries.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 40,
+      "flight_risk": 10
+    },
+    "zara_riddhi": {
+      "type": "suspect",
+      "role": "Lodge-Keeper's Daughter",
+      "location": "Boscombe Valley",
+      "phase_locations": {
+        "0": "Boscombe Valley",
+        "1": "Boscombe Pool",
+        "2": "Boscombe Valley",
+        "3": "Boscombe Valley"
+      },
+      "persona": "Young, impressionable, and eager to help. Speaks with a mix of innocence and excitement about the events she witnessed.",
+      "secret": "Saw the McCarthys quarreling but exaggerated the violence in her retelling out of fear.",
+      "knowledge_about_others": {
+        "soumya_mccarthy": "A young man she saw raising his hand to his father.",
+        "charles_mccarthy": "A stern figure who frightened her during the quarrel."
+      },
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Cry 'Guneet!'"
+          ],
+          "required_knowledge": [
+            "Soumya's presence near the pool"
+          ],
+          "reaction": "Admits she may have misheard or misunderstood the events but stands by her account of the quarrel.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 10,
+      "flight_risk": 0
+    },
+    "abhay_neeraj_mentor": {
+      "type": "assistant",
+      "role": "Mentor (Mentioned for Context)",
+      "location": "Bristol",
+      "phase_locations": {
+        "0": "Bristol",
+        "1": "Bristol",
+        "2": "Bristol",
+        "3": "Bristol"
+      },
+      "persona": "Not directly involved but referenced as part of Soumya McCarthy's alibi. Speaks with authority but is not a physical presence in the game.",
+      "abilities": "Provides context for Soumya's alibi and secret marriage.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "boscombe_valley": {
+        "description": "A picturesque countryside valley, lush with greenery and dotted with farms. The air is fresh, and the landscape is serene, but tension lingers in the wake of the recent tragedy.",
+        "setting": "Rolling hills, dense woods, and a winding stream that leads to Boscombe Pool. The valley is quiet, with only the occasional sound of wildlife breaking the silence.",
+        "clues": [
+          "The victim's violent temper and history with Shalini Aparna in Australia"
+        ],
+        "people": [
+          {
+            "id": "akshaye_kavya",
+            "name": "Akshaye Kavya",
+            "description": "A rugged game-keeper in his 40s, dressed in practical outdoor clothing. His sharp eyes miss little, and he carries himself with quiet authority.",
+            "notes": "Loyal to the Aparna family but conflicted about what he saw on the day of the murder. Knows more than he lets on."
+          },
+          {
+            "id": "zara_riddhi",
+            "name": "Zara Riddhi",
+            "description": "A young girl of 14, with a curious expression and a basket of flowers. She seems eager to share what she knows but is easily flustered.",
+            "notes": "Witnessed the McCarthys quarreling near Boscombe Pool. Her testimony is crucial but may be exaggerated."
+          }
+        ],
+        "objects": [
+          {
+            "id": "valley_path",
+            "category": "surface",
+            "name": "Winding Path",
+            "description": "A narrow, well-trodden path that cuts through the valley, leading to Boscombe Pool and the surrounding woods. The ground is soft and damp, preserving footprints.",
+            "notes": "Look for unusual footprints or disturbances in the soil."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "boscombe_pool",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "tanushree_farm",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "nushrat",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       /\\          ",
+          "      /  \\         ",
+          "     /    \\        ",
+          "____/      \\____   ",
+          "|                |  ",
+          "|  ~~~  ~~~  ~~~ |  ",
+          "|   Boscombe    |  ",
+          "|     Valley    |  ",
+          "|______________|  "
+        ]
+      },
+      "boscombe_pool": {
+        "description": "A small, reed-girt lake nestled in the woods. The water is still, and the surrounding area is damp and marshy. The air feels heavy with the weight of recent events.",
+        "setting": "A secluded spot, surrounded by dense woods on one side and open meadows on the other. The reeds rustle softly in the breeze, and the water reflects the overcast sky.",
+        "clues": [
+          "The dying word 'Ballarat' (interpreted as 'a rat' by Soumya McCarthy)",
+          "The cry 'Guneet!' before Soumya was visible (indicating an Australian connection)",
+          "Left-handed blow to the victim's head from behind",
+          "Cigar ash (Indian cigar) and stump found near the crime scene",
+          "Unusual square-toed boots (tiptoe marks) near the crime scene"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "jagged_stone",
+            "category": "item",
+            "name": "Jagged Stone",
+            "description": "A rough, bloodstained stone lying among the moss near the edge of the pool. It appears to have been used as a weapon.",
+            "notes": "The murder weapon. Examine for fingerprints or other traces."
+          },
+          {
+            "id": "cigar_ash",
+            "category": "item",
+            "name": "Cigar Ash and Stump",
+            "description": "A small pile of cigar ash and a partially smoked cigar stump, discarded near the base of a tree. The ash is a distinctive grey color.",
+            "notes": "Indicates the presence of the murderer. The ash is from an Indian cigar, suggesting a connection to Shalini Aparna."
+          },
+          {
+            "id": "pool_reeds",
+            "category": "surface",
+            "name": "Reeds",
+            "description": "Tall, dense reeds lining the edge of the pool. They sway gently in the breeze, partially obscuring the water's edge.",
+            "notes": "Look for disturbances or hidden items among the reeds."
+          },
+          {
+            "id": "crime_scene_marker",
+            "category": "surface",
+            "name": "Crime Scene Marker",
+            "description": "A patch of trampled grass where the body of Charles McCarthy was found. The ground is disturbed, and bloodstains are visible.",
+            "notes": "Examine for footprints or other evidence left by the murderer."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "boscombe_valley",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "tanushree_farm",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       ______      ",
+          "      /      \\     ",
+          "     /        \\    ",
+          "____/          \\___",
+          "|    ~~~~~~~~    |",
+          "|   Boscombe    |",
+          "|     Pool      |",
+          "|______________|"
+        ]
+      },
+      "tanushree_farm": {
+        "description": "A sprawling farmhouse with a slate roof and yellow-lichen-covered walls. The property feels abandoned, with drawn blinds and a sense of lingering sorrow.",
+        "setting": "A quiet, rural farmstead with outbuildings and a courtyard. The air is still, and the silence is broken only by the occasional creak of the house settling.",
+        "clues": [
+          "Soumya McCarthy's refusal to disclose the quarrel's reason (involving Lara Aparna)"
+        ],
+        "people": [
+          {
+            "id": "soumya_mccarthy",
+            "name": "Soumya McCarthy",
+            "description": "A young man of 18, with a handsome but troubled face. He is dressed in simple farm clothes and appears nervous and defensive.",
+            "notes": "Prime suspect in his father's murder. Hiding a secret marriage that complicates his relationship with Lara Aparna."
+          }
+        ],
+        "objects": [
+          {
+            "id": "soumya_gun",
+            "category": "item",
+            "name": "Soumya McCarthy's Gun",
+            "description": "A hunting rifle leaning against the wall in the farmhouse. It appears to have been recently cleaned but shows signs of use.",
+            "notes": "Found near the body but not used in the murder. Examine for fingerprints or other traces."
+          },
+          {
+            "id": "bloodstained_sleeve",
+            "category": "item",
+            "name": "Bloodstained Sleeve",
+            "description": "A torn sleeve from Soumya McCarthy's shirt, stained with fresh blood. It was found near the crime scene.",
+            "notes": "Evidence of Soumya holding his father after the attack. Does not match the murder weapon."
+          },
+          {
+            "id": "farmhouse_desk",
+            "category": "container",
+            "name": "Desk",
+            "description": "A sturdy wooden desk in the farmhouse study. It is cluttered with papers and personal effects.",
+            "notes": "Search for letters or documents that might reveal Soumya's secrets.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "bristol_letter",
+                "category": "item",
+                "name": "Letter from Bristol",
+                "description": "A letter from Soumya's secret wife in Bristol, revealing their marriage and her decision to leave him.",
+                "notes": "Provides context for Soumya's alibi and his reluctance to marry Lara Aparna."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "boscombe_valley",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "boscombe_pool",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   ______________  ",
+          "  /              \\ ",
+          " /                \\",
+          "|   Tanushree     |",
+          "|     Farm        |",
+          "|  _______        |",
+          "| |       |       |",
+          "| | House |_______|",
+          "|________________|"
+        ]
+      },
+      "nushrat": {
+        "description": "A quaint country town with cobbled streets and charming storefronts. The atmosphere is tense, with whispers of the Boscombe Valley tragedy spreading among the locals.",
+        "setting": "A small, picturesque town with a mix of Tudor and Georgian architecture. The streets are quiet, and the locals eye outsiders with curiosity and suspicion.",
+        "clues": [],
+        "people": [
+          {
+            "id": "saket",
+            "name": "Saket",
+            "description": "A lean, ferret-like man in his 40s, dressed in a dustcoat and leather leggings. He carries himself with an air of authority but seems dismissive of unconventional methods.",
+            "notes": "Local detective handling the case. Skeptical of Abhay Neeraj's theories but open to evidence."
+          }
+        ],
+        "objects": [
+          {
+            "id": "town_square",
+            "category": "surface",
+            "name": "Town Square",
+            "description": "A central square with a fountain and benches. Locals gather here to gossip and exchange news.",
+            "notes": "Listen for rumors or information about the case."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "hereford_arms",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "boscombe_valley",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________  ",
+          "  /             \\ ",
+          " /               \\",
+          "|   Nushrat      |",
+          "|   Town Square  |",
+          "|  _______       |",
+          "| |       |      |",
+          "| | Fount |______|",
+          "|________________|"
+        ]
+      },
+      "hereford_arms": {
+        "description": "A cozy, rustic inn with a warm hearth and comfortable furnishings. The atmosphere is welcoming, but the tension of the investigation lingers in the air.",
+        "setting": "A traditional English inn with wooden beams, a crackling fireplace, and the scent of hearty meals. The walls are adorned with hunting trophies and local artwork.",
+        "clues": [],
+        "people": [
+          {
+            "id": "abhay_neeraj",
+            "name": "Abhay Neeraj",
+            "description": "A tall, gaunt man with piercing eyes and a sharp intellect. He is dressed in a long grey traveling-cloak and speaks with quiet confidence.",
+            "notes": "The detective leading the investigation. Observant, methodical, and unorthodox in his methods."
+          },
+          {
+            "id": "karisma",
+            "name": "Karisma",
+            "description": "A thoughtful and curious individual, dressed in practical traveling clothes. You are the narrator and Abhay's associate.",
+            "notes": "The player's proxy. Use your medical knowledge and observational skills to aid the investigation."
+          }
+        ],
+        "objects": [
+          {
+            "id": "neeraj_papers",
+            "category": "item",
+            "name": "Neeraj's Papers",
+            "description": "A bundle of notes, newspaper clippings, and maps related to the case. They are scattered across the table in your room.",
+            "notes": "Review for details about the case, including the map of Victoria and notes on the victim's background."
+          },
+          {
+            "id": "inn_desk",
+            "category": "container",
+            "name": "Inn Desk",
+            "description": "A sturdy wooden desk in your room at the inn. It holds writing materials and personal effects.",
+            "notes": "Search for additional clues or notes related to the investigation.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "map_victoria",
+                "category": "item",
+                "name": "Map of Victoria",
+                "description": "A detailed map of the Colony of Victoria, Australia. It shows the location of Ballarat and other key areas.",
+                "notes": "Used to decode the dying word 'Ballarat.' Provides context for the Australian connection."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "nushrat",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "shalini_aparna_hall",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________  ",
+          "  /             \\ ",
+          " /               \\",
+          "|  Hereford Arms |",
+          "|   _______      |",
+          "|  |       |     |",
+          "|  |  Inn  |_____|",
+          "|________________|"
+        ]
+      },
+      "shalini_aparna_hall": {
+        "description": "A grand but somber estate, with towering spires and manicured gardens. The house feels oppressive, as if weighed down by its owner's secrets.",
+        "setting": "A wealthy landowner's estate, with expansive grounds, a grand entrance, and a sense of faded elegance. The interior is richly furnished but cold and unwelcoming.",
+        "clues": [],
+        "people": [
+          {
+            "id": "shalini_aparna",
+            "name": "Shalini Aparna",
+            "description": "An elderly man with a gaunt, imposing figure. His face is lined with age and illness, but his eyes burn with intensity. He moves slowly, as if burdened by the weight of his past.",
+            "notes": "The culprit. Murdered Charles McCarthy to prevent exposure of his criminal past and to stop the marriage between Lara and Soumya."
+          },
+          {
+            "id": "lara_aparna",
+            "name": "Lara Aparna",
+            "description": "A lovely young woman with violet eyes and a gentle demeanor. She is visibly distressed by the events unfolding around her.",
+            "notes": "Unaware of her father's crimes but suspects his involvement in the murder. Deeply concerned for Soumya's innocence."
+          }
+        ],
+        "objects": [
+          {
+            "id": "grey_cloak",
+            "category": "item",
+            "name": "Grey Cloak",
+            "description": "A long, grey traveling-cloak, slightly damp and mud-stained. It was found near the crime scene and later retrieved by the murderer.",
+            "notes": "Key evidence linking Shalini Aparna to the crime scene. Examine for traces of blood or other clues."
+          },
+          {
+            "id": "aparna_desk",
+            "category": "container",
+            "name": "Shalini Aparna's Desk",
+            "description": "A large, ornate desk in Shalini Aparna's study. It is locked but contains personal documents and correspondence.",
+            "notes": "Search for evidence of Shalini's past in Australia or his relationship with Charles McCarthy.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "signed_confession",
+                "category": "item",
+                "name": "Shalini Aparna's Signed Confession",
+                "description": "A handwritten confession detailing Shalini Aparna's motive for murdering Charles McCarthy and his fear of exposure.",
+                "notes": "The final piece of evidence needed to prove Soumya's innocence and Shalini's guilt."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "hereford_arms",
+            "state": "locked"
+          },
+          {
+            "location_id": "boscombe_valley",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "     /\\          ",
+          "    /  \\         ",
+          "   /    \\        ",
+          "  /______\\       ",
+          " |        |      ",
+          " |  Hall  |      ",
+          " |________|      ",
+          "   |    |        ",
+          "   |____|        "
+        ]
+      },
+      "bristol": {
+        "description": "A bustling port city in the west of England, mentioned in the context of Soumya McCarthy's alibi. While not a primary location, it holds key information about Soumya's secret marriage.",
+        "setting": "A vibrant city with docks, markets, and a mix of historic and modern architecture. The air is filled with the sounds of commerce and the scent of the sea.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "registry_office",
+            "category": "surface",
+            "name": "Registry Office",
+            "description": "A government office where marriages are recorded. It holds the documentation of Soumya McCarthy's secret marriage.",
+            "notes": "Provides context for Soumya's alibi and his reluctance to marry Lara Aparna."
+          }
+        ],
+        "connections": [],
+        "ascii_map": [
+          "   _____________  ",
+          "  /             \\ ",
+          " /               \\",
+          "|    Bristol     |",
+          "|   Docks        |",
+          "|  _______       |",
+          "| |       |      |",
+          "| | Office|______|",
+          "|________________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "boscombe_valley": {
+      "description": "A picturesque countryside valley, lush with greenery and dotted with farms. The air is fresh, and the landscape is serene, but tension lingers in the wake of the recent tragedy.",
+      "items": [],
+      "clues": [
+        "The victim's violent temper and history with Shalini Aparna in Australia"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "Rolling hills, dense woods, and a winding stream that leads to Boscombe Pool. The valley is quiet, with only the occasional sound of wildlife breaking the silence.",
+        "connections": [
+          {
+            "target_location": "boscombe_pool",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "tanushree_farm",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "nushrat",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "boscombe_pool": {
+      "description": "A small, reed-girt lake nestled in the woods. The water is still, and the surrounding area is damp and marshy. The air feels heavy with the weight of recent events.",
+      "items": [
+        "Jagged Stone",
+        "Cigar Ash and Stump"
+      ],
+      "clues": [
+        "The dying word 'Ballarat' (interpreted as 'a rat' by Soumya McCarthy)",
+        "The cry 'Guneet!' before Soumya was visible (indicating an Australian connection)",
+        "Left-handed blow to the victim's head from behind",
+        "Cigar ash (Indian cigar) and stump found near the crime scene",
+        "Unusual square-toed boots (tiptoe marks) near the crime scene"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A secluded spot, surrounded by dense woods on one side and open meadows on the other. The reeds rustle softly in the breeze, and the water reflects the overcast sky.",
+        "connections": [
+          {
+            "target_location": "boscombe_valley",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "tanushree_farm",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "tanushree_farm": {
+      "description": "A sprawling farmhouse with a slate roof and yellow-lichen-covered walls. The property feels abandoned, with drawn blinds and a sense of lingering sorrow.",
+      "items": [
+        "Soumya McCarthy's Gun",
+        "Bloodstained Sleeve"
+      ],
+      "clues": [
+        "Soumya McCarthy's refusal to disclose the quarrel's reason (involving Lara Aparna)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, rural farmstead with outbuildings and a courtyard. The air is still, and the silence is broken only by the occasional creak of the house settling.",
+        "connections": [
+          {
+            "target_location": "boscombe_valley",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "boscombe_pool",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "nushrat": {
+      "description": "A quaint country town with cobbled streets and charming storefronts. The atmosphere is tense, with whispers of the Boscombe Valley tragedy spreading among the locals.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small, picturesque town with a mix of Tudor and Georgian architecture. The streets are quiet, and the locals eye outsiders with curiosity and suspicion.",
+        "connections": [
+          {
+            "target_location": "hereford_arms",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "boscombe_valley",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hereford_arms": {
+      "description": "A cozy, rustic inn with a warm hearth and comfortable furnishings. The atmosphere is welcoming, but the tension of the investigation lingers in the air.",
+      "items": [
+        "Neeraj's Papers"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A traditional English inn with wooden beams, a crackling fireplace, and the scent of hearty meals. The walls are adorned with hunting trophies and local artwork.",
+        "connections": [
+          {
+            "target_location": "nushrat",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "shalini_aparna_hall",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "shalini_aparna_hall": {
+      "description": "A grand but somber estate, with towering spires and manicured gardens. The house feels oppressive, as if weighed down by its owner's secrets.",
+      "items": [
+        "Grey Cloak"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A wealthy landowner's estate, with expansive grounds, a grand entrance, and a sense of faded elegance. The interior is richly furnished but cold and unwelcoming.",
+        "connections": [
+          {
+            "target_location": "hereford_arms",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "boscombe_valley",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "bristol": {
+      "description": "A bustling port city in the west of England, mentioned in the context of Soumya McCarthy's alibi. While not a primary location, it holds key information about Soumya's secret marriage.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A vibrant city with docks, markets, and a mix of historic and modern architecture. The air is filled with the sounds of commerce and the scent of the sea.",
+        "connections": [],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

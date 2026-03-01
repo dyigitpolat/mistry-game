@@ -1,0 +1,1033 @@
+{
+  "title": "The Adventure of the Priory School",
+  "description": "A mysterious disappearance of a young nobleman, Lord Ranbir, from the Priory School leads Sherlock Neetu on a complex investigation involving kidnapping, murder, and a web of deceit among the school's staff and the boy's own family.",
+  "victim": "Monali (the German master)",
+  "intro_narrative": "Dr. Payal Ekta, the founder and principal of the Priory School, arrives in a state of nervous exhaustion at Baker Street. He reveals that Lord Ranbir, the ten-year-old son of the Duke of Madhavan, has gone missing from his school along with the German master, Monali. The case is urgent, and the Duke has offered a substantial reward for the safe return of his son. Sherlock Neetu, intrigued by the complexity of the case, agrees to investigate.",
+  "start_time": "09:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "The bicycle tracks with Palmer tires (Monali's) leading to his death",
+      "The patched Dunlop tire tracks (indicating another bicycle was involved)",
+      "The absence of cow tracks despite apparent cow hoof prints (revealing the use of counterfeit horseshoes)",
+      "The discovery of Lord Ranbir's cricket cap in the gipsies' caravan",
+      "The bloodstains and gorse with blood near the scene of Monali's death",
+      "The Duke's letter to Lord Ranbir on the day of his disappearance",
+      "The altered horseshoes found in the smithy at the Fighting Siddharth Inn"
+    ],
+    "required_suspect": [
+      "Lakshmi Ranjit",
+      "Pankaj Nidhi"
+    ],
+    "required_motive": [
+      "Lakshmi Ranjit's jealousy and desire to be the sole heir of the Duke's estates",
+      "Pankaj Nidhi's greed and willingness to kidnap for ransom"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues and speak to key characters at the Priory School and surrounding areas.",
+      "unlocked_locations": [
+        "priory_school",
+        "shalu_station"
+      ],
+      "unlocked_characters": [
+        "sherlock_neetu",
+        "dr_karthik",
+        "dr_payal_ekta",
+        "monali",
+        "duke_of_madhavan"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Moor",
+      "objective": "Investigate the moor and surrounding areas for further clues about Lord Ranbir's disappearance.",
+      "unlocked_locations": [
+        "ragged_shaw",
+        "lower_gill_moor",
+        "fighting_siddharth_inn"
+      ],
+      "unlocked_characters": [
+        "lakshmi_ranjit",
+        "pankaj_nidhi",
+        "mrs_nidhi"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Confronting Suspects",
+      "objective": "Confront suspects and gather evidence to solve the mystery.",
+      "unlocked_locations": [
+        "madhavan_hall",
+        "chesterfield_high_road"
+      ],
+      "unlocked_characters": []
+    },
+    {
+      "id": 3,
+      "name": "Resolution",
+      "objective": "Present findings to the Duke and resolve the case.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "sherlock_neetu": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "priory_school",
+      "phase_locations": {
+        "0": "priory_school",
+        "1": "lower_gill_moor",
+        "2": "madhavan_hall",
+        "3": "madhavan_hall"
+      },
+      "persona": "Sharp, observant, and logical. Speaks in a precise and analytical manner, often with a touch of dry humor.",
+      "knowledge_about_others": {
+        "dr_karthik": "Trusts Karthik implicitly and values his medical expertise and companionship.",
+        "dr_payal_ekta": "Views Ekta as a well-meaning but somewhat ineffectual schoolmaster overwhelmed by the situation.",
+        "duke_of_madhavan": "Suspects the Duke is hiding something crucial about his family dynamics.",
+        "lakshmi_ranjit": "Believes Ranjit is deeply involved in the disappearance and is hiding secrets.",
+        "pankaj_nidhi": "Considers Nidhi a dangerous and cunning criminal capable of violence."
+      },
+      "abilities": "Master of deduction, keen observer of details, and skilled in forensic analysis. Can piece together complex puzzles from minimal clues.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The bicycle tracks with Palmer tires (Monali's) leading to his death"
+          ],
+          "reaction": "Neetu will deduce that Monali was involved in the disappearance and met with foul play. He will focus on tracking the second bicycle.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "The absence of cow tracks despite apparent cow hoof prints (revealing the use of counterfeit horseshoes)",
+            "The altered horseshoes found in the smithy at the Fighting Siddharth Inn"
+          ],
+          "reaction": "Neetu will confront Pankaj Nidhi, accusing him of using counterfeit horseshoes to mislead pursuers. He will press for information about Lord Ranbir's whereabouts.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dr_karthik": {
+      "type": "assistant",
+      "role": "Physician and Chronicler",
+      "location": "priory_school",
+      "phase_locations": {
+        "0": "priory_school",
+        "1": "lower_gill_moor",
+        "2": "madhavan_hall",
+        "3": "madhavan_hall"
+      },
+      "persona": "Compassionate, methodical, and detail-oriented. Speaks in a calm and reassuring manner, often providing medical insights.",
+      "knowledge_about_others": {
+        "sherlock_neetu": "Admires Neetu's deductive genius and often serves as his sounding board.",
+        "dr_payal_ekta": "Sympathizes with Ekta's distress and offers medical advice to help him cope.",
+        "duke_of_madhavan": "Views the Duke as a proud and distant figure, possibly hiding family secrets."
+      },
+      "abilities": "Skilled in medical diagnosis, first aid, and providing emotional support. Offers practical advice and observations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The bloodstains and gorse with blood near the scene of Monali's death"
+          ],
+          "reaction": "Karthik will confirm that the bloodstains are fresh and likely from a fatal head injury. He will suggest that the murderer is still at large.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dr_payal_ekta": {
+      "type": "suspect",
+      "role": "Schoolmaster",
+      "location": "priory_school",
+      "phase_locations": {
+        "0": "priory_school",
+        "1": "priory_school",
+        "2": "priory_school",
+        "3": "priory_school"
+      },
+      "persona": "Nervous, pompous, and prone to dramatic outbursts. Speaks in a formal and somewhat condescending manner, often emphasizing his academic credentials.",
+      "knowledge_about_others": {
+        "lord_ranbir": "Views Ranbir as a charming but troubled boy who was unhappy at home.",
+        "monali": "Describes Monali as a morose and unpopular teacher with few friends among the staff or students.",
+        "duke_of_madhavan": "Respects the Duke but is intimidated by his aristocratic demeanor and wishes to avoid scandal."
+      },
+      "secret": "He is deeply ashamed of the scandal and fears it will ruin his reputation and school. He may have withheld information to protect the school's image.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "The Duke's letter to Lord Ranbir on the day of his disappearance"
+          ],
+          "reaction": "Ekta will become defensive and insist that he had no knowledge of the letter's contents or its role in the disappearance.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "lord_ranbir": {
+      "type": "suspect",
+      "role": "Missing Boy",
+      "location": "fighting_siddharth_inn",
+      "phase_locations": {
+        "0": "priory_school",
+        "1": "fighting_siddharth_inn",
+        "2": "fighting_siddharth_inn",
+        "3": "madhavan_hall"
+      },
+      "persona": "Young, impressionable, and somewhat naive. Speaks in a polite and timid manner, often expressing homesickness for his mother.",
+      "knowledge_about_others": {
+        "duke_of_madhavan": "Loves his father but feels distant from him due to his busy schedule and aristocratic demeanor.",
+        "lakshmi_ranjit": "Views Ranjit with a mix of curiosity and unease, sensing his resentment but not understanding its source."
+      },
+      "secret": "He was lured away from the school by a note falsely claiming to be from his mother. He is unaware of the true motives behind his kidnapping.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "duke_of_madhavan": {
+      "type": "suspect",
+      "role": "Nobleman and Father",
+      "location": "madhavan_hall",
+      "phase_locations": {
+        "0": "madhavan_hall",
+        "1": "madhavan_hall",
+        "2": "madhavan_hall",
+        "3": "madhavan_hall"
+      },
+      "persona": "Proud, aristocratic, and commanding. Speaks in a formal and somewhat aloof manner, often emphasizing his status and authority.",
+      "knowledge_about_others": {
+        "lakshmi_ranjit": "Knows Ranjit is his illegitimate son and has tried to keep him close while maintaining his secret.",
+        "pankaj_nidhi": "Views Nidhi as a dangerous criminal but is reluctant to involve the police due to fear of scandal.",
+        "lord_ranbir": "Loves his son but struggles to connect with him emotionally due to his busy schedule and aristocratic upbringing."
+      },
+      "secret": "He is the father of Lakshmi Ranjit, his illegitimate son, and has been trying to protect him despite his criminal actions. He fears scandal and public humiliation.",
+      "suspicion_meter": 70,
+      "flight_risk": 10,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Lakshmi Ranjit's suspicious behavior and late-night visit to the inn",
+            "The Duke's reluctance to involve the police and his attempts to conceal information"
+          ],
+          "reaction": "The Duke will initially deny any involvement but will eventually confess to his relationship with Ranjit and his role in covering up the kidnapping.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "lakshmi_ranjit": {
+      "type": "suspect",
+      "role": "Duke's Secretary and Illegitimate Son",
+      "location": "madhavan_hall",
+      "phase_locations": {
+        "0": "madhavan_hall",
+        "1": "fighting_siddharth_inn",
+        "2": "fighting_siddharth_inn",
+        "3": "madhavan_hall"
+      },
+      "persona": "Intelligent, ambitious, and resentful. Speaks in a polished and articulate manner, often masking his true emotions with a veneer of professionalism.",
+      "knowledge_about_others": {
+        "duke_of_madhavan": "Resents the Duke for his aristocratic privilege and longs to be recognized as his heir.",
+        "pankaj_nidhi": "Views Nidhi as a useful but dangerous ally in his schemes to secure his inheritance.",
+        "lord_ranbir": "Hates Ranbir for being the legitimate heir and sees him as an obstacle to his ambitions."
+      },
+      "secret": "He orchestrated Lord Ranbir's kidnapping in an attempt to force the Duke to break the entail and name him as heir. He is willing to go to extreme lengths to achieve his goals.",
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The patched Dunlop tire tracks (indicating another bicycle was involved)"
+          ],
+          "reaction": "Ranjit will become visibly agitated and attempt to deflect suspicion by questioning the reliability of the evidence.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Lakshmi Ranjit's suspicious behavior and late-night visit to the inn",
+            "The altered horseshoes found in the smithy at the Fighting Siddharth Inn"
+          ],
+          "reaction": "Ranjit will confess to his role in the kidnapping but will shift blame onto Pankaj Nidhi for the murder of Monali.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "monali": {
+      "type": "suspect",
+      "role": "German Master",
+      "location": "ragged_shaw",
+      "phase_locations": {
+        "0": "priory_school",
+        "1": "ragged_shaw"
+      },
+      "persona": "Silent, morose, and somewhat mysterious. Speaks in a heavy German accent and is often lost in thought.",
+      "knowledge_about_others": {
+        "lord_ranbir": "Had little interaction with Ranbir but was aware of his unhappiness at home.",
+        "dr_payal_ekta": "Respected Ekta as the schoolmaster but had little personal connection with him."
+      },
+      "secret": "He was involved in Lord Ranbir's disappearance but was killed by Pankaj Nidhi during a struggle on the moor.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "pankaj_nidhi": {
+      "type": "suspect",
+      "role": "Innkeeper and Accomplice",
+      "location": "fighting_siddharth_inn",
+      "phase_locations": {
+        "0": "fighting_siddharth_inn",
+        "1": "fighting_siddharth_inn",
+        "2": "fighting_siddharth_inn",
+        "3": "chesterfield_high_road"
+      },
+      "persona": "Rough, cunning, and menacing. Speaks in a gruff and uneducated manner, often using threats and intimidation to get his way.",
+      "knowledge_about_others": {
+        "lakshmi_ranjit": "Views Ranjit as a valuable but demanding client who pays well for his criminal services.",
+        "mrs_nidhi": "Treats his wife with contempt but relies on her to help manage the inn and care for Lord Ranbir.",
+        "lord_ranbir": "Sees Ranbir as a valuable hostage and is willing to use violence to keep him under control."
+      },
+      "secret": "He is the one who struck and killed Monali during a struggle on the moor. He has been holding Lord Ranbir captive at the inn and is demanding a ransom from the Duke.",
+      "suspicion_meter": 95,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The altered horseshoes found in the smithy at the Fighting Siddharth Inn",
+            "The bloodstains and gorse with blood near the scene of Monali's death"
+          ],
+          "reaction": "Nidhi will become aggressive and deny any involvement in the murder. He will threaten Neetu and Karthik to leave the inn immediately.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "The discovery of Lord Ranbir's cricket cap in the gipsies' caravan",
+            "Lakshmi Ranjit's suspicious behavior and late-night visit to the inn"
+          ],
+          "reaction": "Nidhi will attempt to flee the inn but will be captured by the police. He will confess to the murder of Monali but will shift blame onto Ranjit for orchestrating the kidnapping.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "mrs_nidhi": {
+      "type": "suspect",
+      "role": "Innkeeper's Wife",
+      "location": "fighting_siddharth_inn",
+      "phase_locations": {
+        "0": "fighting_siddharth_inn",
+        "1": "fighting_siddharth_inn",
+        "2": "fighting_siddharth_inn",
+        "3": "fighting_siddharth_inn"
+      },
+      "persona": "Kind-hearted but timid and easily intimidated. Speaks in a soft and hesitant manner, often deferring to her husband's authority.",
+      "knowledge_about_others": {
+        "pankaj_nidhi": "Fears her husband and is aware of his criminal activities but feels powerless to stop him.",
+        "lord_ranbir": "Sympathizes with Ranbir and has been secretly helping him, providing him with food and comfort."
+      },
+      "secret": "She has been helping Lord Ranbir and is aware of her husband's role in the kidnapping and murder. She is torn between her loyalty to her husband and her desire to do what is right.",
+      "suspicion_meter": 50,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The discovery of Lord Ranbir's cricket cap in the gipsies' caravan"
+          ],
+          "reaction": "Mrs. Nidhi will become visibly distressed and admit to knowing about Ranbir's captivity. She will express guilt for not doing more to help him.",
+          "leads_to_break": false
+        }
+      ]
+    }
+  },
+  "game_world": {
+    "locations": {
+      "priory_school": {
+        "description": "A prestigious preparatory school nestled in the cold, bracing atmosphere of the Peak country. The school is surrounded by well-manicured lawns and ivy-covered buildings. The main hall is grand and imposing, with a large staircase leading to the upper floors where the students' rooms are located.",
+        "setting": "The school exudes an air of academic excellence and discipline. The walls are lined with portraits of past headmasters and distinguished alumni. The atmosphere is one of quiet study and order, though the recent disappearance has cast a pall of unease over the staff and students.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |     PRIORY SCHOOL   |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | H  |       | D  ||",
+          "  |  | A  |       | O  ||",
+          "  |  | L  |       | R  ||",
+          "  |  | L  |       | M  ||",
+          "  |  +----+       +----+|",
+          "  |                     |",
+          "  |  +-----------------+|",
+          "  |  |   MAIN HALL     ||",
+          "  |  +-----------------+|",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The Duke's letter to Lord Ranbir on the day of his disappearance"
+        ],
+        "people": [
+          {
+            "id": "dr_payal_ekta",
+            "name": "Dr. Payal Ekta",
+            "description": "A large, pompous man with a heavy, white face seamed with lines of trouble. He is dressed in formal academic attire and appears visibly distressed by the recent events.",
+            "notes": "Ekta is the founder and principal of the Priory School. He is deeply ashamed of the scandal and fears it will ruin his reputation. He may have withheld information to protect the school's image.",
+            "state": "alive"
+          },
+          {
+            "id": "monali",
+            "name": "Monali",
+            "description": "A tall, morose man with a heavy German accent. He is dressed in a dark suit and appears lost in thought, often staring out of windows.",
+            "notes": "Monali is the German master at the school. He had little interaction with the students but was aware of Lord Ranbir's unhappiness. He was involved in the disappearance but was killed by Pankaj Nidhi.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "monali_bicycle",
+            "category": "item",
+            "name": "Monali's Bicycle",
+            "description": "A sturdy bicycle with Palmer tires. It is parked in the bicycle shed near the school's lawn.",
+            "notes": "This bicycle was used by Monali on the night of Lord Ranbir's disappearance. The tracks it left are crucial to understanding the events of that night."
+          },
+          {
+            "id": "school_desk",
+            "category": "surface",
+            "name": "School Desk",
+            "description": "A large, wooden desk in Dr. Ekta's office. It is cluttered with papers, books, and academic paraphernalia.",
+            "notes": "The desk may contain hidden documents or clues related to the disappearance. Players can search the drawers and surfaces for evidence.",
+            "contains": [
+              {
+                "id": "duke_letter",
+                "category": "item",
+                "name": "Duke's Letter to Lord Ranbir",
+                "description": "A sealed envelope with the Duke of Madhavan's coat of arms. The letter inside is written in the Duke's stiff handwriting.",
+                "notes": "This letter was received by Lord Ranbir on the day of his disappearance. Its contents may provide insight into his motives for leaving the school."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "ragged_shaw",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "shalu_station",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "madhavan_hall": {
+        "description": "A stately Elizabethan mansion with magnificent towers and sprawling grounds. The hall is the ancestral home of the Duke of Madhavan and is filled with priceless art and antiques. The study is a grand room lined with bookshelves and dominated by a large desk.",
+        "setting": "The hall exudes an air of aristocratic grandeur and history. The walls are adorned with portraits of past Dukes and family heirlooms. The atmosphere is one of quiet elegance and privilege, though the recent events have cast a shadow over the household.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |    MADHAVAN HALL    |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | S  |       | G  ||",
+          "  |  | T  |       | A  ||",
+          "  |  | U  |       | R  ||",
+          "  |  | D  |       | D  ||",
+          "  |  | Y  |       | E  ||",
+          "  |  +----+       +----+|",
+          "  |                     |",
+          "  |  +-----------------+|",
+          "  |  |   GREAT HALL    ||",
+          "  |  +-----------------+|",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The Duke's reluctance to involve the police and his attempts to conceal information"
+        ],
+        "people": [
+          {
+            "id": "duke_of_madhavan",
+            "name": "Duke of Madhavan",
+            "description": "A tall, stately man with a drawn, thin face and a long, red beard. He is dressed in formal aristocratic attire and carries himself with an air of authority and command.",
+            "notes": "The Duke is a proud and distant figure who is deeply concerned about the scandal surrounding his son's disappearance. He is hiding secrets about his family dynamics and his relationship with Lakshmi Ranjit.",
+            "state": "alive"
+          },
+          {
+            "id": "lakshmi_ranjit",
+            "name": "Lakshmi Ranjit",
+            "description": "A young, polished man with intelligent light-blue eyes and mobile features. He is dressed in professional attire and carries himself with an air of confidence and ambition.",
+            "notes": "Ranjit is the Duke's secretary and illegitimate son. He is deeply involved in Lord Ranbir's disappearance and is hiding his true motives and actions.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "duke_checkbook",
+            "category": "item",
+            "name": "Duke's Checkbook",
+            "description": "A leather-bound checkbook with the Duke's name embossed on the cover. It contains several recently written checks.",
+            "notes": "The checkbook may provide clues about the Duke's financial transactions and his attempts to handle the situation discreetly."
+          },
+          {
+            "id": "museum_case",
+            "category": "container",
+            "name": "Museum Glass Case",
+            "description": "A large glass case in the hall's museum room. It contains a collection of medieval artifacts, including a pair of unusual horseshoes.",
+            "notes": "The case contains medieval horseshoes that are shaped like cow hooves. These may be connected to the counterfeit horseshoes used in the kidnapping.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "medieval_horseshoes",
+                "category": "item",
+                "name": "Medieval Horseshoes",
+                "description": "A pair of iron horseshoes shaped like cow hooves. They are rusted and worn but still intact.",
+                "notes": "These horseshoes are identical to the counterfeit ones used by Pankaj Nidhi to mislead pursuers. They provide a crucial clue to the kidnappers' methods."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "lower_gill_moor",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "chesterfield_high_road",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "fighting_siddharth_inn": {
+        "description": "A squalid and forbidding inn located on the edge of the moor. The inn is run by Pankaj Nidhi and his wife and is known for its rough clientele. The stable yard is cluttered with old carriages and horses, and the smithy is a grimy, soot-covered building.",
+        "setting": "The inn has a dark and menacing atmosphere. The walls are stained with soot and grime, and the air is thick with the smell of ale and tobacco. The clientele is rough and unkempt, and the innkeeper is known for his aggressive and intimidating demeanor.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  | FIGHTING SIDDHARTH  |",
+          "  |        INN          |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | B  |       | S  ||",
+          "  |  | A  |       | M  ||",
+          "  |  | R  |       | I  ||",
+          "  |  +----+       | T  ||",
+          "  |              | H  ||",
+          "  |              | Y  ||",
+          "  |              +----+|",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The altered horseshoes found in the smithy at the Fighting Siddharth Inn",
+          "Lakshmi Ranjit's suspicious behavior and late-night visit to the inn"
+        ],
+        "people": [
+          {
+            "id": "pankaj_nidhi",
+            "name": "Pankaj Nidhi",
+            "description": "A rough, unshaven man with a menacing demeanor. He is dressed in dirty work clothes and carries a metal-headed stick. His eyes are cunning and filled with malice.",
+            "notes": "Nidhi is the innkeeper and a dangerous criminal. He is deeply involved in the kidnapping and murder and is willing to use violence to protect his secrets.",
+            "state": "alive"
+          },
+          {
+            "id": "mrs_nidhi",
+            "name": "Mrs. Nidhi",
+            "description": "A timid, middle-aged woman with a kind face. She is dressed in simple clothes and appears nervous and on edge.",
+            "notes": "Mrs. Nidhi is the innkeeper's wife. She is aware of her husband's criminal activities but feels powerless to stop him. She has been secretly helping Lord Ranbir.",
+            "state": "alive"
+          },
+          {
+            "id": "lord_ranbir",
+            "name": "Lord Ranbir",
+            "description": "A young boy with a pale, frightened face. He is dressed in a school uniform and appears exhausted and distressed.",
+            "notes": "Ranbir was lured away from the school by a note falsely claiming to be from his mother. He is unaware of the true motives behind his kidnapping and is being held captive at the inn.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "patched_dunlop_bicycle",
+            "category": "item",
+            "name": "Patched Dunlop Tire Bicycle",
+            "description": "A bicycle with a patched Dunlop tire. It is leaning against the wall of the inn's stable yard.",
+            "notes": "This bicycle was used by Lakshmi Ranjit on the night of the kidnapping. The patched tire is a crucial clue linking him to the crime."
+          },
+          {
+            "id": "smithy_tools",
+            "category": "surface",
+            "name": "Smithy Tools",
+            "description": "A cluttered workbench in the inn's smithy. It is covered with tools, horseshoes, and pieces of metal.",
+            "notes": "The workbench may contain clues about the counterfeit horseshoes used in the kidnapping. Players can search the tools and surfaces for evidence.",
+            "contains": [
+              {
+                "id": "counterfeit_horseshoes",
+                "category": "item",
+                "name": "Counterfeit Horseshoes",
+                "description": "A set of iron horseshoes shaped like cow hooves. They are newly forged and still covered in soot.",
+                "notes": "These horseshoes were used by Pankaj Nidhi to mislead pursuers. They are identical to the medieval horseshoes found in Madhavan Hall's museum."
+              }
+            ]
+          },
+          {
+            "id": "inn_guest_book",
+            "category": "item",
+            "name": "Inn Guest Book",
+            "description": "A large, leather-bound book on the inn's front desk. It contains the names and details of recent guests.",
+            "notes": "The guest book may provide clues about Lakshmi Ranjit's visits to the inn and his interactions with Pankaj Nidhi."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "lower_gill_moor",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "chesterfield_high_road",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "ragged_shaw": {
+        "description": "A dense grove of trees located near the Priory School. The wood is dark and foreboding, with thick undergrowth and tangled branches. It is a popular spot for students to explore and play.",
+        "setting": "The wood has a mysterious and somewhat eerie atmosphere. The trees are tall and ancient, their branches forming a dense canopy that blocks out much of the sunlight. The ground is covered in fallen leaves and twigs, and the air is filled with the sounds of birds and rustling wildlife.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |     RAGGED SHAW     |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | T  |       | P  ||",
+          "  |  | R  |       | A  ||",
+          "  |  | E  |       | T  ||",
+          "  |  | E  |       | H  ||",
+          "  |  +----+       +----+|",
+          "  |                     |",
+          "  |  +-----------------+|",
+          "  |  |   CLEARING      ||",
+          "  |  +-----------------+|",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The bicycle tracks with Palmer tires (Monali's) leading to his death"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "ivy_plant",
+            "category": "surface",
+            "name": "Ivy Plant",
+            "description": "A stout ivy plant growing on the side of a tree near the edge of the wood. The ivy is thick and strong, capable of supporting a person's weight.",
+            "notes": "This ivy plant was used by Lord Ranbir and Monali to escape from the school on the night of the disappearance. It may contain clues such as footprints or torn clothing."
+          },
+          {
+            "id": "bloodstained_gorse",
+            "category": "item",
+            "name": "Bloodstained Gorse Branch",
+            "description": "A branch of gorse bush with yellow flowers dabbled in crimson blood. The branch is broken and covered in dark stains.",
+            "notes": "This branch was used as a weapon in the struggle that led to Monali's death. It provides crucial evidence about the violent nature of the crime."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "priory_school",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "lower_gill_moor",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "lower_gill_moor": {
+        "description": "A vast, rolling moor that stretches for miles. The moor is covered in heather and peat, with occasional patches of boggy ground. It is a desolate and windswept landscape, home to sheep, cattle, and a few hardy farmers.",
+        "setting": "The moor has a wild and untamed beauty. The ground is uneven and covered in tufts of heather and grass. The air is fresh and bracing, with a strong wind that carries the scent of peat and earth. The moor is intersected by numerous sheep paths and is a popular spot for hiking and exploration.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |    LOWER GILL MOOR  |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | P  |       | B  ||",
+          "  |  | A  |       | O  ||",
+          "  |  | T  |       | G  ||",
+          "  |  | H  |       |    ||",
+          "  |  +----+       +----+|",
+          "  |                     |",
+          "  |  +-----------------+|",
+          "  |  |   MORASS        ||",
+          "  |  +-----------------+|",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The absence of cow tracks despite apparent cow hoof prints (revealing the use of counterfeit horseshoes)",
+          "The patched Dunlop tire tracks (indicating another bicycle was involved)",
+          "The bloodstains and gorse with blood near the scene of Monali's death"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "neetu_ordnance_map",
+            "category": "item",
+            "name": "Neetu's Ordnance Map",
+            "description": "A large, detailed map of the moor and surrounding areas. The map is marked with various landmarks and paths, and Neetu has made several annotations in the margins.",
+            "notes": "This map is crucial for navigating the moor and understanding the geographical context of the case. Neetu uses it to track the movements of the suspects and identify key locations."
+          },
+          {
+            "id": "sheep_tracks",
+            "category": "surface",
+            "name": "Sheep Tracks",
+            "description": "Numerous tracks left by sheep in the soft peat of the moor. The tracks are small and numerous, crisscrossing the landscape.",
+            "notes": "The sheep tracks are a common sight on the moor and may obscure other, more important tracks. Players must carefully examine the ground to distinguish between different types of tracks."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "ragged_shaw",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "madhavan_hall",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "fighting_siddharth_inn",
+            "state": "unlocked"
+          }
+        ]
+      },
+      "chesterfield_high_road": {
+        "description": "A busy high road that runs through the moorland. The road is well-traveled and lined with a few cottages, an inn, and a church. It is a vital thoroughfare for the local community and connects the moor to the nearby town of Chesterfield.",
+        "setting": "The high road is a bustling and lively place compared to the desolate moor. The road is lined with stone walls and hedgerows, and the air is filled with the sounds of passing carriages and travelers. The inn is a popular stopping point for those traveling to and from Chesterfield.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  | CHESTERFIELD HIGH   |",
+          "  |       ROAD          |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | I  |       | C  ||",
+          "  |  | N  |       | H  ||",
+          "  |  | N  |       | U  ||",
+          "  |  +----+       | R  ||",
+          "  |              | C  ||",
+          "  |              | H  ||",
+          "  |              +----+|",
+          "  +---------------------+"
+        ],
+        "clues": [
+          "The discovery of Lord Ranbir's cricket cap in the gipsies' caravan"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "lord_ranbir_cricket_cap",
+            "category": "item",
+            "name": "Lord Ranbir's Cricket Cap",
+            "description": "A blue cricket cap with a white chevron on the peak. The cap is slightly dirty and worn, with traces of mud and grass stains.",
+            "notes": "This cap was found in the gipsies' caravan and provides a crucial clue linking them to Lord Ranbir's disappearance. It suggests that the gipsies may have been involved in the kidnapping or have information about it."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "fighting_siddharth_inn",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "madhavan_hall",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "shalu_station",
+            "state": "locked"
+          }
+        ]
+      },
+      "shalu_station": {
+        "description": "A small, rural train station located near the Priory School. The station is a simple building with a single platform and a few benches. It is a quiet and unassuming place, serving as a gateway to the nearby town of Shalu.",
+        "setting": "The station has a peaceful and somewhat sleepy atmosphere. The platform is lined with flower beds, and the air is filled with the distant sound of birdsong. The stationmaster is a friendly and talkative man who is always eager to chat with travelers.",
+        "ascii_map": [
+          "  +---------------------+",
+          "  |                     |",
+          "  |     SHALU STATION   |",
+          "  |                     |",
+          "  |  +----+       +----+|",
+          "  |  |    |       |    ||",
+          "  |  | P  |       | T  ||",
+          "  |  | L  |       | I  ||",
+          "  |  | A  |       | C  ||",
+          "  |  | T  |       | K  ||",
+          "  |  | F  |       | E  ||",
+          "  |  | O  |       | T  ||",
+          "  |  | R  |       | S  ||",
+          "  |  | M  |       +----+|",
+          "  |  +----+             |",
+          "  +---------------------+"
+        ],
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "station_timetable",
+            "category": "item",
+            "name": "Station Timetable",
+            "description": "A printed timetable listing the train schedules for Shalu Station. The timetable is slightly out of date and has a few handwritten annotations.",
+            "notes": "The timetable may provide clues about the movements of suspects and witnesses. Players can use it to track train arrivals and departures on the day of the disappearance."
+          },
+          {
+            "id": "return_ticket",
+            "category": "item",
+            "name": "Return Ticket from Shalu",
+            "description": "A used return train ticket from Shalu to London. The ticket is dated the day of Dr. Ekta's visit to Baker Street.",
+            "notes": "This ticket provides evidence of Dr. Ekta's journey to London and his urgency in seeking Neetu's help. It may also contain clues about his movements and interactions on the day of the disappearance."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "priory_school",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "chesterfield_high_road",
+            "state": "locked"
+          }
+        ]
+      }
+    }
+  },
+  "locations": {
+    "priory_school": {
+      "description": "A prestigious preparatory school nestled in the cold, bracing atmosphere of the Peak country. The school is surrounded by well-manicured lawns and ivy-covered buildings. The main hall is grand and imposing, with a large staircase leading to the upper floors where the students' rooms are located.",
+      "items": [
+        "Monali's Bicycle"
+      ],
+      "clues": [
+        "The Duke's letter to Lord Ranbir on the day of his disappearance"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The school exudes an air of academic excellence and discipline. The walls are lined with portraits of past headmasters and distinguished alumni. The atmosphere is one of quiet study and order, though the recent disappearance has cast a pall of unease over the staff and students.",
+        "connections": [
+          {
+            "target_location": "ragged_shaw",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "shalu_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "madhavan_hall": {
+      "description": "A stately Elizabethan mansion with magnificent towers and sprawling grounds. The hall is the ancestral home of the Duke of Madhavan and is filled with priceless art and antiques. The study is a grand room lined with bookshelves and dominated by a large desk.",
+      "items": [
+        "Duke's Checkbook"
+      ],
+      "clues": [
+        "The Duke's reluctance to involve the police and his attempts to conceal information"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The hall exudes an air of aristocratic grandeur and history. The walls are adorned with portraits of past Dukes and family heirlooms. The atmosphere is one of quiet elegance and privilege, though the recent events have cast a shadow over the household.",
+        "connections": [
+          {
+            "target_location": "lower_gill_moor",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "chesterfield_high_road",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "fighting_siddharth_inn": {
+      "description": "A squalid and forbidding inn located on the edge of the moor. The inn is run by Pankaj Nidhi and his wife and is known for its rough clientele. The stable yard is cluttered with old carriages and horses, and the smithy is a grimy, soot-covered building.",
+      "items": [
+        "Patched Dunlop Tire Bicycle",
+        "Inn Guest Book"
+      ],
+      "clues": [
+        "The altered horseshoes found in the smithy at the Fighting Siddharth Inn",
+        "Lakshmi Ranjit's suspicious behavior and late-night visit to the inn"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The inn has a dark and menacing atmosphere. The walls are stained with soot and grime, and the air is thick with the smell of ale and tobacco. The clientele is rough and unkempt, and the innkeeper is known for his aggressive and intimidating demeanor.",
+        "connections": [
+          {
+            "target_location": "lower_gill_moor",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "chesterfield_high_road",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "ragged_shaw": {
+      "description": "A dense grove of trees located near the Priory School. The wood is dark and foreboding, with thick undergrowth and tangled branches. It is a popular spot for students to explore and play.",
+      "items": [
+        "Bloodstained Gorse Branch"
+      ],
+      "clues": [
+        "The bicycle tracks with Palmer tires (Monali's) leading to his death"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The wood has a mysterious and somewhat eerie atmosphere. The trees are tall and ancient, their branches forming a dense canopy that blocks out much of the sunlight. The ground is covered in fallen leaves and twigs, and the air is filled with the sounds of birds and rustling wildlife.",
+        "connections": [
+          {
+            "target_location": "priory_school",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "lower_gill_moor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "lower_gill_moor": {
+      "description": "A vast, rolling moor that stretches for miles. The moor is covered in heather and peat, with occasional patches of boggy ground. It is a desolate and windswept landscape, home to sheep, cattle, and a few hardy farmers.",
+      "items": [
+        "Neetu's Ordnance Map"
+      ],
+      "clues": [
+        "The absence of cow tracks despite apparent cow hoof prints (revealing the use of counterfeit horseshoes)",
+        "The patched Dunlop tire tracks (indicating another bicycle was involved)",
+        "The bloodstains and gorse with blood near the scene of Monali's death"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The moor has a wild and untamed beauty. The ground is uneven and covered in tufts of heather and grass. The air is fresh and bracing, with a strong wind that carries the scent of peat and earth. The moor is intersected by numerous sheep paths and is a popular spot for hiking and exploration.",
+        "connections": [
+          {
+            "target_location": "ragged_shaw",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "madhavan_hall",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "fighting_siddharth_inn",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "chesterfield_high_road": {
+      "description": "A busy high road that runs through the moorland. The road is well-traveled and lined with a few cottages, an inn, and a church. It is a vital thoroughfare for the local community and connects the moor to the nearby town of Chesterfield.",
+      "items": [
+        "Lord Ranbir's Cricket Cap"
+      ],
+      "clues": [
+        "The discovery of Lord Ranbir's cricket cap in the gipsies' caravan"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The high road is a bustling and lively place compared to the desolate moor. The road is lined with stone walls and hedgerows, and the air is filled with the sounds of passing carriages and travelers. The inn is a popular stopping point for those traveling to and from Chesterfield.",
+        "connections": [
+          {
+            "target_location": "fighting_siddharth_inn",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "madhavan_hall",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "shalu_station",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "shalu_station": {
+      "description": "A small, rural train station located near the Priory School. The station is a simple building with a single platform and a few benches. It is a quiet and unassuming place, serving as a gateway to the nearby town of Shalu.",
+      "items": [
+        "Station Timetable",
+        "Return Ticket from Shalu"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The station has a peaceful and somewhat sleepy atmosphere. The platform is lined with flower beds, and the air is filled with the distant sound of birdsong. The stationmaster is a friendly and talkative man who is always eager to chat with travelers.",
+        "connections": [
+          {
+            "target_location": "priory_school",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "chesterfield_high_road",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

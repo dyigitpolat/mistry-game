@@ -1,0 +1,1016 @@
+{
+  "title": "The Curved Blades",
+  "description": "A mystery set in the early 20th century involving the murder of Miss Biggs Eleanor at her Long Island estate, Garden Steps. The victim is found dead in her boudoir under bizarre circumstances, leading to a complex investigation with multiple suspects, clues, and a journey to Egypt.",
+  "victim": "Miss Biggs Eleanor",
+  "intro_narrative": "On a cold January night at Garden Steps, Miss Biggs Eleanor, a wealthy and temperamental spinster, is found dead in her boudoir. She is seated at her dressing table, adorned in an elaborate Oriental negligee and a fortune in jewels, with a paper snake wrapped around her neck. The circumstances of her death are mysterious: she was poisoned with aconitine and later struck on the head with a black-jack. The investigation reveals a web of secrets, lies, and hidden motives among her household and acquaintances.",
+  "start_time": "1916-01-15T21:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Scissors matching the cut of powder papers found in Eleanor Miranda's possession",
+      "Powder papers with aconitine traces found in waste-basket",
+      "Phonograph record of Miss Eleanor's voice used to elicit confession",
+      "Telegram from Nita Anita indicating her flight to Cairo"
+    ],
+    "required_suspect": [
+      "Eleanor Miranda"
+    ],
+    "required_motive": [
+      "Inheritance of Miss Biggs Eleanor's fortune",
+      "Desire to marry Count Hammond Robins without interference",
+      "Revenge for years of mistreatment and humiliation"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Uncover the basic facts of Miss Biggs Eleanor's death and identify initial suspects.",
+      "unlocked_locations": [
+        "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+        "Miss Biggs Eleanor's boudoir",
+        "Miss Biggs Eleanor's bedroom",
+        "Conservatory at Garden Steps",
+        "Library at Garden Steps"
+      ],
+      "unlocked_characters": [
+        "Shortland Beryl",
+        "Nita Anita",
+        "Richard Harold",
+        "G Vic",
+        "Sappho",
+        "John (butler)",
+        "Mrs. John (cook)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Deepening Mystery",
+      "objective": "Explore the relationships and secrets among the household members and guests.",
+      "unlocked_locations": [
+        "Shepheard's Hotel (Cairo)"
+      ],
+      "unlocked_characters": [
+        "Count Hammond Robins",
+        "Mrs. Cleopatra",
+        "Billy (Eleanor Miranda's dragoman)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "International Intrigue",
+      "objective": "Follow the trail to Egypt and uncover the truth behind Eleanor Miranda's involvement.",
+      "unlocked_locations": [
+        "Desert near Sakkara (Egypt)"
+      ],
+      "unlocked_characters": [
+        "Eleanor Miranda",
+        "Ahri Miranda's dragoman (Billy)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the culprit and solve the mystery of Miss Biggs Eleanor's death.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "miss_biggs_eleanor": {
+      "type": "suspect",
+      "role": "victim",
+      "location": "Miss Biggs Eleanor's boudoir",
+      "phase_locations": {
+        "0": "Miss Biggs Eleanor's boudoir"
+      },
+      "persona": "Domineering, vain, and temperamental. She is wealthy and well-connected but deeply insecure about her lack of beauty. She is prone to outbursts of anger and often mistreats those around her.",
+      "knowledge_about_others": {
+        "Nita Anita": "Niece and heir, often the target of her temper.",
+        "Eleanor Miranda": "Nephew and heir, adored by her despite his absence.",
+        "G Vic": "Social secretary, envied for her beauty and often scolded.",
+        "Richard Harold": "Business secretary, treated as a dependent.",
+        "Count Hammond Robins": "Potential suitor, flattered by his attention.",
+        "Sappho": "Maid, often reprimanded harshly."
+      },
+      "secret": "She was secretly planning to change her will to favor Count Hammond Robins and disinherit Nita Anita.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "nita_anita": {
+      "type": "suspect",
+      "role": "niece and heir",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+        "2": "Shepheard's Hotel (Cairo)"
+      },
+      "persona": "Graceful, dignified, and intelligent. She is deeply affected by her aunt's death and fears being wrongly accused. She is loyal to her cousin Eleanor Miranda and seeks justice for her aunt.",
+      "knowledge_about_others": {
+        "Eleanor Miranda": "Cousin and co-heir, deeply trusts him.",
+        "G Vic": "Secretary, distrusts her motives.",
+        "Richard Harold": "Business secretary, relies on him for support.",
+        "Shortland Beryl": "Detective, admires his intelligence and integrity."
+      },
+      "secret": "She overheard parts of a conversation in her aunt's boudoir but is unsure of its meaning.",
+      "suspicion_meter": 30,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Overheard conversation by G Vic implicating someone in the boudoir"
+          ],
+          "reaction": "Defensively denies any involvement and accuses G Vic of lying.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "eleanor_miranda": {
+      "type": "suspect",
+      "role": "nephew and culprit",
+      "location": "Desert near Sakkara (Egypt)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+        "2": "Desert near Sakkara (Egypt)"
+      },
+      "persona": "Charming, intelligent, and manipulative. He is deeply involved in archaeological work in Egypt and has a dark secret. He is calculating and willing to commit murder to achieve his goals.",
+      "knowledge_about_others": {
+        "Nita Anita": "Cousin and co-heir, pretends to care for her but is willing to sacrifice her.",
+        "Miss Biggs Eleanor": "Aunt, resents her control over his inheritance.",
+        "Billy": "Dragoman, loyal and used as an accomplice."
+      },
+      "secret": "He orchestrated the murder of his aunt to secure her fortune and sent Nita Anita into the desert to eliminate her as a rival heir.",
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Telegram from Nita Anita indicating her flight to Cairo"
+          ],
+          "reaction": "Pretends to be concerned for Nita Anita but secretly plans to eliminate her.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "shortland_beryl": {
+      "type": "assistant",
+      "role": "detective",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+        "2": "Shepheard's Hotel (Cairo)"
+      },
+      "persona": "Calm, observant, and highly intelligent. He is methodical in his investigations and has a keen eye for detail. He is deeply affected by Nita Anita's plight and works tirelessly to uncover the truth.",
+      "abilities": "Master detective with unparalleled deductive reasoning. Skilled in analyzing clues, interrogating suspects, and piecing together complex mysteries.",
+      "knowledge_about_others": {
+        "Nita Anita": "Suspects her innocence and admires her strength.",
+        "Eleanor Miranda": "Suspects his involvement and works to expose him.",
+        "G Vic": "Distrusts her motives and testimony."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "g_vic": {
+      "type": "suspect",
+      "role": "social secretary",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)"
+      },
+      "persona": "Pretty, blonde, and seemingly innocent. She is ambitious and envious of Nita Anita's position. She is adept at manipulating others and hiding her true intentions.",
+      "knowledge_about_others": {
+        "Nita Anita": "Envies her inheritance and position.",
+        "Miss Biggs Eleanor": "Tolerates her mistreatment to keep her job.",
+        "Richard Harold": "Flirts with him to gain his favor."
+      },
+      "secret": "She overheard a conversation in Miss Biggs Eleanor's boudoir and is using it to frame Nita Anita.",
+      "suspicion_meter": 60,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Overheard conversation by G Vic implicating someone in the boudoir"
+          ],
+          "reaction": "Accuses Nita Anita of being in the boudoir and fabricates details to incriminate her.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "richard_harold": {
+      "type": "suspect",
+      "role": "business secretary",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)"
+      },
+      "persona": "Good-natured, loyal, and somewhat naive. He is devoted to Nita Anita and tries to protect her. He is often caught between his loyalty to the family and his suspicions of others.",
+      "knowledge_about_others": {
+        "Nita Anita": "Deeply cares for her and wants to protect her.",
+        "Miss Biggs Eleanor": "Resents her treatment of Nita Anita and G Vic.",
+        "G Vic": "Distrusts her but is charmed by her."
+      },
+      "secret": "He suspects Eleanor Miranda but lacks evidence to prove it.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "sappho": {
+      "type": "suspect",
+      "role": "maid",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)"
+      },
+      "persona": "French, nervous, and easily frightened. She is loyal to Miss Biggs Eleanor but hides secrets about her actions on the night of the murder.",
+      "knowledge_about_others": {
+        "Miss Biggs Eleanor": "Fears her temper but is loyal to her.",
+        "Xv": "Romantically involved with him and helped him enter the house."
+      },
+      "secret": "She let Xv into the house on the night of the murder and tried to cover up his involvement.",
+      "suspicion_meter": 50,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "Footprint in spilled powder near the dressing table"
+          ],
+          "reaction": "Denies any involvement and claims she did not upset the breakfast tray.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "count_hammond_robins": {
+      "type": "suspect",
+      "role": "suspect",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)"
+      },
+      "persona": "Polished, charming, and somewhat mysterious. He is a French nobleman with a questionable past. He is interested in Miss Biggs Eleanor's fortune but also flirts with Nita Anita.",
+      "knowledge_about_others": {
+        "Miss Biggs Eleanor": "Courts her for her fortune.",
+        "Nita Anita": "Flirts with her to gain her favor.",
+        "Mrs. Cleopatra": "Uses her as a cover for his activities."
+      },
+      "secret": "He is a fortune hunter and may have conspired with others to murder Miss Biggs Eleanor.",
+      "suspicion_meter": 70,
+      "flight_risk": 40,
+      "conditional_behaviors": []
+    },
+    "mrs_cleopatra": {
+      "type": "suspect",
+      "role": "neighbor and suspect",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)"
+      },
+      "persona": "Overdressed, forward, and somewhat meddlesome. She is jealous of Miss Biggs Eleanor's relationship with Count Hammond Robins and is eager to insert herself into the investigation.",
+      "knowledge_about_others": {
+        "Count Hammond Robins": "Jealous of his attention to Miss Biggs Eleanor.",
+        "Miss Biggs Eleanor": "Resents her wealth and social position."
+      },
+      "secret": "She saw a man leaving Garden Steps on the night of the murder but is unsure of his identity.",
+      "suspicion_meter": 50,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "billy": {
+      "type": "suspect",
+      "role": "Eleanor Miranda's dragoman",
+      "location": "Desert near Sakkara (Egypt)",
+      "phase_locations": {
+        "2": "Desert near Sakkara (Egypt)"
+      },
+      "persona": "Dignified, loyal, and somewhat enigmatic. He is deeply devoted to Eleanor Miranda and assists him in his schemes.",
+      "knowledge_about_others": {
+        "Eleanor Miranda": "Loyal servant and accomplice.",
+        "Nita Anita": "Follows orders to mislead and endanger her."
+      },
+      "secret": "He helped Eleanor Miranda carry out his plans in Egypt.",
+      "suspicion_meter": 60,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "xv": {
+      "type": "suspect",
+      "role": "burglar",
+      "location": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)",
+      "phase_locations": {
+        "0": "Garden Steps (Miss Biggs Eleanor's estate, Long Island)"
+      },
+      "persona": "Rough, superstitious, and easily frightened. He is a professional burglar who was hired to steal Miss Biggs Eleanor's jewels but panicked upon discovering her dead.",
+      "knowledge_about_others": {
+        "Sappho": "Romantically involved with her and relies on her for information.",
+        "Miss Biggs Eleanor": "Intended to rob her but did not kill her."
+      },
+      "secret": "He struck Miss Biggs Eleanor with a black-jack after discovering her dead but did not poison her.",
+      "suspicion_meter": 80,
+      "flight_risk": 70,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "garden_steps": {
+        "description": "A grand estate on Long Island, known for its marble steps, sunken gardens, and Italian landscape gardens. The house is lavishly furnished with flowering plants and evergreens, creating a picturesque setting. The estate is surrounded by terraces, flower banks, and rustic wooden stiles leading to old-fashioned gardens.",
+        "setting": "A beautiful winter night with a supercilious moon illuminating the snow-covered marble steps and balustrades. The estate is quiet, with the occasional sound of laughter and music drifting from the house.",
+        "clues": [
+          "Overheard conversation by G Vic implicating someone in the boudoir"
+        ],
+        "objects": [
+          {
+            "id": "garden_steps_terrace",
+            "category": "surface",
+            "name": "Marble Terrace",
+            "description": "A wide marble terrace leading to the sunken gardens. The steps are covered in a light dusting of snow, and the balustrades are adorned with intricate carvings.",
+            "notes": "The terrace offers a view of the entire estate and is a common place for guests to stroll."
+          },
+          {
+            "id": "garden_steps_entrance",
+            "category": "surface",
+            "name": "Grand Entrance",
+            "description": "The main entrance to Garden Steps, flanked by tall columns and decorated with tropical palms. The door is heavy and ornate, often left ajar during social gatherings.",
+            "notes": "Mrs. Cleopatra was seen entering through this door on the night of the murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "miss_biggs_boudoir",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "conservatory",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "library",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "          [GARDEN STEPS]          ",
+          "          ______________          ",
+          "         /              \\         ",
+          "        /                \\        ",
+          "       /                  \\       ",
+          "      /                    \\      ",
+          "=====/                      \\=====",
+          "|   |                        |   |",
+          "|   |        TERRACE         |   |",
+          "|   |                        |   |",
+          "=====\\                      /=====",
+          "       \\                  /       ",
+          "        \\                /        ",
+          "         \\______________/         ",
+          "                                    "
+        ]
+      },
+      "miss_biggs_boudoir": {
+        "description": "An exquisite apartment adorned with ornate furnishings and delicate decorations. The room is softly lit and fragrant with flowers. A large dressing table with a mirror dominates one side, and a velvet chaise lounge sits near the window.",
+        "setting": "The room is elegantly appointed with Pitts Fleming period furniture. The air is filled with the scent of fresh flowers, and the soft glow of lamps casts a warm light over the space.",
+        "clues": [
+          "Paper snake placed around Miss Eleanor's neck",
+          "Man's glove found in Miss Eleanor's hand",
+          "Overheard conversation by G Vic implicating someone in the boudoir",
+          "Footprint in spilled powder near the dressing table"
+        ],
+        "objects": [
+          {
+            "id": "dressing_table",
+            "category": "surface",
+            "name": "Dressing Table",
+            "description": "A large, ornate dressing table with a gold-framed mirror. It is cluttered with silver brushes, combs, and various jars of cosmetics and powders.",
+            "notes": "Miss Biggs Eleanor was found seated here, with powder spilled on the floor nearby.",
+            "contains": [
+              {
+                "id": "tortoise_shell_comb",
+                "category": "item",
+                "name": "Tortoise-Shell Comb",
+                "description": "A large, carved tortoise-shell comb, broken into pieces. It was an heirloom from a Colonial ancestor.",
+                "notes": "The comb was broken during the struggle or attack on Miss Biggs Eleanor."
+              },
+              {
+                "id": "powder_papers",
+                "category": "item",
+                "name": "Powder Papers",
+                "description": "Small papers used for holding face powder. Some contain traces of aconitine.",
+                "notes": "These were found in the waste-basket and contain traces of the poison used to kill Miss Biggs Eleanor."
+              }
+            ]
+          },
+          {
+            "id": "wardrobe",
+            "category": "container",
+            "name": "Wardrobe",
+            "description": "A large, ornate wardrobe filled with elaborate gowns and negligees. The doors are slightly ajar, revealing a glimpse of the luxurious fabrics inside.",
+            "notes": "Miss Biggs Eleanor's Oriental negligee was found here.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "oriental_negligee",
+                "category": "item",
+                "name": "Oriental Negligee",
+                "description": "A pale green silk negligee, heavily embroidered with gold. It was a gift from Eleanor Miranda.",
+                "notes": "Miss Biggs Eleanor was wearing this on the night of her death."
+              },
+              {
+                "id": "syrian_scarf",
+                "category": "item",
+                "name": "Syrian Scarf",
+                "description": "A long, heavy scarf of white and silver net, patterned with intricate designs. It was draped around Miss Biggs Eleanor's shoulders.",
+                "notes": "The scarf was sent to Miss Biggs Eleanor by her nephew, Eleanor Miranda."
+              }
+            ]
+          },
+          {
+            "id": "waste_basket",
+            "category": "container",
+            "name": "Waste-Basket",
+            "description": "A small, ornate waste-basket beneath the dressing table, filled with discarded items such as ribbon clippings and used powder papers.",
+            "notes": "Contains clues related to the murder, including powder papers with aconitine traces.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "powder_papers_aconitine",
+                "category": "item",
+                "name": "Powder Papers with Aconitine",
+                "description": "Small, folded papers containing traces of aconitine, the poison used to kill Miss Biggs Eleanor.",
+                "notes": "These were found in the waste-basket and are key evidence in the murder investigation."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "garden_steps",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "miss_biggs_bedroom",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   [MISS BIGGS'S BOUDOIR]   ",
+          " ________________________ ",
+          "|                        |",
+          "|  DRESSING TABLE        |",
+          "|   ________________     |",
+          "|  |                |    |",
+          "|  |    MIRROR      |    |",
+          "|  |________________|    |",
+          "|                        |",
+          "|  WARDROBE       CHAISE |",
+          "|   _______        _____ |",
+          "|  |       |      |     ||",
+          "|  |       |      |     ||",
+          "|  |_______|      |_____||",
+          "|________________________|"
+        ]
+      },
+      "miss_biggs_bedroom": {
+        "description": "A luxurious bedroom with a large four-poster bed, draped in silk and lace. The room is softly lit by night lights, and the air is filled with the scent of lavender. A telephone sits on the bedside table.",
+        "setting": "The room is elegantly furnished in the Pitts Fleming style, with delicate fabrics and ornate decorations. The bed is turned down but unslept in, and the night lights cast a soft glow over the space.",
+        "clues": [
+          "Miss Eleanor's unusual attire and jewelry on the night of her death"
+        ],
+        "objects": [
+          {
+            "id": "bed",
+            "category": "surface",
+            "name": "Four-Poster Bed",
+            "description": "A large, ornate bed with silk and lace drapes. The bed is turned down but unslept in, indicating Miss Biggs Eleanor did not retire for the night.",
+            "notes": "The bed was found in this state on the morning of the murder."
+          },
+          {
+            "id": "bedside_table",
+            "category": "surface",
+            "name": "Bedside Table",
+            "description": "A small table beside the bed, holding a telephone, a glass of milk, and a plate of sandwiches.",
+            "notes": "The glass of milk was found untouched, but the sandwiches were eaten. The milk contained bromide.",
+            "contains": [
+              {
+                "id": "glass_of_milk",
+                "category": "item",
+                "name": "Glass of Milk",
+                "description": "A glass of milk, untouched and containing traces of bromide.",
+                "notes": "Sappho prepared this for Miss Biggs Eleanor but she did not drink it."
+              },
+              {
+                "id": "plate_of_sandwiches",
+                "category": "item",
+                "name": "Plate of Sandwiches",
+                "description": "A plate containing caviar sandwiches, which were eaten by Miss Biggs Eleanor.",
+                "notes": "The sandwiches may have contained the poison, but tests show it was likely administered in the milk or another liquid."
+              }
+            ]
+          },
+          {
+            "id": "jewelry_box",
+            "category": "container",
+            "name": "Jewelry Box",
+            "description": "A large, ornate box containing various pieces of jewelry, including pearls, diamonds, and scarabs.",
+            "notes": "Miss Biggs Eleanor's jewels were found here and on her person the night of the murder.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "rope_of_pearls",
+                "category": "item",
+                "name": "Rope of Pearls",
+                "description": "A magnificent rope of pearls, practically priceless. Miss Biggs Eleanor wore these on the night of her death.",
+                "notes": "The pearls were taken from the Safe Deposit box the morning of her death."
+              },
+              {
+                "id": "scarab_bracelet",
+                "category": "item",
+                "name": "Scarab Bracelet",
+                "description": "A bracelet adorned with scarabs, sent to Miss Biggs Eleanor by her nephew. It is an imitation but expertly crafted.",
+                "notes": "The bracelet was found on Miss Biggs Eleanor's wrist after her death."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "miss_biggs_boudoir",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "miss_biggs_bathroom",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   [MISS BIGGS'S BEDROOM]   ",
+          " _________________________ ",
+          "|                         |",
+          "|        BED              |",
+          "|    _______________      |",
+          "|   |               |     |",
+          "|   |               |     |",
+          "|   |_______________|     |",
+          "|                         |",
+          "|  BEDSIDE TABLE          |",
+          "|   _______________       |",
+          "|  |               |      |",
+          "|  |_______________|      |",
+          "|_________________________|"
+        ]
+      },
+      "miss_biggs_bathroom": {
+        "description": "A pristine bathroom with gleaming white tiles and silver fixtures. The room is equipped with embroidered towels, delicate soaps, and various perfumes. A small waste-basket sits beneath the washstand.",
+        "setting": "The bathroom is immaculately clean and elegantly appointed. The scent of lavender and rosewater fills the air, and the silver fixtures gleam in the soft light.",
+        "clues": [
+          "Powder papers with aconitine traces found in waste-basket"
+        ],
+        "objects": [
+          {
+            "id": "washstand",
+            "category": "surface",
+            "name": "Washstand",
+            "description": "A silver washstand with a glass shelf holding various toiletries, including a glass and spoon.",
+            "notes": "The glass and spoon were used to administer the poison and were later rinsed and returned to the shelf.",
+            "contains": [
+              {
+                "id": "glass_and_spoon",
+                "category": "item",
+                "name": "Glass and Spoon",
+                "description": "A glass and spoon used to mix and administer the poison. Traces of aconitine were found on them.",
+                "notes": "These were rinsed and returned to the washstand after the poison was administered."
+              }
+            ]
+          },
+          {
+            "id": "bathroom_waste_basket",
+            "category": "container",
+            "name": "Waste-Basket",
+            "description": "A small waste-basket beneath the washstand, containing discarded paper wrappers from powder papers.",
+            "notes": "Contains the powder papers used to hold the aconitine.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "powder_papers_bathroom",
+                "category": "item",
+                "name": "Powder Papers",
+                "description": "Small, folded papers that contained the aconitine. These were found in the waste-basket.",
+                "notes": "These papers match the scissors found in Eleanor Miranda's possession."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "miss_biggs_bedroom",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "  [MISS BIGGS'S BATHROOM]  ",
+          " ________________________ ",
+          "|                        |",
+          "|      WASHSTAND         |",
+          "|   ________________     |",
+          "|  |                |    |",
+          "|  |    GLASS       |    |",
+          "|  |________________|    |",
+          "|                        |",
+          "|  WASTE-BASKET          |",
+          "|   _______              |",
+          "|  |       |             |",
+          "|  |_______|             |",
+          "|________________________|"
+        ]
+      },
+      "conservatory": {
+        "description": "A warm, heavily-scented conservatory filled with tropical plants, palms, and orchids. The air is humid, and the sound of trickling water from a small fountain adds to the serene atmosphere.",
+        "setting": "The conservatory is a lush, green space with a variety of exotic plants and flowers. The scent of orchids and jasmine fills the air, and the soft light filtering through the glass roof creates a tranquil ambiance.",
+        "clues": [],
+        "objects": [
+          {
+            "id": "fountain",
+            "category": "surface",
+            "name": "Fountain",
+            "description": "A small, ornate fountain in the center of the conservatory. The sound of trickling water adds to the peaceful atmosphere.",
+            "notes": "Miss Biggs Eleanor and Count Hammond Robins were seen strolling here on the night of the murder."
+          },
+          {
+            "id": "potted_palms",
+            "category": "surface",
+            "name": "Potted Palms",
+            "description": "Large potted palms and tropical plants line the pathways of the conservatory, creating a lush, green environment.",
+            "notes": "The conservatory is a popular spot for guests to stroll and enjoy the beauty of the plants."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "garden_steps",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "      [CONSERVATORY]      ",
+          " ________________________ ",
+          "|                        |",
+          "|        FOUNTAIN        |",
+          "|         _____          |",
+          "|        |     |         |",
+          "|        |     |         |",
+          "|        |_____|         |",
+          "|                        |",
+          "|  POTTED PALMS          |",
+          "|   _______   _______    |",
+          "|  |       | |       |   |",
+          "|  |_______| |_______|   |",
+          "|________________________|"
+        ]
+      },
+      "library": {
+        "description": "A grand library filled with mahogany bookshelves, a large desk, and comfortable seating. The room is lined with books and adorned with various artworks and photographs.",
+        "setting": "The library is a warm, inviting space with the scent of old books and polished wood. The walls are lined with mahogany bookshelves, and a large desk sits near the window, overlooking the gardens.",
+        "clues": [
+          "Phonograph record of Miss Eleanor's voice used to elicit confession"
+        ],
+        "objects": [
+          {
+            "id": "desk",
+            "category": "surface",
+            "name": "Mahogany Desk",
+            "description": "A large, ornate desk made of mahogany. It is cluttered with papers, books, and various writing utensils.",
+            "notes": "Shortland Beryl uses this desk as his base of operations during the investigation.",
+            "contains": [
+              {
+                "id": "phonograph_record",
+                "category": "item",
+                "name": "Phonograph Record",
+                "description": "A record of Miss Biggs Eleanor's voice, including her laughter and a song. It was used to elicit a confession from Eleanor Miranda.",
+                "notes": "The record contains Miss Biggs Eleanor singing 'Believe Me, If All Those Endearing Young Charms.'"
+              },
+              {
+                "id": "telegram_nita_anita",
+                "category": "item",
+                "name": "Telegram from Nita Anita",
+                "description": "A telegram from Nita Anita indicating her flight to Cairo and her fear of Shortland Beryl.",
+                "notes": "This telegram was sent to Eleanor Miranda and played a key role in the investigation."
+              }
+            ]
+          },
+          {
+            "id": "bookshelf",
+            "category": "surface",
+            "name": "Bookshelf",
+            "description": "A large mahogany bookshelf filled with books, photographs, and various knick-knacks.",
+            "notes": "The bookshelf contains photographs of Nita Anita and Eleanor Miranda from childhood to adulthood.",
+            "contains": [
+              {
+                "id": "photograph_carr",
+                "category": "item",
+                "name": "Photograph of Carr",
+                "description": "A photograph of Carr, a beautiful woman on a Nile trip. The photograph is prominently displayed on the bookshelf.",
+                "notes": "Miss Biggs Eleanor admired this photograph and often gazed at it."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "garden_steps",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "        [LIBRARY]         ",
+          " ________________________ ",
+          "|                        |",
+          "|        DESK            |",
+          "|   ________________     |",
+          "|  |                |    |",
+          "|  |                |    |",
+          "|  |________________|    |",
+          "|                        |",
+          "|  BOOKSHELF             |",
+          "|   ________________     |",
+          "|  |                |    |",
+          "|  |                |    |",
+          "|  |________________|    |",
+          "|________________________|"
+        ]
+      },
+      "shepheards_hotel": {
+        "description": "A grand hotel in Cairo, known for its luxurious accommodations and bustling terrace. The hotel is a hub of social activity, with guests from all over the world.",
+        "setting": "The hotel is elegantly appointed with ornate furnishings and decorations. The terrace is a popular spot for tea and socializing, offering a view of the bustling streets of Cairo.",
+        "clues": [],
+        "objects": [
+          {
+            "id": "terrace_table",
+            "category": "surface",
+            "name": "Terrace Table",
+            "description": "A small table on the terrace of Shepheard's Hotel, where guests gather for tea and conversation.",
+            "notes": "Nita Anita and Shortland Beryl often meet here during their stay in Cairo."
+          },
+          {
+            "id": "hotel_desk",
+            "category": "surface",
+            "name": "Hotel Desk",
+            "description": "The front desk of Shepheard's Hotel, where guests check in and out, and messages are left.",
+            "notes": "Telegrams and letters for Nita Anita and Eleanor Miranda are delivered here."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "desert_near_sakkara",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "    [SHEPHEARD'S HOTEL]    ",
+          " ________________________ ",
+          "|                        |",
+          "|       TERRACE          |",
+          "|   ________________     |",
+          "|  |                |    |",
+          "|  |    TABLES      |    |",
+          "|  |________________|    |",
+          "|                        |",
+          "|       HOTEL DESK       |",
+          "|   ________________     |",
+          "|  |                |    |",
+          "|  |________________|    |",
+          "|________________________|"
+        ]
+      },
+      "desert_near_sakkara": {
+        "description": "A vast, sandy desert near the ancient site of Sakkara. The landscape is dotted with small hills and the occasional palm tree. The air is dry and hot, with a sense of isolation and danger.",
+        "setting": "The desert is a harsh, unforgiving environment. The sand stretches endlessly in all directions, and the sun beats down relentlessly. The silence is broken only by the occasional gust of wind.",
+        "clues": [],
+        "objects": [
+          {
+            "id": "sand_cart",
+            "category": "surface",
+            "name": "Sand-Cart",
+            "description": "A small, horse-drawn cart used for traversing the desert sands. It is similar to an English dog-cart and is essential for travel in the desert.",
+            "notes": "Nita Anita was taken into the desert in one of these carts by Billy and a Moorish driver."
+          },
+          {
+            "id": "desert_hills",
+            "category": "surface",
+            "name": "Desert Hills",
+            "description": "Small, sandy hills that dot the landscape of the desert near Sakkara. They provide some shelter from the wind but also obscure the view.",
+            "notes": "Nita Anita was abandoned near one of these hills by her driver."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "shepheards_hotel",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   [DESERT NEAR SAKKARA]   ",
+          " ________________________ ",
+          "|                        |",
+          "|        SAND-CART       |",
+          "|         _____          |",
+          "|        |     |         |",
+          "|        |     |         |",
+          "|        |_____|         |",
+          "|                        |",
+          "|      DESERT HILLS      |",
+          "|   _______   _______    |",
+          "|  |       | |       |   |",
+          "|  |_______| |_______|   |",
+          "|________________________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "garden_steps": {
+      "description": "A grand estate on Long Island, known for its marble steps, sunken gardens, and Italian landscape gardens. The house is lavishly furnished with flowering plants and evergreens, creating a picturesque setting. The estate is surrounded by terraces, flower banks, and rustic wooden stiles leading to old-fashioned gardens.",
+      "items": [],
+      "clues": [
+        "Overheard conversation by G Vic implicating someone in the boudoir"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A beautiful winter night with a supercilious moon illuminating the snow-covered marble steps and balustrades. The estate is quiet, with the occasional sound of laughter and music drifting from the house.",
+        "connections": [
+          {
+            "target_location": "miss_biggs_boudoir",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "conservatory",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "library",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "miss_biggs_boudoir": {
+      "description": "An exquisite apartment adorned with ornate furnishings and delicate decorations. The room is softly lit and fragrant with flowers. A large dressing table with a mirror dominates one side, and a velvet chaise lounge sits near the window.",
+      "items": [],
+      "clues": [
+        "Paper snake placed around Miss Eleanor's neck",
+        "Man's glove found in Miss Eleanor's hand",
+        "Overheard conversation by G Vic implicating someone in the boudoir",
+        "Footprint in spilled powder near the dressing table"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is elegantly appointed with Pitts Fleming period furniture. The air is filled with the scent of fresh flowers, and the soft glow of lamps casts a warm light over the space.",
+        "connections": [
+          {
+            "target_location": "garden_steps",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "miss_biggs_bedroom",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "miss_biggs_bedroom": {
+      "description": "A luxurious bedroom with a large four-poster bed, draped in silk and lace. The room is softly lit by night lights, and the air is filled with the scent of lavender. A telephone sits on the bedside table.",
+      "items": [],
+      "clues": [
+        "Miss Eleanor's unusual attire and jewelry on the night of her death"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is elegantly furnished in the Pitts Fleming style, with delicate fabrics and ornate decorations. The bed is turned down but unslept in, and the night lights cast a soft glow over the space.",
+        "connections": [
+          {
+            "target_location": "miss_biggs_boudoir",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "miss_biggs_bathroom",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "miss_biggs_bathroom": {
+      "description": "A pristine bathroom with gleaming white tiles and silver fixtures. The room is equipped with embroidered towels, delicate soaps, and various perfumes. A small waste-basket sits beneath the washstand.",
+      "items": [],
+      "clues": [
+        "Powder papers with aconitine traces found in waste-basket"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The bathroom is immaculately clean and elegantly appointed. The scent of lavender and rosewater fills the air, and the silver fixtures gleam in the soft light.",
+        "connections": [
+          {
+            "target_location": "miss_biggs_bedroom",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "conservatory": {
+      "description": "A warm, heavily-scented conservatory filled with tropical plants, palms, and orchids. The air is humid, and the sound of trickling water from a small fountain adds to the serene atmosphere.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The conservatory is a lush, green space with a variety of exotic plants and flowers. The scent of orchids and jasmine fills the air, and the soft light filtering through the glass roof creates a tranquil ambiance.",
+        "connections": [
+          {
+            "target_location": "garden_steps",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "library": {
+      "description": "A grand library filled with mahogany bookshelves, a large desk, and comfortable seating. The room is lined with books and adorned with various artworks and photographs.",
+      "items": [],
+      "clues": [
+        "Phonograph record of Miss Eleanor's voice used to elicit confession"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The library is a warm, inviting space with the scent of old books and polished wood. The walls are lined with mahogany bookshelves, and a large desk sits near the window, overlooking the gardens.",
+        "connections": [
+          {
+            "target_location": "garden_steps",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "shepheards_hotel": {
+      "description": "A grand hotel in Cairo, known for its luxurious accommodations and bustling terrace. The hotel is a hub of social activity, with guests from all over the world.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The hotel is elegantly appointed with ornate furnishings and decorations. The terrace is a popular spot for tea and socializing, offering a view of the bustling streets of Cairo.",
+        "connections": [
+          {
+            "target_location": "desert_near_sakkara",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "desert_near_sakkara": {
+      "description": "A vast, sandy desert near the ancient site of Sakkara. The landscape is dotted with small hills and the occasional palm tree. The air is dry and hot, with a sense of isolation and danger.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The desert is a harsh, unforgiving environment. The sand stretches endlessly in all directions, and the sun beats down relentlessly. The silence is broken only by the occasional gust of wind.",
+        "connections": [
+          {
+            "target_location": "shepheards_hotel",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

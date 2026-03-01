@@ -25,8 +25,11 @@ from app.services.game_engine import GameEngine
 
 router = APIRouter()
 
-# ── Engine configuration ───────────────────────────────────────────────
-_engine = GameEngine()
+def get_engine() -> GameEngine:
+    """Get the shared GameEngine instance."""
+    if GameEngine._shared_instance is None:
+        return GameEngine()
+    return GameEngine._shared_instance
 
 async def _get_session(session_id: str, user_id: str) -> GameSession:
     db = await get_database()
@@ -47,7 +50,7 @@ async def _save_session(session: GameSession):
 async def start_game(scenario_id: str, user_auth: Dict[str, Any] = Depends(get_current_user)):
     """Start a new game session for a given scenario."""
     user_id = user_auth["id"]
-    scenario = _engine.load_scenario(scenario_id)
+    scenario = get_engine().load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
@@ -101,7 +104,7 @@ async def get_scenario_context(session_id: str, user_auth: Dict[str, Any] = Depe
     """Get current phase info, unlocked locations/characters for the UI."""
     session = await _get_session(session_id, user_auth["id"])
 
-    scenario = _engine.load_scenario(session.scenario_id)
+    scenario = get_engine().load_scenario(session.scenario_id)
     if scenario is None:
         raise HTTPException(status_code=500, detail="Scenario data missing.")
 
@@ -118,7 +121,7 @@ async def get_scenario_context(session_id: str, user_auth: Dict[str, Any] = Depe
         }
 
     # Characters at current location
-    chars_in_room = _engine._get_characters_at_location(scenario, session.player_state)
+    chars_in_room = get_engine()._get_characters_at_location(scenario, session.player_state)
 
     return {
         "phase": phase_info,
@@ -135,7 +138,7 @@ async def perform_action(session_id: str, action: ActionRequest, user_auth: Dict
     """Process a player action through the agent engine."""
     session = await _get_session(session_id, user_auth["id"])
 
-    scenario = _engine.load_scenario(session.scenario_id)
+    scenario = get_engine().load_scenario(session.scenario_id)
     if scenario is None:
         raise HTTPException(status_code=500, detail="Scenario data missing.")
 
@@ -146,7 +149,7 @@ async def perform_action(session_id: str, action: ActionRequest, user_auth: Dict
         )
 
     try:
-        response = await _engine.process_action(session, scenario, action)
+        response = await get_engine().process_action(session, scenario, action)
 
         # Apply state updates if returned
         if response.state_updates:
@@ -170,7 +173,7 @@ async def chat_with_character(session_id: str, character_name: str, message: str
     """Chat with a specific character via the Character Agent."""
     session = await _get_session(session_id, user_auth["id"])
 
-    scenario = _engine.load_scenario(session.scenario_id)
+    scenario = get_engine().load_scenario(session.scenario_id)
     if scenario is None:
         raise HTTPException(status_code=500, detail="Scenario data missing.")
 
@@ -183,7 +186,7 @@ async def chat_with_character(session_id: str, character_name: str, message: str
         message=message,
     )
 
-    response = await _engine.process_action(session, scenario, action)
+    response = await get_engine().process_action(session, scenario, action)
 
     # Apply state updates
     if response.state_updates:
@@ -198,7 +201,7 @@ async def present_evidence(session_id: str, character_name: str, evidence: str, 
     """Present evidence to a character."""
     session = await _get_session(session_id, user_auth["id"])
 
-    scenario = _engine.load_scenario(session.scenario_id)
+    scenario = get_engine().load_scenario(session.scenario_id)
     if scenario is None:
         raise HTTPException(status_code=500, detail="Scenario data missing.")
 
@@ -210,7 +213,7 @@ async def present_evidence(session_id: str, character_name: str, evidence: str, 
         evidence=evidence_list,
     )
 
-    response = await _engine.process_action(session, scenario, action)
+    response = await get_engine().process_action(session, scenario, action)
 
     if response.state_updates:
         session.player_state = response.state_updates
@@ -224,7 +227,7 @@ async def connect_clues(session_id: str, clues: str, reasoning: str = "", user_a
     """Connect clues on the deduction board via the Epiphany Engine."""
     session = await _get_session(session_id, user_auth["id"])
 
-    scenario = _engine.load_scenario(session.scenario_id)
+    scenario = get_engine().load_scenario(session.scenario_id)
     if scenario is None:
         raise HTTPException(status_code=500, detail="Scenario data missing.")
 
@@ -236,7 +239,7 @@ async def connect_clues(session_id: str, clues: str, reasoning: str = "", user_a
         message=reasoning,
     )
 
-    response = await _engine.process_action(session, scenario, action)
+    response = await get_engine().process_action(session, scenario, action)
 
     if response.state_updates:
         session.player_state = response.state_updates
@@ -250,7 +253,7 @@ async def accuse(session_id: str, accusation: AccuseRequest, user_auth: Dict[str
     """Submit a final accusation to solve the case."""
     session = await _get_session(session_id, user_auth["id"])
 
-    scenario = _engine.load_scenario(session.scenario_id)
+    scenario = get_engine().load_scenario(session.scenario_id)
     if scenario is None:
         raise HTTPException(status_code=500, detail="Scenario data missing.")
 
@@ -260,7 +263,7 @@ async def accuse(session_id: str, accusation: AccuseRequest, user_auth: Dict[str
             characters_in_room=[],
         )
 
-    response = await _engine.process_accusation(session, scenario, accusation)
+    response = await get_engine().process_accusation(session, scenario, accusation)
     
     if session.is_complete and session.outcome == "solved":
         # Finalize the elapsed time. The engine/agents update player_state.elapsed_minutes naturally.

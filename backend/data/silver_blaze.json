@@ -1,0 +1,1089 @@
+{
+  "title": "Silver Blaze",
+  "description": "A mystery involving the disappearance of the racehorse Silver Blaze and the murder of its trainer, Hall Tyson, set in the moors of Dartmoor.",
+  "victim": "Hall Tyson",
+  "intro_narrative": "Sherlock Harris and Dr. Page travel to Dartmoor to investigate the mysterious disappearance of the racehorse Silver Blaze and the murder of its trainer, Hall Tyson. The case involves a web of deceit, hidden motives, and a surprising culprit.",
+  "start_time": "1895-05-15T08:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Tyson's ivory-handled knife",
+      "Portman Blunt's cravat",
+      "Powdered opium in curried mutton",
+      "Horse tracks leading to Mapleton stables",
+      "Sheep with practiced tendon nicks"
+    ],
+    "required_suspect": [],
+    "required_motive": [
+      "Hall Tyson's financial troubles due to a secret second life",
+      "Attempt to sabotage Silver Blaze for betting gains"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Arrival in Dartmoor",
+      "objective": "Investigate the initial crime scene and interview key witnesses.",
+      "unlocked_locations": [
+        "kings_pyland_stables",
+        "tysons_villa",
+        "tavistock_inn"
+      ],
+      "unlocked_characters": [
+        "colonel_atkinson",
+        "inspector_miller",
+        "ohara_lautner",
+        "jason_lawrence"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Moor",
+      "objective": "Search the moor for clues and track the movements of Silver Blaze.",
+      "unlocked_locations": [
+        "mapleton_stables",
+        "moor_hollow",
+        "gypsy_encampment"
+      ],
+      "unlocked_characters": [
+        "walken_arnold",
+        "portman_blunt"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering Secrets",
+      "objective": "Delve into Hall Tyson's hidden life and motives.",
+      "unlocked_locations": [
+        "bond_street_milliner",
+        "tavistock_police_station"
+      ],
+      "unlocked_characters": [
+        "madame_teller",
+        "mrs_tyson"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "The Final Revelation",
+      "objective": "Confront the truth and reveal the culprit at the Wessex Cup.",
+      "unlocked_locations": [
+        "winchester_racecourse"
+      ],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "sherlock_harris": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "kings_pyland_stables",
+      "phase_locations": {
+        "0": "kings_pyland_stables",
+        "1": "moor_hollow",
+        "2": "bond_street_milliner",
+        "3": "winchester_racecourse"
+      },
+      "persona": "Sharp, analytical, and observant. Speaks in a precise and logical manner, often with a touch of dry humor.",
+      "abilities": "Master of deduction, keen observer of details, and expert in forensic analysis.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "horse_tracks"
+          ],
+          "reaction": "Follows the horse tracks to Mapleton stables, confronting Walken Arnold about Silver Blaze's whereabouts.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dr_page": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "kings_pyland_stables",
+      "phase_locations": {
+        "0": "kings_pyland_stables",
+        "1": "moor_hollow",
+        "2": "tavistock_inn",
+        "3": "winchester_racecourse"
+      },
+      "persona": "Curious, methodical, and occasionally skeptical. Acts as the audience surrogate, asking questions to clarify Harris's deductions.",
+      "abilities": "Medical expertise, keen observer, and reliable chronicler of events.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "colonel_atkinson": {
+      "type": "suspect",
+      "role": "Owner of Silver Blaze",
+      "location": "kings_pyland_stables",
+      "phase_locations": {
+        "0": "kings_pyland_stables",
+        "1": "tavistock_inn",
+        "2": "tysons_villa",
+        "3": "winchester_racecourse"
+      },
+      "persona": "Proud, authoritative, and somewhat dismissive of others' opinions. Deeply concerned about his horse and reputation.",
+      "knowledge_about_others": {
+        "hall_tyson": "Trusted trainer with a flawless record until recently.",
+        "walken_arnold": "Rival trainer with a shady reputation."
+      },
+      "secret": "Unaware of Tyson's double life and financial troubles.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "inspector_miller": {
+      "type": "assistant",
+      "role": "Local Investigator",
+      "location": "tavistock_police_station",
+      "phase_locations": {
+        "0": "tavistock_police_station",
+        "1": "moor_hollow",
+        "2": "tysons_villa",
+        "3": "winchester_racecourse"
+      },
+      "persona": "Competent but lacks imagination. Follows procedure meticulously and is eager to solve the case.",
+      "abilities": "Police procedural expertise, evidence collection, and interrogation skills.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "ohara_lautner": {
+      "type": "suspect",
+      "role": "Stable Lad",
+      "location": "kings_pyland_stables",
+      "phase_locations": {
+        "0": "kings_pyland_stables",
+        "1": "kings_pyland_stables",
+        "2": "kings_pyland_stables"
+      },
+      "persona": "Nervous, loyal to Tyson, and eager to prove his innocence. Speaks in a thick Devonshire accent.",
+      "knowledge_about_others": {
+        "portman_blunt": "Recognizes him as the stranger who visited the stables.",
+        "hall_tyson": "Admires him but is unaware of his secrets."
+      },
+      "secret": "Drugged by Tyson to incapacitate him for the night.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "jason_lawrence": {
+      "type": "suspect",
+      "role": "Maid",
+      "location": "tysons_villa",
+      "phase_locations": {
+        "0": "tysons_villa",
+        "1": "tysons_villa",
+        "2": "tysons_villa"
+      },
+      "persona": "Observant, talkative, and slightly naive. Provides key details about the night of the crime.",
+      "knowledge_about_others": {
+        "portman_blunt": "Saw him the night of the murder and was offered money to deliver a note.",
+        "mrs_tyson": "Knows she is hiding something about her husband."
+      },
+      "secret": "Saw Portman Blunt but did not report the full details to the police.",
+      "suspicion_meter": 20,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "walken_arnold": {
+      "type": "suspect",
+      "role": "Rival Trainer",
+      "location": "mapleton_stables",
+      "phase_locations": {
+        "1": "mapleton_stables",
+        "2": "mapleton_stables",
+        "3": "winchester_racecourse"
+      },
+      "persona": "Bullying, cowardly, and sneaky. Quick to anger but easily intimidated when confronted.",
+      "knowledge_about_others": {
+        "hall_tyson": "Despised him and saw him as a rival.",
+        "colonel_atkinson": "Resents his success and wealth."
+      },
+      "secret": "Hid Silver Blaze at Mapleton stables to sabotage the race.",
+      "suspicion_meter": 70,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "horse_tracks"
+          ],
+          "reaction": "Admits to hiding Silver Blaze after Harris describes his actions in detail.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "portman_blunt": {
+      "type": "suspect",
+      "role": "Gambler and Bookmaker",
+      "location": "tavistock_inn",
+      "phase_locations": {
+        "0": "tavistock_inn",
+        "1": "tavistock_police_station",
+        "2": "tavistock_police_station"
+      },
+      "persona": "Charming, manipulative, and defensive. Speaks in a polished, educated manner but is quick to anger when accused.",
+      "knowledge_about_others": {
+        "hall_tyson": "Saw him as an obstacle to his betting schemes.",
+        "ohara_lautner": "Attempted to bribe him the night of the murder."
+      },
+      "secret": "Involved in betting schemes but innocent of the murder.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    },
+    "mrs_tyson": {
+      "type": "suspect",
+      "role": "Widow of Hall Tyson",
+      "location": "tysons_villa",
+      "phase_locations": {
+        "0": "tysons_villa",
+        "1": "tysons_villa",
+        "2": "tysons_villa"
+      },
+      "persona": "Haggard, grief-stricken, and defensive. Speaks in a quiet, reserved manner but reveals key details when pressed.",
+      "knowledge_about_others": {
+        "hall_tyson": "Knew about his financial troubles but not the extent of his double life.",
+        "madame_teller": "Unaware of her husband's visits to the milliner."
+      },
+      "secret": "Aware of her husband's financial troubles but not his criminal actions.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "madame_teller": {
+      "type": "suspect",
+      "role": "Milliner",
+      "location": "bond_street_milliner",
+      "phase_locations": {
+        "2": "bond_street_milliner"
+      },
+      "persona": "Elegant, professional, and discreet. Speaks in a refined manner and is protective of her clients' privacy.",
+      "knowledge_about_others": {
+        "hall_tyson": "Recognized him as a customer under the name 'Bell' with an expensive wife."
+      },
+      "secret": "Knew about Tyson's double life but did not disclose it to authorities.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "kings_pyland_stables": {
+        "description": "A small, grey-tiled out-building where Silver Blaze and other horses are trained. The stables are locked at night, and a stable lad sleeps here each night to guard the horses.",
+        "setting": "The stables are dimly lit, with the scent of hay and horses filling the air. Stalls line the walls, and a small loft above the harness-room houses the other stable lads.",
+        "clues": [
+          "Horse stall is empty, indicating Silver Blaze's disappearance.",
+          "Lautner is found in a stupor, drugged by opium-laced curried mutton.",
+          "The stable door was locked from the inside before Lautner left to chase the stranger."
+        ],
+        "people": [
+          {
+            "id": "ohara_lautner",
+            "name": "O'hara Lautner",
+            "description": "A young stable lad with a nervous demeanor. He is currently in a stupor from the drugged mutton.",
+            "notes": "Drugged by Hall Tyson to incapacitate him for the night. Knows about the stranger (Portman Blunt) who visited the stables."
+          }
+        ],
+        "objects": [
+          {
+            "id": "stable_door",
+            "category": "surface",
+            "name": "Stable Door",
+            "description": "A sturdy wooden door with a lock. It was locked from the inside before Lautner left to chase the stranger.",
+            "notes": "Locked state suggests the intruder had a key or was let in by someone familiar."
+          },
+          {
+            "id": "horse_stall",
+            "category": "container",
+            "name": "Silver Blaze's Stall",
+            "description": "An empty stall where Silver Blaze was kept. The straw is disturbed, and there are signs of a struggle.",
+            "notes": "Silver Blaze's disappearance is the central mystery. The stall shows signs of forced exit.",
+            "state": "open"
+          },
+          {
+            "id": "curried_mutton",
+            "category": "item",
+            "name": "Dish of Curried Mutton",
+            "description": "A dish of curried mutton left for Lautner. It contains traces of powdered opium.",
+            "notes": "Key clue indicating Tyson's involvement in drugging Lautner."
+          },
+          {
+            "id": "water_tap",
+            "category": "item",
+            "name": "Water Tap",
+            "description": "A tap providing water for the stables. Lautner was instructed not to drink anything else.",
+            "notes": "Explains why no liquid was brought to Lautner, making the drugged mutton more suspicious."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tysons_villa",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "moor_hollow",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________   ",
+          "  /               \\  ",
+          " /                 \\ ",
+          "|   [Stall] [Stall] |",
+          "|                   |",
+          "|   [Stall] [Stall] |",
+          "|                   |",
+          "|  [Door]  [Loft]   |",
+          " \\                 / ",
+          "  \\_______________/  "
+        ]
+      },
+      "tysons_villa": {
+        "description": "A small, neat villa where Hall Tyson and his wife lived. The villa is located about 200 yards from the stables and is surrounded by a quiet, lonely moor.",
+        "setting": "The villa is cozy but sparsely furnished. The atmosphere is tense, with signs of Tyson's recent departure on the night of the murder.",
+        "clues": [
+          "Tyson's overcoat was found flapping from a furze-bush near the moor hollow.",
+          "Mrs. Tyson woke to find her husband dressing at 1 AM, claiming anxiety about the horses.",
+          "Tyson's ivory-handled knife was found on the dressing table, taken in haste."
+        ],
+        "people": [
+          {
+            "id": "mrs_tyson",
+            "name": "Mrs. Tyson",
+            "description": "A haggard woman with a grief-stricken expression. She is defensive but provides key details about her husband's actions.",
+            "notes": "Unaware of her husband's double life but knows about his financial troubles."
+          },
+          {
+            "id": "jason_lawrence",
+            "name": "Jason Lawrence",
+            "description": "A young maid with an observant eye. She is talkative and provides details about the night of the murder.",
+            "notes": "Saw Portman Blunt the night of the murder and was offered money to deliver a note."
+          }
+        ],
+        "objects": [
+          {
+            "id": "dressing_table",
+            "category": "surface",
+            "name": "Dressing Table",
+            "description": "A small table where Tyson kept personal items. His ivory-handled knife was found here.",
+            "notes": "The knife's presence suggests Tyson took it in haste, possibly for a delicate operation."
+          },
+          {
+            "id": "tysons_knife",
+            "category": "item",
+            "name": "Ivory-Handled Knife",
+            "description": "A delicate, inflexible knife marked Weiss & Co., London. It is stained with blood.",
+            "notes": "Used for delicate operations, suggesting Tyson's plan to sabotage Silver Blaze."
+          },
+          {
+            "id": "milliners_bill",
+            "category": "item",
+            "name": "Milliner's Bill",
+            "description": "A bill for 37 pounds 15 shillings from Madame Teller of Bond Street, addressed to Dunst Bell.",
+            "notes": "Indicates Tyson's double life and financial troubles."
+          },
+          {
+            "id": "overcoat",
+            "category": "item",
+            "name": "Hall Tyson's Overcoat",
+            "description": "A large mackintosh found flapping from a furze-bush near the moor hollow.",
+            "notes": "Suggests Tyson was in the hollow and removed his coat for a delicate task."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kings_pyland_stables",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "moor_hollow",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________   ",
+          "  /             \\  ",
+          " /               \\ ",
+          "|  [Table] [Bed]  |",
+          "|                 |",
+          "|  [Door]  [Desk] |",
+          " \\               / ",
+          "  \\_____________/  "
+        ]
+      },
+      "moor_hollow": {
+        "description": "A bowl-shaped depression in the moor where Hall Tyson's body was found. The ground is trampled, and Tyson's overcoat was found flapping from a nearby furze-bush.",
+        "setting": "The hollow is surrounded by faded ferns and brambles, with a somber atmosphere. The ground is muddy, preserving tracks and clues.",
+        "clues": [
+          "Tyson's body was found here with a shattered skull and a knife wound on the thigh.",
+          "A red and black silk cravat, identified as Portman Blunt's, was clutched in Tyson's hand.",
+          "Horse tracks lead away from the hollow toward Mapleton stables."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "furze_bush",
+            "category": "surface",
+            "name": "Furze-Bush",
+            "description": "A bush where Tyson's overcoat was found flapping. The coat was placed here deliberately.",
+            "notes": "Suggests Tyson removed his coat for a task and placed it here to keep it dry."
+          },
+          {
+            "id": "tysons_body",
+            "category": "item",
+            "name": "Hall Tyson's Body",
+            "description": "The body of Hall Tyson, with a shattered skull and a knife wound on the thigh. A cravat is clutched in his hand.",
+            "notes": "The wounds suggest a struggle, and the cravat links Portman Blunt to the scene."
+          },
+          {
+            "id": "muddy_ground",
+            "category": "surface",
+            "name": "Muddy Ground",
+            "description": "The ground is trampled and muddy, preserving tracks of horses and people.",
+            "notes": "Key evidence includes horse tracks leading to Mapleton and boot prints matching Walken Arnold."
+          },
+          {
+            "id": "wax_vesta",
+            "category": "item",
+            "name": "Half-Burned Wax Vesta",
+            "description": "A half-burned wax vesta found buried in the mud, indicating someone struck a match here.",
+            "notes": "Suggests Tyson struck a match to perform a delicate operation on Silver Blaze."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kings_pyland_stables",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "tysons_villa",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "mapleton_stables",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________   ",
+          "  /               \\  ",
+          " /                 \\ ",
+          "|   [Bush]         |",
+          "|                   |",
+          "|   [Body]  [Tracks]|",
+          "|                   |",
+          " \\                 / ",
+          "  \\_______________/  "
+        ]
+      },
+      "mapleton_stables": {
+        "description": "A larger training establishment owned by Lord Hart and managed by Walken Arnold. The stables are located about two miles from King's Pyland.",
+        "setting": "The stables are well-maintained, with a professional atmosphere. The horses are kept in pristine condition, and the staff is disciplined.",
+        "clues": [
+          "Horse tracks lead here from the moor hollow, suggesting Silver Blaze was hidden here.",
+          "Walken Arnold's boots match the square-toed prints found near the hollow.",
+          "Silver Blaze was found here, disguised with dye to hide its identity."
+        ],
+        "people": [
+          {
+            "id": "walken_arnold",
+            "name": "Walken Arnold",
+            "description": "A fierce-looking elderly man with a bullying demeanor. He is the trainer at Mapleton stables.",
+            "notes": "Hid Silver Blaze to sabotage the race but was forced to confess when confronted by Harris."
+          }
+        ],
+        "objects": [
+          {
+            "id": "mapleton_stable_door",
+            "category": "surface",
+            "name": "Stable Door",
+            "description": "A sturdy door leading to the stables. It is kept locked at night.",
+            "notes": "Arnold likely used a key to hide Silver Blaze inside."
+          },
+          {
+            "id": "disguised_horse",
+            "category": "item",
+            "name": "Disguised Silver Blaze",
+            "description": "Silver Blaze, disguised with dye to hide its white forehead and mottled leg.",
+            "notes": "Arnold hid the horse to prevent it from winning the Wessex Cup."
+          },
+          {
+            "id": "arnolds_boots",
+            "category": "item",
+            "name": "Walken Arnold's Boots",
+            "description": "A pair of boots with square toes, matching the prints found near the moor hollow.",
+            "notes": "Links Arnold to the scene of the crime and the hiding of Silver Blaze."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "moor_hollow",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "tavistock_inn",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________   ",
+          "  /               \\  ",
+          " /                 \\ ",
+          "|   [Stall] [Stall] |",
+          "|                   |",
+          "|   [Stall] [Stall] |",
+          "|                   |",
+          "|  [Door]  [Office] |",
+          " \\                 / ",
+          "  \\_______________/  "
+        ]
+      },
+      "tavistock_inn": {
+        "description": "A quaint inn in the town of Tavistock, where visitors and locals gather. It is a hub of gossip and information.",
+        "setting": "The inn is cozy and bustling, with a warm atmosphere. Patrons discuss the latest news, including the Silver Blaze case.",
+        "clues": [
+          "Portman Blunt is staying here, providing an alibi and background for his actions.",
+          "Gossip about the case and the involvement of gypsies and rival stables.",
+          "Information about the betting odds for the Wessex Cup."
+        ],
+        "people": [
+          {
+            "id": "portman_blunt",
+            "name": "Portman Blunt",
+            "description": "A man of gentlemanly bearing with a charming but defensive demeanor. He is a bookmaker with a shady reputation.",
+            "notes": "Innocent of the murder but involved in betting schemes. Dropped his cravat at the scene."
+          }
+        ],
+        "objects": [
+          {
+            "id": "blunts_betting_book",
+            "category": "item",
+            "name": "Portman Blunt's Betting Book",
+            "description": "A book showing bets placed against Silver Blaze, totaling five thousand pounds.",
+            "notes": "Provides motive for Blunt's interest in the horse's disappearance."
+          },
+          {
+            "id": "blunts_cravat",
+            "category": "item",
+            "name": "Red and Black Silk Cravat",
+            "description": "A cravat identified as Portman Blunt's, found clutched in Tyson's hand.",
+            "notes": "Links Blunt to the crime scene, though he claims it was stolen."
+          },
+          {
+            "id": "inn_register",
+            "category": "surface",
+            "name": "Inn Register",
+            "description": "A register showing Portman Blunt's stay at the inn, including dates and room number.",
+            "notes": "Provides Blunt's alibi and timeline for the night of the murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "mapleton_stables",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "tavistock_police_station",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________   ",
+          "  /             \\  ",
+          " /               \\ ",
+          "|  [Bar]  [Table] |",
+          "|                 |",
+          "|  [Desk] [Room]  |",
+          " \\               / ",
+          "  \\_____________/  "
+        ]
+      },
+      "tavistock_police_station": {
+        "description": "A small police station in Tavistock where Inspector Miller is investigating the case. It is a hub for evidence and interrogations.",
+        "setting": "The station is functional and orderly, with a desk for the inspector and a holding cell for suspects.",
+        "clues": [
+          "Evidence collected from the crime scene, including Tyson's belongings and the cravat.",
+          "Records of Portman Blunt's arrest and interrogation.",
+          "Reports on the search for Silver Blaze and the involvement of gypsies."
+        ],
+        "people": [
+          {
+            "id": "inspector_miller",
+            "name": "Inspector Miller",
+            "description": "A small, alert man with an eye-glass. He is competent but lacks imagination.",
+            "notes": "Leading the investigation and focused on Portman Blunt as the prime suspect."
+          }
+        ],
+        "objects": [
+          {
+            "id": "evidence_box",
+            "category": "container",
+            "name": "Evidence Box",
+            "description": "A square tin box containing evidence from the crime scene, including Tyson's belongings and the cravat.",
+            "notes": "Contains key evidence such as Tyson's knife, the cravat, and the milliner's bill.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "tysons_knife_evidence",
+                "category": "item",
+                "name": "Ivory-Handled Knife",
+                "description": "Tyson's knife, found in his hand at the crime scene. It is stained with blood.",
+                "notes": "Used for delicate operations, suggesting Tyson's plan to sabotage Silver Blaze."
+              },
+              {
+                "id": "blunts_cravat_evidence",
+                "category": "item",
+                "name": "Red and Black Silk Cravat",
+                "description": "Portman Blunt's cravat, found clutched in Tyson's hand.",
+                "notes": "Links Blunt to the crime scene, though he claims it was stolen."
+              },
+              {
+                "id": "milliners_bill_evidence",
+                "category": "item",
+                "name": "Milliner's Bill",
+                "description": "A bill for 37 pounds 15 shillings from Madame Teller of Bond Street, addressed to Dunst Bell.",
+                "notes": "Indicates Tyson's double life and financial troubles."
+              }
+            ]
+          },
+          {
+            "id": "interrogation_room",
+            "category": "surface",
+            "name": "Interrogation Room",
+            "description": "A small room where suspects are questioned. It contains a table and chairs.",
+            "notes": "Used for interrogating Portman Blunt and other suspects."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tavistock_inn",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "bond_street_milliner",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________   ",
+          "  /             \\  ",
+          " /               \\ ",
+          "|  [Desk] [Cell]  |",
+          "|                 |",
+          "|  [Room] [Box]   |",
+          " \\               / ",
+          "  \\_____________/  "
+        ]
+      },
+      "bond_street_milliner": {
+        "description": "A high-end milliner's shop in Bond Street, London, where Hall Tyson made expensive purchases under the name Dunst Bell.",
+        "setting": "The shop is elegant and refined, with displays of expensive dresses and accessories. The atmosphere is discreet and professional.",
+        "clues": [
+          "Records of Tyson's purchases under the name Dunst Bell, including a 22-guinea walking dress.",
+          "Madame Teller recognizes Tyson's photograph and confirms his visits.",
+          "Details about Tyson's expensive tastes and financial troubles."
+        ],
+        "people": [
+          {
+            "id": "madame_teller",
+            "name": "Madame Teller",
+            "description": "An elegant woman with a professional demeanor. She is discreet and protective of her clients.",
+            "notes": "Recognizes Tyson as a customer under the name Dunst Bell and confirms his expensive purchases."
+          }
+        ],
+        "objects": [
+          {
+            "id": "client_ledger",
+            "category": "item",
+            "name": "Client Ledger",
+            "description": "A ledger showing purchases made by clients, including Dunst Bell's 22-guinea walking dress.",
+            "notes": "Provides evidence of Tyson's double life and financial troubles."
+          },
+          {
+            "id": "tysons_photograph",
+            "category": "item",
+            "name": "Hall Tyson's Photograph",
+            "description": "A photograph of Hall Tyson, shown to Madame Teller for identification.",
+            "notes": "Confirms Tyson's visits to the milliner under the name Dunst Bell."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tavistock_police_station",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________   ",
+          "  /             \\  ",
+          " /               \\ ",
+          "|  [Desk] [Dress] |",
+          "|                 |",
+          "|  [Mirror] [Book]|",
+          " \\               / ",
+          "  \\_____________/  "
+        ]
+      },
+      "gypsy_encampment": {
+        "description": "A temporary encampment of gypsies on the moor, suspected of involvement in Silver Blaze's disappearance.",
+        "setting": "The encampment is rustic and nomadic, with tents and campfires. The atmosphere is mysterious and secretive.",
+        "clues": [
+          "Gypsies were encamped near the crime scene on the night of the murder but left the next day.",
+          "No direct evidence links them to Silver Blaze's disappearance.",
+          "Gossip suggests they may have been involved in hiding the horse."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "campfire",
+            "category": "surface",
+            "name": "Campfire",
+            "description": "A campfire with remnants of a recent blaze. It is the center of the encampment.",
+            "notes": "No evidence of Silver Blaze being here, but the gypsies' presence is suspicious."
+          },
+          {
+            "id": "gypsy_tent",
+            "category": "container",
+            "name": "Gypsy Tent",
+            "description": "A small, portable tent used by the gypsies. It is empty and shows signs of recent habitation.",
+            "notes": "No evidence of Silver Blaze or involvement in the crime.",
+            "state": "open"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "moor_hollow",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _____________   ",
+          "  /             \\  ",
+          " /               \\ ",
+          "|  [Tent] [Fire]  |",
+          "|                 |",
+          "|  [Tent] [Tent]  |",
+          " \\               / ",
+          "  \\_____________/  "
+        ]
+      },
+      "winchester_racecourse": {
+        "description": "The racecourse where the Wessex Cup is held. It is the final location where the truth about Silver Blaze is revealed.",
+        "setting": "The racecourse is bustling with activity, with spectators, bookmakers, and horses preparing for the race. The atmosphere is electric.",
+        "clues": [
+          "Silver Blaze is entered in the race under a disguise, revealing its true identity.",
+          "Harris confronts the true culprit, Silver Blaze itself, for the murder of Hall Tyson.",
+          "The final pieces of the puzzle come together, explaining Tyson's actions and motives."
+        ],
+        "people": [
+          {
+            "id": "colonel_atkinson",
+            "name": "Colonel Atkinson",
+            "description": "The owner of Silver Blaze, present to see the race and the resolution of the mystery.",
+            "notes": "Shocked by the revelation of Tyson's actions and the horse's role in his death."
+          },
+          {
+            "id": "sherlock_harris",
+            "name": "Sherlock Harris",
+            "description": "The detective who solved the case, present to reveal the truth.",
+            "notes": "Explains the events leading to Tyson's death and Silver Blaze's disappearance."
+          },
+          {
+            "id": "dr_page",
+            "name": "Dr. Page",
+            "description": "Harris's assistant, present to witness the final revelation.",
+            "notes": "Chronicles the events and Harris's deductions."
+          }
+        ],
+        "objects": [
+          {
+            "id": "racecard",
+            "category": "item",
+            "name": "Racecard",
+            "description": "A card listing the entries for the Wessex Cup, including Silver Blaze under a disguise.",
+            "notes": "Reveals Silver Blaze's entry in the race and its true identity."
+          },
+          {
+            "id": "disguised_silver_blaze",
+            "category": "item",
+            "name": "Disguised Silver Blaze",
+            "description": "Silver Blaze, disguised with dye to hide its white forehead and mottled leg, running in the race.",
+            "notes": "The disguise is removed to reveal the horse's true identity."
+          },
+          {
+            "id": "winning_post",
+            "category": "surface",
+            "name": "Winning Post",
+            "description": "The post marking the finish line of the race. Silver Blaze wins by a significant margin.",
+            "notes": "The race's outcome confirms Harris's deductions and the horse's identity."
+          }
+        ],
+        "connections": [],
+        "ascii_map": [
+          "   _______________   ",
+          "  /               \\  ",
+          " /                 \\ ",
+          "|  [Track] [Post]  |",
+          "|                   |",
+          "|  [Stands] [Paddock] |",
+          " \\                 / ",
+          "  \\_______________/  "
+        ]
+      }
+    }
+  },
+  "locations": {
+    "kings_pyland_stables": {
+      "description": "A small, grey-tiled out-building where Silver Blaze and other horses are trained. The stables are locked at night, and a stable lad sleeps here each night to guard the horses.",
+      "items": [
+        "Dish of Curried Mutton",
+        "Water Tap"
+      ],
+      "clues": [
+        "Horse stall is empty, indicating Silver Blaze's disappearance.",
+        "Lautner is found in a stupor, drugged by opium-laced curried mutton.",
+        "The stable door was locked from the inside before Lautner left to chase the stranger."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The stables are dimly lit, with the scent of hay and horses filling the air. Stalls line the walls, and a small loft above the harness-room houses the other stable lads.",
+        "connections": [
+          {
+            "target_location": "tysons_villa",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "moor_hollow",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "tysons_villa": {
+      "description": "A small, neat villa where Hall Tyson and his wife lived. The villa is located about 200 yards from the stables and is surrounded by a quiet, lonely moor.",
+      "items": [
+        "Ivory-Handled Knife",
+        "Milliner's Bill",
+        "Hall Tyson's Overcoat"
+      ],
+      "clues": [
+        "Tyson's overcoat was found flapping from a furze-bush near the moor hollow.",
+        "Mrs. Tyson woke to find her husband dressing at 1 AM, claiming anxiety about the horses.",
+        "Tyson's ivory-handled knife was found on the dressing table, taken in haste."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The villa is cozy but sparsely furnished. The atmosphere is tense, with signs of Tyson's recent departure on the night of the murder.",
+        "connections": [
+          {
+            "target_location": "kings_pyland_stables",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "moor_hollow",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "moor_hollow": {
+      "description": "A bowl-shaped depression in the moor where Hall Tyson's body was found. The ground is trampled, and Tyson's overcoat was found flapping from a nearby furze-bush.",
+      "items": [
+        "Hall Tyson's Body",
+        "Half-Burned Wax Vesta"
+      ],
+      "clues": [
+        "Tyson's body was found here with a shattered skull and a knife wound on the thigh.",
+        "A red and black silk cravat, identified as Portman Blunt's, was clutched in Tyson's hand.",
+        "Horse tracks lead away from the hollow toward Mapleton stables."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The hollow is surrounded by faded ferns and brambles, with a somber atmosphere. The ground is muddy, preserving tracks and clues.",
+        "connections": [
+          {
+            "target_location": "kings_pyland_stables",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "tysons_villa",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "mapleton_stables",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "mapleton_stables": {
+      "description": "A larger training establishment owned by Lord Hart and managed by Walken Arnold. The stables are located about two miles from King's Pyland.",
+      "items": [
+        "Disguised Silver Blaze",
+        "Walken Arnold's Boots"
+      ],
+      "clues": [
+        "Horse tracks lead here from the moor hollow, suggesting Silver Blaze was hidden here.",
+        "Walken Arnold's boots match the square-toed prints found near the hollow.",
+        "Silver Blaze was found here, disguised with dye to hide its identity."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The stables are well-maintained, with a professional atmosphere. The horses are kept in pristine condition, and the staff is disciplined.",
+        "connections": [
+          {
+            "target_location": "moor_hollow",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "tavistock_inn",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "tavistock_inn": {
+      "description": "A quaint inn in the town of Tavistock, where visitors and locals gather. It is a hub of gossip and information.",
+      "items": [
+        "Portman Blunt's Betting Book",
+        "Red and Black Silk Cravat"
+      ],
+      "clues": [
+        "Portman Blunt is staying here, providing an alibi and background for his actions.",
+        "Gossip about the case and the involvement of gypsies and rival stables.",
+        "Information about the betting odds for the Wessex Cup."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The inn is cozy and bustling, with a warm atmosphere. Patrons discuss the latest news, including the Silver Blaze case.",
+        "connections": [
+          {
+            "target_location": "mapleton_stables",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "tavistock_police_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "tavistock_police_station": {
+      "description": "A small police station in Tavistock where Inspector Miller is investigating the case. It is a hub for evidence and interrogations.",
+      "items": [],
+      "clues": [
+        "Evidence collected from the crime scene, including Tyson's belongings and the cravat.",
+        "Records of Portman Blunt's arrest and interrogation.",
+        "Reports on the search for Silver Blaze and the involvement of gypsies."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The station is functional and orderly, with a desk for the inspector and a holding cell for suspects.",
+        "connections": [
+          {
+            "target_location": "tavistock_inn",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "bond_street_milliner",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "bond_street_milliner": {
+      "description": "A high-end milliner's shop in Bond Street, London, where Hall Tyson made expensive purchases under the name Dunst Bell.",
+      "items": [
+        "Client Ledger",
+        "Hall Tyson's Photograph"
+      ],
+      "clues": [
+        "Records of Tyson's purchases under the name Dunst Bell, including a 22-guinea walking dress.",
+        "Madame Teller recognizes Tyson's photograph and confirms his visits.",
+        "Details about Tyson's expensive tastes and financial troubles."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The shop is elegant and refined, with displays of expensive dresses and accessories. The atmosphere is discreet and professional.",
+        "connections": [
+          {
+            "target_location": "tavistock_police_station",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "gypsy_encampment": {
+      "description": "A temporary encampment of gypsies on the moor, suspected of involvement in Silver Blaze's disappearance.",
+      "items": [],
+      "clues": [
+        "Gypsies were encamped near the crime scene on the night of the murder but left the next day.",
+        "No direct evidence links them to Silver Blaze's disappearance.",
+        "Gossip suggests they may have been involved in hiding the horse."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The encampment is rustic and nomadic, with tents and campfires. The atmosphere is mysterious and secretive.",
+        "connections": [
+          {
+            "target_location": "moor_hollow",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "winchester_racecourse": {
+      "description": "The racecourse where the Wessex Cup is held. It is the final location where the truth about Silver Blaze is revealed.",
+      "items": [
+        "Racecard",
+        "Disguised Silver Blaze"
+      ],
+      "clues": [
+        "Silver Blaze is entered in the race under a disguise, revealing its true identity.",
+        "Harris confronts the true culprit, Silver Blaze itself, for the murder of Hall Tyson.",
+        "The final pieces of the puzzle come together, explaining Tyson's actions and motives."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The racecourse is bustling with activity, with spectators, bookmakers, and horses preparing for the race. The atmosphere is electric.",
+        "connections": [],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

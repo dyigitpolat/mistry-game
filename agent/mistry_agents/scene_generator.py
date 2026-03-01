@@ -33,6 +33,7 @@ class SceneGenerator:
         self.model = "gemini-3.1-flash-image-preview"
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.langfuse = None # Ensure attribute exists
 
     def _build_prompt(self, visual_metadata: Dict[str, Any], location_name: str) -> str:
         """Build an image generation prompt from VisualMetadata."""
@@ -273,13 +274,13 @@ Create the hero banner now.
                     name="generate_hero_banner",
                     tags=["scene_generation", "hero_banner", scenario_id]
                 )
-                response = await self.client.models.generate_content_async(
+                response = self.client.models.generate_content(
                     model=self.model,
                     contents=prompt,
                 )
                 trace.update(output="Hero Banner Generated successfully")
             else:
-                response = await self.client.models.generate_content_async(
+                response = self.client.models.generate_content(
                     model=self.model,
                     contents=prompt,
                 )

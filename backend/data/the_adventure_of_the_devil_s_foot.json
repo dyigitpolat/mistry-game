@@ -1,0 +1,833 @@
+{
+  "title": "The Adventure of the Devil's Foot",
+  "description": "A chilling mystery set in the eerie moors of Cornwall, where three members of the Holmes family are found dead or driven mad by an unknown terror. The investigation uncovers a sinister plot involving a rare African poison and a web of family secrets.",
+  "victim": "Watson Holmes, Tredannick Holmes, Moore Holmes",
+  "intro_narrative": "In the spring of 1897, Wartha Tregennis and his companion find themselves in a small cottage near Poldhu Bay, Cornwall, seeking respite from the stresses of London. Their peaceful retreat is shattered when they are summoned to investigate the mysterious deaths and madness of the Holmes family. The victims were found in a state of extreme horror, with no signs of physical violence. As Tregennis delves deeper, he uncovers a tale of love, betrayal, and a deadly poison known as the devil's-foot root.",
+  "start_time": "1897-03-16T09:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Devil's-foot root residue on the talc shield",
+      "Gravel matching Dr. Arthur's cottage on the vicarage window-sill",
+      "Photograph of Watson Holmes revealing Dr. Arthur's motive",
+      "Lamp used to burn the poison in both incidents"
+    ],
+    "required_suspect": [
+      "Dr. Sherlock Arthur"
+    ],
+    "required_motive": [
+      "Revenge for the death of Watson Holmes, whom Dr. Arthur loved",
+      "Family quarrel over money and property"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Explore the initial crime scene at David Roundhay and gather basic clues about the victims' condition.",
+      "unlocked_locations": [
+        "poldhu_bay_cottage",
+        "david_roundhay",
+        "vicarage"
+      ],
+      "unlocked_characters": [
+        "Satan Holmes",
+        "Mr. George",
+        "Wartha Tregennis",
+        "Mrs. Doyle"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Expanding the Search",
+      "objective": "Investigate the vicarage and the surrounding areas to uncover more clues about the second death and the involvement of Dr. Arthur.",
+      "unlocked_locations": [
+        "tredannick_wollas",
+        "satan_holmes_sitting_room"
+      ],
+      "unlocked_characters": [
+        "Dr. Sherlock Arthur",
+        "Watson Holmes (ghostly presence)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering the Truth",
+      "objective": "Delve into Dr. Arthur's past and his connection to the Holmes family, and piece together the method of the crimes.",
+      "unlocked_locations": [
+        "beauchamp_arriance"
+      ],
+      "unlocked_characters": [
+        "Tredannick Holmes (ghostly presence)",
+        "Moore Holmes (ghostly presence)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront the culprit with the evidence and uncover the full motive behind the crimes.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "wartha_tregennis": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "poldhu_bay_cottage",
+      "phase_locations": {
+        "0": "poldhu_bay_cottage",
+        "1": "vicarage",
+        "2": "beauchamp_arriance",
+        "3": "beauchamp_arriance"
+      },
+      "persona": "Sombre, cynical, and highly intelligent. Prefers to work in silence and solitude, often lost in thought. Has a dry sense of humor and a deep aversion to publicity.",
+      "abilities": "Masterful deductive reasoning, keen observation skills, and an encyclopedic knowledge of obscure facts. Skilled in reconstructing events from minimal evidence.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Gravel on the vicarage window-sill",
+            "Devil's-foot root residue on the talc shield"
+          ],
+          "reaction": "Begins to piece together the method of the crime, focusing on the lamp and the poison. Plans to confront Dr. Arthur with the evidence.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Photograph of Watson Holmes",
+            "Revolver"
+          ],
+          "reaction": "Confronts Dr. Arthur with the motive and method, leading to a full confession.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "satan_holmes": {
+      "type": "suspect",
+      "role": "Lodger at the Vicarage",
+      "location": "vicarage",
+      "phase_locations": {
+        "0": "vicarage",
+        "1": "vicarage"
+      },
+      "persona": "Thin, dark, and spectacled with a stooped posture. Reticent and introspective, often brooding. Speaks in a quiet, hesitant manner but becomes agitated when discussing the deaths of his family.",
+      "knowledge_about_others": {
+        "Dr. Sherlock Arthur": "Suspects him of having a motive due to a past family quarrel, but lacks concrete evidence.",
+        "Wartha Tregennis": "Views him as the only man capable of solving the mystery."
+      },
+      "secret": "Initially suspected of being involved in the deaths of his family due to a past quarrel, but is later revealed to be a victim himself.",
+      "suspicion_meter": 70,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Movement outside the window"
+          ],
+          "reaction": "Becomes defensive and insists that the deaths were caused by something supernatural. Avoids direct questions about his family's quarrel.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "dr_sherlock_arthur": {
+      "type": "suspect",
+      "role": "Explorer and Culprit",
+      "location": "beauchamp_arriance",
+      "phase_locations": {
+        "0": "beauchamp_arriance",
+        "1": "beauchamp_arriance",
+        "2": "beauchamp_arriance",
+        "3": "beauchamp_arriance"
+      },
+      "persona": "Tall, imposing, and fiercely independent. Speaks with authority and a touch of arrogance. Deeply emotional beneath a stoic exterior, especially when discussing Watson Holmes.",
+      "knowledge_about_others": {
+        "Satan Holmes": "Holds him responsible for the deaths of his loved ones due to a past family quarrel.",
+        "Wartha Tregennis": "Respects his deductive abilities but is wary of his interference."
+      },
+      "secret": "Used devil's-foot root to poison the Holmes family as revenge for the death of Watson Holmes, whom he loved. Later kills Satan Holmes using the same method.",
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Gravel on the vicarage window-sill",
+            "Lamp residue"
+          ],
+          "reaction": "Becomes increasingly agitated and attempts to mislead the investigation by suggesting supernatural causes.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Photograph of Watson Holmes",
+            "Devil's-foot root"
+          ],
+          "reaction": "Confesses to the crimes, revealing his motive and method in a dramatic confrontation.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "mr_george": {
+      "type": "assistant",
+      "role": "Vicar",
+      "location": "vicarage",
+      "phase_locations": {
+        "0": "vicarage",
+        "1": "vicarage",
+        "2": "vicarage"
+      },
+      "persona": "Portly, affable, and garrulous. Speaks warmly and with a sense of urgency when discussing the tragedies. Knowledgeable about local lore and the Holmes family.",
+      "abilities": "Provides crucial background information about the Holmes family and their relationships. Acts as a liaison between Tregennis and other characters.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "No signs of forced entry or struggle"
+          ],
+          "reaction": "Expresses bewilderment at the lack of physical evidence and suggests supernatural causes, but defers to Tregennis's expertise.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "watson_holmes": {
+      "type": "suspect",
+      "role": "Victim (Ghostly Presence)",
+      "location": "david_roundhay",
+      "phase_locations": {
+        "0": "david_roundhay"
+      },
+      "persona": "Described as a beautiful woman with a kind and gentle demeanor. Her presence is felt through the reactions of others and the photograph found in Dr. Arthur's possession.",
+      "knowledge_about_others": {
+        "Dr. Sherlock Arthur": "Deeply loved by him, and her death is the motive for his crimes."
+      },
+      "secret": "Her death was caused by the devil's-foot root poison, administered by Dr. Arthur in a misguided act of revenge.",
+      "state": "dead",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "tredannick_holmes": {
+      "type": "suspect",
+      "role": "Victim (Ghostly Presence)",
+      "location": "david_roundhay",
+      "phase_locations": {
+        "0": "david_roundhay"
+      },
+      "persona": "Described as a strong and cheerful man before his descent into madness. His presence is felt through the accounts of others.",
+      "knowledge_about_others": {
+        "Satan Holmes": "Brother who was present during the poisoning incident."
+      },
+      "secret": "Driven mad by the devil's-foot root poison, likely due to a family quarrel over money.",
+      "state": "dead",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "moore_holmes": {
+      "type": "suspect",
+      "role": "Victim (Ghostly Presence)",
+      "location": "david_roundhay",
+      "phase_locations": {
+        "0": "david_roundhay"
+      },
+      "persona": "Described similarly to Tredannick Holmes, cheerful and strong before the incident. His presence is felt through the accounts of others.",
+      "knowledge_about_others": {
+        "Satan Holmes": "Brother who was present during the poisoning incident."
+      },
+      "secret": "Driven mad by the devil's-foot root poison, likely due to a family quarrel over money.",
+      "state": "dead",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "mrs_doyle": {
+      "type": "assistant",
+      "role": "Housekeeper at David Roundhay",
+      "location": "david_roundhay",
+      "phase_locations": {
+        "0": "david_roundhay"
+      },
+      "persona": "Elderly, superstitious, and deeply shaken by the events. Speaks in a trembling voice and is eager to leave the house after the tragedies.",
+      "abilities": "Provides firsthand accounts of the victims' behavior and the state of the house before and after the incidents. Offers insights into the family dynamics.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "No signs of forced entry or struggle"
+          ],
+          "reaction": "Insists that no one could have entered the house without her knowledge and suggests supernatural causes.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  },
+  "game_world": {
+    "locations": {
+      "poldhu_bay_cottage": {
+        "description": "A small, whitewashed cottage perched high on a grassy headland overlooking Mounts Bay. The interior is cozy but sparsely furnished, with a sitting-room where Tregennis and his companion spend much of their time. The windows offer a sweeping view of the sinister semicircle of the bay, with its black cliffs and treacherous reefs.",
+        "setting": "The cottage exudes a sense of solitude and introspection, with the constant sound of waves crashing against the cliffs below. The air is damp and salty, and the wind howls through the cracks in the windows. The sitting-room is filled with books, maps, and notes on various cases and studies.",
+        "clues": [
+          "Satan Holmes mentioned seeing movement outside the window, which misdirected initial suspicions."
+        ],
+        "people": [
+          {
+            "id": "wartha_tregennis",
+            "name": "Wartha Tregennis",
+            "description": "A tall, gaunt man with a sombre and cynical demeanor. His face is haggard, and his eyes are sharp and piercing. He moves with a quiet, deliberate grace.",
+            "notes": "Prefers solitude and deep thought. Has a dry sense of humor and a deep aversion to publicity. Highly observant and deductive."
+          }
+        ],
+        "objects": [
+          {
+            "id": "cottage_notes",
+            "category": "surface",
+            "name": "Tregennis's Notes",
+            "description": "A stack of papers and notebooks filled with Tregennis's observations, deductions, and sketches related to various cases. Some pages are dedicated to the current investigation.",
+            "notes": "Contains early theories about the Holmes family deaths, including notes on the victims' expressions of horror and the lack of physical evidence."
+          },
+          {
+            "id": "cottage_lantern",
+            "category": "item",
+            "name": "Lantern",
+            "description": "A sturdy, brass lantern used for walks along the cliffs at night. It is currently unlit.",
+            "notes": "Could be used to test theories about light and visibility during the investigation."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tredannick_wollas",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "vicarage",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________",
+          "         /               \\",
+          "        /                 \\",
+          "_______/                   \\_______",
+          "|   _______           _______   |",
+          "|  |       |         |       |  |",
+          "|  |       |         |       |  |",
+          "|  |_______|         |_______|  |",
+          "|       Sitting-Room         |",
+          "|                             |",
+          "|  _______             _____  |",
+          "| |       |           |     | |",
+          "| |       |           |     | |",
+          "| |_______|           |_____| |",
+          "|_____________________________|"
+        ]
+      },
+      "david_roundhay": {
+        "description": "A large, bright villa with a considerable garden filled with spring flowers. The house is well-maintained, with a cozy sitting-room where the Holmes family met their tragic fate. The atmosphere is eerily quiet, with an air of lingering horror.",
+        "setting": "The villa is surrounded by a lush garden, but the beauty of the flowers contrasts sharply with the grim events that took place inside. The sitting-room is preserved as it was on the night of the tragedy, with cards still on the table and chairs pushed back against the walls.",
+        "clues": [
+          "The victims (Watson, Tredannick, and Moore Holmes) were found with expressions of extreme horror, suggesting a shared terrifying experience.",
+          "No signs of forced entry or struggle at David Roundhay, indicating the cause was not a physical attack.",
+          "Cards and table at David Roundhay showed victims were in the middle of a game when attacked."
+        ],
+        "people": [
+          {
+            "id": "mrs_doyle",
+            "name": "Mrs. Doyle",
+            "description": "An elderly woman with a kind face, now pale and shaken. She wears a simple dress and apron, and her hands tremble as she speaks.",
+            "notes": "Deeply affected by the tragedies. Provides firsthand accounts of the victims' behavior and the state of the house. Superstitious and eager to leave."
+          },
+          {
+            "id": "watson_holmes_ghost",
+            "name": "Watson Holmes (Ghostly Presence)",
+            "description": "A beautiful woman with dark, clear-cut features. Her presence is felt through the lingering horror in the room and the reactions of others.",
+            "notes": "Her death was caused by the devil's-foot root poison. Her photograph reveals her relationship with Dr. Arthur.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "roundhay_table",
+            "category": "surface",
+            "name": "Dining Table",
+            "description": "A large, wooden table still set with cards, guttered candles, and the remnants of a game of whist. The chairs are pushed back against the walls.",
+            "notes": "The table and cards are arranged as they were on the night of the tragedy, providing clues about the victims' last moments."
+          },
+          {
+            "id": "roundhay_cards",
+            "category": "item",
+            "name": "Playing Cards",
+            "description": "A scattered deck of playing cards, some still in the hands of the victims. The cards are slightly singed from the candles.",
+            "notes": "The arrangement of the cards suggests the victims were in the middle of a game when the tragedy struck."
+          },
+          {
+            "id": "roundhay_lamp",
+            "category": "item",
+            "name": "Lamp",
+            "description": "A standard oil lamp, now cold and empty. It was used to burn the poison that caused the victims' deaths.",
+            "notes": "The lamp was lit in the middle of the night, suggesting it was used for a specific purpose. Residue of the devil's-foot root may be found on it."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tredannick_wollas",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "poldhu_bay_cottage",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________",
+          "         /               \\",
+          "        /                 \\",
+          "_______/                   \\_______",
+          "|   Garden                     |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|   Sitting-Room               |",
+          "|  _______________             |",
+          "| |               |            |",
+          "| |   Dining      |            |",
+          "| |    Table      |            |",
+          "| |_______________|            |",
+          "|______________________________|"
+        ]
+      },
+      "tredannick_wollas": {
+        "description": "A small hamlet clustered around an ancient, moss-grown church. The cottages are quaint and closely packed, with narrow, winding lanes leading to the moors. The atmosphere is quiet and somber, with a sense of history and mystery.",
+        "setting": "The hamlet is surrounded by rolling moors, dotted with strange monuments of stone and earthworks from a vanished race. The air is damp and misty, adding to the eerie atmosphere. The church tower looms over the village, a silent witness to the tragedies.",
+        "clues": [
+          "Tregennis's experiment with the powder reproduced the symptoms, confirming the cause of the deaths."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "hamlet_church",
+            "category": "surface",
+            "name": "Church",
+            "description": "An ancient, moss-grown church with a tall tower. The interior is dimly lit and filled with local artifacts and records.",
+            "notes": "Contains records of the Holmes family and other local residents. May provide background information on the victims and suspects."
+          },
+          {
+            "id": "hamlet_gravel",
+            "category": "item",
+            "name": "Gravel",
+            "description": "A small pile of reddish-brown gravel, similar to that found on the vicarage window-sill.",
+            "notes": "Matches the gravel from Dr. Arthur's cottage, linking him to the crime scene."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "david_roundhay",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "poldhu_bay_cottage",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "vicarage",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________",
+          "         /               \\",
+          "        /                 \\",
+          "_______/                   \\_______",
+          "|   Cottages                   |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|   Church                     |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| | Tower |                    |",
+          "| |_______|                    |",
+          "|______________________________|"
+        ]
+      },
+      "vicarage": {
+        "description": "A large, straggling house with a croquet lawn leading up to the windows. The vicarage is home to Mr. George and his lodger, Satan Holmes. The atmosphere is one of quiet study and reflection, though the recent tragedy has cast a pall over the house.",
+        "setting": "The vicarage is filled with books, artifacts, and religious icons. The sitting-room is cozy and well-lit, while the upstairs rooms are more austere. The croquet lawn outside is well-maintained, with a clear view of the surrounding moors.",
+        "clues": [
+          "The lamp in Satan Holmes's room was lit in broad daylight, suggesting it was used for a specific purpose (burning the poison).",
+          "Residue of reddish-brown powder (devil's-foot root) found on the lamp's talc shield, linking it to the poison."
+        ],
+        "people": [
+          {
+            "id": "mr_george",
+            "name": "Mr. George",
+            "description": "A portly, middle-aged man with a friendly face and a warm demeanor. He wears clerical attire and speaks with enthusiasm about local lore.",
+            "notes": "Knowledgeable about the Holmes family and their relationships. Acts as a liaison between Tregennis and other characters."
+          },
+          {
+            "id": "satan_holmes",
+            "name": "Satan Holmes",
+            "description": "A thin, dark man with a stooped posture and spectacles. His face is pale and drawn, and his eyes are often averted as if lost in thought.",
+            "notes": "Initially a suspect due to his reticence and the family quarrel, but later revealed to be a victim himself."
+          }
+        ],
+        "objects": [
+          {
+            "id": "vicarage_lamp",
+            "category": "item",
+            "name": "Lamp",
+            "description": "A standard oil lamp with a talc shield covering the top. It was lit in broad daylight, suggesting it was used for a specific purpose.",
+            "notes": "Residue of the devil's-foot root poison was found on the talc shield, linking it to the crimes."
+          },
+          {
+            "id": "vicarage_talc_shield",
+            "category": "item",
+            "name": "Talc Shield",
+            "description": "A small, round shield made of talc, used to cover the top of the lamp. It is discolored with reddish-brown residue.",
+            "notes": "Contains residue of the devil's-foot root poison, a key piece of evidence."
+          },
+          {
+            "id": "vicarage_window_sill",
+            "category": "surface",
+            "name": "Window-Sill",
+            "description": "A narrow window-sill outside Satan Holmes's sitting-room. It is covered in reddish-brown gravel, matching that from Dr. Arthur's cottage.",
+            "notes": "The gravel on the window-sill links Dr. Arthur to the crime scene and suggests he was present at the vicarage."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "tredannick_wollas",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "beauchamp_arriance",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________",
+          "         /               \\",
+          "        /                 \\",
+          "_______/                   \\_______",
+          "|   Croquet Lawn               |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|   Sitting-Room               |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|______________________________|"
+        ]
+      },
+      "beauchamp_arriance": {
+        "description": "A dense, lonely wood where Dr. Sherlock Arthur's bungalow is hidden. The trees are tall and ancient, casting deep shadows over the narrow paths. The atmosphere is one of seclusion and mystery.",
+        "setting": "The wood is filled with the sounds of birds and rustling leaves, but the bungalow itself is quiet and unassuming. The air is thick with the scent of pine and damp earth. The bungalow is sparsely furnished, with maps and books covering every surface.",
+        "clues": [
+          "Dr. Arthur's abrupt return from Plymouth and his emotional reaction to the deaths pointed to a personal motive.",
+          "Gravel on the vicarage window-sill matched gravel from Dr. Arthur's cottage, indicating his presence at the scene."
+        ],
+        "people": [
+          {
+            "id": "dr_sherlock_arthur",
+            "name": "Dr. Sherlock Arthur",
+            "description": "A tall, imposing man with a deeply seamed face, fierce eyes, and a hawk-like nose. His grizzled hair and beard give him a wild, untamed appearance.",
+            "notes": "A renowned explorer with a fierce and independent spirit. His love for Watson Holmes drove him to commit the crimes."
+          }
+        ],
+        "objects": [
+          {
+            "id": "bungalow_photograph",
+            "category": "item",
+            "name": "Photograph of Watson Holmes",
+            "description": "A small, framed photograph of a beautiful woman with dark, clear-cut features. The photograph is worn, suggesting it is frequently handled.",
+            "notes": "Reveals Dr. Arthur's motive for the crimes: his love for Watson Holmes and his desire for revenge."
+          },
+          {
+            "id": "bungalow_revolver",
+            "category": "item",
+            "name": "Revolver",
+            "description": "A well-maintained revolver, loaded and ready for use. It bears signs of recent handling.",
+            "notes": "Used by Dr. Arthur to threaten Satan Holmes during their confrontation."
+          },
+          {
+            "id": "bungalow_devils_foot_root",
+            "category": "item",
+            "name": "Devil's-Foot Root",
+            "description": "A small paper packet containing reddish-brown, snuff-like powder. The packet is labeled 'Radix pedis diaboli' with a red poison label.",
+            "notes": "The poison used in the crimes. It stimulates the brain's fear centers, causing madness or death."
+          },
+          {
+            "id": "bungalow_gravel_pile",
+            "category": "surface",
+            "name": "Gravel Pile",
+            "description": "A heap of reddish-brown gravel beside the gate of the bungalow. Some of the gravel is scattered, as if recently disturbed.",
+            "notes": "Matches the gravel found on the vicarage window-sill, linking Dr. Arthur to the crime scene."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "vicarage",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________",
+          "         /               \\",
+          "        /                 \\",
+          "_______/                   \\_______",
+          "|   Dense Trees                |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|   Bungalow                   |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|______________________________|"
+        ]
+      },
+      "satan_holmes_sitting_room": {
+        "description": "A cozy, well-lit room on the ground floor of the vicarage, belonging to Satan Holmes. The room is filled with books and personal effects, and a lamp sits on the center table. The atmosphere is one of quiet study, though the recent tragedy has left a lingering sense of horror.",
+        "setting": "The room is comfortably furnished, with a large window overlooking the croquet lawn. The walls are lined with bookshelves, and a desk is piled high with papers and notes. The lamp on the table is a standard oil lamp, similar to the one used in the crimes.",
+        "clues": [
+          "Satan Holmes was found dead in this room, with the same symptoms as his family. The lamp was lit in broad daylight, and residue of the poison was found on the talc shield."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "sitting_room_lamp",
+            "category": "item",
+            "name": "Lamp",
+            "description": "A standard oil lamp with a talc shield covering the top. It was lit in broad daylight, and residue of the devil's-foot root was found on the shield.",
+            "notes": "The lamp was used to burn the poison, causing Satan Holmes's death."
+          },
+          {
+            "id": "sitting_room_notes",
+            "category": "surface",
+            "name": "Desk",
+            "description": "A wooden desk covered in papers, notes, and books. Some of the notes appear to be related to the Holmes family and their history.",
+            "notes": "May contain clues about the family quarrel and Satan Holmes's suspicions about Dr. Arthur."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "vicarage",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "          _______________",
+          "         /               \\",
+          "        /                 \\",
+          "_______/                   \\_______",
+          "|   Bookshelves                |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|   Desk and Lamp              |",
+          "|  _______                     |",
+          "| |       |                    |",
+          "| |       |                    |",
+          "| |_______|                    |",
+          "|______________________________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "poldhu_bay_cottage": {
+      "description": "A small, whitewashed cottage perched high on a grassy headland overlooking Mounts Bay. The interior is cozy but sparsely furnished, with a sitting-room where Tregennis and his companion spend much of their time. The windows offer a sweeping view of the sinister semicircle of the bay, with its black cliffs and treacherous reefs.",
+      "items": [
+        "Lantern"
+      ],
+      "clues": [
+        "Satan Holmes mentioned seeing movement outside the window, which misdirected initial suspicions."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The cottage exudes a sense of solitude and introspection, with the constant sound of waves crashing against the cliffs below. The air is damp and salty, and the wind howls through the cracks in the windows. The sitting-room is filled with books, maps, and notes on various cases and studies.",
+        "connections": [
+          {
+            "target_location": "tredannick_wollas",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "vicarage",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "david_roundhay": {
+      "description": "A large, bright villa with a considerable garden filled with spring flowers. The house is well-maintained, with a cozy sitting-room where the Holmes family met their tragic fate. The atmosphere is eerily quiet, with an air of lingering horror.",
+      "items": [
+        "Playing Cards",
+        "Lamp"
+      ],
+      "clues": [
+        "The victims (Watson, Tredannick, and Moore Holmes) were found with expressions of extreme horror, suggesting a shared terrifying experience.",
+        "No signs of forced entry or struggle at David Roundhay, indicating the cause was not a physical attack.",
+        "Cards and table at David Roundhay showed victims were in the middle of a game when attacked."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The villa is surrounded by a lush garden, but the beauty of the flowers contrasts sharply with the grim events that took place inside. The sitting-room is preserved as it was on the night of the tragedy, with cards still on the table and chairs pushed back against the walls.",
+        "connections": [
+          {
+            "target_location": "tredannick_wollas",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "poldhu_bay_cottage",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "tredannick_wollas": {
+      "description": "A small hamlet clustered around an ancient, moss-grown church. The cottages are quaint and closely packed, with narrow, winding lanes leading to the moors. The atmosphere is quiet and somber, with a sense of history and mystery.",
+      "items": [
+        "Gravel"
+      ],
+      "clues": [
+        "Tregennis's experiment with the powder reproduced the symptoms, confirming the cause of the deaths."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The hamlet is surrounded by rolling moors, dotted with strange monuments of stone and earthworks from a vanished race. The air is damp and misty, adding to the eerie atmosphere. The church tower looms over the village, a silent witness to the tragedies.",
+        "connections": [
+          {
+            "target_location": "david_roundhay",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "poldhu_bay_cottage",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "vicarage",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "vicarage": {
+      "description": "A large, straggling house with a croquet lawn leading up to the windows. The vicarage is home to Mr. George and his lodger, Satan Holmes. The atmosphere is one of quiet study and reflection, though the recent tragedy has cast a pall over the house.",
+      "items": [
+        "Lamp",
+        "Talc Shield"
+      ],
+      "clues": [
+        "The lamp in Satan Holmes's room was lit in broad daylight, suggesting it was used for a specific purpose (burning the poison).",
+        "Residue of reddish-brown powder (devil's-foot root) found on the lamp's talc shield, linking it to the poison."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The vicarage is filled with books, artifacts, and religious icons. The sitting-room is cozy and well-lit, while the upstairs rooms are more austere. The croquet lawn outside is well-maintained, with a clear view of the surrounding moors.",
+        "connections": [
+          {
+            "target_location": "tredannick_wollas",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "beauchamp_arriance",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "beauchamp_arriance": {
+      "description": "A dense, lonely wood where Dr. Sherlock Arthur's bungalow is hidden. The trees are tall and ancient, casting deep shadows over the narrow paths. The atmosphere is one of seclusion and mystery.",
+      "items": [
+        "Photograph of Watson Holmes",
+        "Revolver",
+        "Devil's-Foot Root"
+      ],
+      "clues": [
+        "Dr. Arthur's abrupt return from Plymouth and his emotional reaction to the deaths pointed to a personal motive.",
+        "Gravel on the vicarage window-sill matched gravel from Dr. Arthur's cottage, indicating his presence at the scene."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The wood is filled with the sounds of birds and rustling leaves, but the bungalow itself is quiet and unassuming. The air is thick with the scent of pine and damp earth. The bungalow is sparsely furnished, with maps and books covering every surface.",
+        "connections": [
+          {
+            "target_location": "vicarage",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "satan_holmes_sitting_room": {
+      "description": "A cozy, well-lit room on the ground floor of the vicarage, belonging to Satan Holmes. The room is filled with books and personal effects, and a lamp sits on the center table. The atmosphere is one of quiet study, though the recent tragedy has left a lingering sense of horror.",
+      "items": [
+        "Lamp"
+      ],
+      "clues": [
+        "Satan Holmes was found dead in this room, with the same symptoms as his family. The lamp was lit in broad daylight, and residue of the poison was found on the talc shield."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "The room is comfortably furnished, with a large window overlooking the croquet lawn. The walls are lined with bookshelves, and a desk is piled high with papers and notes. The lamp on the table is a standard oil lamp, similar to the one used in the crimes.",
+        "connections": [
+          {
+            "target_location": "vicarage",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

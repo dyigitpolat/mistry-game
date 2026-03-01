@@ -1,0 +1,972 @@
+{
+  "title": "The Opal Serpent",
+  "description": "A mystery novel involving the murder of Aaron Norman, a second-hand bookseller and pawnbroker, whose death is connected to a past crime and an opal serpent brooch.",
+  "victim": "Aaron Norman (Lemuel Krill)",
+  "intro_narrative": "Paul Beecot, an aspiring author, becomes entangled in the mystery surrounding the murder of Aaron Norman, a pawnbroker and second-hand bookseller. The discovery of an opal serpent brooch, which played a key role in a past crime, leads Paul and detective Billy Hurd into a complex investigation involving Norman's estranged family and hidden secrets.",
+  "start_time": "1905-07-06T23:45:00Z",
+  "win_conditions": {
+    "required_evidence": [
+      "Opal serpent brooch",
+      "Unfinished letter by Aaron Norman",
+      "Handful of coarse brown sugar (goor)",
+      "Norman's confession",
+      "Marriage and birth certificates revealing Maud's true parentage",
+      "Aaron Norman's will"
+    ],
+    "required_suspect": [
+      "Maud Krill (Jessop)"
+    ],
+    "required_motive": [
+      "Revenge for past cruelty",
+      "Greed for inheritance",
+      "Concealment of past crimes"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Discovery",
+      "objective": "Uncover the initial clues and establish connections between Aaron Norman's murder and the opal serpent brooch.",
+      "unlocked_locations": [
+        "Gwynne Street, London",
+        "Charing Cross Hospital"
+      ],
+      "unlocked_characters": [
+        "Paul Beecot",
+        "Sylvia Norman",
+        "Aaron Norman",
+        "Deborah Junk (Tawsey)",
+        "Bart Tawsey"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Past",
+      "objective": "Investigate Aaron Norman's past life and connections to Christchurch and Stowley.",
+      "unlocked_locations": [
+        "Christchurch, Hants ('The Red Pig' inn)",
+        "Stowley, Buckinghamshire"
+      ],
+      "unlocked_characters": [
+        "Grexon Hay",
+        "Mrs. Krill (Jessop)",
+        "Maud Krill (Jessop)",
+        "Billy Hurd",
+        "Aurora Qian"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Unraveling Secrets",
+      "objective": "Delve deeper into the secrets of the Krill family and the true nature of Maud's parentage.",
+      "unlocked_locations": [
+        "Jubileetown",
+        "Hunter Street, Kensington"
+      ],
+      "unlocked_characters": [
+        "Captain Jarvey Jessop",
+        "Hokar",
+        "Tray Clump"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the culprit and reveal the truth behind Aaron Norman's murder.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "paul_beecot": {
+      "type": "assistant",
+      "role": "Protagonist, aspiring author",
+      "location": "Bloomsbury, London",
+      "phase_locations": {
+        "0": "Bloomsbury, London",
+        "1": "Gwynne Street, London",
+        "2": "Jubileetown",
+        "3": "Wargrove, Essex"
+      },
+      "persona": "Eager, passionate, and determined. Speaks with a mix of idealism and practicality.",
+      "knowledge_about_others": {
+        "sylvia_norman": "Love interest, daughter of Aaron Norman.",
+        "aaron_norman": "Murder victim, pawnbroker and bookseller.",
+        "deborah_junk": "Devoted servant to Sylvia Norman.",
+        "grexon_hay": "Old school friend, swindler.",
+        "billy_hurd": "Detective investigating the murder."
+      },
+      "abilities": "Observant, intelligent, and resourceful. Skilled in writing and keen on solving mysteries.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Opal serpent brooch"
+          ],
+          "required_knowledge": [
+            "Aaron Norman's past"
+          ],
+          "reaction": "Becomes more determined to uncover the truth about Aaron Norman's murder and the brooch's significance.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "sylvia_norman": {
+      "type": "assistant",
+      "role": "Daughter of Aaron Norman, Paul's love interest",
+      "location": "Gwynne Street, London",
+      "phase_locations": {
+        "0": "Gwynne Street, London",
+        "1": "Gwynne Street, London",
+        "2": "Jubileetown",
+        "3": "Wargrove, Essex"
+      },
+      "persona": "Gentle, kind-hearted, and somewhat naive. Speaks softly and with a sense of vulnerability.",
+      "knowledge_about_others": {
+        "paul_beecot": "Love interest, aspiring author.",
+        "aaron_norman": "Father, pawnbroker and bookseller.",
+        "deborah_junk": "Devoted nurse and servant.",
+        "mrs_krill": "Aaron Norman's first wife."
+      },
+      "abilities": "Compassionate, intuitive, and supportive. Provides emotional insight into the mystery.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Norman's confession"
+          ],
+          "required_knowledge": [
+            "Father's past"
+          ],
+          "reaction": "Becomes more anxious and seeks comfort and protection from Paul and Deborah.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "aaron_norman": {
+      "type": "suspect",
+      "role": "Murdered pawnbroker and bookseller (Lemuel Krill)",
+      "location": "Gwynne Street, London",
+      "phase_locations": {
+        "0": "Gwynne Street, London"
+      },
+      "persona": "Nervous, secretive, and haunted by his past. Speaks hesitantly and with fear.",
+      "knowledge_about_others": {
+        "mrs_krill": "First wife, estranged.",
+        "maud_krill": "Daughter, though not biologically.",
+        "sylvia_norman": "Daughter from second marriage."
+      },
+      "secret": "Changed his name from Lemuel Krill to Aaron Norman to escape his past crimes and bigamy.",
+      "suspicion_meter": 80,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "deborah_junk": {
+      "type": "assistant",
+      "role": "Sylvia's devoted nurse and servant",
+      "location": "Gwynne Street, London",
+      "phase_locations": {
+        "0": "Gwynne Street, London",
+        "1": "Gwynne Street, London",
+        "2": "Jubileetown",
+        "3": "Jubileetown"
+      },
+      "persona": "Loud, protective, and fiercely loyal. Speaks in a straightforward and sometimes blunt manner.",
+      "knowledge_about_others": {
+        "sylvia_norman": "Young mistress, love interest of Paul Beecot.",
+        "aaron_norman": "Former employer, murder victim.",
+        "bart_tawsey": "Future husband."
+      },
+      "abilities": "Strong, resourceful, and deeply caring. Acts as a guardian to Sylvia.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Opal serpent brooch"
+          ],
+          "required_knowledge": [
+            "Aaron Norman's secrets"
+          ],
+          "reaction": "Becomes more protective of Sylvia and suspicious of others' intentions.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "grexon_hay": {
+      "type": "suspect",
+      "role": "Paul's old school friend, a swindler",
+      "location": "Camden Hill, London",
+      "phase_locations": {
+        "0": "Camden Hill, London",
+        "1": "Gwynne Street, London",
+        "2": "Hunter Street, Kensington"
+      },
+      "persona": "Charming, manipulative, and cold. Speaks with calculated politeness and detachment.",
+      "knowledge_about_others": {
+        "paul_beecot": "Old school friend.",
+        "mrs_krill": "Potential mother-in-law.",
+        "maud_krill": "Fiancée, potential heiress."
+      },
+      "secret": "Involved in swindling and possibly connected to the opal brooch's disappearance.",
+      "suspicion_meter": 70,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Opal serpent brooch"
+          ],
+          "required_knowledge": [
+            "Maud Krill's inheritance"
+          ],
+          "reaction": "Becomes more secretive and attempts to manipulate others to secure Maud's fortune.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "mrs_krill": {
+      "type": "suspect",
+      "role": "Aaron Norman's first wife (Jessop)",
+      "location": "Christchurch, Hants",
+      "phase_locations": {
+        "0": "Christchurch, Hants",
+        "1": "Hunter Street, Kensington"
+      },
+      "persona": "Calm, composed, and manipulative. Speaks in a smooth and controlled manner.",
+      "knowledge_about_others": {
+        "aaron_norman": "First husband, murder victim.",
+        "maud_krill": "Daughter.",
+        "sylvia_norman": "Stepdaughter."
+      },
+      "secret": "Committed bigamy and possibly involved in past crimes, including the murder of Lady Rachel Sandal.",
+      "suspicion_meter": 90,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Marriage and birth certificates"
+          ],
+          "required_knowledge": [
+            "Maud's true parentage"
+          ],
+          "reaction": "Attempts to manipulate legal proceedings to secure the inheritance for Maud.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "maud_krill": {
+      "type": "suspect",
+      "role": "Mrs. Krill's daughter, the murderer",
+      "location": "Christchurch, Hants",
+      "phase_locations": {
+        "0": "Christchurch, Hants",
+        "1": "Hunter Street, Kensington"
+      },
+      "persona": "Cold, calculating, and cruel. Speaks with a calm demeanor that hides her true nature.",
+      "knowledge_about_others": {
+        "aaron_norman": "Stepfather, murder victim.",
+        "mrs_krill": "Mother.",
+        "sylvia_norman": "Stepsister."
+      },
+      "secret": "Murdered Lady Rachel Sandal and Aaron Norman for revenge and inheritance.",
+      "suspicion_meter": 95,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Opal serpent brooch",
+            "Norman's confession"
+          ],
+          "required_knowledge": [
+            "Sylvia's knowledge of her crimes"
+          ],
+          "reaction": "Attempts to silence Sylvia and escape justice.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "billy_hurd": {
+      "type": "assistant",
+      "role": "Detective investigating the murder",
+      "location": "Scotland Yard, London",
+      "phase_locations": {
+        "0": "Scotland Yard, London",
+        "1": "Gwynne Street, London",
+        "2": "Christchurch, Hants"
+      },
+      "persona": "Calm, methodical, and insightful. Speaks with authority and a touch of dry humor.",
+      "knowledge_about_others": {
+        "paul_beecot": "Protagonist, aspiring author.",
+        "sylvia_norman": "Daughter of the victim.",
+        "mrs_krill": "Suspect.",
+        "maud_krill": "Suspect."
+      },
+      "abilities": "Skilled detective with a keen eye for detail and a methodical approach to solving crimes.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Opal serpent brooch",
+            "Handful of coarse brown sugar"
+          ],
+          "required_knowledge": [
+            "Aaron Norman's past"
+          ],
+          "reaction": "Intensifies investigation and seeks to uncover the truth behind the murder.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "aurora_qian": {
+      "type": "assistant",
+      "role": "Hurd's sister, actress and undercover agent",
+      "location": "Kensington, London",
+      "phase_locations": {
+        "0": "Kensington, London",
+        "1": "Christchurch, Hants"
+      },
+      "persona": "Charming, witty, and perceptive. Speaks with a playful yet insightful tone.",
+      "knowledge_about_others": {
+        "billy_hurd": "Brother, detective.",
+        "grexon_hay": "Suspect.",
+        "mrs_krill": "Suspect."
+      },
+      "abilities": "Actress skilled in deception and gathering information discreetly.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Marriage and birth certificates"
+          ],
+          "required_knowledge": [
+            "Maud's true parentage"
+          ],
+          "reaction": "Uses her acting skills to gather crucial information from suspects.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "captain_jarvey_jessop": {
+      "type": "suspect",
+      "role": "Maud's father, a sailor",
+      "location": "Southampton",
+      "phase_locations": {
+        "0": "Southampton",
+        "1": "Christchurch, Hants"
+      },
+      "persona": "Blunt, rough, and somewhat secretive. Speaks in a gruff, nautical manner.",
+      "knowledge_about_others": {
+        "mrs_krill": "Former wife.",
+        "maud_krill": "Daughter."
+      },
+      "secret": "Involved in past crimes and possibly connected to the opal brooch.",
+      "suspicion_meter": 75,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Opal serpent brooch"
+          ],
+          "required_knowledge": [
+            "Maud's crimes"
+          ],
+          "reaction": "Attempts to evade questioning and escape accountability.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "hokar": {
+      "type": "suspect",
+      "role": "Indian servant with Thug connections",
+      "location": "Christchurch, Hants",
+      "phase_locations": {
+        "0": "Christchurch, Hants"
+      },
+      "persona": "Mysterious, quiet, and somewhat ominous. Speaks sparingly and with caution.",
+      "knowledge_about_others": {
+        "mrs_krill": "Employer.",
+        "maud_krill": "Associate."
+      },
+      "secret": "Possibly involved in the murder plot and connected to Thug practices.",
+      "suspicion_meter": 85,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Handful of coarse brown sugar (goor)"
+          ],
+          "required_knowledge": [
+            "Maud's intentions"
+          ],
+          "reaction": "Attempts to flee or remain silent to avoid implication.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "tray_clump": {
+      "type": "suspect",
+      "role": "Street urchin involved in the crime",
+      "location": "Gwynne Street, London",
+      "phase_locations": {
+        "0": "Gwynne Street, London",
+        "1": "Chancery Lane, London"
+      },
+      "persona": "Impudent, cunning, and street-smart. Speaks in a rough and defiant manner.",
+      "knowledge_about_others": {
+        "paul_beecot": "Accident witness.",
+        "maud_krill": "Accomplice."
+      },
+      "secret": "Stole the opal brooch and assisted Maud in the murder of Aaron Norman.",
+      "suspicion_meter": 80,
+      "flight_risk": 90,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Opal serpent brooch"
+          ],
+          "required_knowledge": [
+            "Maud's crimes"
+          ],
+          "reaction": "Attempts to evade capture and avoid punishment.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "bart_tawsey": {
+      "type": "assistant",
+      "role": "Shop assistant at Aaron Norman's bookshop",
+      "location": "Gwynne Street, London",
+      "phase_locations": {
+        "0": "Gwynne Street, London",
+        "1": "Jubileetown"
+      },
+      "persona": "Loyal, somewhat timid, and hardworking. Speaks in a straightforward and earnest manner.",
+      "knowledge_about_others": {
+        "aaron_norman": "Employer, murder victim.",
+        "deborah_junk": "Future wife.",
+        "sylvia_norman": "Daughter of employer."
+      },
+      "abilities": "Diligent worker and supportive to Deborah and Sylvia.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Handful of coarse brown sugar"
+          ],
+          "required_knowledge": [
+            "Hokar's presence"
+          ],
+          "reaction": "Becomes more vigilant and protective of the shop and Sylvia.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  },
+  "game_world": {
+    "locations": {
+      "gwynne_street_london": {
+        "description": "A narrow street in London where Aaron Norman's second-hand bookshop and residence are located. The shop has a cellar used for pawnbroking.",
+        "clues": [
+          "Unfinished letter by Aaron Norman hinting at a secret past",
+          "Norman's confession detailing his life and fears",
+          "Tray's knowledge of the brooch and its theft from Paul Beecot"
+        ],
+        "people": [
+          {
+            "id": "aaron_norman",
+            "name": "Aaron Norman",
+            "description": "A nervous, one-eyed man who runs the bookshop and pawnbroking business.",
+            "notes": "Secretly Lemuel Krill, hiding from his past crimes."
+          },
+          {
+            "id": "bart_tawsey",
+            "name": "Bart Tawsey",
+            "description": "A lean, hardworking shop assistant.",
+            "notes": "Loyal to Aaron Norman and later marries Deborah Junk."
+          }
+        ],
+        "objects": [
+          {
+            "id": "shop_counter",
+            "category": "surface",
+            "name": "Shop Counter",
+            "description": "A large wooden counter where transactions are made.",
+            "notes": "Location where the handful of coarse brown sugar was left."
+          },
+          {
+            "id": "trap_door",
+            "category": "container",
+            "name": "Trap Door",
+            "description": "A wooden trap door leading to the cellar.",
+            "notes": "Used by Aaron Norman to access the pawnbroking area.",
+            "state": "closed"
+          },
+          {
+            "id": "opal_serpent_brooch",
+            "category": "item",
+            "name": "Opal Serpent Brooch",
+            "description": "A brooch in the shape of a serpent, set with opals and diamonds.",
+            "notes": "Key evidence in the murder investigation."
+          },
+          {
+            "id": "copper_wire",
+            "category": "item",
+            "name": "Copper Wire",
+            "description": "A thin, strong wire used in the murder.",
+            "notes": "Used to strangle Aaron Norman."
+          },
+          {
+            "id": "auger",
+            "category": "item",
+            "name": "Auger",
+            "description": "A tool used to bore holes.",
+            "notes": "Used to bore a hole for the copper wire."
+          },
+          {
+            "id": "blue_velvet_case",
+            "category": "container",
+            "name": "Blue Velvet Case",
+            "description": "A small case that held the opal brooch.",
+            "notes": "Held the opal serpent brooch.",
+            "contains": [
+              {
+                "id": "opal_serpent_brooch_item",
+                "category": "item",
+                "name": "Opal Serpent Brooch",
+                "description": "A brooch in the shape of a serpent, set with opals and diamonds.",
+                "notes": "Key evidence in the murder investigation."
+              }
+            ],
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "charing_cross_hospital",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "christchurch_hants",
+            "state": "locked"
+          }
+        ],
+        "setting": "A dimly lit, musty bookshop with a hidden cellar used for pawnbroking. The atmosphere is tense and secretive."
+      },
+      "charing_cross_hospital": {
+        "description": "A hospital in London where Paul Beecot recovers after an accident.",
+        "clues": [
+          "Aaron Norman's fainting spell upon seeing the opal brooch"
+        ],
+        "people": [
+          {
+            "id": "paul_beecot_hospital",
+            "name": "Paul Beecot",
+            "description": "An aspiring author recovering from an accident.",
+            "notes": "Witness to Aaron Norman's reaction to the opal brooch."
+          }
+        ],
+        "objects": [
+          {
+            "id": "hospital_bed",
+            "category": "surface",
+            "name": "Hospital Bed",
+            "description": "A bed where Paul Beecot recovers.",
+            "notes": "Location where Paul Beecot stays during his recovery."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "gwynne_street_london",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A sterile, well-lit hospital ward with an air of quiet urgency."
+      },
+      "christchurch_hants": {
+        "description": "A small town in Hampshire where 'The Red Pig' inn is located. This is where Aaron Norman (Lemuel Krill) lived with his first wife.",
+        "clues": [
+          "Jessop's testimony about the night of Lady Rachel Sandal's death"
+        ],
+        "people": [
+          {
+            "id": "mrs_krill_christchurch",
+            "name": "Mrs. Krill",
+            "description": "The landlady of 'The Red Pig' inn.",
+            "notes": "Former wife of Aaron Norman, involved in past crimes."
+          },
+          {
+            "id": "maud_krill_christchurch",
+            "name": "Maud Krill",
+            "description": "Daughter of Mrs. Krill.",
+            "notes": "Involved in the murder of Lady Rachel Sandal."
+          },
+          {
+            "id": "matilda_junk",
+            "name": "Matilda Junk",
+            "description": "Sister of Deborah Junk, working at 'The Red Pig'.",
+            "notes": "Provides information about the Krill family."
+          }
+        ],
+        "objects": [
+          {
+            "id": "red_pig_inn_sign",
+            "category": "surface",
+            "name": "The Red Pig Inn Sign",
+            "description": "A sign depicting a red pig hanging outside the inn.",
+            "notes": "Landmark of the inn where Aaron Norman lived."
+          },
+          {
+            "id": "lady_rachel_room",
+            "category": "container",
+            "name": "Lady Rachel's Room",
+            "description": "A bedroom where Lady Rachel Sandal stayed.",
+            "notes": "Site of Lady Rachel Sandal's murder.",
+            "state": "locked"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "gwynne_street_london",
+            "state": "locked"
+          },
+          {
+            "location_id": "stowley_buckinghamshire",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quaint, rustic inn with a dark history, surrounded by green fields and hedgerows."
+      },
+      "stowley_buckinghamshire": {
+        "description": "A town in Buckinghamshire where the opal brooch was originally pawned.",
+        "clues": [
+          "Marriage and birth certificates revealing Maud's true parentage"
+        ],
+        "people": [
+          {
+            "id": "pawnbroker_stowley",
+            "name": "Pawnbroker",
+            "description": "A local pawnbroker who dealt with the opal brooch.",
+            "notes": "Sold the opal brooch to Paul Beecot's father."
+          }
+        ],
+        "objects": [
+          {
+            "id": "pawn_shop_counter",
+            "category": "surface",
+            "name": "Pawn Shop Counter",
+            "description": "A counter where transactions are made.",
+            "notes": "Location where the opal brooch was pawned."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "christchurch_hants",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A small, quiet town with a modest pawn shop at its center."
+      },
+      "jubileetown": {
+        "description": "A suburb near London where Deborah Tawsey runs a laundry.",
+        "clues": [
+          "Deborah's knowledge of Maud's true age and intentions"
+        ],
+        "people": [
+          {
+            "id": "sylvia_norman_jubileetown",
+            "name": "Sylvia Norman",
+            "description": "Daughter of Aaron Norman, living with Deborah Tawsey.",
+            "notes": "Recovers from the traumatic events and assists in the laundry."
+          },
+          {
+            "id": "deborah_tawsey",
+            "name": "Deborah Tawsey",
+            "description": "Sylvia's devoted nurse and laundry owner.",
+            "notes": "Protects Sylvia and provides crucial information."
+          }
+        ],
+        "objects": [
+          {
+            "id": "laundry_tub",
+            "category": "surface",
+            "name": "Laundry Tub",
+            "description": "A large tub used for washing clothes.",
+            "notes": "Central to Deborah's laundry business."
+          },
+          {
+            "id": "rose_cottage",
+            "category": "container",
+            "name": "Rose Cottage",
+            "description": "A small cottage where Sylvia and Deborah live.",
+            "notes": "Home of Sylvia Norman and Deborah Tawsey.",
+            "state": "open"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "gwynne_street_london",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "hunter_street_kensington",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet, newly developed suburb with a small cottage and laundry business."
+      },
+      "hunter_street_kensington": {
+        "description": "A street in Kensington where Mrs. Krill and Maud Krill reside after inheriting Aaron Norman's fortune.",
+        "clues": [
+          "Mrs. Krill's evasiveness about her past and the brooch",
+          "Maud's scar from the brooch incident in her childhood"
+        ],
+        "people": [
+          {
+            "id": "mrs_krill_kensington",
+            "name": "Mrs. Krill",
+            "description": "Wealthy widow residing in Kensington.",
+            "notes": "Attempts to secure the inheritance for Maud."
+          },
+          {
+            "id": "maud_krill_kensington",
+            "name": "Maud Krill",
+            "description": "Daughter of Mrs. Krill, living in Kensington.",
+            "notes": "Plots to silence Sylvia Norman."
+          },
+          {
+            "id": "grexon_hay_kensington",
+            "name": "Grexon Hay",
+            "description": "Fiancé of Maud Krill.",
+            "notes": "Involved in swindling and possibly connected to the murder."
+          }
+        ],
+        "objects": [
+          {
+            "id": "hunter_street_house",
+            "category": "container",
+            "name": "Hunter Street House",
+            "description": "A well-furnished house where Mrs. Krill and Maud reside.",
+            "notes": "Residence of Mrs. Krill and Maud Krill.",
+            "state": "open"
+          },
+          {
+            "id": "black_silk_handkerchief",
+            "category": "item",
+            "name": "Black Silk Handkerchief",
+            "description": "A handkerchief used in the attempted murder of Sylvia.",
+            "notes": "Used by Maud Krill in her attempt to strangle Sylvia."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "jubileetown",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "An elegant, affluent street in Kensington with well-furnished houses."
+      }
+    }
+  },
+  "locations": {
+    "gwynne_street_london": {
+      "description": "A narrow street in London where Aaron Norman's second-hand bookshop and residence are located. The shop has a cellar used for pawnbroking.",
+      "items": [
+        "Opal Serpent Brooch",
+        "Copper Wire",
+        "Auger"
+      ],
+      "clues": [
+        "Unfinished letter by Aaron Norman hinting at a secret past",
+        "Norman's confession detailing his life and fears",
+        "Tray's knowledge of the brooch and its theft from Paul Beecot"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit, musty bookshop with a hidden cellar used for pawnbroking. The atmosphere is tense and secretive.",
+        "connections": [
+          {
+            "target_location": "charing_cross_hospital",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "christchurch_hants",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "charing_cross_hospital": {
+      "description": "A hospital in London where Paul Beecot recovers after an accident.",
+      "items": [],
+      "clues": [
+        "Aaron Norman's fainting spell upon seeing the opal brooch"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A sterile, well-lit hospital ward with an air of quiet urgency.",
+        "connections": [
+          {
+            "target_location": "gwynne_street_london",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "christchurch_hants": {
+      "description": "A small town in Hampshire where 'The Red Pig' inn is located. This is where Aaron Norman (Lemuel Krill) lived with his first wife.",
+      "items": [],
+      "clues": [
+        "Jessop's testimony about the night of Lady Rachel Sandal's death"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quaint, rustic inn with a dark history, surrounded by green fields and hedgerows.",
+        "connections": [
+          {
+            "target_location": "gwynne_street_london",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "stowley_buckinghamshire",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "stowley_buckinghamshire": {
+      "description": "A town in Buckinghamshire where the opal brooch was originally pawned.",
+      "items": [],
+      "clues": [
+        "Marriage and birth certificates revealing Maud's true parentage"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small, quiet town with a modest pawn shop at its center.",
+        "connections": [
+          {
+            "target_location": "christchurch_hants",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "jubileetown": {
+      "description": "A suburb near London where Deborah Tawsey runs a laundry.",
+      "items": [],
+      "clues": [
+        "Deborah's knowledge of Maud's true age and intentions"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, newly developed suburb with a small cottage and laundry business.",
+        "connections": [
+          {
+            "target_location": "gwynne_street_london",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "hunter_street_kensington",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hunter_street_kensington": {
+      "description": "A street in Kensington where Mrs. Krill and Maud Krill reside after inheriting Aaron Norman's fortune.",
+      "items": [
+        "Black Silk Handkerchief"
+      ],
+      "clues": [
+        "Mrs. Krill's evasiveness about her past and the brooch",
+        "Maud's scar from the brooch incident in her childhood"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An elegant, affluent street in Kensington with well-furnished houses.",
+        "connections": [
+          {
+            "target_location": "jubileetown",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

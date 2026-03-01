@@ -1,0 +1,963 @@
+{
+  "title": "The Adventure of the Cardboard Box",
+  "description": "A gruesome mystery involving a cardboard box containing human ears sent to Miss Susan Shafaq. The investigation leads to a shocking crime of passion and betrayal aboard a ship.",
+  "victim": "Amol Ronit and Rajeev Neha",
+  "intro_narrative": "It was a blazing hot day in August when Kuldeep Ranbir received a peculiar letter regarding a gruesome package sent to Miss Susan Shafaq of Croydon. The package contained two human ears, sparking a mysterious investigation that would lead Ranbir and his assistant Tanushree through a web of deceit, secrets, and murder. As they delve deeper, they uncover a tale of jealousy, betrayal, and a sailor's vengeance.",
+  "start_time": "1894-08-12T10:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Sagar Ronit's knife",
+      "Sagar Ronit's written confession",
+      "Photograph of Kiran Shafaq with a steward"
+    ],
+    "required_suspect": [
+      "Sagar Ronit"
+    ],
+    "required_motive": [
+      "Jealousy and revenge for his wife's infidelity and his sister-in-law's meddling"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Examine the cardboard box and its contents at Miss Susan Shafaq's residence. Gather initial clues and speak to Miss Shafaq.",
+      "unlocked_locations": [
+        "baker_street",
+        "cross_street_croydon",
+        "outhouse"
+      ],
+      "unlocked_characters": [
+        "kuldeep_ranbir",
+        "tanushree",
+        "miss_susan_shafaq",
+        "manisha"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring Connections",
+      "objective": "Visit Miss Kiran Shafaq's residence and investigate the Liverpool connections. Uncover the relationship between the victims and the suspect.",
+      "unlocked_locations": [
+        "new_street_wallington",
+        "liverpool",
+        "albert_dock"
+      ],
+      "unlocked_characters": [
+        "miss_kiran_shafaq",
+        "sagar_ronit"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Uncovering the Truth",
+      "objective": "Track down Sagar Ronit aboard the *May Day* and gather conclusive evidence. Piece together the timeline of events leading to the murders.",
+      "unlocked_locations": [
+        "new_brighton"
+      ],
+      "unlocked_characters": []
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront Sagar Ronit with the evidence and secure his confession. Ensure all loose ends are tied up and justice is served.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "kuldeep_ranbir": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "cross_street_croydon",
+        "2": "new_street_wallington",
+        "3": "albert_dock"
+      },
+      "persona": "Sharp, observant, and methodical. Speaks in a calm, measured tone but can be intensely focused when solving a case. Prefers to let the evidence speak for itself.",
+      "knowledge_about_others": {
+        "tanushree": "Trusts Tanushree implicitly and values her insights. Knows she has a keen eye for detail.",
+        "manisha": "Respects Manisha's tenacity but finds his lack of reasoning frustrating.",
+        "sagar_ronit": "Suspects Sagar Ronit early on due to his seafaring connections and erratic behavior."
+      },
+      "abilities": "Master of deduction and observation. Can piece together complex scenarios from minimal clues. Skilled in reading people's unspoken thoughts and emotions.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "The string used to tie the package was tarred twine, common among sailors"
+          ],
+          "reaction": "Narrows the investigation to seafaring individuals. Begins to suspect a connection to the *May Day* ship.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Photograph of Kiran Shafaq with a steward"
+          ],
+          "reaction": "Focuses the investigation on Sagar Ronit. Plans to intercept him at Albert Dock.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Sagar Ronit's knife",
+            "Sagar Ronit's written confession"
+          ],
+          "reaction": "Confronts Sagar Ronit with the evidence, leading to his full confession.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "tanushree": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "cross_street_croydon",
+        "2": "new_street_wallington",
+        "3": "albert_dock"
+      },
+      "persona": "Curious, analytical, and empathetic. Often serves as the voice of reason and provides a grounded perspective. Admires Ranbir's deductive skills but questions his methods at times.",
+      "knowledge_about_others": {
+        "kuldeep_ranbir": "Views Ranbir as a mentor and is fascinated by his deductive prowess. Often acts as his sounding board.",
+        "miss_susan_shafaq": "Finds Miss Shafaq's innocence and placidity endearing but is puzzled by her lack of awareness of the situation.",
+        "sagar_ronit": "Feels a mix of pity and horror toward Sagar Ronit, recognizing the depth of his despair and madness."
+      },
+      "abilities": "Excellent at documenting and organizing information. Skilled at noticing subtle details and patterns. Provides emotional support to Ranbir during intense investigations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "The address on the package was originally 'Miss Meenal Shafaq,' suggesting it was meant for Kiran Shafaq"
+          ],
+          "reaction": "Questions why the package was sent to Susan instead of Kiran. Begins to suspect a case of mistaken identity.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Sagar Ronit's erratic behavior aboard the *May Day* drew attention"
+          ],
+          "reaction": "Urges Ranbir to act quickly to intercept Sagar Ronit before he flees or harms himself.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "miss_susan_shafaq": {
+      "type": "suspect",
+      "role": "Witness (Recipient of the Package)",
+      "location": "cross_street_croydon",
+      "phase_locations": {
+        "0": "cross_street_croydon",
+        "1": "cross_street_croydon"
+      },
+      "persona": "Gentle, placid, and somewhat naive. Speaks in a soft, measured tone and is easily flustered by the attention of the investigation. Unaware of the darker implications of the package.",
+      "knowledge_about_others": {
+        "miss_kiran_shafaq": "Views Kiran as meddlesome and difficult but loves her dearly. Blames herself for their recent quarrel.",
+        "sagar_ronit": "Remembers Sagar as a kind but troubled man. Feels pity for his struggles with alcohol and his broken marriage."
+      },
+      "secret": "Unaware of the true significance of the package but harbors guilt over her estrangement from Kiran and her inability to help Sagar Ronit.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "The parcel was posted from Belfast, a port city"
+          ],
+          "reaction": "Expresses confusion and insists the package was not meant for her. Repeats that she has no enemies.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Miss Shafaq's ear matched the female ear in the box, indicating a blood relation"
+          ],
+          "reaction": "Becomes visibly distressed and withdraws further into herself. Refuses to answer more questions without a clear explanation.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "miss_kiran_shafaq": {
+      "type": "suspect",
+      "role": "Intended Recipient of the Package",
+      "location": "new_street_wallington",
+      "phase_locations": {
+        "1": "new_street_wallington",
+        "2": "new_street_wallington"
+      },
+      "persona": "Proud, fierce, and unyielding. Speaks with a sharp tongue and is quick to anger. Hides her vulnerability behind a facade of strength.",
+      "knowledge_about_others": {
+        "sagar_ronit": "Hates Sagar Ronit with a passion for his betrayal and the destruction of her sister's marriage. Blames him for Amol's death.",
+        "amol_ronit": "Loved her sister deeply but resents her for choosing Sagar over her. Feels guilt over her role in their estrangement."
+      },
+      "secret": "Knew about Amol's affair with Rajeev Neha and may have encouraged it out of spite for Sagar. Fears the truth about the murders will implicate her.",
+      "suspicion_meter": 60,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The address on the package was originally 'Miss Meenal Shafaq,' suggesting it was meant for Kiran Shafaq"
+          ],
+          "reaction": "Denies any knowledge of the package but becomes visibly agitated. Refuses to discuss her relationship with Sagar Ronit.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Photograph of Kiran Shafaq with a steward"
+          ],
+          "reaction": "Breaks down and admits her hatred for Sagar Ronit. Confesses to meddling in Amol and Sagar's marriage but denies involvement in the murders.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "sagar_ronit": {
+      "type": "suspect",
+      "role": "Culprit (Steward on the *May Day*)",
+      "location": "albert_dock",
+      "phase_locations": {
+        "2": "albert_dock",
+        "3": "albert_dock"
+      },
+      "persona": "Volatile, passionate, and tormented. Speaks in a mix of rage, despair, and dark humor. Struggles with alcoholism and guilt over his actions.",
+      "knowledge_about_others": {
+        "amol_ronit": "Loved his wife deeply but was consumed by jealousy and rage over her affair. Blames himself for driving her away.",
+        "kiran_shafaq": "Hates Kiran for poisoning his marriage and driving a wedge between him and Amol. Holds her responsible for the murders.",
+        "rajeev_neha": "Despises Rajeev for stealing Amol's affections and humiliating him. Feels no remorse for killing him."
+      },
+      "secret": "Murdered his wife Amol and her lover Rajeev Neha in a fit of jealous rage. Sent the ears to Kiran as a twisted act of revenge.",
+      "suspicion_meter": 90,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Sagar Ronit's erratic behavior aboard the *May Day* drew attention"
+          ],
+          "reaction": "Becomes increasingly agitated and paranoid. Attempts to flee but is intercepted by the police.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Sagar Ronit's knife",
+            "Sagar Ronit's written confession"
+          ],
+          "reaction": "Breaks down and confesses to the murders. Expresses relief at unburdening himself but shows no remorse.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "amol_ronit": {
+      "type": "suspect",
+      "role": "Victim (Sagar's Wife)",
+      "location": "liverpool",
+      "phase_locations": {
+        "1": "liverpool"
+      },
+      "persona": "Gentle, trusting, and deeply loyal. Struggled with her husband's alcoholism and her sister's meddling but remained devoted to both. Her affair with Rajeev was a desperate attempt to escape her unhappy marriage.",
+      "knowledge_about_others": {
+        "sagar_ronit": "Loved Sagar despite his flaws but was heartbroken by his drinking and violence. Felt trapped in their marriage.",
+        "kiran_shafaq": "Loved her sister but resented her interference in her marriage. Felt betrayed by Kiran's encouragement of her affair with Rajeev."
+      },
+      "secret": "Had an affair with Rajeev Neha but regretted it deeply. Planned to end the affair and reconcile with Sagar before her murder.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "rajeev_neha": {
+      "type": "suspect",
+      "role": "Victim (Amol's Lover)",
+      "location": "new_brighton",
+      "phase_locations": {
+        "2": "new_brighton"
+      },
+      "persona": "Charming, confident, and manipulative. A sailor with a silver tongue and a penchant for seduction. Enjoyed the thrill of forbidden love but had no intention of leaving his life at sea.",
+      "knowledge_about_others": {
+        "amol_ronit": "Genuinely cared for Amol but saw their affair as a temporary escape. Never intended to leave his wife or his life as a sailor.",
+        "sagar_ronit": "Viewed Sagar as a pathetic figure but underestimated his capacity for violence. Felt no guilt over the affair."
+      },
+      "secret": "Was involved with multiple women simultaneously and had a history of leaving them heartbroken. Used his charm to manipulate those around him.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "manisha": {
+      "type": "assistant",
+      "role": "Detective from Scotland Yard",
+      "location": "cross_street_croydon",
+      "phase_locations": {
+        "0": "cross_street_croydon",
+        "1": "albert_dock",
+        "2": "albert_dock"
+      },
+      "persona": "Tenacious, methodical, and somewhat rigid. Speaks in a formal, no-nonsense tone and values procedure over intuition. Respects Ranbir's skills but finds his unorthodox methods frustrating.",
+      "knowledge_about_others": {
+        "kuldeep_ranbir": "Admires Ranbir's deductive abilities but finds him arrogant and dismissive of police procedures.",
+        "tanushree": "Views Tanushree as a useful but somewhat passive assistant. Appreciates her documentation skills."
+      },
+      "abilities": "Skilled in police procedure and evidence collection. Excellent at organizing and executing large-scale investigations. Lacks Ranbir's intuitive leaps but is thorough and reliable.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "The string used to tie the package was tarred twine, common among sailors"
+          ],
+          "reaction": "Dismisses the clue as insignificant but notes it for further investigation. Focuses on the medical student theory.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Sagar Ronit's erratic behavior aboard the *May Day* drew attention"
+          ],
+          "reaction": "Coordinates with the Liverpool police to intercept Sagar Ronit. Ensures all evidence is properly documented for the trial.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A modest but comfortable residence at 221B Baker Street. The sitting room is cluttered with books, scientific instruments, and mementos from past cases. The air is thick with the scent of tobacco and the faint hum of city life outside.",
+        "setting": "A cozy but somewhat chaotic sitting room with large windows overlooking Baker Street. The walls are lined with bookshelves, and a fireplace crackles softly in the corner. A desk piled with papers and a violin case sit near the window.",
+        "clues": [
+          "The timeline of the *May Day*'s voyage aligned with the posting of the package"
+        ],
+        "people": [
+          {
+            "id": "kuldeep_ranbir",
+            "name": "Kuldeep Ranbir",
+            "description": "A lean, sharp-featured man with piercing eyes and an air of intense focus. He is dressed in a comfortable but slightly rumpled suit, and his fingers are stained with ink from writing.",
+            "notes": "The detective at the heart of the investigation. Known for his deductive brilliance and unorthodox methods. Prefers to work in solitude but values Tanushree's companionship."
+          },
+          {
+            "id": "tanushree",
+            "name": "Tanushree",
+            "description": "A young woman with a keen, observant gaze and a warm, approachable demeanor. She is dressed practically for travel and carries a notebook filled with observations.",
+            "notes": "Ranbir's assistant and chronicler. Acts as his sounding board and provides emotional support during investigations. Skilled at noticing subtle details."
+          }
+        ],
+        "objects": [
+          {
+            "id": "desk",
+            "category": "surface",
+            "name": "Desk",
+            "description": "A large, cluttered desk covered in papers, ink bottles, and scientific instruments. A magnifying glass and a half-smoked cigar rest on top.",
+            "notes": "Ranbir's primary workspace. Contains notes and documents related to ongoing cases."
+          },
+          {
+            "id": "violin_case",
+            "category": "container",
+            "name": "Violin Case",
+            "description": "A worn but well-cared-for violin case. The clasp is slightly loose, and the interior is lined with velvet.",
+            "notes": "Contains Ranbir's prized Stradivarius violin. He often plays to relax or when deep in thought.",
+            "state": "closed",
+            "contains": [
+              {
+                "id": "stradivarius_violin",
+                "category": "item",
+                "name": "Stradivarius Violin",
+                "description": "A beautifully crafted violin with a rich, warm tone. The wood is polished to a high sheen, and the strings are well-maintained.",
+                "notes": "Ranbir's most prized possession. He purchased it for a fraction of its value and cherishes it deeply."
+              }
+            ]
+          },
+          {
+            "id": "newspaper",
+            "category": "item",
+            "name": "Newspaper",
+            "description": "A copy of the *Daily Chronicle* with a short paragraph about the gruesome package sent to Miss Shafaq.",
+            "notes": "The article that sparked Ranbir's interest in the case. Contains the initial details of the package and its contents."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cross_street_croydon",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |   221B Baker  |",
+          "      |     Street    |",
+          "      |_______________|",
+          "      /               \\",
+          "     /                 \\",
+          "____/                   \\____",
+          "|  _______________________  |",
+          "| |                       | |",
+          "| |     Sitting Room      | |",
+          "| |                       | |",
+          "| |  [Desk]  [Violin]     | |",
+          "| |_______________________| |",
+          "|___________________________|"
+        ]
+      },
+      "cross_street_croydon": {
+        "description": "A quiet, prim street lined with two-story brick houses. The air is thick with the scent of flowers and freshly baked bread. Miss Susan Shafaq's residence is neat and unassuming, with a small garden in the back.",
+        "setting": "A long, straight street of identical brick houses. Each house has a small front garden and a set of white stone steps leading to the door. The atmosphere is peaceful but slightly oppressive in the summer heat.",
+        "clues": [
+          "The string used to tie the package was tarred twine, common among sailors",
+          "The knot in the string was a sailor's knot",
+          "Miss Shafaq's ear matched the female ear in the box, indicating a blood relation"
+        ],
+        "people": [
+          {
+            "id": "miss_susan_shafaq",
+            "name": "Miss Susan Shafaq",
+            "description": "A placid-faced woman in her fifties with large, gentle eyes and grizzled hair. She is dressed in a simple but well-made dress and wears a small cap. Her hands are busy with needlework.",
+            "notes": "The recipient of the gruesome package. A quiet, unassuming woman with few acquaintances. Unaware of the true significance of the package but deeply disturbed by it."
+          },
+          {
+            "id": "manisha",
+            "name": "Manisha",
+            "description": "A wiry, dapper man with a ferret-like face and sharp eyes. He is dressed in a formal suit and carries a notebook filled with observations and sketches.",
+            "notes": "A detective from Scotland Yard assigned to the case. Tenacious and methodical but lacks Ranbir's intuitive leaps. Values procedure and evidence above all else."
+          }
+        ],
+        "objects": [
+          {
+            "id": "mantelpiece",
+            "category": "surface",
+            "name": "Mantelpiece",
+            "description": "A simple wooden mantelpiece adorned with a few small trinkets and a portrait group of three sisters. The fireplace below is cold and clean.",
+            "notes": "Contains a portrait of Miss Shafaq and her two sisters, Kiran and Amol. The photograph is a key clue in the investigation."
+          },
+          {
+            "id": "cardboard_box",
+            "category": "item",
+            "name": "Cardboard Box",
+            "description": "A small, yellow cardboard box wrapped in brown paper and tied with tarred twine. The box is stained with salt and has a faint smell of coffee.",
+            "notes": "The package sent to Miss Shafaq. Contains two human ears preserved in coarse salt. The box and its contents are the central focus of the investigation."
+          },
+          {
+            "id": "brown_paper_wrapper",
+            "category": "item",
+            "name": "Brown Paper Wrapper",
+            "description": "A piece of brown paper with a distinct smell of coffee. The address is printed in straggling characters: 'Miss Meenal. Shafaq, Cross Street, Croydon.'",
+            "notes": "The wrapper from the package. Contains clues about the sender, including the misspelled address and the masculine handwriting."
+          },
+          {
+            "id": "tarred_twine",
+            "category": "item",
+            "name": "Tarred Twine",
+            "description": "A piece of thick, tarred twine used to tie the package. The knot is a sailor's knot, and the twine smells faintly of the sea.",
+            "notes": "A key clue linking the package to a sailor. The knot and the tarred twine are common among seafaring individuals."
+          },
+          {
+            "id": "two_human_ears",
+            "category": "item",
+            "name": "Two Human Ears",
+            "description": "Two human ears, one male and one female, preserved in coarse salt. The male ear is pierced for an earring, and both ears show signs of having been freshly severed.",
+            "notes": "The gruesome contents of the package. The ears are evidence of a double murder and provide clues about the victims' identities and the killer's motives."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "outhouse",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "new_street_wallington",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  Cross Street |",
+          "      |    Croydon    |",
+          "      |_______________|",
+          "      /               \\",
+          "     /                 \\",
+          "____/                   \\____",
+          "|  _______________________  |",
+          "| |                       | |",
+          "| |   Miss Shafaq's      | |",
+          "| |      Residence       | |",
+          "| |                       | |",
+          "| |  [Mantelpiece]        | |",
+          "| |_______________________| |",
+          "|___________________________|",
+          "            |  |",
+          "            |  |",
+          "         [Outhouse]"
+        ]
+      },
+      "outhouse": {
+        "description": "A small, dimly lit shed in the narrow garden behind Miss Shafaq's house. The air is musty and thick with the scent of damp wood and earth. A bench sits against one wall, and the floor is littered with gardening tools.",
+        "setting": "A cramped, utilitarian shed with a single small window. The walls are lined with shelves holding gardening supplies, and a bench sits against one wall. The atmosphere is claustrophobic and slightly eerie.",
+        "clues": [
+          "Coarse salt was used to preserve the ears"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "bench",
+            "category": "surface",
+            "name": "Bench",
+            "description": "A simple wooden bench with a few splinters and stains. It is sturdy but slightly uncomfortable to sit on.",
+            "notes": "Where Ranbir and Manisha examined the contents of the package. The bench is a key location in the investigation."
+          },
+          {
+            "id": "coarse_salt",
+            "category": "item",
+            "name": "Coarse Salt",
+            "description": "A small pile of coarse, rough salt. The salt is of the quality used for preserving hides and other commercial purposes.",
+            "notes": "Used to preserve the ears in the package. The type of salt provides a clue about the killer's background and motives."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cross_street_croydon",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "       __________",
+          "      |          |",
+          "      | Outhouse |",
+          "      |__________|",
+          "      /          \\",
+          "     /            \\",
+          "____/              \\____",
+          "|  _________________  |",
+          "| |                 | |",
+          "| |     [Bench]     | |",
+          "| |                 | |",
+          "| |_________________| |",
+          "|_____________________|"
+        ]
+      },
+      "new_street_wallington": {
+        "description": "A quiet, residential street lined with neat, well-kept houses. Miss Kiran Shafaq's residence is similar to her sister's but slightly more austere. The atmosphere is tense, and the house feels unwelcoming.",
+        "setting": "A straight, tree-lined street with identical brick houses. Each house has a small front garden and a set of stone steps leading to the door. The street is quiet, with few signs of life.",
+        "clues": [
+          "The address on the package was originally 'Miss Meenal Shafaq,' suggesting it was meant for Kiran Shafaq"
+        ],
+        "people": [
+          {
+            "id": "miss_kiran_shafaq",
+            "name": "Miss Kiran Shafaq",
+            "description": "A tall, striking woman with black hair and sharp, piercing eyes. She is dressed in a severe, high-necked dress and carries herself with an air of pride and defiance.",
+            "notes": "Miss Susan Shafaq's younger sister and the intended recipient of the package. Proud, fierce, and unyielding, she harbors deep resentment toward Sagar Ronit and blames him for her sister's death.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "photograph_kiran_steward",
+            "category": "item",
+            "name": "Photograph of Kiran Shafaq with a Steward",
+            "description": "A photograph taken in Liverpool showing Kiran Shafaq with a man in a steward's uniform. The man is identified as Sagar Ronit, and the photograph was taken shortly before Kiran's marriage.",
+            "notes": "A key piece of evidence linking Sagar Ronit to the case. The photograph suggests a close relationship between Kiran and Sagar, which may have contributed to the murders."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cross_street_croydon",
+            "state": "locked"
+          },
+          {
+            "location_id": "liverpool",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      | New Street    |",
+          "      |  Wallington   |",
+          "      |_______________|",
+          "      /               \\",
+          "     /                 \\",
+          "____/                   \\____",
+          "|  _______________________  |",
+          "| |                       | |",
+          "| |  Miss Kiran Shafaq's  | |",
+          "| |      Residence       | |",
+          "| |                       | |",
+          "| |    [Photograph]      | |",
+          "| |_______________________| |",
+          "|___________________________|"
+        ]
+      },
+      "liverpool": {
+        "description": "A bustling port city with a mix of industrial and residential areas. The air is thick with the scent of saltwater and smoke, and the streets are crowded with sailors, merchants, and laborers. The Ronit residence is modest but well-kept.",
+        "setting": "A lively, chaotic city with narrow streets and tall buildings. The docks are a hive of activity, with ships coming and going at all hours. The atmosphere is vibrant but slightly grimy.",
+        "clues": [
+          "Sagar Ronit's erratic behavior aboard the *May Day* drew attention"
+        ],
+        "people": [
+          {
+            "id": "amol_ronit",
+            "name": "Amol Ronit",
+            "description": "A gentle, soft-spoken woman with a kind face and warm eyes. She is dressed simply but elegantly, and her demeanor is calm and composed. There is a sadness in her eyes that hints at her troubled marriage.",
+            "notes": "Sagar Ronit's wife and the victim of the double murder. A kind, trusting woman who was deeply affected by her husband's alcoholism and her sister's meddling. Had an affair with Rajeev Neha but regretted it deeply.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "sagar_ronit_knife",
+            "category": "item",
+            "name": "Sagar Ronit's Knife",
+            "description": "A large, sharp knife with a worn wooden handle. The blade is stained and slightly rusted, and the edge is still razor-sharp.",
+            "notes": "The murder weapon used by Sagar Ronit to kill his wife and her lover. The knife is a key piece of evidence linking him to the crime."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "new_street_wallington",
+            "state": "locked"
+          },
+          {
+            "location_id": "albert_dock",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |   Liverpool   |",
+          "      |_______________|",
+          "      /               \\",
+          "     /                 \\",
+          "____/                   \\____",
+          "|  _______________________  |",
+          "| |                       | |",
+          "| |    Ronit Residence    | |",
+          "| |                       | |",
+          "| |      [Knife]          | |",
+          "| |_______________________| |",
+          "|___________________________|"
+        ]
+      },
+      "albert_dock": {
+        "description": "A busy, bustling dock where ships from around the world come and go. The air is thick with the scent of saltwater, tar, and fish. The *May Day* is docked here, and the dockworkers are busy loading and unloading cargo.",
+        "setting": "A large, open dock area with towering cranes and stacks of cargo. Ships of all sizes are moored along the dock, and the water is choppy and gray. The atmosphere is industrious and slightly chaotic.",
+        "clues": [
+          "The parcel was posted from Belfast, a port city",
+          "The male ear was pierced for an earring, common among sailors"
+        ],
+        "people": [
+          {
+            "id": "sagar_ronit",
+            "name": "Sagar Ronit",
+            "description": "A large, swarthy man with a clean-shaven face and a powerful build. He is dressed in a steward's uniform and carries himself with a mix of defiance and despair. His eyes are bloodshot, and his hands tremble slightly.",
+            "notes": "The steward of the *May Day* and the culprit behind the double murder. A volatile, passionate man driven to madness by jealousy and alcohol. Tormented by guilt and haunted by the faces of his victims.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "may_day_ship",
+            "category": "surface",
+            "name": "*May Day* Ship",
+            "description": "A large, sturdy steamship with a black hull and a single smokestack. The ship is moored at the dock, and the gangplank is down, allowing access to the deck.",
+            "notes": "The ship where Sagar Ronit worked as a steward. The timeline of the *May Day*'s voyage aligns with the posting of the package, linking Sagar to the crime."
+          },
+          {
+            "id": "sagar_ronit_confession",
+            "category": "item",
+            "name": "Sagar Ronit's Written Confession",
+            "description": "A typewritten document several pages long. The confession details Sagar Ronit's motives for the murders and his actions leading up to and following the crime.",
+            "notes": "A full confession written by Sagar Ronit and witnessed by Inspector Akshara. The document provides a chilling account of the murders and the killer's state of mind."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "liverpool",
+            "state": "locked"
+          },
+          {
+            "location_id": "new_brighton",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |   Albert Dock |",
+          "      |_______________|",
+          "      /               \\",
+          "     /                 \\",
+          "____/                   \\____",
+          "|  _______________________  |",
+          "| |                       | |",
+          "| |      *May Day*        | |",
+          "| |        Ship           | |",
+          "| |                       | |",
+          "| |   [Confession]        | |",
+          "| |_______________________| |",
+          "|___________________________|"
+        ]
+      },
+      "new_brighton": {
+        "description": "A quiet, scenic coastal town with a long promenade and a sandy beach. The atmosphere is peaceful and idyllic, but the events of the murders cast a dark shadow over the location. The haze from the day of the murders still lingers in the air.",
+        "setting": "A picturesque seaside town with a long, sandy beach and a promenade lined with shops and cafes. The water is calm and blue, and the sky is clear. The atmosphere is deceptively peaceful, hiding the dark events that took place here.",
+        "clues": [],
+        "people": [
+          {
+            "id": "rajeev_neha",
+            "name": "Rajeev Neha",
+            "description": "A charming, confident man with a swaggering gait and a winning smile. He is dressed in a sailor's uniform and carries himself with an air of easy authority. His eyes are sharp and calculating.",
+            "notes": "Amol Ronit's lover and the second victim of the double murder. A sailor with a silver tongue and a penchant for seduction. Used his charm to manipulate those around him but underestimated Sagar Ronit's capacity for violence.",
+            "state": "dead"
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "albert_dock",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       _______________",
+          "      |               |",
+          "      |  New Brighton |",
+          "      |_______________|",
+          "      /               \\",
+          "     /                 \\",
+          "____/                   \\____",
+          "|  _______________________  |",
+          "| |                       | |",
+          "| |      Promenade       | |",
+          "| |                       | |",
+          "| |     [Beach]           | |",
+          "| |_______________________| |",
+          "|___________________________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A modest but comfortable residence at 221B Baker Street. The sitting room is cluttered with books, scientific instruments, and mementos from past cases. The air is thick with the scent of tobacco and the faint hum of city life outside.",
+      "items": [
+        "Newspaper"
+      ],
+      "clues": [
+        "The timeline of the *May Day*'s voyage aligned with the posting of the package"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy but somewhat chaotic sitting room with large windows overlooking Baker Street. The walls are lined with bookshelves, and a fireplace crackles softly in the corner. A desk piled with papers and a violin case sit near the window.",
+        "connections": [
+          {
+            "target_location": "cross_street_croydon",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "cross_street_croydon": {
+      "description": "A quiet, prim street lined with two-story brick houses. The air is thick with the scent of flowers and freshly baked bread. Miss Susan Shafaq's residence is neat and unassuming, with a small garden in the back.",
+      "items": [
+        "Cardboard Box",
+        "Brown Paper Wrapper",
+        "Tarred Twine",
+        "Two Human Ears"
+      ],
+      "clues": [
+        "The string used to tie the package was tarred twine, common among sailors",
+        "The knot in the string was a sailor's knot",
+        "Miss Shafaq's ear matched the female ear in the box, indicating a blood relation"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A long, straight street of identical brick houses. Each house has a small front garden and a set of white stone steps leading to the door. The atmosphere is peaceful but slightly oppressive in the summer heat.",
+        "connections": [
+          {
+            "target_location": "outhouse",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "new_street_wallington",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "outhouse": {
+      "description": "A small, dimly lit shed in the narrow garden behind Miss Shafaq's house. The air is musty and thick with the scent of damp wood and earth. A bench sits against one wall, and the floor is littered with gardening tools.",
+      "items": [
+        "Coarse Salt"
+      ],
+      "clues": [
+        "Coarse salt was used to preserve the ears"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cramped, utilitarian shed with a single small window. The walls are lined with shelves holding gardening supplies, and a bench sits against one wall. The atmosphere is claustrophobic and slightly eerie.",
+        "connections": [
+          {
+            "target_location": "cross_street_croydon",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "new_street_wallington": {
+      "description": "A quiet, residential street lined with neat, well-kept houses. Miss Kiran Shafaq's residence is similar to her sister's but slightly more austere. The atmosphere is tense, and the house feels unwelcoming.",
+      "items": [
+        "Photograph of Kiran Shafaq with a Steward"
+      ],
+      "clues": [
+        "The address on the package was originally 'Miss Meenal Shafaq,' suggesting it was meant for Kiran Shafaq"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A straight, tree-lined street with identical brick houses. Each house has a small front garden and a set of stone steps leading to the door. The street is quiet, with few signs of life.",
+        "connections": [
+          {
+            "target_location": "cross_street_croydon",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "liverpool",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "liverpool": {
+      "description": "A bustling port city with a mix of industrial and residential areas. The air is thick with the scent of saltwater and smoke, and the streets are crowded with sailors, merchants, and laborers. The Ronit residence is modest but well-kept.",
+      "items": [
+        "Sagar Ronit's Knife"
+      ],
+      "clues": [
+        "Sagar Ronit's erratic behavior aboard the *May Day* drew attention"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lively, chaotic city with narrow streets and tall buildings. The docks are a hive of activity, with ships coming and going at all hours. The atmosphere is vibrant but slightly grimy.",
+        "connections": [
+          {
+            "target_location": "new_street_wallington",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "albert_dock",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "albert_dock": {
+      "description": "A busy, bustling dock where ships from around the world come and go. The air is thick with the scent of saltwater, tar, and fish. The *May Day* is docked here, and the dockworkers are busy loading and unloading cargo.",
+      "items": [
+        "Sagar Ronit's Written Confession"
+      ],
+      "clues": [
+        "The parcel was posted from Belfast, a port city",
+        "The male ear was pierced for an earring, common among sailors"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A large, open dock area with towering cranes and stacks of cargo. Ships of all sizes are moored along the dock, and the water is choppy and gray. The atmosphere is industrious and slightly chaotic.",
+        "connections": [
+          {
+            "target_location": "liverpool",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "new_brighton",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "new_brighton": {
+      "description": "A quiet, scenic coastal town with a long promenade and a sandy beach. The atmosphere is peaceful and idyllic, but the events of the murders cast a dark shadow over the location. The haze from the day of the murders still lingers in the air.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A picturesque seaside town with a long, sandy beach and a promenade lined with shops and cafes. The water is calm and blue, and the sky is clear. The atmosphere is deceptively peaceful, hiding the dark events that took place here.",
+        "connections": [
+          {
+            "target_location": "albert_dock",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

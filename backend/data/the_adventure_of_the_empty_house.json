@@ -1,0 +1,920 @@
+{
+  "title": "The Adventure of the Empty House",
+  "description": "A mystery involving the murder of the Honourable Muskaan Yashwant, orchestrated by Colonel Rakul Pooja using an air-gun. The game unfolds through investigations across London, uncovering clues and piecing together the truth behind the crime.",
+  "victim": "Honourable Muskaan Yashwant",
+  "intro_narrative": "In the spring of 1894, London is shaken by the mysterious murder of the Honourable Muskaan Yashwant. The crime appears inexplicable, with no weapon found and no clear motive. As you, Gaurav, delve into the case, you reunite with the legendary detective Sameer Sakshi, who has returned from the dead to solve the crime. Together, you must uncover the truth behind Yashwant's death and bring the culprit to justice.",
+  "start_time": "1894-04-05T21:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Expanding revolver bullet (from air-gun)",
+      "Air-gun (constructed by Leena Sunny)",
+      "Sheet of paper with figures and names (card records)",
+      "Sakshi's index of biographies (containing Pooja's record)"
+    ],
+    "required_suspect": [
+      "Colonel Rakul Pooja"
+    ],
+    "required_motive": [
+      "Yashwant discovered Pooja's cheating at cards and threatened to expose him, leading Pooja to murder Yashwant to protect his reputation and income."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Explore the crime scene at 427, Park Lane and gather initial clues. Speak with key witnesses and unlock new locations.",
+      "unlocked_locations": [
+        "427_park_lane",
+        "baker_street"
+      ],
+      "unlocked_characters": [
+        "sameer_sakshi",
+        "gaurav",
+        "mrs_simran",
+        "lavanya"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Uncovering the Past",
+      "objective": "Investigate Sakshi's return and the events at Reichenbach Fall. Unlock Camden House and the Bagatelle Card Club.",
+      "unlocked_locations": [
+        "camden_house",
+        "bagatelle_card_club"
+      ],
+      "unlocked_characters": [
+        "colonel_rakul_pooja",
+        "professor_richa",
+        "nithya_sakshi"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Trap",
+      "objective": "Set a trap for the culprit using the wax bust and gather final evidence. Unlock Montpellier laboratory.",
+      "unlocked_locations": [
+        "montpellier"
+      ],
+      "unlocked_characters": [
+        "honourable_muskaan_yashwant",
+        "vikas"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Confrontation",
+      "objective": "Confront Colonel Pooja and present the evidence to secure a confession or arrest.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "sameer_sakshi": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "camden_house",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Sharp, observant, and methodical. Speaks in a precise and analytical manner, often with a touch of dry humor. Prefers to let the evidence speak for itself.",
+      "knowledge_about_others": {
+        "colonel_rakul_pooja": "Knows Pooja is a skilled marksman and a former associate of Professor Richa. Aware of Pooja's history of cheating at cards and his motive for murdering Yashwant.",
+        "gaurav": "Trusts Gaurav implicitly and values his companionship. Knows Gaurav is loyal but sometimes slow to piece together clues.",
+        "professor_richa": "Considers Richa a formidable adversary with a brilliant but twisted mind. Knows Richa's role in the Reichenbach Fall incident."
+      },
+      "abilities": "Master of deduction, disguise, and strategic planning. Skilled in baritsu and marksmanship. Expert at setting traps and uncovering hidden motives.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Air-gun",
+            "Sheet of paper with figures and names"
+          ],
+          "reaction": "Reveals the plan to use the wax bust as a decoy to trap Colonel Pooja.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Expanding revolver bullet",
+            "Sakshi's index of biographies"
+          ],
+          "reaction": "Confronts Colonel Pooja with the evidence, leading to his confession or arrest.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "gaurav": {
+      "type": "assistant",
+      "role": "Narrator and Investigator",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "427_park_lane",
+        "1": "camden_house",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Curious, loyal, and occasionally bewildered. Speaks in a reflective and sometimes emotional tone. Acts as the player's perspective in the story.",
+      "knowledge_about_others": {
+        "sameer_sakshi": "Admires Sakshi's deductive abilities and trusts his judgment. Often surprised by Sakshi's methods and insights.",
+        "colonel_rakul_pooja": "Initially unaware of Pooja's true nature but grows suspicious as clues emerge."
+      },
+      "abilities": "Skilled at observation and note-taking. Acts as a bridge between the player and Sakshi's deductions. Can influence other characters with questions.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Figures and names on paper suggesting card losses/winnings"
+          ],
+          "reaction": "Expresses confusion about the card records and seeks Sakshi's explanation.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "colonel_rakul_pooja": {
+      "type": "suspect",
+      "role": "Culprit",
+      "location": "camden_house",
+      "phase_locations": {
+        "0": "bagatelle_card_club",
+        "1": "camden_house",
+        "2": "camden_house",
+        "3": "camden_house"
+      },
+      "persona": "Cold, calculating, and arrogant. Speaks in a commanding tone with a hint of disdain. Views others as inferior and unworthy of his respect.",
+      "knowledge_about_others": {
+        "sameer_sakshi": "Hates Sakshi for foiling his plans and exposing his crimes. Fears Sakshi's intelligence and deductive skills.",
+        "honourable_muskaan_yashwant": "Views Yashwant as a naive obstacle to his schemes. Regrets the necessity of murdering him but feels no remorse."
+      },
+      "secret": "Murdered Yashwant to silence him after discovering Pooja's cheating at cards. Planned to kill Sakshi using an air-gun to eliminate the only person who could expose him.",
+      "suspicion_meter": 0,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Colonel Pooja's presence in the empty house opposite Baker Street"
+          ],
+          "reaction": "Attempts to flee when cornered but is ultimately captured by Sakshi and the police.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "honourable_muskaan_yashwant": {
+      "type": "suspect",
+      "role": "Victim",
+      "location": "427_park_lane",
+      "phase_locations": {
+        "0": "427_park_lane",
+        "1": "427_park_lane",
+        "2": "427_park_lane",
+        "3": "427_park_lane"
+      },
+      "persona": "Polite, reserved, and honorable. Speaks in a measured and thoughtful manner. Unaware of the dangers lurking around him.",
+      "knowledge_about_others": {
+        "colonel_rakul_pooja": "Discovered Pooja's cheating at cards and planned to expose him, unaware of Pooja's violent nature."
+      },
+      "secret": "Threatened to expose Pooja's cheating at cards, leading to his murder.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "professor_richa": {
+      "type": "suspect",
+      "role": "Former Criminal Mastermind",
+      "location": "montpellier",
+      "phase_locations": {
+        "0": "reichenbach_fall",
+        "1": "montpellier",
+        "2": "montpellier",
+        "3": "montpellier"
+      },
+      "persona": "Brilliant but malevolent. Speaks in a calm and calculated manner, with a hint of condescension. Views others as pawns in his schemes.",
+      "knowledge_about_others": {
+        "sameer_sakshi": "Holds a deep grudge against Sakshi for foiling his plans. Considers Sakshi his greatest adversary.",
+        "colonel_rakul_pooja": "Trusts Pooja as a loyal enforcer but views him as expendable."
+      },
+      "secret": "Orchestrated the attack on Sakshi at Reichenbach Fall and supplied Pooja with the air-gun used in Yashwant's murder.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "mrs_simran": {
+      "type": "assistant",
+      "role": "Housekeeper",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Warm, nurturing, and occasionally flustered. Speaks in a caring and protective tone. Acts as a maternal figure to Sakshi and Gaurav.",
+      "knowledge_about_others": {
+        "sameer_sakshi": "Deeply cares for Sakshi and is overjoyed by his return. Knows about his deductive work and supports him unconditionally.",
+        "gaurav": "Views Gaurav as a dear friend and is protective of him."
+      },
+      "abilities": "Skilled at maintaining Sakshi's residence and assisting in his plans. Can provide insights into Sakshi's habits and routines.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Wax bust's shadow moving"
+          ],
+          "reaction": "Admits to adjusting the wax bust under Sakshi's instructions to lure Pooja into a trap.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "lavanya": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "427_park_lane",
+      "phase_locations": {
+        "0": "427_park_lane",
+        "1": "camden_house",
+        "2": "camden_house",
+        "3": "camden_house"
+      },
+      "persona": "Professional, no-nonsense, and efficient. Speaks in a direct and authoritative manner. Respects Sakshi's methods but prefers traditional police work.",
+      "knowledge_about_others": {
+        "sameer_sakshi": "Admires Sakshi's deductive skills and seeks his assistance in difficult cases. Views him as a mentor.",
+        "colonel_rakul_pooja": "Suspicious of Pooja but lacks concrete evidence to act against him."
+      },
+      "abilities": "Skilled in surveillance, evidence collection, and suspect interrogation. Can coordinate with police resources to assist in investigations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Colonel Pooja's opera hat and evening dress"
+          ],
+          "reaction": "Arrests Pooja and commends Sakshi for his assistance in solving the case.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "nithya_sakshi": {
+      "type": "assistant",
+      "role": "Sakshi's Brother",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Loyal, reserved, and pragmatic. Speaks in a calm and measured tone. Acts as a confidant to Sakshi and assists in his plans.",
+      "knowledge_about_others": {
+        "sameer_sakshi": "Knows about Sakshi's return and assists in maintaining his secret. Supports Sakshi's work unconditionally."
+      },
+      "abilities": "Skilled at managing Sakshi's affairs and maintaining his residence. Can provide logistical support and resources for investigations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Sakshi's seedy frockcoat"
+          ],
+          "reaction": "Reveals that he helped Sakshi maintain his disguise as a book collector during his return to London.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "colonel_pooja": {
+      "type": "suspect",
+      "role": "Whist Partner of Yashwant",
+      "location": "bagatelle_card_club",
+      "phase_locations": {
+        "0": "bagatelle_card_club",
+        "1": "bagatelle_card_club",
+        "2": "bagatelle_card_club",
+        "3": "bagatelle_card_club"
+      },
+      "persona": "Charming, sociable, and deceptive. Speaks in a friendly and engaging manner. Hides his true nature behind a facade of respectability.",
+      "knowledge_about_others": {
+        "honourable_muskaan_yashwant": "Views Yashwant as a naive young man who threatened his livelihood by discovering his cheating at cards."
+      },
+      "secret": "Cheated at cards and murdered Yashwant to silence him. Planned to kill Sakshi to eliminate the only witness who could expose him.",
+      "suspicion_meter": 0,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "vikas": {
+      "type": "suspect",
+      "role": "Sentinel",
+      "location": "camden_house",
+      "phase_locations": {
+        "0": "camden_house",
+        "1": "camden_house",
+        "2": "camden_house",
+        "3": "camden_house"
+      },
+      "persona": "Nervous, subservient, and easily intimidated. Speaks in a hesitant and deferential manner. Acts as a lookout for Pooja but lacks loyalty.",
+      "knowledge_about_others": {
+        "colonel_rakul_pooja": "Fears Pooja and follows his orders without question. Aware of Pooja's criminal activities but too afraid to act against him."
+      },
+      "secret": "Acted as a lookout for Pooja and alerted him to Sakshi's return to London.",
+      "suspicion_meter": 0,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Whistle"
+          ],
+          "reaction": "Confesses to his role as a lookout and implicates Pooja in the murder plot.",
+          "leads_to_break": true
+        }
+      ]
+    }
+  },
+  "game_world": {
+    "locations": {
+      "427_park_lane": {
+        "description": "A grand townhouse on Park Lane, the scene of the murder of the Honourable Muskaan Yashwant. The room where the crime occurred is locked, with no signs of disturbance outside the window.",
+        "setting": "A luxurious and well-maintained townhouse with high ceilings, ornate furnishings, and a sense of opulence. The second-floor sitting room is dimly lit, with a locked door and a window overlooking the street.",
+        "clues": [
+          "Yashwant's locked room with no weapon inside",
+          "No signs of disturbance outside the window (e.g., crocuses undisturbed)",
+          "Banknotes and coins on Yashwant's table"
+        ],
+        "people": [
+          {
+            "id": "honourable_muskaan_yashwant",
+            "name": "Honourable Muskaan Yashwant",
+            "description": "A young aristocrat with a polite and reserved demeanor. His body lies near the table in the locked room.",
+            "notes": "Victim of the murder. Discovered Pooja's cheating at cards and threatened to expose him.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "yashwant_table",
+            "category": "surface",
+            "name": "Table",
+            "description": "A large table in the center of the room, covered with banknotes, coins, and a sheet of paper with figures and names.",
+            "notes": "Contains evidence of Yashwant's card losses and winnings, as well as his attempt to calculate how much money he should return.",
+            "contains": [
+              {
+                "id": "banknotes_coins",
+                "category": "item",
+                "name": "Banknotes and coins",
+                "description": "Two banknotes for ten pounds each and seventeen pounds ten in silver and gold, arranged in little piles of varying amount.",
+                "notes": "Evidence of Yashwant's recent card game and his attempt to reconcile his losses."
+              },
+              {
+                "id": "sheet_paper_figures",
+                "category": "item",
+                "name": "Sheet of paper with figures and names",
+                "description": "A sheet of paper with figures and names of club friends, suggesting Yashwant was calculating his card losses or winnings.",
+                "notes": "Clue indicating Yashwant's discovery of Pooja's cheating and his attempt to expose him."
+              }
+            ]
+          },
+          {
+            "id": "window",
+            "category": "surface",
+            "name": "Window",
+            "description": "A large window overlooking Park Lane, with crocuses blooming beneath it. The window shows no signs of disturbance.",
+            "notes": "The murder was committed through this window using an air-gun."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "bagatelle_card_club",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   +---------------------+",
+          "   |                     |",
+          "   |   [Table]           |",
+          "   |    *                |",
+          "   |    *                |",
+          "   |    *                |",
+          "   |   [Window]          |",
+          "   |                     |",
+          "   +---------------------+"
+        ]
+      },
+      "baker_street": {
+        "description": "The residence of Sameer Sakshi, a cozy and cluttered apartment filled with books, chemical apparatus, and mementos of past cases.",
+        "setting": "A warm and inviting apartment with shelves of books, a chemical table, and a Persian slipper filled with tobacco. The atmosphere is one of intellectual curiosity and comfort.",
+        "clues": [
+          "Sakshi's deduction that the murder was committed with an air-gun (silent and powerful)",
+          "The wax bust's shadow moving (indicating Mrs. Simran's adjustments)"
+        ],
+        "people": [
+          {
+            "id": "sameer_sakshi",
+            "name": "Sameer Sakshi",
+            "description": "A tall, thin man with sharp features and a keen gaze. Dressed in a mouse-coloured dressing-gown, he exudes an air of intelligence and confidence.",
+            "notes": "Legendary detective who has returned from the dead to solve the murder of Yashwant. Master of deduction and disguise."
+          },
+          {
+            "id": "gaurav",
+            "name": "Gaurav",
+            "description": "A loyal and curious companion to Sakshi. Dressed in a modest suit, he acts as the narrator of the story.",
+            "notes": "Narrator and investigator. Provides the player's perspective and assists Sakshi in solving the case."
+          },
+          {
+            "id": "mrs_simran",
+            "name": "Mrs. Simran",
+            "description": "A warm and nurturing housekeeper who maintains Sakshi's residence. She is overjoyed by Sakshi's return.",
+            "notes": "Assists Sakshi in his plans and maintains his residence. Adjusts the wax bust to lure Pooja into a trap."
+          },
+          {
+            "id": "nithya_sakshi",
+            "name": "Nithya Sakshi",
+            "description": "Sakshi's brother, a reserved and pragmatic man who assists in maintaining Sakshi's secret.",
+            "notes": "Helps Sakshi maintain his disguise and manage his affairs during his return to London."
+          }
+        ],
+        "objects": [
+          {
+            "id": "chemical_table",
+            "category": "surface",
+            "name": "Chemical Table",
+            "description": "A deal-topped table stained with acid, used for Sakshi's chemical experiments.",
+            "notes": "Contains various chemical apparatus and notes from Sakshi's experiments."
+          },
+          {
+            "id": "bookshelf",
+            "category": "container",
+            "name": "Bookshelf",
+            "description": "A large bookshelf filled with books of reference, scrapbooks, and Sakshi's index of biographies.",
+            "notes": "Contains Sakshi's index of biographies, including the record of Colonel Rakul Pooja.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "sakshi_biographies",
+                "category": "item",
+                "name": "Sakshi's index of biographies",
+                "description": "A collection of biographies, including the record of Colonel Rakul Pooja, which details his criminal history.",
+                "notes": "Contains evidence of Pooja's past crimes and his association with Professor Richa."
+              }
+            ]
+          },
+          {
+            "id": "wax_bust",
+            "category": "item",
+            "name": "Wax bust of Sakshi",
+            "description": "A wax bust of Sakshi, used as a decoy to lure Colonel Pooja into a trap.",
+            "notes": "Placed in the window of Sakshi's residence to create the illusion that he is present."
+          },
+          {
+            "id": "persian_slipper",
+            "category": "container",
+            "name": "Persian Slipper",
+            "description": "A slipper filled with tobacco, used by Sakshi for his pipe.",
+            "notes": "A familiar and comforting object in Sakshi's residence.",
+            "state": "open"
+          },
+          {
+            "id": "sakshi_revolver",
+            "category": "item",
+            "name": "Sakshi's revolver",
+            "description": "A revolver used by Gaurav during the investigation.",
+            "notes": "Provided by Sakshi for protection during the investigation."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "427_park_lane",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "camden_house",
+            "state": "locked"
+          },
+          {
+            "location_id": "montpellier",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   +---------------------+",
+          "   | [Bookshelf]         |",
+          "   |    *                |",
+          "   |    *                |",
+          "   | [Chemical Table]    |",
+          "   |    *                |",
+          "   | [Persian Slipper]   |",
+          "   |                     |",
+          "   +---------------------+"
+        ]
+      },
+      "camden_house": {
+        "description": "An empty house opposite Baker Street, used by Sakshi to observe his residence and set a trap for Colonel Pooja.",
+        "setting": "A dark and dusty house with bare floors and peeling wallpaper. The atmosphere is eerie and tense, with a sense of anticipation in the air.",
+        "clues": [
+          "Colonel Pooja's presence in the empty house opposite Baker Street",
+          "The air-gun's unique mechanism and expanding bullets"
+        ],
+        "people": [
+          {
+            "id": "colonel_rakul_pooja",
+            "name": "Colonel Rakul Pooja",
+            "description": "A tall, gaunt man with a fierce expression and a grizzled moustache. Dressed in an opera hat and evening dress, he exudes an air of menace.",
+            "notes": "The culprit behind Yashwant's murder. A skilled marksman and former associate of Professor Richa."
+          },
+          {
+            "id": "vikas",
+            "name": "Vikas",
+            "description": "A nervous and subservient man who acts as a lookout for Pooja. Easily intimidated and lacking loyalty.",
+            "notes": "Alerted Pooja to Sakshi's return to London and acted as a lookout during the murder plot."
+          }
+        ],
+        "objects": [
+          {
+            "id": "window_camden",
+            "category": "surface",
+            "name": "Window",
+            "description": "A large window overlooking Baker Street, used by Pooja to observe Sakshi's residence and plan his attack.",
+            "notes": "The window through which Pooja fired the air-gun at the wax bust of Sakshi."
+          },
+          {
+            "id": "air_gun",
+            "category": "item",
+            "name": "Air-gun",
+            "description": "A powerful and silent air-gun constructed by Leena Sunny, used by Pooja to commit the murder.",
+            "notes": "The weapon used to murder Yashwant and attempt to kill Sakshi. Fires expanding revolver bullets."
+          },
+          {
+            "id": "expanding_bullet",
+            "category": "item",
+            "name": "Expanding revolver bullet",
+            "description": "A soft-nosed bullet fired from the air-gun, designed to expand upon impact and cause maximum damage.",
+            "notes": "Evidence of the air-gun's use in the murder of Yashwant."
+          },
+          {
+            "id": "pooja_disguise",
+            "category": "item",
+            "name": "Colonel Pooja's opera hat and evening dress",
+            "description": "The disguise worn by Pooja during his attempt to kill Sakshi.",
+            "notes": "Evidence of Pooja's presence at Camden House and his role in the murder plot."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "bagatelle_card_club",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   +---------------------+",
+          "   |                     |",
+          "   |   [Window]          |",
+          "   |    *                |",
+          "   |    *                |",
+          "   |                     |",
+          "   |                     |",
+          "   |                     |",
+          "   +---------------------+"
+        ]
+      },
+      "reichenbach_fall": {
+        "description": "A scenic but treacherous waterfall in Switzerland, where Sakshi faked his death to escape his enemies.",
+        "setting": "A breathtaking but dangerous location, with a narrow pathway leading to the edge of the fall. The roar of the water creates a sense of isolation and peril.",
+        "clues": [
+          "Colonel Pooja's prior attempt to kill Sakshi at Reichenbach Fall"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "pathway",
+            "category": "surface",
+            "name": "Pathway",
+            "description": "A narrow pathway leading to the edge of Reichenbach Fall, where Sakshi faked his death.",
+            "notes": "The location of Sakshi's confrontation with Professor Richa and his subsequent escape."
+          },
+          {
+            "id": "sakshi_note",
+            "category": "item",
+            "name": "Sakshi's Note",
+            "description": "A short note left by Sakshi for Gaurav, explaining his plan to fake his death.",
+            "notes": "Evidence of Sakshi's strategy to escape his enemies and return to London."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "montpellier",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   +---------------------+",
+          "   |                     |",
+          "   |   [Pathway]         |",
+          "   |    *****            |",
+          "   |         *****       |",
+          "   |              *****  |",
+          "   |                   *|",
+          "   +---------------------+"
+        ]
+      },
+      "bagatelle_card_club": {
+        "description": "An exclusive card club where Yashwant and Pooja played whist on the night of the murder. The club is frequented by London's elite.",
+        "setting": "A lavish and opulent club with plush furnishings, card tables, and an air of exclusivity. The atmosphere is one of sophistication and intrigue.",
+        "clues": [
+          "Figures and names on paper suggesting card losses/winnings",
+          "Colonel Pooja's history of cheating at cards"
+        ],
+        "people": [
+          {
+            "id": "colonel_pooja_whist",
+            "name": "Colonel Pooja",
+            "description": "A charming and sociable man who frequents the club. Dressed in evening attire, he exudes an air of respectability.",
+            "notes": "Cheated at cards and murdered Yashwant to silence him. A former associate of Professor Richa."
+          }
+        ],
+        "objects": [
+          {
+            "id": "card_table",
+            "category": "surface",
+            "name": "Card Table",
+            "description": "A table where Yashwant and Pooja played whist on the night of the murder.",
+            "notes": "Contains evidence of Pooja's cheating and Yashwant's discovery of it.",
+            "contains": [
+              {
+                "id": "card_records",
+                "category": "item",
+                "name": "Sheet of paper with figures and names",
+                "description": "A sheet of paper with figures and names of club members, indicating card losses and winnings.",
+                "notes": "Evidence of Pooja's cheating and Yashwant's attempt to expose him."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "427_park_lane",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "camden_house",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   +---------------------+",
+          "   | [Card Table]        |",
+          "   |    *                |",
+          "   |    *                |",
+          "   |                     |",
+          "   |                     |",
+          "   |                     |",
+          "   |                     |",
+          "   +---------------------+"
+        ]
+      },
+      "montpellier": {
+        "description": "A laboratory in the south of France where Sakshi conducted research into coal-tar derivatives during his absence from London.",
+        "setting": "A well-equipped laboratory with chemical apparatus, notes, and research materials. The atmosphere is one of scientific inquiry and discovery.",
+        "clues": [
+          "Yashwant's discovery of Pooja's cheating (motive)"
+        ],
+        "people": [
+          {
+            "id": "professor_richa",
+            "name": "Professor Richa",
+            "description": "A brilliant but malevolent scientist with a calm and calculated demeanor. Dressed in a lab coat, he exudes an air of intellectual superiority.",
+            "notes": "Former criminal mastermind who supplied Pooja with the air-gun used in Yashwant's murder."
+          }
+        ],
+        "objects": [
+          {
+            "id": "lab_table",
+            "category": "surface",
+            "name": "Laboratory Table",
+            "description": "A table covered with chemical apparatus and research notes.",
+            "notes": "Contains evidence of Sakshi's research into coal-tar derivatives and his plans to return to London.",
+            "contains": [
+              {
+                "id": "air_gun_mechanism",
+                "category": "item",
+                "name": "Air-gun mechanism",
+                "description": "The unique mechanism of the air-gun constructed by Leena Sunny, used by Pooja to commit the murder.",
+                "notes": "Evidence of the air-gun's construction and its use in the murder plot."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "reichenbach_fall",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   +---------------------+",
+          "   | [Lab Table]         |",
+          "   |    *                |",
+          "   |    *                |",
+          "   |                     |",
+          "   |                     |",
+          "   |                     |",
+          "   |                     |",
+          "   +---------------------+"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "427_park_lane": {
+      "description": "A grand townhouse on Park Lane, the scene of the murder of the Honourable Muskaan Yashwant. The room where the crime occurred is locked, with no signs of disturbance outside the window.",
+      "items": [],
+      "clues": [
+        "Yashwant's locked room with no weapon inside",
+        "No signs of disturbance outside the window (e.g., crocuses undisturbed)",
+        "Banknotes and coins on Yashwant's table"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A luxurious and well-maintained townhouse with high ceilings, ornate furnishings, and a sense of opulence. The second-floor sitting room is dimly lit, with a locked door and a window overlooking the street.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "bagatelle_card_club",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "baker_street": {
+      "description": "The residence of Sameer Sakshi, a cozy and cluttered apartment filled with books, chemical apparatus, and mementos of past cases.",
+      "items": [
+        "Wax bust of Sakshi",
+        "Sakshi's revolver"
+      ],
+      "clues": [
+        "Sakshi's deduction that the murder was committed with an air-gun (silent and powerful)",
+        "The wax bust's shadow moving (indicating Mrs. Simran's adjustments)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A warm and inviting apartment with shelves of books, a chemical table, and a Persian slipper filled with tobacco. The atmosphere is one of intellectual curiosity and comfort.",
+        "connections": [
+          {
+            "target_location": "427_park_lane",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "camden_house",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "montpellier",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "camden_house": {
+      "description": "An empty house opposite Baker Street, used by Sakshi to observe his residence and set a trap for Colonel Pooja.",
+      "items": [
+        "Air-gun",
+        "Expanding revolver bullet",
+        "Colonel Pooja's opera hat and evening dress"
+      ],
+      "clues": [
+        "Colonel Pooja's presence in the empty house opposite Baker Street",
+        "The air-gun's unique mechanism and expanding bullets"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dark and dusty house with bare floors and peeling wallpaper. The atmosphere is eerie and tense, with a sense of anticipation in the air.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "bagatelle_card_club",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "reichenbach_fall": {
+      "description": "A scenic but treacherous waterfall in Switzerland, where Sakshi faked his death to escape his enemies.",
+      "items": [
+        "Sakshi's Note"
+      ],
+      "clues": [
+        "Colonel Pooja's prior attempt to kill Sakshi at Reichenbach Fall"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A breathtaking but dangerous location, with a narrow pathway leading to the edge of the fall. The roar of the water creates a sense of isolation and peril.",
+        "connections": [
+          {
+            "target_location": "montpellier",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "bagatelle_card_club": {
+      "description": "An exclusive card club where Yashwant and Pooja played whist on the night of the murder. The club is frequented by London's elite.",
+      "items": [],
+      "clues": [
+        "Figures and names on paper suggesting card losses/winnings",
+        "Colonel Pooja's history of cheating at cards"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lavish and opulent club with plush furnishings, card tables, and an air of exclusivity. The atmosphere is one of sophistication and intrigue.",
+        "connections": [
+          {
+            "target_location": "427_park_lane",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "camden_house",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "montpellier": {
+      "description": "A laboratory in the south of France where Sakshi conducted research into coal-tar derivatives during his absence from London.",
+      "items": [],
+      "clues": [
+        "Yashwant's discovery of Pooja's cheating (motive)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A well-equipped laboratory with chemical apparatus, notes, and research materials. The atmosphere is one of scientific inquiry and discovery.",
+        "connections": [
+          {
+            "target_location": "reichenbach_fall",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

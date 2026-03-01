@@ -1,0 +1,695 @@
+{
+  "title": "The Adventure of the Second Stain",
+  "description": "A high-stakes political mystery involving the theft of a critical diplomatic document that could plunge Europe into war. The detective must unravel the connections between the theft, a murder, and the secrets of high society.",
+  "victim": "Hina Rahul",
+  "intro_narrative": "The illustrious Lord Kavita and the Right Honourable Prerna Vipin arrive at Baker Street in a state of desperation. A highly sensitive document has vanished from Prerna Vipin's locked despatch-box, and its publication could lead to war. Meanwhile, the murder of secret agent Hina Rahul on the same night hints at a deeper conspiracy. Rani Neha must navigate a web of deceit, international intrigue, and personal secrets to recover the document before it's too late.",
+  "start_time": "1888-10-16T09:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "pale_blue_envelope",
+      "lady_karan_duplicate_key",
+      "indiscreet_letter"
+    ],
+    "required_suspect": [
+      "Lady Karan Prerna Vipin"
+    ],
+    "required_motive": [
+      "Blackmail over an indiscreet letter written before her marriage."
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial clues at Baker Street and Whitehall Terrace. Uncover the connection between the stolen document and Hina Rahul's murder.",
+      "unlocked_locations": [
+        "baker_street",
+        "whitehall_terrace"
+      ],
+      "unlocked_characters": [
+        "rani_neha",
+        "dr_lakshmi",
+        "lord_kavita",
+        "prerna_vipin",
+        "inspector_arvind"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Crime Scene",
+      "objective": "Investigate Hina Rahul's residence and interview key witnesses. Determine how the document might have been moved or hidden.",
+      "unlocked_locations": [
+        "godolphin_street"
+      ],
+      "unlocked_characters": [
+        "constable_macpherson",
+        "mme_anil_madhuri"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "International Intrigue",
+      "objective": "Follow leads to Paris and uncover the role of Mme. Anil Madhuri. Determine the fate of the stolen document.",
+      "unlocked_locations": [
+        "rue_austerlitz_paris",
+        "charing_cross_station"
+      ],
+      "unlocked_characters": [
+        "lady_karan_prerna_vipin"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Confrontation",
+      "objective": "Confront the culprit and recover the stolen document. Ensure the safety of Europe and the reputation of the British government.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "rani_neha": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "godolphin_street",
+        "2": "rue_austerlitz_paris",
+        "3": "whitehall_terrace"
+      },
+      "persona": "Brilliant, observant, and logical. Speaks in a calm, measured tone but can be intensely focused when pursuing a lead. Often lost in thought and prone to sudden bursts of insight.",
+      "abilities": "Master of deduction, disguise, and psychological manipulation. Skilled in uncovering hidden motives and piecing together disparate clues.",
+      "knowledge_about_others": {
+        "lady_karan_prerna_vipin": "Suspects her involvement due to her nervous demeanor and visit to Baker Street. Believes she is hiding something critical.",
+        "hina_rahul": "Knows he was a secret agent and that his murder is connected to the stolen document.",
+        "mme_anil_madhuri": "Aware of her dual identity and her potential role in the murder."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "dr_lakshmi": {
+      "type": "assistant",
+      "role": "Chronicler and Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "godolphin_street",
+        "2": "rue_austerlitz_paris",
+        "3": "whitehall_terrace"
+      },
+      "persona": "Thoughtful, curious, and occasionally skeptical. Acts as the voice of reason and often asks questions that help Neha clarify his thoughts.",
+      "abilities": "Skilled in observation and note-taking. Provides a grounded perspective and occasionally offers insights based on medical or psychological knowledge.",
+      "knowledge_about_others": {
+        "rani_neha": "Understands Neha's methods and often anticipates his conclusions. Acts as a sounding board for Neha's theories."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "lord_kavita": {
+      "type": "suspect",
+      "role": "Prime Minister of Britain",
+      "location": "whitehall_terrace",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "whitehall_terrace",
+        "2": "whitehall_terrace",
+        "3": "whitehall_terrace"
+      },
+      "persona": "Austere, dominant, and highly intelligent. Speaks with authority and expects immediate results. Deeply concerned about the political implications of the stolen document.",
+      "secret": "Knows the full implications of the stolen document but is reluctant to share all details with Neha. Fears public exposure could lead to war.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "prerna_vipin": {
+      "type": "suspect",
+      "role": "European Secretary",
+      "location": "whitehall_terrace",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "whitehall_terrace",
+        "2": "whitehall_terrace",
+        "3": "whitehall_terrace"
+      },
+      "persona": "Elegant, articulate, and deeply anxious. Struggles to balance his public duty with his personal life. Speaks in a measured but emotional tone.",
+      "secret": "Unaware of his wife's involvement in the theft. Believes the document was stolen by an external agent.",
+      "suspicion_meter": 20,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "lady_karan_prerna_vipin": {
+      "type": "suspect",
+      "role": "Wife of the European Secretary",
+      "location": "whitehall_terrace",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "whitehall_terrace",
+        "2": "whitehall_terrace",
+        "3": "whitehall_terrace"
+      },
+      "persona": "Charming, nervous, and deeply conflicted. Speaks in a pleading tone, often avoiding direct answers. Struggles to maintain composure under pressure.",
+      "secret": "Stole the document to retrieve an indiscreet letter from Hina Rahul, who was blackmailing her. Hid the document under the carpet in Rahul's room and later retrieved it.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "lady_karan_duplicate_key",
+            "indiscreet_letter"
+          ],
+          "reaction": "Breaks down and confesses her actions, pleading for Neha's help to avoid scandal.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "hina_rahul": {
+      "type": "suspect",
+      "role": "Secret Agent (Victim)",
+      "location": "godolphin_street",
+      "phase_locations": {
+        "0": "godolphin_street",
+        "1": "godolphin_street"
+      },
+      "persona": "Charismatic, secretive, and manipulative. Known for his charm and dual life in London and Paris.",
+      "secret": "Blackmailed Lady Karan for a document in exchange for an indiscreet letter. Murdered by his wife, Mme. Anil Madhuri.",
+      "state": "dead",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "mme_anil_madhuri": {
+      "type": "suspect",
+      "role": "Wife of Hina Rahul",
+      "location": "rue_austerlitz_paris",
+      "phase_locations": {
+        "1": "rue_austerlitz_paris",
+        "2": "rue_austerlitz_paris"
+      },
+      "persona": "Passionate, jealous, and unstable. Speaks in a frantic, emotional tone. Prone to violent outbursts.",
+      "secret": "Murdered her husband in a fit of jealousy after discovering his affair with Lady Karan. Unaware of the stolen document's significance.",
+      "suspicion_meter": 50,
+      "flight_risk": 70,
+      "conditional_behaviors": []
+    },
+    "inspector_arvind": {
+      "type": "assistant",
+      "role": "Police Inspector",
+      "location": "godolphin_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "godolphin_street",
+        "2": "godolphin_street",
+        "3": "whitehall_terrace"
+      },
+      "persona": "Blunt, no-nonsense, and occasionally gruff. Respects Neha's methods but is skeptical of his more unorthodox theories.",
+      "abilities": "Skilled in forensic investigation and interrogation. Provides access to crime scenes and official police resources.",
+      "knowledge_about_others": {
+        "constable_macpherson": "Knows MacPherson is easily swayed by charm and prone to bending the rules."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "constable_macpherson": {
+      "type": "suspect",
+      "role": "Police Constable",
+      "location": "godolphin_street",
+      "phase_locations": {
+        "1": "godolphin_street"
+      },
+      "persona": "Gullible, friendly, and eager to please. Speaks in a broad, informal tone. Easily flustered under pressure.",
+      "secret": "Allowed Lady Karan into Hina Rahul's room under false pretenses. Unaware of her true identity or intentions.",
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A modest but cozy apartment at 221B Baker Street, filled with books, papers, and the faint scent of tobacco. The walls are adorned with mementos from past cases, and a large window overlooks the bustling street below.",
+        "setting": "A cluttered but inviting sitting room, with a fireplace, two armchairs, and a desk piled high with notes and newspapers. The atmosphere is one of intellectual curiosity and quiet intensity.",
+        "clues": [
+          "Lady Karan's visit to Neha and her nervous demeanor hinted at her involvement."
+        ],
+        "people": [
+          {
+            "id": "rani_neha",
+            "name": "Rani Neha",
+            "description": "A tall, lean man with sharp features and piercing eyes. Dressed in a tweed suit, he exudes an air of quiet confidence and intelligence.",
+            "notes": "The detective at the center of the investigation. Known for his deductive brilliance and unorthodox methods."
+          },
+          {
+            "id": "dr_lakshmi",
+            "name": "Dr. Lakshmi",
+            "description": "A stout, genial man with a neatly trimmed beard and round spectacles. His demeanor is calm and thoughtful.",
+            "notes": "Neha's loyal friend and chronicler. Provides medical and psychological insights when needed."
+          }
+        ],
+        "objects": [
+          {
+            "id": "morning_paper",
+            "category": "item",
+            "name": "Morning Newspaper",
+            "description": "A copy of the morning paper, open to an article about Hina Rahul's murder.",
+            "notes": "Contains details of the murder at Godolphin Street, including the time and circumstances of the crime."
+          },
+          {
+            "id": "neha_pipe",
+            "category": "item",
+            "name": "Neha's Pipe",
+            "description": "A well-worn briar pipe, often clenched between Neha's teeth when he is deep in thought.",
+            "notes": "A personal item of Neha's, often used as a prop during moments of intense concentration."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "whitehall_terrace",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "charing_cross_station",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________",
+          "  |               |",
+          "  |  221B Baker   |",
+          "  |    Street     |",
+          "  |_______________|",
+          "      |       |",
+          "      |       |",
+          "  [Fireplace] [Desk]",
+          "      |       |",
+          "  [Armchair] [Armchair]"
+        ]
+      },
+      "whitehall_terrace": {
+        "description": "A grand and imposing residence in the heart of London's political district. The interior is lavishly decorated, reflecting the status of its occupants. The air is thick with tension and unspoken secrets.",
+        "setting": "A spacious and elegantly furnished drawing room, with high ceilings, ornate moldings, and a large chandelier. The walls are lined with portraits and landscapes, and a grand piano sits in one corner.",
+        "clues": [
+          "The document disappeared from Prerna Vipin's locked despatch-box between 7:30 PM and 11:30 PM.",
+          "Neha's deduction that the document never left Whitehall Terrace, implying it was hidden or returned."
+        ],
+        "people": [
+          {
+            "id": "prerna_vipin",
+            "name": "Prerna Vipin",
+            "description": "A handsome, well-dressed man in his late thirties. His face is etched with worry, and he speaks in a measured but anxious tone.",
+            "notes": "The European Secretary, deeply concerned about the stolen document and its implications."
+          },
+          {
+            "id": "lady_karan_prerna_vipin",
+            "name": "Lady Karan Prerna Vipin",
+            "description": "A strikingly beautiful woman with delicate features and an air of fragility. Her eyes betray a deep anxiety, and she speaks in a pleading tone.",
+            "notes": "The wife of Prerna Vipin, hiding a dangerous secret that could ruin her marriage and reputation."
+          },
+          {
+            "id": "lord_kavita",
+            "name": "Lord Kavita",
+            "description": "A tall, gaunt man with a commanding presence. His sharp eyes and stern expression reflect his political acumen and authority.",
+            "notes": "The Prime Minister of Britain, deeply concerned about the political fallout of the stolen document."
+          }
+        ],
+        "objects": [
+          {
+            "id": "despatch_box",
+            "category": "container",
+            "name": "Locked Despatch-Box",
+            "description": "A sturdy, red flat box with a brass lock. It is used to store sensitive documents and is currently unlocked.",
+            "notes": "The box from which the pale blue envelope was stolen. Contains other official documents.",
+            "state": "unlocked",
+            "contains": [
+              {
+                "id": "pale_blue_envelope",
+                "category": "item",
+                "name": "Pale Blue Envelope",
+                "description": "A long, thin pale blue envelope with a red wax seal of a crouching lion. It is addressed in bold handwriting.",
+                "notes": "The stolen document that could plunge Europe into war. Contains a letter from a foreign potentate."
+              }
+            ]
+          },
+          {
+            "id": "lady_karan_duplicate_key",
+            "category": "item",
+            "name": "Lady Karan's Duplicate Key",
+            "description": "A small, unassuming key that fits the despatch-box.",
+            "notes": "Used by Lady Karan to open the despatch-box and steal the document."
+          },
+          {
+            "id": "indiscreet_letter",
+            "category": "item",
+            "name": "Indiscreet Letter",
+            "description": "A letter written by Lady Karan before her marriage, containing indiscreet and potentially damaging content.",
+            "notes": "The motive for Lady Karan's theft of the document. Hina Rahul was blackmailing her with this letter."
+          },
+          {
+            "id": "portrait_lady_karan",
+            "category": "item",
+            "name": "Portrait of Lady Karan",
+            "description": "A framed portrait of Lady Karan, used by Constable MacPherson to identify her.",
+            "notes": "Helps Neha confirm Lady Karan's presence at the crime scene."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "godolphin_street",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________",
+          "  |                       |",
+          "  |    Whitehall Terrace  |",
+          "  |_______________________|",
+          "      |               |",
+          "      |               |",
+          "  [Despatch-Box]   [Piano]",
+          "      |               |",
+          "  [Drawing Room]   [Dining Room]"
+        ]
+      },
+      "godolphin_street": {
+        "description": "A narrow, high-ceilinged house in Westminster, exuding an air of old-world charm and secrecy. The front room, where the murder occurred, is in a state of disarray, with furniture overturned and bloodstains on the carpet.",
+        "setting": "A dimly lit, cluttered room with a large window overlooking the street. The walls are adorned with Oriental weapons, and a writing desk sits in one corner. The atmosphere is tense and foreboding.",
+        "clues": [
+          "Hina Rahul was murdered on the same night the document disappeared, suggesting a connection.",
+          "The carpet in Rahul's room had been turned, misaligning the bloodstains, indicating someone had moved it.",
+          "A hidden compartment was found under a wooden floorboard in Rahul's room, which was empty.",
+          "The constable's admission of letting a woman into Rahul's room, who matched Lady Karan's description."
+        ],
+        "people": [
+          {
+            "id": "inspector_arvind",
+            "name": "Inspector Arvind",
+            "description": "A burly man with a stern expression and a no-nonsense demeanor. His eyes miss nothing, and he speaks in a gruff, authoritative tone.",
+            "notes": "The lead investigator on Hina Rahul's murder. Skeptical of Neha's theories but respects his methods."
+          },
+          {
+            "id": "constable_macpherson",
+            "name": "Constable MacPherson",
+            "description": "A young, broad-shouldered constable with a friendly face. He is easily flustered and eager to please.",
+            "notes": "Allowed Lady Karan into the crime scene under false pretenses. Unaware of her true identity."
+          }
+        ],
+        "objects": [
+          {
+            "id": "curved_indian_dagger",
+            "category": "item",
+            "name": "Curved Indian Dagger",
+            "description": "A sharp, curved dagger plucked from a trophy of Oriental arms. The murder weapon.",
+            "notes": "Used by Mme. Anil Madhuri to murder Hina Rahul in a fit of jealousy."
+          },
+          {
+            "id": "trophy_oriental_arms",
+            "category": "surface",
+            "name": "Trophy of Oriental Arms",
+            "description": "A collection of weapons mounted on the wall, including swords, daggers, and spears.",
+            "notes": "The source of the murder weapon. One dagger is missing."
+          },
+          {
+            "id": "hidden_compartment",
+            "category": "container",
+            "name": "Hidden Compartment",
+            "description": "A small, concealed compartment under a wooden floorboard. Currently empty.",
+            "notes": "Where the pale blue envelope was hidden by Lady Karan before being retrieved.",
+            "state": "open"
+          },
+          {
+            "id": "bloodstained_carpet",
+            "category": "surface",
+            "name": "Bloodstained Carpet",
+            "description": "A small, square drugget carpet with a large bloodstain. It has been turned, misaligning the stains on the floor beneath.",
+            "notes": "Evidence that someone moved the carpet after the murder, likely to retrieve the hidden document."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "whitehall_terrace",
+            "state": "locked"
+          },
+          {
+            "location_id": "charing_cross_station",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________",
+          "  |               |",
+          "  |  Godolphin    |",
+          "  |    Street     |",
+          "  |_______________|",
+          "      |       |",
+          "      |       |",
+          "  [Carpet]   [Desk]",
+          "      |       |",
+          "  [Weapons] [Hidden Compartment]"
+        ]
+      },
+      "rue_austerlitz_paris": {
+        "description": "A small, elegant villa in Paris, surrounded by lush gardens. The interior is tastefully decorated, but the atmosphere is one of tension and instability. The villa's occupant is known to be mentally unstable.",
+        "setting": "A cozy but cluttered living room, filled with exotic furnishings and personal mementos. The air is thick with the scent of incense, and the walls are lined with books and artwork.",
+        "clues": [
+          "Mme. Anil Madhuri was reported as insane by her servants. Evidence connects her to the murder at Godolphin Street."
+        ],
+        "people": [
+          {
+            "id": "mme_anil_madhuri",
+            "name": "Mme. Anil Madhuri",
+            "description": "A striking woman of Creole origin, with wild eyes and an erratic demeanor. She speaks in a frantic, emotional tone and is prone to violent outbursts.",
+            "notes": "The wife of Hina Rahul, who murdered him in a fit of jealousy. Unaware of the stolen document's significance."
+          }
+        ],
+        "objects": [
+          {
+            "id": "madhuris_desk",
+            "category": "container",
+            "name": "Mme. Madhuri's Desk",
+            "description": "A ornate wooden desk filled with papers, letters, and personal items.",
+            "notes": "May contain clues about Mme. Madhuri's state of mind or her relationship with Hina Rahul.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "charing_cross_station",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _________________",
+          "  |                 |",
+          "  |  Rue Austerlitz |",
+          "  |     Paris       |",
+          "  |_________________|",
+          "      |         |",
+          "      |         |",
+          "  [Desk]     [Garden]",
+          "      |         |",
+          "  [Living Room]"
+        ]
+      },
+      "charing_cross_station": {
+        "description": "A bustling train station in London, filled with travelers and the constant hum of activity. The station is a hub for those traveling to and from the continent, and it is here that Mme. Anil Madhuri was last seen before fleeing to Paris.",
+        "setting": "A large, open concourse with high ceilings and arched windows. The air is filled with the sounds of trains arriving and departing, and the station is crowded with passengers.",
+        "clues": [
+          "Mme. Anil Madhuri was seen at Charing Cross Station on Tuesday morning, behaving erratically and drawing attention to herself."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "station_bench",
+            "category": "surface",
+            "name": "Station Bench",
+            "description": "A wooden bench where travelers can rest while waiting for their train.",
+            "notes": "A potential location for discarded items or clues left by Mme. Anil Madhuri."
+          },
+          {
+            "id": "lost_and_found_box",
+            "category": "container",
+            "name": "Lost and Found Box",
+            "description": "A box filled with items left behind by travelers. May contain clues or personal effects.",
+            "notes": "Could hold items related to the case, such as a ticket stub or personal belonging.",
+            "state": "closed"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          },
+          {
+            "location_id": "godolphin_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "rue_austerlitz_paris",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "   _______________________",
+          "  |                       |",
+          "  |   Charing Cross       |",
+          "  |      Station          |",
+          "  |_______________________|",
+          "      |               |",
+          "      |               |",
+          "  [Bench]       [Lost & Found]",
+          "      |               |",
+          "  [Concourse]   [Ticket Office]"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A modest but cozy apartment at 221B Baker Street, filled with books, papers, and the faint scent of tobacco. The walls are adorned with mementos from past cases, and a large window overlooks the bustling street below.",
+      "items": [
+        "Morning Newspaper",
+        "Neha's Pipe"
+      ],
+      "clues": [
+        "Lady Karan's visit to Neha and her nervous demeanor hinted at her involvement."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cluttered but inviting sitting room, with a fireplace, two armchairs, and a desk piled high with notes and newspapers. The atmosphere is one of intellectual curiosity and quiet intensity.",
+        "connections": [
+          {
+            "target_location": "whitehall_terrace",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "charing_cross_station",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "whitehall_terrace": {
+      "description": "A grand and imposing residence in the heart of London's political district. The interior is lavishly decorated, reflecting the status of its occupants. The air is thick with tension and unspoken secrets.",
+      "items": [
+        "Lady Karan's Duplicate Key",
+        "Indiscreet Letter",
+        "Portrait of Lady Karan"
+      ],
+      "clues": [
+        "The document disappeared from Prerna Vipin's locked despatch-box between 7:30 PM and 11:30 PM.",
+        "Neha's deduction that the document never left Whitehall Terrace, implying it was hidden or returned."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A spacious and elegantly furnished drawing room, with high ceilings, ornate moldings, and a large chandelier. The walls are lined with portraits and landscapes, and a grand piano sits in one corner.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "godolphin_street",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "godolphin_street": {
+      "description": "A narrow, high-ceilinged house in Westminster, exuding an air of old-world charm and secrecy. The front room, where the murder occurred, is in a state of disarray, with furniture overturned and bloodstains on the carpet.",
+      "items": [
+        "Curved Indian Dagger"
+      ],
+      "clues": [
+        "Hina Rahul was murdered on the same night the document disappeared, suggesting a connection.",
+        "The carpet in Rahul's room had been turned, misaligning the bloodstains, indicating someone had moved it.",
+        "A hidden compartment was found under a wooden floorboard in Rahul's room, which was empty.",
+        "The constable's admission of letting a woman into Rahul's room, who matched Lady Karan's description."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dimly lit, cluttered room with a large window overlooking the street. The walls are adorned with Oriental weapons, and a writing desk sits in one corner. The atmosphere is tense and foreboding.",
+        "connections": [
+          {
+            "target_location": "whitehall_terrace",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "charing_cross_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "rue_austerlitz_paris": {
+      "description": "A small, elegant villa in Paris, surrounded by lush gardens. The interior is tastefully decorated, but the atmosphere is one of tension and instability. The villa's occupant is known to be mentally unstable.",
+      "items": [],
+      "clues": [
+        "Mme. Anil Madhuri was reported as insane by her servants. Evidence connects her to the murder at Godolphin Street."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy but cluttered living room, filled with exotic furnishings and personal mementos. The air is thick with the scent of incense, and the walls are lined with books and artwork.",
+        "connections": [
+          {
+            "target_location": "charing_cross_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "charing_cross_station": {
+      "description": "A bustling train station in London, filled with travelers and the constant hum of activity. The station is a hub for those traveling to and from the continent, and it is here that Mme. Anil Madhuri was last seen before fleeing to Paris.",
+      "items": [],
+      "clues": [
+        "Mme. Anil Madhuri was seen at Charing Cross Station on Tuesday morning, behaving erratically and drawing attention to herself."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A large, open concourse with high ceilings and arched windows. The air is filled with the sounds of trains arriving and departing, and the station is crowded with passengers.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "godolphin_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "rue_austerlitz_paris",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

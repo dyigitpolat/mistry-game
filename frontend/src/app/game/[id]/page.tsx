@@ -17,6 +17,7 @@ import {
     connectClues,
     accuseCase,
     getScenario,
+    generateSceneImage,
     BACKEND_URL,
     type GameSession,
     type Scenario,
@@ -418,10 +419,11 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
         let mounted = true;
         if (scenarioId && currentLocation) {
             setSceneImageUrl(undefined); // clear old image
-            fetch(`${BACKEND_URL}/scenes/${scenarioId}/generate?location_name=${encodeURIComponent(currentLocation)}`, { method: "POST" })
-                .then(res => res.json())
+
+            generateSceneImage(scenarioId, currentLocation)
                 .then(data => {
                     if (mounted && data.image_url) {
+                        // image_url is returned as a relative path like `/scenes/file.png`
                         setSceneImageUrl(`${BACKEND_URL}${data.image_url}`);
                     }
                 })
@@ -493,7 +495,7 @@ export default function GamePage({ params }: { params: Promise<{ id: string }> }
             <div className="min-h-screen bg-background-dark flex items-center justify-center font-display">
                 <div className="text-center">
                     <span className="material-symbols-outlined text-6xl text-primary animate-spin">progress_activity</span>
-                    <p className="mt-4 text-lg text-text-secondary">Connecting to Whodunit Engine…</p>
+                    <p className="mt-4 text-lg text-text-secondary">Connecting to Mistry Engine…</p>
                 </div>
             </div>
         );

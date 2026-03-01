@@ -1,0 +1,1062 @@
+{
+  "title": "The Mysterious Affair at Styles",
+  "description": "A murder mystery set in the English countryside, where the wealthy Mrs. And is poisoned under mysterious circumstances. The investigation uncovers secrets, lies, and a web of deceit involving the household and its inhabitants.",
+  "victim": "Kreacher And",
+  "intro_narrative": "The intense interest aroused in the public by what was known at the time as 'The Snape Case' has now somewhat subsided. Nevertheless, in view of the world-wide notoriety which attended it, I have been asked to write an account of the whole story. Mrs. And, a wealthy and generous woman, is found dead in her locked bedroom, seemingly from strychnine poisoning. The household is thrown into chaos, and suspicions arise about various members, including her husband, stepsons, and other residents of Snape Court.",
+  "start_time": "1917-07-16T08:00:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Phial of strychnine found in Vernon Hat's room",
+      "Black beard from the attic",
+      "Blotting-paper with a partial will written in reverse",
+      "Charred fragment of a will found in the grate",
+      "Fingerprints on a bottle of Hydro-chloride of Strychnine in the dispensary",
+      "Anonymous note in Vernon Hat's handwriting",
+      "Letter fragments found in the spill vase on the mantelpiece"
+    ],
+    "required_suspect": [
+      "Wizarding And",
+      "Parvati Petunia"
+    ],
+    "required_motive": [
+      "Financial gain through inheritance",
+      "Covering up an affair and blackmail",
+      "Revenge and personal vendetta"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Uncover initial clues and establish the circumstances of Mrs. And's death.",
+      "unlocked_locations": [
+        "Snape Court",
+        "Boudoir at Snape Court"
+      ],
+      "unlocked_characters": [
+        "Wizarding And",
+        "Parvati Petunia",
+        "Vernon Hat",
+        "Scorpius Hat",
+        "Hercule Luna",
+        "Fenrir"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring Secrets",
+      "objective": "Delve deeper into the household's secrets and uncover hidden motives.",
+      "unlocked_locations": [
+        "Mrs. And's Bedroom",
+        "Red Cross Hospital Dispensary at Cattermole",
+        "Leastways Cottage"
+      ],
+      "unlocked_characters": [
+        "Moony Hat",
+        "Patronus Manticore",
+        "Dr. Ginny",
+        "Albert Regulus"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Gathering Evidence",
+      "objective": "Collect crucial evidence and narrow down the list of suspects.",
+      "unlocked_locations": [
+        "Chemist's Shop in Snape St. Scorpius",
+        "Marston's Spinney"
+      ],
+      "unlocked_characters": [
+        "Scorpius Hat",
+        "Vernon Hat",
+        "Parvati Petunia"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelations",
+      "objective": "Confront the suspects with the evidence and uncover the truth.",
+      "unlocked_locations": [
+        "Snape Court"
+      ],
+      "unlocked_characters": [
+        "Wizarding And",
+        "Parvati Petunia",
+        "Hercule Luna"
+      ]
+    }
+  ],
+  "characters": {
+    "Wizarding And": {
+      "type": "suspect",
+      "role": "Husband of the victim",
+      "location": "Snape Court",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Snape Court",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A man with a black beard and gold-rimmed pince-nez, known for his deference and attentiveness towards his wife. He has a curious impassivity of feature and is often seen as an outsider by the household.",
+      "knowledge_about_others": {
+        "Parvati Petunia": "Cousin and accomplice in the murder plot.",
+        "Vernon Hat": "Stepson who is framed for the murder.",
+        "Scorpius Hat": "Daughter-in-law who is suspected of involvement."
+      },
+      "secret": "He is involved in a murder plot with Parvati Petunia to kill his wife for financial gain and to cover up their affair.",
+      "suspicion_meter": 85,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Anonymous note in Vernon Hat's handwriting"
+          ],
+          "reaction": "Attempts to divert suspicion towards Vernon Hat by planting evidence.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Confesses to the crime when confronted with irrefutable evidence.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Parvati Petunia": {
+      "type": "suspect",
+      "role": "Companion and factotum of Mrs. And",
+      "location": "Snape Court",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Red Cross Hospital Dispensary at Cattermole",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A gruff, no-nonsense woman with a deep voice and a strong sense of loyalty to Mrs. And. She is known for her blunt honesty and protective nature.",
+      "knowledge_about_others": {
+        "Wizarding And": "Cousin and accomplice in the murder plot.",
+        "Vernon Hat": "Stepson who is framed for the murder.",
+        "Scorpius Hat": "Daughter-in-law who is suspected of involvement."
+      },
+      "secret": "She is involved in a murder plot with Wizarding And to kill Mrs. And for financial gain and to cover up their affair.",
+      "suspicion_meter": 75,
+      "flight_risk": 60,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "Fragment of green material from a land armlet"
+          ],
+          "reaction": "Attempts to mislead investigators by providing false information.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Confesses to her role in the crime when confronted.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "Vernon Hat": {
+      "type": "suspect",
+      "role": "Stepson of the victim",
+      "location": "Snape Court",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Snape Court",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A good-natured but somewhat unimaginative man, known for his generosity and kindness. He is financially dependent on his stepmother and is often seen as the responsible stepson.",
+      "knowledge_about_others": {
+        "Wizarding And": "Suspects him of the murder but lacks evidence.",
+        "Scorpius Hat": "Wife with whom he has a strained relationship.",
+        "Moony Hat": "Brother who is also a suspect."
+      },
+      "secret": "He is framed for the murder by Wizarding And and Parvati Petunia, but is innocent of the crime.",
+      "suspicion_meter": 90,
+      "flight_risk": 30,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Phial of strychnine found in Vernon Hat's room"
+          ],
+          "reaction": "Denies involvement and seeks to clear his name.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Is exonerated when the true culprits are revealed.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Scorpius Hat": {
+      "type": "suspect",
+      "role": "Wife of Vernon Hat",
+      "location": "Snape Court",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Snape Court",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A proud and enigmatic woman with a strong personality. She is known for her beauty and her reserved demeanor, often keeping her thoughts and feelings to herself.",
+      "knowledge_about_others": {
+        "Wizarding And": "Suspects him of the murder but lacks evidence.",
+        "Vernon Hat": "Husband with whom she has a strained relationship.",
+        "Dr. Ginny": "Friend who is suspected of espionage."
+      },
+      "secret": "She is suspected of involvement in the murder due to her strained relationship with her mother-in-law and her association with Dr. Ginny.",
+      "suspicion_meter": 60,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Fragment of green material from a land armlet"
+          ],
+          "reaction": "Denies involvement and seeks to protect her husband.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Is cleared of suspicion when the true culprits are revealed.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Moony Hat": {
+      "type": "suspect",
+      "role": "Younger stepson of the victim",
+      "location": "Snape Court",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Snape Court",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A shy and reserved man with a melancholic demeanor. He is known for his literary ambitions and his quiet nature, often keeping to himself.",
+      "knowledge_about_others": {
+        "Patronus Manticore": "Has feelings for her but is unaware she reciprocates.",
+        "Vernon Hat": "Brother who is framed for the murder.",
+        "Wizarding And": "Suspects him of the murder."
+      },
+      "secret": "He is in love with Patronus Manticore and initially suspects her of the murder, leading him to act strangely.",
+      "suspicion_meter": 50,
+      "flight_risk": 10,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Fingerprints on a bottle of Hydro-chloride of Strychnine"
+          ],
+          "reaction": "Acts suspiciously to protect Patronus Manticore, whom he suspects.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Is cleared of suspicion and confesses his feelings for Patronus.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Patronus Manticore": {
+      "type": "suspect",
+      "role": "Protégée of Mrs. And and dispenser at the Red Cross Hospital",
+      "location": "Red Cross Hospital Dispensary at Cattermole",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Red Cross Hospital Dispensary at Cattermole",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A fresh-looking young woman full of life and vigor. She is known for her kindness and her work at the dispensary, where she handles poisons and medicines.",
+      "knowledge_about_others": {
+        "Moony Hat": "Is in love with him but believes he dislikes her.",
+        "Scorpius Hat": "Feels intimidated by her.",
+        "Wizarding And": "Suspects him of the murder."
+      },
+      "secret": "She is in love with Moony Hat but believes he dislikes her, leading to misunderstandings.",
+      "suspicion_meter": 40,
+      "flight_risk": 5,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Sample of cocoa with traces of narcotic"
+          ],
+          "reaction": "Acts nervously due to her feelings for Moony Hat and her fear of being suspected.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Is cleared of suspicion and confesses her feelings for Moony Hat.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Hercule Luna": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Leastways Cottage",
+      "phase_locations": {
+        "0": "Leastways Cottage",
+        "1": "Snape Court",
+        "2": "Leastways Cottage",
+        "3": "Snape Court"
+      },
+      "persona": "A meticulous and observant detective with a keen eye for detail. He is known for his methodical approach and his ability to piece together seemingly unrelated clues.",
+      "knowledge_about_others": {
+        "Wizarding And": "Suspects him of the murder and uncovers his plot with Parvati Petunia.",
+        "Vernon Hat": "Works to clear his name and uncover the true culprits.",
+        "Scorpius Hat": "Suspects her initially but later clears her of involvement."
+      },
+      "abilities": "Expert in deduction, forensic analysis, and psychological profiling. Skilled at uncovering hidden motives and piecing together complex puzzles.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Fragment of green material from a land armlet"
+          ],
+          "reaction": "Begins to suspect Scorpius Hat and delves deeper into the household's secrets.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Confronts Wizarding And and Parvati Petunia with the evidence, leading to their confessions.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Dr. Ginny": {
+      "type": "suspect",
+      "role": "Local doctor and specialist in poisons",
+      "location": "Leastways Cottage",
+      "phase_locations": {
+        "0": "Leastways Cottage",
+        "1": "Snape Court",
+        "2": "Leastways Cottage",
+        "3": "Leastways Cottage"
+      },
+      "persona": "A tall, bearded man with a calm and authoritative demeanor. He is known for his expertise in toxicology and his mysterious behavior.",
+      "knowledge_about_others": {
+        "Scorpius Hat": "Has a close relationship with her, leading to suspicions of espionage.",
+        "Wizarding And": "Suspects him of the murder.",
+        "Vernon Hat": "Is aware of his strained relationship with his wife."
+      },
+      "secret": "He is suspected of espionage and has a close relationship with Scorpius Hat, which raises suspicions about his involvement in the murder.",
+      "suspicion_meter": 70,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Fingerprints on a bottle of Hydro-chloride of Strychnine"
+          ],
+          "reaction": "Acts suspiciously and is later revealed to be involved in espionage.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Is cleared of involvement in the murder but remains under suspicion for espionage.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "Fenrir": {
+      "type": "assistant",
+      "role": "Parlourmaid at Snape Court",
+      "location": "Snape Court",
+      "phase_locations": {
+        "0": "Snape Court",
+        "1": "Snape Court",
+        "2": "Snape Court",
+        "3": "Snape Court"
+      },
+      "persona": "A loyal and observant servant with a strong sense of duty. She is known for her honesty and her protective nature towards the household.",
+      "knowledge_about_others": {
+        "Mrs. And": "Was deeply loyal to her and aware of her secrets.",
+        "Wizarding And": "Distrusts him and suspects him of the murder.",
+        "Vernon Hat": "Is protective of him and seeks to clear his name."
+      },
+      "abilities": "Excellent observer and keeper of household secrets. Skilled at providing crucial information and insights into the household's dynamics.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Stain on the carpet near the window in Mrs. And's bedroom"
+          ],
+          "reaction": "Provides key information about the household's routines and the events leading up to the murder.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Assists in uncovering the true culprits by providing crucial testimony.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Albert Regulus": {
+      "type": "suspect",
+      "role": "Chemist's assistant",
+      "location": "Chemist's Shop in Snape St. Scorpius",
+      "phase_locations": {
+        "0": "Chemist's Shop in Snape St. Scorpius",
+        "1": "Chemist's Shop in Snape St. Scorpius",
+        "2": "Chemist's Shop in Snape St. Scorpius",
+        "3": "Chemist's Shop in Snape St. Scorpius"
+      },
+      "persona": "A nervous and somewhat naive young man who is eager to please. He is known for his honesty but is easily flustered under pressure.",
+      "knowledge_about_others": {
+        "Wizarding And": "Sold strychnine to someone he believed to be Wizarding And.",
+        "Parvati Petunia": "Unknowingly sold strychnine to her in disguise."
+      },
+      "secret": "He unknowingly sold strychnine to Parvati Petunia, who was disguised as Wizarding And.",
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Phial of strychnine found in Vernon Hat's room"
+          ],
+          "reaction": "Provides crucial testimony about the sale of strychnine, unaware of the deception.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Letter fragments found in the spill vase on the mantelpiece"
+          ],
+          "reaction": "Is cleared of any wrongdoing and assists in confirming the true identity of the buyer.",
+          "leads_to_break": false
+        }
+      ]
+    }
+  },
+  "game_world": {
+    "locations": {
+      "Snape Court": {
+        "description": "A grand old house with extensive grounds, located in the countryside. It is the residence of the And and Hat families and the scene of the murder.",
+        "clues": [
+          "Fragment of green material from a land armlet found on the bolt of the connecting door",
+          "Scribbled words on an envelope hinting at a new will"
+        ],
+        "people": [
+          {
+            "id": "Wizarding_And",
+            "name": "Wizarding And",
+            "description": "A man with a black beard and gold-rimmed pince-nez, known for his deference and attentiveness towards his wife.",
+            "notes": "Suspected of murdering his wife for financial gain and to cover up an affair with Parvati Petunia.",
+            "state": "alive"
+          },
+          {
+            "id": "Parvati_Petunia",
+            "name": "Parvati Petunia",
+            "description": "A gruff, no-nonsense woman with a deep voice, known for her loyalty to Mrs. And.",
+            "notes": "Suspected accomplice in the murder plot with Wizarding And.",
+            "state": "alive"
+          },
+          {
+            "id": "Vernon_Hat",
+            "name": "Vernon Hat",
+            "description": "A good-natured man with a somewhat unimaginative demeanor, known for his generosity and kindness.",
+            "notes": "Framed for the murder but innocent of the crime.",
+            "state": "alive"
+          },
+          {
+            "id": "Scorpius_Hat",
+            "name": "Scorpius Hat",
+            "description": "A proud and enigmatic woman with a strong personality, known for her beauty and reserved demeanor.",
+            "notes": "Initially suspected due to her strained relationship with her mother-in-law.",
+            "state": "alive"
+          },
+          {
+            "id": "Moony_Hat",
+            "name": "Moony Hat",
+            "description": "A shy and reserved man with a melancholic demeanor, known for his literary ambitions.",
+            "notes": "In love with Patronus Manticore and initially suspects her of the murder.",
+            "state": "alive"
+          },
+          {
+            "id": "Fenrir",
+            "name": "Fenrir",
+            "description": "A loyal and observant parlourmaid with a strong sense of duty.",
+            "notes": "Provides crucial information about the household's routines and events leading up to the murder.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "despatch_case",
+            "category": "container",
+            "name": "Purple despatch-case",
+            "description": "A locked case where Mrs. And kept her important papers. The lock was forced by the murderer.",
+            "notes": "Contains crucial documents related to the murder plot.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "will_fragment",
+                "category": "item",
+                "name": "Charred fragment of a will",
+                "description": "A piece of burnt paper found in the grate, hinting at the destruction of a will.",
+                "notes": "Evidence of a will made in favor of Wizarding And."
+              }
+            ]
+          },
+          {
+            "id": "spill_vase",
+            "category": "container",
+            "name": "Spill vase",
+            "description": "A vase on the mantelpiece containing torn letter fragments.",
+            "notes": "Contains incriminating letter fragments written by Wizarding And to Parvati Petunia.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "letter_fragments",
+                "category": "item",
+                "name": "Letter fragments",
+                "description": "Torn pieces of a letter found in the spill vase on the mantelpiece.",
+                "notes": "Incriminating evidence against Wizarding And and Parvati Petunia."
+              }
+            ]
+          },
+          {
+            "id": "coffee_cups",
+            "category": "item",
+            "name": "Coffee-cups",
+            "description": "Cups with traces of sugar, except for Patronus's cup, which was drugged.",
+            "notes": "Evidence of the drugging of Patronus Manticore."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Boudoir at Snape Court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Mrs. And's Bedroom",
+            "state": "locked"
+          }
+        ],
+        "setting": "A grand and historic country house with extensive gardens and woodlands. The atmosphere is one of old-world charm and elegance, but beneath the surface, tensions and secrets abound."
+      },
+      "Boudoir at Snape Court": {
+        "description": "A cozy and elegant room where Mrs. And spent much of her time. It contains her desk and personal belongings.",
+        "clues": [
+          "Scribbled words on an envelope hinting at a new will",
+          "Anonymous note in Vernon Hat's handwriting"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "writing_desk",
+            "category": "container",
+            "name": "Writing desk",
+            "description": "A desk where Mrs. And kept her personal correspondence and documents.",
+            "notes": "Contains evidence of the new will made by Mrs. And.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "envelope",
+                "category": "item",
+                "name": "Envelope with scribbled words",
+                "description": "An envelope with words scribbled on it, hinting at the creation of a new will.",
+                "notes": "Evidence of Mrs. And's intention to make a new will."
+              }
+            ]
+          },
+          {
+            "id": "blotting_paper",
+            "category": "item",
+            "name": "Blotting-paper",
+            "description": "A piece of blotting-paper with a partial will written in reverse.",
+            "notes": "Evidence of the will's contents and the identity of the beneficiary."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Snape Court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Mrs. And's Bedroom",
+            "state": "locked"
+          }
+        ],
+        "setting": "A cozy and intimate room filled with personal mementos and elegant furnishings. The atmosphere is one of quiet reflection and secrecy."
+      },
+      "Mrs. And's Bedroom": {
+        "description": "The bedroom where Mrs. And was found dead. It is locked and contains crucial evidence related to the murder.",
+        "clues": [
+          "Stain on the carpet near the window in Mrs. And's bedroom (coffee spill)",
+          "Empty box of bromide powders in Mrs. And's bedroom",
+          "Candle grease on the floor in Mrs. And's bedroom",
+          "Missing coffee-cup hidden in a brass vase"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "bed_table",
+            "category": "surface",
+            "name": "Bedside table",
+            "description": "A table by the bed that was overturned during Mrs. And's final moments.",
+            "notes": "Contains remnants of a coffee-cup that was crushed to hide evidence."
+          },
+          {
+            "id": "tonic_bottle",
+            "category": "item",
+            "name": "Mrs. And's bottle of tonic",
+            "description": "A bottle containing Mrs. And's tonic, which was laced with strychnine.",
+            "notes": "Evidence of the method used to administer the poison."
+          },
+          {
+            "id": "brass_vase",
+            "category": "container",
+            "name": "Brass vase",
+            "description": "A vase where the missing coffee-cup was hidden.",
+            "notes": "Contains the missing coffee-cup used to drug Patronus Manticore.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "missing_coffee_cup",
+                "category": "item",
+                "name": "Missing coffee-cup",
+                "description": "A coffee-cup hidden in the brass vase to conceal evidence.",
+                "notes": "Evidence of the drugging of Patronus Manticore."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Snape Court",
+            "state": "locked"
+          },
+          {
+            "location_id": "Boudoir at Snape Court",
+            "state": "locked"
+          },
+          {
+            "location_id": "Patronus's Room",
+            "state": "locked"
+          }
+        ],
+        "setting": "A grand and opulent bedroom with elegant furnishings. The atmosphere is one of tragedy and mystery, with signs of a struggle and hidden secrets."
+      },
+      "Red Cross Hospital Dispensary at Cattermole": {
+        "description": "A small dispensary at the Red Cross Hospital where Patronus Manticore works. It contains various medicines and poisons.",
+        "clues": [
+          "Fingerprints on a bottle of Hydro-chloride of Strychnine in the dispensary"
+        ],
+        "people": [
+          {
+            "id": "Patronus_Manticore",
+            "name": "Patronus Manticore",
+            "description": "A fresh-looking young woman who works as a dispenser at the hospital.",
+            "notes": "Involved in handling poisons and initially suspected of the murder.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "poison_cupboard",
+            "category": "container",
+            "name": "Poison cupboard",
+            "description": "A locked cupboard containing various poisons, including strychnine.",
+            "notes": "Contains the bottle of Hydro-chloride of Strychnine with Moony Hat's fingerprints.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "strychnine_bottle",
+                "category": "item",
+                "name": "Bottle of Hydro-chloride of Strychnine",
+                "description": "A bottle containing strychnine, with fingerprints on it.",
+                "notes": "Evidence linking Moony Hat to the handling of the poison."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Marston's Spinney",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A small and clinical room filled with bottles of medicines and poisons. The atmosphere is one of precision and caution, with a sense of hidden dangers."
+      },
+      "Chemist's Shop in Snape St. Scorpius": {
+        "description": "A small chemist's shop in the village where strychnine was purchased under false pretenses.",
+        "clues": [],
+        "people": [
+          {
+            "id": "Albert_Regulus",
+            "name": "Albert Regulus",
+            "description": "A nervous young man who works as a chemist's assistant.",
+            "notes": "Unknowingly sold strychnine to Parvati Petunia in disguise.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "poison_register",
+            "category": "item",
+            "name": "Poison register",
+            "description": "A register where the sale of poisons is recorded.",
+            "notes": "Contains the forged signature of Wizarding And, linking Vernon Hat to the purchase of strychnine."
+          },
+          {
+            "id": "strychnine_phial",
+            "category": "item",
+            "name": "Phial of strychnine",
+            "description": "A small phial containing strychnine, sold to Parvati Petunia in disguise.",
+            "notes": "Evidence of the purchase of the poison used in the murder."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Snape Court",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quaint and old-fashioned shop filled with bottles of medicines and remedies. The atmosphere is one of quiet routine, with a sense of hidden secrets."
+      },
+      "Marston's Spinney": {
+        "description": "A secluded and wooded area where Vernon Hat was lured by an anonymous note.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "Red Cross Hospital Dispensary at Cattermole",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "Snape Court",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet and secluded woodland area, with a sense of isolation and mystery. The atmosphere is one of hidden dangers and unseen watchers."
+      },
+      "Leastways Cottage": {
+        "description": "A small cottage in the village where Hercule Luna resides. It is a hub for the investigation and a place where crucial evidence is analyzed.",
+        "clues": [],
+        "people": [
+          {
+            "id": "Hercule_Luna",
+            "name": "Hercule Luna",
+            "description": "A meticulous and observant detective with a keen eye for detail.",
+            "notes": "Leads the investigation into Mrs. And's murder and uncovers the true culprits.",
+            "state": "alive"
+          },
+          {
+            "id": "Dr_Ginny",
+            "name": "Dr. Ginny",
+            "description": "A tall, bearded man with a calm and authoritative demeanor.",
+            "notes": "Suspected of espionage and initially thought to be involved in the murder.",
+            "state": "alive"
+          }
+        ],
+        "objects": [
+          {
+            "id": "luna_desk",
+            "category": "container",
+            "name": "Luna's desk",
+            "description": "A desk where Luna keeps his notes and evidence related to the investigation.",
+            "notes": "Contains crucial evidence and analysis of the murder case.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "evidence_notes",
+                "category": "item",
+                "name": "Evidence notes",
+                "description": "Luna's detailed notes and analysis of the murder case.",
+                "notes": "Contains crucial insights and deductions about the murder."
+              }
+            ]
+          },
+          {
+            "id": "black_beard",
+            "category": "item",
+            "name": "Black beard",
+            "description": "A black beard found in the attic of Snape Court, used as a disguise.",
+            "notes": "Evidence linking Wizarding And to the purchase of strychnine."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "Snape Court",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A cozy and cluttered cottage filled with books, notes, and evidence. The atmosphere is one of intense focus and determination, with a sense of hidden truths waiting to be uncovered."
+      }
+    }
+  },
+  "locations": {
+    "Snape Court": {
+      "description": "A grand old house with extensive grounds, located in the countryside. It is the residence of the And and Hat families and the scene of the murder.",
+      "items": [
+        "Coffee-cups"
+      ],
+      "clues": [
+        "Fragment of green material from a land armlet found on the bolt of the connecting door",
+        "Scribbled words on an envelope hinting at a new will"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and historic country house with extensive gardens and woodlands. The atmosphere is one of old-world charm and elegance, but beneath the surface, tensions and secrets abound.",
+        "connections": [
+          {
+            "target_location": "Boudoir at Snape Court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Mrs. And's Bedroom",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Boudoir at Snape Court": {
+      "description": "A cozy and elegant room where Mrs. And spent much of her time. It contains her desk and personal belongings.",
+      "items": [
+        "Blotting-paper"
+      ],
+      "clues": [
+        "Scribbled words on an envelope hinting at a new will",
+        "Anonymous note in Vernon Hat's handwriting"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy and intimate room filled with personal mementos and elegant furnishings. The atmosphere is one of quiet reflection and secrecy.",
+        "connections": [
+          {
+            "target_location": "Snape Court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Mrs. And's Bedroom",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Mrs. And's Bedroom": {
+      "description": "The bedroom where Mrs. And was found dead. It is locked and contains crucial evidence related to the murder.",
+      "items": [
+        "Mrs. And's bottle of tonic"
+      ],
+      "clues": [
+        "Stain on the carpet near the window in Mrs. And's bedroom (coffee spill)",
+        "Empty box of bromide powders in Mrs. And's bedroom",
+        "Candle grease on the floor in Mrs. And's bedroom",
+        "Missing coffee-cup hidden in a brass vase"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and opulent bedroom with elegant furnishings. The atmosphere is one of tragedy and mystery, with signs of a struggle and hidden secrets.",
+        "connections": [
+          {
+            "target_location": "Snape Court",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Boudoir at Snape Court",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "Patronus's Room",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Red Cross Hospital Dispensary at Cattermole": {
+      "description": "A small dispensary at the Red Cross Hospital where Patronus Manticore works. It contains various medicines and poisons.",
+      "items": [],
+      "clues": [
+        "Fingerprints on a bottle of Hydro-chloride of Strychnine in the dispensary"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small and clinical room filled with bottles of medicines and poisons. The atmosphere is one of precision and caution, with a sense of hidden dangers.",
+        "connections": [
+          {
+            "target_location": "Marston's Spinney",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Chemist's Shop in Snape St. Scorpius": {
+      "description": "A small chemist's shop in the village where strychnine was purchased under false pretenses.",
+      "items": [
+        "Poison register",
+        "Phial of strychnine"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quaint and old-fashioned shop filled with bottles of medicines and remedies. The atmosphere is one of quiet routine, with a sense of hidden secrets.",
+        "connections": [
+          {
+            "target_location": "Snape Court",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Marston's Spinney": {
+      "description": "A secluded and wooded area where Vernon Hat was lured by an anonymous note.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet and secluded woodland area, with a sense of isolation and mystery. The atmosphere is one of hidden dangers and unseen watchers.",
+        "connections": [
+          {
+            "target_location": "Red Cross Hospital Dispensary at Cattermole",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "Snape Court",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "Leastways Cottage": {
+      "description": "A small cottage in the village where Hercule Luna resides. It is a hub for the investigation and a place where crucial evidence is analyzed.",
+      "items": [
+        "Black beard"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy and cluttered cottage filled with books, notes, and evidence. The atmosphere is one of intense focus and determination, with a sense of hidden truths waiting to be uncovered.",
+        "connections": [
+          {
+            "target_location": "Snape Court",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

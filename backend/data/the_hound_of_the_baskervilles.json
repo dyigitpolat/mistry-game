@@ -1,0 +1,893 @@
+{
+  "title": "The Hound of the Baskervilles",
+  "description": "A mystery game based on the classic novel where players must uncover the truth behind the legendary hound and the deaths surrounding the Baskerville family.",
+  "victim": "Sir Zeta Cruz",
+  "intro_narrative": "Mr. Bateman Gere and Dr. Franco are called upon to investigate the mysterious death of Sir Zeta Cruz, the latest in a series of tragic events plaguing the Baskerville family. As they delve deeper into the legend of the hound and the secrets of the moor, they uncover a web of deceit, danger, and dark family history.",
+  "start_time": "1889-10-01T09:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "The walking stick left by Dr. Mcgregor",
+      "The manuscript detailing the Baskerville legend",
+      "The warning letter to Sir Foster Cruz",
+      "The missing boots",
+      "The footprints of a gigantic hound near Sir Zeta's body",
+      "The candle signals between Cruz Hall and the moor",
+      "The testimony of Mrs. Astin Baldwin",
+      "The discovery of the hound's lair in the Pattinson Mire",
+      "The portrait of the wicked Sheen Cruz",
+      "The typewritten note found in the hound's lair"
+    ],
+    "required_suspect": [
+      "Murdoch Cruz (alias Mendes, alias Calloway)"
+    ],
+    "required_motive": [
+      "Inheritance of the Baskerville estate and fortune"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Introduction",
+      "objective": "Gather initial clues and understand the Baskerville legend.",
+      "unlocked_locations": [
+        "Baker Street (Bateman Gere's residence)",
+        "Northumberland Hotel (London)"
+      ],
+      "unlocked_characters": [
+        "Bateman Gere",
+        "Dr. Franco",
+        "Dr. Jason Mcgregor"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploration of London",
+      "objective": "Investigate the mysterious warning letter and the shadowing figure in London.",
+      "unlocked_locations": [
+        "Cruz Hall",
+        "Shyamalan Pitt"
+      ],
+      "unlocked_characters": [
+        "Sir Foster Cruz",
+        "Murdoch Cruz (Mendes)",
+        "Young Cruz (Mrs. Mendes)",
+        "Mrs. Astin Baldwin"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Journey to Dartmoor",
+      "objective": "Travel to Dartmoor and begin exploring the moor and surrounding locations.",
+      "unlocked_locations": [
+        "Merripit House",
+        "Yew Alley (Cruz Hall grounds)",
+        "The Moor (including Pattinson Mire and stone huts)",
+        "Princetown (convict prison)"
+      ],
+      "unlocked_characters": [
+        "Paley (butler)",
+        "Mrs. Paley",
+        "Tyson (escaped convict)",
+        "Mr. Hathaway"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Unraveling the Mystery",
+      "objective": "Uncover the truth behind the hound and the deaths on the moor.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "bateman_gere": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Baker Street (Bateman Gere's residence)",
+      "phase_locations": {
+        "0": "Baker Street (Bateman Gere's residence)",
+        "1": "Baker Street (Bateman Gere's residence)",
+        "2": "The Moor",
+        "3": "Baker Street (Bateman Gere's residence)"
+      },
+      "persona": "Sharp, analytical, and observant with a dry sense of humor. Prefers to deduce facts quietly and methodically.",
+      "abilities": "Master of disguise, keen observer, expert in forensic science, and logical deduction.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "dr_franco": {
+      "type": "assistant",
+      "role": "Doctor and Assistant Detective",
+      "location": "Baker Street (Bateman Gere's residence)",
+      "phase_locations": {
+        "0": "Baker Street (Bateman Gere's residence)",
+        "1": "Northumberland Hotel (London)",
+        "2": "Cruz Hall",
+        "3": "Cruz Hall"
+      },
+      "persona": "Loyal, inquisitive, and brave. Acts as the narrator and provides medical expertise.",
+      "abilities": "Medical knowledge, keen observer, and supportive in investigations.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "sir_foster_cruz": {
+      "type": "suspect",
+      "role": "Baronet and Heir to the Baskerville Estate",
+      "location": "Northumberland Hotel (London)",
+      "phase_locations": {
+        "0": "Northumberland Hotel (London)",
+        "1": "Northumberland Hotel (London)",
+        "2": "Cruz Hall",
+        "3": "Cruz Hall"
+      },
+      "persona": "Determined, brave, and occasionally impulsive. Speaks with an American accent due to time spent abroad.",
+      "knowledge_about_others": {
+        "bateman_gere": "Trusts him implicitly and relies on his guidance.",
+        "dr_franco": "Sees him as a close friend and ally.",
+        "murdoch_cruz": "Initially unaware of his true identity and intentions."
+      },
+      "secret": "He is the target of Murdoch Cruz's schemes to inherit the Baskerville estate.",
+      "suspicion_meter": 10,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "dr_jason_mcgregor": {
+      "type": "suspect",
+      "role": "Family Doctor and Friend",
+      "location": "Shyamalan Pitt",
+      "phase_locations": {
+        "0": "Baker Street (Bateman Gere's residence)",
+        "1": "Northumberland Hotel (London)",
+        "2": "Shyamalan Pitt",
+        "3": "Shyamalan Pitt"
+      },
+      "persona": "Scientific, methodical, and somewhat naive. Deeply cares for his patients and friends.",
+      "knowledge_about_others": {
+        "sir_zeta_cruz": "Knew him well and was his personal physician.",
+        "murdoch_cruz": "Initially trusts him as a friend and fellow scientist."
+      },
+      "secret": "He is unaware of the true nature of Murdoch Cruz's intentions.",
+      "suspicion_meter": 20,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "murdoch_cruz": {
+      "type": "suspect",
+      "role": "Antagonist and True Culprit",
+      "location": "Merripit House",
+      "phase_locations": {
+        "0": "Unknown",
+        "1": "Northumberland Hotel (London)",
+        "2": "Merripit House",
+        "3": "The Moor"
+      },
+      "persona": "Charming, manipulative, and highly intelligent. Uses his wit and cunning to deceive others.",
+      "knowledge_about_others": {
+        "sir_foster_cruz": "Sees him as an obstacle to his inheritance.",
+        "young_cruz": "Controls her through fear and manipulation.",
+        "mrs_astin_baldwin": "Uses her to further his schemes."
+      },
+      "secret": "He is the true heir to the Baskerville estate and is orchestrating the deaths to claim his inheritance.",
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "The portrait of the wicked Sheen Cruz"
+          ],
+          "reaction": "Attempts to manipulate or eliminate those who get too close to the truth.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "young_cruz": {
+      "type": "suspect",
+      "role": "Wife of Murdoch Cruz (posing as his sister)",
+      "location": "Merripit House",
+      "phase_locations": {
+        "0": "Unknown",
+        "1": "Northumberland Hotel (London)",
+        "2": "Merripit House",
+        "3": "Merripit House"
+      },
+      "persona": "Elegant, mysterious, and conflicted. Torn between loyalty to her husband and her own moral compass.",
+      "knowledge_about_others": {
+        "murdoch_cruz": "Fears and loves him, aware of his true nature but trapped by his control.",
+        "sir_foster_cruz": "Develops feelings for him and tries to warn him of the danger."
+      },
+      "secret": "She is Murdoch Cruz's wife and is complicit in his schemes out of fear and manipulation.",
+      "suspicion_meter": 60,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "mrs_astin_baldwin": {
+      "type": "suspect",
+      "role": "Local Typist and Former Lover of Murdoch Cruz",
+      "location": "Shyamalan Pitt",
+      "phase_locations": {
+        "0": "Shyamalan Pitt",
+        "1": "Shyamalan Pitt",
+        "2": "Shyamalan Pitt",
+        "3": "Shyamalan Pitt"
+      },
+      "persona": "Beautiful, independent, and initially naive. Later becomes disillusioned and vengeful.",
+      "knowledge_about_others": {
+        "murdoch_cruz": "Initially trusts him and believes in his promises of marriage.",
+        "sir_zeta_cruz": "Sought his help and was manipulated into writing a letter to him."
+      },
+      "secret": "She was used by Murdoch Cruz to lure Sir Zeta Cruz to his death.",
+      "suspicion_meter": 50,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "paley": {
+      "type": "suspect",
+      "role": "Butler at Cruz Hall",
+      "location": "Cruz Hall",
+      "phase_locations": {
+        "0": "Cruz Hall",
+        "1": "Cruz Hall",
+        "2": "Cruz Hall",
+        "3": "Cruz Hall"
+      },
+      "persona": "Respectable, composed, and secretive. Appears loyal but harbors his own secrets.",
+      "knowledge_about_others": {
+        "sir_zeta_cruz": "Was the last to see him alive and knows more than he admits.",
+        "tyson": "Helps his brother-in-law, the escaped convict, out of familial loyalty."
+      },
+      "secret": "He aids Tyson, the escaped convict, by providing him with food and shelter.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "mrs_paley": {
+      "type": "suspect",
+      "role": "Housekeeper at Cruz Hall",
+      "location": "Cruz Hall",
+      "phase_locations": {
+        "0": "Cruz Hall",
+        "1": "Cruz Hall",
+        "2": "Cruz Hall",
+        "3": "Cruz Hall"
+      },
+      "persona": "Stoic, deeply religious, and burdened by sorrow. Struggles with her loyalty to her husband and her moral compass.",
+      "knowledge_about_others": {
+        "paley": "Supports his decisions but is deeply troubled by them.",
+        "tyson": "Feels a maternal bond towards her brother despite his crimes."
+      },
+      "secret": "She is the sister of Tyson, the escaped convict, and aids him out of familial duty.",
+      "suspicion_meter": 30,
+      "flight_risk": 5,
+      "conditional_behaviors": []
+    },
+    "tyson": {
+      "type": "suspect",
+      "role": "Escaped Convict",
+      "location": "The Moor",
+      "phase_locations": {
+        "0": "Princetown (convict prison)",
+        "1": "The Moor",
+        "2": "The Moor",
+        "3": "The Moor"
+      },
+      "persona": "Brutal, desperate, and cunning. Will stop at nothing to evade capture.",
+      "knowledge_about_others": {
+        "paley": "Relies on him for food and shelter.",
+        "mrs_paley": "Trusts her due to their familial bond."
+      },
+      "secret": "He is hiding on the moor and is inadvertently involved in Murdoch Cruz's schemes.",
+      "suspicion_meter": 80,
+      "flight_risk": 90,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "baker_street": {
+        "description": "A cozy and cluttered residence at 221B Baker Street, filled with books, scientific instruments, and the remnants of past investigations. The atmosphere is one of intellectual curiosity and warmth.",
+        "clues": [
+          "The walking stick left by Dr. Mcgregor (revealing his true identity and background)"
+        ],
+        "people": [
+          {
+            "id": "bateman_gere",
+            "name": "Bateman Gere",
+            "description": "A tall, lean man with sharp features and piercing eyes. He exudes an air of quiet confidence and intelligence.",
+            "notes": "Master detective with a keen eye for detail and a sharp mind for deduction."
+          },
+          {
+            "id": "dr_franco",
+            "name": "Dr. Franco",
+            "description": "A loyal and observant man, often seen assisting Bateman Gere in his investigations. He has a medical background and a keen interest in mysteries.",
+            "notes": "Acts as the narrator and provides medical expertise to the investigations."
+          }
+        ],
+        "objects": [
+          {
+            "id": "walking_stick",
+            "category": "item",
+            "name": "Dr. Mcgregor's Walking Stick",
+            "description": "A fine, thick piece of wood, bulbous-headed, with a broad silver band engraved with 'To Jason Mcgregor, M.R.C.S., from his friends of the C.C.H.,' dated '1884.'",
+            "notes": "Left behind by Dr. Mcgregor during his visit. Provides clues about his identity and background."
+          },
+          {
+            "id": "coffee_pot",
+            "category": "item",
+            "name": "Silver-Plated Coffee Pot",
+            "description": "A well-polished, silver-plated coffee pot that reflects light brilliantly.",
+            "notes": "Used by Gere to deduce Franco's actions."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "northumberland_hotel",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A warm and inviting sitting-room filled with books, scientific instruments, and comfortable furniture. The atmosphere is one of intellectual curiosity and warmth."
+      },
+      "cruz_hall": {
+        "description": "A grand and ancient manor house with a dark and foreboding atmosphere. The halls are lined with portraits of the Baskerville ancestors, and the grounds are extensive and eerie.",
+        "clues": [
+          "The manuscript detailing the Baskerville legend",
+          "The footprints of a gigantic hound near Sir Zeta's body"
+        ],
+        "people": [
+          {
+            "id": "paley",
+            "name": "Paley",
+            "description": "A tall, handsome butler with a square black beard and distinguished features. He carries himself with an air of quiet dignity.",
+            "notes": "Butler at Cruz Hall with a mysterious past and connections to the escaped convict."
+          },
+          {
+            "id": "mrs_paley",
+            "name": "Mrs. Paley",
+            "description": "A large, impassive woman with a stern expression. Her eyes often betray a deep sorrow.",
+            "notes": "Housekeeper at Cruz Hall and sister to the escaped convict Tyson."
+          }
+        ],
+        "objects": [
+          {
+            "id": "manuscript",
+            "category": "item",
+            "name": "The Baskerville Manuscript",
+            "description": "An old manuscript detailing the legend of the Hound of the Baskervilles, dated 1742.",
+            "notes": "Provides historical context and hints about the curse on the Baskerville family."
+          },
+          {
+            "id": "portrait_sheen_cruz",
+            "category": "item",
+            "name": "Portrait of Sheen Cruz",
+            "description": "A portrait of the wicked Sheen Cruz, resembling Murdoch Cruz (Mendes).",
+            "notes": "Reveals the physical resemblance between Sheen Cruz and Murdoch Cruz, hinting at a deeper connection."
+          },
+          {
+            "id": "yew_alley",
+            "category": "surface",
+            "name": "Yew Alley",
+            "description": "A long, dark alley lined with ancient yew trees, leading to a moor-gate. The atmosphere is eerie and foreboding.",
+            "notes": "The location where Sir Zeta Cruz met his death. Contains clues about the events leading to his demise."
+          },
+          {
+            "id": "hall_door",
+            "category": "surface",
+            "name": "Hall Door",
+            "description": "The main entrance to Cruz Hall, heavy and imposing with intricate carvings.",
+            "notes": "The last place Sir Zeta Cruz was seen alive."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "yew_alley",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_moor",
+            "state": "locked"
+          },
+          {
+            "location_id": "merripit_house",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand and ancient manor house with dark corridors, eerie portraits, and an atmosphere of foreboding. The grounds are extensive and filled with shadows."
+      },
+      "merripit_house": {
+        "description": "A bleak and isolated house on the moor, surrounded by an orchard and stunted trees. The interior is surprisingly elegant, reflecting the tastes of its inhabitants.",
+        "clues": [
+          "The candle signals between Cruz Hall and the moor (used to communicate with the convict)"
+        ],
+        "people": [
+          {
+            "id": "murdoch_cruz",
+            "name": "Murdoch Cruz (Mendes)",
+            "description": "A tall, thin man with a long nose and keen grey eyes. He dresses in a professional but somewhat slovenly fashion.",
+            "notes": "Naturalist posing as a harmless scholar but with sinister intentions. The true culprit behind the Baskerville deaths."
+          },
+          {
+            "id": "young_cruz",
+            "name": "Young Cruz (Mrs. Mendes)",
+            "description": "A beautiful woman with dark, expressive eyes and an air of elegance. She appears conflicted and troubled.",
+            "notes": "Wife of Murdoch Cruz, posing as his sister. Torn between loyalty and her own moral compass."
+          }
+        ],
+        "objects": [
+          {
+            "id": "butterfly_net",
+            "category": "item",
+            "name": "Butterfly Net",
+            "description": "A green butterfly net used by Mendes in his entomological pursuits.",
+            "notes": "Used by Mendes to maintain his cover as a naturalist."
+          },
+          {
+            "id": "botanical_box",
+            "category": "container",
+            "name": "Botanical Specimen Box",
+            "description": "A tin box used by Mendes to store his collected specimens.",
+            "notes": "Contains various plant and insect specimens, reinforcing Mendes's cover story.",
+            "state": "closed",
+            "contains": []
+          },
+          {
+            "id": "candle",
+            "category": "item",
+            "name": "Candle",
+            "description": "A candle used for signaling between Cruz Hall and the moor.",
+            "notes": "Used to communicate with Tyson, the escaped convict."
+          },
+          {
+            "id": "hound_lair",
+            "category": "container",
+            "name": "Hound's Lair",
+            "description": "A hidden outhouse where the hound was kept.",
+            "notes": "Contains remnants of the hound and clues about its use in the murders.",
+            "state": "locked"
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_moor",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "cruz_hall",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bleak and isolated house with an elegant interior. The surrounding moor adds to the sense of desolation and mystery."
+      },
+      "yew_alley": {
+        "description": "A long, dark alley lined with ancient yew trees, leading to a moor-gate. The atmosphere is eerie and foreboding, with shadows stretching long and dark.",
+        "clues": [
+          "The warning letter to Sir Foster Cruz (constructed from newspaper clippings)",
+          "The missing boots (used to set the hound on Sir Foster's trail)"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "moor_gate",
+            "category": "surface",
+            "name": "Moor-Gate",
+            "description": "A white wooden gate with a latch, leading out onto the moor. It is the spot where Sir Zeta Cruz stood before his death.",
+            "notes": "The location where Sir Zeta Cruz waited and where cigar ash was found."
+          },
+          {
+            "id": "cigar_ash",
+            "category": "item",
+            "name": "Cigar Ash",
+            "description": "Ash from Sir Zeta Cruz's cigar, found near the moor-gate.",
+            "notes": "Indicates that Sir Zeta Cruz waited at the gate for some time."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cruz_hall",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_moor",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A long, dark alley with ancient yew trees creating a tunnel-like effect. The atmosphere is eerie and foreboding, with a sense of lurking danger."
+      },
+      "the_moor": {
+        "description": "A vast, desolate expanse of moorland, dotted with tors, stone huts, and patches of bog. The atmosphere is wild, mysterious, and often foggy.",
+        "clues": [
+          "The discovery of the hound's lair in the Pattinson Mire",
+          "The sobs heard in the night (Mrs. Paley's distress over her brother, the convict)"
+        ],
+        "people": [
+          {
+            "id": "tyson",
+            "name": "Tyson",
+            "description": "A rough-looking man with a bristling beard and matted hair. His face is seamed with scars and his eyes are cunning.",
+            "notes": "Escaped convict hiding on the moor. Involved in the events surrounding the Baskerville deaths."
+          }
+        ],
+        "objects": [
+          {
+            "id": "stone_huts",
+            "category": "surface",
+            "name": "Stone Huts",
+            "description": "Ancient stone huts scattered across the moor, remnants of prehistoric inhabitants.",
+            "notes": "Used as hiding places by Tyson and possibly others."
+          },
+          {
+            "id": "pattinson_mire",
+            "category": "surface",
+            "name": "Pattinson Mire",
+            "description": "A treacherous bog with bright green patches of rushes. It is deadly to those who do not know its paths.",
+            "notes": "Location of the hound's lair and the final confrontation with Murdoch Cruz."
+          },
+          {
+            "id": "tin_phosphorus",
+            "category": "item",
+            "name": "Tin of Phosphorus Mixture",
+            "description": "A tin containing a luminous mixture used to make the hound appear spectral.",
+            "notes": "Used by Murdoch Cruz to create the terrifying appearance of the hound."
+          },
+          {
+            "id": "old_boot",
+            "category": "item",
+            "name": "Old Black Boot",
+            "description": "An old black boot marked 'Oldman, Toronto,' found in the mire.",
+            "notes": "Belonged to Sir Foster Cruz and was used to set the hound on Tyson's trail."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cruz_hall",
+            "state": "locked"
+          },
+          {
+            "location_id": "yew_alley",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "merripit_house",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "princetown",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "shyamalan_pitt",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A vast, desolate expanse with rolling hills, tors, and patches of bog. The atmosphere is wild and mysterious, often shrouded in fog."
+      },
+      "shyamalan_pitt": {
+        "description": "A small village near the moor, with a few larger buildings including the inn and Dr. Mcgregor's house. The atmosphere is quiet and rural.",
+        "clues": [
+          "The testimony of Mrs. Astin Baldwin regarding her letter to Sir Zeta Cruz"
+        ],
+        "people": [
+          {
+            "id": "dr_jason_mcgregor",
+            "name": "Dr. Jason Mcgregor",
+            "description": "A very tall, thin man with a long nose and keen grey eyes. He dresses in a professional but somewhat slovenly fashion.",
+            "notes": "Family doctor and friend of the Baskervilles. Provides medical expertise and local knowledge."
+          },
+          {
+            "id": "mrs_astin_baldwin",
+            "name": "Mrs. Astin Baldwin",
+            "description": "A beautiful woman with rich hazel eyes and freckled cheeks. She has an air of independence and sorrow.",
+            "notes": "Local typist with a connection to Murdoch Cruz. Provides crucial testimony about the warning letter."
+          }
+        ],
+        "objects": [
+          {
+            "id": "typewriter",
+            "category": "item",
+            "name": "Typewriter",
+            "description": "A Remington typewriter used by Mrs. Astin Baldwin for her typing business.",
+            "notes": "Used to type documents and potentially the warning letter."
+          },
+          {
+            "id": "warning_letter",
+            "category": "item",
+            "name": "Warning Letter",
+            "description": "A letter constructed from newspaper clippings, warning Sir Foster Cruz to stay away from the moor.",
+            "notes": "Provides clues about the sender's identity and intentions."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_moor",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "merripit_house",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet, rural village with a few larger buildings. The atmosphere is peaceful but holds secrets connected to the Baskerville mystery."
+      },
+      "princetown": {
+        "description": "A small town known for its convict prison. The atmosphere is grim and utilitarian, with a focus on security and order.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "convict_prison",
+            "category": "surface",
+            "name": "Convict Prison",
+            "description": "A large, imposing building housing convicts, including Tyson before his escape.",
+            "notes": "The starting point of Tyson's involvement in the mystery."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "the_moor",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grim and utilitarian town centered around its convict prison. The atmosphere is one of security and order."
+      },
+      "northumberland_hotel": {
+        "description": "A grand hotel in London where Sir Foster Cruz stays upon his arrival. The atmosphere is elegant and bustling, catering to wealthy guests.",
+        "clues": [],
+        "people": [
+          {
+            "id": "sir_foster_cruz",
+            "name": "Sir Foster Cruz",
+            "description": "A small, alert, dark-eyed man about thirty years of age. He is sturdily built with thick black eyebrows and a strong, pugnacious face.",
+            "notes": "The new baronet and heir to the Baskerville estate. Target of Murdoch Cruz's schemes."
+          }
+        ],
+        "objects": [
+          {
+            "id": "hotel_register",
+            "category": "surface",
+            "name": "Hotel Register",
+            "description": "A book where guests sign their names upon arrival at the hotel.",
+            "notes": "Contains records of guests, including Sir Foster Cruz and potential suspects."
+          },
+          {
+            "id": "missing_boots",
+            "category": "item",
+            "name": "Missing Boots",
+            "description": "A pair of boots belonging to Sir Foster Cruz that mysteriously go missing and reappear.",
+            "notes": "Used by Murdoch Cruz to set the hound on Tyson's trail."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "An elegant and bustling hotel catering to wealthy guests. The atmosphere is one of luxury and sophistication."
+      }
+    }
+  },
+  "locations": {
+    "baker_street": {
+      "description": "A cozy and cluttered residence at 221B Baker Street, filled with books, scientific instruments, and the remnants of past investigations. The atmosphere is one of intellectual curiosity and warmth.",
+      "items": [
+        "Dr. Mcgregor's Walking Stick",
+        "Silver-Plated Coffee Pot"
+      ],
+      "clues": [
+        "The walking stick left by Dr. Mcgregor (revealing his true identity and background)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A warm and inviting sitting-room filled with books, scientific instruments, and comfortable furniture. The atmosphere is one of intellectual curiosity and warmth.",
+        "connections": [
+          {
+            "target_location": "northumberland_hotel",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "cruz_hall": {
+      "description": "A grand and ancient manor house with a dark and foreboding atmosphere. The halls are lined with portraits of the Baskerville ancestors, and the grounds are extensive and eerie.",
+      "items": [
+        "The Baskerville Manuscript",
+        "Portrait of Sheen Cruz"
+      ],
+      "clues": [
+        "The manuscript detailing the Baskerville legend",
+        "The footprints of a gigantic hound near Sir Zeta's body"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand and ancient manor house with dark corridors, eerie portraits, and an atmosphere of foreboding. The grounds are extensive and filled with shadows.",
+        "connections": [
+          {
+            "target_location": "yew_alley",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_moor",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "merripit_house",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "merripit_house": {
+      "description": "A bleak and isolated house on the moor, surrounded by an orchard and stunted trees. The interior is surprisingly elegant, reflecting the tastes of its inhabitants.",
+      "items": [
+        "Butterfly Net",
+        "Candle"
+      ],
+      "clues": [
+        "The candle signals between Cruz Hall and the moor (used to communicate with the convict)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bleak and isolated house with an elegant interior. The surrounding moor adds to the sense of desolation and mystery.",
+        "connections": [
+          {
+            "target_location": "the_moor",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "cruz_hall",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "yew_alley": {
+      "description": "A long, dark alley lined with ancient yew trees, leading to a moor-gate. The atmosphere is eerie and foreboding, with shadows stretching long and dark.",
+      "items": [
+        "Cigar Ash"
+      ],
+      "clues": [
+        "The warning letter to Sir Foster Cruz (constructed from newspaper clippings)",
+        "The missing boots (used to set the hound on Sir Foster's trail)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A long, dark alley with ancient yew trees creating a tunnel-like effect. The atmosphere is eerie and foreboding, with a sense of lurking danger.",
+        "connections": [
+          {
+            "target_location": "cruz_hall",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_moor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_moor": {
+      "description": "A vast, desolate expanse of moorland, dotted with tors, stone huts, and patches of bog. The atmosphere is wild, mysterious, and often foggy.",
+      "items": [
+        "Tin of Phosphorus Mixture",
+        "Old Black Boot"
+      ],
+      "clues": [
+        "The discovery of the hound's lair in the Pattinson Mire",
+        "The sobs heard in the night (Mrs. Paley's distress over her brother, the convict)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A vast, desolate expanse with rolling hills, tors, and patches of bog. The atmosphere is wild and mysterious, often shrouded in fog.",
+        "connections": [
+          {
+            "target_location": "cruz_hall",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "yew_alley",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "merripit_house",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "princetown",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "shyamalan_pitt",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "shyamalan_pitt": {
+      "description": "A small village near the moor, with a few larger buildings including the inn and Dr. Mcgregor's house. The atmosphere is quiet and rural.",
+      "items": [
+        "Typewriter",
+        "Warning Letter"
+      ],
+      "clues": [
+        "The testimony of Mrs. Astin Baldwin regarding her letter to Sir Zeta Cruz"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, rural village with a few larger buildings. The atmosphere is peaceful but holds secrets connected to the Baskerville mystery.",
+        "connections": [
+          {
+            "target_location": "the_moor",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "merripit_house",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "princetown": {
+      "description": "A small town known for its convict prison. The atmosphere is grim and utilitarian, with a focus on security and order.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grim and utilitarian town centered around its convict prison. The atmosphere is one of security and order.",
+        "connections": [
+          {
+            "target_location": "the_moor",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "northumberland_hotel": {
+      "description": "A grand hotel in London where Sir Foster Cruz stays upon his arrival. The atmosphere is elegant and bustling, catering to wealthy guests.",
+      "items": [
+        "Missing Boots"
+      ],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An elegant and bustling hotel catering to wealthy guests. The atmosphere is one of luxury and sophistication.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

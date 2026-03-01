@@ -1,0 +1,1088 @@
+{
+  "title": "The Riddle of the Purple Emperor",
+  "description": "A complex mystery involving the disappearance of Lady Margaret Cheyne, the murder of her aunt Miss Cheyne, and the theft of the famed Purple Emperor jewel. The narrative unfolds through a series of clues, hidden identities, and intricate plots set in various locations around London and Hampton.",
+  "victim": "Miss Marion Cheyne (Honourable Miss Cheyne)",
+  "intro_narrative": "It was nearly half-past five on a wild March afternoon, and Charing Cross Station was bustling with the arrival of a boat-train from the continent. Among the crowd was Hamilton Cleek, waiting for Ailsa Lorne, who was returning with Lady Margaret Cheyne, a young girl fresh from a convent in Paris. Cleek's drive to Cheyne Court with Lady Margaret would unravel a mystery that involved murder, deception, and the famed Purple Emperor jewel.",
+  "start_time": "1895-03-11T17:30:00",
+  "win_conditions": {
+    "required_evidence": [
+      "The Purple Emperor (violet diamond)",
+      "Gold lace scarf fragment found in the dead man's hand",
+      "Fingerprints matching those of Sam Blake on the murder weapon",
+      "Prussic acid pellet found in the dead man's mouth",
+      "Seal ring marks on the victim's throat"
+    ],
+    "required_suspect": [
+      "James Blake (alias Gunga Dall)",
+      "Sam Blake",
+      "John (the butler)",
+      "Aggie"
+    ],
+    "required_motive": [
+      "Theft of the Purple Emperor jewel",
+      "Revenge for past grievances",
+      "Control over Lady Margaret Cheyne's inheritance"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Introduction and Arrival",
+      "objective": "Introduce key characters and establish the initial mystery surrounding Lady Margaret Cheyne's arrival and Miss Cheyne's murder.",
+      "unlocked_locations": [
+        "Cheyne Court",
+        "Charing Cross Station",
+        "Hampton Village"
+      ],
+      "unlocked_characters": [
+        "Hamilton Cleek",
+        "Lady Margaret Cheyne",
+        "Ailsa Lorne",
+        "Dollops",
+        "Superintendent Narkom"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Investigation Begins",
+      "objective": "Begin the investigation into Miss Cheyne's murder and Lady Margaret's disappearance, exploring key locations and gathering initial clues.",
+      "unlocked_locations": [
+        "The Towers (Lady Brenton's home)",
+        "Drury Lane (Madame Elise's shop)",
+        "Hotel Central (London)"
+      ],
+      "unlocked_characters": [
+        "Sir Edgar Brenton",
+        "Jennifer Wynne",
+        "Dr. Verrall",
+        "Bobby Wynne",
+        "Lady Brenton"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Deepening Mystery",
+      "objective": "Uncover deeper layers of the mystery, including the involvement of the Pentacle Club and the theft of the Purple Emperor jewel.",
+      "unlocked_locations": [
+        "Gunga Dall's house",
+        "The meadow near Cheyne Court (circus location)"
+      ],
+      "unlocked_characters": [
+        "Gunga Dall (James Blake)",
+        "Sam Blake"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Resolution",
+      "objective": "Resolve the mystery by identifying the culprits, recovering the stolen jewels, and ensuring justice for the victims.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "hamilton_cleek": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "Cheyne Court",
+      "phase_locations": {
+        "0": "Charing Cross Station",
+        "1": "Cheyne Court",
+        "2": "The Towers",
+        "3": "Cheyne Court"
+      },
+      "persona": "Astute, observant, and highly adaptable. Uses his ability to change his appearance to blend into various social settings and extract information.",
+      "knowledge_about_others": {
+        "Lady Margaret Cheyne": "Recently returned from a convent in Paris, under the guardianship of Miss Cheyne. Inherits the Cheyne jewels, including the Purple Emperor.",
+        "Ailsa Lorne": "A close friend and confidante who assists in the investigation.",
+        "Superintendent Narkom": "A colleague from Scotland Yard who provides official support and resources.",
+        "James Blake": "Alias Gunga Dall, a member of the Pentacle Club involved in the theft of the Purple Emperor jewel.",
+        "Sir Edgar Brenton": "Fiancé of Lady Margaret Cheyne, with a complicated relationship with Miss Cheyne."
+      },
+      "abilities": "Master of disguise, keen observer, adept at piecing together clues from seemingly unrelated events.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Gold lace scarf fragment found in the dead man's hand"
+          ],
+          "required_knowledge": [
+            "Lady Margaret's note asking for help"
+          ],
+          "reaction": "Focuses investigation on identifying the owner of the gold lace scarf and its connection to the murder.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "lady_margaret_cheyne": {
+      "type": "suspect",
+      "role": "Heiress",
+      "location": "Cheyne Court",
+      "phase_locations": {
+        "0": "Charing Cross Station",
+        "1": "Cheyne Court",
+        "2": "Gunga Dall's house",
+        "3": "The Towers"
+      },
+      "persona": "Young, innocent, and sheltered. Struggles to understand the complexities and dangers of the adult world she has entered.",
+      "knowledge_about_others": {
+        "Miss Cheyne": "Her aunt and guardian, who has kept her sheltered and isolated.",
+        "Sir Edgar Brenton": "Her fiancé, whom she loves deeply.",
+        "Ailsa Lorne": "A friend who assists her during her return to England."
+      },
+      "secret": "Inherits the Cheyne jewels, including the Purple Emperor, which makes her a target for theft and deception.",
+      "suspicion_meter": 30,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "sir_edgar_brenton": {
+      "type": "suspect",
+      "role": "Fiancé",
+      "location": "The Towers",
+      "phase_locations": {
+        "0": "The Towers",
+        "1": "Cheyne Court",
+        "2": "Hotel Central",
+        "3": "The Towers"
+      },
+      "persona": "Passionate, impulsive, and deeply in love with Lady Margaret. Struggles with the obstacles in their path.",
+      "knowledge_about_others": {
+        "Lady Margaret Cheyne": "His fiancée, whom he is desperate to protect and marry.",
+        "Miss Cheyne": "Lady Margaret's aunt, who opposes their marriage.",
+        "Jennifer Wynne": "A childhood friend with unrequited feelings for him."
+      },
+      "secret": "Possesses a revolver that may be connected to the murder of Miss Cheyne.",
+      "suspicion_meter": 60,
+      "flight_risk": 50,
+      "conditional_behaviors": []
+    },
+    "jennifer_wynne": {
+      "type": "suspect",
+      "role": "Rival",
+      "location": "Hampton Village",
+      "phase_locations": {
+        "0": "Hampton Village",
+        "1": "Cheyne Court",
+        "2": "Drury Lane",
+        "3": "The Towers"
+      },
+      "persona": "Ambitious, cunning, and determined. Willing to go to great lengths to secure her desires.",
+      "knowledge_about_others": {
+        "Sir Edgar Brenton": "A childhood friend whom she loves and wishes to marry.",
+        "Lady Margaret Cheyne": "Her rival for Sir Edgar's affections.",
+        "Bobby Wynne": "Her brother, whom she seeks to protect and support."
+      },
+      "secret": "Involved in blackmailing James Blake to protect her brother's secrets.",
+      "suspicion_meter": 70,
+      "flight_risk": 40,
+      "conditional_behaviors": []
+    },
+    "dr_verrall": {
+      "type": "suspect",
+      "role": "Physician",
+      "location": "Hampton Village",
+      "phase_locations": {
+        "0": "Hampton Village",
+        "1": "Cheyne Court",
+        "2": "Drury Lane",
+        "3": "The Towers"
+      },
+      "persona": "Professional, reserved, and deeply in love with Jennifer Wynne. Struggles with ethical dilemmas.",
+      "knowledge_about_others": {
+        "Jennifer Wynne": "The woman he loves, whom he seeks to protect at all costs.",
+        "Bobby Wynne": "Jennifer's brother, who is involved in questionable activities."
+      },
+      "secret": "Has access to prussic acid and may have tampered with evidence to protect Jennifer.",
+      "suspicion_meter": 50,
+      "flight_risk": 30,
+      "conditional_behaviors": []
+    },
+    "bobby_wynne": {
+      "type": "suspect",
+      "role": "Gambler",
+      "location": "Hampton Village",
+      "phase_locations": {
+        "0": "Hampton Village",
+        "1": "Cheyne Court",
+        "2": "Gunga Dall's house",
+        "3": "The Towers"
+      },
+      "persona": "Irresponsible, impulsive, and easily led. Struggles with gambling debts and loyalty to his sister.",
+      "knowledge_about_others": {
+        "Jennifer Wynne": "His sister, who supports and protects him.",
+        "James Blake": "A tipster who has lent him money and involved him in dangerous schemes."
+      },
+      "secret": "Involved in the theft of the Purple Emperor jewel and the murder of Sam Blake.",
+      "suspicion_meter": 80,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    },
+    "lady_brenton": {
+      "type": "suspect",
+      "role": "Mother",
+      "location": "The Towers",
+      "phase_locations": {
+        "0": "The Towers",
+        "1": "Cheyne Court",
+        "2": "The Towers",
+        "3": "The Towers"
+      },
+      "persona": "Elegant, protective, and deeply concerned for her son's happiness. Struggles with past grievances.",
+      "knowledge_about_others": {
+        "Sir Edgar Brenton": "Her son, whom she seeks to protect and support.",
+        "Miss Cheyne": "An old rival from her past.",
+        "Lady Margaret Cheyne": "Her son's fiancée, whom she wishes to accept."
+      },
+      "secret": "Has a history of sleepwalking and was unknowingly present at Cheyne Court during key events.",
+      "suspicion_meter": 40,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "ailsa_lorne": {
+      "type": "assistant",
+      "role": "Friend",
+      "location": "Hampton Village",
+      "phase_locations": {
+        "0": "Charing Cross Station",
+        "1": "Cheyne Court",
+        "2": "The Towers",
+        "3": "Hampton Village"
+      },
+      "persona": "Kind, intuitive, and supportive. Acts as a confidante and helper to both Lady Margaret and Cleek.",
+      "knowledge_about_others": {
+        "Lady Margaret Cheyne": "A young friend whom she seeks to protect and support.",
+        "Hamilton Cleek": "A close friend and ally in solving the mystery."
+      },
+      "abilities": "Provides emotional support, gathers information, and assists in piecing together clues.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Lady Margaret's note asking for help"
+          ],
+          "required_knowledge": [
+            "Lady Margaret's location"
+          ],
+          "reaction": "Offers shelter and assistance to Lady Margaret, helping her evade danger.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "superintendent_narkom": {
+      "type": "assistant",
+      "role": "Police Superintendent",
+      "location": "Scotland Yard",
+      "phase_locations": {
+        "0": "Scotland Yard",
+        "1": "Cheyne Court",
+        "2": "The Towers",
+        "3": "Cheyne Court"
+      },
+      "persona": "Authoritative, methodical, and supportive. Provides official resources and guidance to Cleek.",
+      "knowledge_about_others": {
+        "Hamilton Cleek": "A trusted colleague and friend who assists in solving complex cases.",
+        "James Blake": "A criminal with a history of jewel thefts and involvement in the Pentacle Club."
+      },
+      "abilities": "Provides access to police resources, coordinates investigations, and offers strategic advice.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Fingerprints matching those of Sam Blake on the murder weapon"
+          ],
+          "required_knowledge": [
+            "James Blake's criminal history"
+          ],
+          "reaction": "Coordinates efforts to apprehend James Blake and recover the stolen jewels.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dollops": {
+      "type": "assistant",
+      "role": "Assistant",
+      "location": "Cheyne Court",
+      "phase_locations": {
+        "0": "Charing Cross Station",
+        "1": "Cheyne Court",
+        "2": "The meadow near Cheyne Court",
+        "3": "Cheyne Court"
+      },
+      "persona": "Loyal, resourceful, and energetic. Acts as Cleek's right-hand man and gathers crucial information.",
+      "knowledge_about_others": {
+        "Hamilton Cleek": "His mentor and employer, whom he assists in solving cases.",
+        "Jennifer Wynne": "A suspect whose movements he tracks and reports on."
+      },
+      "abilities": "Tracks suspects, gathers evidence, and provides physical support during investigations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Footprints leading to and from Cheyne Court"
+          ],
+          "required_knowledge": [
+            "Suspects' movements"
+          ],
+          "reaction": "Follows and reports on the movements of suspects, leading to key discoveries.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "james_blake": {
+      "type": "suspect",
+      "role": "Criminal Mastermind",
+      "location": "Gunga Dall's house",
+      "phase_locations": {
+        "0": "Gunga Dall's house",
+        "1": "Cheyne Court",
+        "2": "The meadow near Cheyne Court",
+        "3": "Cheyne Court"
+      },
+      "persona": "Cunning, ruthless, and manipulative. Leads the Pentacle Club and orchestrates the theft of the Purple Emperor jewel.",
+      "knowledge_about_others": {
+        "Sam Blake": "His brother and accomplice in the Pentacle Club.",
+        "Lady Margaret Cheyne": "The target of his schemes to steal the Purple Emperor jewel.",
+        "John (the butler)": "An accomplice in his plans."
+      },
+      "secret": "Impersonates Gunga Dall and is responsible for the murder of Miss Cheyne and Sam Blake.",
+      "suspicion_meter": 90,
+      "flight_risk": 80,
+      "conditional_behaviors": []
+    },
+    "sam_blake": {
+      "type": "suspect",
+      "role": "Accomplice",
+      "location": "Cheyne Court",
+      "phase_locations": {
+        "0": "Cheyne Court",
+        "1": "Drury Lane",
+        "2": "Cheyne Court"
+      },
+      "persona": "Deceptive, opportunistic, and violent. Works with James Blake but seeks to outmaneuver him.",
+      "knowledge_about_others": {
+        "James Blake": "His brother and leader of the Pentacle Club.",
+        "Miss Cheyne": "Impersonates her to gain access to the Cheyne jewels."
+      },
+      "secret": "Murders Miss Cheyne and impersonates her to steal the Purple Emperor jewel.",
+      "suspicion_meter": 85,
+      "flight_risk": 70,
+      "conditional_behaviors": []
+    },
+    "john_the_butler": {
+      "type": "suspect",
+      "role": "Accomplice",
+      "location": "Cheyne Court",
+      "phase_locations": {
+        "0": "Cheyne Court",
+        "1": "Cheyne Court",
+        "2": "The meadow near Cheyne Court",
+        "3": "Cheyne Court"
+      },
+      "persona": "Loyal to James Blake, obedient, and secretive. Assists in the kidnapping of Lady Margaret.",
+      "knowledge_about_others": {
+        "James Blake": "His employer and leader of the Pentacle Club.",
+        "Aggie": "His accomplice in guarding Lady Margaret."
+      },
+      "secret": "Assists in the kidnapping of Lady Margaret and the theft of the Purple Emperor jewel.",
+      "suspicion_meter": 75,
+      "flight_risk": 50,
+      "conditional_behaviors": []
+    },
+    "aggie": {
+      "type": "suspect",
+      "role": "Accomplice",
+      "location": "Cheyne Court",
+      "phase_locations": {
+        "0": "Cheyne Court",
+        "1": "Cheyne Court",
+        "2": "The meadow near Cheyne Court"
+      },
+      "persona": "Rough, unkempt, and ruthless. Acts as a guard for Lady Margaret and assists in the theft of the jewels.",
+      "knowledge_about_others": {
+        "John (the butler)": "Her accomplice in guarding Lady Margaret.",
+        "James Blake": "The leader of the Pentacle Club, whom she assists."
+      },
+      "secret": "Assists in the kidnapping of Lady Margaret and the theft of the Purple Emperor jewel.",
+      "suspicion_meter": 70,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "cheyne_court": {
+        "description": "A large, isolated mansion with a dark and foreboding atmosphere. The house is filled with hidden passages, secret rooms, and a mysterious ballroom where key events unfold.",
+        "clues": [
+          "Footprints leading to and from Cheyne Court",
+          "The discovery of the pentacle symbol on the ballroom floor",
+          "The hidden vault beneath Cheyne Court"
+        ],
+        "people": [
+          {
+            "id": "lady_margaret_cheyne_0",
+            "name": "Lady Margaret Cheyne",
+            "description": "A young, innocent girl recently returned from a convent in Paris. She is the heiress to the Cheyne jewels.",
+            "notes": "Inherits the Cheyne jewels, including the Purple Emperor. Target of kidnapping and deception."
+          },
+          {
+            "id": "miss_cheyne_0",
+            "name": "Miss Cheyne",
+            "description": "Lady Margaret's eccentric aunt and guardian. She is found murdered in the ballroom.",
+            "notes": "Murdered by Sam Blake, who impersonates her to gain access to the Cheyne jewels.",
+            "state": "dead"
+          },
+          {
+            "id": "john_the_butler_0",
+            "name": "John (the butler)",
+            "description": "An immaculate butler who assists in the kidnapping of Lady Margaret.",
+            "notes": "Accomplice to James Blake and Aggie in the kidnapping and theft schemes."
+          },
+          {
+            "id": "aggie_0",
+            "name": "Aggie",
+            "description": "A rough and unkempt maid who acts as a guard for Lady Margaret.",
+            "notes": "Assists in the kidnapping of Lady Margaret and the theft of the jewels."
+          }
+        ],
+        "objects": [
+          {
+            "id": "gold_lace_scarf_cheyne_court",
+            "category": "item",
+            "name": "Gold lace scarf",
+            "description": "A delicate gold lace scarf belonging to Lady Margaret Cheyne. A fragment of it is found in the dead man's hand.",
+            "notes": "Key evidence linking suspects to the murder and kidnapping."
+          },
+          {
+            "id": "revolver_cheyne_court",
+            "category": "item",
+            "name": "Revolver with Sir Edgar's initials",
+            "description": "A revolver bearing the initials of Sir Edgar Brenton. Found near the body of the murdered man.",
+            "notes": "Potential murder weapon, linking Sir Edgar to the crime."
+          },
+          {
+            "id": "dagger_cheyne_court",
+            "category": "item",
+            "name": "Dagger",
+            "description": "A dagger used in the murder of Madame Elise in Drury Lane.",
+            "notes": "Murder weapon with fingerprints matching those of Sam Blake."
+          },
+          {
+            "id": "hidden_vault_cheyne_court",
+            "category": "container",
+            "name": "Hidden Vault",
+            "description": "A secret vault beneath Cheyne Court where the Cheyne jewels are hidden.",
+            "notes": "Contains the stolen jewels, including the Purple Emperor.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "purple_emperor_cheyne_court",
+                "category": "item",
+                "name": "The Purple Emperor",
+                "description": "A large, violet-colored diamond looted from an Indian temple. The centerpiece of the Cheyne jewels.",
+                "notes": "The target of the theft and the key to solving the mystery."
+              },
+              {
+                "id": "cheyne_court_jewels",
+                "category": "item",
+                "name": "Cheyne Court jewels",
+                "description": "A collection of historic and valuable jewels belonging to the Cheyne family.",
+                "notes": "Stolen by the Pentacle Club and hidden in the vault."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "charing_cross_station",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "hampton_village",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_towers",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A dark, gothic mansion with overgrown gardens and a sense of foreboding. The house is filled with hidden secrets and eerie sounds."
+      },
+      "charing_cross_station": {
+        "description": "A bustling train station in London, filled with travelers and the constant hum of arrivals and departures. The starting point of Lady Margaret's journey to Cheyne Court.",
+        "clues": [
+          "The disguised identities of the Blake brothers"
+        ],
+        "people": [
+          {
+            "id": "hamilton_cleek_0",
+            "name": "Hamilton Cleek",
+            "description": "A master of disguise and detective who meets Lady Margaret and Ailsa Lorne at the station.",
+            "notes": "Begins the investigation into the mystery surrounding Lady Margaret's arrival."
+          },
+          {
+            "id": "lady_margaret_cheyne_1",
+            "name": "Lady Margaret Cheyne",
+            "description": "A young girl fresh from a convent in Paris, arriving in England under the care of Ailsa Lorne.",
+            "notes": "Target of kidnapping and deception by the Pentacle Club."
+          },
+          {
+            "id": "ailsa_lorne_0",
+            "name": "Ailsa Lorne",
+            "description": "A kind and supportive friend who accompanies Lady Margaret on her journey.",
+            "notes": "Assists Lady Margaret and provides crucial information to Cleek."
+          },
+          {
+            "id": "dollops_0",
+            "name": "Dollops",
+            "description": "Cleek's loyal assistant, who is present at the station to assist in the investigation.",
+            "notes": "Provides support and gathers information for Cleek."
+          }
+        ],
+        "objects": [
+          {
+            "id": "telegram_charing_cross",
+            "category": "item",
+            "name": "Telegram sent to Sir Edgar",
+            "description": "A telegram sent to Sir Edgar Brenton, luring him to London on a false pretext.",
+            "notes": "Used to create an alibi and divert suspicion."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cheyne_court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "hampton_village",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A busy, crowded train station with the constant noise of arrivals and departures. The air is filled with anticipation and the hustle of travelers."
+      },
+      "hampton_village": {
+        "description": "A quiet, picturesque village near Cheyne Court. The village is home to several key characters and serves as a hub for the investigation.",
+        "clues": [
+          "The scent of Huile de jasmin found at multiple crime scenes"
+        ],
+        "people": [
+          {
+            "id": "jennifer_wynne_0",
+            "name": "Jennifer Wynne",
+            "description": "A childhood friend of Sir Edgar Brenton and rival for his affections. She is deeply involved in the mystery.",
+            "notes": "Involved in blackmailing James Blake and protecting her brother."
+          },
+          {
+            "id": "bobby_wynne_0",
+            "name": "Bobby Wynne",
+            "description": "Jennifer's brother, a gambler with heavy debts. He is involved in the theft of the Purple Emperor jewel.",
+            "notes": "Involved in the theft and murder schemes of the Pentacle Club."
+          },
+          {
+            "id": "dr_verrall_0",
+            "name": "Dr. Verrall",
+            "description": "The village doctor, deeply in love with Jennifer Wynne. He provides medical expertise and assistance in the investigation.",
+            "notes": "Has access to prussic acid and may have tampered with evidence."
+          },
+          {
+            "id": "constable_roberts_0",
+            "name": "Constable Roberts",
+            "description": "A local police officer who assists in the investigation and provides key information.",
+            "notes": "Provides crucial details about the events at Cheyne Court."
+          }
+        ],
+        "objects": [
+          {
+            "id": "prussic_acid_bottle_hampton",
+            "category": "item",
+            "name": "Prussic acid bottle",
+            "description": "A bottle of prussic acid from Dr. Wynne's surgery, used in the murder of Sam Blake.",
+            "notes": "Key evidence linking Dr. Verrall and Jennifer Wynne to the murder."
+          },
+          {
+            "id": "circus_caravans_hampton",
+            "category": "surface",
+            "name": "Circus caravans",
+            "description": "Gaily-painted caravans belonging to a travelling circus, used for smuggling the stolen jewels.",
+            "notes": "Used by the Pentacle Club to transport the stolen jewels and animals."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cheyne_court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "charing_cross_station",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_towers",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "drury_lane",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A charming, quiet village with cobblestone streets and quaint cottages. The village is surrounded by lush greenery and has a peaceful atmosphere."
+      },
+      "the_towers": {
+        "description": "The grand home of Lady Brenton and Sir Edgar Brenton. The Towers is a stately mansion with beautiful gardens and a warm, inviting atmosphere.",
+        "clues": [
+          "Seal ring marks on the victim's throat"
+        ],
+        "people": [
+          {
+            "id": "lady_brenton_0",
+            "name": "Lady Brenton",
+            "description": "The mother of Sir Edgar Brenton and a gracious hostess. She is deeply concerned for her son's happiness and safety.",
+            "notes": "Has a history of sleepwalking and was unknowingly present at Cheyne Court."
+          },
+          {
+            "id": "sir_edgar_brenton_0",
+            "name": "Sir Edgar Brenton",
+            "description": "Lady Margaret's fiancé, who is deeply in love with her and determined to protect her.",
+            "notes": "Possesses a revolver that may be connected to the murder of Miss Cheyne."
+          },
+          {
+            "id": "ailsa_lorne_1",
+            "name": "Ailsa Lorne",
+            "description": "A close friend of Lady Brenton and Lady Margaret, who provides support and assistance during the investigation.",
+            "notes": "Acts as a confidante and helper to both Lady Margaret and Cleek."
+          }
+        ],
+        "objects": [
+          {
+            "id": "gold_lace_scarf_towers",
+            "category": "item",
+            "name": "Gold lace scarf (Lady Margaret's)",
+            "description": "A delicate gold lace scarf belonging to Lady Margaret Cheyne, similar to the one found at Cheyne Court.",
+            "notes": "Key evidence linking Lady Margaret to the events at Cheyne Court."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cheyne_court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "hampton_village",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand, stately mansion with beautiful gardens and a warm, inviting atmosphere. The house is filled with elegance and charm."
+      },
+      "drury_lane": {
+        "description": "A grimy, bustling area in London known for its second-hand shops and vibrant street life. The location of Madame Elise's shop and the murder of Elsie McBride.",
+        "clues": [
+          "Fingerprints matching those of Sam Blake on the murder weapon"
+        ],
+        "people": [
+          {
+            "id": "madame_elise_0",
+            "name": "Madame Elise",
+            "description": "An old wardrobe keeper and second-hand clothes dealer, murdered for her wigs and clothing.",
+            "notes": "Murdered by Sam Blake, who used her wigs and clothing for his disguise.",
+            "state": "dead"
+          },
+          {
+            "id": "sam_blake_0",
+            "name": "Sam Blake",
+            "description": "A member of the Pentacle Club who murders Madame Elise to obtain her wigs and clothing for his disguise.",
+            "notes": "Murderer of Madame Elise and Miss Cheyne, impersonates Miss Cheyne to steal the jewels.",
+            "state": "dead"
+          }
+        ],
+        "objects": [
+          {
+            "id": "wigs_drury_lane",
+            "category": "item",
+            "name": "Wigs and old clothes",
+            "description": "A collection of wigs and old clothes from Madame Elise's shop, used by Sam Blake for his disguise.",
+            "notes": "Key evidence linking Sam Blake to the murder of Madame Elise."
+          },
+          {
+            "id": "dagger_drury_lane",
+            "category": "item",
+            "name": "Dagger used in Madame Elise's murder",
+            "description": "A dagger used to murder Madame Elise, with fingerprints matching those of Sam Blake.",
+            "notes": "Murder weapon with fingerprints linking Sam Blake to the crime."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "hampton_village",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A bustling, grimy area filled with second-hand shops and vibrant street life. The air is thick with the sounds of commerce and the hum of activity."
+      },
+      "hotel_central": {
+        "description": "A grand hotel in London where key events unfold. The hotel is a hub of activity and intrigue during the investigation.",
+        "clues": [
+          "Lady Margaret's note asking for help"
+        ],
+        "people": [
+          {
+            "id": "lady_margaret_cheyne_2",
+            "name": "Lady Margaret Cheyne",
+            "description": "A young girl who is lured to the hotel under false pretenses and held captive.",
+            "notes": "Target of kidnapping and held captive by James Blake."
+          },
+          {
+            "id": "sir_edgar_brenton_1",
+            "name": "Sir Edgar Brenton",
+            "description": "Lady Margaret's fiancé, who is lured to the hotel on a false pretext.",
+            "notes": "Attempts to rescue Lady Margaret and uncover the truth."
+          }
+        ],
+        "objects": [
+          {
+            "id": "telegram_hotel_central",
+            "category": "item",
+            "name": "Telegram sent to Sir Edgar",
+            "description": "A telegram sent to Sir Edgar Brenton, luring him to the hotel on a false pretext.",
+            "notes": "Used to create an alibi and divert suspicion from the true events."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "charing_cross_station",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand, bustling hotel with elegant interiors and a constant flow of guests. The atmosphere is one of luxury and intrigue."
+      },
+      "gunga_dalls_house": {
+        "description": "The home of Gunga Dall, a mysterious and exotic figure with ties to the Pentacle Club. The house is filled with Eastern artifacts and a sense of intrigue.",
+        "clues": [
+          "The hidden identities of the Blake brothers"
+        ],
+        "people": [
+          {
+            "id": "james_blake_0",
+            "name": "James Blake (alias Gunga Dall)",
+            "description": "A criminal mastermind who impersonates Gunga Dall and orchestrates the theft of the Purple Emperor jewel.",
+            "notes": "Leader of the Pentacle Club and orchestrator of the theft and murder schemes."
+          },
+          {
+            "id": "lady_margaret_cheyne_3",
+            "name": "Lady Margaret Cheyne",
+            "description": "A young girl held captive in Gunga Dall's house by James Blake.",
+            "notes": "Target of kidnapping and held captive until her rescue."
+          }
+        ],
+        "objects": [
+          {
+            "id": "marsupial_animals_gunga_dall",
+            "category": "item",
+            "name": "Marsupial animals",
+            "description": "A collection of marsupial animals used to hide the stolen jewels, including the Purple Emperor.",
+            "notes": "Used by the Pentacle Club to conceal and transport the stolen jewels."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cheyne_court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "the_meadow_near_cheyne_court",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "An exotic, mysterious house filled with Eastern artifacts and a sense of intrigue. The atmosphere is one of secrecy and danger."
+      },
+      "the_meadow_near_cheyne_court": {
+        "description": "A large, open meadow near Cheyne Court, used as a campsite by a travelling circus. The meadow is a key location for the smuggling and concealment of the stolen jewels.",
+        "clues": [
+          "The discovery of the pentacle symbol on the ballroom floor"
+        ],
+        "people": [
+          {
+            "id": "james_blake_1",
+            "name": "James Blake (alias Gunga Dall)",
+            "description": "A criminal mastermind who uses the meadow as a base for his circus and smuggling operations.",
+            "notes": "Leader of the Pentacle Club and orchestrator of the theft and smuggling schemes."
+          },
+          {
+            "id": "john_the_butler_1",
+            "name": "John (the butler)",
+            "description": "An accomplice to James Blake, assisting in the smuggling and concealment of the stolen jewels.",
+            "notes": "Assists in the smuggling and concealment of the stolen jewels."
+          },
+          {
+            "id": "aggie_1",
+            "name": "Aggie",
+            "description": "An accomplice to James Blake, assisting in the smuggling and concealment of the stolen jewels.",
+            "notes": "Assists in the smuggling and concealment of the stolen jewels."
+          }
+        ],
+        "objects": [
+          {
+            "id": "circus_caravans_meadow",
+            "category": "surface",
+            "name": "Circus caravans",
+            "description": "Gaily-painted caravans belonging to the travelling circus, used for smuggling the stolen jewels.",
+            "notes": "Used by the Pentacle Club to transport and conceal the stolen jewels."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "cheyne_court",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "gunga_dalls_house",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A large, open meadow with a sense of freedom and space. The meadow is dotted with caravans and the occasional animal, creating an atmosphere of intrigue and adventure."
+      }
+    }
+  },
+  "locations": {
+    "cheyne_court": {
+      "description": "A large, isolated mansion with a dark and foreboding atmosphere. The house is filled with hidden passages, secret rooms, and a mysterious ballroom where key events unfold.",
+      "items": [
+        "Gold lace scarf",
+        "Revolver with Sir Edgar's initials",
+        "Dagger"
+      ],
+      "clues": [
+        "Footprints leading to and from Cheyne Court",
+        "The discovery of the pentacle symbol on the ballroom floor",
+        "The hidden vault beneath Cheyne Court"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dark, gothic mansion with overgrown gardens and a sense of foreboding. The house is filled with hidden secrets and eerie sounds.",
+        "connections": [
+          {
+            "target_location": "charing_cross_station",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "hampton_village",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_towers",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "charing_cross_station": {
+      "description": "A bustling train station in London, filled with travelers and the constant hum of arrivals and departures. The starting point of Lady Margaret's journey to Cheyne Court.",
+      "items": [
+        "Telegram sent to Sir Edgar"
+      ],
+      "clues": [
+        "The disguised identities of the Blake brothers"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A busy, crowded train station with the constant noise of arrivals and departures. The air is filled with anticipation and the hustle of travelers.",
+        "connections": [
+          {
+            "target_location": "cheyne_court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "hampton_village",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hampton_village": {
+      "description": "A quiet, picturesque village near Cheyne Court. The village is home to several key characters and serves as a hub for the investigation.",
+      "items": [
+        "Prussic acid bottle"
+      ],
+      "clues": [
+        "The scent of Huile de jasmin found at multiple crime scenes"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A charming, quiet village with cobblestone streets and quaint cottages. The village is surrounded by lush greenery and has a peaceful atmosphere.",
+        "connections": [
+          {
+            "target_location": "cheyne_court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "charing_cross_station",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_towers",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "drury_lane",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_towers": {
+      "description": "The grand home of Lady Brenton and Sir Edgar Brenton. The Towers is a stately mansion with beautiful gardens and a warm, inviting atmosphere.",
+      "items": [
+        "Gold lace scarf (Lady Margaret's)"
+      ],
+      "clues": [
+        "Seal ring marks on the victim's throat"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand, stately mansion with beautiful gardens and a warm, inviting atmosphere. The house is filled with elegance and charm.",
+        "connections": [
+          {
+            "target_location": "cheyne_court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "hampton_village",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "drury_lane": {
+      "description": "A grimy, bustling area in London known for its second-hand shops and vibrant street life. The location of Madame Elise's shop and the murder of Elsie McBride.",
+      "items": [
+        "Wigs and old clothes",
+        "Dagger used in Madame Elise's murder"
+      ],
+      "clues": [
+        "Fingerprints matching those of Sam Blake on the murder weapon"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A bustling, grimy area filled with second-hand shops and vibrant street life. The air is thick with the sounds of commerce and the hum of activity.",
+        "connections": [
+          {
+            "target_location": "hampton_village",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hotel_central": {
+      "description": "A grand hotel in London where key events unfold. The hotel is a hub of activity and intrigue during the investigation.",
+      "items": [
+        "Telegram sent to Sir Edgar"
+      ],
+      "clues": [
+        "Lady Margaret's note asking for help"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand, bustling hotel with elegant interiors and a constant flow of guests. The atmosphere is one of luxury and intrigue.",
+        "connections": [
+          {
+            "target_location": "charing_cross_station",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "gunga_dalls_house": {
+      "description": "The home of Gunga Dall, a mysterious and exotic figure with ties to the Pentacle Club. The house is filled with Eastern artifacts and a sense of intrigue.",
+      "items": [
+        "Marsupial animals"
+      ],
+      "clues": [
+        "The hidden identities of the Blake brothers"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "An exotic, mysterious house filled with Eastern artifacts and a sense of intrigue. The atmosphere is one of secrecy and danger.",
+        "connections": [
+          {
+            "target_location": "cheyne_court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "the_meadow_near_cheyne_court",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "the_meadow_near_cheyne_court": {
+      "description": "A large, open meadow near Cheyne Court, used as a campsite by a travelling circus. The meadow is a key location for the smuggling and concealment of the stolen jewels.",
+      "items": [],
+      "clues": [
+        "The discovery of the pentacle symbol on the ballroom floor"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A large, open meadow with a sense of freedom and space. The meadow is dotted with caravans and the occasional animal, creating an atmosphere of intrigue and adventure.",
+        "connections": [
+          {
+            "target_location": "cheyne_court",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "gunga_dalls_house",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

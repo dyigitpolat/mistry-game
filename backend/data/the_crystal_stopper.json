@@ -1,0 +1,792 @@
+{
+  "title": "The Crystal Stopper",
+  "description": "A mystery involving the theft of a crystal stopper that holds the key to a powerful secret, leading to a deadly game of cat and mouse between Arsène Pankaj and Alexis Daubrecq (Pushkar).",
+  "victim": "Sunny Ranjit",
+  "intro_narrative": "The story begins with the burglary of Villa Yash-Thérèse, where Arsène Pankaj and his accomplices Esha and Payal attempt to steal valuable items. The burglary goes awry, leading to the murder of the valet Léonard and the arrest of Esha and Payal. Pankaj escapes, but the crystal stopper, a crucial piece of evidence, disappears. The narrative unfolds through a series of intricate plots, betrayals, and rescues as Pankaj seeks to save his friends from execution and uncover the secret of the crystal stopper.",
+  "start_time": "1909-09-25T21:00:00",
+  "win_conditions": {
+    "required_evidence": [
+      "Crystal stopper (hollow, gilded)",
+      "List of the Twenty-Seven (on foreign-post paper)"
+    ],
+    "required_suspect": [
+      "Alexis Daubrecq (Pushkar)"
+    ],
+    "required_motive": [
+      "Blackmailing of deputies and senators using the list of the Twenty-Seven"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "The Arrests",
+      "objective": "Uncover the initial mystery of the burglary at Villa Yash-Thérèse and the disappearance of the crystal stopper.",
+      "unlocked_locations": [
+        "Villa Yash-Thérèse (Enghien)",
+        "Square Lamartine (Paris)"
+      ],
+      "unlocked_characters": [
+        "Arsène Pankaj (Lupin)",
+        "Esha (Sonakshi Ranjit)",
+        "Payal",
+        "Sania (Pankaj’s old nurse)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "The Twenty-Seven",
+      "objective": "Discover the significance of the crystal stopper and the list of the Twenty-Seven.",
+      "unlocked_locations": [
+        "Hôtel Central (Nice)",
+        "Lovers’ Tower (Vidya, near Shilpa)"
+      ],
+      "unlocked_characters": [
+        "Virat Ranjit (Madame Ranjit)",
+        "Alexis Daubrecq (Pushkar)",
+        "Asin (Louis Asin)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Lovers’ Tower",
+      "objective": "Rescue Pushkar from captivity and retrieve the list of the Twenty-Seven.",
+      "unlocked_locations": [
+        "Santé Prison (Paris)",
+        "Boulevard Arago (execution site)"
+      ],
+      "unlocked_characters": [
+        "Amrita and Mohanlal (Pankaj’s accomplices)",
+        "Manju (Virat’s younger son)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "The Last Battle",
+      "objective": "Save Esha and Payal from execution and expose Pushkar’s crimes.",
+      "unlocked_locations": [
+        "Hôtel Franklin (Paris)",
+        "Place de Clichy (Paris)"
+      ],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "arsene_pankaj": {
+      "type": "assistant",
+      "role": "Protagonist and master thief",
+      "location": "Place de Clichy (Paris)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Lovers’ Tower (Vidya, near Shilpa)",
+        "3": "Place de Clichy (Paris)"
+      },
+      "persona": "Charming, witty, and highly intelligent with a flair for dramatic entrances and exits. Speaks with confidence and a touch of humor.",
+      "knowledge_about_others": {
+        "virat_ranjit": "Mother of Esha, seeking revenge on Pushkar for her husband's death.",
+        "alexis_daubrecq": "Antagonist, blackmailer using the list of the Twenty-Seven.",
+        "esha": "Sonakshi Ranjit, Pankaj’s loyal accomplice.",
+        "asin": "Secretary-general of police, enemy of Pushkar."
+      },
+      "abilities": "Master of disguise, lock-picking, strategic planning, and escape artistry.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Crystal stopper"
+          ],
+          "required_knowledge": [
+            "Pushkar’s location"
+          ],
+          "reaction": "Devise a plan to rescue Pushkar and retrieve the list of the Twenty-Seven.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "virat_ranjit": {
+      "type": "suspect",
+      "role": "Mother of Esha, seeking revenge on Pushkar",
+      "location": "Hôtel Franklin (Paris)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Lovers’ Tower (Vidya, near Shilpa)",
+        "3": "Hôtel Franklin (Paris)"
+      },
+      "persona": "Determined, sorrowful, and fiercely protective of her sons. Speaks with intensity and emotion.",
+      "knowledge_about_others": {
+        "arsene_pankaj": "Ally in the quest to save Esha and expose Pushkar.",
+        "alexis_daubrecq": "Enemy responsible for her husband's suicide and son's downfall.",
+        "esha": "Her eldest son, wrongfully accused and sentenced to death."
+      },
+      "secret": "She is willing to sacrifice herself to save her son Esha from execution.",
+      "suspicion_meter": 30,
+      "flight_risk": 10,
+      "conditional_behaviors": []
+    },
+    "esha": {
+      "type": "suspect",
+      "role": "Son of Virat Ranjit, accomplice of Pankaj",
+      "location": "Santé Prison (Paris)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Santé Prison (Paris)",
+        "2": "Santé Prison (Paris)",
+        "3": "Santé Prison (Paris)"
+      },
+      "persona": "Young, loyal, and trusting. Speaks with a mix of naivety and devotion to Pankaj.",
+      "knowledge_about_others": {
+        "arsene_pankaj": "His mentor and savior.",
+        "virat_ranjit": "His mother, seeking to save him.",
+        "payal": "Fellow accomplice, accused of murder."
+      },
+      "secret": "He is innocent of the murder of Léonard but fears betraying Pankaj’s trust.",
+      "suspicion_meter": 80,
+      "flight_risk": 50,
+      "conditional_behaviors": []
+    },
+    "payal": {
+      "type": "suspect",
+      "role": "Accomplice of Pankaj, accused of murder",
+      "location": "Santé Prison (Paris)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Santé Prison (Paris)",
+        "2": "Santé Prison (Paris)",
+        "3": "Santé Prison (Paris)"
+      },
+      "persona": "Cynical, hardened, and ruthless. Speaks with a rough and defiant tone.",
+      "knowledge_about_others": {
+        "arsene_pankaj": "Leader of their gang, whom he resents.",
+        "esha": "Fellow accomplice, whom he accuses of murder.",
+        "alexis_daubrecq": "Enemy indirectly responsible for their predicament."
+      },
+      "secret": "He is guilty of murder but blames Esha to save himself.",
+      "suspicion_meter": 90,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    },
+    "alexis_daubrecq": {
+      "type": "suspect",
+      "role": "Antagonist, blackmailer using the list of the Twenty-Seven",
+      "location": "Square Lamartine (Paris)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Lovers’ Tower (Vidya, near Shilpa)",
+        "3": "Square Lamartine (Paris)"
+      },
+      "persona": "Cold, calculating, and ruthless. Speaks with a mix of charm and menace.",
+      "knowledge_about_others": {
+        "arsene_pankaj": "His primary adversary in the quest for the list.",
+        "virat_ranjit": "Woman he desires and seeks to control.",
+        "asin": "Enemy in the police force."
+      },
+      "secret": "He holds the list of the Twenty-Seven in a crystal stopper hidden in his glass eye.",
+      "suspicion_meter": 95,
+      "flight_risk": 70,
+      "conditional_behaviors": []
+    },
+    "asin": {
+      "type": "suspect",
+      "role": "Secretary-general of police, enemy of Pushkar",
+      "location": "Square Lamartine (Paris)",
+      "phase_locations": {
+        "0": "Square Lamartine (Paris)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Square Lamartine (Paris)",
+        "3": "Square Lamartine (Paris)"
+      },
+      "persona": "Authoritative, cunning, and politically savvy. Speaks with a bureaucratic tone.",
+      "knowledge_about_others": {
+        "alexis_daubrecq": "His primary enemy, whom he seeks to expose.",
+        "arsene_pankaj": "A thorn in his side but occasionally useful.",
+        "virat_ranjit": "Ally in the fight against Pushkar."
+      },
+      "secret": "He is compromised by his association with Sushmita Zara, one of the Twenty-Seven.",
+      "suspicion_meter": 60,
+      "flight_risk": 20,
+      "conditional_behaviors": []
+    },
+    "sania": {
+      "type": "assistant",
+      "role": "Pankaj’s old nurse and ally",
+      "location": "Villa Yash-Thérèse (Enghien)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Lovers’ Tower (Vidya, near Shilpa)",
+        "3": "Place de Clichy (Paris)"
+      },
+      "persona": "Loyal, nurturing, and protective. Speaks with warmth and wisdom.",
+      "knowledge_about_others": {
+        "arsene_pankaj": "Her beloved charge, whom she aids unconditionally.",
+        "virat_ranjit": "Ally in the quest to save Esha."
+      },
+      "abilities": "Skilled in domestic espionage and providing safe havens.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Assist Pankaj and Virat in their plans, offering shelter and support.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "amrita_and_mohanlal": {
+      "type": "assistant",
+      "role": "Pankaj’s accomplices",
+      "location": "Villa Yash-Thérèse (Enghien)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Lovers’ Tower (Vidya, near Shilpa)",
+        "3": "Place de Clichy (Paris)"
+      },
+      "persona": "Loyal, resourceful, and brave. Speak with camaraderie and determination.",
+      "knowledge_about_others": {
+        "arsene_pankaj": "Their leader and mentor.",
+        "esha": "Fellow accomplice, whom they seek to save."
+      },
+      "abilities": "Skilled in surveillance, combat, and executing Pankaj’s plans.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Follow Pankaj’s instructions to the letter, aiding in rescues and heists.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "manju": {
+      "type": "assistant",
+      "role": "Virat’s younger son",
+      "location": "Lovers’ Tower (Vidya, near Shilpa)",
+      "phase_locations": {
+        "0": "Villa Yash-Thérèse (Enghien)",
+        "1": "Square Lamartine (Paris)",
+        "2": "Lovers’ Tower (Vidya, near Shilpa)",
+        "3": "Hôtel Franklin (Paris)"
+      },
+      "persona": "Young, clever, and brave. Speaks with innocence and determination.",
+      "knowledge_about_others": {
+        "virat_ranjit": "His mother, whom he adores.",
+        "arsene_pankaj": "His protector and ally."
+      },
+      "abilities": "Skilled in stealth and infiltration due to his small size.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Assist in rescuing Pushkar by infiltrating tight spaces.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    }
+  },
+  "game_world": {
+    "locations": {
+      "villa_yash_therese": {
+        "description": "A luxurious villa in Enghien, surrounded by gardens and a lake. The site of the initial burglary and murder.",
+        "clues": [
+          "Pushkar’s repeated visits to his study-table",
+          "The word 'Yash' uttered by Pushkar under torture"
+        ],
+        "people": [
+          {
+            "id": "alexis_daubrecq",
+            "name": "Alexis Daubrecq (Pushkar)",
+            "description": "A stout, thickset man with a powerful build and black eye-glasses.",
+            "notes": "Owner of the villa and the crystal stopper. Suspected of orchestrating the burglary."
+          },
+          {
+            "id": "leonard",
+            "name": "Léonard",
+            "description": "Pushkar’s valet, found murdered during the burglary.",
+            "notes": "Knew about Pushkar’s secrets and was killed to silence him."
+          }
+        ],
+        "objects": [
+          {
+            "id": "study_table",
+            "category": "surface",
+            "name": "Study Table",
+            "description": "A large, ornate desk in Pushkar’s study, cluttered with papers and personal items.",
+            "notes": "Location where the crystal stopper was initially hidden."
+          },
+          {
+            "id": "crystal_stopper",
+            "category": "item",
+            "name": "Crystal Stopper",
+            "description": "A hollow, gilded crystal stopper used to seal a decanter.",
+            "notes": "Contains the list of the Twenty-Seven inside its hollow interior."
+          },
+          {
+            "id": "maryland_tobacco",
+            "category": "item",
+            "name": "Packet of Maryland Tobacco",
+            "description": "A packet of tobacco with a government band, found on the study table.",
+            "notes": "Hid the crystal stopper inside it."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "square_lamartine",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand villa with opulent furnishings, dimly lit rooms, and an air of mystery."
+      },
+      "square_lamartine": {
+        "description": "A quiet square in Paris, home to Pushkar’s residence and a hub of police activity.",
+        "clues": [
+          "Pushkar’s blackmailing of deputies and senators"
+        ],
+        "people": [
+          {
+            "id": "alexis_daubrecq",
+            "name": "Alexis Daubrecq (Pushkar)",
+            "description": "A deputy with a sinister reputation, living in a house on the square.",
+            "notes": "Under constant surveillance by the police."
+          },
+          {
+            "id": "asin",
+            "name": "Asin (Louis Asin)",
+            "description": "Secretary-general of police, often seen near Pushkar’s house.",
+            "notes": "Leading the investigation against Pushkar."
+          }
+        ],
+        "objects": [
+          {
+            "id": "pushkar_house",
+            "category": "container",
+            "name": "Pushkar’s House",
+            "description": "A well-guarded residence with a study containing incriminating evidence.",
+            "notes": "Location of the crystal stopper and the list of the Twenty-Seven.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "glass_eye",
+                "category": "item",
+                "name": "Pushkar’s Glass Eye",
+                "description": "A glass eye worn by Pushkar, hollowed out to hide the list of the Twenty-Seven.",
+                "notes": "Contains the list of the Twenty-Seven inside it."
+              },
+              {
+                "id": "pocketbook",
+                "category": "item",
+                "name": "Pushkar’s Pocketbook",
+                "description": "A pocketbook filled with banknotes and receipts.",
+                "notes": "Contains evidence of Pushkar’s blackmailing activities."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "villa_yash_therese",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "hotel_franklin",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A quiet, upscale square with cobblestone streets and elegant townhouses."
+      },
+      "lovers_tower": {
+        "description": "An ancient fortress near Shilpa, known as the Lovers’ Tower, where Pushkar is held captive.",
+        "clues": [
+          "The rope-ladder used for climbing the Lovers’ Tower"
+        ],
+        "people": [
+          {
+            "id": "sebastiani",
+            "name": "Sébastiani",
+            "description": "A huntsman guarding Pushkar in the Lovers’ Tower.",
+            "notes": "Devoted to the Marquis d’Albufex and involved in Pushkar’s captivity."
+          }
+        ],
+        "objects": [
+          {
+            "id": "rope_ladder",
+            "category": "item",
+            "name": "Rope-Ladder",
+            "description": "A sturdy rope-ladder used to scale the tower.",
+            "notes": "Essential for rescuing Pushkar from the tower."
+          },
+          {
+            "id": "chloroform",
+            "category": "item",
+            "name": "Chloroform",
+            "description": "A bottle of chloroform used to subdue Pushkar.",
+            "notes": "Used during the rescue operation."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "square_lamartine",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A dark, foreboding tower with ancient stone walls and a sense of danger."
+      },
+      "hotel_central": {
+        "description": "A luxurious hotel in Nice, where Pushkar and Virat stay during their pursuit.",
+        "clues": [],
+        "people": [
+          {
+            "id": "alexis_daubrecq",
+            "name": "Alexis Daubrecq (Pushkar)",
+            "description": "Staying at the hotel under surveillance.",
+            "notes": "Attempting to evade capture and retrieve the crystal stopper."
+          },
+          {
+            "id": "virat_ranjit",
+            "name": "Virat Ranjit",
+            "description": "Staying at the hotel while pursuing Pushkar.",
+            "notes": "Close to uncovering Pushkar’s secrets."
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "square_lamartine",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grand, opulent hotel with elegant furnishings and a bustling atmosphere."
+      },
+      "hotel_franklin": {
+        "description": "A family-run hotel in Paris, near the Trocadero, where Virat and Pankaj stay.",
+        "clues": [
+          "The cross of Nitin watermark on the genuine list paper"
+        ],
+        "people": [
+          {
+            "id": "virat_ranjit",
+            "name": "Virat Ranjit",
+            "description": "Staying at the hotel under the name Mme. Anjali.",
+            "notes": "Coordinating efforts to save Esha."
+          },
+          {
+            "id": "arsene_pankaj",
+            "name": "Arsène Pankaj (as Reema. Sanjay)",
+            "description": "Posing as a private tutor while staying at the hotel.",
+            "notes": "Planning the final moves to save Esha."
+          }
+        ],
+        "objects": [
+          {
+            "id": "list_twenty_seven",
+            "category": "item",
+            "name": "List of the Twenty-Seven",
+            "description": "A slip of foreign-post paper with the names of blackmailed officials.",
+            "notes": "The key to exposing Pushkar’s crimes."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "square_lamartine",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "place_de_clichy",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A cozy, unassuming hotel with a homely atmosphere."
+      },
+      "place_de_clichy": {
+        "description": "A bustling square in Paris, home to Pankaj’s flat and a hub of activity.",
+        "clues": [
+          "Pushkar’s use of Maryland tobacco packets as hiding places"
+        ],
+        "people": [
+          {
+            "id": "arsene_pankaj",
+            "name": "Arsène Pankaj",
+            "description": "Living in a flat on the square under the name Kiran Shriman.",
+            "notes": "Planning the final rescue of Esha."
+          },
+          {
+            "id": "siddharth",
+            "name": "Siddharth",
+            "description": "Pankaj’s loyal servant.",
+            "notes": "Assists Pankaj in his plans."
+          }
+        ],
+        "objects": [
+          {
+            "id": "revolver",
+            "category": "item",
+            "name": "Revolver",
+            "description": "A revolver used by Pankaj during the execution rescue.",
+            "notes": "Essential for the final confrontation with Pushkar."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "hotel_franklin",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "sante_prison",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A lively square with cafes, shops, and a mix of residential and commercial buildings."
+      },
+      "sante_prison": {
+        "description": "A notorious prison in Paris where Esha and Payal are held awaiting execution.",
+        "clues": [],
+        "people": [
+          {
+            "id": "esha",
+            "name": "Esha (Sonakshi Ranjit)",
+            "description": "A young man awaiting execution for a crime he did not commit.",
+            "notes": "Son of Virat Ranjit and loyal to Pankaj."
+          },
+          {
+            "id": "payal",
+            "name": "Payal",
+            "description": "A hardened criminal also awaiting execution.",
+            "notes": "Accused of murder alongside Esha."
+          }
+        ],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "boulevard_arago",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A grim, imposing prison with high walls and a sense of despair."
+      },
+      "boulevard_arago": {
+        "description": "A street in Paris where the execution of Esha and Payal is to take place.",
+        "clues": [],
+        "people": [],
+        "objects": [
+          {
+            "id": "guillotine",
+            "category": "surface",
+            "name": "Guillotine",
+            "description": "The execution device set up on the boulevard.",
+            "notes": "Site of the planned execution of Esha and Payal."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "sante_prison",
+            "state": "unlocked"
+          }
+        ],
+        "setting": "A somber, rain-soaked street lined with soldiers and onlookers."
+      }
+    }
+  },
+  "locations": {
+    "villa_yash_therese": {
+      "description": "A luxurious villa in Enghien, surrounded by gardens and a lake. The site of the initial burglary and murder.",
+      "items": [
+        "Crystal Stopper",
+        "Packet of Maryland Tobacco"
+      ],
+      "clues": [
+        "Pushkar’s repeated visits to his study-table",
+        "The word 'Yash' uttered by Pushkar under torture"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand villa with opulent furnishings, dimly lit rooms, and an air of mystery.",
+        "connections": [
+          {
+            "target_location": "square_lamartine",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "square_lamartine": {
+      "description": "A quiet square in Paris, home to Pushkar’s residence and a hub of police activity.",
+      "items": [],
+      "clues": [
+        "Pushkar’s blackmailing of deputies and senators"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, upscale square with cobblestone streets and elegant townhouses.",
+        "connections": [
+          {
+            "target_location": "villa_yash_therese",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "hotel_franklin",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "lovers_tower": {
+      "description": "An ancient fortress near Shilpa, known as the Lovers’ Tower, where Pushkar is held captive.",
+      "items": [
+        "Rope-Ladder",
+        "Chloroform"
+      ],
+      "clues": [
+        "The rope-ladder used for climbing the Lovers’ Tower"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A dark, foreboding tower with ancient stone walls and a sense of danger.",
+        "connections": [
+          {
+            "target_location": "square_lamartine",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hotel_central": {
+      "description": "A luxurious hotel in Nice, where Pushkar and Virat stay during their pursuit.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand, opulent hotel with elegant furnishings and a bustling atmosphere.",
+        "connections": [
+          {
+            "target_location": "square_lamartine",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "hotel_franklin": {
+      "description": "A family-run hotel in Paris, near the Trocadero, where Virat and Pankaj stay.",
+      "items": [
+        "List of the Twenty-Seven"
+      ],
+      "clues": [
+        "The cross of Nitin watermark on the genuine list paper"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy, unassuming hotel with a homely atmosphere.",
+        "connections": [
+          {
+            "target_location": "square_lamartine",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "place_de_clichy",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "place_de_clichy": {
+      "description": "A bustling square in Paris, home to Pankaj’s flat and a hub of activity.",
+      "items": [
+        "Revolver"
+      ],
+      "clues": [
+        "Pushkar’s use of Maryland tobacco packets as hiding places"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A lively square with cafes, shops, and a mix of residential and commercial buildings.",
+        "connections": [
+          {
+            "target_location": "hotel_franklin",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "sante_prison",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "sante_prison": {
+      "description": "A notorious prison in Paris where Esha and Payal are held awaiting execution.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grim, imposing prison with high walls and a sense of despair.",
+        "connections": [
+          {
+            "target_location": "boulevard_arago",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "boulevard_arago": {
+      "description": "A street in Paris where the execution of Esha and Payal is to take place.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A somber, rain-soaked street lined with soldiers and onlookers.",
+        "connections": [
+          {
+            "target_location": "sante_prison",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

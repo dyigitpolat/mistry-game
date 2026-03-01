@@ -37,11 +37,7 @@ async def lifespan(app: FastAPI):
     if os.getenv("GEMINI_API_KEY"):
         print("🎨 Google Nanobanana scene generation enabled")
 
-    # Mount generated scenes as static files
-    scenes_dir = _project_root / "backend" / "data" / "scenes"
-    scenes_dir.mkdir(parents=True, exist_ok=True)
-    app.mount("/scenes", StaticFiles(directory=str(scenes_dir)), name="scenes")
-
+    # Scenes directory is resolved globally
     # Connect to Databases
     await connect_to_mongo()
     await connect_to_redis()
@@ -49,9 +45,12 @@ async def lifespan(app: FastAPI):
     # Load any user-generated scenarios from MongoDB into the GameEngine
     from app.services.game_engine import GameEngine
     engine = GameEngine._shared_instance
-    if engine:
-        await engine.load_scenarios_from_db()
-        print(f"🔮 Total scenarios loaded: {len(engine.scenarios)}")
+    if engine is None:
+        print("🔮 Initializing GameEngine for the first time...")
+        engine = GameEngine()
+        
+    await engine.load_scenarios_from_db()
+    print(f"🔮 Total scenarios loaded: {len(engine.scenarios)}")
 
     yield
     # ── Shutdown ──
@@ -61,8 +60,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Mistry Whodunit Engine",
-    description="Backend API for the Whodunit multi-agent detective game. "
+    title="Mistry Engine",
+    description="Backend API for the Mistry multi-agent detective game. "
                 "Powered by GPT-5-mini via deepagents SDK with Langfuse observability.",
     version="0.2.0",
     lifespan=lifespan,
@@ -104,3 +103,9 @@ async def health_check():
         "langfuse": bool(os.getenv("LANGFUSE_SECRET_KEY")),
         "scene_gen": bool(os.getenv("GEMINI_API_KEY")),
     }
+
+# ── Static Files ──────────────────────────────────────────────────────
+# Mounted AFTER routers to prevent shadowing the /scenes API endpoints
+scenes_dir = _project_root / "backend" / "data" / "scenes"
+scenes_dir.mkdir(parents=True, exist_ok=True)
+app.mount("/scenes", StaticFiles(directory=str(scenes_dir)), name="scenes_static")

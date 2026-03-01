@@ -1,0 +1,1019 @@
+{
+  "title": "The Adventure of the Abbey Grange",
+  "description": "A murder mystery set in the Abbey Grange, Kent, where Sir Eustace Brackenstall has been found dead under suspicious circumstances. The investigation uncovers a web of deception, love, and justice.",
+  "victim": "Sir Eustace Brackenstall",
+  "intro_narrative": "It was on a bitterly cold and frosty morning that Dr. Watson was awakened by Sherlock Holmes, who had received an urgent summons to Abbey Grange in Kent. A murder had been committed, and the local inspector, Stanley Hopkins, believed it to be the work of a notorious gang of burglars. However, Holmes soon suspects that all is not as it seems, and a deeper conspiracy unfolds.",
+  "start_time": "1897-02-24T03:30:00Z",
+  "win_conditions": {
+    "required_evidence": [
+      "frayed_bell_rope",
+      "blood_on_chair",
+      "wine_glasses_with_beeswing",
+      "cork_drawn_with_pocket_screw"
+    ],
+    "required_suspect": [
+      "Captain Jack Croker"
+    ],
+    "required_motive": [
+      "self_defense",
+      "protection_of_lady_brackenstall"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Arrival at Abbey Grange",
+      "objective": "Investigate the initial crime scene and interview the primary witnesses.",
+      "unlocked_locations": [
+        "abbey_grange_exterior",
+        "morning_room",
+        "dining_room"
+      ],
+      "unlocked_characters": [
+        "lady_mary_brackenstall",
+        "theresa_wright",
+        "stanley_hopkins"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Exploring the Crime Scene",
+      "objective": "Examine the dining room and gather physical evidence.",
+      "unlocked_locations": [
+        "kitchen",
+        "billiard_room",
+        "gun_room",
+        "drawing_room"
+      ],
+      "unlocked_characters": []
+    },
+    {
+      "id": 2,
+      "name": "Uncovering the Truth",
+      "objective": "Follow leads to London and piece together the events of the night.",
+      "unlocked_locations": [
+        "london_telegraph_office",
+        "adelaide_southampton_office",
+        "baker_street"
+      ],
+      "unlocked_characters": [
+        "captain_jack_croker"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Confrontation and Resolution",
+      "objective": "Confront the suspect and determine the truth behind the murder.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "sherlock_holmes": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "abbey_grange_exterior",
+        "1": "dining_room",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Sharp, observant, and logical. Speaks in a precise and analytical manner, often with a touch of dry humor.",
+      "abilities": "Master of deduction, keen observer of details, and expert in forensic science of the era.",
+      "knowledge_about_others": {
+        "lady_mary_brackenstall": "Suspects her story is fabricated.",
+        "theresa_wright": "Believes she is deeply loyal to Lady Brackenstall.",
+        "captain_jack_croker": "Deduces his involvement through physical evidence."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "dr_john_watson": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "abbey_grange_exterior",
+        "1": "dining_room",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Loyal, curious, and empathetic. Often serves as the voice of reason and humanity.",
+      "abilities": "Medical expertise, keen observer, and chronicler of Holmes' cases.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "lady_mary_brackenstall": {
+      "type": "suspect",
+      "role": "Widow of the Victim",
+      "location": "morning_room",
+      "phase_locations": {
+        "0": "morning_room",
+        "1": "morning_room",
+        "2": "morning_room",
+        "3": "morning_room"
+      },
+      "persona": "Graceful, composed, but with an undercurrent of tension. Speaks with a mix of elegance and weariness.",
+      "secret": "She is covering for Captain Croker, whom she loves.",
+      "knowledge_about_others": {
+        "theresa_wright": "Deeply trusts her maid and confidante.",
+        "sir_eustace_brackenstall": "Hated him for his abuse and drunkenness."
+      },
+      "suspicion_meter": 70,
+      "flight_risk": 20,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "blood_on_chair"
+          ],
+          "reaction": "Becomes defensive and refuses to answer further questions.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "frayed_bell_rope",
+            "wine_glasses_with_beeswing"
+          ],
+          "reaction": "Breaks down and admits the truth about Captain Croker.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "theresa_wright": {
+      "type": "suspect",
+      "role": "Maid and Confidante",
+      "location": "morning_room",
+      "phase_locations": {
+        "0": "morning_room",
+        "1": "morning_room",
+        "2": "morning_room",
+        "3": "morning_room"
+      },
+      "persona": "Stern, protective, and fiercely loyal. Speaks in a no-nonsense manner with a strong Australian accent.",
+      "secret": "She helped orchestrate the cover-up to protect Lady Brackenstall and Captain Croker.",
+      "knowledge_about_others": {
+        "lady_mary_brackenstall": "Would do anything to protect her.",
+        "sir_eustace_brackenstall": "Despised him for his cruelty."
+      },
+      "suspicion_meter": 60,
+      "flight_risk": 10,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0,
+            1
+          ],
+          "required_evidence": [
+            "blood_on_chair"
+          ],
+          "reaction": "Becomes agitated and attempts to steer the conversation away from the crime.",
+          "leads_to_break": false
+        }
+      ]
+    },
+    "stanley_hopkins": {
+      "type": "assistant",
+      "role": "Inspector",
+      "location": "abbey_grange_exterior",
+      "phase_locations": {
+        "0": "abbey_grange_exterior",
+        "1": "dining_room",
+        "2": "london_telegraph_office"
+      },
+      "persona": "Eager, competent, and respectful of Holmes' abilities. Speaks with professionalism but lacks Holmes' depth of insight.",
+      "abilities": "Experienced in police procedure and evidence collection.",
+      "knowledge_about_others": {
+        "sherlock_holmes": "Admires and defers to his expertise."
+      },
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": []
+    },
+    "captain_jack_croker": {
+      "type": "suspect",
+      "role": "First Officer of the Rock of Gibraltar",
+      "location": "baker_street",
+      "phase_locations": {
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Strong, passionate, and protective. Speaks with a mix of defiance and desperation.",
+      "secret": "He killed Sir Eustace in self-defense and to protect Lady Brackenstall.",
+      "knowledge_about_others": {
+        "lady_mary_brackenstall": "Deeply in love with her and would do anything to protect her.",
+        "sir_eustace_brackenstall": "Hated him for his abuse of Lady Brackenstall."
+      },
+      "suspicion_meter": 90,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "frayed_bell_rope",
+            "wine_glasses_with_beeswing"
+          ],
+          "reaction": "Admits to the murder but insists it was justified.",
+          "leads_to_break": true
+        }
+      ]
+    }
+  },
+  "game_world": {
+    "locations": {
+      "abbey_grange_exterior": {
+        "description": "The grand exterior of Abbey Grange, a low, widespread house with ancient elms lining the avenue. The central part of the house is shrouded in ivy, and one wing appears to be entirely new. The air is bitterly cold, and frost clings to the ground.",
+        "setting": "A noble park with ancient trees and a long driveway leading to the house. The atmosphere is eerie and foreboding, with the first faint light of dawn breaking over the horizon.",
+        "clues": [
+          "The ground is iron hard, with no visible footprints near the French window.",
+          "The lodge-keeper's haggard face suggests something terrible has occurred."
+        ],
+        "people": [
+          {
+            "id": "stanley_hopkins",
+            "name": "Stanley Hopkins",
+            "description": "A youthful inspector with an alert and eager face. He is dressed in a heavy coat to ward off the cold.",
+            "notes": "Eager to solve the case but lacks Holmes' depth of insight. Respects Holmes' abilities and defers to his expertise."
+          }
+        ],
+        "objects": [
+          {
+            "id": "abbey_grange_gate",
+            "category": "surface",
+            "name": "Lodge Gate",
+            "description": "An old, wrought-iron gate guarded by a lodge-keeper. The gate is open, and the lodge-keeper stands nearby, looking distressed.",
+            "notes": "The lodge-keeper may have seen something unusual the night before."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "morning_room",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "dining_room",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "       __________",
+          "      /          \\",
+          "     /            \\",
+          "____/              \\____",
+          "|  ________________  |",
+          "| |                | |",
+          "| |   ABBEY GRANGE | |",
+          "| |________________| |",
+          "|____________________|",
+          "   |              |",
+          "   |    GATE      |",
+          "   |______________|"
+        ]
+      },
+      "morning_room": {
+        "description": "A cozy room with a couch where Lady Brackenstall reclines. The room is warm and inviting, with a fireplace crackling softly. A black sequin-covered dinner-dress lies on the couch beside her.",
+        "setting": "A comfortable, well-furnished room with elegant decor. The atmosphere is tense, with Lady Brackenstall looking drawn and haggard.",
+        "clues": [
+          "Lady Brackenstall has a plum-colored swelling over one eye, suggesting she was struck.",
+          "Her forearms show red marks, possibly from a hatpin or other sharp object.",
+          "Theresa Wright is bathing her mistress's bruise with vinegar and water."
+        ],
+        "people": [
+          {
+            "id": "lady_mary_brackenstall",
+            "name": "Lady Mary Brackenstall",
+            "description": "A graceful, golden-haired woman with blue eyes. She is dressed in a loose dressing-gown of blue and silver and looks exhausted.",
+            "notes": "Her story of the burglary may be fabricated. She is covering for someone she loves."
+          },
+          {
+            "id": "theresa_wright",
+            "name": "Theresa Wright",
+            "description": "A tall, austere woman with a stern face. She is dressed in a maid's uniform and tends to Lady Brackenstall with motherly care.",
+            "notes": "Deeply loyal to Lady Brackenstall and may be involved in the cover-up."
+          }
+        ],
+        "objects": [
+          {
+            "id": "morning_room_couch",
+            "category": "surface",
+            "name": "Couch",
+            "description": "A comfortable couch where Lady Brackenstall reclines. A black sequin-covered dinner-dress lies beside her.",
+            "notes": "The dinner-dress may have bloodstains matching those found in the dining room."
+          },
+          {
+            "id": "vinegar_bottle",
+            "category": "item",
+            "name": "Vinegar Bottle",
+            "description": "A small bottle of vinegar used by Theresa Wright to bathe Lady Brackenstall's bruise.",
+            "notes": "Common household item, but its use suggests the severity of the injury."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "abbey_grange_exterior",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "dining_room",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   COUCH        |",
+          "|  [Lady B.]     |",
+          "|________________|",
+          "|                |",
+          "|  FIREPLACE     |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "dining_room": {
+        "description": "A large and high chamber with carved oak ceiling and oaken paneling. The body of Sir Eustace Brackenstall lies on the tigerskin hearthrug in front of the fireplace. The room is cold, with winter sunshine streaming through the windows.",
+        "setting": "A grand, imposing room with deer heads and ancient weapons adorning the walls. The atmosphere is grim, with the body of Sir Eustace lying in the center of the room.",
+        "clues": [
+          "The body of Sir Eustace Brackenstall lies on the hearthrug, his head horribly injured.",
+          "A heavy poker, bent into a curve, lies beside the body.",
+          "A frayed bell-rope hangs from the mantelpiece, cut three inches from the top.",
+          "Three wine glasses, one with beeswing, are grouped on the sideboard.",
+          "A bottle of wine, two-thirds full, stands nearby with a deeply stained cork.",
+          "A bloodstain is visible on the seat of the oaken chair at the head of the table."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "dining_room_chair",
+            "category": "surface",
+            "name": "Oaken Chair",
+            "description": "A heavy oaken chair with arms and cross-bars at the bottom. A crimson cord is woven through the open woodwork.",
+            "notes": "The chair has a bloodstain on the seat, suggesting Lady Brackenstall was not seated here during the murder."
+          },
+          {
+            "id": "bell_rope",
+            "category": "item",
+            "name": "Bell-Rope",
+            "description": "A frayed red cord hanging from the mantelpiece, cut three inches from the top.",
+            "notes": "The fraying is unnatural and suggests deliberate tampering."
+          },
+          {
+            "id": "wine_glasses",
+            "category": "item",
+            "name": "Wine Glasses",
+            "description": "Three glasses grouped together on the sideboard, one containing dregs of beeswing.",
+            "notes": "The beeswing in only one glass suggests only two people drank from the bottle."
+          },
+          {
+            "id": "wine_bottle",
+            "category": "item",
+            "name": "Wine Bottle",
+            "description": "A bottle of wine, two-thirds full, with a deeply stained cork.",
+            "notes": "The cork was drawn with a pocket screw, not the corkscrew in the drawer."
+          },
+          {
+            "id": "poker",
+            "category": "item",
+            "name": "Poker",
+            "description": "A heavy poker bent into a curve, lying beside the body.",
+            "notes": "The poker was used to strike Sir Eustace and is a key piece of evidence."
+          },
+          {
+            "id": "sideboard",
+            "category": "surface",
+            "name": "Sideboard",
+            "description": "A large sideboard with silver articles missing from its surface.",
+            "notes": "The missing silver was later found in the pond outside."
+          },
+          {
+            "id": "french_window",
+            "category": "surface",
+            "name": "French Window",
+            "description": "A long French window that forms a door leading to the lawn. It is open, with no signs of forced entry.",
+            "notes": "The window was used by the intruder to enter and exit the room."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "abbey_grange_exterior",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "kitchen",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "billiard_room",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "gun_room",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "drawing_room",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________________",
+          "|                        |",
+          "|   SIDEBOARD            |",
+          "|  [Wine Glasses]        |",
+          "|________________________|",
+          "|                        |",
+          "|   FIREPLACE            |",
+          "|  [Body] [Poker]        |",
+          "|________________________|",
+          "|                        |",
+          "|   CHAIR                |",
+          "|  [Bloodstain]          |",
+          "|________________________|",
+          "   |                  |",
+          "   |  FRENCH WINDOW   |",
+          "   |__________________|"
+        ]
+      },
+      "kitchen": {
+        "description": "A large, functional kitchen at the back of the house. The room is tidy, with no signs of recent use. The bell from the dining room would have rung here.",
+        "setting": "A utilitarian space with pots, pans, and utensils neatly arranged. The atmosphere is quiet, with no signs of activity.",
+        "clues": [
+          "The kitchen is far from the main house, so the bell from the dining room would not have been heard by the servants.",
+          "A corkscrew lies in a half-opened drawer, but it was not used to open the wine bottle in the dining room."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "kitchen_drawer",
+            "category": "container",
+            "name": "Drawer",
+            "description": "A half-opened drawer containing table linen and a large corkscrew.",
+            "notes": "The corkscrew was not used to open the wine bottle in the dining room.",
+            "state": "open",
+            "contains": [
+              {
+                "id": "corkscrew",
+                "category": "item",
+                "name": "Corkscrew",
+                "description": "A large corkscrew found in the kitchen drawer.",
+                "notes": "This corkscrew was not used to open the wine bottle in the dining room."
+              }
+            ]
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "dining_room",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   DRAWER       |",
+          "|  [Corkscrew]   |",
+          "|________________|",
+          "|                |",
+          "|   STOVE        |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "billiard_room": {
+        "description": "A dimly lit room with a billiard table in the center. The room is cold and unused, with a layer of dust covering the table.",
+        "setting": "A quiet, forgotten space with a billiard table and cues neatly arranged on the wall. The atmosphere is still and undisturbed.",
+        "clues": [
+          "The room shows no signs of recent use, suggesting the burglars did not enter here."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "billiard_table",
+            "category": "surface",
+            "name": "Billiard Table",
+            "description": "A large billiard table covered in dust, with cues arranged on the wall.",
+            "notes": "The dust suggests the room has not been used recently."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "dining_room",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   TABLE        |",
+          "|  [Dusty]       |",
+          "|________________|",
+          "|                |",
+          "|   CUES         |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "gun_room": {
+        "description": "A small room lined with racks of guns and hunting equipment. The room is tidy, with no signs of disturbance.",
+        "setting": "A well-organized space with guns, ammunition, and hunting gear neatly arranged. The atmosphere is orderly and undisturbed.",
+        "clues": [
+          "The guns are all accounted for, suggesting the burglars did not enter this room."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "gun_rack",
+            "category": "surface",
+            "name": "Gun Rack",
+            "description": "A rack of guns and hunting equipment, all neatly arranged.",
+            "notes": "All guns are present and undisturbed."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "dining_room",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   GUN RACK     |",
+          "|  [Guns]        |",
+          "|________________|",
+          "|                |",
+          "|   AMMO         |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "drawing_room": {
+        "description": "A formal room with elegant furniture and decor. The room is cold and unused, with a layer of dust on the surfaces.",
+        "setting": "A grand, formal space with plush furniture and ornate decorations. The atmosphere is quiet and undisturbed.",
+        "clues": [
+          "The room shows no signs of recent use, suggesting the burglars did not enter here."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "drawing_room_table",
+            "category": "surface",
+            "name": "Table",
+            "description": "A large, ornate table covered in dust.",
+            "notes": "The dust suggests the room has not been used recently."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "dining_room",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   TABLE        |",
+          "|  [Dusty]       |",
+          "|________________|",
+          "|                |",
+          "|   CHAIRS       |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "london_telegraph_office": {
+        "description": "A bustling office in Charing Cross where telegrams are sent and received. The room is filled with the clatter of typewriters and the hum of activity.",
+        "setting": "A busy, functional space with clerks working at desks. The atmosphere is efficient and fast-paced.",
+        "clues": [
+          "Holmes sends a telegram to gather information about Captain Croker."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "telegraph_machine",
+            "category": "item",
+            "name": "Telegraph Machine",
+            "description": "A machine used to send and receive telegrams.",
+            "notes": "Holmes uses this to send a message about Captain Croker."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "adelaide_southampton_office",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   DESKS        |",
+          "|  [Clerks]      |",
+          "|________________|",
+          "|                |",
+          "|   TELEGRAPH    |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "adelaide_southampton_office": {
+        "description": "The office of the Adelaide-Southampton shipping line in Pall Mall. The room is well-appointed, with maps and schedules adorning the walls.",
+        "setting": "A professional, well-organized space with maps of shipping routes and schedules. The atmosphere is businesslike and efficient.",
+        "clues": [
+          "Records show that Lady Brackenstall and Theresa Wright traveled on the Rock of Gibraltar in June 1895.",
+          "Captain Croker was the first officer on that voyage and is now a captain with the same company."
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "passenger_records",
+            "category": "item",
+            "name": "Passenger Records",
+            "description": "Records of passengers who traveled on the Rock of Gibraltar in June 1895.",
+            "notes": "These records confirm that Lady Brackenstall and Theresa Wright were on the voyage with Captain Croker."
+          },
+          {
+            "id": "shipping_schedule",
+            "category": "item",
+            "name": "Shipping Schedule",
+            "description": "A schedule of the Adelaide-Southampton shipping line, showing the routes and officers of their ships.",
+            "notes": "The schedule confirms Captain Croker's promotion and upcoming voyage."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "london_telegraph_office",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   MAPS         |",
+          "|  [Shipping]    |",
+          "|________________|",
+          "|                |",
+          "|   RECORDS      |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      },
+      "baker_street": {
+        "description": "The familiar sitting room at 221B Baker Street, where Holmes and Watson reside. The room is warm and cluttered, with books, papers, and chemical apparatus scattered about.",
+        "setting": "A cozy, lived-in space with a fireplace, armchairs, and shelves filled with books and curiosities. The atmosphere is intellectual and inviting.",
+        "clues": [
+          "Holmes pieces together the evidence and deduces the truth about Captain Croker's involvement."
+        ],
+        "people": [
+          {
+            "id": "sherlock_holmes",
+            "name": "Sherlock Holmes",
+            "description": "A tall, lean man with sharp features and piercing eyes. He is dressed in his usual dressing-gown and slippers.",
+            "notes": "Holmes is deep in thought, piecing together the evidence from Abbey Grange."
+          },
+          {
+            "id": "dr_john_watson",
+            "name": "Dr. John Watson",
+            "description": "A sturdy, middle-aged man with a kind face. He is dressed comfortably and observes Holmes with interest.",
+            "notes": "Watson is eager to hear Holmes' deductions and assist in any way he can."
+          }
+        ],
+        "objects": [
+          {
+            "id": "baker_street_armchair",
+            "category": "surface",
+            "name": "Armchair",
+            "description": "A comfortable armchair where Holmes often sits to think.",
+            "notes": "Holmes uses this chair to ponder the case and share his deductions with Watson."
+          },
+          {
+            "id": "chemical_apparatus",
+            "category": "item",
+            "name": "Chemical Apparatus",
+            "description": "A set of chemical apparatus used by Holmes for his experiments.",
+            "notes": "Holmes occasionally uses these tools to analyze evidence."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "london_telegraph_office",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "adelaide_southampton_office",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          " ________________",
+          "|                |",
+          "|   ARMCHAIR     |",
+          "|  [Holmes]      |",
+          "|________________|",
+          "|                |",
+          "|   FIREPLACE    |",
+          "|________________|",
+          "   |          |",
+          "   |  DOOR    |",
+          "   |__________|"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "abbey_grange_exterior": {
+      "description": "The grand exterior of Abbey Grange, a low, widespread house with ancient elms lining the avenue. The central part of the house is shrouded in ivy, and one wing appears to be entirely new. The air is bitterly cold, and frost clings to the ground.",
+      "items": [],
+      "clues": [
+        "The ground is iron hard, with no visible footprints near the French window.",
+        "The lodge-keeper's haggard face suggests something terrible has occurred."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A noble park with ancient trees and a long driveway leading to the house. The atmosphere is eerie and foreboding, with the first faint light of dawn breaking over the horizon.",
+        "connections": [
+          {
+            "target_location": "morning_room",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "dining_room",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "morning_room": {
+      "description": "A cozy room with a couch where Lady Brackenstall reclines. The room is warm and inviting, with a fireplace crackling softly. A black sequin-covered dinner-dress lies on the couch beside her.",
+      "items": [
+        "Vinegar Bottle"
+      ],
+      "clues": [
+        "Lady Brackenstall has a plum-colored swelling over one eye, suggesting she was struck.",
+        "Her forearms show red marks, possibly from a hatpin or other sharp object.",
+        "Theresa Wright is bathing her mistress's bruise with vinegar and water."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A comfortable, well-furnished room with elegant decor. The atmosphere is tense, with Lady Brackenstall looking drawn and haggard.",
+        "connections": [
+          {
+            "target_location": "abbey_grange_exterior",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "dining_room",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "dining_room": {
+      "description": "A large and high chamber with carved oak ceiling and oaken paneling. The body of Sir Eustace Brackenstall lies on the tigerskin hearthrug in front of the fireplace. The room is cold, with winter sunshine streaming through the windows.",
+      "items": [
+        "Bell-Rope",
+        "Wine Glasses",
+        "Wine Bottle",
+        "Poker"
+      ],
+      "clues": [
+        "The body of Sir Eustace Brackenstall lies on the hearthrug, his head horribly injured.",
+        "A heavy poker, bent into a curve, lies beside the body.",
+        "A frayed bell-rope hangs from the mantelpiece, cut three inches from the top.",
+        "Three wine glasses, one with beeswing, are grouped on the sideboard.",
+        "A bottle of wine, two-thirds full, stands nearby with a deeply stained cork.",
+        "A bloodstain is visible on the seat of the oaken chair at the head of the table."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand, imposing room with deer heads and ancient weapons adorning the walls. The atmosphere is grim, with the body of Sir Eustace lying in the center of the room.",
+        "connections": [
+          {
+            "target_location": "abbey_grange_exterior",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "kitchen",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "billiard_room",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "gun_room",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "drawing_room",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "kitchen": {
+      "description": "A large, functional kitchen at the back of the house. The room is tidy, with no signs of recent use. The bell from the dining room would have rung here.",
+      "items": [],
+      "clues": [
+        "The kitchen is far from the main house, so the bell from the dining room would not have been heard by the servants.",
+        "A corkscrew lies in a half-opened drawer, but it was not used to open the wine bottle in the dining room."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A utilitarian space with pots, pans, and utensils neatly arranged. The atmosphere is quiet, with no signs of activity.",
+        "connections": [
+          {
+            "target_location": "dining_room",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "billiard_room": {
+      "description": "A dimly lit room with a billiard table in the center. The room is cold and unused, with a layer of dust covering the table.",
+      "items": [],
+      "clues": [
+        "The room shows no signs of recent use, suggesting the burglars did not enter here."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A quiet, forgotten space with a billiard table and cues neatly arranged on the wall. The atmosphere is still and undisturbed.",
+        "connections": [
+          {
+            "target_location": "dining_room",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "gun_room": {
+      "description": "A small room lined with racks of guns and hunting equipment. The room is tidy, with no signs of disturbance.",
+      "items": [],
+      "clues": [
+        "The guns are all accounted for, suggesting the burglars did not enter this room."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A well-organized space with guns, ammunition, and hunting gear neatly arranged. The atmosphere is orderly and undisturbed.",
+        "connections": [
+          {
+            "target_location": "dining_room",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "drawing_room": {
+      "description": "A formal room with elegant furniture and decor. The room is cold and unused, with a layer of dust on the surfaces.",
+      "items": [],
+      "clues": [
+        "The room shows no signs of recent use, suggesting the burglars did not enter here."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand, formal space with plush furniture and ornate decorations. The atmosphere is quiet and undisturbed.",
+        "connections": [
+          {
+            "target_location": "dining_room",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "london_telegraph_office": {
+      "description": "A bustling office in Charing Cross where telegrams are sent and received. The room is filled with the clatter of typewriters and the hum of activity.",
+      "items": [
+        "Telegraph Machine"
+      ],
+      "clues": [
+        "Holmes sends a telegram to gather information about Captain Croker."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A busy, functional space with clerks working at desks. The atmosphere is efficient and fast-paced.",
+        "connections": [
+          {
+            "target_location": "adelaide_southampton_office",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "adelaide_southampton_office": {
+      "description": "The office of the Adelaide-Southampton shipping line in Pall Mall. The room is well-appointed, with maps and schedules adorning the walls.",
+      "items": [
+        "Passenger Records",
+        "Shipping Schedule"
+      ],
+      "clues": [
+        "Records show that Lady Brackenstall and Theresa Wright traveled on the Rock of Gibraltar in June 1895.",
+        "Captain Croker was the first officer on that voyage and is now a captain with the same company."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A professional, well-organized space with maps of shipping routes and schedules. The atmosphere is businesslike and efficient.",
+        "connections": [
+          {
+            "target_location": "london_telegraph_office",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "baker_street": {
+      "description": "The familiar sitting room at 221B Baker Street, where Holmes and Watson reside. The room is warm and cluttered, with books, papers, and chemical apparatus scattered about.",
+      "items": [
+        "Chemical Apparatus"
+      ],
+      "clues": [
+        "Holmes pieces together the evidence and deduces the truth about Captain Croker's involvement."
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A cozy, lived-in space with a fireplace, armchairs, and shelves filled with books and curiosities. The atmosphere is intellectual and inviting.",
+        "connections": [
+          {
+            "target_location": "london_telegraph_office",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "adelaide_southampton_office",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}

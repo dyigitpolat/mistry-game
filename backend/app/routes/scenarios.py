@@ -17,7 +17,13 @@ from app.core.auth import get_current_user, get_current_user_optional
 from app.db.mongodb import get_database
 
 router = APIRouter()
-_engine = GameEngine()
+
+def get_engine() -> GameEngine:
+    print("DEBUG: get_engine called")
+    """Get the shared GameEngine instance."""
+    if GameEngine._shared_instance is None:
+        return GameEngine()
+    return GameEngine._shared_instance
 
 
 class ScenarioSummary(BaseModel):
@@ -112,9 +118,10 @@ async def list_scenarios(user: Optional[Dict[str, Any]] = Depends(get_current_us
                     user_sessions[sid] = doc
         user_name = await _resolve_user_name(user["id"])
 
-    for sid, scenario in _engine.scenarios.items():
+    for sid, scenario in get_engine().scenarios.items():
         is_public = scenario.visibility.value == "public" if scenario.visibility else True
-        is_owner = bool(user) and _check_ownership(scenario, user["id"], user_name) if user else False
+        user_id = user["id"] if user else None
+        is_owner = bool(user) and _check_ownership(scenario, user_id, user_name) if user else False
 
         if not is_public and not is_owner:
             continue
@@ -157,7 +164,7 @@ async def _set_visibility(scenario_id: str, user: Dict[str, Any], target: str):
     """Shared helper to change a scenario's visibility. Only the owner can do this."""
     from app.models.scenario import ScenarioVisibility
 
-    scenario = _engine.load_scenario(scenario_id)
+    scenario = get_engine().load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
 
@@ -207,7 +214,7 @@ async def unpublish_scenario(
 @router.get("/{scenario_id}")
 async def get_scenario(scenario_id: str):
     """Get full scenario data (Knowledge Graph)."""
-    scenario = _engine.load_scenario(scenario_id)
+    scenario = get_engine().load_scenario(scenario_id)
     if scenario is None:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
     return scenario

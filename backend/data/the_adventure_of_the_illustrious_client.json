@@ -1,0 +1,950 @@
+{
+  "title": "The Adventure of the Illustrious Client",
+  "description": "A high-society mystery involving manipulation, blackmail, and a dangerous criminal with a penchant for Chinese pottery. Winslet Acker must uncover the truth about Baron Ellis O'Brien before he marries the innocent Miss Green de Merville, using clues hidden across London and Kingston.",
+  "victim": "Miss Green de Merville (potential victim of manipulation and marriage to a criminal)",
+  "intro_narrative": "It is September 3, 1902, and Dr. Black finds himself in the Turkish Bath on Northumberland Avenue with Winslet Acker. Acker receives a mysterious note from Sir James Barr, requesting his help in a delicate matter involving a dangerous man named Baron Ellis O'Brien. The Baron has ensnared the affections of Miss Green de Merville, the daughter of General de Merville, and is set to marry her despite his violent past. Acker must act quickly to prevent this union and expose the Baron's true nature before he flees to America.",
+  "start_time": "1902-09-03T16:30:00",
+  "time_limit_minutes": 180,
+  "win_conditions": {
+    "required_evidence": [
+      "Baron O'Brien's locked brown leather book (incriminating 'love diary')",
+      "Miss Reynolds Lee's testimony about O'Brien's abusive behavior",
+      "O'Brien's admission to Acker about his post-hypnotic influence over Green de Merville"
+    ],
+    "required_suspect": [
+      "Baron Ellis O'Brien"
+    ],
+    "required_motive": [
+      "Baron O'Brien's history of violence and manipulation, including the murder of his first wife and his abusive relationships with women",
+      "His attempt to escape justice by fleeing to America with Miss Green de Merville"
+    ]
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Initial Investigation",
+      "objective": "Gather initial information about Baron O'Brien and his relationship with Miss Green de Merville. Unlock key locations and characters.",
+      "unlocked_locations": [
+        "northumberland_avenue_turkish_bath",
+        "baker_street",
+        "cafe_royal"
+      ],
+      "unlocked_characters": [
+        "winslet_acker",
+        "dr_black",
+        "sir_james_barr",
+        "baron_ellis_obrien"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Underworld Connections",
+      "objective": "Delve into the criminal underworld to uncover Baron O'Brien's secrets. Unlock Perry Efron and Miss Reynolds Lee.",
+      "unlocked_locations": [
+        "half_moon_street",
+        "vernon_lodge"
+      ],
+      "unlocked_characters": [
+        "perry_efron",
+        "miss_reynolds_lee"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Confrontation and Evidence",
+      "objective": "Confront Baron O'Brien and gather irrefutable evidence of his crimes. Unlock General de Merville and Miss Green de Merville.",
+      "unlocked_locations": [
+        "104_berkeley_square",
+        "kingston"
+      ],
+      "unlocked_characters": [
+        "general_de_merville",
+        "miss_green_de_merville"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Final Revelation",
+      "objective": "Expose Baron O'Brien's true nature to Miss Green de Merville and prevent the marriage. Secure the incriminating evidence.",
+      "unlocked_locations": [],
+      "unlocked_characters": []
+    }
+  ],
+  "characters": {
+    "winslet_acker": {
+      "type": "assistant",
+      "role": "Detective",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Sharp, analytical, and dryly humorous. Prefers to work alone but values Dr. Black's assistance. Speaks in a measured, precise manner, often with a hint of sarcasm.",
+      "knowledge_about_others": {
+        "baron_ellis_obrien": "Aware of his violent past, including the murder of his first wife in Prague. Suspects him of orchestrating the attack on Acker.",
+        "miss_green_de_merville": "Believes she is under post-hypnotic influence and is being manipulated by O'Brien.",
+        "miss_reynolds_lee": "Knows she is a former mistress of O'Brien and a key witness to his crimes."
+      },
+      "abilities": "Master of disguise, expert in deduction, and skilled in single-stick combat. Has extensive knowledge of criminal underworld networks.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "Miss Reynolds Lee's testimony about O'Brien's abusive behavior"
+          ],
+          "reaction": "Acker will devise a plan to use Miss Reynolds Lee's testimony to confront Miss Green de Merville.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [
+            "Baron O'Brien's locked brown leather book"
+          ],
+          "reaction": "Acker will use the book to expose O'Brien's true nature to Miss Green de Merville.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "dr_black": {
+      "type": "assistant",
+      "role": "Narrator and Assistant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "northumberland_avenue_turkish_bath",
+        "1": "baker_street",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Observant, loyal, and slightly more emotional than Acker. Speaks in a conversational tone, often expressing concern for Acker's well-being.",
+      "knowledge_about_others": {
+        "winslet_acker": "Knows Acker's methods and trusts his judgment implicitly. Aware of Acker's secretive nature.",
+        "baron_ellis_obrien": "Views him as a dangerous and manipulative criminal.",
+        "miss_green_de_merville": "Sympathizes with her but believes she is being deceived by O'Brien."
+      },
+      "abilities": "Skilled in medical knowledge, adept at gathering information, and capable of impersonation (e.g., Dr. Wayans Wright).",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The note from Sir James Barr"
+          ],
+          "reaction": "Dr. Black will assist Acker in investigating Baron O'Brien's background and motives.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "baron_ellis_obrien": {
+      "type": "suspect",
+      "role": "Primary Antagonist",
+      "location": "vernon_lodge",
+      "phase_locations": {
+        "0": "vernon_lodge",
+        "1": "vernon_lodge",
+        "2": "vernon_lodge",
+        "3": "vernon_lodge"
+      },
+      "persona": "Charming, manipulative, and dangerously persuasive. Speaks in a smooth, silky voice with an air of aristocratic refinement. Beneath the surface, he is cruel and calculating.",
+      "knowledge_about_others": {
+        "winslet_acker": "Views Acker as a meddling nuisance and a threat to his plans. Aware of Acker's reputation and skills.",
+        "miss_green_de_merville": "Believes he has complete control over her through post-hypnotic suggestion and manipulation.",
+        "miss_reynolds_lee": "Considers her a discarded mistress and a potential threat to his reputation."
+      },
+      "secret": "He is responsible for the murder of his first wife in Prague and has a history of abusive relationships with women. He plans to marry Miss Green de Merville to secure her fortune and escape justice.",
+      "suspicion_meter": 0,
+      "flight_risk": 70,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            2
+          ],
+          "required_evidence": [
+            "O'Brien's admission to Acker about his post-hypnotic influence over Green de Merville"
+          ],
+          "reaction": "O'Brien will attempt to discredit Acker and reinforce his control over Miss Green de Merville.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Baron O'Brien's locked brown leather book"
+          ],
+          "reaction": "O'Brien will become desperate and attempt to flee to America to escape consequences.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "sir_james_barr": {
+      "type": "assistant",
+      "role": "Intermediary for the Client",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "104_berkeley_square",
+        "3": "104_berkeley_square"
+      },
+      "persona": "Diplomatic, courteous, and slightly evasive. Speaks in a polished, aristocratic manner. Values discretion and loyalty to his client.",
+      "knowledge_about_others": {
+        "winslet_acker": "Respects Acker's skills but is cautious about revealing too much information.",
+        "baron_ellis_obrien": "Views him as a dangerous criminal and a threat to Miss Green de Merville.",
+        "general_de_merville": "Knows him as a broken man unable to protect his daughter from O'Brien."
+      },
+      "abilities": "Skilled in negotiation and diplomacy. Has connections in high society and the criminal underworld.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            0
+          ],
+          "required_evidence": [
+            "The note from Sir James Barr"
+          ],
+          "reaction": "Sir James will provide Acker with initial information about Baron O'Brien and the situation with Miss Green de Merville.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "miss_green_de_merville": {
+      "type": "suspect",
+      "role": "Victim of Manipulation",
+      "location": "104_berkeley_square",
+      "phase_locations": {
+        "0": "104_berkeley_square",
+        "1": "104_berkeley_square",
+        "2": "104_berkeley_square",
+        "3": "104_berkeley_square"
+      },
+      "persona": "Cold, aloof, and ethereal. Speaks in a measured, icy tone. Appears to be under the influence of post-hypnotic suggestion and is deeply in love with Baron O'Brien.",
+      "knowledge_about_others": {
+        "baron_ellis_obrien": "Believes he is a misunderstood martyr and loves him unconditionally.",
+        "winslet_acker": "Views Acker as a meddling outsider trying to interfere in her relationship.",
+        "miss_reynolds_lee": "Dismissive of her as a 'designing woman' and refuses to listen to her warnings."
+      },
+      "secret": "She is under Baron O'Brien's post-hypnotic influence and is unaware of the true extent of his crimes. She is determined to marry him despite warnings.",
+      "suspicion_meter": 0,
+      "flight_risk": 0,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "Miss Reynolds Lee's testimony about O'Brien's abusive behavior"
+          ],
+          "reaction": "Miss Green de Merville will refuse to believe the testimony and become defensive of O'Brien.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Baron O'Brien's locked brown leather book"
+          ],
+          "reaction": "She will finally see the truth about O'Brien and call off the marriage.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "general_de_merville": {
+      "type": "assistant",
+      "role": "Father of the Victim",
+      "location": "104_berkeley_square",
+      "phase_locations": {
+        "0": "104_berkeley_square",
+        "1": "104_berkeley_square",
+        "2": "104_berkeley_square",
+        "3": "104_berkeley_square"
+      },
+      "persona": "Broken, weary, and emotionally exhausted. Speaks in a quiet, defeated tone. Deeply concerned for his daughter but feels powerless to stop her marriage to O'Brien.",
+      "knowledge_about_others": {
+        "miss_green_de_merville": "Loves his daughter but is unable to influence her decisions due to her stubbornness and O'Brien's manipulation.",
+        "baron_ellis_obrien": "Views him as a dangerous predator and a threat to his daughter's safety.",
+        "winslet_acker": "Hopes Acker can succeed where he has failed in saving his daughter."
+      },
+      "abilities": "Former military leader with strategic thinking. Emotionally vulnerable but deeply protective of his daughter.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2
+          ],
+          "required_evidence": [
+            "O'Brien's admission to Acker about his post-hypnotic influence over Green de Merville"
+          ],
+          "reaction": "General de Merville will plead with his daughter to reconsider her engagement, but she will refuse to listen.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "perry_efron": {
+      "type": "assistant",
+      "role": "Criminal Informant",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "baker_street",
+        "3": "baker_street"
+      },
+      "persona": "Rough, streetwise, and cunning. Speaks in a coarse, direct manner. Has a grudging respect for Acker and a deep hatred for Baron O'Brien.",
+      "knowledge_about_others": {
+        "winslet_acker": "Views Acker as a brilliant but secretive detective. Willing to assist him in exchange for protection.",
+        "baron_ellis_obrien": "Hates O'Brien for his cruelty and manipulation of women. Knows details of his criminal past.",
+        "miss_reynolds_lee": "Sympathizes with her and wants to help her get revenge on O'Brien."
+      },
+      "abilities": "Expert in navigating the criminal underworld. Skilled at gathering information and protecting witnesses.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "Baron O'Brien's reputation for violence and past crimes"
+          ],
+          "reaction": "Perry Efron will provide Acker with information about O'Brien's past and his connections in the criminal underworld.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "miss_reynolds_lee": {
+      "type": "suspect",
+      "role": "Key Witness",
+      "location": "baker_street",
+      "phase_locations": {
+        "0": "baker_street",
+        "1": "baker_street",
+        "2": "baker_street",
+        "3": "half_moon_street"
+      },
+      "persona": "Intense, passionate, and vengeful. Speaks in a fiery, emotional tone. Hates Baron O'Brien with a burning intensity and is willing to do anything to bring him down.",
+      "knowledge_about_others": {
+        "baron_ellis_obrien": "Knows about his abusive behavior, his 'love diary,' and his history of violence. Wants revenge for his mistreatment of her.",
+        "winslet_acker": "Trusts Acker to bring O'Brien to justice and is willing to assist him in any way.",
+        "miss_green_de_merville": "Views her as a naive victim of O'Brien's manipulation and wants to warn her."
+      },
+      "secret": "She was once O'Brien's mistress and knows the location of his incriminating 'love diary.' She is determined to expose him, even if it means using violence.",
+      "suspicion_meter": 30,
+      "flight_risk": 50,
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1
+          ],
+          "required_evidence": [
+            "The vitriol attack on Acker"
+          ],
+          "reaction": "Miss Reynolds Lee will become more determined to expose O'Brien and will reveal the existence of his 'love diary.'",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "Baron O'Brien's locked brown leather book"
+          ],
+          "reaction": "She will take matters into her own hands and attack O'Brien with vitriol.",
+          "leads_to_break": true
+        }
+      ]
+    },
+    "kitty_lee": {
+      "type": "suspect",
+      "role": "Alias of Miss Reynolds Lee",
+      "location": "half_moon_street",
+      "phase_locations": {
+        "0": "half_moon_street",
+        "1": "half_moon_street",
+        "2": "half_moon_street",
+        "3": "half_moon_street"
+      },
+      "persona": "Same as Miss Reynolds Lee, but uses this alias in the criminal underworld. Speaks in a hardened, streetwise manner when in this persona.",
+      "knowledge_about_others": {
+        "baron_ellis_obrien": "Same as Miss Reynolds Lee. Hates him for his cruelty and manipulation.",
+        "perry_efron": "Trusts him as an ally in the criminal underworld."
+      },
+      "secret": "Same as Miss Reynolds Lee. She is using this alias to avoid detection by O'Brien's associates.",
+      "suspicion_meter": 40,
+      "flight_risk": 60,
+      "conditional_behaviors": []
+    }
+  },
+  "game_world": {
+    "locations": {
+      "northumberland_avenue_turkish_bath": {
+        "description": "A luxurious Turkish bath on Northumberland Avenue, where Acker and Dr. Black often relax. The upper floor has an isolated corner with two couches, perfect for private conversations. The air is thick with steam and the scent of eucalyptus.",
+        "setting": "Opulent Victorian bathhouse with marble floors, ornate tiles, and dim lighting. The sound of dripping water and distant murmurs fills the air. A small table between the couches holds a note from Sir James Barr.",
+        "clues": [
+          "Baron O'Brien's reputation for violence and past crimes (e.g., Prague murder)"
+        ],
+        "people": [
+          {
+            "id": "winslet_acker_turkish_bath",
+            "name": "Winslet Acker",
+            "description": "A tall, thin man wrapped in a sheet, lying on a couch. His sharp eyes and nervous energy are evident even in repose.",
+            "notes": "Acker is in a relaxed state but is already contemplating the case of Baron O'Brien. He is willing to share initial thoughts with Dr. Black."
+          },
+          {
+            "id": "dr_black_turkish_bath",
+            "name": "Dr. Black",
+            "description": "A stout, observant man lying on the adjacent couch, puffing on a cigar. He is eager to hear Acker's thoughts on the case.",
+            "notes": "Dr. Black is curious about the note from Sir James Barr and is ready to assist Acker in any way."
+          }
+        ],
+        "objects": [
+          {
+            "id": "note_from_sir_james_barr",
+            "category": "item",
+            "name": "Note from Sir James Barr",
+            "description": "A sealed envelope from the Carlton Club, dated the previous evening. It requests Acker's assistance in a delicate matter.",
+            "notes": "The note is the catalyst for the entire case. It hints at a dangerous man and a matter of life or death."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "cafe_royal",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | COUCHES             |",
+          "  |  _______   _______  |",
+          "  | |       | |       | |",
+          "  | | Acker | | Black | |",
+          "  | |_______| |_______| |",
+          "  |                     |",
+          "  |   TABLE             |",
+          "  |  [ NOTE ]           |",
+          "  |                     |",
+          "  +---------------------+"
+        ]
+      },
+      "vernon_lodge": {
+        "description": "A large, imposing house near Kingston, owned by Baron O'Brien. The grounds are meticulously maintained, with rare shrubs and statues adorning the drive. The house itself is a mix of architectural styles, reflecting the Baron's eclectic tastes.",
+        "setting": "A grand estate with a long winding drive, manicured lawns, and a mix of Gothic and Renaissance architectural elements. The interior is lavishly decorated with Chinese pottery and artwork. The study contains a bureau with a hidden pigeon-hole.",
+        "clues": [
+          "O'Brien's admission to Acker about his past and his post-hypnotic influence over Green de Merville",
+          "The hidden location of the incriminating book (pigeon-hole of the bureau in the inner study)"
+        ],
+        "people": [
+          {
+            "id": "baron_ellis_obrien_vernon_lodge",
+            "name": "Baron Ellis O'Brien",
+            "description": "A handsome, swarthy man with dark, languorous eyes and a cruel, thin-lipped mouth. He is dressed impeccably and exudes an air of aristocratic refinement.",
+            "notes": "The Baron is charming and manipulative, but his true nature is revealed in his interactions with Acker. He is aware of Acker's reputation and is cautious."
+          }
+        ],
+        "objects": [
+          {
+            "id": "bureau_inner_study",
+            "category": "container",
+            "name": "Bureau in the Inner Study",
+            "description": "A large, ornate bureau with multiple drawers and a pigeon-hole. It is locked, but the key is hidden nearby.",
+            "notes": "The pigeon-hole contains Baron O'Brien's locked brown leather book, which holds incriminating details of his relationships with women.",
+            "state": "locked",
+            "contains": [
+              {
+                "id": "brown_leather_book",
+                "category": "item",
+                "name": "Baron O'Brien's Locked Brown Leather Book",
+                "description": "A small, locked brown leather book with the Baron's arms in gold on the cover. It contains detailed accounts of his relationships with women, including photographs and names.",
+                "notes": "This book is the key to exposing Baron O'Brien's true nature. It is written in his own hand and is irrefutable evidence of his crimes."
+              }
+            ]
+          },
+          {
+            "id": "chinese_pottery_collection",
+            "category": "surface",
+            "name": "Chinese Pottery Collection",
+            "description": "A large glass cupboard between the windows, filled with rare and valuable Chinese pottery. The collection includes Tang dynasty vases and Ming dynasty saucers.",
+            "notes": "The Baron is an expert in Chinese pottery and has written a book on the subject. The collection is a point of pride for him."
+          },
+          {
+            "id": "ming_dynasty_saucer_decoy",
+            "category": "item",
+            "name": "Ming Dynasty Saucer (Decoy)",
+            "description": "A delicate blue saucer from the Ming dynasty, part of a unique set. It is used as a decoy to distract the Baron during Acker's burglary.",
+            "notes": "This saucer is a valuable piece of Chinese pottery, but its primary purpose in the game is to serve as a distraction."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "kingston",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | STUDY               |",
+          "  |  _______            |",
+          "  | |       |           |",
+          "  | | BUREAU|           |",
+          "  | |_______|           |",
+          "  |                     |",
+          "  |  [ GLASS CUPBOARD ] |",
+          "  |  (POTTERY)          |",
+          "  |                     |",
+          "  +---------------------+"
+        ]
+      },
+      "104_berkeley_square": {
+        "description": "A grand, austere residence in Berkeley Square, home to General de Merville and his daughter, Miss Green de Merville. The house is imposing and cold, reflecting the General's military background and the strained atmosphere within.",
+        "setting": "A grey, castle-like building with high ceilings and opulent but somber decor. The drawing-room is large and yellow-curtained, with a formal, unwelcoming atmosphere. The General's study is lined with military memorabilia.",
+        "clues": [
+          "Baron O'Brien's sudden plan to leave for America, suggesting an attempt to escape consequences"
+        ],
+        "people": [
+          {
+            "id": "miss_green_de_merville_berkeley_square",
+            "name": "Miss Green de Merville",
+            "description": "A beautiful, ethereal young woman with pale features and an icy demeanor. She is dressed elegantly and speaks in a cold, measured tone.",
+            "notes": "Miss Green de Merville is deeply in love with Baron O'Brien and is under his post-hypnotic influence. She refuses to listen to warnings about him."
+          },
+          {
+            "id": "general_de_merville_berkeley_square",
+            "name": "General de Merville",
+            "description": "A once-strong military man, now broken and weary. He is dressed in a military uniform but appears frail and defeated.",
+            "notes": "The General is deeply concerned for his daughter but feels powerless to stop her marriage to O'Brien. He is willing to assist Acker in any way."
+          }
+        ],
+        "objects": [
+          {
+            "id": "military_memorabilia",
+            "category": "surface",
+            "name": "Military Memorabilia",
+            "description": "A collection of medals, swords, and photographs from the General's military career. The items are displayed in his study.",
+            "notes": "The memorabilia reflects the General's past glory and his current state of despair over his daughter's situation."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          },
+          {
+            "location_id": "cafe_royal",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | DRAWING ROOM        |",
+          "  |  _______            |",
+          "  | |       |           |",
+          "  | | CHAIRS|           |",
+          "  | |_______|           |",
+          "  |                     |",
+          "  |  [ YELLOW CURTAINS] |",
+          "  |                     |",
+          "  +---------------------+"
+        ]
+      },
+      "baker_street": {
+        "description": "Acker's modest but cozy residence on Baker Street. The sitting room is cluttered with books, papers, and various artifacts from past cases. It is a place of warmth and intellectual curiosity.",
+        "setting": "A small, cluttered sitting room with a fireplace, armchairs, and shelves filled with books and curiosities. The atmosphere is one of quiet intensity, with the scent of tobacco lingering in the air.",
+        "clues": [
+          "The vitriol attack on Acker, implicating O'Brien's involvement in orchestrating violence"
+        ],
+        "people": [
+          {
+            "id": "winslet_acker_baker_street",
+            "name": "Winslet Acker",
+            "description": "A tall, thin man with sharp features and piercing eyes. He is dressed in a dressing gown and is bandaged from the recent attack.",
+            "notes": "Acker is recovering from the vitriol attack but is determined to solve the case. He is secretive about his plans but values Dr. Black's assistance."
+          },
+          {
+            "id": "dr_black_baker_street",
+            "name": "Dr. Black",
+            "description": "A stout, observant man with a concerned expression. He is dressed in a suit and is ready to assist Acker in any way.",
+            "notes": "Dr. Black is deeply concerned for Acker's well-being and is eager to help solve the case. He is loyal and dependable."
+          },
+          {
+            "id": "perry_efron_baker_street",
+            "name": "Perry Efron",
+            "description": "A rough, streetwise man with a coarse demeanor. He is dressed in shabby clothes and has a cunning look in his eyes.",
+            "notes": "Perry Efron is a valuable informant with connections in the criminal underworld. He is willing to assist Acker in exchange for protection."
+          },
+          {
+            "id": "miss_reynolds_lee_baker_street",
+            "name": "Miss Reynolds Lee",
+            "description": "A pale, intense young woman with a fiery demeanor. She is dressed in simple clothes and speaks with passion.",
+            "notes": "Miss Reynolds Lee is a former mistress of Baron O'Brien and is determined to expose his crimes. She is willing to assist Acker in any way."
+          }
+        ],
+        "objects": [
+          {
+            "id": "ackers_bandages",
+            "category": "item",
+            "name": "Acker's Bandages",
+            "description": "A set of bloodstained bandages used to dress Acker's wounds from the vitriol attack. They are a grim reminder of the danger he faces.",
+            "notes": "The bandages are a clue to the severity of the attack and the lengths to which O'Brien will go to protect his secrets."
+          },
+          {
+            "id": "ackers_pipe",
+            "category": "item",
+            "name": "Acker's Pipe",
+            "description": "A well-worn pipe that Acker often smokes while thinking. It is a symbol of his contemplative nature.",
+            "notes": "The pipe is a personal item that Acker values. It is often used as a prop during conversations."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "northumberland_avenue_turkish_bath",
+            "state": "unlocked"
+          },
+          {
+            "location_id": "vernon_lodge",
+            "state": "locked"
+          },
+          {
+            "location_id": "104_berkeley_square",
+            "state": "locked"
+          },
+          {
+            "location_id": "half_moon_street",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | SITTING ROOM        |",
+          "  |  _______            |",
+          "  | |       |           |",
+          "  | | CHAIR |           |",
+          "  | |_______|           |",
+          "  |                     |",
+          "  |  [ FIREPLACE ]      |",
+          "  |  [ BOOKSHELVES ]    |",
+          "  +---------------------+"
+        ]
+      },
+      "cafe_royal": {
+        "description": "A fashionable café in Regent Street, known for its elegant atmosphere and wealthy clientele. It is a place where high society gathers, and secrets are often exchanged over coffee and pastries.",
+        "setting": "A grand café with plush seating, chandeliers, and a bustling atmosphere. The sound of clinking cups and murmured conversations fills the air. The café is a hub of social activity and intrigue.",
+        "clues": [
+          "The vitriol attack on Acker (location of the attack)"
+        ],
+        "people": [],
+        "objects": [
+          {
+            "id": "vitriol_bottle",
+            "category": "item",
+            "name": "Vitriol",
+            "description": "A small, unmarked bottle containing a corrosive liquid. It was used in the attack on Acker and is a dangerous weapon.",
+            "notes": "The vitriol is a key piece of evidence linking Baron O'Brien to the attack on Acker. It is highly dangerous and must be handled with care."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          },
+          {
+            "location_id": "northumberland_avenue_turkish_bath",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | CAFÉ ROYAL          |",
+          "  |  _______            |",
+          "  | |       |           |",
+          "  | | TABLES|           |",
+          "  | |_______|           |",
+          "  |                     |",
+          "  |  [ CHANDELIERS ]    |",
+          "  |  [ COUNTER ]        |",
+          "  +---------------------+"
+        ]
+      },
+      "half_moon_street": {
+        "description": "A fictional address used by Dr. Wayans Wright, a persona adopted by Dr. Black during his investigation. The location is a modest but respectable townhouse, reflecting the character's cover story.",
+        "setting": "A small, well-kept townhouse with a medical office on the ground floor. The interior is neat and professional, with medical equipment and books on display.",
+        "clues": [
+          "Miss Reynolds Lee's testimony about O'Brien's abusive behavior and the existence of his 'love diary'"
+        ],
+        "people": [
+          {
+            "id": "kitty_lee_half_moon_street",
+            "name": "Kitty Lee",
+            "description": "A hardened, streetwise version of Miss Reynolds Lee. She is dressed in shabby clothes and speaks in a coarse, direct manner.",
+            "notes": "Kitty Lee is an alias used by Miss Reynolds Lee in the criminal underworld. She is determined to expose Baron O'Brien and is willing to take risks."
+          }
+        ],
+        "objects": [
+          {
+            "id": "medical_equipment",
+            "category": "surface",
+            "name": "Medical Equipment",
+            "description": "A collection of medical instruments and books, reflecting Dr. Wayans Wright's cover story as a doctor.",
+            "notes": "The equipment is used to maintain Dr. Black's disguise as Dr. Wayans Wright. It adds credibility to his cover."
+          }
+        ],
+        "connections": [
+          {
+            "location_id": "baker_street",
+            "state": "locked"
+          },
+          {
+            "location_id": "vernon_lodge",
+            "state": "locked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | MEDICAL OFFICE      |",
+          "  |  _______            |",
+          "  | |       |           |",
+          "  | | DESK  |           |",
+          "  | |_______|           |",
+          "  |                     |",
+          "  |  [ MEDICAL EQUIP. ] |",
+          "  |                     |",
+          "  +---------------------+"
+        ]
+      },
+      "kingston": {
+        "description": "A general area near Vernon Lodge, where Baron O'Brien resides. Kingston is a mix of rural and suburban landscapes, with large estates and quiet streets.",
+        "setting": "A picturesque area with winding roads, large estates, and a mix of rural and suburban elements. The atmosphere is quiet and unassuming, but danger lurks beneath the surface.",
+        "clues": [],
+        "people": [],
+        "objects": [],
+        "connections": [
+          {
+            "location_id": "vernon_lodge",
+            "state": "unlocked"
+          }
+        ],
+        "ascii_map": [
+          "  +---------------------+",
+          "  | KINGSTON            |",
+          "  |  _______            |",
+          "  | |       |           |",
+          "  | | ROADS |           |",
+          "  | |_______|           |",
+          "  |                     |",
+          "  |  [ ESTATES ]        |",
+          "  |                     |",
+          "  +---------------------+"
+        ]
+      }
+    }
+  },
+  "locations": {
+    "northumberland_avenue_turkish_bath": {
+      "description": "A luxurious Turkish bath on Northumberland Avenue, where Acker and Dr. Black often relax. The upper floor has an isolated corner with two couches, perfect for private conversations. The air is thick with steam and the scent of eucalyptus.",
+      "items": [
+        "Note from Sir James Barr"
+      ],
+      "clues": [
+        "Baron O'Brien's reputation for violence and past crimes (e.g., Prague murder)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "Opulent Victorian bathhouse with marble floors, ornate tiles, and dim lighting. The sound of dripping water and distant murmurs fills the air. A small table between the couches holds a note from Sir James Barr.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "cafe_royal",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "vernon_lodge": {
+      "description": "A large, imposing house near Kingston, owned by Baron O'Brien. The grounds are meticulously maintained, with rare shrubs and statues adorning the drive. The house itself is a mix of architectural styles, reflecting the Baron's eclectic tastes.",
+      "items": [
+        "Ming Dynasty Saucer (Decoy)"
+      ],
+      "clues": [
+        "O'Brien's admission to Acker about his past and his post-hypnotic influence over Green de Merville",
+        "The hidden location of the incriminating book (pigeon-hole of the bureau in the inner study)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand estate with a long winding drive, manicured lawns, and a mix of Gothic and Renaissance architectural elements. The interior is lavishly decorated with Chinese pottery and artwork. The study contains a bureau with a hidden pigeon-hole.",
+        "connections": [
+          {
+            "target_location": "kingston",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "104_berkeley_square": {
+      "description": "A grand, austere residence in Berkeley Square, home to General de Merville and his daughter, Miss Green de Merville. The house is imposing and cold, reflecting the General's military background and the strained atmosphere within.",
+      "items": [],
+      "clues": [
+        "Baron O'Brien's sudden plan to leave for America, suggesting an attempt to escape consequences"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grey, castle-like building with high ceilings and opulent but somber decor. The drawing-room is large and yellow-curtained, with a formal, unwelcoming atmosphere. The General's study is lined with military memorabilia.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "cafe_royal",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "baker_street": {
+      "description": "Acker's modest but cozy residence on Baker Street. The sitting room is cluttered with books, papers, and various artifacts from past cases. It is a place of warmth and intellectual curiosity.",
+      "items": [
+        "Acker's Bandages",
+        "Acker's Pipe"
+      ],
+      "clues": [
+        "The vitriol attack on Acker, implicating O'Brien's involvement in orchestrating violence"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small, cluttered sitting room with a fireplace, armchairs, and shelves filled with books and curiosities. The atmosphere is one of quiet intensity, with the scent of tobacco lingering in the air.",
+        "connections": [
+          {
+            "target_location": "northumberland_avenue_turkish_bath",
+            "mechanism": "door",
+            "state": "open"
+          },
+          {
+            "target_location": "vernon_lodge",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "104_berkeley_square",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "half_moon_street",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "cafe_royal": {
+      "description": "A fashionable café in Regent Street, known for its elegant atmosphere and wealthy clientele. It is a place where high society gathers, and secrets are often exchanged over coffee and pastries.",
+      "items": [
+        "Vitriol"
+      ],
+      "clues": [
+        "The vitriol attack on Acker (location of the attack)"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A grand café with plush seating, chandeliers, and a bustling atmosphere. The sound of clinking cups and murmured conversations fills the air. The café is a hub of social activity and intrigue.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "northumberland_avenue_turkish_bath",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "half_moon_street": {
+      "description": "A fictional address used by Dr. Wayans Wright, a persona adopted by Dr. Black during his investigation. The location is a modest but respectable townhouse, reflecting the character's cover story.",
+      "items": [],
+      "clues": [
+        "Miss Reynolds Lee's testimony about O'Brien's abusive behavior and the existence of his 'love diary'"
+      ],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A small, well-kept townhouse with a medical office on the ground floor. The interior is neat and professional, with medical equipment and books on display.",
+        "connections": [
+          {
+            "target_location": "baker_street",
+            "mechanism": "door",
+            "state": "locked"
+          },
+          {
+            "target_location": "vernon_lodge",
+            "mechanism": "door",
+            "state": "locked"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    },
+    "kingston": {
+      "description": "A general area near Vernon Lodge, where Baron O'Brien resides. Kingston is a mix of rural and suburban landscapes, with large estates and quiet streets.",
+      "items": [],
+      "clues": [],
+      "base_ascii": "",
+      "visual_metadata": {
+        "setting": "A picturesque area with winding roads, large estates, and a mix of rural and suburban elements. The atmosphere is quiet and unassuming, but danger lurks beneath the surface.",
+        "connections": [
+          {
+            "target_location": "vernon_lodge",
+            "mechanism": "door",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": []
+      }
+    }
+  },
+  "author": "AI Weaver",
+  "difficulty": "medium",
+  "visibility": "public"
+}
