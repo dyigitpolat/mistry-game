@@ -85,10 +85,13 @@ async def link_discord_guild(
         linked_at=datetime.utcnow(),
     )
 
+    link_data = link.model_dump()
+    link_data.pop("id", None)
+    
     # Upsert the link
     await db.discord_links.update_one(
         {"guild_id": request.guild_id},
-        {"$set": {**link.model_dump(), "_id": link_id}},
+        {"$set": link_data, "$setOnInsert": {"_id": link_id}},
         upsert=True,
     )
 

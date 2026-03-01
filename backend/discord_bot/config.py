@@ -28,9 +28,9 @@ class BotConfig:
         if not token:
             raise ValueError("DISCORD_BOT_TOKEN not set")
 
-        client_id = os.getenv("DISCORD_CLIENT_ID")
+        client_id = os.getenv("DISCORD_CLIENT_ID") or os.getenv("NEXT_PUBLIC_DISCORD_CLIENT_ID")
         if not client_id:
-            raise ValueError("DISCORD_CLIENT_ID not set")
+            raise ValueError("DISCORD_CLIENT_ID or NEXT_PUBLIC_DISCORD_CLIENT_ID not set")
 
         return cls(
             token=token,

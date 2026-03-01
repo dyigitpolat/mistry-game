@@ -1,0 +1,773 @@
+{
+  "title": "asd",
+  "author": "AI Weaver",
+  "description": "A gala night at the asd Grand Hotel turns sour when a centerpiece donation vanishes from a ballroom display. Detective Lillian Hart follows subtle handling marks, a starchy trail, and an unmistakable lipstick-red sealing wax signature through the hotel’s back corridors.",
+  "victim": "The asd Grand Hotel (reputation/charity gala) — theft victim: asd",
+  "intro_narrative": "Rain slicks the cobblestones outside the asd Grand Hotel. Inside, cigarette smoke and gardenias mingle beneath gilded cornices while jazz rises from the ballroom like a dare. Detective Lillian Hart and her assistant, ad, arrive to investigate a single headline: asd—stolen from a display stand moments before the Charleston contest. The clasp wasn’t forced. Someone knew exactly how to take it, and exactly where to vanish afterward.",
+  "time_limit_minutes": 180,
+  "start_time": "21:10",
+  "win_conditions": {
+    "required_evidence": [
+      "asd (critical evidence item)",
+      "manager’s threatened-audit note",
+      "crumpled gloves dusted with starch",
+      "triangle of black lace",
+      "lipstick-red sealing wax smear",
+      "laundry starch",
+      "bellhop cap"
+    ],
+    "required_suspect": [
+      "asd"
+    ],
+    "required_motive": [
+      "Fear of tomorrow’s audit exposing skimming from hotel receipts; theft of asd to create a scandal and buy time."
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Phase 1 — The Empty Stand",
+      "objective": "Learn what was taken and how it was removed without force.",
+      "unlocked_locations": [
+        "asd Grand Hotel lobby",
+        "asd Grand Hotel ballroom"
+      ],
+      "unlocked_characters": [
+        "Detective Lillian Hart",
+        "ad",
+        "Mabel Kline",
+        "Officer Eugene Rudd",
+        "Reverend Thomas Pruitt",
+        "Basil Lorne",
+        "Clara Voss",
+        "asd"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Phase 2 — The Upstairs Route",
+      "objective": "Find the thief’s route and confirm service-side movement.",
+      "unlocked_locations": [
+        "asd Grand Hotel mezzanine corridor",
+        "asd Grand Hotel service stairwell"
+      ],
+      "unlocked_characters": [
+        "Detective Lillian Hart",
+        "ad",
+        "Basil Lorne"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Phase 3 — Access, Motive, and Tools",
+      "objective": "Establish motive and access; connect physical traces to a person.",
+      "unlocked_locations": [
+        "asd Grand Hotel manager’s office",
+        "asd Grand Hotel linen room",
+        "asd Grand Hotel kitchen corridor"
+      ],
+      "unlocked_characters": [
+        "Mabel Kline",
+        "Clara Voss",
+        "Reverend Thomas Pruitt",
+        "Officer Eugene Rudd",
+        "asd"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Phase 4 — The Substation Wrap-Up",
+      "objective": "Present the chain of evidence and secure the culprit’s confession/arrest processing.",
+      "unlocked_locations": [
+        "asd Police substation"
+      ],
+      "unlocked_characters": [
+        "Officer Eugene Rudd",
+        "asd"
+      ]
+    }
+  ],
+  "locations": {
+    "asd Grand Hotel lobby": {
+      "description": "A jeweled lobby of black-and-white tile, potted palms, and umbrella racks. The revolving door sighs as rain-damp guests drift past toward the ballroom arches.",
+      "items": [
+        "bellhop cap"
+      ],
+      "clues": [
+        "asd is the only staff member known to seal internal memos with lipstick-red sealing wax rather than a stamp pad."
+      ],
+      "base_ascii": "+----------------------+\n| REVOLVING DOOR   []  |\n|      (street)        |\n|  UMBRELLA RACK  PALM |\n|  ________      ___   |\n| | TILE  |---->|ARCH| |\n| |______|      |____| |\n+----------------------+",
+      "visual_metadata": {
+        "setting": "Cigarette smoke and gardenias hang in warm air over gleaming checker tiles. Brass fixtures and gilt trim catch chandelier light; the ballroom’s jazz leaks through tall arches.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel ballroom",
+            "mechanism": "open archway",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel mezzanine corridor",
+            "mechanism": "curved public staircase",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel manager’s office",
+            "mechanism": "staff door behind reception",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Umbrella rack",
+            "type": "container",
+            "spatial_relationship": "Near the revolving door on the east wall",
+            "objects": [
+              {
+                "item_id": "bellhop cap",
+                "visibility": "partially hidden",
+                "hidden_by": "A cluster of wet umbrellas and a folded raincoat"
+              }
+            ]
+          },
+          {
+            "id": "Reception counter",
+            "type": "surface",
+            "spatial_relationship": "North side, facing the entrance",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "asd Grand Hotel ballroom": {
+      "description": "A cozy crowd beneath amber lamps and a brassy bandstand. Near the dais, a velvet-lined display stand sits conspicuously empty.",
+      "items": [
+        "lipstick-red sealing wax smear"
+      ],
+      "clues": [
+        "The display stand’s clasp is intact, suggesting the stolen item was removed with the correct touch rather than forced.",
+        "A faint streak of lipstick-red wax is found on the velvet under the empty space where the item sat.",
+        "A small triangle of black lace is snagged on a brass screw beneath the stand’s edge."
+      ],
+      "base_ascii": "+------------------------+\n| BANDSTAND    (BRASS)    |\n|   ____                 |\n|  |____|     TABLES     |\n|      o o o o o         |\n|  DAIS  [DISPLAY STAND] |\n| DOORS--> to LOBBY      |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "Jazz and low laughter roll over linen-draped tables. The velvet display stand by the dais feels like a missing tooth: too clean, too noticed. Staff weave in and out with trays; a service-side door blends into the wall paneling.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel lobby",
+            "mechanism": "double doors / arch",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel mezzanine corridor",
+            "mechanism": "staircase landing by the arches",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel kitchen corridor",
+            "mechanism": "swing door marked STAFF",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Display stand by dais",
+            "type": "surface",
+            "spatial_relationship": "South-east quadrant, beside the dais",
+            "objects": [
+              {
+                "item_id": "lipstick-red sealing wax smear",
+                "visibility": "partially hidden",
+                "hidden_by": "Low light on the velvet and the shadow of the dais"
+              }
+            ]
+          },
+          {
+            "id": "Bandstand riser",
+            "type": "surface",
+            "spatial_relationship": "North wall",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "asd Grand Hotel mezzanine corridor": {
+      "description": "A burgundy-carpeted balcony hall above the ballroom, lit by brass sconces. The air smells faintly of soap, and a service door sits slightly ajar.",
+      "items": [
+        "laundry starch"
+      ],
+      "clues": [
+        "On the mezzanine corridor rug, a wet shoeprint carries a pale, powdery residue like laundry starch."
+      ],
+      "base_ascii": "+------------------------+\n| SCONCE   SCONCE   ____ |\n|   |        |     |SERV||\n| [RUG]  WET PRINT  |DOOR||\n|                    ---- |\n| HALL -> GUEST END       |\n| HALL -> OFFICE END      |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "The corridor muffles the party below; every footstep sinks into deep burgundy pile. A narrow wet print cuts across the rug near the service door, dusted with pale powder that clings like fine snow.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel ballroom",
+            "mechanism": "stair landing and balcony arch",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel manager’s office",
+            "mechanism": "side hall with a frosted-glass door",
+            "state": "closed"
+          },
+          {
+            "target_location": "asd Grand Hotel service stairwell",
+            "mechanism": "service door (slightly ajar)",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Burgundy rug area",
+            "type": "surface",
+            "spatial_relationship": "Center of corridor near the service door",
+            "objects": [
+              {
+                "item_id": "laundry starch",
+                "visibility": "partially hidden",
+                "hidden_by": "Embedded in the rug fibers as pale residue"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asd Grand Hotel manager’s office": {
+      "description": "A mahogany desk, a wall safe with a brass dial, and a calendar crowded with penciled notes. Rain blurs the street lamps beyond the window.",
+      "items": [
+        "manager’s threatened-audit note"
+      ],
+      "clues": [
+        "In the manager’s office, a note about a threatened audit is dated for tomorrow morning."
+      ],
+      "base_ascii": "+------------------------+\n| WINDOW (RAIN)      SAFE|\n|  ________          [#] |\n| |DESK   |  CHAIR        |\n| |DRAWER |               |\n|  ---- DOOR -> HALL      |\n|  FILE CABINET           |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "Close, tense air—paper, ink, and worry. The desk’s polished surface reflects lamplight in a hard sheen, as if even the room wants to keep secrets tidy until morning.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel mezzanine corridor",
+            "mechanism": "office door to side hall",
+            "state": "closed"
+          },
+          {
+            "target_location": "asd Grand Hotel lobby",
+            "mechanism": "staff hall to reception side",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Mahogany desk",
+            "type": "surface",
+            "spatial_relationship": "Center of room beneath desk lamp",
+            "objects": [
+              {
+                "item_id": "manager’s threatened-audit note",
+                "visibility": "visible",
+                "hidden_by": null
+              }
+            ]
+          },
+          {
+            "id": "Desk drawer",
+            "type": "container",
+            "spatial_relationship": "Right side of desk",
+            "objects": []
+          },
+          {
+            "id": "Wall safe",
+            "type": "container",
+            "spatial_relationship": "East wall",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "asd Grand Hotel service stairwell": {
+      "description": "A narrow, institutional-green stairwell with a metal handrail worn smooth. It smells faintly of soap and damp wool, and it connects the hotel’s polished front to its hidden working spine.",
+      "items": [],
+      "clues": [
+        "Basil Lorne admits he saw someone in a bellhop’s cap on the service stairwell, but the figure moved like a woman in heels."
+      ],
+      "base_ascii": "+-------------------+\n| DOOR -> MEZZ       |\n|  ____              |\n| |____|  LANDING    |\n|   ||   HANDRAIL    |\n|  STAIRS DOWN  v    |\n| DOOR -> LINEN      |\n+-------------------+",
+      "visual_metadata": {
+        "setting": "Painted concrete and clipped echoes. The stairwell compresses sound into short, guilty bursts—footfalls, a quick breath, a brush of fabric against the rail.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel mezzanine corridor",
+            "mechanism": "service door at upper landing",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel linen room",
+            "mechanism": "utility door at lower landing",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel kitchen corridor",
+            "mechanism": "basement/service passage door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Lower landing floor",
+            "type": "surface",
+            "spatial_relationship": "Bottom of stairs near linen-room door",
+            "objects": []
+          }
+        ]
+      }
+    },
+    "asd Grand Hotel linen room": {
+      "description": "Stacks of folded sheets rise like snowdrifts. A clipboard inventory hangs by the door; a small repair bench sits beneath harsh light.",
+      "items": [
+        "triangle of black lace"
+      ],
+      "clues": [
+        "The linen room inventory shows a missing half-box of laundry starch and a roll of black lace used for uniform repairs."
+      ],
+      "base_ascii": "+------------------------+\n| SHELVES: SHEETS  SHEETS|\n| SHELVES: TOWELS  PILLOWS|\n| [INVENTORY CLIPBOARD]   |\n| REPAIR BENCH  (SCREWS)  |\n| DOOR -> STAIRWELL       |\n| CART TRACKS             |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "Crisp, clean smell—soap and pressed cotton—overlaid with the faint chalky tang of starch. The room is orderly in a way that makes missing things feel louder.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel service stairwell",
+            "mechanism": "utility door",
+            "state": "open"
+          },
+          {
+            "target_location": "asd Grand Hotel kitchen corridor",
+            "mechanism": "service passage",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Clipboard by door",
+            "type": "surface",
+            "spatial_relationship": "Hanging next to the doorframe",
+            "objects": []
+          },
+          {
+            "id": "Repair bench",
+            "type": "surface",
+            "spatial_relationship": "South wall under a bare bulb",
+            "objects": [
+              {
+                "item_id": "triangle of black lace",
+                "visibility": "partially hidden",
+                "hidden_by": "Caught under a brass screw head at the bench edge"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asd Grand Hotel kitchen corridor": {
+      "description": "A warm, noisy back corridor where pots clang and onion-heavy steam lingers. A door marked STAFF ONLY sits near an overfilled trash pail.",
+      "items": [
+        "crumpled gloves dusted with starch",
+        "asd (critical evidence item)"
+      ],
+      "clues": [
+        "In the kitchen corridor, a trash pail holds a crumpled pair of thin gloves dusted with starch and a smear of lipstick-red wax."
+      ],
+      "base_ascii": "+------------------------+\n| SWING DOOR -> BALLROOM  |\n| HOT PIPES   RADIO HUM   |\n| STAFF ONLY [DOOR]       |\n| TRASH PAIL (LID)        |\n| SERVICE HALL -> LINEN   |\n| SERVICE HALL -> STAIRS  |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "Heat and hustle: damp brick, rattling pans, hurried shoes. The corridor is a funnel for staff movement—perfect for discarding a mistake and letting the noise swallow it.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel ballroom",
+            "mechanism": "swing door",
+            "state": "closed"
+          },
+          {
+            "target_location": "asd Grand Hotel linen room",
+            "mechanism": "service passage",
+            "state": "closed"
+          },
+          {
+            "target_location": "asd Grand Hotel service stairwell",
+            "mechanism": "basement/service door",
+            "state": "closed"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Trash pail",
+            "type": "container",
+            "spatial_relationship": "Beside the STAFF ONLY door",
+            "objects": [
+              {
+                "item_id": "crumpled gloves dusted with starch",
+                "visibility": "hidden",
+                "hidden_by": "Greasy paper and kitchen refuse near the top"
+              }
+            ]
+          },
+          {
+            "id": "Staff-only closet",
+            "type": "container",
+            "spatial_relationship": "Behind the door marked STAFF ONLY",
+            "objects": [
+              {
+                "item_id": "asd (critical evidence item)",
+                "visibility": "hidden",
+                "hidden_by": "A canvas laundry sack pushed behind cleaning tins"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asd Police substation": {
+      "description": "A cramped substation smelling of coffee and wet wool. A booking desk, a bulletin board of notices, and a small interview room with a buzzing light.",
+      "items": [],
+      "clues": [
+        "Clara Voss’s evening wrap has a fresh tear that matches the snagged triangle of black lace."
+      ],
+      "base_ascii": "+------------------------+\n| BOOKING DESK   COFFEE   |\n| BULL. BOARD  (NOTICES)  |\n| BENCH (WAITING)         |\n| INTERVIEW ROOM [GLASS]  |\n| COAT HOOKS (WET)        |\n| DOOR -> STREET          |\n+------------------------+",
+      "visual_metadata": {
+        "setting": "Hard angles and harsher light. Rain ticks at the window; papers curl at the edges. The city feels closer here—less music, more consequences.",
+        "connections": [
+          {
+            "target_location": "asd Grand Hotel lobby",
+            "mechanism": "street route / patrol car",
+            "state": "open"
+          }
+        ],
+        "surfaces_and_containers": [
+          {
+            "id": "Booking desk",
+            "type": "surface",
+            "spatial_relationship": "Front of the room near the entry",
+            "objects": []
+          },
+          {
+            "id": "Interview room table",
+            "type": "surface",
+            "spatial_relationship": "Behind glass partition",
+            "objects": []
+          }
+        ]
+      }
+    }
+  },
+  "characters": {
+    "Detective Lillian Hart": {
+      "type": "assistant",
+      "role": "Player-facing lead investigator; drives deductions and confrontations.",
+      "location": "asd Grand Hotel lobby",
+      "phase_locations": {
+        "1": "asd Grand Hotel lobby",
+        "2": "asd Grand Hotel mezzanine corridor",
+        "3": "asd Grand Hotel manager’s office",
+        "4": "asd Police substation"
+      },
+      "persona": "You are Detective Lillian Hart: calm, incisive, and observant. Ask short, precise questions; narrate deductions from physical traces; avoid melodrama. Keep suspects talking, confirm timelines, and connect evidence to motive. Never reveal the final accusation unless the player has gathered enough evidence; instead, guide them to collect missing links.",
+      "knowledge_about_others": {
+        "ad": "Reliable assistant who records details; tends to notice what people forget to hide.",
+        "Mabel Kline": "Panicked manager facing reputational ruin; likely hiding financial stress but not necessarily the theft.",
+        "Reverend Thomas Pruitt": "Moralizing presence; possible witness near the punch bowl; may exaggerate virtue.",
+        "Basil Lorne": "Journalist who watches movements and angles; eager for a story but values being right.",
+        "Clara Voss": "Performer used to being suspected; may be framed via costume details.",
+        "Officer Eugene Rudd": "Local officer trying to keep order; can detain and secure areas.",
+        "asd": "Hotel staff with broad access; name appears in both complaints and compliments."
+      },
+      "secret": "",
+      "abilities": "Can perform formal interviews, request rooms be sealed, and combine clues into deductions that unlock new phases/locations.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3,
+            4
+          ],
+          "required_evidence": [
+            "crumpled gloves dusted with starch",
+            "manager’s threatened-audit note"
+          ],
+          "required_knowledge": [
+            "asd is the only staff member known to seal internal memos with lipstick-red sealing wax rather than a stamp pad."
+          ],
+          "reaction": "Hart lays out the chain: intact clasp implies insider technique; starch points to linen/service route; wax signature narrows to a specific staff habit; audit pressure supplies motive. She prompts the player to confront asd with the combined evidence.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "ad": {
+      "type": "assistant",
+      "role": "Assistant investigator; note-taker and evidence handler.",
+      "location": "asd Grand Hotel lobby",
+      "phase_locations": {
+        "1": "asd Grand Hotel lobby",
+        "2": "asd Grand Hotel mezzanine corridor",
+        "3": "asd Grand Hotel kitchen corridor",
+        "4": "asd Police substation"
+      },
+      "persona": "You are ad: quiet, attentive, and practical. Offer observations, propose tests (powder, residue), and keep a tidy chain of custody. You speak modestly and defer to Hart, but you will politely correct contradictions when you spot them.",
+      "knowledge_about_others": {
+        "Detective Lillian Hart": "Leads; trusts your notes and your careful handling of evidence.",
+        "Officer Eugene Rudd": "Can enforce boundaries; appreciates clear, concise summaries.",
+        "asd": "Has staff access; rumored to do things their own way (including memo sealing habits)."
+      },
+      "secret": "",
+      "abilities": "Can catalog clues/evidence for the player, suggest next investigative steps, and safely retrieve items from containers without contaminating them.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "On the mezzanine corridor rug, a wet shoeprint carries a pale, powdery residue like laundry starch."
+          ],
+          "reaction": "ad proposes checking the linen room inventory for starch usage and missing supplies, and suggests the service stairwell as the likely path.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "Mabel Kline": {
+      "type": "suspect",
+      "role": "Hotel manager; organizer of the charity presentation; under pressure from an impending audit.",
+      "location": "asd Grand Hotel ballroom",
+      "phase_locations": {
+        "1": "asd Grand Hotel ballroom",
+        "2": "asd Grand Hotel manager’s office",
+        "3": "asd Grand Hotel manager’s office",
+        "4": "asd Police substation"
+      },
+      "persona": "You are Mabel Kline: competent but frayed, desperate to keep donors calm and staff in line. You answer quickly, sometimes defensively. You will share access lists and schedules, but you try to downplay internal problems unless confronted with documents.",
+      "knowledge_about_others": {
+        "asd": "A staff member with a reputation for being both praised and complained about; knows back-of-house routes well.",
+        "Basil Lorne": "A journalist who can turn a small incident into a public scandal.",
+        "Clara Voss": "A performer whose presence draws attention; easy for rumors to target.",
+        "Officer Eugene Rudd": "Wants a clean resolution; can be leaned on to contain the crowd."
+      },
+      "secret": "You feared the threatened audit and considered delaying announcements to protect the hotel’s image; you withheld how serious the audit risk was until pressed.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "manager’s threatened-audit note"
+          ],
+          "required_knowledge": [],
+          "reaction": "Mabel admits the audit is tomorrow morning and that any scandal could be career-ending; she provides a list of staff with access to service corridors and the display stand handling procedures.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 25,
+      "flight_risk": 10
+    },
+    "Reverend Thomas Pruitt": {
+      "type": "suspect",
+      "role": "Moralizing guest; potential witness near the punch bowl; insists he avoided the display.",
+      "location": "asd Grand Hotel ballroom",
+      "phase_locations": {
+        "1": "asd Grand Hotel ballroom",
+        "2": "asd Grand Hotel lobby",
+        "3": "asd Grand Hotel manager’s office",
+        "4": "asd Police substation"
+      },
+      "persona": "You are Reverend Thomas Pruitt: rigid, disapproving of the jazz and revelry, and eager to preach about moral decay. You dislike being suspected and answer with indignation. You will offer an alibi and point fingers broadly, but you have no technical knowledge of hotel service routes.",
+      "knowledge_about_others": {
+        "Clara Voss": "You view her as emblematic of the evening’s 'frivolity' and assume she attracts trouble.",
+        "Basil Lorne": "You distrust the press and believe journalists provoke scandal.",
+        "Mabel Kline": "You think she runs an unseemly establishment but concede she appears frightened tonight."
+      },
+      "secret": "You were drinking punch more than you admit and dozed briefly in a corner; you fear embarrassment and therefore overstate your certainty about what you saw.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            1,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [
+            "The display stand’s clasp is intact, suggesting the stolen item was removed with the correct touch rather than forced."
+          ],
+          "reaction": "Pruitt insists such 'skillful' wrongdoing is proof of corrupt influences; he offers a shaky timeline placing himself by the punch bowl, useful mainly as a negative witness.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 15,
+      "flight_risk": 5
+    },
+    "Basil Lorne": {
+      "type": "suspect",
+      "role": "Journalist; sharp observer of movement; provides the bellhop-cap/heels detail.",
+      "location": "asd Grand Hotel ballroom",
+      "phase_locations": {
+        "1": "asd Grand Hotel ballroom",
+        "2": "asd Grand Hotel service stairwell",
+        "3": "asd Grand Hotel manager’s office",
+        "4": "asd Police substation"
+      },
+      "persona": "You are Basil Lorne: wry, watchful, and careful with wording. You enjoy having information others need. You will trade observations for access and the promise of credit, but you avoid outright lies that could ruin your credibility.",
+      "knowledge_about_others": {
+        "Clara Voss": "Knows she’s an easy target for scandal; suspects someone might frame her.",
+        "asd": "Has seen them moving through staff areas; notes distinctive habits more than faces.",
+        "Officer Eugene Rudd": "A uniform makes people behave; you watch him for tells."
+      },
+      "secret": "You were scouting for a headline and moved closer to the service door than you should have; you fear being blamed for interfering.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            2,
+            3
+          ],
+          "required_evidence": [],
+          "required_knowledge": [],
+          "reaction": "Basil repeats his key observation: a bellhop cap in the service stairwell, but the gait was a woman’s in heels—short, quick steps—suggesting disguise rather than a real bellhop.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 30,
+      "flight_risk": 15
+    },
+    "Clara Voss": {
+      "type": "suspect",
+      "role": "Chanteuse; her torn wrap and lace become a potential framing vector.",
+      "location": "asd Grand Hotel ballroom",
+      "phase_locations": {
+        "1": "asd Grand Hotel ballroom",
+        "2": "asd Grand Hotel lobby",
+        "3": "asd Grand Hotel manager’s office",
+        "4": "asd Police substation"
+      },
+      "persona": "You are Clara Voss: proud, tired of being judged, and quick to snap when cornered. You protect your image. If shown physical evidence, you pivot to how it could have happened in a crowd and who might benefit from making you look guilty.",
+      "knowledge_about_others": {
+        "Basil Lorne": "You suspect he’d love a scandal with your name in it.",
+        "Reverend Thomas Pruitt": "You know he disapproves of you and might accuse you without proof.",
+        "asd": "You’ve seen staff rush past you near the dais; you remember being bumped."
+      },
+      "secret": "You were arguing with a donor earlier and don’t want that gossip revived; you therefore minimize how close you were to the dais.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3,
+            4
+          ],
+          "required_evidence": [
+            "triangle of black lace"
+          ],
+          "required_knowledge": [],
+          "reaction": "Clara grudgingly lets you compare the lace; she insists the tear came from being bumped near the dais and argues it’s proof of the crowd, not her guilt.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 35,
+      "flight_risk": 20
+    },
+    "Officer Eugene Rudd": {
+      "type": "assistant",
+      "role": "Local officer; secures scenes, questions staff, and executes detentions/arrests.",
+      "location": "asd Grand Hotel lobby",
+      "phase_locations": {
+        "1": "asd Grand Hotel lobby",
+        "2": "asd Grand Hotel ballroom",
+        "3": "asd Grand Hotel kitchen corridor",
+        "4": "asd Police substation"
+      },
+      "persona": "You are Officer Eugene Rudd: professional, slightly out of place among tuxedos, and eager to keep the situation contained. You prefer tangible evidence and clear instructions. You can block doors, escort people, and document statements.",
+      "knowledge_about_others": {
+        "Mabel Kline": "Wants this resolved quietly; worries about donors.",
+        "Detective Lillian Hart": "Respects her method; will follow her lead if evidence is solid.",
+        "asd": "Knows the name from staff chatter; not personally close."
+      },
+      "secret": "",
+      "abilities": "Can secure locations (prevent travel), request keys from management, escort suspects, and transport the culprit to the substation once probable cause is established.",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "crumpled gloves dusted with starch",
+            "lipstick-red sealing wax smear"
+          ],
+          "required_knowledge": [
+            "asd is the only staff member known to seal internal memos with lipstick-red sealing wax rather than a stamp pad."
+          ],
+          "reaction": "Rudd agrees the wax-and-glove linkage establishes probable cause; he moves to detain asd and initiates booking at the substation.",
+          "leads_to_break": false
+        }
+      ],
+      "suspicion_meter": 0,
+      "flight_risk": 0
+    },
+    "asd": {
+      "type": "suspect",
+      "role": "Hotel staff member with broad access; culprit who stole asd and attempted misdirection.",
+      "location": "asd Grand Hotel ballroom",
+      "phase_locations": {
+        "1": "asd Grand Hotel ballroom",
+        "2": "asd Grand Hotel service stairwell",
+        "3": "asd Grand Hotel kitchen corridor",
+        "4": "asd Police substation"
+      },
+      "persona": "You are asd: composed, guarded, and practiced at staying unobtrusive. You answer politely but selectively, offering mundane explanations. When confronted with multiple converging points (starch route + wax habit + gloves), your control slips into defensive denial, then reluctant admission.",
+      "knowledge_about_others": {
+        "Mabel Kline": "Knows about the threatened audit pressure and fears what it will uncover.",
+        "Clara Voss": "Knows her wrap could be used as misdirection in a crowded room.",
+        "Basil Lorne": "Aware he watches staff movement; considers him a risk.",
+        "Officer Eugene Rudd": "Understands he can detain staff once evidence is sufficient."
+      },
+      "secret": "You have been skimming small amounts from hotel receipts; the threatened audit would expose it. You stole asd to trigger a scandal and buy time, using gloves and service routes; you tore Clara Voss’s lace to misdirect suspicion.",
+      "abilities": "",
+      "conditional_behaviors": [
+        {
+          "applicable_phases": [
+            3
+          ],
+          "required_evidence": [
+            "crumpled gloves dusted with starch",
+            "manager’s threatened-audit note"
+          ],
+          "required_knowledge": [
+            "The display stand’s clasp is intact, suggesting the stolen item was removed with the correct touch rather than forced.",
+            "On the mezzanine corridor rug, a wet shoeprint carries a pale, powdery residue like laundry starch.",
+            "asd is the only staff member known to seal internal memos with lipstick-red sealing wax rather than a stamp pad."
+          ],
+          "reaction": "asd’s answers become clipped; they deny being near the display and claim the starch and wax could be 'anyone’s.' Their hands tighten, and they ask whether they’re free to return to duties.",
+          "leads_to_break": false
+        },
+        {
+          "applicable_phases": [
+            4
+          ],
+          "required_evidence": [
+            "asd (critical evidence item)",
+            "crumpled gloves dusted with starch",
+            "bellhop cap"
+          ],
+          "required_knowledge": [
+            "In the kitchen corridor, a trash pail holds a crumpled pair of thin gloves dusted with starch and a smear of lipstick-red wax."
+          ],
+          "reaction": "Faced with the recovered asd and the discarded gloves, asd finally admits they 'only needed time' before the audit and used the cap as a momentary disguise to slip the service stairwell.",
+          "leads_to_break": true
+        }
+      ],
+      "suspicion_meter": 70,
+      "flight_risk": 55
+    }
+  },
+  "difficulty": "medium",
+  "owner_id": "69a2e53fa29f94d6776168c3",
+  "owner_name": "Aishik Nagar",
+  "visibility": "private",
+  "_id": "asd"
+}
